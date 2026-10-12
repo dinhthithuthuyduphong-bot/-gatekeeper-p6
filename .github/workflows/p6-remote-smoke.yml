@@ -1,0 +1,44 @@
+name: Gatekeeper P6 synthetic smoke
+
+on:
+  workflow_dispatch:
+    inputs:
+      permission_and_budget_confirmed:
+        description: Authorized personal research repo, allowed service use, and no-paid-overage safeguards checked
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gatekeeper-p6-smoke
+  cancel-in-progress: false
+
+jobs:
+  synthetic-smoke:
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.permission_and_budget_confirmed }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Local mechanism checks, no containers
+        run: python3 -m unittest discover -s tests -v
+      - name: Resolve image before smoke trials
+        shell: bash
+        run: |
+          set -euo pipefail
+          timeout 150 docker pull python:3.12-slim-bookworm
+          P6_IMAGE_ID=$(docker image inspect --format '{{.Id}}' python:3.12-slim-bookworm)
+          python3 RUN_P6_REMOTE.py --image "$P6_IMAGE_ID"
+      - name: Preserve receipt even on failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: P6_REMOTE_OUTPUT
+          path: P6_REMOTE_OUTPUT/
+          retention-days: 1
+          if-no-files-found: warn
