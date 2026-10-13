@@ -1,10 +1,10 @@
-name: Gatekeeper P6 synthetic smoke
+name: Gatekeeper P6.2 pinned smoke
 
 on:
   workflow_dispatch:
     inputs:
       permission_and_budget_confirmed:
-        description: Authorized personal research repo, allowed service use, and no-paid-overage safeguards checked
+        description: Permitted research use and applicable Actions costs checked
         required: true
         default: false
         type: boolean
@@ -22,23 +22,72 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           persist-credentials: false
-      - name: Local mechanism checks, no containers
-        run: python3 -m unittest discover -s tests -v
-      - name: Resolve image before smoke trials
+      - name: Verify source and capture host metadata
         shell: bash
         run: |
           set -euo pipefail
-          timeout 150 docker pull python:3.12-slim-bookworm
-          P6_IMAGE_ID=$(docker image inspect --format '{{.Id}}' python:3.12-slim-bookworm)
+          mkdir P6_WORKFLOW_RECEIPTS
+          python3 - <<'PY'
+          import hashlib, json, os, platform, subprocess, sys
+          from pathlib import Path
+          expected = {
+              'RUN_P6_REMOTE.py': '6edce6f6818f4557ec5a608dca3492e30454932a',
+              'tests/test_remote.py': '7d76357e20fb66fa66a1ad25b8ecd8df45fd7fbf',
+          }
+          files = {}
+          for name, blob in expected.items():
+              data = Path(name).read_bytes()
+              actual = hashlib.sha1(b'blob ' + str(len(data)).encode() + b'\0' + data).hexdigest()
+              files[name] = {'sha256': hashlib.sha256(data).hexdigest(), 'git_blob': actual, 'expected_git_blob': blob, 'matched': actual == blob}
+          metadata = {
+              'schema': 'gk_p6_2_host_v1', 'files': files,
+              'commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(),
+              'python': sys.version, 'platform': platform.platform(),
+              'os_release': Path('/etc/os-release').read_text(),
+              'runner': {k: os.environ.get(k) for k in ('ImageOS', 'ImageVersion', 'RUNNER_OS', 'RUNNER_ARCH', 'GITHUB_RUN_ID', 'GITHUB_RUN_ATTEMPT')},
+              'note': 'Host recorded, not frozen; repeated synthetic fixture, not independent research trials.'
+          }
+          Path('P6_WORKFLOW_RECEIPTS/host.json').write_text(json.dumps(metadata, indent=2) + '\n')
+          if not all(x['matched'] for x in files.values()):
+              raise SystemExit('Source mismatch: stop before container execution')
+          PY
+      - name: Require all 14 mechanism tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY' 2>&1 | tee P6_WORKFLOW_RECEIPTS/tests.log
+          import json, unittest
+          from pathlib import Path
+          suite = unittest.defaultTestLoader.discover('tests', pattern='test_remote.py')
+          count = suite.countTestCases()
+          if count != 14:
+              raise SystemExit(f'Expected 14 tests; discovered {count}')
+          result = unittest.TextTestRunner(verbosity=2).run(suite)
+          summary = {'discovered': count, 'ran': result.testsRun, 'failures': len(result.failures), 'errors': len(result.errors), 'skipped': len(result.skipped)}
+          Path('P6_WORKFLOW_RECEIPTS/tests.json').write_text(json.dumps(summary, indent=2) + '\n')
+          raise SystemExit(0 if result.wasSuccessful() and result.testsRun == 14 and not result.skipped else 1)
+          PY
+      - name: Run four fresh containers with pinned image
+        shell: bash
+        run: |
+          set -euo pipefail
+          P6_IMAGE_REF='python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258'
+          timeout 150 docker pull --platform linux/amd64 "$P6_IMAGE_REF"
+          P6_IMAGE_ID=$(docker image inspect --format '{{.Id}}' "$P6_IMAGE_REF")
+          test "$P6_IMAGE_ID" = 'sha256:4f228bc1cbcfc794e4878312cfc241d368eff55a21c08d1e2bb263116c4ef524'
+          docker image inspect "$P6_IMAGE_ID" > P6_WORKFLOW_RECEIPTS/image.json
+          docker version --format '{{json .}}' > P6_WORKFLOW_RECEIPTS/docker.json
           python3 RUN_P6_REMOTE.py --image "$P6_IMAGE_ID"
-      - name: Preserve receipt even on failure
+      - name: Preserve receipts including failures
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: P6_REMOTE_OUTPUT
-          path: P6_REMOTE_OUTPUT/
+          name: P6_2_REMOTE_OUTPUT
+          path: |
+            P6_REMOTE_OUTPUT/
+            P6_WORKFLOW_RECEIPTS/
           retention-days: 1
           if-no-files-found: warn
