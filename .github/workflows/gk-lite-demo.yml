@@ -37,3 +37,34 @@ jobs:
           name: GK_LITE_DEMO_OUTPUT
           path: ${{ env.GK_DIR }}/out_demo
           if-no-files-found: error
+
+  real-click:
+    # Same pipeline on real Click code, scored by Click's own upstream tests.
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Locate project folder
+        run: |
+          main=$(find . -path ./.git -prune -o -path '*/gatekeeper_lite/__main__.py' -print | head -n 1)
+          echo "GK_DIR=$(dirname "$(dirname "$main")")" >> "$GITHUB_ENV"
+      - name: Install pytest (oracle runner only)
+        run: python -m pip install --quiet "pytest==8.3.4"
+      - name: Fetch frozen real targets
+        run: cd "$GK_DIR" && python tools/fetch_real_targets.py real
+      - name: Real-target run
+        run: |
+          cd "$GK_DIR"
+          python -m gatekeeper_lite run --config real/config_real.json --out out_real
+          cp real/FETCH_RECEIPT.json out_real/
+          cat out_real/REPORT.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: GK_LITE_REAL_CLICK_OUTPUT
+          path: |
+            ${{ env.GK_DIR }}/out_real
+            ${{ env.GK_DIR }}/real/FETCH_RECEIPT.json
+          if-no-files-found: warn
