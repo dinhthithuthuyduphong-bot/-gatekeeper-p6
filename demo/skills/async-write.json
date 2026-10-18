@@ -1,0 +1,36 @@
+{
+  "skill_id": "async-write",
+  "version": "1.0",
+  "pi": {
+    "transform": "async_write",
+    "params": {
+      "source_method": "write",
+      "target_method": "write_async"
+    }
+  },
+  "D": {
+    "python": ">=3.9",
+    "packages": {
+      "fakedb": ">=1,<2"
+    }
+  },
+  "I": [
+    "single_site",
+    "target_declares:write_async"
+  ],
+  "P": [
+    {
+      "before": "../sources/async_before.py",
+      "after": "../sources/async_after.py",
+      "heldout": false
+    }
+  ],
+  "K": {
+    "behaviors": [
+      "exception-handling",
+      "write-path",
+      "concurrency"
+    ]
+  },
+  "scope": "db-write"
+}

@@ -1,0 +1,17 @@
+{
+  "target_id": "T7_db_save",
+  "module": "store.py",
+  "python": "3.12",
+  "platform": "linux",
+  "packages": {
+    "fakedb": "1.3.0"
+  },
+  "capabilities": [
+    "write_async"
+  ],
+  "repository": "demo/order-service",
+  "revision": "r5",
+  "regime": "C",
+  "behavior_class": "ack may be lost after commit",
+  "scope": "db/ack-after-commit"
+}

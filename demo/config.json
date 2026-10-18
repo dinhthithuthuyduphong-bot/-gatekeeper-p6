@@ -1,0 +1,103 @@
+{
+  "experiment_id": "gatekeeper-lite-demo-v1",
+  "skills_dir": "skills",
+  "targets_dir": "targets",
+  "theta": 0.1,
+  "seed": 20261018,
+  "budget_tasks": 24,
+  "alpha_total": 0.25,
+  "cells": {
+    "empty-string-guard@help/object-defaults": 0.025,
+    "empty-string-guard@help/lazy-text-defaults": 0.025,
+    "empty-string-guard@help/already-patched": 0.025,
+    "empty-string-guard@help/aliased-builtins": 0.025,
+    "negative-bool-guard@validation/strict-int-fields": 0.025,
+    "negative-bool-guard@validation/bool-as-count": 0.025,
+    "retry-write@db/ack-after-commit": 0.025,
+    "async-write@db/ack-after-commit": 0.025,
+    "async-write+retry-write@db/ack-after-commit": 0.025
+  },
+  "pairs": [
+    {
+      "skills": [
+        "empty-string-guard"
+      ],
+      "target": "T1_help_strict"
+    },
+    {
+      "skills": [
+        "empty-string-guard"
+      ],
+      "target": "T2_help_lazy"
+    },
+    {
+      "skills": [
+        "empty-string-guard"
+      ],
+      "target": "T3_help_guarded"
+    },
+    {
+      "skills": [
+        "empty-string-guard"
+      ],
+      "target": "T4_help_shadow"
+    },
+    {
+      "skills": [
+        "negative-bool-guard"
+      ],
+      "target": "T5_port_bool"
+    },
+    {
+      "skills": [
+        "negative-bool-guard"
+      ],
+      "target": "T6_count_bool"
+    },
+    {
+      "skills": [
+        "retry-write"
+      ],
+      "target": "T7_db_save"
+    },
+    {
+      "skills": [
+        "async-write"
+      ],
+      "target": "T7_db_save"
+    }
+  ],
+  "compositions": [
+    {
+      "skills": [
+        "async-write",
+        "retry-write"
+      ],
+      "target": "T7_db_save"
+    }
+  ],
+  "retirement": [
+    {
+      "skills": [
+        "empty-string-guard"
+      ],
+      "target": "T1_help_strict",
+      "change": {
+        "packages": {
+          "clicklike": "8.2.0"
+        }
+      }
+    },
+    {
+      "skills": [
+        "empty-string-guard"
+      ],
+      "target": "T1_help_strict",
+      "change": {
+        "packages": {
+          "clicklike": "9.0.1"
+        }
+      }
+    }
+  ]
+}

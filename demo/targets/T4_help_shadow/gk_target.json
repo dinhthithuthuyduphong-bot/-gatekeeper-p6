@@ -1,0 +1,14 @@
+{
+  "target_id": "T4_help_shadow",
+  "module": "helpfmt.py",
+  "python": "3.12",
+  "platform": "linux",
+  "packages": {
+    "clicklike": "8.1.7"
+  },
+  "repository": "demo/cli-help-d",
+  "revision": "r4",
+  "regime": "B",
+  "behavior_class": "builtin str is aliased",
+  "scope": "help/aliased-builtins"
+}

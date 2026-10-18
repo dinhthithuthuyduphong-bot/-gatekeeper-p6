@@ -1,0 +1,31 @@
+{
+  "skill_id": "empty-string-guard",
+  "version": "1.0",
+  "pi": {
+    "transform": "empty_string_guard",
+    "params": {}
+  },
+  "D": {
+    "python": ">=3.9,<3.13",
+    "packages": {
+      "clicklike": ">=8,<9"
+    }
+  },
+  "I": [
+    "single_site"
+  ],
+  "P": [
+    {
+      "before": "../sources/help_before.py",
+      "after": "../sources/help_after.py",
+      "heldout": false
+    }
+  ],
+  "K": {
+    "behaviors": [
+      "eq-empty-string",
+      "default-display"
+    ]
+  },
+  "scope": "help-default-display"
+}

@@ -1,0 +1,38 @@
+{
+  "skill_id": "retry-write",
+  "version": "1.0",
+  "pi": {
+    "transform": "retry_write",
+    "params": {
+      "methods": [
+        "write",
+        "write_async"
+      ],
+      "exception": "TransientError",
+      "attempts": 3
+    }
+  },
+  "D": {
+    "python": ">=3.9",
+    "packages": {
+      "fakedb": ">=1,<2"
+    }
+  },
+  "I": [
+    "single_site"
+  ],
+  "P": [
+    {
+      "before": "../sources/retry_before.py",
+      "after": "../sources/retry_after.py",
+      "heldout": false
+    }
+  ],
+  "K": {
+    "behaviors": [
+      "exception-handling",
+      "write-path"
+    ]
+  },
+  "scope": "db-write"
+}

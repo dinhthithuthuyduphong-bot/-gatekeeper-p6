@@ -1,0 +1,33 @@
+{
+  "skill_id": "negative-bool-guard",
+  "version": "1.0",
+  "pi": {
+    "transform": "negative_type_guard",
+    "params": {
+      "base": "int",
+      "excluded": "bool"
+    }
+  },
+  "D": {
+    "python": ">=3.9",
+    "packages": {
+      "configlib": ">=2,<3"
+    }
+  },
+  "I": [
+    "single_site"
+  ],
+  "P": [
+    {
+      "before": "../sources/status_before.py",
+      "after": "../sources/status_after.py",
+      "heldout": false
+    }
+  ],
+  "K": {
+    "behaviors": [
+      "type-check"
+    ]
+  },
+  "scope": "int-validation"
+}

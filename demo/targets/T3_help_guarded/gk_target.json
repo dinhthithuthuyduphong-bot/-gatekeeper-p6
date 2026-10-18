@@ -1,0 +1,14 @@
+{
+  "target_id": "T3_help_guarded",
+  "module": "helpfmt.py",
+  "python": "3.12",
+  "platform": "linux",
+  "packages": {
+    "clicklike": "8.1.7"
+  },
+  "repository": "demo/cli-help-c",
+  "revision": "r2",
+  "regime": "A",
+  "behavior_class": "already patched upstream",
+  "scope": "help/already-patched"
+}

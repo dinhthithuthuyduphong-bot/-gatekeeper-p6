@@ -1,0 +1,14 @@
+{
+  "target_id": "T5_port_bool",
+  "python": "3.12",
+  "platform": "linux",
+  "packages": {
+    "configlib": "2.4.0"
+  },
+  "module": "config.py",
+  "repository": "demo/service-cfg",
+  "revision": "r3",
+  "regime": "B",
+  "behavior_class": "booleans are not ports",
+  "scope": "validation/strict-int-fields"
+}

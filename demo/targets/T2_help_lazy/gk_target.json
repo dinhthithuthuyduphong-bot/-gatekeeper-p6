@@ -1,0 +1,14 @@
+{
+  "target_id": "T2_help_lazy",
+  "module": "helpfmt.py",
+  "python": "3.12",
+  "platform": "linux",
+  "packages": {
+    "clicklike": "8.1.7"
+  },
+  "repository": "demo/cli-help-b",
+  "revision": "r7",
+  "regime": "B",
+  "behavior_class": "lazy translatable strings are valid defaults",
+  "scope": "help/lazy-text-defaults"
+}

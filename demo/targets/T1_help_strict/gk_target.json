@@ -1,0 +1,14 @@
+{
+  "target_id": "T1_help_strict",
+  "module": "helpfmt.py",
+  "python": "3.12",
+  "platform": "linux",
+  "packages": {
+    "clicklike": "8.1.7"
+  },
+  "repository": "demo/cli-help-a",
+  "revision": "r1",
+  "regime": "B",
+  "behavior_class": "defaults may be arbitrary objects",
+  "scope": "help/object-defaults"
+}

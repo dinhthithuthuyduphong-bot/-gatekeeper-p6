@@ -1,0 +1,14 @@
+{
+  "target_id": "T6_count_bool",
+  "python": "3.12",
+  "platform": "linux",
+  "packages": {
+    "configlib": "2.4.0"
+  },
+  "module": "metrics.py",
+  "repository": "demo/metrics",
+  "revision": "r9",
+  "regime": "B",
+  "behavior_class": "booleans are valid increments",
+  "scope": "validation/bool-as-count"
+}
