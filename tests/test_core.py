@@ -180,3 +180,58 @@ class EndToEndTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class RealLayoutTests(unittest.TestCase):
+    """Exercise the real-target path offline: src/ layout, function anchor, function replay."""
+
+    def test_src_layout_anchor_and_function_replay(self):
+        import json
+        import tempfile
+        from gatekeeper_lite.eprocess import AlphaLedger
+        from gatekeeper_lite.gatekeeper import replay, run_pair
+        from gatekeeper_lite.skill import Skill, Target
+
+        core = ('class Option:\n'
+                '    def get_help_record(self, default_value):\n'
+                '        if default_value == "":\n'
+                '            return \'""\'\n'
+                '        return str(default_value)\n\n'
+                'def unrelated(x):\n'
+                '    return x == ""\n')
+        fixed = core.replace('if default_value == "":',
+                             'if isinstance(default_value, str) and default_value == "":')
+        fixed = fixed.replace('return x == ""', 'return x == ""  # touched elsewhere')
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp = Path(tmp)
+            (tmp / "t" / "src" / "pkg").mkdir(parents=True)
+            (tmp / "t" / "src" / "pkg" / "__init__.py").write_text("")
+            (tmp / "t" / "src" / "pkg" / "core.py").write_text(core)
+            (tmp / "t" / "oracle_cases.py").write_text(
+                "from pkg.core import Option\n"
+                "class S:\n    def __eq__(self, o):\n        raise ValueError\n"
+                "    __hash__ = object.__hash__\n    def __str__(self):\n        return 's'\n"
+                "def cases():\n"
+                "    return [('plain', lambda: Option().get_help_record('a')),\n"
+                "            ('strict', lambda: Option().get_help_record(S()))]\n")
+            (tmp / "t" / "gk_target.json").write_text(json.dumps({
+                "target_id": "t", "module": "src/pkg/core.py", "pythonpath": ["src"],
+                "python": "3.12", "packages": {}, "scope": "s"}))
+            (tmp / "before.py").write_text(core)
+            (tmp / "after.py").write_text(fixed)
+            (tmp / "skill.json").write_text(json.dumps({
+                "skill_id": "k", "version": "1", "scope": "s",
+                "pi": {"transform": "empty_string_guard",
+                       "params": {"functions": ["get_help_record"]}},
+                "D": {"python": ">=3.8"}, "I": ["single_site"], "K": {},
+                "P": [{"before": "before.py", "after": "after.py",
+                       "compare_function": "get_help_record"}]}))
+            skill = Skill.load(tmp / "skill.json")
+            self.assertTrue(replay(skill)["passed"])
+            rec = run_pair("k@s", [skill], Target.load(tmp / "t"),
+                           AlphaLedger(0.1, {"k@s": 0.05}),
+                           {"theta": 0.1, "seed": 1, "budget_tasks": 2})
+            self.assertTrue(rec["bind"]["ok"], rec["bind"]["reason"])
+            self.assertEqual(rec["ground_truth"], "BENEFICIAL")
+            self.assertTrue(rec["paired"]["integrity_ok"])
+            self.assertEqual(rec["comparators"]["B6R"]["decision"], "ADMIT")

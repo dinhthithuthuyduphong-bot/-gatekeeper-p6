@@ -89,10 +89,11 @@ def parse_junit(xml_text: str) -> Dict[str, dict]:
     return results
 
 
-def _run_pytest(snapshot: Path, tests: List[str], env: dict, timeout: float) -> Dict[str, dict]:
+def _run_pytest(snapshot: Path, tests: List[str], env: dict, timeout: float,
+                extra_args: Optional[List[str]] = None) -> Dict[str, dict]:
     junit = snapshot / "_gk_junit.xml"
     cmd = [sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider",
-           f"--junitxml={junit}", *tests]
+           f"--junitxml={junit}", *(extra_args or []), *tests]
     proc = subprocess.run(cmd, cwd=str(snapshot), env=env, capture_output=True,
                           text=True, timeout=timeout)
     if not junit.exists():
@@ -102,20 +103,26 @@ def _run_pytest(snapshot: Path, tests: List[str], env: dict, timeout: float) -> 
 
 
 def run_arm(arm: str, target_root: Path, module: str, treated_source: Optional[str],
-            seed: int, timeout: float = 60.0, oracle: Optional[dict] = None) -> ArmResult:
+            seed: int, timeout: float = 60.0, oracle: Optional[dict] = None,
+            pythonpath: Optional[List[str]] = None) -> ArmResult:
     work = Path(tempfile.mkdtemp(prefix=f"gk_{arm}_"))
     try:
         snapshot = work / "snapshot"
-        shutil.copytree(target_root, snapshot, ignore=shutil.ignore_patterns("__pycache__"))
+        shutil.copytree(target_root, snapshot,
+                        ignore=shutil.ignore_patterns("__pycache__", ".git", "*.egg-info"))
         if treated_source is not None:
             (snapshot / module).write_text(treated_source, encoding="utf-8")
         hashes = _hash_tree(snapshot)
+        paths = [str(snapshot / p) for p in (pythonpath or [])] + [str(PACKAGE_ROOT)]
         env = dict(os.environ, PYTHONHASHSEED=str(seed), PYTHONDONTWRITEBYTECODE="1",
-                   PYTHONPATH=str(PACKAGE_ROOT))
+                   PYTHONPATH=os.pathsep.join(paths))
         oracle = oracle or {"kind": "cases"}
         start = time.perf_counter()
         if oracle["kind"] == "pytest":
-            results = _run_pytest(snapshot, oracle["tests"], env, timeout)
+            results = _run_pytest(snapshot, oracle["tests"], env, timeout,
+                                  oracle.get("pytest_args"))
+            if not results:
+                raise RuntimeError(f"pytest collected no usable tests in {arm}")
         else:
             proc = subprocess.run([sys.executable, "-m", "gatekeeper_lite.harness",
                                    str(snapshot), str(seed)],
@@ -132,9 +139,10 @@ def run_arm(arm: str, target_root: Path, module: str, treated_source: Optional[s
 
 def paired_run(target, treated_source: str, seed: int, timeout: float = 60.0) -> PairedRun:
     oracle = target.manifest.get("oracle", {"kind": "cases"})
-    base = run_arm("baseline", target.root, target.module, None, seed, timeout, oracle)
+    paths = target.manifest.get("pythonpath", [])
+    base = run_arm("baseline", target.root, target.module, None, seed, timeout, oracle, paths)
     treat = run_arm("treatment", target.root, target.module, treated_source, seed, timeout,
-                    oracle)
+                    oracle, paths)
     notes = []
     differing = {k for k in set(base.file_hashes) | set(treat.file_hashes)
                  if base.file_hashes.get(k) != treat.file_hashes.get(k)

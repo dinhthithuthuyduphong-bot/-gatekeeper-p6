@@ -202,6 +202,11 @@ class EmptyStringGuard(Transform):
     behaviors = ("eq-empty-string", "default-display")
     shadow_sensitive = ("str", "isinstance")
 
+    def __init__(self, functions=None, subjects=None):
+        # Optional anchors: only sites inside these functions / on these subjects.
+        self.functions = set(functions or [])
+        self.subjects = set(subjects or [])
+
     def find(self, tree):
         out = []
         for node in ast.walk(tree):
@@ -210,6 +215,10 @@ class EmptyStringGuard(Transform):
                     and isinstance(node.comparators[0], ast.Constant)
                     and node.comparators[0].value == ""
                     and not isinstance(node.left, ast.Constant)):
+                if self.functions and _enclosing_function(node) not in self.functions:
+                    continue
+                if self.subjects and ast.unparse(node.left) not in self.subjects:
+                    continue
                 out.append(node)
         return out
 

@@ -18,15 +18,15 @@ Chỉ dùng thư viện chuẩn của Python (≥ 3.9; đã chạy với 3.12.3)
 ## Chạy nhanh
 
 ```bash
-# trong thư mục gk_lite/
-python -m unittest discover -s tests -v                              # 20 test
+# ở thư mục gốc của repo (hoặc thư mục chứa gatekeeper_lite/)
+python -m unittest discover -s tests -v                              # 21 test
 python -m gatekeeper_lite run --config demo/config.json --out out_demo
 python -m gatekeeper_lite show out_demo/RESULT.json T2_help_lazy     # giải thích 1 cặp
 ```
 
 Kết quả: `out_demo/REPORT.md` (báo cáo tiếng Việt) và `out_demo/RESULT.json` (đầy đủ: diff code, kết quả từng task, quỹ đạo e-process, alpha đã chi, hash cấu hình).
 
-Trên GitHub: chạy workflow `.github/workflows/gk-lite-demo.yml` (unit test + demo trong container `python:3.12-slim`, upload artifact `GK_LITE_DEMO_OUTPUT`). Ghim SHA của action và digest image theo `actions.lock` trước khi dùng làm bằng chứng.
+Trên GitHub: chạy workflow `.github/workflows/gk-lite-demo.yml` (tự tìm thư mục dự án, chạy unit test và demo, đưa REPORT.md vào trang Summary, upload artifact `GK_LITE_DEMO_OUTPUT`). Ghim SHA của action theo `actions.lock` trước khi dùng làm bằng chứng.
 
 ## Ánh xạ với paper
 
@@ -64,6 +64,22 @@ Số đếm thô: cặp có hại bị admit — B2 2/2, B6-R 2/2, B8 0/2, Gatek
 
 **Cách đọc đúng:** Gatekeeper không an toàn hơn B8 (B8 cũng chặn 2/2 ca có hại), đúng như paper dự phóng. Điểm khác là B8 phải chạy mọi task, còn Gatekeeper dừng sớm khi đủ bằng chứng; đổi lại Gatekeeper bỏ lỡ 2 ca có lợi vì ngân sách và ngưỡng chặt. Đây là sự đánh đổi an toàn–lợi ích–chi phí, không phải chiến thắng tuyệt đối.
 
+## Thí nghiệm trên mã Click thật (job `real-click`)
+
+Job thứ hai trong workflow chạy cùng pipeline trên mã Click thật, chấm bằng **test gốc của Click** (`tests/test_options.py`, không sửa assertion):
+
+| Target | Revision | Vai trò |
+|---|---|---|
+| R1 | `c021f05c` (commit cha của bản sửa nguồn), test lấy từ bản sửa `d3e3852e` | Đã thấy (nguồn của skill): kiểm tra pipeline trên code thật |
+| R2 | tag `8.1.7` | Chưa xem, chọn trước khi chạy |
+| R3 | tag `8.2.1` | Chưa xem, chọn trước khi chạy |
+
+Skill `click-empty-default-guard` là cùng phép sửa với binder v3 (thêm `isinstance(x, str)` trước `x == ""`), neo vào hàm `get_help_record` / `get_help_extra`. B6-R replay so sánh **đúng hàm** `get_help_record` giữa kết quả sinh ra và bản sửa chính thức. Script `tools/fetch_real_targets.py` ghi commit thực tế của từng checkout vào `FETCH_RECEIPT.json`.
+
+**Điều nên chờ đợi và cách đọc:** mỗi target chỉ có rất ít test chạm đúng biên đã sửa, trong khi file test có hàng trăm test. Vì vậy Gatekeeper nhiều khả năng QUARANTINE (bằng chứng không đủ), trong khi B6-R và B8 admit. Đây không phải lỗi: nó cho thấy trên dữ liệu thật, một bản sửa đơn lẻ không tạo đủ bằng chứng thống kê, đúng với phát hiện "evidence adequacy" ở Week 5. Kết quả R2, R3 được ghi nguyên trạng, kể cả khi binder từ chối (ví dụ code đã được sửa sẵn).
+
+Phần này chưa được chạy ở môi trường của tôi (không có mạng và pytest); lần chạy đầu tiên trên Actions là lần kiểm chứng.
+
 ## Kịch bản demo 5 phút cho thầy
 
 1. **Vấn đề (1 phút):** `show out_demo/RESULT.json T2_help_lazy`. Cùng một sửa đổi (thêm `isinstance(x, str)`) đúng ở T1 nhưng làm hỏng 16 task ở T2, vì chuỗi lazy không phải `str`. B6-R vẫn ADMIT vì replay ở nguồn pass và fingerprint khớp.
@@ -96,7 +112,7 @@ Runner chạy pytest ở cả hai nhánh và đọc báo cáo JUnit; test bị s
 
 | Ngày | Việc | Kết quả mong đợi |
 |---|---|---|
-| 1 | Đưa thư mục vào repo (`gk_lite/`), chạy unit test và demo cục bộ và trên Actions | Artifact `GK_LITE_DEMO_OUTPUT` |
+| 1 | Đưa code vào repo, chạy unit test và demo cục bộ và trên Actions | Đã xong: run `39139075701` |
 | 2 | Viết wrapper cho binder v3 theo hợp đồng `external_command`; chạy lại T1–T4 bằng v3 | v3 cho cùng quyết định hoặc ghi rõ khác biệt |
 | 3 | Thêm 1 target thật (Click ở revision có #3298) với oracle pytest; ghi exposure: đây là target đã thấy | Một cặp thật ở mức development |
 | 4 | Đóng băng P7.4 (file protocol đã gửi) và chọn 2–3 target chưa thấy; chỉ chạy dry-run binder | Danh sách ứng viên + exposure registry |
@@ -121,6 +137,8 @@ demo/config.json   tham số đóng băng, danh sách cặp, composition, retire
 demo/skills/       4 skill JSON
 demo/sources/      ví dụ before/after của nguồn (dùng cho replay)
 demo/targets/      T1–T7: mã nguồn, oracle_cases.py, gk_target.json
-tests/             20 unit test
+real/              thí nghiệm trên Click thật: skill, 3 target, config_real.json
+tools/             fetch_real_targets.py (tải mã nguồn đã đóng băng trên Actions)
+tests/             21 unit test
 .github/workflows/ gk-lite-demo.yml
 ```

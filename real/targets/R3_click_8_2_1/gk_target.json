@@ -1,0 +1,25 @@
+{
+  "target_id": "R3_click_8_2_1",
+  "module": "src/click/core.py",
+  "pythonpath": [
+    "src"
+  ],
+  "python": "3.12",
+  "platform": "linux",
+  "packages": {},
+  "repository": "pallets/click",
+  "revision": "tag 8.2.1",
+  "regime": "A",
+  "scope": "click/release-8.2",
+  "exposure": "CHƯA XEM: chọn trước khi chạy, kết quả ghi nguyên trạng",
+  "checkout": {
+    "repo": "https://github.com/pallets/click.git",
+    "ref": "refs/tags/8.2.1"
+  },
+  "oracle": {
+    "kind": "pytest",
+    "tests": [
+      "tests/test_options.py"
+    ]
+  }
+}

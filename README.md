@@ -1,37 +1,25 @@
-# Gatekeeper P6 — synthetic container smoke test
+# Gatekeeper-Lite — kiểm soát rủi ro khi tái sử dụng kỹ năng sửa code
 
-This private research repository contains a synthetic fixture, container runner,
-mocked mechanism tests, and a manually triggered GitHub Actions workflow\.
-It contains no company code, manuscript PDFs, model credentials, or real benchmark data\.
+Repo nghiên cứu cho luận văn tái hiện thu gọn (Lite) bài *Scope before Reuse: Risk-Controlled Admission of Learned Coding Skills* (FSE-2027-13). Repo **công khai**; không chứa mã của tổ chức, PDF bản thảo, khoá API hay dữ liệu benchmark riêng.
 
-## Files
+## Nội dung
 
-- `RUN_P6_REMOTE.py`: runner for an authorized Linux host with Docker already available\.
-- `tests/test_remote.py`: 14 local mechanism checks using mocks where Docker is involved\.
-- `.github/workflows/p6-remote-smoke.yml`: manual workflow; no push, pull request, or schedule trigger\.
+| Thư mục / file | Vai trò |
+|---|---|
+| `gatekeeper_lite/` | Pipeline: scope screen → binder AST → paired trials → e-process → ADMIT/QUARANTINE; comparator B2, B6-R, B8; composition; retirement |
+| `demo/` | 7 target dựng sẵn (bằng chứng loại `CONSTRUCTED_DEMO_FIXTURES`) |
+| `real/`, `tools/` | Cùng pipeline trên mã Click thật, chấm bằng test gốc của Click |
+| `tests/` | Unit test (`python -m unittest discover -s tests -v`) |
+| `.github/workflows/` | Các workflow chạy thủ công: P6.x, P7.x và `gk-lite-demo.yml` |
+| `RUN_P6_REMOTE.py` | Smoke test container của giai đoạn P6 (giữ lại để truy vết) |
+| `EVIDENCE_LEDGER.md` | Sổ bằng chứng: run ID, commit, digest artifact, phạm vi kết luận |
 
-## Before running
+Hướng dẫn chạy, ánh xạ với paper và giới hạn: xem [`README_VI.md`](README_VI.md).
 
-Verify permitted service use, remaining Actions allowance and account safeguards
-against new paid overage\. A checkbox, 10\-minute timeout and 1\-day artifact retention
-are not billing caps\. No paid spending is authorized by this repository\.
-Do not install Docker or WSL on the company Windows computer\.
+## Quy ước về bằng chứng
 
-Once those checks are complete, open Actions \> Gatekeeper P6 synthetic smoke \>
-Run workflow\. Select the default branch and confirm the permission/budget input\.
-Download the `P6_REMOTE_OUTPUT` artifact promptly: its retention is one day\.
-Return `P6_REMOTE_OUTPUT.zip` for review, including failures\. If no artifact exists,
-return the run URL and failed\-step log after removing any sensitive information\.
+- **Paper expectation:** số liệu trong bài là *projected*, không phải kết quả của repo này.
+- **Implemented:** có mã chạy được.
+- **Verified:** có run trên GitHub Actions, artifact và digest ghi trong `EVIDENCE_LEDGER.md`.
 
-## Expected result and limits
-
-Four fresh containers run two counterbalanced rounds of the same fixture\.
-Baseline: 5/6 passing cases; treatment: 6/6\. The baseline failure is intentional\.
-A successful overall receipt reports `PASS_SYNTHETIC_CONTAINER_SMOKE`\.
-This is not evidence of independent statistical trials, real\-repository transfer,
-production sandbox security, or results matching a research paper\.
-GK\-07 remains incomplete until the broader runner requirements are validated\.
-
-The bootstrap image tag can change across workflow runs; each individual run
-resolves and records the immutable local image ID before starting containers\.
-No model API is called and no API key is required for this smoke test\.
+Mọi lần chạy đều thủ công (`workflow_dispatch`) và không gọi model trả phí.

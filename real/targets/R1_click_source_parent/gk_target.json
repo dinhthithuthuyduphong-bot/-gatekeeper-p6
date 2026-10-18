@@ -1,0 +1,29 @@
+{
+  "target_id": "R1_click_source_parent",
+  "module": "src/click/core.py",
+  "pythonpath": [
+    "src"
+  ],
+  "python": "3.12",
+  "platform": "linux",
+  "packages": {},
+  "repository": "pallets/click",
+  "revision": "c021f05c838c1d0401ebc340d1de9b663c7fb578",
+  "regime": "A",
+  "scope": "click/source-parent",
+  "exposure": "EXPOSED: commit cha của bản sửa nguồn mà skill được học từ đó",
+  "checkout": {
+    "repo": "https://github.com/pallets/click.git",
+    "ref": "c021f05c838c1d0401ebc340d1de9b663c7fb578",
+    "tests_from": "d3e3852eba45a6f7ce0ae5e02ca49106e228add6",
+    "test_files": [
+      "tests/test_options.py"
+    ]
+  },
+  "oracle": {
+    "kind": "pytest",
+    "tests": [
+      "tests/test_options.py"
+    ]
+  }
+}

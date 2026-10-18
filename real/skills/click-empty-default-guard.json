@@ -1,0 +1,34 @@
+{
+  "skill_id": "click-empty-default-guard",
+  "version": "1.0",
+  "pi": {
+    "transform": "empty_string_guard",
+    "params": {
+      "functions": [
+        "get_help_record",
+        "get_help_extra"
+      ]
+    }
+  },
+  "D": {
+    "python": ">=3.8"
+  },
+  "I": [
+    "single_site"
+  ],
+  "P": [
+    {
+      "before": "../sources/click_core_source_parent.py",
+      "after": "../sources/click_core_source_fix.py",
+      "compare_function": "get_help_record",
+      "heldout": false
+    }
+  ],
+  "K": {
+    "behaviors": [
+      "eq-empty-string",
+      "default-display"
+    ]
+  },
+  "scope": "click-help"
+}

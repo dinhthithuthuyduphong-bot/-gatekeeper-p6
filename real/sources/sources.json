@@ -1,0 +1,16 @@
+{
+  "files": [
+    {
+      "out": "click_core_source_parent.py",
+      "repo": "https://github.com/pallets/click.git",
+      "ref": "c021f05c838c1d0401ebc340d1de9b663c7fb578",
+      "path": "src/click/core.py"
+    },
+    {
+      "out": "click_core_source_fix.py",
+      "repo": "https://github.com/pallets/click.git",
+      "ref": "d3e3852eba45a6f7ce0ae5e02ca49106e228add6",
+      "path": "src/click/core.py"
+    }
+  ]
+}

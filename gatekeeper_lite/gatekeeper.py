@@ -55,15 +55,29 @@ def footprint_overlap(a: Sequence[str], b: Sequence[str]) -> List[str]:
     return sorted((set(a) & set(b)) - {"func:<module>"})
 
 
+def _functions_dump(source: str, name: str) -> list:
+    import ast
+    return [ast.dump(n) for n in ast.walk(ast.parse(source))
+            if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef)) and n.name == name]
+
+
 def replay(skill: Skill) -> dict:
-    """Source replay (B5/B6 ingredient): reproduce each recorded fix on its source."""
+    """Source replay (B5/B6 ingredient): reproduce each recorded fix on its source.
+
+    With "compare_function", only that function is compared (the official commit may
+    also touch unrelated code in the same file).
+    """
     checks = []
     for ex in skill.P:
         before = (skill.root / ex["before"]).read_text(encoding="utf-8")
         after = (skill.root / ex["after"]).read_text(encoding="utf-8")
         try:
             out = skill.transform().apply(before, single_site=skill.single_site).source
-            ok = transforms.ast_equal(out, after)
+            if ex.get("compare_function"):
+                got, want = (_functions_dump(x, ex["compare_function"]) for x in (out, after))
+                ok = bool(want) and got == want
+            else:
+                ok = transforms.ast_equal(out, after)
             checks.append({"example": ex["before"], "passed": ok,
                            "heldout": bool(ex.get("heldout", False))})
         except transforms.Abstain as exc:
