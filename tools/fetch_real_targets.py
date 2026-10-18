@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -15,9 +16,16 @@ import tempfile
 from pathlib import Path
 
 
+# No background gc/maintenance: a detached git process writing into .git/objects
+# while the temporary directory is removed caused "Directory not empty" on Actions.
+_GIT = ["git", "-c", "gc.auto=0", "-c", "maintenance.auto=false",
+        "-c", "fetch.writeCommitGraph=false", "-c", "core.fsmonitor=false"]
+
+
 def _git(*args, cwd, capture=False):
-    res = subprocess.run(["git", *args], cwd=cwd, check=True, text=True,
-                         capture_output=capture)
+    env = dict(os.environ, GIT_TERMINAL_PROMPT="0")
+    res = subprocess.run([*_GIT, *args], cwd=cwd, check=True, text=True,
+                         capture_output=capture, env=env)
     return res.stdout.strip() if capture else None
 
 
@@ -42,7 +50,7 @@ def main(root: str) -> int:
     for manifest_path in sorted((root / "targets").glob("*/gk_target.json")):
         target_dir = manifest_path.parent
         spec = json.loads(manifest_path.read_text(encoding="utf-8"))["checkout"]
-        with tempfile.TemporaryDirectory() as tmp:
+        with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
             repo_dir = Path(tmp) / "repo"
             sha = _clone_ref(spec["repo"], spec["ref"], repo_dir)
             shutil.copytree(repo_dir, target_dir, dirs_exist_ok=True,
@@ -64,7 +72,7 @@ def main(root: str) -> int:
     sources = root / "sources" / "sources.json"
     if sources.exists():
         for item in json.loads(sources.read_text(encoding="utf-8"))["files"]:
-            with tempfile.TemporaryDirectory() as tmp:
+            with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
                 sha = _clone_ref(item["repo"], item["ref"], Path(tmp) / "repo")
                 data = (Path(tmp) / "repo" / item["path"]).read_text(encoding="utf-8")
             (root / "sources" / item["out"]).write_text(data, encoding="utf-8")
