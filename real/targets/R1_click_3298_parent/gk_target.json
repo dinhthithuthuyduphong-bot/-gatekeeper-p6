@@ -23,7 +23,11 @@
   "oracle": {
     "kind": "pytest",
     "tests": [
-      "tests/test_options.py"
+      "tests/test_options.py",
+      "tests/test_gk_boundary.py"
     ]
-  }
+  },
+  "inject_tests": [
+    "oracle_templates/test_gk_boundary.py"
+  ]
 }

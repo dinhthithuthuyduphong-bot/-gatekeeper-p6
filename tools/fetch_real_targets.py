@@ -53,6 +53,10 @@ def main(root: str) -> int:
                     text, test_sha = _show(repo_dir, spec["repo"], spec["tests_from"], test_file)
                     (target_dir / test_file).write_text(text, encoding="utf-8")
                     entry.setdefault("tests_from", {})[test_file] = test_sha
+        for rel in json.loads(manifest_path.read_text()).get("inject_tests", []):
+            src = root / rel
+            shutil.copy2(src, target_dir / "tests" / src.name)
+            entry.setdefault("injected", {})[src.name] = hashlib.sha256(src.read_bytes()).hexdigest()
         module = target_dir / json.loads(manifest_path.read_text())["module"]
         entry["module_sha256"] = hashlib.sha256(module.read_bytes()).hexdigest()
         receipt["targets"][target_dir.name] = entry

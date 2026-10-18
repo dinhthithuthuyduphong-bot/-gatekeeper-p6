@@ -137,6 +137,38 @@ def run_arm(arm: str, target_root: Path, module: str, treated_source: Optional[s
         shutil.rmtree(work, ignore_errors=True)       # cleanup is part of the protocol
 
 
+def reach_pass(target, functions: List[str], seed: int, timeout: float = 600.0) -> Optional[dict]:
+    """Extra baseline-only pytest pass recording which tests call the edited functions.
+
+    Runs on the untreated snapshot, so the filter cannot depend on treatment outcomes.
+    Returns None (no filter) if the pass fails for any reason.
+    """
+    oracle = target.manifest.get("oracle", {})
+    if oracle.get("kind") != "pytest" or not functions:
+        return None
+    work = Path(tempfile.mkdtemp(prefix="gk_reach_"))
+    try:
+        snapshot = work / "snapshot"
+        shutil.copytree(target.root, snapshot,
+                        ignore=shutil.ignore_patterns("__pycache__", ".git", "*.egg-info"))
+        out = work / "reach.json"
+        paths = [str(snapshot / p) for p in target.manifest.get("pythonpath", [])]
+        env = dict(os.environ, PYTHONHASHSEED=str(seed), PYTHONDONTWRITEBYTECODE="1",
+                   PYTHONPATH=os.pathsep.join(paths + [str(PACKAGE_ROOT)]),
+                   GK_REACH_FUNCS=",".join(functions), GK_REACH_FILE=target.module,
+                   GK_REACH_OUT=str(out))
+        cmd = [sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider",
+               "-p", "gatekeeper_lite.pytest_reach", *(oracle.get("pytest_args") or []),
+               *oracle["tests"]]
+        subprocess.run(cmd, cwd=str(snapshot), env=env, capture_output=True, text=True,
+                       timeout=timeout)
+        return json.loads(out.read_text(encoding="utf-8")) if out.exists() else None
+    except Exception:
+        return None
+    finally:
+        shutil.rmtree(work, ignore_errors=True)
+
+
 def paired_run(target, treated_source: str, seed: int, timeout: float = 60.0) -> PairedRun:
     oracle = target.manifest.get("oracle", {"kind": "cases"})
     paths = target.manifest.get("pythonpath", [])

@@ -19,7 +19,7 @@ Chỉ dùng thư viện chuẩn của Python (≥ 3.9; đã chạy với 3.12.3)
 
 ```bash
 # ở thư mục gốc của repo (hoặc thư mục chứa gatekeeper_lite/)
-python -m unittest discover -s tests -v                              # 23 test
+python -m unittest discover -s tests -v                              # 25 test
 python -m gatekeeper_lite run --config demo/config.json --out out_demo
 python -m gatekeeper_lite show out_demo/RESULT.json T2_help_lazy     # giải thích 1 cặp
 ```
@@ -80,6 +80,22 @@ Job thứ hai chạy cùng pipeline trên mã Click thật, chấm bằng **test
 Kiểm tra ngoại tuyến trên mã Click lấy từ artifact P7: cả hai binder đều bind ở `get_help_extra` của R1, B6-R replay khớp đúng hàm đã sửa của bản chính thức, và 4 file của v3 khớp hash đóng băng.
 
 **Cách đọc:** ở R1 test của bản sửa chạm đúng biên, nên paired trial có tín hiệu. Ở R2, R3, test của chính bản phát hành không có ca đối tượng so sánh chặt, nên nhiều khả năng "không quan sát thấy khác biệt dưới oracle không chạm biên": B6-R và B8 admit, Gatekeeper không đủ bằng chứng. Đây là kết quả có ích cho paper (độ đủ của oracle), không phải lỗi.
+
+**Bản v3 của thí nghiệm (mới):**
+
+- *Oracle biên dùng chung* `real/oracle_templates/test_gk_boundary.py`, mô phỏng đúng test chính thức #3298, được chèn nguyên vẹn vào mọi target (hash ghi trong `FETCH_RECEIPT.json`). Các nhóm: đối tượng so sánh chặt (8), array-like (4), chuỗi thường và chuỗi rỗng (3), chuỗi lazy (2), chuỗi lazy rỗng (6). Kỳ vọng do người nghiên cứu khai báo (oracle phát triển, viết sau khi đã nghiên cứu P7), không phải oracle đánh giá độc lập.
+- *Lọc task theo khả năng chạm* (`task_filter: reach_baseline`): một lượt pytest **chỉ trên code gốc** ghi lại test nào gọi tới hàm bị sửa (`gatekeeper_lite/pytest_reach.py`). Gatekeeper chỉ lấy mẫu trong các task này, vì task không chạm hàm bị sửa luôn có Z = 0. Bộ lọc được quyết định trước khi xem treatment; chi phí lượt lọc được cộng vào chi phí Gatekeeper.
+
+Kiểm tra ngoại tuyến oracle biên trên mã Click thật lấy từ artifact P7:
+
+| Nhóm | Số ca | Commit cha #3298 | Sau khi áp skill | Bản sửa chính thức |
+|---|---|---|---|---|
+| Đối tượng so sánh chặt | 8 | 0 pass | 8 | 8 |
+| Array-like | 4 | 0 | 0 | 0 |
+| Chuỗi thường, chuỗi rỗng, chuỗi lazy | 5 | 5 | 5 | 5 |
+| Chuỗi lazy rỗng | 6 | 6 | **0** | **0** |
+
+Array-like hỏng ở một phép so sánh khác (`default_value not in (None, UNSET)`), nằm ngoài phạm vi skill. Bản sửa #3298, kể cả bản chính thức, đổi lỗi với đối tượng so sánh chặt lấy thay đổi hành vi với chuỗi lazy rỗng (theo kỳ vọng đã khai báo).
 
 **Lưu ý lịch sử:** bản sửa nguồn trước đó (`d3e3852`) chính là commit **thêm** nhánh `default_value == ""`; nhánh này về sau gây lỗi #3298 với default không phải chuỗi. P7.1 đã cho thấy skill học từ bản sửa đó có lợi ở ca đã biết nhưng có hại ở đầu vào mới.
 
@@ -143,6 +159,6 @@ demo/targets/      T1–T7: mã nguồn, oracle_cases.py, gk_target.json
 real/              thí nghiệm trên Click thật: skill, 3 target, config_real.json
 tools/             fetch_real_targets.py (tải mã nguồn đã đóng băng trên Actions)
 p7/                binder v3 của P7.3 (đóng băng) + wrapper
-tests/             23 unit test
+tests/             25 unit test
 .github/workflows/ gk-lite-demo.yml
 ```

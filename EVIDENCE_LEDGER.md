@@ -12,7 +12,8 @@ Mỗi dòng là một lần chạy trên GitHub Actions. "Phạm vi" ghi rõ đi
 | Gatekeeper-Lite demo #2 | 39139075701 | 6908381 | `b58c2391c3e194ce5eeb8d490a5872ef5a834fe2d1095affe0101bab00564b64` | Toàn chuỗi trên target dựng sẵn; không phải repository độc lập |
 | Gatekeeper-Lite demo #4 (demo + real-click v1) | 39141922266 | d028bae | demo `6b608e67bc2e41d4db4140c5c9209a7003509a57c934ee765ea281967db8f8d8`, real `23a404752829f67c06e30906d920ce208c1aded98093bedec16ee9beb38158e6` | Pipeline chạy trên Click thật lần đầu. Thiết kế R1 của bản này sai (commit chưa có nhánh cần sửa); thay bằng real-click v2 |
 | P7 extract embedded sources | (bổ sung) | (bổ sung) | `P7_SOURCES_READABLE` | Mã P7.0–P7.3 giải nén ra dạng đọc được; binder v3 khớp hash `BINDER_FREEZE.json` |
-| Gatekeeper-Lite real-click v2 | (chưa chạy) | | | Hai binder (neo theo hàm, v3) × 3 target Click; R1 = nguồn #3298 (đã thấy), R2–R3 chưa xem |
+| Gatekeeper-Lite demo #5 (real-click v2) | 39143998624 | f4f781c | demo `d2a7f166958da5729f37bda8d3b0a72644eb5383d6ce4bdb388d046caa391db6`, real `cdbaba9fb8f249be4fb9b139cb322f593691b4f586d81180538e0592996358e3` | 6 cặp: R1 có lợi (1 task phân biệt trên 552) với cả hai binder; R2 binder neo theo hàm từ chối, v3 áp dụng; R3 không đổi. B6-R và B8 admit 5/6; Gatekeeper QUARANTINE cả 5 (24 task lấy ngẫu nhiên không chạm task phân biệt) |
+| Gatekeeper-Lite real-click v3 | (chưa chạy) | | | Thêm oracle biên dùng chung + lọc task theo khả năng chạm |
 
 ## Việc còn thiếu để tái lập
 

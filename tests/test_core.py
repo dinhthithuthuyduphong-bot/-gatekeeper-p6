@@ -266,3 +266,37 @@ class P73WrapperTests(unittest.TestCase):
         with self.assertRaises(T.Abstain) as ctx:
             ext.apply("def f(x):\n    return x == ''\n")
         self.assertEqual(ctx.exception.reason, "ABSTAIN_SCOPE_MISMATCH")
+
+
+class ReachPluginTests(unittest.TestCase):
+    def test_junit_id_and_tracer(self):
+        import importlib, os, sys
+        os.environ["GK_REACH_FUNCS"] = "target_fn"
+        os.environ["GK_REACH_FILE"] = "test_core.py"
+        import gatekeeper_lite.pytest_reach as reach
+        reach = importlib.reload(reach)
+        self.assertEqual(reach.junit_id("tests/test_options.py::test_a[x-1]"),
+                         "tests.test_options::test_a[x-1]")
+        self.assertEqual(reach.junit_id("tests/test_x.py::Cls::test_b"), "tests.test_x.Cls::test_b")
+
+        def target_fn():
+            return 1
+
+        class Item:
+            nodeid = "tests/test_options.py::test_reach"
+        reach.pytest_runtest_setup(Item())
+        target_fn()
+        reach.pytest_runtest_teardown(Item(), None)
+        self.assertIn("tests.test_options::test_reach", reach._state["reached"])
+
+    def test_filter_without_reaching_tasks_quarantines(self):
+        from gatekeeper_lite.gatekeeper import BindOutcome, gatekeeper
+        from gatekeeper_lite.runner import ArmResult, PairedRun
+        from gatekeeper_lite.skill import Target
+        base = ArmResult("baseline", {"a": {"passed": False}}, 0, {})
+        treat = ArmResult("treatment", {"a": {"passed": True}}, 0, {})
+        run = PairedRun(base, treat, True)
+        tgt = Target.load(TGT / "T1_help_strict")
+        res = gatekeeper("c", [], tgt, run, BindOutcome(True, "x"), AlphaLedger(0.1, {"c": 0.05}),
+                         {"theta": 0.1, "seed": 1, "budget_tasks": 5}, reached=set())
+        self.assertEqual(res.decision, "QUARANTINE")

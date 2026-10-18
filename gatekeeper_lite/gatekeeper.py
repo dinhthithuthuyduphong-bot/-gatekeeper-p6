@@ -17,7 +17,7 @@ from typing import Dict, List, Optional, Sequence
 
 from . import transforms
 from .eprocess import AlphaLedger, BettingEProcess
-from .runner import PairedRun, paired_run
+from .runner import PairedRun, paired_run, reach_pass
 from .screen import MATCH, screen
 from .skill import Skill, Target
 
@@ -107,8 +107,8 @@ class GatekeeperResult:
 
 
 def gatekeeper(cell: str, skills: Sequence[Skill], target: Target, run: Optional[PairedRun],
-               bound: BindOutcome, ledger: AlphaLedger, cfg: dict, epoch: int = 0
-               ) -> GatekeeperResult:
+               bound: BindOutcome, ledger: AlphaLedger, cfg: dict, epoch: int = 0,
+               reached: Optional[set] = None) -> GatekeeperResult:
     for skill in skills:
         scr = screen(skill, target)
         if not scr.in_scope:
@@ -118,10 +118,14 @@ def gatekeeper(cell: str, skills: Sequence[Skill], target: Target, run: Optional
         return GatekeeperResult(OUT_OF_SCOPE, bound.reason, epoch=epoch)
     if run is None or not run.integrity_ok:
         return GatekeeperResult(QUARANTINE, "pair integrity failed", epoch=epoch)
+    order = list(run.case_ids)
+    if reached is not None:
+        order = [c for c in order if c in reached]
+        if not order:
+            return GatekeeperResult(QUARANTINE, "no task reaches the edited site", epoch=epoch)
     alpha = ledger.draw(cell, epoch)
     threshold = 1.0 / alpha
     ep = BettingEProcess(theta=cfg["theta"])
-    order = list(run.case_ids)
     random.Random(cfg["seed"] * 1000 + epoch).shuffle(order)   # frozen sampling order
     budget = min(cfg["budget_tasks"], len(order))
     for n, case_id in enumerate(order[:budget], start=1):
@@ -167,7 +171,12 @@ def run_pair(cell: str, skills: Sequence[Skill], target: Target, ledger: AlphaLe
     bound = bind(skills, target)
     run = paired_run(target, bound.source, cfg["seed"],
                      timeout=cfg.get("timeout_seconds", 120)) if bound.ok else None
-    gk = gatekeeper(cell, skills, target, run, bound, ledger, cfg, epoch)
+    reach = None
+    if run is not None and cfg.get("task_filter") == "reach_baseline":
+        functions = sorted({s["function"] for s in bound.sites if s.get("function")})
+        reach = reach_pass(target, functions, cfg["seed"], cfg.get("timeout_seconds", 600))
+    reached = set(reach["reached"]) & set(run.case_ids) if reach else None
+    gk = gatekeeper(cell, skills, target, run, bound, ledger, cfg, epoch, reached)
     record = {
         "cell": cell,
         "skills": [s.skill_id for s in skills],
@@ -185,8 +194,15 @@ def run_pair(cell: str, skills: Sequence[Skill], target: Target, ledger: AlphaLe
         "comparators": comparators(skills, target, run, bound),
         "gatekeeper": asdict(gk),
     }
+    screening = len(run.case_ids) if (run is not None and reach) else 0
     record["comparators"]["Gatekeeper"] = {"decision": gk.decision,
-                                           "cost_tasks": 2 * gk.tasks_used}
+                                           "cost_tasks": 2 * gk.tasks_used + screening}
+    record["task_filter"] = {"mode": cfg.get("task_filter", "none"),
+                             "available": reach is not None,
+                             "reaching_tasks": len(reached) if reached is not None else None,
+                             "discriminating_tasks": (sum(1 for c in run.case_ids if run.z(c) != 0)
+                                                      if run is not None else None),
+                             "screening_cost_tasks": screening}
     if run:
         record["paired"] = {
             "integrity_ok": run.integrity_ok, "integrity_notes": run.integrity_notes,
