@@ -1,0 +1,148 @@
+"""Paired trials: run the same oracle tasks WITHOUT and WITH the skill.
+
+Both arms are copied from the same frozen target snapshot into fresh temporary
+directories and differ only in the treated module file (pair integrity).  Each arm
+runs in its own subprocess with the same seed and PYTHONHASHSEED.
+"""
+from __future__ import annotations
+
+import hashlib
+import json
+import os
+import shutil
+import subprocess
+import sys
+import tempfile
+import time
+from dataclasses import dataclass, field
+from pathlib import Path
+from typing import Dict, List, Optional
+
+PACKAGE_ROOT = Path(__file__).resolve().parent.parent
+
+
+@dataclass
+class ArmResult:
+    arm: str
+    results: Dict[str, dict]
+    seconds: float
+    file_hashes: Dict[str, str]
+
+    def failed(self) -> set:
+        return {c for c, r in self.results.items() if not r["passed"]}
+
+
+@dataclass
+class PairedRun:
+    baseline: ArmResult
+    treatment: ArmResult
+    integrity_ok: bool
+    integrity_notes: List[str] = field(default_factory=list)
+
+    @property
+    def case_ids(self) -> List[str]:
+        return sorted(self.baseline.results)
+
+    def z(self, case_id: str) -> float:
+        b = 0.0 if self.baseline.results[case_id]["passed"] else 1.0
+        t = 0.0 if self.treatment.results[case_id]["passed"] else 1.0
+        return t - b
+
+    @property
+    def new_failures(self) -> List[str]:
+        return sorted(self.treatment.failed() - self.baseline.failed())
+
+    @property
+    def resolved_failures(self) -> List[str]:
+        return sorted(self.baseline.failed() - self.treatment.failed())
+
+    def suite_loss(self, arm: str) -> float:
+        """Paper-style loss: (1 - pass rate) + 0.5 per regression, clipped to [0, 1]."""
+        res = self.baseline if arm == "baseline" else self.treatment
+        n = len(res.results)
+        fail_rate = len(res.failed()) / n if n else 1.0
+        regressions = len(self.new_failures) if arm == "treatment" else 0
+        return min(1.0, fail_rate + 0.5 * regressions)
+
+
+def _hash_tree(root: Path) -> Dict[str, str]:
+    out = {}
+    for p in sorted(root.rglob("*")):
+        if p.is_file() and "__pycache__" not in p.parts:
+            out[str(p.relative_to(root))] = hashlib.sha256(p.read_bytes()).hexdigest()
+    return out
+
+
+def parse_junit(xml_text: str) -> Dict[str, dict]:
+    """Per-test outcome from a pytest JUnit XML report (skips count as missing, not pass)."""
+    import xml.etree.ElementTree as ET
+    root = ET.fromstring(xml_text)
+    results = {}
+    for case in root.iter("testcase"):
+        case_id = f"{case.get('classname', '')}::{case.get('name', '')}"
+        if case.find("skipped") is not None:
+            continue
+        bad = case.find("failure") if case.find("failure") is not None else case.find("error")
+        results[case_id] = {"passed": bad is None}
+        if bad is not None:
+            results[case_id]["error"] = (bad.get("message") or "")[:200]
+    return results
+
+
+def _run_pytest(snapshot: Path, tests: List[str], env: dict, timeout: float) -> Dict[str, dict]:
+    junit = snapshot / "_gk_junit.xml"
+    cmd = [sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider",
+           f"--junitxml={junit}", *tests]
+    proc = subprocess.run(cmd, cwd=str(snapshot), env=env, capture_output=True,
+                          text=True, timeout=timeout)
+    if not junit.exists():
+        raise RuntimeError(f"pytest produced no report (exit {proc.returncode}): "
+                           f"{(proc.stderr or proc.stdout)[-500:]}")
+    return parse_junit(junit.read_text(encoding="utf-8"))
+
+
+def run_arm(arm: str, target_root: Path, module: str, treated_source: Optional[str],
+            seed: int, timeout: float = 60.0, oracle: Optional[dict] = None) -> ArmResult:
+    work = Path(tempfile.mkdtemp(prefix=f"gk_{arm}_"))
+    try:
+        snapshot = work / "snapshot"
+        shutil.copytree(target_root, snapshot, ignore=shutil.ignore_patterns("__pycache__"))
+        if treated_source is not None:
+            (snapshot / module).write_text(treated_source, encoding="utf-8")
+        hashes = _hash_tree(snapshot)
+        env = dict(os.environ, PYTHONHASHSEED=str(seed), PYTHONDONTWRITEBYTECODE="1",
+                   PYTHONPATH=str(PACKAGE_ROOT))
+        oracle = oracle or {"kind": "cases"}
+        start = time.perf_counter()
+        if oracle["kind"] == "pytest":
+            results = _run_pytest(snapshot, oracle["tests"], env, timeout)
+        else:
+            proc = subprocess.run([sys.executable, "-m", "gatekeeper_lite.harness",
+                                   str(snapshot), str(seed)],
+                                  cwd=str(snapshot), env=env, capture_output=True,
+                                  text=True, timeout=timeout)
+            if proc.returncode != 0:
+                raise RuntimeError(f"harness failed in {arm}: {proc.stderr[-500:]}")
+            results = json.loads(proc.stdout.strip().splitlines()[-1])["results"]
+        seconds = time.perf_counter() - start
+        return ArmResult(arm, results, seconds, hashes)
+    finally:
+        shutil.rmtree(work, ignore_errors=True)       # cleanup is part of the protocol
+
+
+def paired_run(target, treated_source: str, seed: int, timeout: float = 60.0) -> PairedRun:
+    oracle = target.manifest.get("oracle", {"kind": "cases"})
+    base = run_arm("baseline", target.root, target.module, None, seed, timeout, oracle)
+    treat = run_arm("treatment", target.root, target.module, treated_source, seed, timeout,
+                    oracle)
+    notes = []
+    differing = {k for k in set(base.file_hashes) | set(treat.file_hashes)
+                 if base.file_hashes.get(k) != treat.file_hashes.get(k)
+                 and not k.startswith("_gk_")}
+    if differing - {target.module}:
+        notes.append(f"unexpected file differences: {sorted(differing - {target.module})}")
+    if target.module not in differing:
+        notes.append("treated module is identical to baseline")
+    if set(base.results) != set(treat.results):
+        notes.append("arms ran different task sets")
+    return PairedRun(base, treat, not notes, notes)
