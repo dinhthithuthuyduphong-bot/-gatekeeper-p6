@@ -257,3 +257,12 @@ class EmbeddedPayloadTests(unittest.TestCase):
             manifest = tool.extract(wf, Path(tmp) / "out")
             self.assertEqual(manifest["payloads"][0]["kind"], "zip")
             self.assertEqual(read(Path(tmp) / "out" / "binder" / "anchored_binder.py"), "print('v3')\n")
+
+
+class P73WrapperTests(unittest.TestCase):
+    def test_v3_wrapper_abstains_outside_scope_and_checks_freeze(self):
+        ext = T.ExternalCommand(command="{python} " + str(ROOT / "p7" / "p73_binder_cli.py")
+                                + " --in {input} --out {output} --receipt {receipt}")
+        with self.assertRaises(T.Abstain) as ctx:
+            ext.apply("def f(x):\n    return x == ''\n")
+        self.assertEqual(ctx.exception.reason, "ABSTAIN_SCOPE_MISMATCH")

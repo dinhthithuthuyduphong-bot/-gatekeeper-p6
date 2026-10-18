@@ -376,12 +376,13 @@ class ExternalCommand(Transform):
         import json as _json
         import shlex
         import subprocess
+        import sys
         import tempfile
         from pathlib import Path as _Path
         with tempfile.TemporaryDirectory(prefix="gk_ext_") as tmp:
             src, out, rec = (_Path(tmp) / n for n in ("input.py", "output.py", "receipt.json"))
             src.write_text(source, encoding="utf-8")
-            cmd = [part.format(input=src, output=out, receipt=rec)
+            cmd = [part.format(input=src, output=out, receipt=rec, python=sys.executable)
                    for part in shlex.split(self.command)]
             proc = subprocess.run(cmd, capture_output=True, text=True, timeout=self.timeout)
             if proc.returncode != 0 or not rec.exists():

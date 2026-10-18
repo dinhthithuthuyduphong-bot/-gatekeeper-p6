@@ -1,0 +1,21 @@
+{
+  "schema": "gk_p73_binder_revision_v1",
+  "exposure": "P71_P72_ALREADY_EXPOSED_DEVELOPMENT",
+  "files": {
+    "anchored_binder.py": "2fdb6dd9cefe2b9e81a5506649bb9181b9d4408e65b239400c0b82c63decfc12",
+    "GUARDED_TEMPLATE_V2.json": "676e6f93c5d6ddf76c225a540bbc9299a8aeac809e2022e389e9a57d65023ac1",
+    "FROZEN_TEMPLATE.json": "c19daa246f585cca56bc113740fc63c7fa1d43d98af5a2db5dce1b4b7b7f62d2",
+    "template_skill.py": "a175a6a1cf8a4dab23c111baba530718c94ef23781ff968c7638e336633d41dd"
+  },
+  "scope_allowlist": [
+    "Option.get_help_record",
+    "Option.get_help_extra"
+  ],
+  "target_informed_scope_extension": true,
+  "guard_from_frozen_v2": true,
+  "new_independent_source_skills": 0,
+  "new_independent_target_clusters": 0,
+  "prospective_pairs": 0,
+  "successful_independent_transfers": 0,
+  "candidate_admitted": false
+}

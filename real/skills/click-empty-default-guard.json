@@ -18,9 +18,9 @@
   ],
   "P": [
     {
-      "before": "../sources/click_core_source_parent.py",
-      "after": "../sources/click_core_source_fix.py",
-      "compare_function": "get_help_record",
+      "before": "../sources/click_core_3298_parent.py",
+      "after": "../sources/click_core_3298_fix.py",
+      "compare_function": "get_help_extra",
       "heldout": false
     }
   ],

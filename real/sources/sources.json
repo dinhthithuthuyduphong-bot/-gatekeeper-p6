@@ -1,15 +1,15 @@
 {
   "files": [
     {
-      "out": "click_core_source_parent.py",
+      "out": "click_core_3298_parent.py",
       "repo": "https://github.com/pallets/click.git",
-      "ref": "c021f05c838c1d0401ebc340d1de9b663c7fb578",
+      "ref": "04ef3a6f473deb2499721a8d11f92a7d2c0912f2",
       "path": "src/click/core.py"
     },
     {
-      "out": "click_core_source_fix.py",
+      "out": "click_core_3298_fix.py",
       "repo": "https://github.com/pallets/click.git",
-      "ref": "d3e3852eba45a6f7ce0ae5e02ca49106e228add6",
+      "ref": "1458800409ed12076f18451889b0857db36aa522",
       "path": "src/click/core.py"
     }
   ]

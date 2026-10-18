@@ -19,7 +19,7 @@ Chỉ dùng thư viện chuẩn của Python (≥ 3.9; đã chạy với 3.12.3)
 
 ```bash
 # ở thư mục gốc của repo (hoặc thư mục chứa gatekeeper_lite/)
-python -m unittest discover -s tests -v                              # 21 test
+python -m unittest discover -s tests -v                              # 23 test
 python -m gatekeeper_lite run --config demo/config.json --out out_demo
 python -m gatekeeper_lite show out_demo/RESULT.json T2_help_lazy     # giải thích 1 cặp
 ```
@@ -66,19 +66,22 @@ Số đếm thô: cặp có hại bị admit — B2 2/2, B6-R 2/2, B8 0/2, Gatek
 
 ## Thí nghiệm trên mã Click thật (job `real-click`)
 
-Job thứ hai trong workflow chạy cùng pipeline trên mã Click thật, chấm bằng **test gốc của Click** (`tests/test_options.py`, không sửa assertion):
+Job thứ hai chạy cùng pipeline trên mã Click thật, chấm bằng **test gốc của Click** (`tests/test_options.py`, không sửa assertion). Hai skill cùng một phép sửa (thêm `isinstance(x, str)` trước `x == ""`), được học từ bản sửa Click #3298 (`04ef3a6f` → `14588004`):
+
+- `click-empty-default-guard`: binder neo theo hàm của Gatekeeper-Lite;
+- `click-guard-v3`: **binder v3 của P7.3**, chạy nguyên bản đã đóng băng qua `p7/p73_binder_cli.py` (từ chối chạy nếu hash khác `BINDER_FREEZE.json`).
 
 | Target | Revision | Vai trò |
 |---|---|---|
-| R1 | `c021f05c` (commit cha của bản sửa nguồn), test lấy từ bản sửa `d3e3852e` | Đã thấy (nguồn của skill): kiểm tra pipeline trên code thật |
+| R1 | `04ef3a6f` (commit cha của #3298), test lấy từ bản sửa `14588004` | Nguồn của skill, đã thấy (P7.3) |
 | R2 | tag `8.1.7` | Chưa xem, chọn trước khi chạy |
 | R3 | tag `8.2.1` | Chưa xem, chọn trước khi chạy |
 
-Skill `click-empty-default-guard` là cùng phép sửa với binder v3 (thêm `isinstance(x, str)` trước `x == ""`), neo vào hàm `get_help_record` / `get_help_extra`. B6-R replay so sánh **đúng hàm** `get_help_record` giữa kết quả sinh ra và bản sửa chính thức. Script `tools/fetch_real_targets.py` ghi commit thực tế của từng checkout vào `FETCH_RECEIPT.json`.
+Kiểm tra ngoại tuyến trên mã Click lấy từ artifact P7: cả hai binder đều bind ở `get_help_extra` của R1, B6-R replay khớp đúng hàm đã sửa của bản chính thức, và 4 file của v3 khớp hash đóng băng.
 
-**Điều nên chờ đợi và cách đọc:** mỗi target chỉ có rất ít test chạm đúng biên đã sửa, trong khi file test có hàng trăm test. Vì vậy Gatekeeper nhiều khả năng QUARANTINE (bằng chứng không đủ), trong khi B6-R và B8 admit. Đây không phải lỗi: nó cho thấy trên dữ liệu thật, một bản sửa đơn lẻ không tạo đủ bằng chứng thống kê, đúng với phát hiện "evidence adequacy" ở Week 5. Kết quả R2, R3 được ghi nguyên trạng, kể cả khi binder từ chối (ví dụ code đã được sửa sẵn).
+**Cách đọc:** ở R1 test của bản sửa chạm đúng biên, nên paired trial có tín hiệu. Ở R2, R3, test của chính bản phát hành không có ca đối tượng so sánh chặt, nên nhiều khả năng "không quan sát thấy khác biệt dưới oracle không chạm biên": B6-R và B8 admit, Gatekeeper không đủ bằng chứng. Đây là kết quả có ích cho paper (độ đủ của oracle), không phải lỗi.
 
-Phần này chưa được chạy ở môi trường của tôi (không có mạng và pytest); lần chạy đầu tiên trên Actions là lần kiểm chứng.
+**Lưu ý lịch sử:** bản sửa nguồn trước đó (`d3e3852`) chính là commit **thêm** nhánh `default_value == ""`; nhánh này về sau gây lỗi #3298 với default không phải chuỗi. P7.1 đã cho thấy skill học từ bản sửa đó có lợi ở ca đã biết nhưng có hại ở đầu vào mới.
 
 ## Kịch bản demo 5 phút cho thầy
 
@@ -139,6 +142,7 @@ demo/sources/      ví dụ before/after của nguồn (dùng cho replay)
 demo/targets/      T1–T7: mã nguồn, oracle_cases.py, gk_target.json
 real/              thí nghiệm trên Click thật: skill, 3 target, config_real.json
 tools/             fetch_real_targets.py (tải mã nguồn đã đóng băng trên Actions)
-tests/             21 unit test
+p7/                binder v3 của P7.3 (đóng băng) + wrapper
+tests/             23 unit test
 .github/workflows/ gk-lite-demo.yml
 ```

@@ -1,5 +1,5 @@
 {
-  "experiment_id": "gatekeeper-lite-real-click-v1",
+  "experiment_id": "gatekeeper-lite-real-click-v2",
   "skills_dir": "skills",
   "targets_dir": "targets",
   "theta": 0.1,
@@ -8,16 +8,19 @@
   "timeout_seconds": 900,
   "alpha_total": 0.1,
   "cells": {
-    "click-empty-default-guard@click/source-parent": 0.025,
-    "click-empty-default-guard@click/release-8.1": 0.025,
-    "click-empty-default-guard@click/release-8.2": 0.025
+    "click-empty-default-guard@click/3298-source": 0.015,
+    "click-empty-default-guard@click/release-8.1": 0.015,
+    "click-empty-default-guard@click/release-8.2": 0.015,
+    "click-guard-v3@click/3298-source": 0.015,
+    "click-guard-v3@click/release-8.1": 0.015,
+    "click-guard-v3@click/release-8.2": 0.015
   },
   "pairs": [
     {
       "skills": [
         "click-empty-default-guard"
       ],
-      "target": "R1_click_source_parent"
+      "target": "R1_click_3298_parent"
     },
     {
       "skills": [
@@ -28,6 +31,24 @@
     {
       "skills": [
         "click-empty-default-guard"
+      ],
+      "target": "R3_click_8_2_1"
+    },
+    {
+      "skills": [
+        "click-guard-v3"
+      ],
+      "target": "R1_click_3298_parent"
+    },
+    {
+      "skills": [
+        "click-guard-v3"
+      ],
+      "target": "R2_click_8_1_7"
+    },
+    {
+      "skills": [
+        "click-guard-v3"
       ],
       "target": "R3_click_8_2_1"
     }
