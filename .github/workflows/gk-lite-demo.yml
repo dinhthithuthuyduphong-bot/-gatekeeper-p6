@@ -1,5 +1,6 @@
-# Gatekeeper-Lite demo: unit tests + frozen demo run inside an isolated container.
-# Place this repository folder at <repo>/gk_lite/ and pin action SHAs per actions.lock.
+# Gatekeeper-Lite demo: unit tests + frozen demo run on a fresh GitHub-hosted runner.
+# Works whether the project sits at the repository root or in a subfolder (e.g. gk_lite/).
+# Pin action SHAs in actions.lock before using outputs as research evidence.
 name: Gatekeeper-Lite demo
 on: workflow_dispatch
 permissions:
@@ -7,19 +8,32 @@ permissions:
 jobs:
   demo:
     runs-on: ubuntu-24.04
-    container: python:3.12-slim   # pin by digest before using results as evidence
-    defaults:
-      run:
-        working-directory: gk_lite
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Locate project folder
+        run: |
+          main=$(find . -path ./.git -prune -o -path '*/gatekeeper_lite/__main__.py' -print | head -n 1)
+          if [ -z "$main" ]; then
+            echo "::error::gatekeeper_lite/__main__.py not found in the repository"
+            find . -maxdepth 3 -not -path './.git*' | head -n 50
+            exit 1
+          fi
+          dir=$(dirname "$(dirname "$main")")
+          echo "GK_DIR=$dir" >> "$GITHUB_ENV"
+          echo "project folder: $dir"; python --version; which python
       - name: Unit tests
-        run: python -m unittest discover -s tests -v
+        run: cd "$GK_DIR" && python -m unittest discover -s tests -v
       - name: Frozen demo run
         run: |
+          cd "$GK_DIR"
           python -m gatekeeper_lite run --config demo/config.json --out out_demo
           sha256sum demo/config.json demo/skills/*.json > out_demo/INPUT_SHA256.txt
-      - uses: actions/upload-artifact@v4
+          cat out_demo/REPORT.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v7
         with:
           name: GK_LITE_DEMO_OUTPUT
-          path: gk_lite/out_demo
+          path: ${{ env.GK_DIR }}/out_demo
+          if-no-files-found: error
