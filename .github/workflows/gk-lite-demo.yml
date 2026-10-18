@@ -1,0 +1,25 @@
+# Gatekeeper-Lite demo: unit tests + frozen demo run inside an isolated container.
+# Place this repository folder at <repo>/gk_lite/ and pin action SHAs per actions.lock.
+name: Gatekeeper-Lite demo
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  demo:
+    runs-on: ubuntu-24.04
+    container: python:3.12-slim   # pin by digest before using results as evidence
+    defaults:
+      run:
+        working-directory: gk_lite
+    steps:
+      - uses: actions/checkout@v4
+      - name: Unit tests
+        run: python -m unittest discover -s tests -v
+      - name: Frozen demo run
+        run: |
+          python -m gatekeeper_lite run --config demo/config.json --out out_demo
+          sha256sum demo/config.json demo/skills/*.json > out_demo/INPUT_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: GK_LITE_DEMO_OUTPUT
+          path: gk_lite/out_demo
