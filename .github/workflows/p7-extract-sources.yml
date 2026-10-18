@@ -1,0 +1,37 @@
+# Extract the code embedded (base64 + xz) in the P7.x workflow files into readable files.
+# Nothing from the payloads is executed. Output: artifact P7_SOURCES_READABLE.
+name: Gatekeeper P7 extract embedded sources
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  extract:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Extract every P7 workflow payload
+        run: |
+          tool=$(find . -path ./.git -prune -o -name extract_embedded_payload.py -print | head -n 1)
+          if [ -z "$tool" ]; then echo "::error::tools/extract_embedded_payload.py not found"; exit 1; fi
+          mkdir -p p7_readable
+          for wf in .github/workflows/p7-*.yml; do
+            name=$(basename "$wf" .yml)
+            echo "== $wf"
+            python "$tool" "$wf" "p7_readable/$name" || echo "no embedded payload in $wf"
+          done
+          find p7_readable -type f | sort | tee p7_readable/FILE_LIST.txt
+          {
+            echo "## Extracted P7 sources"
+            echo '```'
+            cat p7_readable/FILE_LIST.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: P7_SOURCES_READABLE
+          path: p7_readable
+          if-no-files-found: error
