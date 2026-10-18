@@ -235,3 +235,25 @@ class RealLayoutTests(unittest.TestCase):
             self.assertEqual(rec["ground_truth"], "BENEFICIAL")
             self.assertTrue(rec["paired"]["integrity_ok"])
             self.assertEqual(rec["comparators"]["B6R"]["decision"], "ADMIT")
+
+
+class EmbeddedPayloadTests(unittest.TestCase):
+    def test_extract_xz_zip_payload_from_workflow(self):
+        import base64, importlib.util, io, lzma, tempfile, zipfile
+        spec = importlib.util.spec_from_file_location(
+            "extract_tool", ROOT / "tools" / "extract_embedded_payload.py")
+        tool = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(tool)
+        buf = io.BytesIO()
+        with zipfile.ZipFile(buf, "w") as zf:
+            zf.writestr("binder/anchored_binder.py", "print('v3')\n")
+        b64 = base64.b64encode(lzma.compress(buf.getvalue())).decode()
+        wrapped = "\n          ".join(b64[i:i + 76] for i in range(0, len(b64), 76))
+        yaml = ("jobs:\n  x:\n    steps:\n      - run: |\n          python3 - <<'PY'\n"
+                f"          transport = base64.b64decode('''{wrapped}''')\n          PY\n")
+        with tempfile.TemporaryDirectory() as tmp:
+            wf = Path(tmp) / "wf.yml"
+            wf.write_text(yaml)
+            manifest = tool.extract(wf, Path(tmp) / "out")
+            self.assertEqual(manifest["payloads"][0]["kind"], "zip")
+            self.assertEqual(read(Path(tmp) / "out" / "binder" / "anchored_binder.py"), "print('v3')\n")

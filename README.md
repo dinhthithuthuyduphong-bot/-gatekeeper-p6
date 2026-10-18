@@ -11,6 +11,7 @@ Repo nghiên cứu cho luận văn tái hiện thu gọn (Lite) bài *Scope befo
 | `real/`, `tools/` | Cùng pipeline trên mã Click thật, chấm bằng test gốc của Click |
 | `tests/` | Unit test (`python -m unittest discover -s tests -v`) |
 | `.github/workflows/` | Các workflow chạy thủ công: P6.x, P7.x và `gk-lite-demo.yml` |
+| `p7/` | Mã P7.x ở dạng đọc được, giải nén từ payload nhúng trong workflow (`tools/extract_embedded_payload.py`) |
 | `RUN_P6_REMOTE.py` | Smoke test container của giai đoạn P6 (giữ lại để truy vết) |
 | `EVIDENCE_LEDGER.md` | Sổ bằng chứng: run ID, commit, digest artifact, phạm vi kết luận |
 

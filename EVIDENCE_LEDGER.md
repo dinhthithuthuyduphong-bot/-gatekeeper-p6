@@ -14,6 +14,6 @@ Mỗi dòng là một lần chạy trên GitHub Actions. "Phạm vi" ghi rõ đi
 
 ## Việc còn thiếu để tái lập
 
-- Mã nguồn của P7.0–P7.3 (binder v3, script prepare/audit) cần có trong repo ở commit tương ứng; hiện thư mục gốc của `main` không chứa các file này.
+- Mã P7.x đang được **nhúng trong file workflow** dưới dạng base64 nén xz (ví dụ `p7-3-anchored-binder.yml`, bước "Unpack frozen binder revision and exposed target"). Mã chạy được và đóng băng, nhưng người đọc không xem hay diff được. Cần giải nén ra dạng đọc được bằng `python tools/extract_embedded_payload.py .github/workflows/p7-3-anchored-binder.yml p7/p7_3` và commit thư mục `p7/` kèm `MANIFEST.json` (sha256 của payload và từng file).
 - Gắn tag cho các commit bằng chứng, ví dụ `p7.3-evidence` → `e5e4422`, `gk-lite-demo-v1` → `6908381`.
 - Prospective pairs (trên target độc lập, protocol đóng băng trước): **0**.
