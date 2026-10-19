@@ -1,0 +1,37 @@
+# Post-hoc supplementary run S1: rich-click B1 with its own test suite loadable (typer
+# installed).  Reported separately; never replaces Study B v1.
+name: Gatekeeper Study B S1 (post-hoc)
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  s1:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: |
+          python -m pip install --quiet "pytest==8.3.5"
+          mkdir -p out_s1/logs
+          python tools/install_requirements.py study_b_s1/config_s1.json out_s1/PIP_FREEZE.txt
+      - name: Fetch
+        run: |
+          set -o pipefail
+          python tools/fetch_real_targets.py real 2>&1 | tee out_s1/logs/fetch_real.log
+          python tools/fetch_real_targets.py study_b_s1 2>&1 | tee out_s1/logs/fetch_s1.log
+      - name: Run
+        run: |
+          set -o pipefail
+          python -m gatekeeper_lite run --config study_b_s1/config_s1.json --out out_s1 2>&1 | tee out_s1/logs/run.log
+          python tools/render_report.py out_s1/RESULT.json out_s1/REPORT.md --evidence-class POSTHOC_SUPPLEMENTARY
+          cat out_s1/REPORT.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: STUDY_B_S1_OUTPUT
+          path: out_s1
+          if-no-files-found: warn
