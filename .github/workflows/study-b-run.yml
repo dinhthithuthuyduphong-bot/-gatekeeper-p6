@@ -42,13 +42,20 @@ jobs:
           python tools/install_requirements.py study_b/config_study_b.json out_study_b/PIP_FREEZE.txt
       - name: Fetch source files and frozen Study B targets
         run: |
-          python tools/fetch_real_targets.py real
-          python tools/fetch_real_targets.py study_b
+          set -o pipefail
+          mkdir -p out_study_b/logs
+          python tools/fetch_real_targets.py real 2>&1 | tee out_study_b/logs/fetch_real.log
+          python tools/fetch_real_targets.py study_b 2>&1 | tee out_study_b/logs/fetch_study_b.log
       - name: Run (refuses while DRAFT)
         run: |
-          python -m gatekeeper_lite run --config study_b/config_study_b.json --out out_study_b
-          cp study_b/FETCH_RECEIPT.json out_study_b/
+          set -o pipefail
+          python -m gatekeeper_lite run --config study_b/config_study_b.json --out out_study_b 2>&1 | tee out_study_b/logs/run.log
           cat out_study_b/REPORT.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Keep receipts even when a step failed
+        if: always()
+        run: |
+          cp study_b/FETCH_RECEIPT.json out_study_b/STUDY_B_FETCH_RECEIPT.json 2>/dev/null || true
+          cp real/FETCH_RECEIPT.json out_study_b/REAL_SOURCES_FETCH_RECEIPT.json 2>/dev/null || true
       - uses: actions/upload-artifact@v7
         if: always()
         with:
