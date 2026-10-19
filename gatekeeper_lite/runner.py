@@ -108,7 +108,7 @@ def run_arm(arm: str, target_root: Path, module: str, treated_source: Optional[s
     work = Path(tempfile.mkdtemp(prefix=f"gk_{arm}_"))
     try:
         snapshot = work / "snapshot"
-        shutil.copytree(target_root, snapshot,
+        shutil.copytree(target_root, snapshot, symlinks=True,
                         ignore=shutil.ignore_patterns("__pycache__", ".git", "*.egg-info"))
         if treated_source is not None:
             (snapshot / module).write_text(treated_source, encoding="utf-8")
@@ -149,7 +149,7 @@ def reach_pass(target, functions: List[str], seed: int, timeout: float = 600.0) 
     work = Path(tempfile.mkdtemp(prefix="gk_reach_"))
     try:
         snapshot = work / "snapshot"
-        shutil.copytree(target.root, snapshot,
+        shutil.copytree(target.root, snapshot, symlinks=True,
                         ignore=shutil.ignore_patterns("__pycache__", ".git", "*.egg-info"))
         out = work / "reach.json"
         paths = [str(snapshot / p) for p in target.manifest.get("pythonpath", [])]

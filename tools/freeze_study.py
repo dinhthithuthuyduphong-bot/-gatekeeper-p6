@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parent.parent
 
 
 def tracked(study: Path) -> list:
-    files = [study / "config_study_b.json", study / "STUDY_B_PROTOCOL.md"]
+    files = [study / "config_study_b.json", study / "STUDY_B_PROTOCOL.md", study / "AMENDMENTS.md"]
     files += sorted((study / "skills").glob("*.json"))
     files += sorted((study / "targets").glob("*/gk_target.json"))
     files += sorted((study / "oracle_templates").glob("*.py"))

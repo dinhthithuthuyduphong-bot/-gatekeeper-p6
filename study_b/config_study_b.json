@@ -70,5 +70,8 @@
     "D2": "admission by e-BH at FDR 0.1 over the 4 cells; early stop when E >= K/fdr = 40; harm stop per cell at e >= 1/0.05 = 20",
     "D3": "lazy-text classes are pre-declared adversarial behaviour classes for Study B (targets never run before freeze); primary endpoint includes them; sensitivity without them always reported; independent confirmation of the expectation requested from the advisor (does not change the frozen rule)",
     "D4": "targets B1 rich-click v1.9.9 (30ac1778e609) and B2 asyncclick 8.3.0.6+async (4e5fea9cc5a3); one release per repository"
-  }
+  },
+  "amendments": [
+    "A1 (19/10/2026): symlink-safe fetch/snapshot copy; no rule change; no outcomes observed before"
+  ]
 }

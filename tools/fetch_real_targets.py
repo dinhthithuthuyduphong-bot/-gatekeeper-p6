@@ -45,15 +45,27 @@ def _show(repo_dir: Path, repo: str, ref: str, path: str) -> tuple:
 
 
 def main(root: str) -> int:
+    try:
+        return _main(root)
+    except subprocess.CalledProcessError as exc:
+        print(f"::error::git failed: {' '.join(exc.cmd[-4:])} (exit {exc.returncode}) "
+              f"{(exc.stderr or '')[-300:]}")
+        raise
+
+
+def _main(root: str) -> int:
     root = Path(root).resolve()
     receipt = {"targets": {}, "sources": {}}
     for manifest_path in sorted((root / "targets").glob("*/gk_target.json")):
         target_dir = manifest_path.parent
+        print(f"fetching {target_dir.name} ...", flush=True)
         spec = json.loads(manifest_path.read_text(encoding="utf-8"))["checkout"]
         with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
             repo_dir = Path(tmp) / "repo"
             sha = _clone_ref(spec["repo"], spec["ref"], repo_dir)
-            shutil.copytree(repo_dir, target_dir, dirs_exist_ok=True,
+            # Keep symlinks as links: some upstream repos contain links whose targets do
+            # not exist in a shallow checkout, which made a plain copy fail (Amendment A1).
+            shutil.copytree(repo_dir, target_dir, dirs_exist_ok=True, symlinks=True,
                             ignore=shutil.ignore_patterns(".git"))
             entry = {"ref": spec["ref"], "commit": sha}
             if spec.get("tests_from"):

@@ -1,6 +1,6 @@
 # Study B — protocol (ĐÃ ĐÓNG BĂNG 19/10/2026)
 
-**Trạng thái:** FROZEN. Hash của mọi đầu vào nằm trong `study_b/FREEZE.json`; workflow kiểm tra lại hash trước khi chạy và dừng nếu có file thay đổi. Commit đóng băng được gắn tag `study-b-freeze`. Mọi thay đổi sau thời điểm này phải ghi thành amendment có lý do, và không áp dụng cho kết quả đã chạy.
+**Trạng thái:** FROZEN. Hash của mọi đầu vào nằm trong `study_b/FREEZE.json`; workflow kiểm tra lại hash trước khi chạy và dừng nếu có file thay đổi. Commit đóng băng được gắn tag `study-b-freeze`. Mọi thay đổi sau thời điểm này phải ghi thành amendment có lý do, và không áp dụng cho kết quả đã chạy. Danh sách amendment: `study_b/AMENDMENTS.md` (A1: sửa lỗi kỹ thuật khi tải target; tag `study-b-freeze-a1`).
 
 ## 1. Câu hỏi
 

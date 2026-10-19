@@ -1,7 +1,8 @@
 {
   "files": {
-    "study_b/config_study_b.json": "2672cc4c1c6588aefed99c9a3b3f1d79f7eee6f69c7d62b06c30689dca020dfd",
-    "study_b/STUDY_B_PROTOCOL.md": "047eb08d2be4899ba139aa8a2809ad850ec41e9a9e9a4c2f7608c106e5d0279c",
+    "study_b/config_study_b.json": "8f8674cbcf5b5840f629beecc7f5550521542122fc4d5c6cc47264ce353ece76",
+    "study_b/STUDY_B_PROTOCOL.md": "e230228a54f00f77354142dfdecd3628fce0557d241932df520668bc0b39cce5",
+    "study_b/AMENDMENTS.md": "653097f254b95d420452ea64956fe9304ec412c167f79a1db77ff849ed2b50a3",
     "study_b/skills/click-guard-v3.json": "8b7e2bf86629f1232c64707fe0d359b48cfb6754c5646ae234c8eeb12ac55475",
     "study_b/skills/empty-default-guard-family.json": "3be4868908f785d84ab52e2cc1000c35d9804a1c6a7a69c18e27f13128c9c00d",
     "study_b/targets/B1_rich_click/gk_target.json": "b4db5eb17517c92e530283b1ea3055f27f53385b76238f5b77d0231de3242e41",
@@ -15,7 +16,7 @@
     "gatekeeper_lite/harness.py": "e47b4d33a08fa196431a61503ed5986275cf4636cd955e69b47f00a2a8631807",
     "gatekeeper_lite/pytest_reach.py": "16be670c645272df1f9f364e2d5d48eca39e2350fc9cc3409ab577121a6b6773",
     "gatekeeper_lite/report.py": "70d7ce8cafef2b31ca6f75d975483100147f46b066233bce446c40d91e641558",
-    "gatekeeper_lite/runner.py": "8adf84fb809055659bc01911f9566c64f452e787adb3ff7a66179c1dac672607",
+    "gatekeeper_lite/runner.py": "2357636e4c0eec8d8890ff3b2d4e09ead23189f2bf43e0b553d5c0d08623a1c2",
     "gatekeeper_lite/screen.py": "56fbacba4cff58a1d0864c3ef852ee7c6d5f225f06749a1a84fd8efa2624f112",
     "gatekeeper_lite/skill.py": "3d8b6dfceaa89721e5e9dc1d3e9c244912ff909e324b718ba0b1edaa08f23708",
     "gatekeeper_lite/transforms.py": "4112cb302a7c29703c719804269390904f0f0769eed0117da5ea2cfafb7bc76b",
@@ -26,7 +27,7 @@
     "p7/p7_3/FROZEN_TEMPLATE.json": "c19daa246f585cca56bc113740fc63c7fa1d43d98af5a2db5dce1b4b7b7f62d2",
     "p7/p7_3/GUARDED_TEMPLATE_V2.json": "676e6f93c5d6ddf76c225a540bbc9299a8aeac809e2022e389e9a57d65023ac1",
     "p7/p7_3/MANIFEST.json": "20da6dd8d2f59afc7c122b03774d327c8399add2f7e1900dd1de858e670d3f7b",
-    "tools/fetch_real_targets.py": "beeb617680203f02c703f7606b89e4edc51247d134e2d7002d5aca71d60f5b8e",
+    "tools/fetch_real_targets.py": "c4e3774b171ee0ae1aae381d48dea9b9948f8eba9c9220d1383d0ad11940c982",
     "tools/install_requirements.py": "34bce85278e960ba7e74fecab510c91e7d83e2bfe056d131294e6bc853ed16c2"
   }
 }
