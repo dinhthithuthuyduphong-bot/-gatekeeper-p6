@@ -27,6 +27,8 @@ Mỗi dòng là một lần chạy trên GitHub Actions. "Phạm vi" ghi rõ đi
 | Study B S1 (hậu kiểm) lần 1 | 39249192992 | (bổ sung) | `STUDY_B_S1_OUTPUT` | Bộ test gốc rich-click vẫn không chạy (`pyproject` yêu cầu `pytest-cov`); oracle metamorphic cho cùng kết quả Study B. Sửa: thêm `pytest-cov` |
 | Quét ứng viên vòng 3 | 39249187394 | (bổ sung) | `STUDY_B_CANDIDATE_SCAN` | 9 repository hệ sinh thái Click: không có site trên giá trị default. Tổng 3 vòng: 15 repository, 2 đủ điều kiện (đã dùng ở Study B) |
 | Study C freeze | — | (tag `study-c-freeze`) | `study_c/FREEZE.json` | Regime A: 6 bản phát hành Click chưa chạy × 2 binder × 2 scope = 24 ô; oracle metamorphic v2 |
+| **Study C v1** | 39250346083 | (bổ sung) | `STUDY_C_OUTPUT` `0c60525862de328fe68dadca0bc9ba4ffd194921d7bed4b3993ff2137a35a27a` | **H1–H3 xác nhận** trên 6 bản Click chưa chạy: Gatekeeper admit 12/12 ô *đối tượng*, REJECT_HARM 12/12 ô *chuỗi lazy*; B6-R admit cả 24 ô (12 có hại); chi phí Gatekeeper 5.128 so với B8 9.200. Ablation: `study_c/results/ABLATION_study-c-v1.md` |
+| Study B S1 (hậu kiểm) lần 2 | 39250323194 | (bổ sung) | `STUDY_B_S1_OUTPUT` `a1d92b3ce7fdd8b8d760b45e85557c561cab4e112c092a8b0ceef5b23f70bdec` | Bộ test gốc rich-click đã chạy (29 task) nhưng cả 29 đều fail ở cả hai nhánh (môi trường không khớp), nên không cho thông tin; kết luận Study B giữ nguyên |
 | Study B run (thử) | (bổ sung) | (bổ sung) | `STUDY_B_OUTPUT` (chỉ PIP_FREEZE) | Dừng có chủ đích: protocol còn DRAFT. Không có kết quả Study B nào được tạo ra |
 | Study B candidate scan v1 | (bổ sung) | (bổ sung) | `STUDY_B_CANDIDATE_SCAN` | rich-click `4ee6d4b27950` có site chưa guard trong `_get_parameter_default`; asyncclick HEAD đã sửa; typer, click-extra, cloup không có site |
 

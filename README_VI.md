@@ -112,7 +112,11 @@ Array-like hỏng ở một phép so sánh khác (`default_value not in (None, U
 
 Trên rich-click v1.9.9 và asyncclick 8.3.0.6 (chưa từng chạy trước khi đóng băng): B6-R admit 3/3 cặp có hại, B8 và Gatekeeper-Lite từ chối cả 3; Gatekeeper dừng sau 9 task mỗi cặp với chi phí khoảng một nửa B8. Bỏ lớp chuỗi lazy thì cả 3 cặp thành có lợi. Xem `study_b/results/RESULTS_SUMMARY_study-b-v1.md`.
 
-## Bước tiếp theo: Study C (admission theo scope)
+## Kết quả Study C v1 (19/10/2026)
+
+Trên 6 bản phát hành Click chưa từng chạy: Gatekeeper-Lite **admit 12/12** ô scope *đối tượng* và **từ chối vì tác hại 12/12** ô scope *chuỗi lazy*, trong khi B6-R admit cả 24 ô. Chi phí khoảng 56% so với B8. Xem `study_c/results/RESULTS_SUMMARY_study-c-v1.md` và ablation trong cùng thư mục.
+
+## Study C (admission theo scope)
 
 `gatekeeper_lite/scoped.py` chia task thành các scope hành vi khai báo trước; mỗi scope là một ô admission. Trên demo: cùng một skill được ADMIT ở scope "đối tượng" và REJECT_HARM ở scope "chuỗi lazy", trong khi B6-R admit ở mọi scope. Bản nháp: `study_c/STUDY_C_PROTOCOL_DRAFT.md`. Chạy bổ sung hậu kiểm S1 cho rich-click: workflow `study-b-s1.yml`.
 
