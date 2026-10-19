@@ -21,6 +21,7 @@ Mỗi dòng là một lần chạy trên GitHub Actions. "Phạm vi" ghi rõ đi
 | Study B freeze | — | (commit gắn tag `study-b-freeze`) | `study_b/FREEZE.json` (28 file) | D1 kiểm định dấu; D2 e-BH FDR 0,1, dừng sớm ở E ≥ 40, tác hại ở e ≥ 20; D3 lớp lazy khai báo trước; D4 rich-click v1.9.9 + asyncclick 8.3.0.6 |
 | Study B run #4 | 39218140976 | c571174 | `STUDY_B_OUTPUT` (chỉ PIP_FREEZE) | Qua kiểm tra đóng băng, dừng ở bước tải target; chưa chạy cặp nào. Sửa bằng Amendment A1 |
 | Study B run sau A1 | (bổ sung) | (bổ sung) | `STUDY_B_OUTPUT` (chỉ PIP_FREEZE) | Dừng trước khi tạo kết quả, không có log; sửa bằng Amendment A2 |
+| **Study B v1 (sau A2)** | 39219880641 | (bổ sung) | `STUDY_B_OUTPUT` `fe28cc2896dc5bcae18c4ef8a6fcb87d4103f4217bac3264721bb60a0bd54722` | **Bằng chứng prospective đầu tiên.** rich-click v1.9.9 + asyncclick 8.3.0.6: B6-R admit 3/3 cặp có hại; B8 reject 3/3 (2.224 lượt); Gatekeeper REJECT_HARM 3/3 sau 9 task (1.166 lượt); v3 từ chối ở rich-click. Bỏ lớp lazy: cả 3 có lợi. Bộ test gốc rich-click không chạy (thiếu `typer`). Chi tiết: `study_b/results/` |
 | Study B run (thử) | (bổ sung) | (bổ sung) | `STUDY_B_OUTPUT` (chỉ PIP_FREEZE) | Dừng có chủ đích: protocol còn DRAFT. Không có kết quả Study B nào được tạo ra |
 | Study B candidate scan v1 | (bổ sung) | (bổ sung) | `STUDY_B_CANDIDATE_SCAN` | rich-click `4ee6d4b27950` có site chưa guard trong `_get_parameter_default`; asyncclick HEAD đã sửa; typer, click-extra, cloup không có site |
 

@@ -108,6 +108,10 @@ Array-like hỏng ở một phép so sánh khác (`default_value not in (None, U
 - **Quét ứng viên:** workflow `study-b-scan.yml` (chỉ đọc) → artifact `STUDY_B_CANDIDATE_SCAN`.
 - **Protocol Study B (đã đóng băng 19/10/2026):** `study_b/STUDY_B_PROTOCOL.md`, hash trong `study_b/FREEZE.json`; kiểm tra bằng `python tools/freeze_study.py verify study_b`. Admission chung bằng e-BH (FDR 0,1).
 
+## Kết quả Study B v1 (19/10/2026)
+
+Trên rich-click v1.9.9 và asyncclick 8.3.0.6 (chưa từng chạy trước khi đóng băng): B6-R admit 3/3 cặp có hại, B8 và Gatekeeper-Lite từ chối cả 3; Gatekeeper dừng sau 9 task mỗi cặp với chi phí khoảng một nửa B8. Bỏ lớp chuỗi lazy thì cả 3 cặp thành có lợi. Xem `study_b/results/RESULTS_SUMMARY_study-b-v1.md`.
+
 ## Kịch bản demo 5 phút cho thầy
 
 1. **Vấn đề (1 phút):** `show out_demo/RESULT.json T2_help_lazy`. Cùng một sửa đổi (thêm `isinstance(x, str)`) đúng ở T1 nhưng làm hỏng 16 task ở T2, vì chuỗi lazy không phải `str`. B6-R vẫn ADMIT vì replay ở nguồn pass và fingerprint khớp.
