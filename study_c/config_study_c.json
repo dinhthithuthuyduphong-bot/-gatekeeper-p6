@@ -1,0 +1,46 @@
+{
+  "experiment_id": "study-c-v1",
+  "status": "DRAFT",
+  "requires_freeze": true,
+  "skills_dir": "../study_b/skills",
+  "targets_dir": "targets",
+  "theta": 0.1,
+  "seed": 20261102,
+  "budget_tasks": 24,
+  "timeout_seconds": 900,
+  "evidence": "discordant_sign",
+  "discordant": {
+    "q0": 0.6,
+    "q1": 0.9,
+    "harm_eps": 0.05,
+    "harm_alt": 0.5
+  },
+  "task_filter": "reach_baseline",
+  "task_priority": [
+    "gk_metamorphic"
+  ],
+  "sensitivity_exclude": [
+    [
+      "lazy"
+    ]
+  ],
+  "alpha_total": 0.1,
+  "cells": "DERIVED_FROM_PAIRS_x_SCOPES",
+  "pairs": "DECISION_TARGETS_AFTER_SCAN_ROUND_3",
+  "compositions": [],
+  "retirement": [],
+  "multiplicity": {
+    "method": "e-BH",
+    "fdr": 0.1,
+    "harm_alpha": 0.05
+  },
+  "scopes": {
+    "objects": [
+      "[strict-",
+      "[array-"
+    ],
+    "lazy": [
+      "[lazy-"
+    ]
+  }
+}

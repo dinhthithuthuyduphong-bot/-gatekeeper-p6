@@ -401,3 +401,30 @@ class OracleGroupTests(unittest.TestCase):
             raise RuntimeError("boom")
         with self.assertRaises(RuntimeError):
             run_oracle_groups(Path("."), {"kind": "pytest", "tests": ["t"]}, {}, 5, runner=fake)
+
+
+class ScopedAdmissionTests(unittest.TestCase):
+    def test_same_skill_admitted_in_safe_scope_blocked_in_risky_scope(self):
+        import json, tempfile
+        cfg = json.loads((ROOT / "demo" / "config.json").read_text())
+        cfg.update({"evidence": "discordant_sign", "budget_tasks": 40,
+                    "multiplicity": {"method": "e-BH", "fdr": 0.1, "harm_alpha": 0.05},
+                    "scopes": {"objects": ["strict_eq", "array_like"], "lazy": ["lazy_"]},
+                    "pairs": [{"skills": ["empty-string-guard"], "target": "T1_help_strict"},
+                              {"skills": ["empty-string-guard"], "target": "T2_help_lazy"}],
+                    "compositions": [], "retirement": []})
+        cfg["cells"] = {f"empty-string-guard@{s}/{k}": 0.01
+                        for s in ("help/object-defaults", "help/lazy-text-defaults")
+                        for k in ("objects", "lazy")}
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "config.json"
+            cfg["skills_dir"] = str(ROOT / "demo" / "skills")
+            cfg["targets_dir"] = str(ROOT / "demo" / "targets")
+            path.write_text(json.dumps(cfg))
+            res = run_experiment(path)
+        by = {(r["target"], r["scope_class"]): r for r in res["records"]}
+        self.assertEqual(by[("T1_help_strict", "objects")]["gatekeeper"]["decision"], "ADMIT")
+        self.assertEqual(by[("T2_help_lazy", "lazy")]["ground_truth"], "HARMFUL")
+        self.assertEqual(by[("T2_help_lazy", "lazy")]["gatekeeper"]["decision"], "REJECT_HARM")
+        self.assertEqual({r["comparators"]["B6R"]["decision"] for r in res["records"]
+                          if r["target"] == "T2_help_lazy"}, {"ADMIT"})

@@ -34,7 +34,8 @@ def render(run: dict) -> str:
     for r in run["records"]:
         c = r["comparators"]
         bind = "áp dụng" if r["bind"]["ok"] else r["bind"]["reason"].split(": ", 1)[-1]
-        out.append(_row([r["target"], r["regime"], "+".join(r["skills"]), bind,
+        scope = f" [{r['scope_class']}]" if r.get("scope_class") else ""
+        out.append(_row([r["target"] + scope, r["regime"], "+".join(r["skills"]), bind,
                          r["ground_truth"], c["B2"]["decision"], c["B6R"]["decision"],
                          c["B8"]["decision"], c["Gatekeeper"]["decision"],
                          r["gatekeeper"]["tasks_used"]]))

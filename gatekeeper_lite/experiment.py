@@ -86,6 +86,11 @@ def run_experiment(config_path: Path) -> dict:
     for pair in cfg["pairs"]:
         sk = [skills[i] for i in pair["skills"]]
         try:
+            if cfg.get("scopes"):
+                from .scoped import run_pair_scoped
+                records.extend(run_pair_scoped(_cell(sk, targets[pair["target"]]), sk,
+                                               targets[pair["target"]], ledger, cfg))
+                continue
             rec = run_pair(_cell(sk, targets[pair["target"]]), sk, targets[pair["target"]],
                            ledger, cfg)
         except Exception as exc:  # a technical failure is recorded, never counted as an outcome

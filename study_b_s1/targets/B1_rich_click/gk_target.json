@@ -1,0 +1,55 @@
+{
+  "target_id": "B1_rich_click",
+  "module": "src/rich_click/rich_help_rendering.py",
+  "pythonpath": [
+    "src"
+  ],
+  "python": "3.12",
+  "platform": "linux",
+  "packages": {},
+  "repository": "ewels/rich-click",
+  "revision": "v1.9.9 (30ac1778e609)",
+  "regime": "B",
+  "scope": "rich-click/help-default",
+  "exposure": "ĐÃ THẤY trong Study B v1 — S1 là phân tích hậu kiểm, không thay kết quả chính",
+  "checkout": {
+    "repo": "https://github.com/ewels/rich-click.git",
+    "ref": "30ac1778e60975b00d52ac8a565499fd4c30ea0d"
+  },
+  "inject_tests": [
+    "oracle_templates/test_gk_metamorphic.py",
+    "oracle_templates/pytest.ini"
+  ],
+  "requirements": [
+    "click",
+    "rich",
+    "typing_extensions",
+    "typer"
+  ],
+  "env": {
+    "GK_CLI_FLAVOR": "rich_click"
+  },
+  "oracle": {
+    "kind": "pytest",
+    "groups": [
+      {
+        "tests": [
+          "gk_oracle/test_gk_metamorphic.py"
+        ],
+        "args": [
+          "-c",
+          "gk_oracle/pytest.ini",
+          "--rootdir",
+          "gk_oracle"
+        ]
+      },
+      {
+        "tests": [
+          "tests"
+        ],
+        "args": []
+      }
+    ]
+  },
+  "inject_dir": "gk_oracle"
+}

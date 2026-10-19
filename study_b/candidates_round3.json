@@ -1,0 +1,50 @@
+{
+  "note": "Round 3 (read-only): click-ecosystem tools that render option defaults (docs, man pages, TUIs, help formatters). Candidate frame for Study C.",
+  "candidates": [
+    {
+      "name": "sphinx-click",
+      "repo": "https://github.com/click-contrib/sphinx-click.git",
+      "ref": "HEAD"
+    },
+    {
+      "name": "mkdocs-click",
+      "repo": "https://github.com/mkdocs/mkdocs-click.git",
+      "ref": "HEAD"
+    },
+    {
+      "name": "click-man",
+      "repo": "https://github.com/click-contrib/click-man.git",
+      "ref": "HEAD"
+    },
+    {
+      "name": "click-help-colors",
+      "repo": "https://github.com/click-contrib/click-help-colors.git",
+      "ref": "HEAD"
+    },
+    {
+      "name": "click-option-group",
+      "repo": "https://github.com/click-contrib/click-option-group.git",
+      "ref": "HEAD"
+    },
+    {
+      "name": "click-default-group",
+      "repo": "https://github.com/click-contrib/click-default-group.git",
+      "ref": "HEAD"
+    },
+    {
+      "name": "trogon",
+      "repo": "https://github.com/Textualize/trogon.git",
+      "ref": "HEAD"
+    },
+    {
+      "name": "clickclick",
+      "repo": "https://github.com/zalando/python-clickclick.git",
+      "ref": "HEAD"
+    },
+    {
+      "name": "typer-docs (typer HEAD, rich_utils)",
+      "repo": "https://github.com/fastapi/typer.git",
+      "ref": "HEAD"
+    }
+  ]
+}

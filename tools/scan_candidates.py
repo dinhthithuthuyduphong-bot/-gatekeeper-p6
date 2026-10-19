@@ -46,7 +46,8 @@ def scan_tree(repo: Path) -> dict:
                          for p in repo.glob("LICENSE*") if p.is_file()), None)
     pyproject = (repo / "pyproject.toml").read_text(errors="replace") if (repo / "pyproject.toml").exists() else ""
     return {"python_files_scanned": files, "sites": sites,
-            "relevant_unguarded": [s for s in sites if s["help_or_default"] and not s["already_guarded"]],
+            "relevant_unguarded": [s for s in sites if (s["help_or_default"] or "default" in s["subject"])
+                                   and not s["already_guarded"]],
             "has_tests_dir": (repo / "tests").is_dir(),
             "pytest_configured": "pytest" in pyproject or (repo / "pytest.ini").exists()
                                  or (repo / "setup.cfg").exists(),

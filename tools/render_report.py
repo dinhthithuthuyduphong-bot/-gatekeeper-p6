@@ -17,6 +17,9 @@ LABELS = {
     "PROSPECTIVE_FROZEN_REAL_TARGETS":
         "> **Loại bằng chứng: PROSPECTIVE_FROZEN_REAL_TARGETS.** Target thật, chưa từng chạy trước "
         "khi đóng băng protocol; oracle gồm bộ test gốc của target và oracle metamorphic khai báo trước.",
+    "POSTHOC_SUPPLEMENTARY":
+        "> **Loại bằng chứng: POSTHOC_SUPPLEMENTARY.** Chạy hậu kiểm trên target đã thấy; báo riêng, "
+        "không thay kết quả chính.",
     "REAL_CODE_DEVELOPMENT_ORACLE":
         "> **Loại bằng chứng: REAL_CODE_DEVELOPMENT_ORACLE.** Mã thật, nhưng target đã dùng khi phát "
         "triển và oracle biên viết sau khi nghiên cứu dữ liệu.",
