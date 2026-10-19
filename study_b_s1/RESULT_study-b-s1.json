@@ -1,0 +1,511 @@
+{
+  "schema": "gatekeeper_lite_run_v1",
+  "created_utc": "2026-10-19T12:13:22+00:00",
+  "python": "3.12.15",
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "config": {
+    "experiment_id": "study-b-s1-posthoc",
+    "status": "POSTHOC_SUPPLEMENTARY",
+    "requires_freeze": false,
+    "skills_dir": "../study_b/skills",
+    "targets_dir": "targets",
+    "theta": 0.1,
+    "seed": 20261101,
+    "budget_tasks": 24,
+    "timeout_seconds": 900,
+    "evidence": "discordant_sign",
+    "discordant": {
+      "q0": 0.6,
+      "q1": 0.9,
+      "harm_eps": 0.05,
+      "harm_alt": 0.5
+    },
+    "task_filter": "reach_baseline",
+    "task_priority": [
+      "gk_metamorphic"
+    ],
+    "sensitivity_exclude": [
+      [
+        "lazy"
+      ]
+    ],
+    "alpha_total": 0.1,
+    "cells": {
+      "empty-default-guard-family@rich-click/help-default": 0.025
+    },
+    "pairs": [
+      {
+        "skills": [
+          "empty-default-guard-family"
+        ],
+        "target": "B1_rich_click"
+      }
+    ],
+    "compositions": [],
+    "retirement": [],
+    "multiplicity": {
+      "method": "e-BH",
+      "fdr": 0.1,
+      "harm_alpha": 0.05
+    },
+    "purpose": "Re-run B1 with typer installed so rich-click's own test suite loads. Post-hoc; reported separately; does not replace Study B v1."
+  },
+  "config_sha256": "1f253f3e6be9ca04bbf59266c063acdf0125284fa424387a5620092ac053e635",
+  "skill_sha256": {
+    "click-guard-v3": "5b8b14fa1207b313c5a9893514dabce2363e33125b34a1fda55c99fe4cac518d",
+    "empty-default-guard-family": "7bf6f203bd2cc60ddb1e78d77853e78fad6a96ef8eb12804333bb83d3de98745"
+  },
+  "alpha_spent": [],
+  "records": [
+    {
+      "cell": "empty-default-guard-family@rich-click/help-default",
+      "skills": [
+        "empty-default-guard-family"
+      ],
+      "target": "B1_rich_click",
+      "regime": "B",
+      "fingerprint": "febb21a470ce89f8",
+      "bind": {
+        "ok": true,
+        "reason": "",
+        "sites": [
+          {
+            "skill": "empty-default-guard-family",
+            "line": 611,
+            "function": "_get_parameter_default",
+            "snippet": "default_value == \"\""
+          }
+        ],
+        "footprint": [
+          "behavior:default-display",
+          "behavior:eq-empty-string",
+          "func:_get_parameter_default",
+          "subject:default_value"
+        ],
+        "diff": "--- a/src/rich_click/rich_help_rendering.py\n+++ b/src/rich_click/rich_help_rendering.py\n@@ -608,7 +608,7 @@\n                 default_string = str(param.default)\n             else:\n                 default_string = \"\"\n-        elif default_value == \"\":\n+        elif (isinstance(default_value, str) and default_value == \"\"):\n             default_string = '\"\"'\n         else:\n             default_string = str(default_value)\n"
+      },
+      "ground_truth": "HARMFUL",
+      "comparators": {
+        "B1": {
+          "decision": "NO_SKILL",
+          "cost_tasks": 0
+        },
+        "B2": {
+          "decision": "ADMIT",
+          "cost_tasks": 0
+        },
+        "B6R": {
+          "decision": "ADMIT",
+          "reason": "replay passed, fingerprint MATCH",
+          "fingerprint": [
+            "MATCH"
+          ],
+          "replay": [
+            {
+              "passed": true,
+              "checks": [
+                {
+                  "example": "../../real/sources/click_core_3298_parent.py",
+                  "passed": true,
+                  "heldout": false
+                }
+              ]
+            }
+          ],
+          "cost_tasks": 0
+        },
+        "B8": {
+          "decision": "REJECT",
+          "cost_tasks": 98
+        },
+        "Gatekeeper": {
+          "decision": "REJECT_HARM",
+          "cost_tasks": 67
+        }
+      },
+      "gatekeeper": {
+        "decision": "REJECT_HARM",
+        "reason": "harm e-value 76.7 >= 20 (helped 4, hurt 3)",
+        "alpha": 0.1,
+        "threshold": 10.0,
+        "tasks_used": 9,
+        "e_value": 0.07910156249999989,
+        "trajectory": [
+          1.0,
+          1.0,
+          1.0,
+          0.2499999999999999,
+          0.37499999999999983,
+          0.5624999999999998,
+          0.8437499999999997,
+          1.2656249999999996,
+          0.3164062499999998,
+          0.07910156249999989
+        ],
+        "epoch": 0
+      },
+      "task_filter": {
+        "mode": "reach_baseline",
+        "available": true,
+        "reaching_tasks": 20,
+        "reached_ids": [
+          "test_gk_metamorphic::test_gk_metamorphic_default[array-0]",
+          "test_gk_metamorphic::test_gk_metamorphic_default[array-1]",
+          "test_gk_metamorphic::test_gk_metamorphic_default[array-2]",
+          "test_gk_metamorphic::test_gk_metamorphic_default[array-3]",
+          "test_gk_metamorphic::test_gk_metamorphic_default[lazy-empty-0]",
+          "test_gk_metamorphic::test_gk_metamorphic_default[lazy-empty-1]",
+          "test_gk_metamorphic::test_gk_metamorphic_default[lazy-empty-2]",
+          "test_gk_metamorphic::test_gk_metamorphic_default[lazy-empty-3]",
+          "test_gk_metamorphic::test_gk_metamorphic_default[lazy-empty-4]",
+          "test_gk_metamorphic::test_gk_metamorphic_default[lazy-empty-5]",
+          "test_gk_metamorphic::test_gk_metamorphic_default[lazy-text-Bonjour]",
+          "test_gk_metamorphic::test_gk_metamorphic_default[lazy-text-Hello]",
+          "test_gk_metamorphic::test_gk_metamorphic_default[strict-0]",
+          "test_gk_metamorphic::test_gk_metamorphic_default[strict-1]",
+          "test_gk_metamorphic::test_gk_metamorphic_default[strict-2]",
+          "test_gk_metamorphic::test_gk_metamorphic_default[strict-3]",
+          "test_gk_metamorphic::test_gk_metamorphic_default[strict-4]",
+          "test_gk_metamorphic::test_gk_metamorphic_default[strict-5]",
+          "test_gk_metamorphic::test_gk_metamorphic_default[strict-6]",
+          "test_gk_metamorphic::test_gk_metamorphic_default[strict-7]"
+        ],
+        "discriminating_tasks": 14,
+        "screening_cost_tasks": 49
+      },
+      "paired": {
+        "integrity_ok": true,
+        "integrity_notes": [],
+        "tasks": 49,
+        "new_failures": [
+          "test_gk_metamorphic::test_gk_metamorphic_default[lazy-empty-0]",
+          "test_gk_metamorphic::test_gk_metamorphic_default[lazy-empty-1]",
+          "test_gk_metamorphic::test_gk_metamorphic_default[lazy-empty-2]",
+          "test_gk_metamorphic::test_gk_metamorphic_default[lazy-empty-3]",
+          "test_gk_metamorphic::test_gk_metamorphic_default[lazy-empty-4]",
+          "test_gk_metamorphic::test_gk_metamorphic_default[lazy-empty-5]"
+        ],
+        "resolved_failures": [
+          "test_gk_metamorphic::test_gk_metamorphic_default[strict-0]",
+          "test_gk_metamorphic::test_gk_metamorphic_default[strict-1]",
+          "test_gk_metamorphic::test_gk_metamorphic_default[strict-2]",
+          "test_gk_metamorphic::test_gk_metamorphic_default[strict-3]",
+          "test_gk_metamorphic::test_gk_metamorphic_default[strict-4]",
+          "test_gk_metamorphic::test_gk_metamorphic_default[strict-5]",
+          "test_gk_metamorphic::test_gk_metamorphic_default[strict-6]",
+          "test_gk_metamorphic::test_gk_metamorphic_default[strict-7]"
+        ],
+        "loss_without": 0.8367,
+        "loss_with": 1.0,
+        "seconds": 4.716,
+        "harness_errors": {
+          "baseline": [],
+          "treatment": []
+        },
+        "per_task": {
+          "::tests.help.test_arguments": {
+            "without": false,
+            "with": false,
+            "Z": 0.0
+          },
+          "::tests.help.test_class_overrides": {
+            "without": false,
+            "with": false,
+            "Z": 0.0
+          },
+          "::tests.help.test_context_settings": {
+            "without": false,
+            "with": false,
+            "Z": 0.0
+          },
+          "::tests.help.test_custom_errors": {
+            "without": false,
+            "with": false,
+            "Z": 0.0
+          },
+          "::tests.help.test_declarative": {
+            "without": false,
+            "with": false,
+            "Z": 0.0
+          },
+          "::tests.help.test_defaults": {
+            "without": false,
+            "with": false,
+            "Z": 0.0
+          },
+          "::tests.help.test_deprecated": {
+            "without": false,
+            "with": false,
+            "Z": 0.0
+          },
+          "::tests.help.test_envvar": {
+            "without": false,
+            "with": false,
+            "Z": 0.0
+          },
+          "::tests.help.test_epilog_and_footer": {
+            "without": false,
+            "with": false,
+            "Z": 0.0
+          },
+          "::tests.help.test_flag_values": {
+            "without": false,
+            "with": false,
+            "Z": 0.0
+          },
+          "::tests.help.test_groups_sorting": {
+            "without": false,
+            "with": false,
+            "Z": 0.0
+          },
+          "::tests.help.test_header": {
+            "without": false,
+            "with": false,
+            "Z": 0.0
+          },
+          "::tests.help.test_markdown": {
+            "without": false,
+            "with": false,
+            "Z": 0.0
+          },
+          "::tests.help.test_metavars": {
+            "without": false,
+            "with": false,
+            "Z": 0.0
+          },
+          "::tests.help.test_options": {
+            "without": false,
+            "with": false,
+            "Z": 0.0
+          },
+          "::tests.help.test_panels_defaults": {
+            "without": false,
+            "with": false,
+            "Z": 0.0
+          },
+          "::tests.help.test_panels_sorting": {
+            "without": false,
+            "with": false,
+            "Z": 0.0
+          },
+          "::tests.help.test_panels_styles": {
+            "without": false,
+            "with": false,
+            "Z": 0.0
+          },
+          "::tests.help.test_rich_markup": {
+            "without": false,
+            "with": false,
+            "Z": 0.0
+          },
+          "::tests.help.test_simple": {
+            "without": false,
+            "with": false,
+            "Z": 0.0
+          },
+          "::tests.help.test_table_styles": {
+            "without": false,
+            "with": false,
+            "Z": 0.0
+          },
+          "::tests.help.test_wildcard_groups": {
+            "without": false,
+            "with": false,
+            "Z": 0.0
+          },
+          "::tests.test_config": {
+            "without": false,
+            "with": false,
+            "Z": 0.0
+          },
+          "::tests.test_misc": {
+            "without": false,
+            "with": false,
+            "Z": 0.0
+          },
+          "::tests.test_no_rich_imports": {
+            "without": false,
+            "with": false,
+            "Z": 0.0
+          },
+          "::tests.test_rich_click_cli": {
+            "without": false,
+            "with": false,
+            "Z": 0.0
+          },
+          "::tests.typer_help.test_typer_markdown": {
+            "without": false,
+            "with": false,
+            "Z": 0.0
+          },
+          "::tests.typer_help.test_typer_rich_panels": {
+            "without": false,
+            "with": false,
+            "Z": 0.0
+          },
+          "::tests.typer_help.test_typer_types": {
+            "without": false,
+            "with": false,
+            "Z": 0.0
+          },
+          "test_gk_metamorphic::test_gk_metamorphic_default[array-0]": {
+            "without": false,
+            "with": false,
+            "Z": 0.0
+          },
+          "test_gk_metamorphic::test_gk_metamorphic_default[array-1]": {
+            "without": false,
+            "with": false,
+            "Z": 0.0
+          },
+          "test_gk_metamorphic::test_gk_metamorphic_default[array-2]": {
+            "without": false,
+            "with": false,
+            "Z": 0.0
+          },
+          "test_gk_metamorphic::test_gk_metamorphic_default[array-3]": {
+            "without": false,
+            "with": false,
+            "Z": 0.0
+          },
+          "test_gk_metamorphic::test_gk_metamorphic_default[lazy-empty-0]": {
+            "without": true,
+            "with": false,
+            "Z": 1.0
+          },
+          "test_gk_metamorphic::test_gk_metamorphic_default[lazy-empty-1]": {
+            "without": true,
+            "with": false,
+            "Z": 1.0
+          },
+          "test_gk_metamorphic::test_gk_metamorphic_default[lazy-empty-2]": {
+            "without": true,
+            "with": false,
+            "Z": 1.0
+          },
+          "test_gk_metamorphic::test_gk_metamorphic_default[lazy-empty-3]": {
+            "without": true,
+            "with": false,
+            "Z": 1.0
+          },
+          "test_gk_metamorphic::test_gk_metamorphic_default[lazy-empty-4]": {
+            "without": true,
+            "with": false,
+            "Z": 1.0
+          },
+          "test_gk_metamorphic::test_gk_metamorphic_default[lazy-empty-5]": {
+            "without": true,
+            "with": false,
+            "Z": 1.0
+          },
+          "test_gk_metamorphic::test_gk_metamorphic_default[lazy-text-Bonjour]": {
+            "without": true,
+            "with": true,
+            "Z": 0.0
+          },
+          "test_gk_metamorphic::test_gk_metamorphic_default[lazy-text-Hello]": {
+            "without": true,
+            "with": true,
+            "Z": 0.0
+          },
+          "test_gk_metamorphic::test_gk_metamorphic_default[strict-0]": {
+            "without": false,
+            "with": true,
+            "Z": -1.0
+          },
+          "test_gk_metamorphic::test_gk_metamorphic_default[strict-1]": {
+            "without": false,
+            "with": true,
+            "Z": -1.0
+          },
+          "test_gk_metamorphic::test_gk_metamorphic_default[strict-2]": {
+            "without": false,
+            "with": true,
+            "Z": -1.0
+          },
+          "test_gk_metamorphic::test_gk_metamorphic_default[strict-3]": {
+            "without": false,
+            "with": true,
+            "Z": -1.0
+          },
+          "test_gk_metamorphic::test_gk_metamorphic_default[strict-4]": {
+            "without": false,
+            "with": true,
+            "Z": -1.0
+          },
+          "test_gk_metamorphic::test_gk_metamorphic_default[strict-5]": {
+            "without": false,
+            "with": true,
+            "Z": -1.0
+          },
+          "test_gk_metamorphic::test_gk_metamorphic_default[strict-6]": {
+            "without": false,
+            "with": true,
+            "Z": -1.0
+          },
+          "test_gk_metamorphic::test_gk_metamorphic_default[strict-7]": {
+            "without": false,
+            "with": true,
+            "Z": -1.0
+          }
+        },
+        "Z_suite": 0.1633
+      },
+      "sensitivity": {
+        "without:lazy": {
+          "truth": "BENEFICIAL",
+          "new_failures": 0,
+          "resolved": 8,
+          "tasks": 41
+        }
+      }
+    }
+  ],
+  "summary": {
+    "B2": {
+      "harmful_admitted": 1,
+      "beneficial_admitted": 0,
+      "no_delta_admitted": 0,
+      "beneficial_not_admitted": 0,
+      "cost_tasks": 0
+    },
+    "B6R": {
+      "harmful_admitted": 1,
+      "beneficial_admitted": 0,
+      "no_delta_admitted": 0,
+      "beneficial_not_admitted": 0,
+      "cost_tasks": 0
+    },
+    "B8": {
+      "harmful_admitted": 0,
+      "beneficial_admitted": 0,
+      "no_delta_admitted": 0,
+      "beneficial_not_admitted": 0,
+      "cost_tasks": 98
+    },
+    "Gatekeeper": {
+      "harmful_admitted": 0,
+      "beneficial_admitted": 0,
+      "no_delta_admitted": 0,
+      "beneficial_not_admitted": 0,
+      "cost_tasks": 67
+    },
+    "_denominators": {
+      "pairs": 1,
+      "harmful": 1,
+      "beneficial": 0,
+      "no_delta": 0,
+      "not_applicable": 0,
+      "harness_error": 0
+    }
+  },
+  "compositions": [],
+  "retirements": [],
+  "evidence_class": "CONSTRUCTED_DEMO_FIXTURES",
+  "limits": [
+    "Targets are constructed demo fixtures, not independent repositories.",
+    "A task is one oracle case inside one target; tasks are not i.i.d. contexts.",
+    "B6-R is a reconstruction of the paper's B6, not the original system.",
+    "Counts are descriptive; no population rate or superiority claim."
+  ]
+}
