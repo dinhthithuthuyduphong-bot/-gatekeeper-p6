@@ -21,7 +21,11 @@ def render(run: dict) -> str:
     cfg = run["config"]
     out += ["## Tham số đã đóng băng", "",
             f"- θ (benefit margin): {cfg['theta']} · α tổng: {cfg['alpha_total']} · "
-            f"ngân sách: {cfg['budget_tasks']} task/cặp · seed: {cfg['seed']}", ""]
+            f"ngân sách: {cfg['budget_tasks']} task/cặp · seed: {cfg['seed']}",
+            f"- Bằng chứng: {cfg.get('evidence', 'mean_betting')}"
+            + (f" {cfg.get('discordant')}" if cfg.get('evidence') == 'discordant_sign' else "")
+            + (f" · ưu tiên task: {cfg.get('task_priority')}" if cfg.get('task_priority') else "")
+            + (f" · lọc task: {cfg.get('task_filter')}" if cfg.get('task_filter') else ""), ""]
 
     out += ["## Từng cặp skill–target", "",
             _row(["Target", "Regime", "Skill", "Bind", "Nhãn thật", "B2", "B6-R", "B8",
@@ -50,6 +54,18 @@ def render(run: dict) -> str:
                          f"{row['beneficial_admitted']}/{d['beneficial']}",
                          row["beneficial_not_admitted"], row["cost_tasks"]]))
     out.append("")
+
+    sens = [r for r in run["records"] if r.get("sensitivity")]
+    if sens:
+        keys = list(sens[0]["sensitivity"])
+        out += ["## Phân tích độ nhạy (lớp task khai báo trước)", "",
+                _row(["Target", "Skill", "Nhãn gốc"] + [k.replace("without:", "Bỏ ") for k in keys]),
+                _row(["---"] * (3 + len(keys)))]
+        for r in sens:
+            out.append(_row([r["target"], "+".join(r["skills"]), r["ground_truth"]]
+                            + [f"{r['sensitivity'][k]['truth']} (sửa {r['sensitivity'][k]['resolved']}, "
+                               f"hỏng {r['sensitivity'][k]['new_failures']})" for k in keys]))
+        out.append("")
 
     if run["compositions"]:
         out += ["## Composition (Theorem 7)", ""]

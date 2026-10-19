@@ -1,5 +1,5 @@
 {
-  "experiment_id": "gatekeeper-lite-real-click-v3",
+  "experiment_id": "gatekeeper-lite-real-click-v4",
   "skills_dir": "skills",
   "targets_dir": "targets",
   "theta": 0.1,
@@ -55,5 +55,20 @@
   ],
   "compositions": [],
   "retirement": [],
-  "task_filter": "reach_baseline"
+  "task_filter": "reach_baseline",
+  "evidence": "discordant_sign",
+  "discordant": {
+    "q0": 0.6,
+    "q1": 0.9,
+    "harm_eps": 0.05,
+    "harm_alt": 0.5
+  },
+  "task_priority": [
+    "gk_boundary"
+  ],
+  "sensitivity_exclude": [
+    [
+      "lazy"
+    ]
+  ]
 }

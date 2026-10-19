@@ -16,13 +16,30 @@ from dataclasses import asdict, dataclass, field
 from typing import Dict, List, Optional, Sequence
 
 from . import transforms
-from .eprocess import AlphaLedger, BettingEProcess
+from .eprocess import AlphaLedger, BettingEProcess, make_eprocess
 from .runner import PairedRun, paired_run, reach_pass
 from .screen import MATCH, screen
 from .skill import Skill, Target
 
-ADMIT, QUARANTINE, OUT_OF_SCOPE, REJECT, ENV_UNRESOLVED = (
-    "ADMIT", "QUARANTINE", "OUT_OF_SCOPE", "REJECT", "ENV_UNRESOLVED")
+ADMIT, QUARANTINE, OUT_OF_SCOPE, REJECT, ENV_UNRESOLVED, REJECT_HARM = (
+    "ADMIT", "QUARANTINE", "OUT_OF_SCOPE", "REJECT", "ENV_UNRESOLVED", "REJECT_HARM")
+
+
+def _ordered_tasks(case_ids, seed: int, priority=None) -> list:
+    """Frozen sampling order: tasks matching declared priority patterns first.
+
+    The order depends only on task identifiers and the seed, never on outcomes.
+    """
+    rng = random.Random(seed)
+    groups = [[] for _ in range((len(priority) if priority else 0) + 1)]
+    for c in case_ids:
+        idx = next((i for i, pat in enumerate(priority or []) if pat in c), len(groups) - 1)
+        groups[idx].append(c)
+    order = []
+    for g in groups:
+        rng.shuffle(g)
+        order.extend(g)
+    return order
 
 
 @dataclass
@@ -118,18 +135,22 @@ def gatekeeper(cell: str, skills: Sequence[Skill], target: Target, run: Optional
         return GatekeeperResult(OUT_OF_SCOPE, bound.reason, epoch=epoch)
     if run is None or not run.integrity_ok:
         return GatekeeperResult(QUARANTINE, "pair integrity failed", epoch=epoch)
-    order = list(run.case_ids)
+    order = _ordered_tasks(run.case_ids, cfg["seed"] * 1000 + epoch, cfg.get("task_priority"))
     if reached is not None:
         order = [c for c in order if c in reached]
         if not order:
             return GatekeeperResult(QUARANTINE, "no task reaches the edited site", epoch=epoch)
     alpha = ledger.draw(cell, epoch)
     threshold = 1.0 / alpha
-    ep = BettingEProcess(theta=cfg["theta"])
-    random.Random(cfg["seed"] * 1000 + epoch).shuffle(order)   # frozen sampling order
+    ep = make_eprocess(cfg)
     budget = min(cfg["budget_tasks"], len(order))
     for n, case_id in enumerate(order[:budget], start=1):
         value = ep.update(run.z(case_id))
+        if getattr(ep, "harm_value", 0.0) >= threshold:
+            return GatekeeperResult(REJECT_HARM,
+                                    f"harm e-value {ep.harm_value:.1f} >= {threshold:.0f} "
+                                    f"(helped {ep.helped}, hurt {ep.hurt})",
+                                    alpha, threshold, n, value, ep.history, epoch)
         if value >= threshold:
             return GatekeeperResult(ADMIT, f"E={value:.1f} >= 1/alpha={threshold:.0f}",
                                     alpha, threshold, n, value, ep.history, epoch)
@@ -163,6 +184,21 @@ def comparators(skills: Sequence[Skill], target: Target, run: Optional[PairedRun
         n = len(run.case_ids)
         out["B8"] = {"decision": ADMIT if not run.new_failures else REJECT,
                      "cost_tasks": 2 * n}
+    return out
+
+
+def sensitivity(run: PairedRun, patterns: Sequence[Sequence[str]]) -> dict:
+    """Ground truth recomputed after removing declared task classes (pre-declared)."""
+    out = {}
+    for pats in patterns:
+        keep = [c for c in run.case_ids if not any(p in c for p in pats)]
+        new = [c for c in keep if run.baseline.results[c]["passed"]
+               and not run.treatment.results[c]["passed"]]
+        res = [c for c in keep if not run.baseline.results[c]["passed"]
+               and run.treatment.results[c]["passed"]]
+        out["without:" + "+".join(pats)] = {
+            "truth": "HARMFUL" if new else ("BENEFICIAL" if res else "NO_DELTA"),
+            "new_failures": len(new), "resolved": len(res), "tasks": len(keep)}
     return out
 
 
@@ -200,6 +236,7 @@ def run_pair(cell: str, skills: Sequence[Skill], target: Target, ledger: AlphaLe
     record["task_filter"] = {"mode": cfg.get("task_filter", "none"),
                              "available": reach is not None,
                              "reaching_tasks": len(reached) if reached is not None else None,
+                             "reached_ids": sorted(reached) if reached is not None else None,
                              "discriminating_tasks": (sum(1 for c in run.case_ids if run.z(c) != 0)
                                                       if run is not None else None),
                              "screening_cost_tasks": screening}
@@ -215,6 +252,8 @@ def run_pair(cell: str, skills: Sequence[Skill], target: Target, ledger: AlphaLe
                              "with": run.treatment.results[c]["passed"], "Z": run.z(c)}
                          for c in run.case_ids},
         }
+        if cfg.get("sensitivity_exclude"):
+            record["sensitivity"] = sensitivity(run, cfg["sensitivity_exclude"])
         record["paired"]["Z_suite"] = round(record["paired"]["loss_with"]
                                             - record["paired"]["loss_without"], 4)
     return record

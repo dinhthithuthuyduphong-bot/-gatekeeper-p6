@@ -14,6 +14,7 @@ from .gatekeeper import (ADMIT, Certificate, footprint_overlap, retirement_check
 from .skill import Skill, Target
 
 COMPARATORS = ["B2", "B6R", "B8", "Gatekeeper"]
+NOT_ADMITTED_BY_HARM = "REJECT_HARM"
 
 
 def _cell(skills: List[Skill], target: Target) -> str:

@@ -300,3 +300,50 @@ class ReachPluginTests(unittest.TestCase):
         res = gatekeeper("c", [], tgt, run, BindOutcome(True, "x"), AlphaLedger(0.1, {"c": 0.05}),
                          {"theta": 0.1, "seed": 1, "budget_tasks": 5}, reached=set())
         self.assertEqual(res.decision, "QUARANTINE")
+
+
+class DiscordantSignTests(unittest.TestCase):
+    def test_admission_type_one_error(self):
+        from gatekeeper_lite.eprocess import DiscordantSignEProcess
+        rng, alpha, sims, crossed = random.Random(11), 0.05, 3000, 0
+        for _ in range(sims):
+            ep = DiscordantSignEProcess(q0=0.6)
+            for _ in range(200):
+                u = rng.random()
+                z = 0.0 if u < 0.7 else (-1.0 if rng.random() < 0.6 else 1.0)   # q = q0
+                if ep.update(z) >= 1 / alpha:
+                    crossed += 1
+                    break
+        self.assertLessEqual(crossed / sims, alpha + 0.012)
+
+    def test_harm_type_one_error(self):
+        from gatekeeper_lite.eprocess import DiscordantSignEProcess
+        rng, alpha, sims, flagged = random.Random(5), 0.05, 3000, 0
+        for _ in range(sims):
+            ep = DiscordantSignEProcess(eps=0.05)
+            for _ in range(200):
+                z = -1.0 if rng.random() < 0.95 else 1.0                      # h = eps
+                ep.update(z)
+                if ep.harm_value >= 1 / alpha:
+                    flagged += 1
+                    break
+        self.assertLessEqual(flagged / sims, alpha + 0.012)
+
+    def test_ties_cost_nothing_and_clear_benefit_admits(self):
+        from gatekeeper_lite.eprocess import DiscordantSignEProcess
+        ep = DiscordantSignEProcess(q0=0.6)
+        for _ in range(100):
+            ep.update(0.0)
+        self.assertEqual(ep.value, 1.0)
+        n = 0
+        while ep.value < 1 / 0.009:
+            ep.update(-1.0)
+            n += 1
+        self.assertLessEqual(n, 12)
+
+    def test_priority_order_is_outcome_independent(self):
+        from gatekeeper_lite.gatekeeper import _ordered_tasks
+        ids = ["t::a", "t::gk_boundary[x]", "t::b", "t::gk_boundary[y]"]
+        order = _ordered_tasks(ids, 3, ["gk_boundary"])
+        self.assertEqual(set(order[:2]), {"t::gk_boundary[x]", "t::gk_boundary[y]"})
+        self.assertEqual(order, _ordered_tasks(ids, 3, ["gk_boundary"]))

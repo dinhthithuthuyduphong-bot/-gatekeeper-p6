@@ -19,7 +19,7 @@ Chỉ dùng thư viện chuẩn của Python (≥ 3.9; đã chạy với 3.12.3)
 
 ```bash
 # ở thư mục gốc của repo (hoặc thư mục chứa gatekeeper_lite/)
-python -m unittest discover -s tests -v                              # 25 test
+python -m unittest discover -s tests -v                              # 29 test
 python -m gatekeeper_lite run --config demo/config.json --out out_demo
 python -m gatekeeper_lite show out_demo/RESULT.json T2_help_lazy     # giải thích 1 cặp
 ```
@@ -99,6 +99,15 @@ Array-like hỏng ở một phép so sánh khác (`default_value not in (None, U
 
 **Lưu ý lịch sử:** bản sửa nguồn trước đó (`d3e3852`) chính là commit **thêm** nhánh `default_value == ""`; nhánh này về sau gây lỗi #3298 với default không phải chuỗi. P7.1 đã cho thấy skill học từ bản sửa đó có lợi ở ca đã biết nhưng có hại ở đầu vào mới.
 
+## Chuẩn bị Study B (không tốn tiền)
+
+- **Kiểm định dấu trên cặp bất đồng** (`evidence: discordant_sign`): task có Z = 0 không làm mất bằng chứng; có thêm kiểm định tác hại, dừng với `REJECT_HARM`. Có test kiểm tỉ lệ sai lầm loại I của cả hai kiểm định.
+- **Thứ tự task theo ưu tiên khai báo trước** (`task_priority`): chỉ phụ thuộc tên task.
+- **Phân tích độ nhạy** (`sensitivity_exclude`): nhãn thật tính lại khi bỏ một lớp task, hiện trong REPORT.md.
+- **Mô phỏng lực:** `python tools/power_sim.py out_real/RESULT.json [--exclude lazy]`.
+- **Quét ứng viên:** workflow `study-b-scan.yml` (chỉ đọc) → artifact `STUDY_B_CANDIDATE_SCAN`.
+- **Bản nháp protocol:** `study_b/STUDY_B_PROTOCOL_DRAFT.md` (4 quyết định cần chốt).
+
 ## Kịch bản demo 5 phút cho thầy
 
 1. **Vấn đề (1 phút):** `show out_demo/RESULT.json T2_help_lazy`. Cùng một sửa đổi (thêm `isinstance(x, str)`) đúng ở T1 nhưng làm hỏng 16 task ở T2, vì chuỗi lazy không phải `str`. B6-R vẫn ADMIT vì replay ở nguồn pass và fingerprint khớp.
@@ -159,6 +168,7 @@ demo/targets/      T1–T7: mã nguồn, oracle_cases.py, gk_target.json
 real/              thí nghiệm trên Click thật: skill, 3 target, config_real.json
 tools/             fetch_real_targets.py (tải mã nguồn đã đóng băng trên Actions)
 p7/                binder v3 của P7.3 (đóng băng) + wrapper
-tests/             25 unit test
+study_b/           protocol nháp, ứng viên, mô phỏng lực
+tests/             29 unit test
 .github/workflows/ gk-lite-demo.yml
 ```

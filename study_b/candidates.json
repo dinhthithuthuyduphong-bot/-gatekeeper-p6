@@ -1,0 +1,11 @@
+{
+  "note": "Read-only scan. Refs are moving branch heads; the resolved commit is recorded and must be frozen before any Study B run.",
+  "candidates": [
+    {"name": "click (reference)", "repo": "https://github.com/pallets/click.git", "ref": "HEAD"},
+    {"name": "asyncclick", "repo": "https://github.com/python-trio/asyncclick.git", "ref": "HEAD"},
+    {"name": "typer", "repo": "https://github.com/fastapi/typer.git", "ref": "HEAD"},
+    {"name": "rich-click", "repo": "https://github.com/ewels/rich-click.git", "ref": "HEAD"},
+    {"name": "click-extra", "repo": "https://github.com/kdeldycke/click-extra.git", "ref": "HEAD"},
+    {"name": "cloup", "repo": "https://github.com/janluke/cloup.git", "ref": "HEAD"}
+  ]
+}
