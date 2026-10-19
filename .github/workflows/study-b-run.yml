@@ -13,6 +13,16 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
+      - name: Check protocol freeze (fails closed while DRAFT)
+        run: |
+          python - <<'PY'
+          import json, sys
+          cfg = json.load(open("study_b/config_study_b.json"))
+          if cfg.get("status") != "FROZEN":
+              print(f"::error::Study B protocol status is {cfg.get('status')!r}; freeze it before running.")
+              sys.exit(1)
+          print("protocol frozen:", cfg.get("experiment_id"))
+          PY
       - name: Install pytest and declared target requirements
         run: |
           python -m pip install --quiet "pytest==8.3.5"
