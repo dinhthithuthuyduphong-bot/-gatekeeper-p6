@@ -1,5 +1,5 @@
 {
-  "experiment_id": "gatekeeper-lite-real-click-v4",
+  "experiment_id": "gatekeeper-lite-real-click-v5",
   "skills_dir": "skills",
   "targets_dir": "targets",
   "theta": 0.1,
@@ -64,7 +64,8 @@
     "harm_alt": 0.5
   },
   "task_priority": [
-    "gk_boundary"
+    "gk_boundary",
+    "gk_metamorphic"
   ],
   "sensitivity_exclude": [
     [

@@ -14,8 +14,8 @@ Mỗi dòng là một lần chạy trên GitHub Actions. "Phạm vi" ghi rõ đi
 | P7 extract embedded sources | (bổ sung) | (bổ sung) | `P7_SOURCES_READABLE` | Mã P7.0–P7.3 giải nén ra dạng đọc được; binder v3 khớp hash `BINDER_FREEZE.json` |
 | Gatekeeper-Lite demo #5 (real-click v2) | 39143998624 | f4f781c | demo `d2a7f166958da5729f37bda8d3b0a72644eb5383d6ce4bdb388d046caa391db6`, real `cdbaba9fb8f249be4fb9b139cb322f593691b4f586d81180538e0592996358e3` | 6 cặp: R1 có lợi (1 task phân biệt trên 552) với cả hai binder; R2 binder neo theo hàm từ chối, v3 áp dụng; R3 không đổi. B6-R và B8 admit 5/6; Gatekeeper QUARANTINE cả 5 (24 task lấy ngẫu nhiên không chạm task phân biệt) |
 | Gatekeeper-Lite demo #7 (real-click v3) | 39145008309 | 6867531 | demo `274ee502c68146ce942e25b6ce2c0e4e26c1d41992b8e3929c72ed9b1c6913a7`, real `c50991eff60a675c8b2a8111de1e415fc7b53035aaeaa379e8abd282111ed5bf` | 4 cặp có hại (sửa ca so sánh chặt, hỏng ca chuỗi lazy rỗng): B6-R admit 4/4, B8 và Gatekeeper 0/4; Gatekeeper không admit cặp có lợi duy nhất. Nhãn có hại phụ thuộc lớp chuỗi lazy do mình khai báo; bỏ lớp này thì cả 4 thành có lợi |
-| real-click v4 | (chưa chạy) | | | Kiểm định dấu + ưu tiên oracle biên + độ nhạy |
-| Study B candidate scan | (chưa chạy) | | | Quét chỉ đọc asyncclick, typer, rich-click, click-extra, cloup |
+| real-click v4 | (bổ sung) | (bổ sung) | `GK_LITE_REAL_CLICK_OUTPUT` | Kiểm định dấu: Gatekeeper REJECT_HARM 4/4 cặp có hại sau 14–17 task; B6-R admit 4/4; B8 reject 4/4; cặp có lợi duy nhất QUARANTINE. Bỏ lớp lazy thì cả 4 thành có lợi |
+| Study B candidate scan v1 | (bổ sung) | (bổ sung) | `STUDY_B_CANDIDATE_SCAN` | rich-click `4ee6d4b27950` có site chưa guard trong `_get_parameter_default`; asyncclick HEAD đã sửa; typer, click-extra, cloup không có site |
 
 ## Việc còn thiếu để tái lập
 

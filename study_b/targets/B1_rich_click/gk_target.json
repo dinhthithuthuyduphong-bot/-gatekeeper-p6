@@ -1,0 +1,36 @@
+{
+  "target_id": "B1_rich_click",
+  "module": "src/rich_click/rich_help_rendering.py",
+  "pythonpath": [
+    "src"
+  ],
+  "python": "3.12",
+  "platform": "linux",
+  "packages": {},
+  "repository": "ewels/rich-click",
+  "revision": "4ee6d4b27950",
+  "regime": "B",
+  "scope": "rich-click/help-default",
+  "exposure": "Chỉ quét tĩnh (STUDY_B_CANDIDATE_SCAN); chưa chạy test, chưa áp skill",
+  "checkout": {
+    "repo": "https://github.com/ewels/rich-click.git",
+    "ref": "FILL_FULL_COMMIT_FROM_SCAN"
+  },
+  "inject_tests": [
+    "oracle_templates/test_gk_metamorphic.py"
+  ],
+  "requirements": [
+    "click",
+    "rich",
+    "typing_extensions"
+  ],
+  "env": {
+    "GK_CLI_FLAVOR": "rich_click"
+  },
+  "oracle": {
+    "kind": "pytest",
+    "tests": [
+      "tests/test_gk_metamorphic.py"
+    ]
+  }
+}

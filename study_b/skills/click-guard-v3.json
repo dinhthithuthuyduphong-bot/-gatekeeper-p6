@@ -1,0 +1,35 @@
+{
+  "skill_id": "click-guard-v3",
+  "version": "p7.3",
+  "scope": "click-help",
+  "pi": {
+    "transform": "external_command",
+    "params": {
+      "command": "{python} p7/p73_binder_cli.py --in {input} --out {output} --receipt {receipt}",
+      "behaviors": [
+        "eq-empty-string",
+        "default-display"
+      ]
+    }
+  },
+  "D": {
+    "python": ">=3.8"
+  },
+  "I": [
+    "single_site"
+  ],
+  "P": [
+    {
+      "before": "../../real/sources/click_core_3298_parent.py",
+      "after": "../../real/sources/click_core_3298_fix.py",
+      "compare_function": "get_help_extra",
+      "heldout": false
+    }
+  ],
+  "K": {
+    "behaviors": [
+      "eq-empty-string",
+      "default-display"
+    ]
+  }
+}

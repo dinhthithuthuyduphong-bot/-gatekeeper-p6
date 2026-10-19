@@ -19,7 +19,7 @@ Chỉ dùng thư viện chuẩn của Python (≥ 3.9; đã chạy với 3.12.3)
 
 ```bash
 # ở thư mục gốc của repo (hoặc thư mục chứa gatekeeper_lite/)
-python -m unittest discover -s tests -v                              # 29 test
+python -m unittest discover -s tests -v                              # 31 test
 python -m gatekeeper_lite run --config demo/config.json --out out_demo
 python -m gatekeeper_lite show out_demo/RESULT.json T2_help_lazy     # giải thích 1 cặp
 ```
@@ -169,6 +169,6 @@ real/              thí nghiệm trên Click thật: skill, 3 target, config_rea
 tools/             fetch_real_targets.py (tải mã nguồn đã đóng băng trên Actions)
 p7/                binder v3 của P7.3 (đóng băng) + wrapper
 study_b/           protocol nháp, ứng viên, mô phỏng lực
-tests/             29 unit test
+tests/             31 unit test
 .github/workflows/ gk-lite-demo.yml
 ```

@@ -9,7 +9,8 @@ Trên các target **chưa từng dùng để phát triển**, khi tái sử dụ
 ## 2. Đã đóng băng từ trước (không đổi trong Study B)
 
 - Skill: `click-empty-default-guard` (binder neo theo hàm) và `click-guard-v3` (binder P7.3, hash trong `p7/p7_3/BINDER_FREEZE.json`).
-- Oracle: test gốc của từng target ở đúng revision, cộng `real/oracle_templates/test_gk_boundary.py` (hash ghi trong `FETCH_RECEIPT.json`).
+- Oracle chính: `test_gk_metamorphic.py`. Tính chất thay thế: help của option có default D phải giống hệt help khi default là `str(D)`. Không phụ thuộc định dạng output, nên dùng nguyên vẹn cho click, asyncclick, rich-click. Đã kiểm tra trên Click thật: commit cha #3298 hỏng 8/8 ca so sánh chặt; skill và bản chính thức sửa 8/8 nhưng hỏng 6/6 ca chuỗi lazy rỗng; ca array-like hỏng ở cả ba (ngoài phạm vi skill).
+- Skill Study B: `empty-default-guard-family` neo vào `get_help_record`, `get_help_extra` và hàm có tên chứa `default`, chỉ với biến `default_value`. Đây là phạm vi khai báo trước, rộng hơn binder v3 (v3 chỉ nhận `Option.get_help_record/get_help_extra`, nên dự kiến từ chối ở rich-click).
 - Pipeline: commit Gatekeeper-Lite được tag trước khi chạy.
 
 ## 3. Khung chọn target
@@ -37,6 +38,10 @@ Số đếm thô theo comparator (có hại bị admit, có lợi được admit
 | D1 | E-process chính | (a) kiểm định dấu (đề xuất) · (b) trung bình θ = 0,1 như hiện tại | (b) không ra quyết định ở mọi cặp thật; (a) phát hiện tác hại ở R1/R3 sau khoảng 7–11 task |
 | D2 | Phân bổ α | (a) α/ô = 0,015 (ngưỡng ≈ 110, cần 12 cặp bất đồng có lợi liên tiếp) · (b) α/ô = 0,05 với e-BH giữa các ô (ngưỡng ≈ 33, cần khoảng 9) | Với (a), R1 không thể admit dù bỏ lớp lazy (chỉ có 9 cặp có lợi); với (b) thì có thể |
 | D3 | Lớp chuỗi lazy | (a) giữ làm lớp hành vi đối kháng đã khai báo (regime C), nhờ người độc lập xác nhận kỳ vọng `[default: ""]` · (b) bỏ khỏi oracle chính, chỉ báo ở độ nhạy | Quyết định nhãn có hại/có lợi của mọi cặp hỗn hợp |
-| D4 | Danh sách target | Chọn từ kết quả quét | — |
+| D4 | Danh sách target | Kết quả quét vòng 1: **rich-click** `4ee6d4b27950` có site chưa guard `default_value == ""` trong `_get_parameter_default` (đã đưa vào config nháp). asyncclick HEAD đã có bản sửa; Click vendor trong Typer không còn phép so sánh này; click-extra, cloup không có site. Vòng 2 quét tag của asyncclick và rich-click để tìm bản phát hành trước bản sửa. | Hiện chỉ có 1 target chuyển giao thật; cần vòng 2 để thêm |
+
+**Khoá an toàn:** `study_b/config_study_b.json` có `status: DRAFT` và `requires_freeze: true`. Pipeline từ chối chạy cho tới khi đổi thành `FROZEN`, nên không thể vô tình xem kết quả trước khi đóng băng.
+
+**Kết quả real-click v4 (phát triển, không phải Study B):** kiểm định dấu cho Gatekeeper REJECT_HARM ở cả 4 cặp có hại sau 14–17 task (B6-R admit cả 4, B8 reject cả 4); cặp có lợi duy nhất (v3 trên 8.1.7, 1 cặp bất đồng) vẫn QUARANTINE.
 
 Mô phỏng chi tiết: `POWER_SIM_REAL_CLICK_V3.md` và `POWER_SIM_REAL_CLICK_V3_NO_LAZY.md`.

@@ -63,6 +63,7 @@ def main(root: str) -> int:
                     entry.setdefault("tests_from", {})[test_file] = test_sha
         for rel in json.loads(manifest_path.read_text()).get("inject_tests", []):
             src = root / rel
+            (target_dir / "tests").mkdir(exist_ok=True)
             shutil.copy2(src, target_dir / "tests" / src.name)
             entry.setdefault("injected", {})[src.name] = hashlib.sha256(src.read_bytes()).hexdigest()
         module = target_dir / json.loads(manifest_path.read_text())["module"]

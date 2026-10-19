@@ -1,0 +1,15 @@
+{
+  "note": "Read-only scan, round 2: version tags of the two candidates that matter, to find releases before/after the #3298-style fix.",
+  "candidates": [
+    {
+      "name": "asyncclick",
+      "repo": "https://github.com/python-trio/asyncclick.git",
+      "tags_latest": 8
+    },
+    {
+      "name": "rich-click",
+      "repo": "https://github.com/ewels/rich-click.git",
+      "tags_latest": 6
+    }
+  ]
+}

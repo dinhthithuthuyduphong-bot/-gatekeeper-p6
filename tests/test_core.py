@@ -347,3 +347,19 @@ class DiscordantSignTests(unittest.TestCase):
         order = _ordered_tasks(ids, 3, ["gk_boundary"])
         self.assertEqual(set(order[:2]), {"t::gk_boundary[x]", "t::gk_boundary[y]"})
         self.assertEqual(order, _ordered_tasks(ids, 3, ["gk_boundary"]))
+
+
+class FreezeLockTests(unittest.TestCase):
+    def test_draft_study_b_refuses_to_run(self):
+        with self.assertRaises(SystemExit):
+            run_experiment(ROOT / "study_b" / "config_study_b.json")
+
+    def test_family_anchor_matches_help_default_functions_only(self):
+        src = ("def _get_parameter_default(param, default_value):\n"
+               "    if default_value == '':\n        return '\"\"'\n"
+               "def _metavar(m):\n    return m == ''\n"
+               "def confirm(value):\n    return value == ''\n")
+        t = T.EmptyStringGuard(functions=["get_help_extra"], function_patterns=["default"],
+                               subjects=["default_value"])
+        res = t.apply(src)
+        self.assertEqual([s.function for s in res.sites], ["_get_parameter_default"])

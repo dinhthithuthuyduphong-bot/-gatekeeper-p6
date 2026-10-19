@@ -56,6 +56,9 @@ def summarize(records: List[dict]) -> Dict[str, dict]:
 def run_experiment(config_path: Path) -> dict:
     config_path = Path(config_path).resolve()
     cfg = json.loads(config_path.read_text(encoding="utf-8"))
+    if cfg.get("requires_freeze") and cfg.get("status") != "FROZEN":
+        raise SystemExit(f"{config_path.name}: status is {cfg.get('status')!r}; this experiment "
+                         "only runs after the protocol is frozen (status FROZEN).")
     base = config_path.parent
     skills = {}
     for p in sorted((base / cfg["skills_dir"]).glob("*.json")):

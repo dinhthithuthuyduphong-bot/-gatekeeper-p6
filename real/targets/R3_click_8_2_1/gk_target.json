@@ -20,10 +20,15 @@
     "kind": "pytest",
     "tests": [
       "tests/test_options.py",
-      "tests/test_gk_boundary.py"
+      "tests/test_gk_boundary.py",
+      "tests/test_gk_metamorphic.py"
     ]
   },
   "inject_tests": [
-    "oracle_templates/test_gk_boundary.py"
-  ]
+    "oracle_templates/test_gk_boundary.py",
+    "oracle_templates/test_gk_metamorphic.py"
+  ],
+  "env": {
+    "GK_CLI_FLAVOR": "click"
+  }
 }

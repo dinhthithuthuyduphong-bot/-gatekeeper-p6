@@ -104,7 +104,7 @@ def _run_pytest(snapshot: Path, tests: List[str], env: dict, timeout: float,
 
 def run_arm(arm: str, target_root: Path, module: str, treated_source: Optional[str],
             seed: int, timeout: float = 60.0, oracle: Optional[dict] = None,
-            pythonpath: Optional[List[str]] = None) -> ArmResult:
+            pythonpath: Optional[List[str]] = None, extra_env: Optional[dict] = None) -> ArmResult:
     work = Path(tempfile.mkdtemp(prefix=f"gk_{arm}_"))
     try:
         snapshot = work / "snapshot"
@@ -115,7 +115,7 @@ def run_arm(arm: str, target_root: Path, module: str, treated_source: Optional[s
         hashes = _hash_tree(snapshot)
         paths = [str(snapshot / p) for p in (pythonpath or [])] + [str(PACKAGE_ROOT)]
         env = dict(os.environ, PYTHONHASHSEED=str(seed), PYTHONDONTWRITEBYTECODE="1",
-                   PYTHONPATH=os.pathsep.join(paths))
+                   PYTHONPATH=os.pathsep.join(paths), **(extra_env or {}))
         oracle = oracle or {"kind": "cases"}
         start = time.perf_counter()
         if oracle["kind"] == "pytest":
@@ -156,7 +156,7 @@ def reach_pass(target, functions: List[str], seed: int, timeout: float = 600.0) 
         env = dict(os.environ, PYTHONHASHSEED=str(seed), PYTHONDONTWRITEBYTECODE="1",
                    PYTHONPATH=os.pathsep.join(paths + [str(PACKAGE_ROOT)]),
                    GK_REACH_FUNCS=",".join(functions), GK_REACH_FILE=target.module,
-                   GK_REACH_OUT=str(out))
+                   GK_REACH_OUT=str(out), **target.manifest.get("env", {}))
         cmd = [sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider",
                "-p", "gatekeeper_lite.pytest_reach", *(oracle.get("pytest_args") or []),
                *oracle["tests"]]
@@ -172,9 +172,11 @@ def reach_pass(target, functions: List[str], seed: int, timeout: float = 600.0) 
 def paired_run(target, treated_source: str, seed: int, timeout: float = 60.0) -> PairedRun:
     oracle = target.manifest.get("oracle", {"kind": "cases"})
     paths = target.manifest.get("pythonpath", [])
-    base = run_arm("baseline", target.root, target.module, None, seed, timeout, oracle, paths)
+    extra = target.manifest.get("env", {})
+    base = run_arm("baseline", target.root, target.module, None, seed, timeout, oracle, paths,
+                   extra)
     treat = run_arm("treatment", target.root, target.module, treated_source, seed, timeout,
-                    oracle, paths)
+                    oracle, paths, extra)
     notes = []
     differing = {k for k in set(base.file_hashes) | set(treat.file_hashes)
                  if base.file_hashes.get(k) != treat.file_hashes.get(k)

@@ -53,11 +53,37 @@ def scan_tree(repo: Path) -> dict:
             "license_first_line": license_text}
 
 
+def _version_key(tag: str):
+    import re
+    return tuple(int(x) for x in re.findall(r"\d+", tag)) or (0,)
+
+
+def latest_tags(repo: str, n: int) -> list:
+    """The n highest version-like tags of a remote (read-only ls-remote)."""
+    import subprocess
+    out = subprocess.run(["git", "ls-remote", "--tags", "--refs", repo], check=True,
+                         capture_output=True, text=True).stdout
+    tags = [line.split("refs/tags/", 1)[1] for line in out.splitlines() if "refs/tags/" in line]
+    tags = [t for t in tags if any(ch.isdigit() for ch in t)]
+    return sorted(tags, key=_version_key)[-n:]
+
+
+def expand(candidates: list) -> list:
+    out = []
+    for cand in candidates:
+        if cand.get("tags_latest"):
+            for tag in latest_tags(cand["repo"], int(cand["tags_latest"])):
+                out.append(dict(cand, name=f"{cand['name']}@{tag}", ref=f"refs/tags/{tag}"))
+        else:
+            out.append(cand)
+    return out
+
+
 def main(candidates: str, out_dir: str) -> int:
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
     results = []
-    for cand in json.loads(Path(candidates).read_text(encoding="utf-8"))["candidates"]:
+    for cand in expand(json.loads(Path(candidates).read_text(encoding="utf-8"))["candidates"]):
         entry = {"name": cand["name"], "repo": cand["repo"], "ref": cand["ref"]}
         try:
             with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:

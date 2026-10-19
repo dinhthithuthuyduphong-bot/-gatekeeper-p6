@@ -1,0 +1,45 @@
+{
+  "experiment_id": "study-b-v1",
+  "status": "DRAFT",
+  "requires_freeze": true,
+  "skills_dir": "skills",
+  "targets_dir": "targets",
+  "theta": 0.1,
+  "seed": 20261101,
+  "budget_tasks": 24,
+  "timeout_seconds": 900,
+  "evidence": "discordant_sign",
+  "discordant": {
+    "q0": 0.6,
+    "q1": 0.9,
+    "harm_eps": 0.05,
+    "harm_alt": 0.5
+  },
+  "task_filter": "reach_baseline",
+  "task_priority": [
+    "gk_metamorphic"
+  ],
+  "sensitivity_exclude": [
+    [
+      "lazy"
+    ]
+  ],
+  "alpha_total": "DECISION_D2",
+  "cells": "DECISION_D2",
+  "pairs": [
+    {
+      "skills": [
+        "empty-default-guard-family"
+      ],
+      "target": "B1_rich_click"
+    },
+    {
+      "skills": [
+        "click-guard-v3"
+      ],
+      "target": "B1_rich_click"
+    }
+  ],
+  "compositions": [],
+  "retirement": []
+}
