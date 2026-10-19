@@ -10,9 +10,19 @@ jobs:
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
+      - name: Show which commit and config this run uses
+        run: |
+          echo "ref: $GITHUB_REF  commit: $GITHUB_SHA"
+          git log -1 --format='%H %s (%ci)'
+          git tag --points-at HEAD || true
+          ls -la study_b/ || echo "::error::study_b/ folder missing in this commit"
+          python -c "import json;c=json.load(open('study_b/config_study_b.json'));print('status:',c.get('status'),'frozen_on:',c.get('frozen_on'),'experiment:',c.get('experiment_id'))"
+          test -f study_b/FREEZE.json && echo "FREEZE.json present" || echo "::error::study_b/FREEZE.json missing: the frozen package was not pushed to this commit"
       - name: Check protocol freeze (fails closed while DRAFT)
         run: |
           python - <<'PY'
