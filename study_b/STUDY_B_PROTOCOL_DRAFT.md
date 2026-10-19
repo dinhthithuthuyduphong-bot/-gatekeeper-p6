@@ -38,10 +38,12 @@ Số đếm thô theo comparator (có hại bị admit, có lợi được admit
 | D1 | E-process chính | (a) kiểm định dấu (đề xuất) · (b) trung bình θ = 0,1 như hiện tại | (b) không ra quyết định ở mọi cặp thật; (a) phát hiện tác hại ở R1/R3 sau khoảng 7–11 task |
 | D2 | Phân bổ α | (a) α/ô = 0,015 (ngưỡng ≈ 110, cần 12 cặp bất đồng có lợi liên tiếp) · (b) α/ô = 0,05 với e-BH giữa các ô (ngưỡng ≈ 33, cần khoảng 9) | Với (a), R1 không thể admit dù bỏ lớp lazy (chỉ có 9 cặp có lợi); với (b) thì có thể |
 | D3 | Lớp chuỗi lazy | (a) giữ làm lớp hành vi đối kháng đã khai báo (regime C), nhờ người độc lập xác nhận kỳ vọng `[default: ""]` · (b) bỏ khỏi oracle chính, chỉ báo ở độ nhạy | Quyết định nhãn có hại/có lợi của mọi cặp hỗn hợp |
-| D4 | Danh sách target | Kết quả quét vòng 1: **rich-click** `4ee6d4b27950` có site chưa guard `default_value == ""` trong `_get_parameter_default` (đã đưa vào config nháp). asyncclick HEAD đã có bản sửa; Click vendor trong Typer không còn phép so sánh này; click-extra, cloup không có site. Vòng 2 quét tag của asyncclick và rich-click để tìm bản phát hành trước bản sửa. | Hiện chỉ có 1 target chuyển giao thật; cần vòng 2 để thêm |
+| D4 | Danh sách target (đề xuất, đã ghim commit trong config nháp) | **B1 rich-click v1.9.9** (`30ac1778e609`): site chưa guard ở `_get_parameter_default`; oracle = bộ test của rich-click + metamorphic. **B2 asyncclick 8.3.0.6+async** (`4e5fea9cc5a3`): bản phát hành asyncclick cuối cùng trước bản sửa, site chưa guard ở `get_help_extra`; oracle = `tests/test_options.py` + metamorphic. Mỗi repo một phiên bản (các phiên bản gần nhau cùng một cụm). Các tag 8.3.1/8.3.2 trong repo asyncclick có đường dẫn `src/click/` nên là tag của Click gốc, bị loại. | 2 target × 2 binder = 4 cặp; v3 dự kiến từ chối ở rich-click |
 
 **Khoá an toàn:** `study_b/config_study_b.json` có `status: DRAFT` và `requires_freeze: true`. Pipeline từ chối chạy cho tới khi đổi thành `FROZEN`, nên không thể vô tình xem kết quả trước khi đóng băng.
 
-**Kết quả real-click v4 (phát triển, không phải Study B):** kiểm định dấu cho Gatekeeper REJECT_HARM ở cả 4 cặp có hại sau 14–17 task (B6-R admit cả 4, B8 reject cả 4); cặp có lợi duy nhất (v3 trên 8.1.7, 1 cặp bất đồng) vẫn QUARANTINE.
+**Kết quả real-click v5 (phát triển, oracle metamorphic):** B6-R admit 5/5 cặp có hại; B8 reject 5/5; Gatekeeper REJECT_HARM 4 cặp, QUARANTINE 1 cặp (v3 trên 8.1.7). Riêng v3 trên 8.1.7: v3 thêm cả nhánh `""` vào bản cũ, làm help của chuỗi lazy rỗng khác với help của `""` (6 task hỏng) — test gốc của Click 8.1.7 không thấy điều này. Bỏ lớp lazy thì mọi cặp thành có lợi.
+
+**Kết quả real-click v4:** kiểm định dấu cho Gatekeeper REJECT_HARM ở cả 4 cặp có hại sau 14–17 task (B6-R admit cả 4, B8 reject cả 4); cặp có lợi duy nhất (v3 trên 8.1.7, 1 cặp bất đồng) vẫn QUARANTINE.
 
 Mô phỏng chi tiết: `POWER_SIM_REAL_CLICK_V3.md` và `POWER_SIM_REAL_CLICK_V3_NO_LAZY.md`.

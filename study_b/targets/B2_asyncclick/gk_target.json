@@ -1,0 +1,35 @@
+{
+  "target_id": "B2_asyncclick",
+  "module": "src/asyncclick/core.py",
+  "pythonpath": [
+    "src"
+  ],
+  "python": "3.12",
+  "platform": "linux",
+  "packages": {},
+  "repository": "python-trio/asyncclick",
+  "revision": "8.3.0.6+async (4e5fea9cc5a3)",
+  "regime": "B",
+  "scope": "asyncclick/help-default",
+  "exposure": "Chỉ quét tĩnh (STUDY_B_CANDIDATE_SCAN vòng 2); chưa chạy test, chưa áp skill",
+  "checkout": {
+    "repo": "https://github.com/python-trio/asyncclick.git",
+    "ref": "4e5fea9cc5a31006944af8f30cab8aa1811784b5"
+  },
+  "inject_tests": [
+    "oracle_templates/test_gk_metamorphic.py"
+  ],
+  "requirements": [
+    "anyio"
+  ],
+  "env": {
+    "GK_CLI_FLAVOR": "asyncclick"
+  },
+  "oracle": {
+    "kind": "pytest",
+    "tests": [
+      "tests/test_options.py",
+      "tests/test_gk_metamorphic.py"
+    ]
+  }
+}

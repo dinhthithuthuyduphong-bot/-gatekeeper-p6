@@ -38,6 +38,18 @@
         "click-guard-v3"
       ],
       "target": "B1_rich_click"
+    },
+    {
+      "skills": [
+        "empty-default-guard-family"
+      ],
+      "target": "B2_asyncclick"
+    },
+    {
+      "skills": [
+        "click-guard-v3"
+      ],
+      "target": "B2_asyncclick"
     }
   ],
   "compositions": [],

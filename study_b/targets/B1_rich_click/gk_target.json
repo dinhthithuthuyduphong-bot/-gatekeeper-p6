@@ -8,13 +8,13 @@
   "platform": "linux",
   "packages": {},
   "repository": "ewels/rich-click",
-  "revision": "4ee6d4b27950",
+  "revision": "v1.9.9 (30ac1778e609)",
   "regime": "B",
   "scope": "rich-click/help-default",
-  "exposure": "Chỉ quét tĩnh (STUDY_B_CANDIDATE_SCAN); chưa chạy test, chưa áp skill",
+  "exposure": "Chỉ quét tĩnh (STUDY_B_CANDIDATE_SCAN vòng 1–2); chưa chạy test, chưa áp skill",
   "checkout": {
     "repo": "https://github.com/ewels/rich-click.git",
-    "ref": "FILL_FULL_COMMIT_FROM_SCAN"
+    "ref": "30ac1778e60975b00d52ac8a565499fd4c30ea0d"
   },
   "inject_tests": [
     "oracle_templates/test_gk_metamorphic.py"
@@ -30,7 +30,7 @@
   "oracle": {
     "kind": "pytest",
     "tests": [
-      "tests/test_gk_metamorphic.py"
+      "tests"
     ]
   }
 }
