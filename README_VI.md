@@ -19,7 +19,7 @@ Chỉ dùng thư viện chuẩn của Python (≥ 3.9; đã chạy với 3.12.3)
 
 ```bash
 # ở thư mục gốc của repo (hoặc thư mục chứa gatekeeper_lite/)
-python -m unittest discover -s tests -v                              # 32 test
+python -m unittest discover -s tests -v                              # 35 test
 python -m gatekeeper_lite run --config demo/config.json --out out_demo
 python -m gatekeeper_lite show out_demo/RESULT.json T2_help_lazy     # giải thích 1 cặp
 ```
@@ -112,6 +112,10 @@ Array-like hỏng ở một phép so sánh khác (`default_value not in (None, U
 
 Trên rich-click v1.9.9 và asyncclick 8.3.0.6 (chưa từng chạy trước khi đóng băng): B6-R admit 3/3 cặp có hại, B8 và Gatekeeper-Lite từ chối cả 3; Gatekeeper dừng sau 9 task mỗi cặp với chi phí khoảng một nửa B8. Bỏ lớp chuỗi lazy thì cả 3 cặp thành có lợi. Xem `study_b/results/RESULTS_SUMMARY_study-b-v1.md`.
 
+## Bước tiếp theo: Study C (admission theo scope)
+
+`gatekeeper_lite/scoped.py` chia task thành các scope hành vi khai báo trước; mỗi scope là một ô admission. Trên demo: cùng một skill được ADMIT ở scope "đối tượng" và REJECT_HARM ở scope "chuỗi lazy", trong khi B6-R admit ở mọi scope. Bản nháp: `study_c/STUDY_C_PROTOCOL_DRAFT.md`. Chạy bổ sung hậu kiểm S1 cho rich-click: workflow `study-b-s1.yml`.
+
 ## Kịch bản demo 5 phút cho thầy
 
 1. **Vấn đề (1 phút):** `show out_demo/RESULT.json T2_help_lazy`. Cùng một sửa đổi (thêm `isinstance(x, str)`) đúng ở T1 nhưng làm hỏng 16 task ở T2, vì chuỗi lazy không phải `str`. B6-R vẫn ADMIT vì replay ở nguồn pass và fingerprint khớp.
@@ -173,6 +177,6 @@ real/              thí nghiệm trên Click thật: skill, 3 target, config_rea
 tools/             fetch_real_targets.py (tải mã nguồn đã đóng băng trên Actions)
 p7/                binder v3 của P7.3 (đóng băng) + wrapper
 study_b/           protocol nháp, ứng viên, mô phỏng lực
-tests/             32 unit test
+tests/             35 unit test
 .github/workflows/ gk-lite-demo.yml
 ```
