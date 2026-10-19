@@ -1,6 +1,6 @@
 {
   "experiment_id": "study-c-v1",
-  "status": "DRAFT",
+  "status": "FROZEN",
   "requires_freeze": true,
   "skills_dir": "../study_b/skills",
   "targets_dir": "targets",
@@ -25,8 +25,106 @@
     ]
   ],
   "alpha_total": 0.1,
-  "cells": "DERIVED_FROM_PAIRS_x_SCOPES",
-  "pairs": "DECISION_TARGETS_AFTER_SCAN_ROUND_3",
+  "cells": {
+    "empty-default-guard-family@click-8.1.8/help-default/objects": 0.004,
+    "empty-default-guard-family@click-8.1.8/help-default/lazy": 0.004,
+    "click-guard-v3@click-8.1.8/help-default/objects": 0.004,
+    "click-guard-v3@click-8.1.8/help-default/lazy": 0.004,
+    "empty-default-guard-family@click-8.2.0/help-default/objects": 0.004,
+    "empty-default-guard-family@click-8.2.0/help-default/lazy": 0.004,
+    "click-guard-v3@click-8.2.0/help-default/objects": 0.004,
+    "click-guard-v3@click-8.2.0/help-default/lazy": 0.004,
+    "empty-default-guard-family@click-8.2.2/help-default/objects": 0.004,
+    "empty-default-guard-family@click-8.2.2/help-default/lazy": 0.004,
+    "click-guard-v3@click-8.2.2/help-default/objects": 0.004,
+    "click-guard-v3@click-8.2.2/help-default/lazy": 0.004,
+    "empty-default-guard-family@click-8.3.0/help-default/objects": 0.004,
+    "empty-default-guard-family@click-8.3.0/help-default/lazy": 0.004,
+    "click-guard-v3@click-8.3.0/help-default/objects": 0.004,
+    "click-guard-v3@click-8.3.0/help-default/lazy": 0.004,
+    "empty-default-guard-family@click-8.3.1/help-default/objects": 0.004,
+    "empty-default-guard-family@click-8.3.1/help-default/lazy": 0.004,
+    "click-guard-v3@click-8.3.1/help-default/objects": 0.004,
+    "click-guard-v3@click-8.3.1/help-default/lazy": 0.004,
+    "empty-default-guard-family@click-8.3.2/help-default/objects": 0.004,
+    "empty-default-guard-family@click-8.3.2/help-default/lazy": 0.004,
+    "click-guard-v3@click-8.3.2/help-default/objects": 0.004,
+    "click-guard-v3@click-8.3.2/help-default/lazy": 0.004
+  },
+  "pairs": [
+    {
+      "skills": [
+        "empty-default-guard-family"
+      ],
+      "target": "C_click_8_1_8"
+    },
+    {
+      "skills": [
+        "click-guard-v3"
+      ],
+      "target": "C_click_8_1_8"
+    },
+    {
+      "skills": [
+        "empty-default-guard-family"
+      ],
+      "target": "C_click_8_2_0"
+    },
+    {
+      "skills": [
+        "click-guard-v3"
+      ],
+      "target": "C_click_8_2_0"
+    },
+    {
+      "skills": [
+        "empty-default-guard-family"
+      ],
+      "target": "C_click_8_2_2"
+    },
+    {
+      "skills": [
+        "click-guard-v3"
+      ],
+      "target": "C_click_8_2_2"
+    },
+    {
+      "skills": [
+        "empty-default-guard-family"
+      ],
+      "target": "C_click_8_3_0"
+    },
+    {
+      "skills": [
+        "click-guard-v3"
+      ],
+      "target": "C_click_8_3_0"
+    },
+    {
+      "skills": [
+        "empty-default-guard-family"
+      ],
+      "target": "C_click_8_3_1"
+    },
+    {
+      "skills": [
+        "click-guard-v3"
+      ],
+      "target": "C_click_8_3_1"
+    },
+    {
+      "skills": [
+        "empty-default-guard-family"
+      ],
+      "target": "C_click_8_3_2"
+    },
+    {
+      "skills": [
+        "click-guard-v3"
+      ],
+      "target": "C_click_8_3_2"
+    }
+  ],
   "compositions": [],
   "retirement": [],
   "multiplicity": {
@@ -42,5 +140,13 @@
     "lazy": [
       "[lazy-"
     ]
+  },
+  "frozen_on": "2026-10-20",
+  "decisions": {
+    "regime": "A (unseen releases of the development repository); cross-repo frame exhausted after 3 scan rounds (15 repos, 2 eligible, both used in Study B)",
+    "scopes": "objects = [strict-, [array- ; lazy = [lazy- ; target's own test_options.py shared by both scopes",
+    "evidence": "discordant_sign q0=0.6 q1=0.9; e-BH FDR 0.1 over 24 cells; harm stop e>=20; budget 24",
+    "oracle": "metamorphic v2 (12 strict-eq cases) in an isolated pytest session + Click's own tests/test_options.py",
+    "hypotheses": "H1 Gatekeeper admits the objects scope; H2 Gatekeeper rejects the lazy scope for harm; H3 B2/B6-R give the same decision in both scopes"
   }
 }

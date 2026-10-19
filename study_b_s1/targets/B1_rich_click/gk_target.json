@@ -24,7 +24,8 @@
     "click",
     "rich",
     "typing_extensions",
-    "typer"
+    "typer",
+    "pytest-cov"
   ],
   "env": {
     "GK_CLI_FLAVOR": "rich_click"

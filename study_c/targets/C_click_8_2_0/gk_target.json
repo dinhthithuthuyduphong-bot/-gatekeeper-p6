@@ -1,0 +1,50 @@
+{
+  "target_id": "C_click_8_2_0",
+  "module": "src/click/core.py",
+  "pythonpath": [
+    "src"
+  ],
+  "python": "3.12",
+  "platform": "linux",
+  "packages": {},
+  "repository": "pallets/click",
+  "revision": "tag 8.2.0",
+  "regime": "A",
+  "scope": "click-8.2.0/help-default",
+  "exposure": "CHƯA CHẠY: bản phát hành chưa từng dùng; cùng repository đã dùng khi phát triển (regime A)",
+  "checkout": {
+    "repo": "https://github.com/pallets/click.git",
+    "ref": "refs/tags/8.2.0"
+  },
+  "inject_dir": "gk_oracle",
+  "inject_tests": [
+    "oracle_templates/test_gk_metamorphic.py",
+    "oracle_templates/pytest.ini"
+  ],
+  "requirements": [],
+  "env": {
+    "GK_CLI_FLAVOR": "click"
+  },
+  "oracle": {
+    "kind": "pytest",
+    "groups": [
+      {
+        "tests": [
+          "gk_oracle/test_gk_metamorphic.py"
+        ],
+        "args": [
+          "-c",
+          "gk_oracle/pytest.ini",
+          "--rootdir",
+          "gk_oracle"
+        ]
+      },
+      {
+        "tests": [
+          "tests/test_options.py"
+        ],
+        "args": []
+      }
+    ]
+  }
+}

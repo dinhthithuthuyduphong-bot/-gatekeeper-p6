@@ -62,7 +62,14 @@ def _main(root: str) -> int:
         spec = json.loads(manifest_path.read_text(encoding="utf-8"))["checkout"]
         with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
             repo_dir = Path(tmp) / "repo"
-            sha = _clone_ref(spec["repo"], spec["ref"], repo_dir)
+            try:
+                sha = _clone_ref(spec["repo"], spec["ref"], repo_dir)
+            except subprocess.CalledProcessError as exc:
+                if os.environ.get("GK_FETCH_TOLERANT") != "1":
+                    raise
+                receipt["targets"][target_dir.name] = {"ref": spec["ref"], "error": f"fetch failed (exit {exc.returncode})"}
+                print(f"::warning::{target_dir.name}: fetch failed for {spec['ref']}; recorded as harness error")
+                continue
             # Keep symlinks as links: some upstream repos contain links whose targets do
             # not exist in a shallow checkout, which made a plain copy fail (Amendment A1).
             shutil.copytree(repo_dir, target_dir, dirs_exist_ok=True, symlinks=True,
