@@ -1,0 +1,32 @@
+{
+  "files": {
+    "study_b/config_study_b.json": "2672cc4c1c6588aefed99c9a3b3f1d79f7eee6f69c7d62b06c30689dca020dfd",
+    "study_b/STUDY_B_PROTOCOL.md": "047eb08d2be4899ba139aa8a2809ad850ec41e9a9e9a4c2f7608c106e5d0279c",
+    "study_b/skills/click-guard-v3.json": "8b7e2bf86629f1232c64707fe0d359b48cfb6754c5646ae234c8eeb12ac55475",
+    "study_b/skills/empty-default-guard-family.json": "3be4868908f785d84ab52e2cc1000c35d9804a1c6a7a69c18e27f13128c9c00d",
+    "study_b/targets/B1_rich_click/gk_target.json": "b4db5eb17517c92e530283b1ea3055f27f53385b76238f5b77d0231de3242e41",
+    "study_b/targets/B2_asyncclick/gk_target.json": "141d5ff2337314dc4b8d04d8840fe64c5d0960ea70ba9361debb14656e8ed3f1",
+    "study_b/oracle_templates/test_gk_metamorphic.py": "bc6bc80cd9155f9f7b20cea3bb34e07be8a545729e86cad67532d0a20f46439e",
+    "gatekeeper_lite/__init__.py": "be8ddeba61bbc4885994020bcb9b4f19573f4a22b8a759b079e00e45c3f334e7",
+    "gatekeeper_lite/__main__.py": "7aa7d5b275d60de01de9074e0bd8a864c99527435885098a2243986a48699e90",
+    "gatekeeper_lite/eprocess.py": "78b4bbc7da014feeaad93cd4d674a1efeb044b3ec8261746544135c80afedf42",
+    "gatekeeper_lite/experiment.py": "cd22e9118d811b0f7ca099293903ebd4e260e909b9b8b895a1c8e6237024f642",
+    "gatekeeper_lite/gatekeeper.py": "fee4cc3711a7ab7e8f9f1bcffd23f4ded87ad898bcac1f4b8e77aee62848cb82",
+    "gatekeeper_lite/harness.py": "e47b4d33a08fa196431a61503ed5986275cf4636cd955e69b47f00a2a8631807",
+    "gatekeeper_lite/pytest_reach.py": "16be670c645272df1f9f364e2d5d48eca39e2350fc9cc3409ab577121a6b6773",
+    "gatekeeper_lite/report.py": "70d7ce8cafef2b31ca6f75d975483100147f46b066233bce446c40d91e641558",
+    "gatekeeper_lite/runner.py": "8adf84fb809055659bc01911f9566c64f452e787adb3ff7a66179c1dac672607",
+    "gatekeeper_lite/screen.py": "56fbacba4cff58a1d0864c3ef852ee7c6d5f225f06749a1a84fd8efa2624f112",
+    "gatekeeper_lite/skill.py": "3d8b6dfceaa89721e5e9dc1d3e9c244912ff909e324b718ba0b1edaa08f23708",
+    "gatekeeper_lite/transforms.py": "4112cb302a7c29703c719804269390904f0f0769eed0117da5ea2cfafb7bc76b",
+    "p7/p73_binder_cli.py": "d992249288d6d0f81ee10c386867e2dcc915a62a193e9297c4ef679c1075e081",
+    "p7/p7_3/anchored_binder.py": "2fdb6dd9cefe2b9e81a5506649bb9181b9d4408e65b239400c0b82c63decfc12",
+    "p7/p7_3/template_skill.py": "a175a6a1cf8a4dab23c111baba530718c94ef23781ff968c7638e336633d41dd",
+    "p7/p7_3/BINDER_FREEZE.json": "6f60cf6278d10512e9d495cf0a4132d452a1100fa3b967231fe3024c7cdca706",
+    "p7/p7_3/FROZEN_TEMPLATE.json": "c19daa246f585cca56bc113740fc63c7fa1d43d98af5a2db5dce1b4b7b7f62d2",
+    "p7/p7_3/GUARDED_TEMPLATE_V2.json": "676e6f93c5d6ddf76c225a540bbc9299a8aeac809e2022e389e9a57d65023ac1",
+    "p7/p7_3/MANIFEST.json": "20da6dd8d2f59afc7c122b03774d327c8399add2f7e1900dd1de858e670d3f7b",
+    "tools/fetch_real_targets.py": "beeb617680203f02c703f7606b89e4edc51247d134e2d7002d5aca71d60f5b8e",
+    "tools/install_requirements.py": "34bce85278e960ba7e74fecab510c91e7d83e2bfe056d131294e6bc853ed16c2"
+  }
+}

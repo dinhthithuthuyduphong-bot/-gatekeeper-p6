@@ -139,3 +139,16 @@ def make_eprocess(cfg: dict):
         return DiscordantSignEProcess(p.get("q0", 0.6), p.get("q1", 0.9),
                                       p.get("harm_eps", 0.05), p.get("harm_alt", 0.5))
     return BettingEProcess(theta=cfg["theta"])
+
+
+def e_bh(e_values: Dict[str, float], fdr: float) -> List[str]:
+    """e-BH (Wang & Ramdas 2022): reject the R cells with the largest e-values, where
+    R = max{k : e_(k) >= K / (fdr * k)}.  Controls FDR at `fdr` under any dependence.
+    Each e-value must be the e-process value at a stopping time fixed by the protocol."""
+    k_total = len(e_values)
+    ranked = sorted(e_values.items(), key=lambda kv: kv[1], reverse=True)
+    r = 0
+    for k, (_, e) in enumerate(ranked, start=1):
+        if e >= k_total / (fdr * k):
+            r = k
+    return [cell for cell, _ in ranked[:r]]

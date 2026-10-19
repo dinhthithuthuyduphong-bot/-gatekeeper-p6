@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 from typing import Dict, List
 
-from .eprocess import AlphaLedger
+from .eprocess import AlphaLedger, e_bh
 from .gatekeeper import (ADMIT, Certificate, footprint_overlap, retirement_check, run_pair)
 from .skill import Skill, Target
 
@@ -76,6 +76,25 @@ def run_experiment(config_path: Path) -> dict:
         if rec["gatekeeper"]["decision"] == ADMIT:
             certificates[(rec["cell"], rec["target"])] = Certificate(
                 rec["cell"], rec["target"], rec["fingerprint"], rec["gatekeeper"]["epoch"])
+
+    multi = cfg.get("multiplicity", {})
+    if multi.get("method") == "e-BH":
+        # Every cell that reached a stopping point with an e-value takes part; harmful
+        # rejections and out-of-scope cells enter with e = 0 (they can never be admitted).
+        pool = {r["cell"]: (r["gatekeeper"]["e_value"] or 0.0)
+                if r["gatekeeper"]["decision"] in ("ADMIT", "PENDING_EBH") else 0.0
+                for r in records}
+        admitted = set(e_bh(pool, multi["fdr"]))
+        for r in records:
+            if r["gatekeeper"]["decision"] in ("ADMIT", "PENDING_EBH"):
+                final = ADMIT if r["cell"] in admitted else "QUARANTINE"
+                r["gatekeeper"]["reason"] += f"; e-BH(fdr={multi['fdr']}, K={len(pool)}) -> {final}"
+                r["gatekeeper"]["decision"] = final
+                r["comparators"]["Gatekeeper"]["decision"] = final
+        for r in records:
+            if r["gatekeeper"]["decision"] == ADMIT:
+                certificates[(r["cell"], r["target"])] = Certificate(
+                    r["cell"], r["target"], r["fingerprint"], r["gatekeeper"]["epoch"])
 
     compositions = []
     for comp in cfg.get("compositions", []):

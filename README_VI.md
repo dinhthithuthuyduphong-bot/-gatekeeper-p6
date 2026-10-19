@@ -19,7 +19,7 @@ Chỉ dùng thư viện chuẩn của Python (≥ 3.9; đã chạy với 3.12.3)
 
 ```bash
 # ở thư mục gốc của repo (hoặc thư mục chứa gatekeeper_lite/)
-python -m unittest discover -s tests -v                              # 31 test
+python -m unittest discover -s tests -v                              # 32 test
 python -m gatekeeper_lite run --config demo/config.json --out out_demo
 python -m gatekeeper_lite show out_demo/RESULT.json T2_help_lazy     # giải thích 1 cặp
 ```
@@ -106,7 +106,7 @@ Array-like hỏng ở một phép so sánh khác (`default_value not in (None, U
 - **Phân tích độ nhạy** (`sensitivity_exclude`): nhãn thật tính lại khi bỏ một lớp task, hiện trong REPORT.md.
 - **Mô phỏng lực:** `python tools/power_sim.py out_real/RESULT.json [--exclude lazy]`.
 - **Quét ứng viên:** workflow `study-b-scan.yml` (chỉ đọc) → artifact `STUDY_B_CANDIDATE_SCAN`.
-- **Bản nháp protocol:** `study_b/STUDY_B_PROTOCOL_DRAFT.md` (4 quyết định cần chốt).
+- **Protocol Study B (đã đóng băng 19/10/2026):** `study_b/STUDY_B_PROTOCOL.md`, hash trong `study_b/FREEZE.json`; kiểm tra bằng `python tools/freeze_study.py verify study_b`. Admission chung bằng e-BH (FDR 0,1).
 
 ## Kịch bản demo 5 phút cho thầy
 
@@ -169,6 +169,6 @@ real/              thí nghiệm trên Click thật: skill, 3 target, config_rea
 tools/             fetch_real_targets.py (tải mã nguồn đã đóng băng trên Actions)
 p7/                binder v3 của P7.3 (đóng băng) + wrapper
 study_b/           protocol nháp, ứng viên, mô phỏng lực
-tests/             31 unit test
+tests/             32 unit test
 .github/workflows/ gk-lite-demo.yml
 ```

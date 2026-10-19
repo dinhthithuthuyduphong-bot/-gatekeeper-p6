@@ -140,20 +140,33 @@ def gatekeeper(cell: str, skills: Sequence[Skill], target: Target, run: Optional
         order = [c for c in order if c in reached]
         if not order:
             return GatekeeperResult(QUARANTINE, "no task reaches the edited site", epoch=epoch)
-    alpha = ledger.draw(cell, epoch)
-    threshold = 1.0 / alpha
+    multi = cfg.get("multiplicity", {})
+    if multi.get("method") == "e-BH":
+        # Admission decided jointly by e-BH after all cells stop; a cell stops early only
+        # when its e-value already clears the strictest e-BH bar K/fdr.
+        k_cells = len(cfg["cells"])
+        alpha = multi["fdr"]
+        threshold = k_cells / multi["fdr"]
+        harm_threshold = 1.0 / multi["harm_alpha"]
+    else:
+        alpha = ledger.draw(cell, epoch)
+        threshold = 1.0 / alpha
+        harm_threshold = threshold
     ep = make_eprocess(cfg)
     budget = min(cfg["budget_tasks"], len(order))
     for n, case_id in enumerate(order[:budget], start=1):
         value = ep.update(run.z(case_id))
-        if getattr(ep, "harm_value", 0.0) >= threshold:
+        if getattr(ep, "harm_value", 0.0) >= harm_threshold:
             return GatekeeperResult(REJECT_HARM,
-                                    f"harm e-value {ep.harm_value:.1f} >= {threshold:.0f} "
+                                    f"harm e-value {ep.harm_value:.1f} >= {harm_threshold:.0f} "
                                     f"(helped {ep.helped}, hurt {ep.hurt})",
                                     alpha, threshold, n, value, ep.history, epoch)
         if value >= threshold:
             return GatekeeperResult(ADMIT, f"E={value:.1f} >= 1/alpha={threshold:.0f}",
                                     alpha, threshold, n, value, ep.history, epoch)
+    if multi.get("method") == "e-BH":
+        return GatekeeperResult("PENDING_EBH", f"budget used: E={ep.value:.2f} (joint e-BH decides)",
+                                alpha, threshold, budget, ep.value, ep.history, epoch)
     return GatekeeperResult(QUARANTINE, f"budget exhausted: E={ep.value:.2f} < {threshold:.0f}",
                             alpha, threshold, budget, ep.value, ep.history, epoch)
 

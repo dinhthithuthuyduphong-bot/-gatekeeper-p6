@@ -17,6 +17,8 @@ Mỗi dòng là một lần chạy trên GitHub Actions. "Phạm vi" ghi rõ đi
 | real-click v4 | (bổ sung) | (bổ sung) | `GK_LITE_REAL_CLICK_OUTPUT` | Kiểm định dấu: Gatekeeper REJECT_HARM 4/4 cặp có hại sau 14–17 task; B6-R admit 4/4; B8 reject 4/4; cặp có lợi duy nhất QUARANTINE. Bỏ lớp lazy thì cả 4 thành có lợi |
 | real-click v5 | (bổ sung) | (bổ sung) | `GK_LITE_REAL_CLICK_OUTPUT` | Oracle metamorphic: B6-R admit 5/5 cặp có hại, B8 reject 5/5, Gatekeeper REJECT_HARM 4 + QUARANTINE 1; v3 trên 8.1.7 chuyển thành có hại (backport nhánh `""` làm help không nhất quán với chuỗi lazy rỗng) |
 | Study B candidate scan v2 (tag) | (bổ sung) | (bổ sung) | `STUDY_B_CANDIDATE_SCAN` | asyncclick 8.3.0.6+async `4e5fea9cc5a3` chưa sửa; asyncclick ≥ 8.3.3 đã sửa; rich-click v1.9.5–v1.9.9 đều chưa sửa |
+| real-click v5 lần chạy lại + demo | (bổ sung) | (bổ sung) | `GK_LITE_REAL_CLICK_OUTPUT_1`, `GK_LITE_DEMO_OUTPUT_1` | Hai lần chạy độc lập cho quyết định giống hệt nhau ở mọi cặp (tái lập) |
+| Study B freeze | — | (commit gắn tag `study-b-freeze`) | `study_b/FREEZE.json` (28 file) | D1 kiểm định dấu; D2 e-BH FDR 0,1, dừng sớm ở E ≥ 40, tác hại ở e ≥ 20; D3 lớp lazy khai báo trước; D4 rich-click v1.9.9 + asyncclick 8.3.0.6 |
 | Study B run (thử) | (bổ sung) | (bổ sung) | `STUDY_B_OUTPUT` (chỉ PIP_FREEZE) | Dừng có chủ đích: protocol còn DRAFT. Không có kết quả Study B nào được tạo ra |
 | Study B candidate scan v1 | (bổ sung) | (bổ sung) | `STUDY_B_CANDIDATE_SCAN` | rich-click `4ee6d4b27950` có site chưa guard trong `_get_parameter_default`; asyncclick HEAD đã sửa; typer, click-extra, cloup không có site |
 
