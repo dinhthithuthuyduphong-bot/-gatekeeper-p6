@@ -350,9 +350,15 @@ class DiscordantSignTests(unittest.TestCase):
 
 
 class FreezeLockTests(unittest.TestCase):
-    def test_draft_study_b_refuses_to_run(self):
-        with self.assertRaises(SystemExit):
-            run_experiment(ROOT / "study_b" / "config_study_b.json")
+    def test_draft_study_refuses_to_run(self):
+        import json, tempfile
+        cfg = json.loads((ROOT / "study_b" / "config_study_b.json").read_text())
+        cfg["status"] = "DRAFT"
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "config.json"
+            path.write_text(json.dumps(cfg))
+            with self.assertRaises(SystemExit):
+                run_experiment(path)
 
     def test_family_anchor_matches_help_default_functions_only(self):
         src = ("def _get_parameter_default(param, default_value):\n"
@@ -363,3 +369,13 @@ class FreezeLockTests(unittest.TestCase):
                                subjects=["default_value"])
         res = t.apply(src)
         self.assertEqual([s.function for s in res.sites], ["_get_parameter_default"])
+
+
+class EBHTests(unittest.TestCase):
+    def test_e_bh(self):
+        from gatekeeper_lite.eprocess import e_bh
+        # K=4, fdr=0.1: thresholds 40 (R=1), 20 (R=2), 13.3 (R=3), 10 (R=4)
+        self.assertEqual(e_bh({"a": 45, "b": 1, "c": 0, "d": 0}, 0.1), ["a"])
+        self.assertEqual(sorted(e_bh({"a": 25, "b": 21, "c": 0, "d": 0}, 0.1)), ["a", "b"])
+        self.assertEqual(e_bh({"a": 39, "b": 1, "c": 0, "d": 0}, 0.1), [])
+        self.assertEqual(sorted(e_bh({"a": 11, "b": 12, "c": 10.5, "d": 10}, 0.1)), ["a", "b", "c", "d"])
