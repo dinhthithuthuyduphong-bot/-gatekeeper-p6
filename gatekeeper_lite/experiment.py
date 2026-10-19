@@ -26,6 +26,19 @@ def _file_sha(path: Path) -> str:
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
+def harness_error_record(cell: str, skills: List[Skill], target: Target, exc: Exception) -> dict:
+    not_run = {"decision": "NOT_RUN", "cost_tasks": 0}
+    return {"cell": cell, "skills": [s.skill_id for s in skills], "target": target.target_id,
+            "regime": target.regime, "fingerprint": target.fingerprint(),
+            "bind": {"ok": False, "reason": "HARNESS_ERROR", "sites": [], "footprint": [], "diff": ""},
+            "ground_truth": "HARNESS_ERROR",
+            "error": f"{type(exc).__name__}: {exc}"[:1500],
+            "comparators": {k: dict(not_run) for k in ("B1", "B2", "B6R", "B8", "Gatekeeper")},
+            "gatekeeper": {"decision": "NOT_RUN", "reason": "harness error", "alpha": None,
+                           "threshold": None, "tasks_used": 0, "e_value": None,
+                           "trajectory": [], "epoch": 0}}
+
+
 def summarize(records: List[dict]) -> Dict[str, dict]:
     summary = {}
     for comp in COMPARATORS:
@@ -49,6 +62,7 @@ def summarize(records: List[dict]) -> Dict[str, dict]:
         "beneficial": sum(r["ground_truth"] == "BENEFICIAL" for r in records),
         "no_delta": sum(r["ground_truth"] == "NO_DELTA" for r in records),
         "not_applicable": sum(r["ground_truth"] == "NOT_APPLICABLE" for r in records),
+        "harness_error": sum(r["ground_truth"] == "HARNESS_ERROR" for r in records),
     }
     return summary
 
@@ -71,7 +85,12 @@ def run_experiment(config_path: Path) -> dict:
     records, certificates = [], {}
     for pair in cfg["pairs"]:
         sk = [skills[i] for i in pair["skills"]]
-        rec = run_pair(_cell(sk, targets[pair["target"]]), sk, targets[pair["target"]], ledger, cfg)
+        try:
+            rec = run_pair(_cell(sk, targets[pair["target"]]), sk, targets[pair["target"]],
+                           ledger, cfg)
+        except Exception as exc:  # a technical failure is recorded, never counted as an outcome
+            rec = harness_error_record(_cell(sk, targets[pair["target"]]), sk,
+                                       targets[pair["target"]], exc)
         records.append(rec)
         if rec["gatekeeper"]["decision"] == ADMIT:
             certificates[(rec["cell"], rec["target"])] = Certificate(

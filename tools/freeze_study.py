@@ -20,7 +20,7 @@ def tracked(study: Path) -> list:
     files = [study / "config_study_b.json", study / "STUDY_B_PROTOCOL.md", study / "AMENDMENTS.md"]
     files += sorted((study / "skills").glob("*.json"))
     files += sorted((study / "targets").glob("*/gk_target.json"))
-    files += sorted((study / "oracle_templates").glob("*.py"))
+    files += sorted((study / "oracle_templates").glob("*.py")) + sorted((study / "oracle_templates").glob("*.ini"))
     files += sorted((ROOT / "gatekeeper_lite").glob("*.py"))
     files += sorted((ROOT / "p7").rglob("*.py")) + sorted((ROOT / "p7").rglob("*.json"))
     files += [ROOT / "tools" / "fetch_real_targets.py", ROOT / "tools" / "install_requirements.py"]

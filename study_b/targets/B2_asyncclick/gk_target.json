@@ -17,7 +17,8 @@
     "ref": "4e5fea9cc5a31006944af8f30cab8aa1811784b5"
   },
   "inject_tests": [
-    "oracle_templates/test_gk_metamorphic.py"
+    "oracle_templates/test_gk_metamorphic.py",
+    "oracle_templates/pytest.ini"
   ],
   "requirements": [
     "anyio"
@@ -27,9 +28,25 @@
   },
   "oracle": {
     "kind": "pytest",
-    "tests": [
-      "tests/test_options.py",
-      "tests/test_gk_metamorphic.py"
+    "groups": [
+      {
+        "tests": [
+          "gk_oracle/test_gk_metamorphic.py"
+        ],
+        "args": [
+          "-c",
+          "gk_oracle/pytest.ini",
+          "--rootdir",
+          "gk_oracle"
+        ]
+      },
+      {
+        "tests": [
+          "tests/test_options.py"
+        ],
+        "args": []
+      }
     ]
-  }
+  },
+  "inject_dir": "gk_oracle"
 }

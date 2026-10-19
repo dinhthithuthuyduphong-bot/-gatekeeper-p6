@@ -27,6 +27,7 @@ class ArmResult:
     results: Dict[str, dict]
     seconds: float
     file_hashes: Dict[str, str]
+    harness_errors: List[str] = field(default_factory=list)
 
     def failed(self) -> set:
         return {c for c, r in self.results.items() if not r["passed"]}
@@ -89,16 +90,40 @@ def parse_junit(xml_text: str) -> Dict[str, dict]:
     return results
 
 
+def oracle_groups(oracle: dict) -> List[dict]:
+    """Oracle invocations.  Each group runs as its own pytest session, so a broken
+    upstream conftest/plugin setup cannot disable a separately injected frozen oracle."""
+    if oracle.get("groups"):
+        return oracle["groups"]
+    return [{"tests": oracle["tests"], "args": oracle.get("pytest_args") or []}]
+
+
+def run_oracle_groups(snapshot: Path, oracle: dict, env: dict, timeout: float,
+                      runner=None) -> tuple:
+    runner = runner or _run_pytest
+    results, errors = {}, []
+    for i, group in enumerate(oracle_groups(oracle)):
+        try:
+            results.update(runner(snapshot, group["tests"], env, timeout, group.get("args"),
+                                  junit_name=f"_gk_junit_{i}.xml"))
+        except Exception as exc:  # recorded per group, never silently dropped
+            errors.append(f"group {i} {group['tests']}: {exc}"[:800])
+    if not results:
+        raise RuntimeError("no oracle group produced results: " + " | ".join(errors))
+    return results, errors
+
+
 def _run_pytest(snapshot: Path, tests: List[str], env: dict, timeout: float,
-                extra_args: Optional[List[str]] = None) -> Dict[str, dict]:
-    junit = snapshot / "_gk_junit.xml"
+                extra_args: Optional[List[str]] = None, junit_name: str = "_gk_junit.xml"
+                ) -> Dict[str, dict]:
+    junit = snapshot / junit_name
     cmd = [sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider",
            f"--junitxml={junit}", *(extra_args or []), *tests]
     proc = subprocess.run(cmd, cwd=str(snapshot), env=env, capture_output=True,
                           text=True, timeout=timeout)
     if not junit.exists():
         raise RuntimeError(f"pytest produced no report (exit {proc.returncode}): "
-                           f"{(proc.stderr or proc.stdout)[-500:]}")
+                           f"{(proc.stdout + proc.stderr)[-600:]}")
     return parse_junit(junit.read_text(encoding="utf-8"))
 
 
@@ -118,11 +143,9 @@ def run_arm(arm: str, target_root: Path, module: str, treated_source: Optional[s
                    PYTHONPATH=os.pathsep.join(paths), **(extra_env or {}))
         oracle = oracle or {"kind": "cases"}
         start = time.perf_counter()
+        errors = []
         if oracle["kind"] == "pytest":
-            results = _run_pytest(snapshot, oracle["tests"], env, timeout,
-                                  oracle.get("pytest_args"))
-            if not results:
-                raise RuntimeError(f"pytest collected no usable tests in {arm}")
+            results, errors = run_oracle_groups(snapshot, oracle, env, timeout)
         else:
             proc = subprocess.run([sys.executable, "-m", "gatekeeper_lite.harness",
                                    str(snapshot), str(seed)],
@@ -132,7 +155,7 @@ def run_arm(arm: str, target_root: Path, module: str, treated_source: Optional[s
                 raise RuntimeError(f"harness failed in {arm}: {proc.stderr[-500:]}")
             results = json.loads(proc.stdout.strip().splitlines()[-1])["results"]
         seconds = time.perf_counter() - start
-        return ArmResult(arm, results, seconds, hashes)
+        return ArmResult(arm, results, seconds, hashes, errors)
     finally:
         shutil.rmtree(work, ignore_errors=True)       # cleanup is part of the protocol
 
@@ -157,12 +180,23 @@ def reach_pass(target, functions: List[str], seed: int, timeout: float = 600.0) 
                    PYTHONPATH=os.pathsep.join(paths + [str(PACKAGE_ROOT)]),
                    GK_REACH_FUNCS=",".join(functions), GK_REACH_FILE=target.module,
                    GK_REACH_OUT=str(out), **target.manifest.get("env", {}))
-        cmd = [sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider",
-               "-p", "gatekeeper_lite.pytest_reach", *(oracle.get("pytest_args") or []),
-               *oracle["tests"]]
-        subprocess.run(cmd, cwd=str(snapshot), env=env, capture_output=True, text=True,
-                       timeout=timeout)
-        return json.loads(out.read_text(encoding="utf-8")) if out.exists() else None
+        reached, seen = set(), 0
+        for i, group in enumerate(oracle_groups(oracle)):
+            part = work / f"reach_{i}.json"
+            env["GK_REACH_OUT"] = str(part)
+            cmd = [sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider",
+                   "-p", "gatekeeper_lite.pytest_reach", *(group.get("args") or []),
+                   *group["tests"]]
+            subprocess.run(cmd, cwd=str(snapshot), env=env, capture_output=True, text=True,
+                           timeout=timeout)
+            if part.exists():
+                data = json.loads(part.read_text(encoding="utf-8"))
+                reached.update(data["reached"])
+                seen += data["seen"]
+        if not seen:
+            return None
+        return {"functions": functions, "file": target.module, "seen": seen,
+                "reached": sorted(reached)}
     except Exception:
         return None
     finally:

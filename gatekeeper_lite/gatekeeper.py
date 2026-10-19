@@ -261,6 +261,8 @@ def run_pair(cell: str, skills: Sequence[Skill], target: Target, ledger: AlphaLe
             "loss_without": round(run.suite_loss("baseline"), 4),
             "loss_with": round(run.suite_loss("treatment"), 4),
             "seconds": round(run.baseline.seconds + run.treatment.seconds, 3),
+            "harness_errors": {"baseline": run.baseline.harness_errors,
+                               "treatment": run.treatment.harness_errors},
             "per_task": {c: {"without": run.baseline.results[c]["passed"],
                              "with": run.treatment.results[c]["passed"], "Z": run.z(c)}
                          for c in run.case_ids},

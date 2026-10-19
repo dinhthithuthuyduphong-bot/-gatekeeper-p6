@@ -379,3 +379,25 @@ class EBHTests(unittest.TestCase):
         self.assertEqual(sorted(e_bh({"a": 25, "b": 21, "c": 0, "d": 0}, 0.1)), ["a", "b"])
         self.assertEqual(e_bh({"a": 39, "b": 1, "c": 0, "d": 0}, 0.1), [])
         self.assertEqual(sorted(e_bh({"a": 11, "b": 12, "c": 10.5, "d": 10}, 0.1)), ["a", "b", "c", "d"])
+
+
+class OracleGroupTests(unittest.TestCase):
+    def test_broken_group_is_recorded_not_fatal(self):
+        from gatekeeper_lite.runner import run_oracle_groups
+
+        def fake(snapshot, tests, env, timeout, args=None, junit_name=""):
+            if tests == ["tests"]:
+                raise RuntimeError("ImportError while loading conftest")
+            return {"gk_oracle::t[a]": {"passed": True}}
+        oracle = {"kind": "pytest", "groups": [{"tests": ["gk_oracle/x.py"]}, {"tests": ["tests"]}]}
+        res, errors = run_oracle_groups(Path("."), oracle, {}, 5, runner=fake)
+        self.assertEqual(list(res), ["gk_oracle::t[a]"])
+        self.assertIn("conftest", errors[0])
+
+    def test_all_groups_broken_raises(self):
+        from gatekeeper_lite.runner import run_oracle_groups
+
+        def fake(*a, **k):
+            raise RuntimeError("boom")
+        with self.assertRaises(RuntimeError):
+            run_oracle_groups(Path("."), {"kind": "pytest", "tests": ["t"]}, {}, 5, runner=fake)

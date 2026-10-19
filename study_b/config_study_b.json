@@ -72,6 +72,7 @@
     "D4": "targets B1 rich-click v1.9.9 (30ac1778e609) and B2 asyncclick 8.3.0.6+async (4e5fea9cc5a3); one release per repository"
   },
   "amendments": [
-    "A1 (19/10/2026): symlink-safe fetch/snapshot copy; no rule change; no outcomes observed before"
+    "A1 (19/10/2026): symlink-safe fetch/snapshot copy; no rule change; no outcomes observed before",
+    "A2 (19/10/2026): isolated oracle pytest session + per-group/per-pair harness-error recording + logs; no rule change; no outcomes observed before"
   ]
 }
