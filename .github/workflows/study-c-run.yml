@@ -1,0 +1,65 @@
+# Study C run (regime A, scope-conditional admission). Refuses unless study_c is FROZEN and hashes match.
+# status FROZEN (set only after the protocol is frozen, committed and tagged).
+name: Gatekeeper Study C run
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  study-b:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Show which commit and config this run uses
+        run: |
+          echo "ref: $GITHUB_REF  commit: $GITHUB_SHA"
+          git log -1 --format='%H %s (%ci)'
+          git tag --points-at HEAD || true
+          ls -la study_c/ || echo "::error::study_c/ folder missing in this commit"
+          python -c "import json;c=json.load(open('study_c/config_study_c.json'));print('status:',c.get('status'),'frozen_on:',c.get('frozen_on'),'experiment:',c.get('experiment_id'))"
+          test -f study_c/FREEZE.json && echo "FREEZE.json present" || echo "::error::study_c/FREEZE.json missing: the frozen package was not pushed to this commit"
+      - name: Check protocol freeze (fails closed while DRAFT)
+        run: |
+          python - <<'PY'
+          import json, sys
+          cfg = json.load(open("study_c/config_study_c.json"))
+          if cfg.get("status") != "FROZEN":
+              print(f"::error::Study B protocol status is {cfg.get('status')!r}; freeze it before running.")
+              sys.exit(1)
+          print("protocol frozen:", cfg.get("experiment_id"))
+          PY
+      - name: Verify freeze hashes
+        run: python tools/freeze_study.py verify study_c
+      - name: Install pytest and declared target requirements
+        run: |
+          python -m pip install --quiet "pytest==8.3.5"
+          mkdir -p out_study_c
+          python tools/install_requirements.py study_c/config_study_c.json out_study_c/PIP_FREEZE.txt
+      - name: Fetch source files and frozen Study B targets
+        run: |
+          set -o pipefail
+          mkdir -p out_study_c/logs
+          python tools/fetch_real_targets.py real 2>&1 | tee out_study_c/logs/fetch_real.log
+          GK_FETCH_TOLERANT=1 python tools/fetch_real_targets.py study_c 2>&1 | tee out_study_c/logs/fetch_study_c.log
+      - name: Run (refuses while DRAFT)
+        run: |
+          set -o pipefail
+          python -m gatekeeper_lite run --config study_c/config_study_c.json --out out_study_c 2>&1 | tee out_study_c/logs/run.log
+          python tools/render_report.py out_study_c/RESULT.json out_study_c/REPORT.md --evidence-class PROSPECTIVE_REGIME_A_UNSEEN_REVISIONS
+          cat out_study_c/REPORT.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Keep receipts even when a step failed
+        if: always()
+        run: |
+          cp study_c/FETCH_RECEIPT.json out_study_c/STUDY_C_FETCH_RECEIPT.json 2>/dev/null || true
+          cp real/FETCH_RECEIPT.json out_study_c/REAL_SOURCES_FETCH_RECEIPT.json 2>/dev/null || true
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: STUDY_C_OUTPUT
+          path: out_study_c
+          if-no-files-found: warn
