@@ -27,6 +27,7 @@ from fetch_real_targets import _clone_ref  # noqa: E402
 from gatekeeper_lite.drawharness import run_draw_study  # noqa: E402
 from gatekeeper_lite.gatekeeper import bind_modules, replay  # noqa: E402
 from gatekeeper_lite.runner import parse_junit  # noqa: E402
+from gatekeeper_lite.screen import environment_relation  # noqa: E402
 from gatekeeper_lite.skill import Skill, Target  # noqa: E402
 
 DRAND_QUICKNET = "52db9ba70e0cc0f6eaf7803dd07447a1f5477735fd3f661792ba94600c84e971"
@@ -44,35 +45,62 @@ def drand_seed(freeze_sha: str, when_utc: str) -> dict:
     return {"round": rnd, "randomness": beacon["randomness"], "seed": int(seed[:15], 16), "url": url}
 
 
+def _pytest_once(target, treated, tests, tag):
+    work = Path(tempfile.mkdtemp(prefix=f"census_{tag}_"))
+    try:
+        snap = work / "s"
+        shutil.copytree(target.root, snap, symlinks=True, ignore=shutil.ignore_patterns(".git"))
+        for rel, src in (treated or {}).items():
+            (snap / rel).write_text(src, encoding="utf-8")
+        junit = work / "j.xml"
+        paths = [str(snap / p) for p in target.manifest.get("pythonpath", [])] + [str(snap)]
+        env = dict(os.environ, PYTHONPATH=os.pathsep.join(paths), PYTHONDONTWRITEBYTECODE="1")
+        t0 = time.perf_counter()
+        proc = subprocess.run([sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider",
+                               "-o", "addopts=", "--continue-on-collection-errors",
+                               f"--junitxml={junit}", *tests], cwd=snap, env=env,
+                              capture_output=True, text=True, timeout=3600)
+        res = parse_junit(junit.read_text()) if junit.exists() else {}
+        return {"results": res, "seconds": round(time.perf_counter() - t0, 2), "exit": proc.returncode,
+                "tail": (proc.stdout + proc.stderr)[-600:]}
+    finally:
+        shutil.rmtree(work, ignore_errors=True)
+
+
+BASELINE_RUNS = 3          # protocol section 5
+MIN_STABLE_TESTS = 5       # census is INVALID (target not counted) below this
+
+
 def census(target: Target, treated: dict, tests: list) -> dict:
-    out = {}
-    for arm in ("baseline", "treatment"):
-        work = Path(tempfile.mkdtemp(prefix=f"census_{arm}_"))
-        try:
-            snap = work / "s"
-            shutil.copytree(target.root, snap, symlinks=True, ignore=shutil.ignore_patterns(".git"))
-            if arm == "treatment":
-                for rel, src in treated.items():
-                    (snap / rel).write_text(src, encoding="utf-8")
-            junit = work / "j.xml"
-            paths = [str(snap / p) for p in target.manifest.get("pythonpath", [])] + [str(snap)]
-            env = dict(os.environ, PYTHONPATH=os.pathsep.join(paths), PYTHONDONTWRITEBYTECODE="1")
-            t0 = time.perf_counter()
-            proc = subprocess.run([sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider",
-                                   "-o", "addopts=", "--continue-on-collection-errors",
-                                   f"--junitxml={junit}", *tests], cwd=snap, env=env,
-                                  capture_output=True, text=True, timeout=3600)
-            res = parse_junit(junit.read_text()) if junit.exists() else {}
-            out[arm] = {"results": res, "seconds": round(time.perf_counter() - t0, 2),
-                        "exit": proc.returncode, "tail": (proc.stdout + proc.stderr)[-600:]}
-        finally:
-            shutil.rmtree(work, ignore_errors=True)
-    base, treat = out["baseline"]["results"], out["treatment"]["results"]
-    excluded = sorted(t for t, r in base.items() if not r["passed"])
-    new_fail = sorted(t for t, r in base.items() if r["passed"] and not treat.get(t, {"passed": False})["passed"])
-    return {"tests": len(base), "excluded_baseline_failures": excluded, "new_failures": new_fail,
-            "seconds": {a: out[a]["seconds"] for a in out}, "exit": {a: out[a]["exit"] for a in out},
-            "tail": {a: out[a]["tail"] for a in out}}
+    """Protocol section 5: baseline x3 before treatment; tests that error, fail or flip in
+    any baseline run are excluded; fewer than MIN_STABLE_TESTS stable passes -> INVALID
+    (technical, never an outcome).  Treatment once; failures that appear only with the
+    skill are re-run once and count as regressions only if they persist."""
+    runs = [_pytest_once(target, None, tests, f"base{i}") for i in range(BASELINE_RUNS)]
+    ids = set().union(*(r["results"] for r in runs))
+    stable = sorted(t for t in ids if not t.startswith("::")
+                    and all(t in r["results"] and r["results"][t]["passed"] for r in runs))
+    unstable = sorted(t for t in ids if t not in stable and not t.startswith("::")
+                      and any(t in r["results"] and r["results"][t]["passed"] for r in runs))
+    out = {"baseline_runs": BASELINE_RUNS, "collected": len(ids), "stable_pass": len(stable),
+           "excluded_baseline_failures": sorted(set(ids) - set(stable) - set(unstable)),
+           "excluded_flaky": unstable,
+           "seconds": {"baseline_total": round(sum(r["seconds"] for r in runs), 2)},
+           "exit": {"baseline": [r["exit"] for r in runs]}, "tail": {"baseline": runs[0]["tail"]}}
+    if len(stable) < MIN_STABLE_TESTS:
+        out.update(status="INVALID", new_failures=[],
+                   reason=f"only {len(stable)} stable passing tests (< {MIN_STABLE_TESTS})")
+        return out
+    treat = _pytest_once(target, treated, tests, "treat")
+    first = [t for t in stable if not treat["results"].get(t, {"passed": False})["passed"]]
+    retest = _pytest_once(target, treated, tests, "retest") if first else None
+    persistent = [t for t in first if not retest["results"].get(t, {"passed": False})["passed"]] if retest else []
+    out.update(status="VALID", tests=len(stable), new_failures=persistent,
+               transient_treatment_failures=sorted(set(first) - set(persistent)))
+    out["seconds"].update(treatment=treat["seconds"], retest=retest["seconds"] if retest else 0.0)
+    out["exit"].update(treatment=treat["exit"])
+    out["tail"].update(treatment=treat["tail"])
+    return out
 
 
 def main(config: str, target_id: str, out_dir: str) -> int:
@@ -112,6 +140,9 @@ def main(config: str, target_id: str, out_dir: str) -> int:
         record["bind"] = {"sites": bound["sites"], "abstained": bound["abstained"],
                           "treated_modules": sorted(bound["treated"])}
         record["B6R_replay"] = replay(skill)
+        relation, why = environment_relation(skill.D, target.environment())
+        record["B6R_fingerprint"] = {"relation": relation, "reasons": why,
+                                     "contract": skill.D, "environment": target.environment()}
         if not bound["treated"]:
             record["decision_basis"] = "OUT_OF_SCOPE (skill abstained on every module)"
             record["scopes"] = {}
@@ -125,7 +156,11 @@ def main(config: str, target_id: str, out_dir: str) -> int:
                         "b8_full": True}
             res = run_draw_study(target, bound["treated"], base / manifest["draw_oracle"], draw_cfg,
                                  k_cells=len(cfg["cells"]))
-            if record["census"]["new_failures"]:
+            if record["census"].get("status") == "INVALID":
+                for sc in res["scopes"].values():
+                    sc["decision"] = "CENSUS_INVALID"
+                    sc["decision_basis"] = "census baseline unusable: " + record["census"]["reason"]
+            elif record["census"]["new_failures"]:
                 for sc in res["scopes"].values():
                     sc["decision"] = "REJECT_HARM"
                     sc["decision_basis"] = "census gate: new failure in the target's own tests"

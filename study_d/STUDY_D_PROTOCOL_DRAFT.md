@@ -27,7 +27,7 @@ Study B/C đếm các ca gần như trùng lặp thành bằng chứng độc l�
 - **Đa ô:** **e-Holm, FWER α = 0,1** trên min(e_lợi ích, e_chứng nhận) tại điểm dừng. Phân tích phụ: e-BH q = 0,1 và kiểm định dấu, đều gắn nhãn thăm dò.
 - **Không có nhánh "dưới 7 lớp thì không thể admit".** Nếu scope là quần thể hữu hạn được chạy hết (census), kết luận là chính xác trên quần thể đó.
 
-**Mô phỏng toàn bộ quy tắc** (`tools/decision_sim.py`; K = 8, α = 0,1):
+**Mô phỏng theo từng ô** (`tools/decision_sim.py`; bảng dưới tính với K = 8 ở giai đoạn thiết kế; cấu hình chính thức K = 16 nằm trong `DECISION_SIM_K16.md`, α = 0,1):
 
 | Kịch bản | Nên admit? | P(ADMIT) | P(REJECT_HARM) | Số lần rút (trung vị) |
 |---|---|---|---|---|
@@ -39,7 +39,9 @@ Study B/C đếm các ca gần như trùng lặp thành bằng chứng độc l�
 | Hỗn hợp 30% hại | không | 0 | 1,000 | 8 |
 | Toàn hại | không | 0 | 1,000 | 2 |
 
-Chứng nhận ít tác hại chiếm phần lớn chi phí của một lần admit (khoảng 95 lần rút sạch). Đây là cái giá thật của yêu cầu an toàn, và được báo cáo như vậy. Độ nhạy với η = 0,10 và n_max = 600: `DECISION_SIM_eta010_n600.md`.
+**Mô phỏng cả họ 16 ô dưới e-Holm** (`tools/decision_sim.py --family`, `DECISION_SIM_FAMILY_K16.md`, 400 lần): khi cả 16 ô đều null ở đúng biên (8 biên lợi ích, 8 biên tác hại), **FWER quan sát 0,040** (khoảng tin cậy 95%: 0,021–0,059) ≤ α = 0,1; với họ ô giống Study D (4 tốt, 2 có hại, 4 biên lợi ích, 4 không đổi, 2 biên tác hại), FWER 0,003 và power trên ô tốt 1,000. Đây là kiểm tra mô phỏng, không thay cho lập luận tính hợp lệ (Ville + e-Holm).
+
+Chứng nhận ít tác hại chiếm phần lớn chi phí của một lần admit (khoảng 95–110 lần rút sạch). Đây là cái giá thật của yêu cầu an toàn, và được báo cáo như vậy. Độ nhạy với η = 0,10 và n_max = 600: `DECISION_SIM_eta010_n600.md`.
 
 ## 4. Ngẫu nhiên hoá
 
@@ -47,7 +49,7 @@ Chứng nhận ít tác hại chiếm phần lớn chi phí của một lần ad
 
 ## 5. Lỗi và dừng
 
-- **Trước treatment:** chạy bộ test gốc ở nhánh không skill 3 lần. Test nào lỗi collection, fail hoặc không ổn định thì bị loại khỏi cổng census, theo quy tắc ghi sẵn.
+- **Trước treatment:** chạy bộ test gốc ở nhánh không skill 3 lần. Test nào lỗi collection, fail hoặc không ổn định thì bị loại khỏi cổng census, theo quy tắc ghi sẵn. **Nếu còn ít hơn 5 test ổn định thì census là INVALID**: target được ghi là lỗi kỹ thuật (`CENSUS_INVALID`), không tính vào kết quả và không được thay bằng target khác. (Cài đặt: `tools/run_study_d.py::census`, có test `CensusProtocolTests`.)
 - **Sau treatment:** lỗi theo giai đoạn (collection, setup, call). Lỗi chỉ ở nhánh có skill được kiểm lại một lần; nếu vẫn còn thì tính là tác hại. Lỗi ở cả hai nhánh là lỗi có sẵn và được báo cáo riêng.
 - **Dừng chủ động vì đã quyết định** được ghi là `STOPPED_DECIDED`, không bị phân loại thành lỗi môi trường (exit code 2 của pytest).
 - Không loại task hay scope sau khi đã thấy kết quả.
@@ -112,11 +114,15 @@ Oracle của D3–D5 được viết **sau** kiểm định, chỉ từ mã ngu�
 5. **Chỉ số chính:** tỉ lệ thành công của **patch thực sự được nộp** trong ngân sách. pass@k chỉ là chỉ số phụ.
 6. Trước 30/10 chỉ kiểm tra đường đi bằng phản hồi ghi sẵn và model giả; kết quả này **không** tính là bằng chứng B9.
 
-**Cài đặt (đã nghiệm thu bằng model giả, `B9AcceptanceTests`):** `gatekeeper_lite/b9.py`, `tools/run_b9.py`, `study_d/b9_config.json`, `study_d/b9_instances/`.
+**Cài đặt (đã nghiệm thu bằng model giả, `B9AcceptanceTests`, `B9GuardAndVisibleTests`):** `gatekeeper_lite/b9.py`, `tools/run_b9.py`, `study_d/b9_config.json`, `study_d/b9_instances/`.
+- **Phạm vi B9:** 6 target có lỗi (D1–D5, A1). C1 và C2 được khai báo trước là không áp dụng (không có lỗi để sửa theo hợp đồng của target).
+- **Kiểm tra công khai:** đúng ca hồi quy của upstream, chạy như **một lần rút cố định** qua chính oracle đã đóng băng (`oracle_draw`).
+- **Chặn chi tiêu:** trần 400.000 đồng được chia trước thành hạn mức theo target (tổng 400.000 đồng, tỉ giá cố định 27.000 đồng/USD). Trước mỗi lần gọi, chi phí **xấu nhất** của lần gọi đó (ước lượng token vào + toàn bộ token ra cho phép) phải nằm trong phần hạn mức còn lại; nếu không thì dừng với `BUDGET_CAP`. Vì mỗi job chỉ dùng hạn mức của target mình, tổng chi không thể vượt trần dù các job chạy riêng.
 - **Đầu vào cho model:** mô tả lỗi (diễn đạt lại từ issue/PR upstream, không chứa mã của bản fix), toàn bộ các module được phép sửa, và một kiểm tra công khai (một ca của test hồi quy upstream, viết qua API công khai).
 - **Ngân sách:** tối đa 5 lần gọi, 4.000 token đầu ra mỗi lần, 5 lần chạy kiểm tra công khai. Lần gọi đầu temperature 0, các lần sau 0,8. Mỗi cặp (target, model) lặp lại 3 lần.
 - **Chấm điểm:** patch được nộp được chấm bằng **đúng** oracle rút mẫu đã đóng băng (đủ n_max lần rút) và cổng census.
 - **Model:** DeepSeek `deepseek-flash` và Gemini 3.1 Flash-Lite qua endpoint tương thích OpenAI; khoá API lấy từ secret của repo. Giá ghi theo tháng 10/2026 và được ghi lại vào ngày chạy.
+- **B6-R trong Study D:** ADMIT khi skill bind được, replay trên ví dụ nguồn pass, **và** quan hệ fingerprint giữa hợp đồng D của skill và môi trường target là MATCH.
 - **Chặn chi tiền sớm:** chế độ `record` (gọi trả phí) chỉ chạy khi config là FROZEN và sau 31/10/2026. Cassette lưu mọi phản hồi, nên chạy lại ở chế độ `replay` không tốn thêm tiền.
 - **Trần đợt pilot trả phí:** 400.000 đồng.
 - **Khớp ngân sách:** báo cáo theo hai đơn vị (lần gọi/token/USD và lần chạy test); không tuyên bố một tỉ giá quy đổi duy nhất giữa chi phí Gatekeeper và B9.
@@ -140,8 +146,9 @@ Oracle của D3–D5 được viết **sau** kiểm định, chỉ từ mã ngu�
 - **Chạy khói (smoke)** trước khi đóng băng (workflow `study-d-smoke.yml`): toàn bộ bộ chạy (seed drand, hash, áp skill nhiều module, census, rút mẫu, tổng hợp, ablation, báo cáo) trên target phát triển `demo/targets/T5_port_bool`, không đụng dữ liệu đánh giá.
 
 - **Kiểm tra tái lập từ môi trường sạch** (workflow `clean-room.yml`, `tools/clean_room_check.py`): unit test, quyết định demo khớp `demo/EXPECTED_DECISIONS.json`, mô phỏng tái tạo đúng `DECISION_SIM_default.md`, hash đóng băng.
-- **Đóng băng một lần bấm** (workflow `study-d-freeze.yml`): chạy unit test; đặt `FROZEN`, `frozen_on` và `seed_time_utc` = thời điểm đóng băng + 60 phút; tính lại `FREEZE.json` (41 file); commit và gắn tag `study-d-freeze`. Từ chối đóng băng lần hai.
-- **Chạy Study D** (workflow `study-d-run.yml`) sau `seed_time_utc`: kiểm tra trạng thái và hash, rồi chạy hai target; `tools/aggregate_study_d.py` tổng hợp e-Holm và e-BH.
+- **Đóng băng một lần bấm** (workflow `study-d-freeze.yml`): chạy unit test; đặt `FROZEN`, `frozen_on` và `seed_time_utc` = thời điểm đóng băng + 60 phút; tính lại `FREEZE.json`; commit và gắn tag `study-d-freeze`. Từ chối đóng băng lần hai.
+- **Chạy Study D** (workflow `study-d-run.yml`) sau `seed_time_utc`: kiểm tra trạng thái và hash, rồi chạy **8 target** (16 ô); `tools/aggregate_study_d.py` tổng hợp e-Holm và e-BH; `tools/report_study_d.py` sinh báo cáo, gồm **tổng wall-clock** Gatekeeper so với B8.
+- **Khoá tái lập:** `FREEZE.json` băm cả mã phân tích (`ablation_study_d.py`, `report_study_d.py`, `decision_sim.py`, `aggregate_study_d.py`), bộ chạy, oracle, target, skill, cấu hình B9 và các file mô phỏng.
 
 ## 10. Không được claim
 

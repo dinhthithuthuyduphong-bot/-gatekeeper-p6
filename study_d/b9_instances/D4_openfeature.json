@@ -1,0 +1,15 @@
+{
+  "target": "D4_openfeature",
+  "issue": "For an INTEGER flag whose resolved value is a boolean, the client's type check passes because bool is a subclass of int, so True/False is returned as an integer flag value. Booleans must be treated as a type mismatch for integer flags: the caller's default value is returned with error code TYPE_MISMATCH.",
+  "issue_provenance": "paraphrase of open-feature python-sdk PR #621 description",
+  "visible": {
+    "kind": "oracle_draw",
+    "oracle": "oracles/openfeature_bool.py",
+    "scope": "bool",
+    "draw": {
+      "stored": true,
+      "default": 1
+    }
+  },
+  "visible_desc": "the upstream regression case, checked through the frozen oracle (bool scope, draw {\"stored\": true, \"default\": 1})"
+}

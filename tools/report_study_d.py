@@ -50,30 +50,46 @@ def main(argv=None) -> int:
         census_bad = bool(r.get("census", {}).get("new_failures"))
         stop = sc["decision"] if sc else "OUT_OF_SCOPE"
         evals[cell] = sc["e_min"] if sc and stop in ("ADMIT", "UNDECIDED") and not census_bad else 0.0
+        if r.get("census", {}).get("status") == "INVALID":
+            evals[cell] = 0.0
         cellrows.append((cell, r, sc, binds, census_bad, stop))
     holm, bh = set(e_holm(evals, alpha)), set(e_bh(evals, alpha))
     L += ["", "## 2. Quyết định theo ô", "",
           row(["Ô", "Giúp/hòa/hại (đến lúc dừng)", "Census: regression mới", "B2", "B6-R", "B8 (đủ ngân sách)",
                "Gatekeeper (e-Holm)", "e-BH (phụ)", "Số lần rút GK"]), row(["---"] * 9)]
     for cell, r, sc, binds, census_bad, stop in cellrows:
-        gk = "OUT_OF_SCOPE" if not sc else "REJECT_HARM" if (stop == "REJECT_HARM" or census_bad) else (
-            "ADMIT" if cell in holm else "QUARANTINE")
-        b6 = "ADMIT" if binds and r.get("B6R_replay", {}).get("passed") else ("REJECT" if binds else "OUT_OF_SCOPE")
+        census_invalid = r.get("census", {}).get("status") == "INVALID"
+        gk = ("OUT_OF_SCOPE" if not sc else "CENSUS_INVALID (không tính)" if census_invalid
+              else "REJECT_HARM" if (stop == "REJECT_HARM" or census_bad)
+              else ("ADMIT" if cell in holm else "QUARANTINE"))
+        b6_ok = (binds and r.get("B6R_replay", {}).get("passed")
+                 and r.get("B6R_fingerprint", {}).get("relation") == "MATCH")
+        b6 = "ADMIT" if b6_ok else ("REJECT" if binds else "OUT_OF_SCOPE")
         b8 = "—" if not sc else ("REJECT" if (sc["b8"]["counts"]["hurt"] or census_bad) else "ADMIT")
         c = sc["counts"] if sc else {}
         L.append(row([cell, f"{c.get('help', 0)}/{c.get('tie', 0)}/{c.get('hurt', 0)}" if sc else "—",
                       len(r.get("census", {}).get("new_failures", [])) if binds else "—",
                       "ADMIT" if binds else "OUT_OF_SCOPE", b6, b8, gk,
                       "ADMIT" if cell in bh else "—", sc["draws"] if sc else 0]))
-    L += ["", "## 3. Chi phí đo được", "", row(["Target", "Gatekeeper: lần rút", "B8: lần rút", "Census (giây, 2 nhánh)",
-                                                  "Khởi động worker (giây)"]), row(["---"] * 5)]
+    L += ["", "## 3. Chi phí đo được (wall-clock thật trên runner)", "",
+          row(["Target", "GK: lần rút", "B8: lần rút", "Census (giây)", "Khởi động worker (giây)",
+               "GK tổng (giây)", "B8 tổng (giây)"]), row(["---"] * 7)]
+    tot_gk = tot_b8 = 0.0
     for tid, r in sorted(results.items()):
         scs = r.get("scopes", {})
         if not scs:
             continue
+        fixed = sum(r.get("census", {}).get("seconds", {}).values()) + sum(r.get("startup_seconds", {}).values())
+        gk_s = fixed + sum(s.get("gatekeeper_seconds", 0.0) for s in scs.values())
+        b8_s = fixed + sum(s.get("seconds", 0.0) for s in scs.values())
+        tot_gk, tot_b8 = tot_gk + gk_s, tot_b8 + b8_s
         L.append(row([tid, sum(s["draws"] for s in scs.values()), sum(s["b8"]["draws"] for s in scs.values()),
                       round(sum(r.get("census", {}).get("seconds", {}).values()), 2),
-                      round(sum(r.get("startup_seconds", {}).values()), 3)]))
+                      round(sum(r.get("startup_seconds", {}).values()), 3), round(gk_s, 2), round(b8_s, 2)]))
+    if tot_b8:
+        L += ["", f"Tổng wall-clock: Gatekeeper {tot_gk:.2f} s, B8 {tot_b8:.2f} s "
+                  f"(Gatekeeper / B8 = {tot_gk / tot_b8:.2f}). Chi phí cố định (census, khởi động) tính cho cả hai; "
+                  "chỉ phần rút mẫu khác nhau."]
     if a.b9:
         L += ["", "## 4. B9 (sửa lỗi bằng LLM, khớp ngân sách)", "",
               row(["Target", "Model", "Lần lặp", "Trạng thái", "Hại ở oracle kín", "Lợi ở oracle kín", "Lần gọi", "USD"]),

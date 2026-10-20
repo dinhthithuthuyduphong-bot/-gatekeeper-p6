@@ -1,0 +1,15 @@
+{
+  "target": "D5_pycubrid",
+  "issue": "DBAPIType.__eq__ and __ne__ treat booleans as integer type codes because bool is a subclass of int, so STRING == True can be True. Booleans must never compare equal to a DB-API type object, while integer (and IntEnum) type codes keep working.",
+  "issue_provenance": "paraphrase of pycubrid PR #479 description (issue #369)",
+  "visible": {
+    "kind": "oracle_draw",
+    "oracle": "oracles/pycubrid_bool.py",
+    "scope": "bool",
+    "draw": {
+      "t": 0,
+      "v": true
+    }
+  },
+  "visible_desc": "the upstream regression case, checked through the frozen oracle (bool scope, draw {\"t\": 0, \"v\": true})"
+}

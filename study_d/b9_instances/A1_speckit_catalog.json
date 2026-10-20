@@ -1,0 +1,14 @@
+{
+  "target": "A1_speckit_catalog",
+  "issue": "A preset catalog config with `priority: true` is accepted as priority 1 because int(True) == 1. A boolean priority is a configuration error and must be rejected with PresetValidationError ('Invalid priority ... expected integer').",
+  "issue_provenance": "paraphrase of spec-kit PR #2589 description",
+  "visible": {
+    "kind": "oracle_draw",
+    "oracle": "oracles/speckit_catalog_bool.py",
+    "scope": "bool",
+    "draw": {
+      "priority": true
+    }
+  },
+  "visible_desc": "the upstream regression case, checked through the frozen oracle (bool scope, draw {\"priority\": true})"
+}

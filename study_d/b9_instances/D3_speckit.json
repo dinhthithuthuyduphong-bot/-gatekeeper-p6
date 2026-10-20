@@ -1,0 +1,15 @@
+{
+  "target": "D3_speckit",
+  "issue": "`specify extension set-priority` skips the update when the stored priority equals the requested one. A corrupted stored priority of True compares equal to 1 (bool is an int in Python), so it is reported as already set and never repaired. A boolean stored priority must be treated as corrupted and rewritten as a real integer.",
+  "issue_provenance": "paraphrase of spec-kit PR #3268 description",
+  "visible": {
+    "kind": "oracle_draw",
+    "oracle": "oracles/speckit_priority_bool.py",
+    "scope": "bool",
+    "draw": {
+      "stored": true,
+      "requested": 1
+    }
+  },
+  "visible_desc": "the upstream regression case, checked through the frozen oracle (bool scope, draw {\"stored\": true, \"requested\": 1})"
+}

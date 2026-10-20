@@ -19,7 +19,7 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "tools"))
 from fetch_real_targets import _clone_ref  # noqa: E402
 from run_study_d import census, drand_seed  # noqa: E402
-from gatekeeper_lite.b9 import Budget, CassetteClient, OpenAICompatibleClient, repair  # noqa: E402
+from gatekeeper_lite.b9 import Budget, CassetteClient, OpenAICompatibleClient, SpendGuard, repair  # noqa: E402
 from gatekeeper_lite.drawharness import run_draw_study  # noqa: E402
 from gatekeeper_lite.skill import Target  # noqa: E402
 
@@ -35,7 +35,14 @@ def main(b9_cfg, d_cfg, target_id, model_name, out_dir, mode="replay") -> int:
             raise SystemExit("paid B9 runs are not allowed before " + b9["not_before_utc"])
     base = dcfg_path.parent
     model = next(m for m in b9["models"] if m["name"] == model_name)
+    if target_id not in b9["instances"]:
+        raise SystemExit(f"{target_id}: B9 not applicable ({b9.get('not_applicable', {}).get(target_id, 'not declared')})")
     inst = json.loads((base / "b9_instances" / f"{target_id}.json").read_text())
+    if inst["visible"].get("kind") == "oracle_draw":
+        inst["visible"]["oracle"] = str((base / inst["visible"]["oracle"]).resolve())
+    # hard cap for this job: the target's pre-declared allocation, split evenly across models
+    cap_usd = b9["allocation_vnd"][target_id] / b9["vnd_per_usd"] / len(b9["models"])
+    guard = SpendGuard(cap_usd)
     manifest = json.loads((base / "eval_targets" / target_id / "gk_target.json").read_text())
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
@@ -57,7 +64,8 @@ def main(b9_cfg, d_cfg, target_id, model_name, out_dir, mode="replay") -> int:
                           dcfg["seed_time_utc"])
         for rep in range(b9["repetitions"]):
             r = repair(target, inst, cassette, model_name, Budget(**b9["budget"]),
-                       model["prices_usd_per_mtok"], seed=b9["seed"] + 100 * rep)
+                       model["prices_usd_per_mtok"], seed=b9["seed"] + 100 * rep,
+                       guard=guard if mode == "record" else None)
             entry = {"repetition": rep, "status": r.status, "attempts": r.attempts, "calls": r.calls,
                      "visible_runs": r.visible_runs, "tokens": r.tokens, "cost_usd": r.cost_usd,
                      "seconds": r.seconds, "patched_modules": sorted(r.treated)}
@@ -74,7 +82,8 @@ def main(b9_cfg, d_cfg, target_id, model_name, out_dir, mode="replay") -> int:
     total = sum(r["cost_usd"] for r in runs)
     (out / f"RESULT_B9_{target_id}_{model_name}.json").write_text(json.dumps(
         {"target": target_id, "commit": commit, "model": model_name, "mode": mode,
-         "runs": runs, "total_cost_usd": round(total, 4)}, indent=2))
+         "runs": runs, "total_cost_usd": round(total, 4),
+         "cap_usd": round(cap_usd, 4), "guard_spent_usd": round(guard.spent_usd, 4)}, indent=2))
     print(json.dumps({"target": target_id, "model": model_name, "statuses": [r["status"] for r in runs],
                       "total_cost_usd": round(total, 4)}))
     return 0

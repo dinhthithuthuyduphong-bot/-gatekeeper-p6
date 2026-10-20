@@ -594,3 +594,62 @@ class LargeSeedTests(unittest.TestCase):
         cfg = {"seed": int("f" * 15, 16), "alpha": 0.1, "n_max": 5, "theta": 0.2, "eta": 0.05}
         res = run_draw_study(target, bound["treated"], ROOT / "demo" / "draw_oracles" / "port_bool.py", cfg, 4)
         self.assertEqual(res["scopes"]["bool"]["counts"]["harness_error"], 0)
+
+
+class CensusProtocolTests(unittest.TestCase):
+    def _run(self, runs):
+        import importlib, sys
+        sys.path.insert(0, str(ROOT / "tools"))
+        rs = importlib.import_module("run_study_d")
+        seq = iter(runs)
+        orig = rs._pytest_once
+        rs._pytest_once = lambda target, treated, tests, tag: {"results": next(seq), "seconds": 0.1, "exit": 0, "tail": ""}
+        try:
+            return rs.census(None, {}, ["tests"])
+        finally:
+            rs._pytest_once = orig
+
+    def test_three_baselines_flaky_excluded_and_retest(self):
+        P, F = {"passed": True}, {"passed": False}
+        ok = {f"t{i}": P for i in range(6)}
+        b1, b2, b3 = dict(ok, flaky=P, bad=F), dict(ok, flaky=F, bad=F), dict(ok, flaky=P, bad=F)
+        treat = dict(ok, t0=F, t1=F)                 # two failures with the skill
+        retest = dict(ok, t0=F)                      # t1 was transient
+        out = self._run([b1, b2, b3, treat, retest])
+        self.assertEqual(out["status"], "VALID")
+        self.assertEqual(out["excluded_flaky"], ["flaky"])
+        self.assertEqual(out["excluded_baseline_failures"], ["bad"])
+        self.assertEqual(out["new_failures"], ["t0"])
+        self.assertEqual(out["transient_treatment_failures"], ["t1"])
+
+    def test_invalid_when_too_few_stable(self):
+        P = {"passed": True}
+        out = self._run([{"a": P}, {"a": P}, {"a": P}])
+        self.assertEqual(out["status"], "INVALID")
+
+
+class B9GuardAndVisibleTests(unittest.TestCase):
+    def test_spend_guard_blocks_before_overspending(self):
+        from gatekeeper_lite.b9 import Budget, ScriptedFakeModel, SpendGuard, repair
+        from gatekeeper_lite.skill import Target
+        target = Target.load(TGT / "T5_port_bool")
+        inst = {"issue": "x" * 3000, "visible": {"kind": "python", "code": "raise SystemExit(1)"},
+                "visible_desc": "never passes"}
+        guard = SpendGuard(cap_usd=0.0001)
+        r = repair(target, inst, ScriptedFakeModel(["no diff"]), "fake", Budget(max_calls=5, max_output_tokens=4000),
+                   {"input": 0.30, "output": 1.20}, seed=1, guard=guard)
+        self.assertEqual(r.calls, 0)
+        self.assertEqual(r.attempts[-1]["verdict"], "BUDGET_CAP")
+        self.assertLessEqual(guard.spent_usd, 0.0001)
+
+    def test_oracle_draw_visible_check(self):
+        from gatekeeper_lite.b9 import run_visible
+        spec = {"kind": "oracle_draw", "oracle": str(ROOT / "demo" / "draw_oracles" / "port_bool.py"),
+                "scope": "bool", "draw": {"via": "direct", "arg": True}}
+        self.assertFalse(run_visible(TGT / "T5_port_bool", spec, []))   # unpatched: True accepted as port
+
+    def test_b9_allocations_respect_cap(self):
+        import json
+        c = json.loads((ROOT / "study_d" / "b9_config.json").read_text())
+        self.assertLessEqual(sum(c["allocation_vnd"].values()), c["spend_cap_vnd"])
+        self.assertEqual(sorted(c["instances"]), sorted(c["allocation_vnd"]))

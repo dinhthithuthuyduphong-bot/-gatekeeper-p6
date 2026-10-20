@@ -27,7 +27,10 @@ def tracked(study: Path) -> list:
     files += sorted((ROOT / "gatekeeper_lite").glob("*.py"))
     files += sorted((ROOT / "p7").rglob("*.py")) + sorted((ROOT / "p7").rglob("*.json"))
     files += [ROOT / "tools" / n for n in ("fetch_real_targets.py", "install_requirements.py",
-                                          "run_study_d.py", "aggregate_study_d.py", "run_b9.py")]
+                                          "run_study_d.py", "aggregate_study_d.py", "run_b9.py",
+                                          "ablation_study_d.py", "report_study_d.py", "decision_sim.py",
+                                          "freeze_study_d.py", "clean_room_check.py")]
+    files += sorted(study.glob("DECISION_SIM*.md"))
     return [f for f in files if f.is_file()]
 
 

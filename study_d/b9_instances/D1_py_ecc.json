@@ -1,10 +1,18 @@
 {
   "target": "D1_py_ecc",
   "issue": "Python's bool is a subclass of int, so booleans are accepted where integers are expected by the field element classes (FQ, FQ2, ...) and by the BLS private-key check. Booleans passed where an integer is expected must be rejected: field operations should raise TypeError and an invalid private key should fail validation.",
-  "issue_provenance": "paraphrase of py_ecc PR #161 description (issue #30); no code from the fix",
+  "issue_provenance": "paraphrase of py_ecc PR #161 description (issue #30)",
   "visible": {
-    "kind": "python",
-    "code": "from py_ecc.bn128 import FQ\ntry:\n    FQ(True)\nexcept TypeError:\n    pass\nelse:\n    raise SystemExit(1)\n"
+    "kind": "oracle_draw",
+    "oracle": "oracles/py_ecc_bool.py",
+    "scope": "bool",
+    "draw": {
+      "op": "FQ(v)",
+      "curve": "py_ecc.bn128",
+      "v": true,
+      "n": 1,
+      "m": 2
+    }
   },
-  "visible_desc": "from py_ecc.bn128 import FQ; FQ(True) must raise TypeError (one case of the upstream regression test)"
+  "visible_desc": "the upstream regression case, checked through the frozen oracle (bool scope, draw {\"op\": \"FQ(v)\", \"curve\": \"py_ecc.bn128\", \"v\": true, \"n\": 1, \"m\": 2})"
 }

@@ -1,10 +1,14 @@
 {
   "target": "D2_cerberus",
-  "issue": "Booleans are accepted by the 'number' type rule. In Python bool is a subclass of int, but a boolean is not a number for validation purposes: Validator({'x': {'type': 'number'}}).validate({'x': True}) must return False.",
+  "issue": "Booleans are accepted by the 'number' type rule. A boolean is not a number for validation purposes: Validator({'x': {'type': 'number'}}).validate({'x': True}) must return False.",
   "issue_provenance": "paraphrase of Cerberus issue #144 and the 'number' type documentation",
   "visible": {
-    "kind": "python",
-    "code": "from cerberus import Validator\nimport sys\nsys.exit(0 if Validator({'x': {'type': 'number'}}).validate({'x': True}) is False else 1)\n"
+    "kind": "oracle_draw",
+    "oracle": "oracles/cerberus_bool.py",
+    "scope": "bool",
+    "draw": {
+      "v": true
+    }
   },
-  "visible_desc": "Validator({'x': {'type': 'number'}}).validate({'x': True}) must be False"
+  "visible_desc": "the upstream regression case, checked through the frozen oracle (bool scope, draw {\"v\": true})"
 }

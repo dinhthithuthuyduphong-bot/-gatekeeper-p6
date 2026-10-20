@@ -33,5 +33,27 @@
   ],
   "spend_cap_vnd": 400000,
   "scoring": "submitted patch scored on the SAME frozen draw oracle (n_max draws, full budget) and the census gate; primary metric = outcome of the submitted patch; pass@k secondary",
-  "budget_matching": "reported in two currencies: model calls/tokens/USD and visible test runs; Gatekeeper cost reported as draws, test runs and seconds; no single exchange rate is claimed"
+  "budget_matching": "reported in two currencies: model calls/tokens/USD and visible test runs; Gatekeeper cost reported as draws, test runs and seconds; no single exchange rate is claimed",
+  "instances": [
+    "D1_py_ecc",
+    "D2_cerberus",
+    "D3_speckit",
+    "D4_openfeature",
+    "D5_pycubrid",
+    "A1_speckit_catalog"
+  ],
+  "not_applicable": {
+    "C1_jsonschema": "no bug to repair (no-op control)",
+    "C2_voluptuous": "no bug under the target's own contract (semantic control)"
+  },
+  "vnd_per_usd": 27000,
+  "vnd_per_usd_note": "conservative rate fixed in advance; the real rate on the run date is recorded but the cap uses this value",
+  "allocation_vnd": {
+    "D1_py_ecc": 70000,
+    "D2_cerberus": 60000,
+    "D3_speckit": 70000,
+    "D4_openfeature": 70000,
+    "D5_pycubrid": 60000,
+    "A1_speckit_catalog": 70000
+  }
 }
