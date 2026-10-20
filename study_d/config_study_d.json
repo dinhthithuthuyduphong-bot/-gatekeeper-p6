@@ -1,6 +1,6 @@
 {
   "experiment_id": "study-d-v1",
-  "status": "DRAFT",
+  "status": "FROZEN",
   "requires_freeze": true,
   "theta": 0.2,
   "eta": 0.05,
@@ -27,7 +27,7 @@
   ],
   "skill": "skills/bool-excluded-from-int.json",
   "seed_rule": "sha256(FREEZE.json sha256 || drand quicknet randomness of the first round at or after seed_time_utc)",
-  "seed_time_utc": "DECIDE_AT_FREEZE",
+  "seed_time_utc": "2026-10-20T10:17:23Z",
   "multiplicity": "e-Holm FWER over min(e_benefit, e_cert) of all cells; secondary e-BH q=0.1",
   "census": "target's own tests at the pinned commit, both arms; baseline failures excluded before treatment; any new failure blocks every scope of the target",
   "ablations": [
@@ -38,5 +38,6 @@
     "sign_test",
     "eta_0.10"
   ],
-  "gk16_scope": "composition and retirement are demonstrated on development fixtures only (demo T7, Click retirement); Study D makes no claim about them"
+  "gk16_scope": "composition and retirement are demonstrated on development fixtures only (demo T7, Click retirement); Study D makes no claim about them",
+  "frozen_on": "2026-10-20T09:17:23Z"
 }

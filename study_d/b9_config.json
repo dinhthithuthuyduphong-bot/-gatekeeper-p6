@@ -1,6 +1,6 @@
 {
   "experiment_id": "study-d-b9-v1",
-  "status": "DRAFT",
+  "status": "FROZEN",
   "not_before_utc": "2026-10-31T00:00:00Z",
   "budget": {
     "max_calls": 5,
@@ -55,5 +55,6 @@
     "D4_openfeature": 70000,
     "D5_pycubrid": 60000,
     "A1_speckit_catalog": 70000
-  }
+  },
+  "frozen_on": "2026-10-20T09:17:23Z"
 }
