@@ -1,0 +1,31 @@
+# Apply a documented Study D amendment: record it, pin the seed to the original freeze
+# hash, re-freeze the hashes, commit and tag study-d-freeze-<id>.
+name: Gatekeeper Study D amend
+on:
+  workflow_dispatch:
+    inputs:
+      amendment:
+        description: "amendment id documented in study_d/AMENDMENTS.md (e.g. A1)"
+        required: true
+permissions:
+  contents: write
+jobs:
+  amend:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Unit tests must pass
+        run: python -m unittest discover -s tests
+      - name: Apply amendment and re-freeze
+        run: |
+          python tools/amend_study_d.py ${{ inputs.amendment }}
+          python tools/freeze_study.py verify study_d
+          git config user.name "gatekeeper-freeze-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add study_d
+          git commit -m "Study D amendment ${{ inputs.amendment }} (technical; seed unchanged)"
+          git tag "study-d-freeze-$(echo ${{ inputs.amendment }} | tr 'A-Z' 'a-z')"
+          git push origin HEAD --tags
