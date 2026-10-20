@@ -1,4 +1,6 @@
-# Study D — protocol nghiên cứu chính (BẢN NHÁP, đóng băng dự kiến 30/10/2026)
+# Study D — protocol nghiên cứu chính
+
+**Trạng thái và thời điểm đóng băng:** ghi trong `config_study_d.json` (`status`, `frozen_on`, `seed_time_utc`), do workflow `study-d-freeze.yml` đặt; hash của mọi đầu vào nằm trong `FREEZE.json`.
 
 Bản này thay thế thiết kế thống kê của Study B/C. Các quyết định dưới đây đã đối chiếu với một bản đánh giá phản biện độc lập (20/10/2026), và các lỗi mà bản đánh giá chỉ ra đều được sửa.
 
@@ -145,7 +147,7 @@ Oracle của D3–D5 được viết **sau** kiểm định, chỉ từ mã ngu�
 | 20–22/10 | Protocol này nhất quán; mô phỏng quy tắc quyết định (đã có) |
 | 23–25/10 | Target có commit cụ thể, oracle fail-trước/pass-sau, nguồn chứng cứ; loại target còn tranh luận |
 | 26–28/10 | Harness hai worker chạy được; B9 qua các tình huống chấp nhận với model giả; đo chi phí thật so với chạy đủ |
-| 29–30/10 | Tái lập từ môi trường sạch, đóng băng, chốt dự toán và tiêu chí chi tiền |
+| Trước đóng băng | Tái lập từ môi trường sạch, smoke trên Actions, chốt dự toán và tiêu chí chi tiền (đã hoàn thành) |
 
 ## 9b. Quy trình đóng băng và tái lập
 

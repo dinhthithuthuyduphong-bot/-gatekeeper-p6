@@ -30,14 +30,20 @@ Một skill sửa lỗi học từ một nguồn (bool lọt qua kiểm tra `isi
 - Toàn bộ chuỗi chạy trên Actions (smoke, dữ liệu phát triển): tải repo, cài đặt, census 3 baseline, rút mẫu, dừng thật, tổng hợp, ablation, báo cáo.
 - Tái lập từ môi trường sạch: 4/4.
 
-## 5. Những điểm xin Thầy/Cô quyết định hoặc góp ý
+## 5. Sáu quyết định đã chốt (Thầy/Cô chỉ cần phản đối nếu không đồng ý)
 
-1. **Phạm vi claim:** kết luận chỉ áp dụng cho các bộ sinh đã khai báo trên target ở commit đã ghim, không khái quát sang "mọi repository". Thầy/Cô có chấp nhận phạm vi này cho luận văn không?
-2. **FWER thay vì α riêng từng ô như paper gốc:** e-Holm kiểm soát xác suất có ít nhất một lần admit sai trong cả họ. Đây là sai khác có chủ đích; Thầy/Cô thấy cách diễn đạt trong protocol đã đủ rõ chưa?
-3. **Mức tác hại chấp nhận η = 0,05:** chọn trước, không chỉnh theo kết quả. Cái giá là skill có hại hiếm (khoảng 2%) chỉ được admit khoảng 32–44% số lần trong 300 lần rút.
-4. **Chi phí:** Gatekeeper tiết kiệm nhiều về số lần chạy thử, nhưng wall-clock gần bằng B8 vì census dùng chung chiếm phần lớn. Protocol khai báo trước không claim tiết kiệm thời gian. Thầy/Cô có muốn bổ sung một kịch bản thử đắt (ví dụ mỗi lần rút chạy lại cả bộ test của nhiệm vụ) không?
-5. **Đối chứng ngữ nghĩa voluptuous:** "có hại" được định nghĩa theo hợp đồng của chính target (maintainer coi chấp nhận bool là đúng). Cách định nghĩa này có chấp nhận được không?
-6. **Study B/C** được giữ làm pilot (đã hạ cấp vì đếm ca trùng lặp). Thầy/Cô có đồng ý trình bày chúng như minh hoạ cơ chế không?
+Study D sẽ được đóng băng ngày 30/10 với các quyết định dưới đây, dù buổi review có diễn ra hay không. Mục đích review là bắt lỗi trước khi đóng băng, vì sau đó mọi thay đổi phải ghi thành amendment.
+
+| # | Quyết định đã chốt | Lý do | Cái giá đã chấp nhận |
+|---|---|---|---|
+| 1 | Kết luận chỉ áp dụng cho các bộ sinh đã khai báo trên target ở commit đã ghim | Đây là điều dữ liệu thật sự chứng minh được; khái quát rộng hơn sẽ không bảo vệ được | Không tuyên bố về "mọi repository" |
+| 2 | e-Holm kiểm soát FWER α = 0,1 trên 16 ô (khác α riêng từng ô của paper) | Mỗi lần admit sai là một rủi ro thật; FWER chặt hơn FDR và hợp với số ô nhỏ; kiểm tra bằng mô phỏng: FWER 0,040 ở kịch bản xấu nhất | Mất một chút power so với ngưỡng riêng từng ô |
+| 3 | Mức tác hại chấp nhận η = 0,05, chọn trước | Một skill sửa lỗi gây regression ở hơn 5% đầu vào trong scope thì không nên được dùng lại | Skill có hại hiếm (khoảng 2%) chỉ được admit khoảng 32–44% số lần |
+| 4 | Endpoint chi phí chính là số lần chạy thử; wall-clock là phụ; không claim tiết kiệm thời gian nếu dữ liệu không cho thấy rõ | Smoke đã cho thấy census dùng chung chiếm phần lớn thời gian (tỉ lệ 0,92); khai báo trước để không chọn chỉ số theo kết quả | Lợi thế chi phí có thể chỉ thể hiện ở số lần thử |
+| 5 | "Có hại" ở voluptuous theo hợp đồng của chính target (maintainer coi chấp nhận bool là đúng) | Đối chứng ngữ nghĩa phải dùng hợp đồng của target, không dùng ý muốn của người nghiên cứu | Kết luận ở ô này phụ thuộc hợp đồng đó, được ghi rõ |
+| 6 | Study B/C trình bày là pilot, minh hoạ cơ chế | Chúng đếm ca gần trùng lặp thành bằng chứng độc lập; giữ lại để minh bạch quá trình | Không dùng số liệu B/C làm bằng chứng thống kê chính |
+
+**Việc duy nhất cần ở Thầy/Cô:** rà lại phần thống kê (mục 2 và quyết định 2–3) như một người kiểm tra độc lập. Đây là phần mục GK-08 của checklist không thể tự hoàn thành.
 
 ## 6. Câu hỏi có thể gặp và câu trả lời ngắn
 
