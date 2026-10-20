@@ -653,3 +653,72 @@ class B9GuardAndVisibleTests(unittest.TestCase):
         c = json.loads((ROOT / "study_d" / "b9_config.json").read_text())
         self.assertLessEqual(sum(c["allocation_vnd"].values()), c["spend_cap_vnd"])
         self.assertEqual(sorted(c["instances"]), sorted(c["allocation_vnd"]))
+
+
+class StudyDDecisionConsistencyTests(unittest.TestCase):
+    """aggregate, report and ablation must agree (single decision module)."""
+
+    def _fixture(self, tmp):
+        import json
+        good = {"decision": "ADMIT", "e_min": 500.0, "draws": 110,
+                "counts": {"help": 110, "tie": 0, "hurt": 0, "harness_error": 0},
+                "b8": {"draws": 300, "counts": {"help": 300, "tie": 0, "hurt": 0, "harness_error": 0}},
+                "trace": [[-1.0, False]] * 300, "gatekeeper_seconds": 0.1, "seconds": 0.3}
+        base = {"bind": {"treated_modules": ["m.py"], "abstained": {}}, "B6R_replay": {"passed": True},
+                "commit": "x", "startup_seconds": {}}
+        res = {
+            "A": dict(base, census={"status": "VALID", "new_failures": [], "seconds": {}},
+                      B6R_fingerprint={"relation": "MATCH"}, scopes={"bool": good}),
+            "B": dict(base, census={"status": "INVALID", "new_failures": [], "seconds": {}, "reason": "x"},
+                      B6R_fingerprint={"relation": "MATCH"}, scopes={"bool": dict(good, decision="CENSUS_INVALID")}),
+            "C": dict(base, census={"status": "VALID", "new_failures": [], "seconds": {}},
+                      B6R_fingerprint={"relation": "DRIFT"}, scopes={"bool": good}),
+        }
+        cfg = {"experiment_id": "t", "cells": ["A/bool", "B/bool", "C/bool"], "alpha": 0.1, "theta": 0.2,
+               "eta": 0.05, "alpha_alarm": 0.05, "n_max": 300}
+        for t in res:
+            (tmp / "eval_targets" / t).mkdir(parents=True)
+            (tmp / "eval_targets" / t / "gk_target.json").write_text(json.dumps({"role": "test"}))
+            (tmp / f"RESULT_{t}.json").write_text(json.dumps(res[t]))
+        (tmp / "config_study_d.json").write_text(json.dumps(cfg))
+        return cfg
+
+    def test_three_paths_agree(self):
+        import json, sys, tempfile, importlib
+        sys.path.insert(0, str(ROOT / "tools"))
+        agg, rep, abl = (importlib.import_module(m) for m in ("aggregate_study_d", "report_study_d", "ablation_study_d"))
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp = Path(tmp)
+            self._fixture(tmp)
+            agg.main(str(tmp / "config_study_d.json"), str(tmp), str(tmp / "agg.json"))
+            rows = {r["cell"]: r for r in json.loads((tmp / "agg.json").read_text())["cells"]}
+            self.assertEqual(rows["A/bool"]["Gatekeeper"], "ADMIT")
+            self.assertEqual(rows["B/bool"]["Gatekeeper"], "CENSUS_INVALID")
+            self.assertEqual(rows["B/bool"]["B8"], "CENSUS_INVALID")
+            self.assertEqual(rows["C/bool"]["B6R"], "REJECT")          # fingerprint DRIFT
+            self.assertEqual(rows["A/bool"]["B6R"], "ADMIT")
+            rep.main([str(tmp / "config_study_d.json"), str(tmp), str(tmp / "R.md")])
+            md = (tmp / "R.md").read_text()
+            self.assertIn("| B/bool |", md)
+            line_b = next(l for l in md.splitlines() if l.startswith("| B/bool |"))
+            self.assertIn("CENSUS_INVALID", line_b)
+            out = tmp / "abl.md"
+            abl.main([str(tmp / "config_study_d.json"), str(tmp), "--out", str(out)])
+            for line in out.read_text().splitlines()[2:]:
+                self.assertIn("CENSUS_INVALID", line.split("|")[3])  # column B/bool in every variant
+
+
+class B9VerdictTests(unittest.TestCase):
+    def test_verdicts(self):
+        from gatekeeper_lite.b9 import b9_verdict
+        ok_c = {"status": "VALID", "new_failures": []}
+        self.assertEqual(b9_verdict({"status": "NO_PATCH"}), "NO_PATCH")
+        self.assertEqual(b9_verdict({"status": "SUBMITTED", "census": {"status": "INVALID"}}), "CENSUS_INVALID")
+        self.assertEqual(b9_verdict({"status": "SUBMITTED", "census": {"status": "VALID", "new_failures": ["t"]},
+                                     "hidden_oracle": {"bool": {"help": 5, "hurt": 0}}}), "HARMFUL")
+        self.assertEqual(b9_verdict({"status": "SUBMITTED", "census": ok_c,
+                                     "hidden_oracle": {"bool": {"help": 5, "hurt": 0}, "int": {"help": 0, "hurt": 1}}}), "HARMFUL")
+        self.assertEqual(b9_verdict({"status": "SUBMITTED", "census": ok_c,
+                                     "hidden_oracle": {"bool": {"help": 5, "hurt": 0}, "int": {"help": 0, "hurt": 0}}}), "SUCCESS")
+        self.assertEqual(b9_verdict({"status": "SUBMITTED", "census": ok_c,
+                                     "hidden_oracle": {"bool": {"help": 0, "hurt": 0}}}), "NO_EFFECT")

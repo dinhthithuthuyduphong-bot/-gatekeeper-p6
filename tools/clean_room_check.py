@@ -36,6 +36,16 @@ def main() -> int:
                         "--out", str(out)], cwd=ROOT, capture_output=True, check=True)
         ok &= step("decision simulation reproduces study_d/DECISION_SIM_default.md",
                    out.read_text() == (ROOT / "study_d" / "DECISION_SIM_default.md").read_text())
+        k16 = Path(tmp) / "k16.md"
+        subprocess.run([sys.executable, str(ROOT / "tools" / "decision_sim.py"), "--sims", "1500", "--cells", "16",
+                        "--out", str(k16)], cwd=ROOT, capture_output=True, check=True)
+        ok &= step("per-cell simulation K=16 reproduces study_d/DECISION_SIM_K16.md",
+                   k16.read_text() == (ROOT / "study_d" / "DECISION_SIM_K16.md").read_text())
+        fam = Path(tmp) / "family.md"
+        subprocess.run([sys.executable, str(ROOT / "tools" / "decision_sim.py"), "--family", "--sims", "400",
+                        "--out", str(fam)], cwd=ROOT, capture_output=True, check=True)
+        ok &= step("family simulation (16 cells, e-Holm) reproduces study_d/DECISION_SIM_FAMILY_K16.md",
+                   fam.read_text() == (ROOT / "study_d" / "DECISION_SIM_FAMILY_K16.md").read_text())
     cfg = json.loads((ROOT / "study_d" / "config_study_d.json").read_text())
     if cfg.get("status") == "FROZEN":
         r = subprocess.run([sys.executable, str(ROOT / "tools" / "freeze_study.py"), "verify", "study_d"],

@@ -19,7 +19,7 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "tools"))
 from fetch_real_targets import _clone_ref  # noqa: E402
 from run_study_d import census, drand_seed  # noqa: E402
-from gatekeeper_lite.b9 import Budget, CassetteClient, OpenAICompatibleClient, SpendGuard, repair  # noqa: E402
+from gatekeeper_lite.b9 import Budget, CassetteClient, OpenAICompatibleClient, SpendGuard, b9_verdict, repair  # noqa: E402
 from gatekeeper_lite.drawharness import run_draw_study  # noqa: E402
 from gatekeeper_lite.skill import Target  # noqa: E402
 
@@ -59,6 +59,8 @@ def main(b9_cfg, d_cfg, target_id, model_name, out_dir, mode="replay") -> int:
         if kind == "self-then-uninstall":
             subprocess.run([sys.executable, "-m", "pip", "install", "-q", str(root)], check=True)
             subprocess.run([sys.executable, "-m", "pip", "uninstall", "-y", "-q", pkg], check=True)
+        if manifest.get("census_requirements"):          # same environment as the Study D runner
+            subprocess.run([sys.executable, "-m", "pip", "install", "-q", *manifest["census_requirements"]], check=True)
         target = Target.load(root)
         seed = drand_seed(__import__("hashlib").sha256((base / "FREEZE.json").read_bytes()).hexdigest(),
                           dcfg["seed_time_utc"])
@@ -76,6 +78,7 @@ def main(b9_cfg, d_cfg, target_id, model_name, out_dir, mode="replay") -> int:
                                          "theta": dcfg["theta"], "eta": dcfg["eta"], "b8_full": True},
                                         k_cells=len(dcfg["cells"]))
                 entry["hidden_oracle"] = {s: v["b8"]["counts"] for s, v in scored["scopes"].items()}
+            entry["verdict"] = b9_verdict(entry)
             runs.append(entry)
     finally:
         shutil.rmtree(work, ignore_errors=True)
@@ -83,7 +86,9 @@ def main(b9_cfg, d_cfg, target_id, model_name, out_dir, mode="replay") -> int:
     (out / f"RESULT_B9_{target_id}_{model_name}.json").write_text(json.dumps(
         {"target": target_id, "commit": commit, "model": model_name, "mode": mode,
          "runs": runs, "total_cost_usd": round(total, 4),
-         "cap_usd": round(cap_usd, 4), "guard_spent_usd": round(guard.spent_usd, 4)}, indent=2))
+         "cap_usd": round(cap_usd, 4), "guard_spent_usd": round(guard.spent_usd, 4),
+         "guard_overshoot": guard.overshoot,
+         "verdicts": [r["verdict"] for r in runs]}, indent=2))
     print(json.dumps({"target": target_id, "model": model_name, "statuses": [r["status"] for r in runs],
                       "total_cost_usd": round(total, 4)}))
     return 0

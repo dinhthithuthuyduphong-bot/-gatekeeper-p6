@@ -54,13 +54,17 @@ def main(argv=None) -> int:
         r = json.loads(f.read_text()) if f.exists() else {}
         sc = r.get("scopes", {}).get(scope)
         census_bad = bool(r.get("census", {}).get("new_failures"))
-        data[cell] = (sc["trace"] if sc else None, census_bad)
+        census_invalid = r.get("census", {}).get("status") == "INVALID"
+        data[cell] = (sc["trace"] if sc else None, census_bad, census_invalid)
     lines = ["| Biến thể | " + " | ".join(cfg["cells"]) + " |", "|---|" + "---|" * k]
     for v in VARIANTS:
         decisions, evals = {}, {}
-        for cell, (trace, census_bad) in data.items():
+        for cell, (trace, census_bad, census_invalid) in data.items():
             if trace is None:
                 decisions[cell], evals[cell] = "OUT_OF_SCOPE", 0.0
+                continue
+            if census_invalid:                       # technical: never an outcome, in every variant
+                decisions[cell], evals[cell] = "CENSUS_INVALID", 0.0
                 continue
             d, n, e = replay(trace, cfg, k, v)
             if census_bad and v != "no_census":

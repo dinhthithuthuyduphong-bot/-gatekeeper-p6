@@ -24,7 +24,7 @@ def tracked(study: Path) -> list:
     files += sorted((study / "eval_targets").glob("*/gk_target.json")) + sorted((study / "oracles").glob("*.py"))
     files += sorted(study.glob("b9_config.json")) + sorted((study / "b9_instances").glob("*.json"))
     files += sorted((study / "oracle_templates").glob("*.py")) + sorted((study / "oracle_templates").glob("*.ini"))
-    files += sorted((ROOT / "gatekeeper_lite").glob("*.py"))
+    files += sorted((ROOT / "gatekeeper_lite").glob("*.py"))   # includes studyd_decisions.py, b9.py
     files += sorted((ROOT / "p7").rglob("*.py")) + sorted((ROOT / "p7").rglob("*.json"))
     files += [ROOT / "tools" / n for n in ("fetch_real_targets.py", "install_requirements.py",
                                           "run_study_d.py", "aggregate_study_d.py", "run_b9.py",

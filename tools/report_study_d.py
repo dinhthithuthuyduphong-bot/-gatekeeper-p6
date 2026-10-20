@@ -10,7 +10,6 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
-from gatekeeper_lite.eprocess import e_bh, e_holm  # noqa: E402
 
 
 def row(cells):
@@ -41,36 +40,18 @@ def main(argv=None) -> int:
         L.append(row([tid, man.get("role", ""), (r.get("commit") or "")[:10],
                       ", ".join(b.get("treated_modules", [])) or "—",
                       ", ".join(f"{m}: {why}" for m, why in b.get("abstained", {}).items()) or "—"]))
-    evals, cellrows = {}, []
-    for cell in cfg["cells"]:
-        tgt, scope = cell.split("/")
-        r = results.get(tgt, {})
-        sc = r.get("scopes", {}).get(scope)
-        binds = bool(r.get("bind", {}).get("treated_modules"))
-        census_bad = bool(r.get("census", {}).get("new_failures"))
-        stop = sc["decision"] if sc else "OUT_OF_SCOPE"
-        evals[cell] = sc["e_min"] if sc and stop in ("ADMIT", "UNDECIDED") and not census_bad else 0.0
-        if r.get("census", {}).get("status") == "INVALID":
-            evals[cell] = 0.0
-        cellrows.append((cell, r, sc, binds, census_bad, stop))
-    holm, bh = set(e_holm(evals, alpha)), set(e_bh(evals, alpha))
+    from gatekeeper_lite.studyd_decisions import decide
+    cells = decide(cfg, results)
     L += ["", "## 2. Quyết định theo ô", "",
-          row(["Ô", "Giúp/hòa/hại (đến lúc dừng)", "Census: regression mới", "B2", "B6-R", "B8 (đủ ngân sách)",
+          row(["Ô", "Giúp/hòa/hại (đến lúc dừng)", "Census", "B2", "B6-R", "B8 (đủ ngân sách)",
                "Gatekeeper (e-Holm)", "e-BH (phụ)", "Số lần rút GK"]), row(["---"] * 9)]
-    for cell, r, sc, binds, census_bad, stop in cellrows:
-        census_invalid = r.get("census", {}).get("status") == "INVALID"
-        gk = ("OUT_OF_SCOPE" if not sc else "CENSUS_INVALID (không tính)" if census_invalid
-              else "REJECT_HARM" if (stop == "REJECT_HARM" or census_bad)
-              else ("ADMIT" if cell in holm else "QUARANTINE"))
-        b6_ok = (binds and r.get("B6R_replay", {}).get("passed")
-                 and r.get("B6R_fingerprint", {}).get("relation") == "MATCH")
-        b6 = "ADMIT" if b6_ok else ("REJECT" if binds else "OUT_OF_SCOPE")
-        b8 = "—" if not sc else ("REJECT" if (sc["b8"]["counts"]["hurt"] or census_bad) else "ADMIT")
-        c = sc["counts"] if sc else {}
-        L.append(row([cell, f"{c.get('help', 0)}/{c.get('tie', 0)}/{c.get('hurt', 0)}" if sc else "—",
-                      len(r.get("census", {}).get("new_failures", [])) if binds else "—",
-                      "ADMIT" if binds else "OUT_OF_SCOPE", b6, b8, gk,
-                      "ADMIT" if cell in bh else "—", sc["draws"] if sc else 0]))
+    for c in cells:
+        sc, r = c["scope_result"], c["result"]
+        cs = ("INVALID" if c["census_invalid"] else
+              f"{len(r.get('census', {}).get('new_failures', []))} regression mới" if c["binds"] else "—")
+        cnt = sc["counts"] if sc else {}
+        L.append(row([c["cell"], f"{cnt.get('help', 0)}/{cnt.get('tie', 0)}/{cnt.get('hurt', 0)}" if sc else "—",
+                      cs, c["B2"], c["B6R"], c["B8"], c["Gatekeeper"], c["eBH"], sc["draws"] if sc else 0]))
     L += ["", "## 3. Chi phí đo được (wall-clock thật trên runner)", "",
           row(["Target", "GK: lần rút", "B8: lần rút", "Census (giây)", "Khởi động worker (giây)",
                "GK tổng (giây)", "B8 tổng (giây)"]), row(["---"] * 7)]
@@ -92,13 +73,16 @@ def main(argv=None) -> int:
                   "chỉ phần rút mẫu khác nhau."]
     if a.b9:
         L += ["", "## 4. B9 (sửa lỗi bằng LLM, khớp ngân sách)", "",
-              row(["Target", "Model", "Lần lặp", "Trạng thái", "Hại ở oracle kín", "Lợi ở oracle kín", "Lần gọi", "USD"]),
-              row(["---"] * 8)]
+              row(["Target", "Model", "Lần lặp", "Kết luận cuối", "Patch", "Census", "Hại ở oracle kín",
+                   "Lợi ở oracle kín", "Lần gọi", "USD"]), row(["---"] * 10)]
         for f in sorted(Path(a.b9).glob("RESULT_B9_*.json")):
             b = json.loads(f.read_text())
             for run in b["runs"]:
                 h = run.get("hidden_oracle", {})
-                L.append(row([b["target"], b["model"], run["repetition"], run["status"],
+                cen = run.get("census", {})
+                L.append(row([b["target"], b["model"], run["repetition"], run.get("verdict", "—"), run["status"],
+                              ("INVALID" if cen.get("status") == "INVALID" else
+                               f"{len(cen.get('new_failures', []))} regression mới") if cen else "—",
                               sum(v["hurt"] for v in h.values()) if h else "—",
                               sum(v["help"] for v in h.values()) if h else "—", run["calls"], run["cost_usd"]]))
     abl = subprocess.run([sys.executable, str(ROOT / "tools" / "ablation_study_d.py"), str(cfg_path), str(res_dir)],
