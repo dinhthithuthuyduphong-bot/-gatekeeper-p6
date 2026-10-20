@@ -41,24 +41,30 @@ jobs:
             os: ubuntu-24.04
     runs-on: ${{ matrix.os }}
     timeout-minutes: 90
-    if: ${{ inputs.only == '' || contains(inputs.only, matrix.target) }}
+    # 'matrix' is not allowed in a job-level `if`; selection is applied to every step instead.
+    env:
+      SELECTED: ${{ inputs.only == '' || contains(inputs.only, matrix.target) }}
     steps:
       - uses: actions/checkout@v6
+        if: ${{ env.SELECTED == 'true' }}
       - uses: actions/setup-python@v6
+        if: ${{ env.SELECTED == 'true' }}
         with:
           python-version: ${{ matrix.python }}
       - name: Freeze check and hash verification
+        if: ${{ env.SELECTED == 'true' }}
         run: |
           python -c "import json,sys;c=json.load(open('study_d/config_study_d.json'));sys.exit(0 if c.get('status')=='FROZEN' else '::error::Study D is not FROZEN')"
           python tools/freeze_study.py verify study_d
       - name: Run
+        if: ${{ env.SELECTED == 'true' }}
         run: |
           python -m pip install -q "pytest==8.3.5"
           mkdir -p out_d
           set -o pipefail
           python tools/run_study_d.py study_d/config_study_d.json ${{ matrix.target }} out_d 2>&1 | tee out_d/log_${{ matrix.target }}.txt
       - uses: actions/upload-artifact@v7
-        if: always()
+        if: ${{ always() && env.SELECTED == 'true' }}
         with:
           name: STUDY_D_${{ matrix.target }}
           path: out_d
