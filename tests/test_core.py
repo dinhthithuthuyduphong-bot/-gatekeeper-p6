@@ -580,3 +580,17 @@ class B9AcceptanceTests(unittest.TestCase):
             self.assertEqual(rep.complete("m", msgs, 10, 0.0, 1)["text"], "hello")
             with self.assertRaises(KeyError):
                 rep.complete("m", msgs, 10, 0.0, 2)
+
+
+class LargeSeedTests(unittest.TestCase):
+    def test_drand_sized_seed_starts_workers(self):
+        """drand-derived seeds are ~60-bit; PYTHONHASHSEED must be reduced into [0, 2^32)."""
+        from gatekeeper_lite.drawharness import run_draw_study
+        from gatekeeper_lite.gatekeeper import bind_modules
+        from gatekeeper_lite.skill import Skill, Target
+        skill = Skill.load(ROOT / "demo" / "skills" / "negative-bool-guard.json")
+        target = Target.load(TGT / "T5_port_bool")
+        bound = bind_modules([skill], target)
+        cfg = {"seed": int("f" * 15, 16), "alpha": 0.1, "n_max": 5, "theta": 0.2, "eta": 0.05}
+        res = run_draw_study(target, bound["treated"], ROOT / "demo" / "draw_oracles" / "port_bool.py", cfg, 4)
+        self.assertEqual(res["scopes"]["bool"]["counts"]["harness_error"], 0)
