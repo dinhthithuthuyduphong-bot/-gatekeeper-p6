@@ -68,10 +68,31 @@ def make_env(root: Path, src: Path, extras: list, log: list) -> Path:
 
 def run_tests(py: Path, src: Path, tests: list, junit: Path) -> dict:
     env = dict(os.environ, PYTHONDONTWRITEBYTECODE="1")
+    # A test file that fails to import (e.g. it imports a helper added by the fix) must not
+    # abort the whole session: other files still run and the error is recorded per file.
     r = sh([str(py), "-m", "pytest", "-q", "-p", "no:cacheprovider", "-o", "addopts=",
-            f"--junitxml={junit}", *tests], cwd=src, check=False, env=env)
+            "--continue-on-collection-errors", f"--junitxml={junit}", *tests],
+           cwd=src, check=False, env=env)
     res = parse_junit(junit.read_text()) if junit.exists() else {}
     return {"exit": r.returncode, "results": res, "tail": (r.stdout + r.stderr)[-1500:]}
+
+
+def _test_sources(root: Path, ids: list) -> dict:
+    """Source of each eligible test function (so scope generators can mirror the public API)."""
+    import ast
+    out = {}
+    for tid in ids:
+        mod, _, name = tid.partition("::")
+        func = name.split("[")[0].split("::")[-1]
+        path = root / (mod.replace(".", "/") + ".py")
+        if not path.exists():
+            continue
+        src = path.read_text(encoding="utf-8", errors="replace")
+        for node in ast.walk(ast.parse(src)):
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name == func:
+                deco = "".join(ast.get_source_segment(src, d) + "\n" for d in node.decorator_list)
+                out[tid] = (deco + ast.get_source_segment(src, node))[:3000]
+    return out
 
 
 def main(spec_path: str, out_dir: str) -> int:
@@ -88,6 +109,8 @@ def main(spec_path: str, out_dir: str) -> int:
         changed = sh([*GIT, "diff", "--name-only", pre, gold], cwd=repo).stdout.split()
         test_files = [f for f in changed if "test" in f.split("/")[-1] and f.endswith(".py")]
         report.update(changed_files=changed, gold_test_files=test_files)
+        src_files = [f for f in changed if f.endswith(".py") and f not in test_files]
+        report["gold_source_diff"] = sh([*GIT, "diff", pre, gold, "--", *src_files], cwd=repo).stdout[-12000:] if src_files else ""
         arms = {}
         for arm, rev in (("pre", pre), ("gold", gold)):
             src = work / arm
@@ -102,7 +125,9 @@ def main(spec_path: str, out_dir: str) -> int:
             arms[arm] = run_tests(py, src, spec.get("tests") or test_files, work / f"junit_{arm}.xml")
             arms[arm]["install_log"] = log
         pre_r, gold_r = arms["pre"]["results"], arms["gold"]["results"]
-        ids = sorted(set(pre_r) | set(gold_r))
+        coll = {t for t in set(pre_r) | set(gold_r) if t.startswith("::")}   # file-level collection errors
+        report["collection_errors"] = {t: {"pre": t in pre_r, "gold": t in gold_r} for t in sorted(coll)}
+        ids = sorted((set(pre_r) | set(gold_r)) - coll)
         cls = {}
         for t in ids:
             a, b = pre_r.get(t), gold_r.get(t)
@@ -117,6 +142,7 @@ def main(spec_path: str, out_dir: str) -> int:
                       eligible_oracle=[t for t, c in cls.items() if c == "F->P"],
                       arms={k: {"exit": v["exit"], "tail": v["tail"], "install_log": v["install_log"]}
                             for k, v in arms.items()})
+        report["eligible_sources"] = _test_sources(work / "gold", report["eligible_oracle"])
         report["verdict"] = ("ELIGIBLE" if report["eligible_oracle"]
                              else "NOT_ELIGIBLE (no fail-before/pass-after test)")
     except Exception as exc:  # recorded, never hidden

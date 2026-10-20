@@ -458,3 +458,27 @@ class StudyDStatsTests(unittest.TestCase):
         # Holm gain: two strong cells help each other (30 < 40 alone)
         self.assertEqual(sorted(e_holm({"a": 30, "b": 30, "c": 0, "d": 0}, 0.1)), ["a", "b"])
         self.assertEqual(sorted(e_holm({"a": 50, "b": 50, "c": 0, "d": 0}, 0.1)), ["a", "b"])
+
+
+class BoolGuardFamilyTests(unittest.TestCase):
+    def test_negated_and_multi_site_and_idempotent(self):
+        src = ("def validate_number(v):\n"
+               "    if not isinstance(v, (int, float)):\n"
+               "        raise TypeError('number')\n"
+               "    return v\n\n"
+               "def coerce(n):\n"
+               "    return isinstance(n, int)\n")
+        out = T.NegativeTypeGuard("int", "bool").apply(src, single_site=False).source
+        ns = {}
+        exec(compile(out, "<t>", "exec"), ns)
+        with self.assertRaises(TypeError):
+            ns["validate_number"](True)
+        self.assertEqual(ns["validate_number"](3), 3)
+        self.assertFalse(ns["coerce"](True))
+        self.assertTrue(ns["coerce"](5))
+        with self.assertRaises(T.Abstain) as ctx:
+            T.NegativeTypeGuard("int", "bool").apply(out, single_site=False)
+        self.assertIn(ctx.exception.reason, ("ALREADY_GUARDED", "NO_APPLICABLE_SITE"))
+        upstream_style = "def f(v):\n    if not isinstance(v, int) or isinstance(v, bool):\n        raise TypeError\n"
+        with self.assertRaises(T.Abstain):
+            T.NegativeTypeGuard("int", "bool").apply(upstream_style, single_site=False)

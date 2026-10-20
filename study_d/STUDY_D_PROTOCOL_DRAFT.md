@@ -64,6 +64,8 @@ Họ lỗi thứ hai: **loại bool khỏi kiểm tra kiểu int**.
 | jsonschema (HEAD) | Đối chứng no-op | Đã có guard; skill phải không đổi gì |
 | packaging #1425 | **Loại** khỏi nhóm dương | Đóng nhưng không merge; ngữ nghĩa còn tranh luận |
 
+**Kết quả kiểm định lần 1:** Cerberus **đạt** (`test_boolean_is_not_a_number` fail trước/pass sau; 146 test giữ pass). py_ecc chưa kết luận vì một file test import helper mới làm dừng cả phiên pytest; công cụ đã được sửa để tiếp tục chạy các file khác.
+
 **Nghiệm thu một target dương:** (1) có test **fail trước fix, pass với gold fix** (`tools/vet_target.py`, workflow `vet-targets.yml`); (2) oracle dùng API công khai, chạy được trên cả bản trước và sau fix (test import helper mới bị loại); (3) bộ regression cũ vẫn pass; (4) test oracle cuối không dùng để chỉnh skill hay chọn patch B9.
 
 Họ Click giữ vai trò dữ liệu phát triển và pilot. Hai bản kế thừa requests (niquests, pip vendored) chỉ dùng làm đối chứng no-op và **không** tính là hai bằng chứng chuyển giao độc lập.
