@@ -1,0 +1,15 @@
+{
+  "name": "cerberus_144",
+  "family": "bool-excluded-from-int (number type)",
+  "role": "positive (independent rediscovery)",
+  "repo": "https://github.com/pyeve/cerberus.git",
+  "default_branch": "master",
+  "gold": "d25ae8f69c785addc1af3bdb283104263fcfdba9",
+  "pre": "parent",
+  "python": "3.8",
+  "extras": [
+    "test",
+    "dev"
+  ],
+  "evidence": "commit d25ae8f fixes _validate_type_number (not 'integer'); issue #144"
+}

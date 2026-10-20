@@ -1,0 +1,15 @@
+{
+  "name": "py_ecc_161",
+  "family": "bool-excluded-from-int",
+  "role": "positive (independent rediscovery)",
+  "repo": "https://github.com/ethereum/py_ecc.git",
+  "default_branch": "main",
+  "gold": "refs/pull/161/head",
+  "pre": "merge-base",
+  "python": "3.12",
+  "extras": [
+    "test",
+    "dev"
+  ],
+  "evidence": "PR #161 merged 2026-10-07; adds is_integer() and uses it in field_elements.py, optimized_field_elements.py, ciphersuites.py; tests added"
+}

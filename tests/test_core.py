@@ -428,3 +428,33 @@ class ScopedAdmissionTests(unittest.TestCase):
         self.assertEqual(by[("T2_help_lazy", "lazy")]["gatekeeper"]["decision"], "REJECT_HARM")
         self.assertEqual({r["comparators"]["B6R"]["decision"] for r in res["records"]
                           if r["target"] == "T2_help_lazy"}, {"ADMIT"})
+
+
+class StudyDStatsTests(unittest.TestCase):
+    def test_harm_certificate_valid_at_boundary(self):
+        from gatekeeper_lite.eprocess import HarmCertEProcess
+        rng, alpha, sims, false = random.Random(17), 0.05, 3000, 0
+        for _ in range(sims):
+            ep = HarmCertEProcess(eta=0.05)
+            for _ in range(400):
+                if ep.update(rng.random() < 0.05) >= 1 / alpha:   # h exactly eta (H0 true)
+                    false += 1
+                    break
+        self.assertLessEqual(false / sims, alpha + 0.012)
+
+    def test_harm_certificate_needs_many_clean_draws(self):
+        from gatekeeper_lite.eprocess import HarmCertEProcess
+        ep, n = HarmCertEProcess(eta=0.05), 0
+        while ep.value < 80:
+            ep.update(False)
+            n += 1
+        self.assertGreater(n, 70)      # ~ln(80)/-ln(1-0.9*0.05/0.95)
+
+    def test_e_holm(self):
+        from gatekeeper_lite.eprocess import e_holm
+        # K=4, alpha=0.1: a single cell needs e >= K/alpha = 40 (e-Bonferroni level)
+        self.assertEqual(e_holm({"a": 50, "b": 0, "c": 0, "d": 0}, 0.1), ["a"])
+        self.assertEqual(e_holm({"a": 30, "b": 0, "c": 0, "d": 0}, 0.1), [])
+        # Holm gain: two strong cells help each other (30 < 40 alone)
+        self.assertEqual(sorted(e_holm({"a": 30, "b": 30, "c": 0, "d": 0}, 0.1)), ["a", "b"])
+        self.assertEqual(sorted(e_holm({"a": 50, "b": 50, "c": 0, "d": 0}, 0.1)), ["a", "b"])
