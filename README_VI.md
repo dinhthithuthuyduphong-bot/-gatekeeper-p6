@@ -114,7 +114,7 @@ Trên rich-click v1.9.9 và asyncclick 8.3.0.6 (chưa từng chạy trước khi
 
 ## Study D: thiết kế chính (đang chuẩn bị, đóng băng 30/10)
 
-Study B/C là pilot. Thiết kế chính mới nằm ở `study_d/STUDY_D_PROTOCOL_DRAFT.md`; mô phỏng quy tắc quyết định: `python tools/decision_sim.py`; kiểm định target: workflow `vet-targets.yml`.
+Study B/C là pilot. Harness rút mẫu tuần tự (`drawharness.py`), B9 (`b9.py`), đóng băng một lần bấm và kiểm tra tái lập sạch đã sẵn sàng. Thiết kế chính mới nằm ở `study_d/STUDY_D_PROTOCOL_DRAFT.md`; mô phỏng quy tắc quyết định: `python tools/decision_sim.py`; kiểm định target: workflow `vet-targets.yml`.
 
 ## Kết quả Study C v1 (19/10/2026)
 

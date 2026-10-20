@@ -1,0 +1,117 @@
+{
+  "note": "Expected Gatekeeper/B2/B6R/B8 decisions of the demo run; the clean-room check fails if a fresh checkout disagrees.",
+  "records": [
+    {
+      "target": "T1_help_strict",
+      "skills": [
+        "empty-string-guard"
+      ],
+      "ground_truth": "BENEFICIAL",
+      "decisions": {
+        "B2": "ADMIT",
+        "B6R": "ADMIT",
+        "B8": "ADMIT",
+        "Gatekeeper": "ADMIT"
+      },
+      "tasks_used": 21
+    },
+    {
+      "target": "T2_help_lazy",
+      "skills": [
+        "empty-string-guard"
+      ],
+      "ground_truth": "HARMFUL",
+      "decisions": {
+        "B2": "ADMIT",
+        "B6R": "ADMIT",
+        "B8": "REJECT",
+        "Gatekeeper": "QUARANTINE"
+      },
+      "tasks_used": 24
+    },
+    {
+      "target": "T3_help_guarded",
+      "skills": [
+        "empty-string-guard"
+      ],
+      "ground_truth": "NOT_APPLICABLE",
+      "decisions": {
+        "B2": "OUT_OF_SCOPE",
+        "B6R": "REJECT",
+        "B8": "OUT_OF_SCOPE",
+        "Gatekeeper": "OUT_OF_SCOPE"
+      },
+      "tasks_used": 0
+    },
+    {
+      "target": "T4_help_shadow",
+      "skills": [
+        "empty-string-guard"
+      ],
+      "ground_truth": "NOT_APPLICABLE",
+      "decisions": {
+        "B2": "OUT_OF_SCOPE",
+        "B6R": "REJECT",
+        "B8": "OUT_OF_SCOPE",
+        "Gatekeeper": "OUT_OF_SCOPE"
+      },
+      "tasks_used": 0
+    },
+    {
+      "target": "T5_port_bool",
+      "skills": [
+        "negative-bool-guard"
+      ],
+      "ground_truth": "BENEFICIAL",
+      "decisions": {
+        "B2": "ADMIT",
+        "B6R": "ADMIT",
+        "B8": "ADMIT",
+        "Gatekeeper": "ADMIT"
+      },
+      "tasks_used": 18
+    },
+    {
+      "target": "T6_count_bool",
+      "skills": [
+        "negative-bool-guard"
+      ],
+      "ground_truth": "HARMFUL",
+      "decisions": {
+        "B2": "ADMIT",
+        "B6R": "ADMIT",
+        "B8": "REJECT",
+        "Gatekeeper": "QUARANTINE"
+      },
+      "tasks_used": 22
+    },
+    {
+      "target": "T7_db_save",
+      "skills": [
+        "retry-write"
+      ],
+      "ground_truth": "BENEFICIAL",
+      "decisions": {
+        "B2": "ADMIT",
+        "B6R": "ADMIT",
+        "B8": "ADMIT",
+        "Gatekeeper": "QUARANTINE"
+      },
+      "tasks_used": 14
+    },
+    {
+      "target": "T7_db_save",
+      "skills": [
+        "async-write"
+      ],
+      "ground_truth": "BENEFICIAL",
+      "decisions": {
+        "B2": "ADMIT",
+        "B6R": "ADMIT",
+        "B8": "ADMIT",
+        "Gatekeeper": "QUARANTINE"
+      },
+      "tasks_used": 14
+    }
+  ]
+}

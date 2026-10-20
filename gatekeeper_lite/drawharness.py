@@ -59,6 +59,11 @@ class _Worker:
             self.proc.wait(timeout=10)
         except Exception:
             self.proc.kill()
+        for stream in (self.proc.stdout, self.proc.stderr):
+            try:
+                stream.close()
+            except Exception:
+                pass
 
 
 def _load(path: Path):
