@@ -4,7 +4,7 @@ name: Gatekeeper B9 run
 on:
   workflow_dispatch:
     inputs:
-      target: {description: "D1_py_ecc or D2_cerberus", required: true, default: "D1_py_ecc"}
+      target: {description: "D1_py_ecc, D2_cerberus, D3_speckit, D4_openfeature, D5_pycubrid or A1_speckit_catalog", required: true, default: "D1_py_ecc"}
       model: {description: "deepseek-flash or gemini-3.1-flash-lite", required: true, default: "deepseek-flash"}
       mode: {description: "record (paid) or replay", required: true, default: "replay"}
 permissions:
