@@ -59,6 +59,23 @@ Thêm ứng viên dương D3 spec-kit #3268, D4 open-feature #621, D5 pycubrid #
 
 **Bộ dữ liệu Study D đã chốt:** 8 target, 16 ô; oracle của cả 8 target đã viết từ test và fixture upstream.
 
+## Chạy khói (smoke) Study D trên Actions (dữ liệu phát triển)
+
+| Lượt | Kết quả |
+|---|---|
+| Smoke 1 | Phát hiện lỗi: seed drand 60 bit vượt miền `PYTHONHASHSEED`; đã sửa (modulo 2^32) và thêm test |
+| Smoke 2 (drand vòng 33217012) | T5 demo: ô *bool* ADMIT sau 65 lần rút, ô *int* QUARANTINE; e-Holm, ablation, báo cáo đúng |
+| Smoke 3 | Thêm Click 8.2.1 (`fd183b2c`): tải repo, cài/gỡ gói, census 144 test (0 regression mới), ô *objects* ADMIT sau 80 lần rút, ô *lazy* REJECT_HARM sau 2 lần rút; chi phí Gatekeeper 82 lần rút so với B8 600 |
+| Clean-room | 4/4 đạt (run `39384587962`) |
+
+## Khép 5 điểm còn hở trước đóng băng (21/10/2026)
+
+1. **Census đúng protocol:** baseline 3 lần, loại test lỗi/không ổn định, `CENSUS_INVALID` khi < 5 test ổn định (không tính, không thay target), lỗi chỉ ở treatment được chạy lại một lần. Test: `CensusProtocolTests`.
+2. **B9 khớp benchmark:** instance cho 6 target có lỗi (D1–D5, A1); C1/C2 khai báo trước là không áp dụng; kiểm tra công khai là ca upstream chạy qua oracle đã đóng băng; trần 400.000 đồng chia theo target và được chặn bằng chi phí xấu nhất trước mỗi lần gọi. Test: `B9GuardAndVisibleTests`.
+3. **Mô phỏng cả họ 16 ô dưới e-Holm:** FWER quan sát 0,040 (KTC 95% 0,021–0,059) khi mọi ô null ở biên; 0,003 với họ giống Study D, power 1,000.
+4. **B6-R có kiểm tra fingerprint;** báo cáo có tổng wall-clock Gatekeeper so với B8 (chi phí cố định tính cho cả hai).
+5. **Khoá tái lập:** `FREEZE.json` của Study D băm 71 file, gồm mã phân tích, bộ chạy, oracle, target, skill, cấu hình B9 và các file mô phỏng; tài liệu đã bỏ các đoạn cũ (hai target, K = 8).
+
 ## Ghi chú tái lập Study B
 
 Sau Study B, `gatekeeper_lite/` có thêm admission theo scope (`scoped.py`), nên `freeze_study.py verify study_b` trên `main` sẽ báo file thay đổi — đúng như thiết kế, để không ai chạy lại Study B bằng code mới. Muốn tái lập Study B v1, checkout tag `study-b-freeze-a2`.

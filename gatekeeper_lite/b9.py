@@ -117,11 +117,47 @@ def apply_diff(root: Path, diff: str) -> tuple:
     return proc.returncode == 0, proc.stderr[-300:]
 
 
+# ----------------------------------------------------------------- spend guard
+class BudgetExceeded(RuntimeError):
+    pass
+
+
+class SpendGuard:
+    """Hard cap on money: before every model call the WORST-CASE cost of that call
+    (estimated input tokens + the full output allowance) must fit in what is left."""
+
+    def __init__(self, cap_usd: float):
+        self.cap_usd, self.spent_usd, self.calls = cap_usd, 0.0, 0
+
+    def check(self, messages: List[dict], max_tokens: int, prices: dict) -> None:
+        est_in = sum(len(m["content"]) for m in messages) / 3.0          # conservative chars/token
+        worst = est_in / 1e6 * prices.get("input", 0) + max_tokens / 1e6 * prices.get("output", 0)
+        if self.spent_usd + worst > self.cap_usd:
+            raise BudgetExceeded(f"next call worst case {worst:.4f} USD would exceed cap "
+                                 f"{self.cap_usd:.4f} USD (spent {self.spent_usd:.4f})")
+
+    def add(self, usage: dict, prices: dict) -> float:
+        cost = usage.get("input", 0) / 1e6 * prices.get("input", 0) + usage.get("output", 0) / 1e6 * prices.get("output", 0)
+        self.spent_usd += cost
+        self.calls += 1
+        return cost
+
+
 # ----------------------------------------------------------------- visible filter
+ORACLE_DRAW_RUNNER = (
+    "import importlib.util, json, sys\n"
+    "spec = importlib.util.spec_from_file_location('gk_visible_oracle', sys.argv[1])\n"
+    "o = importlib.util.module_from_spec(spec); spec.loader.exec_module(o)\n"
+    "d = json.loads(sys.argv[3]); out = o.execute(d)\n"
+    "sys.exit(0 if o.judge(sys.argv[2], d, out, out)[1] else 1)\n")
+
+
 def run_visible(root: Path, spec: dict, pythonpath: List[str]) -> bool:
     env = dict(os.environ, PYTHONPATH=os.pathsep.join([str(root / p) for p in pythonpath] + [str(root)]),
                PYTHONDONTWRITEBYTECODE="1")
-    if spec["kind"] == "python":
+    if spec["kind"] == "oracle_draw":      # one fixed draw (the upstream case) through the frozen oracle
+        cmd = [sys.executable, "-c", ORACLE_DRAW_RUNNER, spec["oracle"], spec["scope"], json.dumps(spec["draw"])]
+    elif spec["kind"] == "python":
         cmd = [sys.executable, "-c", spec["code"]]
     else:
         cmd = [sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider", "-o", "addopts=", *spec["tests"]]
@@ -157,7 +193,7 @@ def build_messages(issue: str, sources: Dict[str, str], visible_desc: str) -> Li
 
 
 def repair(target, instance: dict, client: ModelClient, model: str, budget: Budget,
-           prices: dict, seed: int) -> RepairResult:
+           prices: dict, seed: int, guard: Optional[SpendGuard] = None) -> RepairResult:
     """instance: {"issue", "visible": {...}, "visible_desc"}; edit rights = target.modules."""
     t0 = time.perf_counter()
     allowed = set(target.modules)
@@ -166,7 +202,15 @@ def repair(target, instance: dict, client: ModelClient, model: str, budget: Budg
     res = RepairResult("NO_PATCH")
     for i in range(budget.max_calls):
         temperature = 0.0 if i == 0 else 0.8
+        if guard is not None:
+            try:
+                guard.check(messages, budget.max_output_tokens, prices)
+            except BudgetExceeded as exc:
+                res.attempts.append({"call": i + 1, "verdict": "BUDGET_CAP", "detail": str(exc)})
+                break
         reply = client.complete(model, messages, budget.max_output_tokens, temperature, seed + i)
+        if guard is not None:
+            guard.add(reply["usage"], prices)
         res.calls += 1
         for k in ("input", "output"):
             res.tokens[k] += int(reply["usage"].get(k, 0))
