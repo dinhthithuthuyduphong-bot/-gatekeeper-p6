@@ -47,6 +47,16 @@ Study B/C được hạ xuống **bằng chứng pilot** vì đếm các ca gầ
 
 Thêm ứng viên dương D3 spec-kit #3268, D4 open-feature #621, D5 pycubrid #479; đối chứng khả năng áp dụng A1 spec-kit #2589; đối chứng no-op C1 jsonschema v4.23.0; đối chứng ngữ nghĩa C2 voluptuous 0.15.2. D3–D5 và A1 chờ kiểm định (workflow `vet-targets.yml`).
 
+## Kiểm định target Study D (lần 3, 20/10/2026)
+
+| Target | Kết quả | Chi tiết |
+|---|---|---|
+| D3 spec-kit #3268 (merge 13/7/2026, `903d707d`) | **ĐẠT** | 1 test fail trước/pass sau (`TestExtensionPriorityCLI::test_set_priority_repairs_corrupted_bool`), 342 test giữ pass; fix upstream trùng dạng skill |
+| D4 open-feature #621 (merge 30/8/2026, `7d945ec5`) | **ĐẠT** | 11 test fail trước/pass sau, 80 test giữ pass; kiểu kiểm tra qua biến `py_type`, fix còn đổi giá trị trả về |
+| D5 pycubrid #479 (merge 2/10/2026, `4efe599d`) | Chạy lại | `conftest.py` cần `hypothesis`; fix upstream trùng dạng skill |
+| A1 spec-kit #2589 (merge 21/5/2026, `0dee2faf`) | **ĐẠT** | 1 test fail trước/pass sau, 245 test giữ pass; fix nằm trước `int(...)`, không qua `isinstance` |
+| D1 py_ecc, D2 Cerberus | Tái lập đúng | |
+
 ## Ghi chú tái lập Study B
 
 Sau Study B, `gatekeeper_lite/` có thêm admission theo scope (`scoped.py`), nên `freeze_study.py verify study_b` trên `main` sẽ báo file thay đổi — đúng như thiết kế, để không ai chạy lại Study B bằng code mới. Muốn tái lập Study B v1, checkout tag `study-b-freeze-a2`.
