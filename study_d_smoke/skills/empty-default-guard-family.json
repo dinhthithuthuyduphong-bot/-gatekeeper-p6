@@ -1,0 +1,33 @@
+{
+  "skill_id": "empty-default-guard-family",
+  "version": "studyB-1",
+  "scope": "cli-help-default",
+  "pi": {
+    "transform": "empty_string_guard",
+    "params": {
+      "functions": [
+        "get_help_record",
+        "get_help_extra"
+      ],
+      "function_patterns": [
+        "default"
+      ],
+      "subjects": [
+        "default_value"
+      ]
+    }
+  },
+  "D": {
+    "python": ">=3.8"
+  },
+  "I": [
+    "single_site"
+  ],
+  "P": [],
+  "K": {
+    "behaviors": [
+      "eq-empty-string",
+      "default-display"
+    ]
+  }
+}

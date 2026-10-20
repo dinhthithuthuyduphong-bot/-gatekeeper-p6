@@ -1,0 +1,23 @@
+{
+  "target_id": "S2_click_821",
+  "python": "3.12",
+  "packages": {},
+  "platform": "linux",
+  "pythonpath": [
+    "src"
+  ],
+  "role": "SMOKE ONLY (Click 8.2.1, development data used in real-click v2-v5): exercises git fetch, install-then-uninstall, census and REJECT_HARM",
+  "skill": "skills/empty-default-guard-family.json",
+  "modules": [
+    "src/click/core.py"
+  ],
+  "checkout": {
+    "repo": "https://github.com/pallets/click.git",
+    "ref": "refs/tags/8.2.1"
+  },
+  "draw_oracle": "oracles/click_help_metamorphic.py",
+  "census_tests": [
+    "tests/test_options.py"
+  ],
+  "install": "self-then-uninstall:click"
+}

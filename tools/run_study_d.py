@@ -107,7 +107,7 @@ def main(config: str, target_id: str, out_dir: str) -> int:
         if manifest.get("census_requirements"):
             subprocess.run([sys.executable, "-m", "pip", "install", "-q", *manifest["census_requirements"]], check=True)
         target = Target.load(root)
-        skill = Skill.load(base / cfg["skill"])
+        skill = Skill.load(base / manifest.get("skill", cfg["skill"]))   # per-target override (smoke only)
         bound = bind_modules([skill], target)
         record["bind"] = {"sites": bound["sites"], "abstained": bound["abstained"],
                           "treated_modules": sorted(bound["treated"])}

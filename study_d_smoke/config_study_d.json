@@ -9,7 +9,9 @@
   "n_max": 300,
   "cells": [
     "S1_demo_port/bool",
-    "S1_demo_port/int"
+    "S1_demo_port/int",
+    "S2_click_821/objects",
+    "S2_click_821/lazy"
   ],
   "skill": "skills/bool-excluded-from-int.json",
   "seed_rule": "sha256(FREEZE.json sha256 || drand quicknet randomness of the first round at or after seed_time_utc)",
