@@ -13,6 +13,14 @@ jobs:
             python: "3.12"
           - target: cerberus_144
             python: "3.8"
+          - target: speckit_3268
+            python: "3.12"
+          - target: openfeature_621
+            python: "3.12"
+          - target: pycubrid_479
+            python: "3.12"
+          - target: speckit_2589
+            python: "3.12"
     runs-on: ubuntu-22.04
     timeout-minutes: 40
     steps:
@@ -21,6 +29,8 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
       - name: Vet
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           mkdir -p out_vet
           python tools/vet_target.py study_d/targets/${{ matrix.target }}.json out_vet 2>&1 | tee out_vet/log_${{ matrix.target }}.txt

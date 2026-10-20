@@ -15,6 +15,12 @@ jobs:
           - target: D2_cerberus
             python: "3.8"
             os: ubuntu-22.04
+          - target: C1_jsonschema
+            python: "3.12"
+            os: ubuntu-24.04
+          - target: C2_voluptuous
+            python: "3.12"
+            os: ubuntu-24.04
     runs-on: ${{ matrix.os }}
     timeout-minutes: 90
     steps:
