@@ -1,0 +1,35 @@
+# B9 runs (paid, after 31/10).  Keys come from repository secrets; cassettes make every
+# run replayable without paying again.
+name: Gatekeeper B9 run
+on:
+  workflow_dispatch:
+    inputs:
+      target: {description: "D1_py_ecc or D2_cerberus", required: true, default: "D1_py_ecc"}
+      model: {description: "deepseek-flash or gemini-3.1-flash-lite", required: true, default: "deepseek-flash"}
+      mode: {description: "record (paid) or replay", required: true, default: "replay"}
+permissions:
+  contents: read
+jobs:
+  b9:
+    runs-on: ${{ inputs.target == 'D2_cerberus' && 'ubuntu-22.04' || 'ubuntu-24.04' }}
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ inputs.target == 'D2_cerberus' && '3.8' || '3.12' }}
+      - name: Verify freeze
+        run: python tools/freeze_study.py verify study_d
+      - name: Run B9
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python -m pip install -q "pytest==8.3.5"
+          mkdir -p out_b9
+          python tools/run_b9.py study_d/b9_config.json study_d/config_study_d.json ${{ inputs.target }} ${{ inputs.model }} out_b9 ${{ inputs.mode }}
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: B9_${{ inputs.target }}_${{ inputs.model }}
+          path: out_b9
