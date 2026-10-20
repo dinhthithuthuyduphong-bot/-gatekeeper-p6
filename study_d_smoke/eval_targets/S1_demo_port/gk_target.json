@@ -1,0 +1,16 @@
+{
+  "target_id": "S1_demo_port",
+  "python": "3.12",
+  "packages": {},
+  "platform": "linux",
+  "pythonpath": [],
+  "role": "SMOKE ONLY (development fixture demo/targets/T5_port_bool); not evaluation data",
+  "modules": [
+    "config.py"
+  ],
+  "checkout": {
+    "local": "demo/targets/T5_port_bool"
+  },
+  "draw_oracle": "oracles/port_bool.py",
+  "census_tests": []
+}

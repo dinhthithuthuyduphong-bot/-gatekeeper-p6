@@ -55,7 +55,8 @@ def census(target: Target, treated: dict, tests: list) -> dict:
                 for rel, src in treated.items():
                     (snap / rel).write_text(src, encoding="utf-8")
             junit = work / "j.xml"
-            env = dict(os.environ, PYTHONPATH=str(snap), PYTHONDONTWRITEBYTECODE="1")
+            paths = [str(snap / p) for p in target.manifest.get("pythonpath", [])] + [str(snap)]
+            env = dict(os.environ, PYTHONPATH=os.pathsep.join(paths), PYTHONDONTWRITEBYTECODE="1")
             t0 = time.perf_counter()
             proc = subprocess.run([sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider",
                                    "-o", "addopts=", "--continue-on-collection-errors",
@@ -77,7 +78,8 @@ def census(target: Target, treated: dict, tests: list) -> dict:
 def main(config: str, target_id: str, out_dir: str) -> int:
     cfg_path = Path(config).resolve()
     cfg = json.loads(cfg_path.read_text(encoding="utf-8"))
-    if cfg.get("requires_freeze") and cfg.get("status") != "FROZEN":
+    smoke = cfg.get("status") == "SMOKE"   # development smoke test: never an evaluation target
+    if cfg.get("requires_freeze") and cfg.get("status") != "FROZEN" and not smoke:
         raise SystemExit(f"Study D status is {cfg.get('status')!r}; freeze before running.")
     base = cfg_path.parent
     out = Path(out_dir)
@@ -90,8 +92,12 @@ def main(config: str, target_id: str, out_dir: str) -> int:
               "python": sys.version.split()[0], "freeze_sha256": freeze_sha}
     try:
         root = work / target_id
-        commit = _clone_ref(manifest["checkout"]["repo"], manifest["checkout"]["ref"], root)
-        shutil.rmtree(root / ".git", ignore_errors=True)
+        if "local" in manifest["checkout"]:          # smoke only: copy a development fixture
+            shutil.copytree(ROOT / manifest["checkout"]["local"], root)
+            commit = "local:" + manifest["checkout"]["local"]
+        else:
+            commit = _clone_ref(manifest["checkout"]["repo"], manifest["checkout"]["ref"], root)
+            shutil.rmtree(root / ".git", ignore_errors=True)
         (root / "gk_target.json").write_text(json.dumps(manifest), encoding="utf-8")
         record["commit"] = commit
         kind, _, pkg = manifest.get("install", "").partition(":")
@@ -110,7 +116,10 @@ def main(config: str, target_id: str, out_dir: str) -> int:
             record["decision_basis"] = "OUT_OF_SCOPE (skill abstained on every module)"
             record["scopes"] = {}
         else:
-            record["census"] = census(target, bound["treated"], manifest["census_tests"])
+            record["census"] = (census(target, bound["treated"], manifest["census_tests"])
+                                if manifest.get("census_tests") else
+                                {"tests": 0, "new_failures": [], "excluded_baseline_failures": [],
+                                 "seconds": {}, "note": "no census suite declared"})
             draw_cfg = {"seed": seed["seed"], "alpha": cfg["alpha"], "n_max": cfg["n_max"],
                         "theta": cfg["theta"], "eta": cfg["eta"], "alpha_alarm": cfg["alpha_alarm"],
                         "b8_full": True}

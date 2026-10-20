@@ -1,0 +1,24 @@
+{
+  "target_id": "D3_speckit",
+  "python": "3.12",
+  "packages": {},
+  "platform": "linux",
+  "repository": "github/spec-kit",
+  "revision": "f6f3540409badcbe570a9d5cccca35beee932845",
+  "role": "positive (independent rediscovery of PR #3268; fix has the skill's exact shape)",
+  "pythonpath": [
+    "src"
+  ],
+  "modules": [
+    "src/specify_cli/extensions/_commands.py"
+  ],
+  "checkout": {
+    "repo": "https://github.com/github/spec-kit.git",
+    "ref": "f6f3540409badcbe570a9d5cccca35beee932845"
+  },
+  "draw_oracle": "oracles/speckit_priority_bool.py",
+  "census_tests": [
+    "tests/test_extensions.py"
+  ],
+  "install": "self-then-uninstall:specify-cli"
+}

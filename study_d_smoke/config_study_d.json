@@ -1,0 +1,28 @@
+{
+  "experiment_id": "study-d-smoke",
+  "status": "SMOKE",
+  "requires_freeze": true,
+  "theta": 0.2,
+  "eta": 0.05,
+  "alpha": 0.1,
+  "alpha_alarm": 0.05,
+  "n_max": 300,
+  "cells": [
+    "S1_demo_port/bool",
+    "S1_demo_port/int"
+  ],
+  "skill": "skills/bool-excluded-from-int.json",
+  "seed_rule": "sha256(FREEZE.json sha256 || drand quicknet randomness of the first round at or after seed_time_utc)",
+  "seed_time_utc": "2026-10-20T00:00:00Z",
+  "multiplicity": "e-Holm FWER over min(e_benefit, e_cert) of all cells; secondary e-BH q=0.1",
+  "census": "target's own tests at the pinned commit, both arms; baseline failures excluded before treatment; any new failure blocks every scope of the target",
+  "ablations": [
+    "full",
+    "no_harm_cert",
+    "no_census",
+    "bonferroni",
+    "sign_test",
+    "eta_0.10"
+  ],
+  "gk16_scope": "composition and retirement are demonstrated on development fixtures only (demo T7, Click retirement); Study D makes no claim about them"
+}

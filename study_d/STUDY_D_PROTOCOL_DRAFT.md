@@ -78,18 +78,22 @@ Họ Click giữ vai trò dữ liệu phát triển và pilot. Hai bản kế th
 
 **Điểm kiểm tra 25/10:** nếu có ít hơn 2 target dương đã qua nghiệm thu ngoài repository nguồn, thu hẹp tuyên bố chuyển giao hoặc đổi họ lỗi. Không bù bằng các biến thể test gần giống nhau.
 
-## 6b. Bộ dữ liệu Study D (mở rộng 20/10/2026)
+## 6b. Bộ dữ liệu Study D (chốt 20/10/2026): 8 target, 16 ô
 
-| Mã | Target | Vai trò | Trạng thái |
-|---|---|---|---|
-| D1 | py_ecc (trước PR #161) | Dương: tái phát hiện độc lập | Đã kiểm định, có oracle |
-| D2 | Cerberus (trước d25ae8f) | Dương; kiểm tra kiểu qua bí danh `_int_types` | Đã kiểm định, có oracle; skill dự kiến từ chối |
-| D3 | spec-kit (trước PR #3268, merge 13/7/2026) | Dương: `isinstance(raw_priority, int) and ...` | Đã kiểm định; oracle chờ mã fixture |
-| D4 | open-feature python-sdk (trước PR #621, merge 30/8/2026) | Dương; kiểu kiểm tra qua biến `py_type` | Đã kiểm định, có oracle |
-| D5 | pycubrid (trước PR #479, merge 2/10/2026) | Dương: `DBAPIType.__eq__/__ne__` | Có oracle; kiểm định lại (thiếu `hypothesis`) |
-| A1 | spec-kit (trước PR #2589, merge 21/5/2026) | Đối chứng khả năng áp dụng: bool lọt vào `int(...)` | Đã kiểm định; oracle chờ mã fixture |
-| C1 | jsonschema v4.23.0 | Đối chứng no-op: đã loại bool; skill không được làm đổi hành vi | Có oracle |
-| C2 | voluptuous 0.15.2 | Đối chứng ngữ nghĩa: chấp nhận bool là có chủ ý; skill (nếu áp dụng) là có hại theo hợp đồng của target | Có oracle |
+Mọi target đều là fix **đã được upstream merge** và đã qua kiểm định (có test fail trước fix, pass với bản merge; bộ test cũ giữ pass). Mọi oracle viết từ mã test và fixture upstream, trước khi chạy skill lên target.
+
+| Mã | Target (commit trước fix) | Vai trò | Kiểm định | Dạng mã so với skill |
+|---|---|---|---|---|
+| D1 | py_ecc `5cb90f33` (PR #161) | Dương | 5 F→P, 96 P→P | `isinstance(x, int)` trực tiếp, nhiều file |
+| D2 | Cerberus `2b63c1b9` (d25ae8f) | Dương | 1 F→P, 146 P→P | qua bí danh `_int_types`: skill dự kiến từ chối |
+| D3 | spec-kit `f6f35404` (PR #3268) | Dương | 1 F→P, 342 P→P | trùng đúng dạng skill |
+| D4 | open-feature `93296c6e` (PR #621) | Dương | 11 F→P, 80 P→P | qua biến `py_type`; fix còn đổi giá trị trả về |
+| D5 | pycubrid `068325e7` (PR #479) | Dương | 1 F→P, 50 P→P | trùng đúng dạng skill |
+| A1 | spec-kit `7fda89de` (PR #2589) | Đối chứng khả năng áp dụng | 1 F→P, 245 P→P | bool lọt vào `int(...)`, không qua `isinstance` |
+| C1 | jsonschema v4.23.0 | Đối chứng no-op | — | đã loại bool |
+| C2 | voluptuous 0.15.2 | Đối chứng ngữ nghĩa | — | chấp nhận bool là có chủ ý |
+
+Với K = 16 ô (`DECISION_SIM_K16.md`): skill tốt, không hại được admit 100% sau khoảng 110 lần rút; admit sai ở sát biên ≤ 0,9%; skill có hại bị chặn sau 2–8 lần rút.
 
 Oracle của D3–D5 được viết **sau** kiểm định, chỉ từ mã nguồn các test fail-trước/pass-sau mà công cụ kiểm định thu về, và trước khi đóng băng. Target nào không đạt kiểm định thì bị loại, ghi rõ lý do; không bù bằng biến thể gần giống.
 
@@ -132,6 +136,8 @@ Oracle của D3–D5 được viết **sau** kiểm định, chỉ từ mã ngu�
 | 29–30/10 | Tái lập từ môi trường sạch, đóng băng, chốt dự toán và tiêu chí chi tiền |
 
 ## 9b. Quy trình đóng băng và tái lập
+
+- **Chạy khói (smoke)** trước khi đóng băng (workflow `study-d-smoke.yml`): toàn bộ bộ chạy (seed drand, hash, áp skill nhiều module, census, rút mẫu, tổng hợp, ablation, báo cáo) trên target phát triển `demo/targets/T5_port_bool`, không đụng dữ liệu đánh giá.
 
 - **Kiểm tra tái lập từ môi trường sạch** (workflow `clean-room.yml`, `tools/clean_room_check.py`): unit test, quyết định demo khớp `demo/EXPECTED_DECISIONS.json`, mô phỏng tái tạo đúng `DECISION_SIM_default.md`, hash đóng băng.
 - **Đóng băng một lần bấm** (workflow `study-d-freeze.yml`): chạy unit test; đặt `FROZEN`, `frozen_on` và `seed_time_utc` = thời điểm đóng băng + 60 phút; tính lại `FREEZE.json` (41 file); commit và gắn tag `study-d-freeze`. Từ chối đóng băng lần hai.

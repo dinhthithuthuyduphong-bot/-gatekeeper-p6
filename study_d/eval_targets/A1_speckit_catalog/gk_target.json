@@ -1,0 +1,24 @@
+{
+  "target_id": "A1_speckit_catalog",
+  "python": "3.12",
+  "packages": {},
+  "platform": "linux",
+  "repository": "github/spec-kit",
+  "revision": "7fda89decb5425b14a3ff9eb1eb825401eb3080a",
+  "role": "applicability control (bug behind int(...) without isinstance; skill not expected to fix it)",
+  "pythonpath": [
+    "src"
+  ],
+  "modules": [
+    "src/specify_cli/presets.py"
+  ],
+  "checkout": {
+    "repo": "https://github.com/github/spec-kit.git",
+    "ref": "7fda89decb5425b14a3ff9eb1eb825401eb3080a"
+  },
+  "draw_oracle": "oracles/speckit_catalog_bool.py",
+  "census_tests": [
+    "tests/test_presets.py"
+  ],
+  "install": "self-then-uninstall:specify-cli"
+}
