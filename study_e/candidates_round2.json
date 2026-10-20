@@ -1,0 +1,53 @@
+{
+  "note": "Round 2 (read-only): function sources, build/test config and doc mentions for the shortlisted candidates.",
+  "candidates": [
+    {
+      "name": "PyHive",
+      "repo": "https://github.com/dropbox/PyHive.git",
+      "ref": "HEAD",
+      "hypothesis": "H1: ParamEscaper.escape_item nhận bool qua (int, float)"
+    },
+    {
+      "name": "databricks-sql-python v2.9.3",
+      "repo": "https://github.com/databricks/databricks-sql-python.git",
+      "ref": "refs/tags/v2.9.3",
+      "hypothesis": "H2: ParamEscaper.escape_item (inline params)"
+    },
+    {
+      "name": "packaging",
+      "repo": "https://github.com/pypa/packaging.git",
+      "ref": "HEAD",
+      "hypothesis": "M2: Version.from_parts; maintainer bác reject-bool (#1425)"
+    },
+    {
+      "name": "cantools",
+      "repo": "https://github.com/cantools/cantools.git",
+      "ref": "HEAD",
+      "hypothesis": "H4: scaled_to_raw / _is_integer"
+    },
+    {
+      "name": "trino-python-client",
+      "repo": "https://github.com/trinodb/trino-python-client.git",
+      "ref": "HEAD",
+      "hypothesis": "Đối chứng: bool xử lý trước nhánh int (no-op)"
+    },
+    {
+      "name": "redis-py",
+      "repo": "https://github.com/redis/redis-py.git",
+      "ref": "HEAD",
+      "hypothesis": "Đối chứng: bool bị chặn trước"
+    },
+    {
+      "name": "tomlkit",
+      "repo": "https://github.com/python-poetry/tomlkit.git",
+      "ref": "HEAD",
+      "hypothesis": "Rà soát hệ thống: serializer"
+    },
+    {
+      "name": "pyyaml",
+      "repo": "https://github.com/yaml/pyyaml.git",
+      "ref": "HEAD",
+      "hypothesis": "Rà soát hệ thống: representer"
+    }
+  ]
+}

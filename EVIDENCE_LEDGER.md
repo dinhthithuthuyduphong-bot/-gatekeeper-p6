@@ -109,6 +109,14 @@ Click 8.2.1: census VALID (3 baseline, 144/144 test ổn định, 0 regression m
 - **Study E (bản nháp):** đối chứng có hại; khảo sát nguồn cho thấy chưa có ứng viên có test upstream khẳng định bool; lượt quét áp dụng chỉ đọc (`study-e-scan.yml`, 15 ứng viên) quyết định tính khả thi.
 - **Lượt tái lập Study D** (cùng seed, cùng bản đóng băng A1): mục đích là xác nhận quyết định giống hệt và đo độ dao động thời gian; không phải lượt đánh giá mới.
 
+## Lượt tái lập Study D (cùng seed, bản đóng băng A1)
+
+Cả 8 target cho kết quả **giống hệt** lượt chính: seed, vị trí skill áp dụng, quyết định, số lần rút, số lần có lợi/hòa/có hại và census. Thời gian dao động nhỏ (census py_ecc 740,7 s → 746,0 s, khoảng +0,7%).
+
+## Study E — quét áp dụng vòng 1 (15 ứng viên, chỉ đọc)
+
+Skill khớp ở: pyyaml `ignore_aliases` (tuple ghi rõ `bool`: ứng viên có hại mạnh nhất), databricks-sql v2.9.3 `escape_item`, packaging `_validate_*` (tranh cãi, #1425), PyHive `escape_item` (test cần máy chủ), và các chỗ dự kiến không đổi hành vi ở redis-py, tomlkit, trino. Không khớp: python-memcached, cbor2, bencode.py. Vòng 2 thu mã nguồn hàm, cấu hình test và tài liệu để chốt danh sách.
+
 ## Ghi chú tái lập Study B
 
 Sau Study B, `gatekeeper_lite/` có thêm admission theo scope (`scoped.py`), nên `freeze_study.py verify study_b` trên `main` sẽ báo file thay đổi — đúng như thiết kế, để không ai chạy lại Study B bằng code mới. Muốn tái lập Study B v1, checkout tag `study-b-freeze-a2`.

@@ -64,13 +64,40 @@ def scan(repo: Path, transform) -> dict:
         except Exception as exc:
             sites.append({"file": rel, "error": f"{type(exc).__name__}: {exc}"[:200]})
             continue
+        tree = ast.parse(src)
+        funcs = {}
+        for fn in ast.walk(tree):
+            if isinstance(fn, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                funcs.setdefault(fn.name, []).append(fn)
         for s in res.sites:
-            sites.append({"file": rel, "line": s.lineno, "function": s.function, "snippet": s.snippet[:160]})
+            body = ""
+            for fn in funcs.get(s.function, []):
+                if fn.lineno <= s.lineno <= (fn.end_lineno or fn.lineno):
+                    body = (ast.get_source_segment(src, fn) or "")[:3000]
+            sites.append({"file": rel, "line": s.lineno, "function": s.function, "snippet": s.snippet[:160],
+                          "function_source": body})
     tests = bool_tests(repo)
+    cfg = {}
+    for name in ("pyproject.toml", "setup.cfg", "pytest.ini", "tox.ini", "setup.py"):
+        p = repo / name
+        if p.exists():
+            cfg[name] = p.read_text(encoding="utf-8", errors="replace")[:4000]
+    docs = []
+    for p in list(repo.rglob("*.md")) + list(repo.rglob("*.rst")):
+        try:
+            text = p.read_text(encoding="utf-8", errors="replace")
+        except Exception:
+            continue
+        for i, line in enumerate(text.splitlines()):
+            low = line.lower()
+            if ("bool" in low or "true" in low) and any(k in low for k in ("param", "int", "alias", "version", "escape", "type")):
+                docs.append(f"{p.relative_to(repo).as_posix()}:{i + 1}: {line.strip()[:200]}")
+    test_dirs = sorted({p.relative_to(repo).parts[0] for p in repo.rglob("test*.py")})[:10]
     for s in sites:
         fn = s.get("function")
         s["bool_tests_referencing_function"] = [f"{f}::{t}" for f, t, names in tests if fn and fn in names][:10]
-    return {"sites": sites, "n_sites": len([s for s in sites if "line" in s]),
+    return {"sites": sites, "build_config": cfg, "doc_mentions": docs[:60], "test_roots": test_dirs,
+            "n_sites": len([s for s in sites if "line" in s]),
             "n_sites_with_bool_test": len([s for s in sites if s.get("bool_tests_referencing_function")])}
 
 
