@@ -1,0 +1,29 @@
+# Smoke test of the full Study D runner on a DEVELOPMENT fixture (no evaluation data):
+# drand seed, freeze hashing, multi-module bind, census path, draw harness, aggregation,
+# ablation replay and the final report.
+name: Gatekeeper Study D smoke
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Smoke run
+        run: |
+          set -o pipefail
+          mkdir -p out_smoke
+          python tools/freeze_study.py freeze study_d_smoke
+          python tools/run_study_d.py study_d_smoke/config_study_d.json S1_demo_port out_smoke 2>&1 | tee out_smoke/log.txt
+          python tools/aggregate_study_d.py study_d_smoke/config_study_d.json out_smoke out_smoke/AGGREGATE.json
+          python tools/report_study_d.py study_d_smoke/config_study_d.json out_smoke out_smoke/REPORT.md
+          cat out_smoke/REPORT.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: STUDY_D_SMOKE
+          path: out_smoke

@@ -15,6 +15,12 @@ jobs:
           - target: D2_cerberus
             python: "3.8"
             os: ubuntu-22.04
+          - target: D3_speckit
+            python: "3.12"
+            os: ubuntu-24.04
+          - target: A1_speckit_catalog
+            python: "3.12"
+            os: ubuntu-24.04
           - target: D4_openfeature
             python: "3.12"
             os: ubuntu-24.04
