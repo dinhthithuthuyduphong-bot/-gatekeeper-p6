@@ -18,7 +18,9 @@ jobs:
           set -o pipefail
           mkdir -p out_smoke
           python tools/freeze_study.py freeze study_d_smoke
-          python tools/run_study_d.py study_d_smoke/config_study_d.json S1_demo_port out_smoke 2>&1 | tee out_smoke/log.txt
+          python -m pip install -q "pytest==8.3.5"
+          python tools/run_study_d.py study_d_smoke/config_study_d.json S1_demo_port out_smoke 2>&1 | tee out_smoke/log_S1.txt
+          python tools/run_study_d.py study_d_smoke/config_study_d.json S2_click_821 out_smoke 2>&1 | tee out_smoke/log_S2.txt
           python tools/aggregate_study_d.py study_d_smoke/config_study_d.json out_smoke out_smoke/AGGREGATE.json
           python tools/report_study_d.py study_d_smoke/config_study_d.json out_smoke out_smoke/REPORT.md
           cat out_smoke/REPORT.md >> "$GITHUB_STEP_SUMMARY"
