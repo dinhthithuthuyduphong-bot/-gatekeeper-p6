@@ -87,6 +87,15 @@ Họ Click giữ vai trò dữ liệu phát triển và pilot. Hai bản kế th
 5. **Chỉ số chính:** tỉ lệ thành công của **patch thực sự được nộp** trong ngân sách. pass@k chỉ là chỉ số phụ.
 6. Trước 30/10 chỉ kiểm tra đường đi bằng phản hồi ghi sẵn và model giả; kết quả này **không** tính là bằng chứng B9.
 
+**Cài đặt (đã nghiệm thu bằng model giả, `B9AcceptanceTests`):** `gatekeeper_lite/b9.py`, `tools/run_b9.py`, `study_d/b9_config.json`, `study_d/b9_instances/`.
+- **Đầu vào cho model:** mô tả lỗi (diễn đạt lại từ issue/PR upstream, không chứa mã của bản fix), toàn bộ các module được phép sửa, và một kiểm tra công khai (một ca của test hồi quy upstream, viết qua API công khai).
+- **Ngân sách:** tối đa 5 lần gọi, 4.000 token đầu ra mỗi lần, 5 lần chạy kiểm tra công khai. Lần gọi đầu temperature 0, các lần sau 0,8. Mỗi cặp (target, model) lặp lại 3 lần.
+- **Chấm điểm:** patch được nộp được chấm bằng **đúng** oracle rút mẫu đã đóng băng (đủ n_max lần rút) và cổng census.
+- **Model:** DeepSeek `deepseek-flash` và Gemini 3.1 Flash-Lite qua endpoint tương thích OpenAI; khoá API lấy từ secret của repo. Giá ghi theo tháng 10/2026 và được ghi lại vào ngày chạy.
+- **Chặn chi tiền sớm:** chế độ `record` (gọi trả phí) chỉ chạy khi config là FROZEN và sau 31/10/2026. Cassette lưu mọi phản hồi, nên chạy lại ở chế độ `replay` không tốn thêm tiền.
+- **Trần đợt pilot trả phí:** 400.000 đồng.
+- **Khớp ngân sách:** báo cáo theo hai đơn vị (lần gọi/token/USD và lần chạy test); không tuyên bố một tỉ giá quy đổi duy nhất giữa chi phí Gatekeeper và B9.
+
 ## 8. Đo chi phí
 
 - Hai worker riêng (hai môi trường Python), mỗi worker chạy một nhánh, có bộ điều phối ghép cặp kết quả. Gatekeeper chạy thật từng lần rút và dừng thật; B8 chạy đủ theo cùng quy ước.
@@ -100,6 +109,12 @@ Họ Click giữ vai trò dữ liệu phát triển và pilot. Hai bản kế th
 | 23–25/10 | Target có commit cụ thể, oracle fail-trước/pass-sau, nguồn chứng cứ; loại target còn tranh luận |
 | 26–28/10 | Harness hai worker chạy được; B9 qua các tình huống chấp nhận với model giả; đo chi phí thật so với chạy đủ |
 | 29–30/10 | Tái lập từ môi trường sạch, đóng băng, chốt dự toán và tiêu chí chi tiền |
+
+## 9b. Quy trình đóng băng và tái lập
+
+- **Kiểm tra tái lập từ môi trường sạch** (workflow `clean-room.yml`, `tools/clean_room_check.py`): unit test, quyết định demo khớp `demo/EXPECTED_DECISIONS.json`, mô phỏng tái tạo đúng `DECISION_SIM_default.md`, hash đóng băng.
+- **Đóng băng một lần bấm** (workflow `study-d-freeze.yml`): chạy unit test; đặt `FROZEN`, `frozen_on` và `seed_time_utc` = thời điểm đóng băng + 60 phút; tính lại `FREEZE.json` (41 file); commit và gắn tag `study-d-freeze`. Từ chối đóng băng lần hai.
+- **Chạy Study D** (workflow `study-d-run.yml`) sau `seed_time_utc`: kiểm tra trạng thái và hash, rồi chạy hai target; `tools/aggregate_study_d.py` tổng hợp e-Holm và e-BH.
 
 ## 10. Không được claim
 

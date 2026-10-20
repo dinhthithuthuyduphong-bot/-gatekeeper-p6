@@ -511,3 +511,72 @@ class DrawHarnessAcceptanceTests(unittest.TestCase):
         res = self._run("T6_count_bool", "count_bool.py")
         self.assertEqual(res["scopes"]["bool"]["decision"], "REJECT_HARM")
         self.assertLessEqual(res["scopes"]["bool"]["draws"], 5)
+
+
+class B9AcceptanceTests(unittest.TestCase):
+    """B9 harness acceptance with a scripted fake model (development fixture T5)."""
+
+    VISIBLE = {"kind": "python", "code": (
+        "from config import parse_port\n"
+        "try:\n    parse_port(True)\nexcept TypeError:\n    pass\nelse:\n    raise SystemExit(1)\n")}
+
+    def _diff(self, new_line):
+        import difflib
+        src = read(TGT / "T5_port_bool" / "config.py")
+        new = src.replace("    if isinstance(value, int):", new_line, 1)
+        lines = difflib.unified_diff(src.splitlines(True), new.splitlines(True),
+                                     fromfile="a/config.py", tofile="b/config.py")
+        return "diff --git a/config.py b/config.py\n" + "".join(lines)
+
+    def _repair(self, replies, budget=None):
+        from gatekeeper_lite.b9 import Budget, ScriptedFakeModel, repair
+        from gatekeeper_lite.skill import Target
+        target = Target.load(TGT / "T5_port_bool")
+        inst = {"issue": "Booleans must not be accepted as ports.", "visible": self.VISIBLE,
+                "visible_desc": "parse_port(True) must raise TypeError"}
+        return target, repair(target, inst, ScriptedFakeModel(replies), "fake", budget or Budget(),
+                              {"input": 0.15, "output": 0.60}, seed=1)
+
+    def _hidden(self, target, treated):
+        from gatekeeper_lite.drawharness import run_draw_study
+        cfg = {"seed": 3, "alpha": 0.1, "n_max": 60, "theta": 0.2, "eta": 0.05, "b8_full": True}
+        res = run_draw_study(target, treated, ROOT / "demo" / "draw_oracles" / "port_bool.py", cfg, 4)
+        return {s: v["b8"]["counts"] for s, v in res["scopes"].items()}
+
+    def test_gold_patch_submitted_and_scored_on_hidden_oracle(self):
+        target, r = self._repair([self._diff("    if isinstance(value, int) and not isinstance(value, bool):")])
+        self.assertEqual(r.status, "SUBMITTED")
+        counts = self._hidden(target, r.treated)
+        self.assertEqual(counts["bool"]["help"], 60)
+        self.assertEqual(counts["int"]["hurt"], 0)
+        self.assertGreater(r.cost_usd, 0)
+
+    def test_visible_pass_but_hidden_harm_is_caught(self):
+        target, r = self._repair([self._diff("    if isinstance(value, int) and value > 100:")])
+        self.assertEqual(r.status, "SUBMITTED")                 # the visible check cannot see it
+        self.assertGreater(self._hidden(target, r.treated)["int"]["hurt"], 0)
+
+    def test_bad_replies_and_budget(self):
+        outside = "diff --git a/other.py b/other.py\n--- a/other.py\n+++ b/other.py\n@@ -1 +1 @@\n-x\n+y\n"
+        broken = "diff --git a/config.py b/config.py\n--- a/config.py\n+++ b/config.py\n@@ -1,1 +1,1 @@\n-nonexistent\n+line\n"
+        target, r = self._repair(["I cannot fix this.", outside, broken], budget=__import__(
+            "gatekeeper_lite.b9", fromlist=["Budget"]).Budget(max_calls=3))
+        self.assertEqual(r.status, "NO_PATCH")
+        verdicts = [a["verdict"] for a in r.attempts]
+        self.assertEqual(verdicts[0], "NO_DIFF")
+        self.assertTrue(verdicts[1].startswith("OUTSIDE_EDIT_RIGHTS"))
+        self.assertEqual(verdicts[2], "DOES_NOT_APPLY")
+        self.assertEqual(r.calls, 3)
+
+    def test_cassette_replay_never_calls_out(self):
+        import tempfile
+        from gatekeeper_lite.b9 import CassetteClient, ScriptedFakeModel
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "c.json"
+            rec = CassetteClient(path, "record", ScriptedFakeModel(["hello"]))
+            msgs = [{"role": "user", "content": "x"}]
+            self.assertEqual(rec.complete("m", msgs, 10, 0.0, 1)["text"], "hello")
+            rep = CassetteClient(path, "replay")
+            self.assertEqual(rep.complete("m", msgs, 10, 0.0, 1)["text"], "hello")
+            with self.assertRaises(KeyError):
+                rep.complete("m", msgs, 10, 0.0, 2)

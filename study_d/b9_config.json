@@ -1,0 +1,37 @@
+{
+  "experiment_id": "study-d-b9-v1",
+  "status": "DRAFT",
+  "not_before_utc": "2026-10-31T00:00:00Z",
+  "budget": {
+    "max_calls": 5,
+    "max_output_tokens": 4000,
+    "max_visible_runs": 5
+  },
+  "repetitions": 3,
+  "seed": 20261031,
+  "models": [
+    {
+      "name": "deepseek-flash",
+      "base_url": "https://api.deepseek.com",
+      "key_env": "DEEPSEEK_API_KEY",
+      "prices_usd_per_mtok": {
+        "input": 0.3,
+        "output": 1.2
+      },
+      "price_note": "peak-hour list price as recorded in October 2026; re-check on the run date and record"
+    },
+    {
+      "name": "gemini-3.1-flash-lite",
+      "base_url": "https://generativelanguage.googleapis.com/v1beta/openai",
+      "key_env": "GEMINI_API_KEY",
+      "prices_usd_per_mtok": {
+        "input": 0.25,
+        "output": 1.5
+      },
+      "price_note": "list price as recorded in October 2026; re-check on the run date and record"
+    }
+  ],
+  "spend_cap_vnd": 400000,
+  "scoring": "submitted patch scored on the SAME frozen draw oracle (n_max draws, full budget) and the census gate; primary metric = outcome of the submitted patch; pass@k secondary",
+  "budget_matching": "reported in two currencies: model calls/tokens/USD and visible test runs; Gatekeeper cost reported as draws, test runs and seconds; no single exchange rate is claimed"
+}
