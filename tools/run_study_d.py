@@ -98,6 +98,8 @@ def main(config: str, target_id: str, out_dir: str) -> int:
         if kind == "self-then-uninstall":
             subprocess.run([sys.executable, "-m", "pip", "install", "-q", str(root)], check=True)
             subprocess.run([sys.executable, "-m", "pip", "uninstall", "-y", "-q", pkg], check=True)
+        if manifest.get("census_requirements"):
+            subprocess.run([sys.executable, "-m", "pip", "install", "-q", *manifest["census_requirements"]], check=True)
         target = Target.load(root)
         skill = Skill.load(base / cfg["skill"])
         bound = bind_modules([skill], target)

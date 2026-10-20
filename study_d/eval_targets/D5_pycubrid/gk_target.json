@@ -1,0 +1,26 @@
+{
+  "target_id": "D5_pycubrid",
+  "python": "3.12",
+  "packages": {},
+  "platform": "linux",
+  "pythonpath": [],
+  "repository": "cubrid-lab/pycubrid",
+  "revision": "068325e75abb068a6b9d4f9bc841038cb7743a1e",
+  "role": "positive (independent rediscovery of PR #479)",
+  "modules": [
+    "pycubrid/types.py"
+  ],
+  "checkout": {
+    "repo": "https://github.com/cubrid-lab/pycubrid.git",
+    "ref": "068325e75abb068a6b9d4f9bc841038cb7743a1e"
+  },
+  "draw_oracle": "oracles/pycubrid_bool.py",
+  "census_tests": [
+    "tests/test_types.py"
+  ],
+  "install": "self-then-uninstall:pycubrid",
+  "census_requirements": [
+    "pytest-asyncio",
+    "hypothesis"
+  ]
+}

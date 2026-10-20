@@ -169,6 +169,13 @@ def main(spec_path: str, out_dir: str) -> int:
                       arms={k: {"exit": v["exit"], "tail": v["tail"], "install_log": v["install_log"]}
                             for k, v in arms.items()})
         report["eligible_sources"] = _test_sources(work / "gold", report["eligible_oracle"])
+        dump = {}
+        for f in test_files:   # whole changed test files + every conftest.py on their path (fixtures)
+            p = work / "gold" / f
+            for cand in [p] + [q / "conftest.py" for q in p.parents if work / "gold" in q.parents or q == work / "gold"]:
+                if cand.exists():
+                    dump[str(cand.relative_to(work / "gold"))] = cand.read_text(encoding="utf-8", errors="replace")[:60000]
+        report["test_file_sources"] = dump
         report["verdict"] = ("ELIGIBLE" if report["eligible_oracle"]
                              else "NOT_ELIGIBLE (no fail-before/pass-after test)")
     except Exception as exc:  # recorded, never hidden

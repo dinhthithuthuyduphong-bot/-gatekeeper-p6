@@ -6,10 +6,8 @@
   "pre": "merge-base",
   "python": "3.12",
   "test_requirements": [
-    "pytest-asyncio"
-  ],
-  "tests": [
-    "tests/test_types.py"
+    "pytest-asyncio",
+    "hypothesis"
   ],
   "family": "bool-excluded-from-int",
   "role": "positive candidate (DBAPIType.__eq__/__ne__ treated bool as int type code); merge state to be verified",

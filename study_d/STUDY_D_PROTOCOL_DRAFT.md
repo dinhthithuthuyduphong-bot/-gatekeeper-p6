@@ -84,10 +84,10 @@ Họ Click giữ vai trò dữ liệu phát triển và pilot. Hai bản kế th
 |---|---|---|---|
 | D1 | py_ecc (trước PR #161) | Dương: tái phát hiện độc lập | Đã kiểm định, có oracle |
 | D2 | Cerberus (trước d25ae8f) | Dương; kiểm tra kiểu qua bí danh `_int_types` | Đã kiểm định, có oracle; skill dự kiến từ chối |
-| D3 | spec-kit (trước PR #3268, merge 13/7/2026) | Dương: `isinstance(raw_priority, int) and ...` | Chờ kiểm định |
-| D4 | open-feature python-sdk (trước PR #621, merge 30/8/2026) | Dương: kiểm tra kiểu cờ số nguyên | Chờ kiểm định |
-| D5 | pycubrid (trước PR #479) | Dương: `DBAPIType.__eq__/__ne__`; trạng thái merge cần xác nhận | Chờ kiểm định |
-| A1 | spec-kit (trước PR #2589) | Đối chứng khả năng áp dụng: bool lọt vào `int(...)`, không có `isinstance`; skill dự kiến từ chối | Chờ kiểm định |
+| D3 | spec-kit (trước PR #3268, merge 13/7/2026) | Dương: `isinstance(raw_priority, int) and ...` | Đã kiểm định; oracle chờ mã fixture |
+| D4 | open-feature python-sdk (trước PR #621, merge 30/8/2026) | Dương; kiểu kiểm tra qua biến `py_type` | Đã kiểm định, có oracle |
+| D5 | pycubrid (trước PR #479, merge 2/10/2026) | Dương: `DBAPIType.__eq__/__ne__` | Có oracle; kiểm định lại (thiếu `hypothesis`) |
+| A1 | spec-kit (trước PR #2589, merge 21/5/2026) | Đối chứng khả năng áp dụng: bool lọt vào `int(...)` | Đã kiểm định; oracle chờ mã fixture |
 | C1 | jsonschema v4.23.0 | Đối chứng no-op: đã loại bool; skill không được làm đổi hành vi | Có oracle |
 | C2 | voluptuous 0.15.2 | Đối chứng ngữ nghĩa: chấp nhận bool là có chủ ý; skill (nếu áp dụng) là có hại theo hợp đồng của target | Có oracle |
 

@@ -1,0 +1,26 @@
+{
+  "target_id": "D4_openfeature",
+  "python": "3.12",
+  "packages": {},
+  "platform": "linux",
+  "pythonpath": [],
+  "repository": "open-feature/python-sdk",
+  "revision": "93296c6e7788d74699746c553993352ece693816",
+  "role": "positive (independent rediscovery of PR #621); type checked via a variable (py_type)",
+  "modules": [
+    "openfeature/client.py"
+  ],
+  "checkout": {
+    "repo": "https://github.com/open-feature/python-sdk.git",
+    "ref": "93296c6e7788d74699746c553993352ece693816"
+  },
+  "draw_oracle": "oracles/openfeature_bool.py",
+  "census_tests": [
+    "tests"
+  ],
+  "install": "self-then-uninstall:openfeature-sdk",
+  "census_requirements": [
+    "pytest-asyncio",
+    "pytest-mock"
+  ]
+}
