@@ -86,6 +86,18 @@ Click 8.2.1: census VALID (3 baseline, 144/144 test ổn định, 0 regression m
 2. **B9:** cài `census_requirements`; kết luận cuối mỗi lần lặp (`b9_verdict`) gộp census và oracle kín; ước lượng chi phí bảo thủ hơn (2 ký tự/token); workflow từ chối lượt gọi trả phí thứ hai cho cùng target/model; mô tả trần chi tiêu được sửa cho trung thực (không còn "không thể vượt trần"); khuyến nghị nạp trước đúng số tiền trần. Test `B9VerdictTests`.
 3. **Nghiệm thu:** clean-room tái tạo đúng cả ba bảng mô phỏng (K = 8, K = 16 theo ô, cả họ K = 16), 6/6 mục đạt, 74 giây; sửa số repository thành 7 (spec-kit có hai target).
 
+## Study D — lượt chạy chính (đóng băng `6d964eb1…`, drand vòng 33229360)
+
+| Target | Kết quả lượt chính |
+|---|---|
+| D1 py_ecc | Skill áp dụng 23 vị trí; *bool* ADMIT sau 110 lần rút (85 có lợi, 25 hòa, 0 có hại); *int* không đổi; census 210 test ổn định, 0 regression |
+| D3 spec-kit | Skill áp dụng đúng vị trí fix upstream; *bool* ADMIT sau 110 lần rút (56 có lợi, 54 hòa, 0 có hại); *int* không đổi; census 342 test, 0 regression |
+| D5 pycubrid | Skill áp dụng `__eq__`/`__ne__`; *bool*: 33/300 có lợi, 0 có hại, chưa đạt biên lợi ích (UNDECIDED); census 49 test, 0 regression |
+| D4 open-feature | Skill từ chối (NO_MATCH: kiểu kiểm tra qua biến), đúng dự đoán từ diff |
+| A1 spec-kit #2589 | Skill từ chối (NO_MATCH), đúng dự đoán |
+| C2 voluptuous | Skill áp dụng ở hàm không liên quan (`_get_precision_scale`); không đổi hành vi; census 148 test, 0 regression |
+| C1 jsonschema, D2 Cerberus | Lỗi kỹ thuật trước khi có kết quả (setuptools-scm cần `.git`; `ast.unparse` thiếu trên Python 3.8) → **Amendment A1**, chạy lại chỉ hai target này, seed giữ nguyên |
+
 ## Ghi chú tái lập Study B
 
 Sau Study B, `gatekeeper_lite/` có thêm admission theo scope (`scoped.py`), nên `freeze_study.py verify study_b` trên `main` sẽ báo file thay đổi — đúng như thiết kế, để không ai chạy lại Study B bằng code mới. Muốn tái lập Study B v1, checkout tag `study-b-freeze-a2`.
