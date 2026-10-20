@@ -76,6 +76,10 @@ Thêm ứng viên dương D3 spec-kit #3268, D4 open-feature #621, D5 pycubrid #
 4. **B6-R có kiểm tra fingerprint;** báo cáo có tổng wall-clock Gatekeeper so với B8 (chi phí cố định tính cho cả hai).
 5. **Khoá tái lập:** `FREEZE.json` của Study D băm 71 file, gồm mã phân tích, bộ chạy, oracle, target, skill, cấu hình B9 và các file mô phỏng; tài liệu đã bỏ các đoạn cũ (hai target, K = 8).
 
+## Smoke sau khi khép 5 điểm (run `39390142156` cho clean-room)
+
+Click 8.2.1: census VALID (3 baseline, 144/144 test ổn định, 0 regression mới); B6-R fingerprint MATCH; ô *objects* ADMIT sau 80 lần rút, ô *lazy* REJECT_HARM sau 2 lần rút. Wall-clock: Gatekeeper 2,76 s, B8 2,97 s (tỉ lệ 0,93) vì census dùng chung chiếm phần lớn; đã khai báo trước trong protocol (mục 8b): không claim tiết kiệm thời gian nếu số liệu Study D không cho thấy rõ. Clean-room 4/4.
+
 ## Ghi chú tái lập Study B
 
 Sau Study B, `gatekeeper_lite/` có thêm admission theo scope (`scoped.py`), nên `freeze_study.py verify study_b` trên `main` sẽ báo file thay đổi — đúng như thiết kế, để không ai chạy lại Study B bằng code mới. Muốn tái lập Study B v1, checkout tag `study-b-freeze-a2`.

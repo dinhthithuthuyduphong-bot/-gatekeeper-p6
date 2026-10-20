@@ -132,6 +132,12 @@ Oracle của D3–D5 được viết **sau** kiểm định, chỉ từ mã ngu�
 - Hai worker riêng (hai môi trường Python), mỗi worker chạy một nhánh, có bộ điều phối ghép cặp kết quả. Gatekeeper chạy thật từng lần rút và dừng thật; B8 chạy đủ theo cùng quy ước.
 - Ghi số lần rút, số test, thời gian, tách chi phí cố định (khởi tạo, cổng census, lọc) và chi phí biên. Báo cáo **điểm hòa vốn** nếu tiết kiệm chỉ xuất hiện sau nhiều lần tái dùng.
 
+## 8b. Endpoint chi phí (khai báo trước, 21/10/2026)
+
+- **Endpoint chi phí chính:** số lần chạy cặp (lần rút) mà mỗi phương pháp cần, **không tính** chi phí cố định dùng chung.
+- **Endpoint chi phí phụ:** tổng wall-clock gồm cả chi phí cố định (census 3 baseline + treatment, khởi động worker).
+- **Kỳ vọng đã biết trước khi chạy:** ở thiết kế này mỗi lần rút chỉ tốn vài mili-giây, còn census dùng chung chiếm phần lớn thời gian. Smoke trên Click 8.2.1 cho Gatekeeper 82 lần rút so với B8 600, nhưng wall-clock chỉ 0,93 lần B8. Vì vậy **không claim tiết kiệm thời gian** trừ khi số liệu Study D cho thấy rõ; tiết kiệm về số lần rút chỉ có ý nghĩa thời gian khi mỗi lần thử đắt (ví dụ chạy lại cả bộ test của nhiệm vụ, hoặc gọi model).
+
 ## 9. Mốc nghiệm thu đến 30/10
 
 | Mốc | Kết quả phải có |
