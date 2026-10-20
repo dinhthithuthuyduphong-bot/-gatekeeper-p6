@@ -482,3 +482,32 @@ class BoolGuardFamilyTests(unittest.TestCase):
         upstream_style = "def f(v):\n    if not isinstance(v, int) or isinstance(v, bool):\n        raise TypeError\n"
         with self.assertRaises(T.Abstain):
             T.NegativeTypeGuard("int", "bool").apply(upstream_style, single_site=False)
+
+
+class DrawHarnessAcceptanceTests(unittest.TestCase):
+    """Harness acceptance on development fixtures (never on Study D evaluation targets)."""
+
+    def _run(self, target_dir, oracle):
+        from gatekeeper_lite.drawharness import run_draw_study
+        from gatekeeper_lite.gatekeeper import bind_modules
+        from gatekeeper_lite.skill import Skill, Target
+        skill = Skill.load(ROOT / "demo" / "skills" / "negative-bool-guard.json")
+        target = Target.load(TGT / target_dir)
+        bound = bind_modules([skill], target)
+        self.assertTrue(bound["treated"])
+        cfg = {"seed": 7, "alpha": 0.1, "n_max": 150, "theta": 0.2, "eta": 0.05}
+        return run_draw_study(target, bound["treated"], ROOT / "demo" / "draw_oracles" / oracle,
+                              cfg, k_cells=4)
+
+    def test_beneficial_scope_admitted_and_stops_for_real(self):
+        res = self._run("T5_port_bool", "port_bool.py")
+        bool_scope, int_scope = res["scopes"]["bool"], res["scopes"]["int"]
+        self.assertEqual(bool_scope["decision"], "ADMIT")
+        self.assertLess(bool_scope["draws"], 150)            # stopped before the budget
+        self.assertEqual(int_scope["counts"]["hurt"], 0)     # no regression on ints
+        self.assertEqual(int_scope["decision"], "UNDECIDED") # no benefit on ints: not admitted
+
+    def test_harmful_scope_rejected_fast(self):
+        res = self._run("T6_count_bool", "count_bool.py")
+        self.assertEqual(res["scopes"]["bool"]["decision"], "REJECT_HARM")
+        self.assertLessEqual(res["scopes"]["bool"]["draws"], 5)

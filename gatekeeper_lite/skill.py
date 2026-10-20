@@ -56,7 +56,14 @@ class Target:
 
     @property
     def module(self) -> str:
-        return self.manifest["module"]
+        return self.manifest.get("module") or self.manifest["modules"][0]
+
+    @property
+    def modules(self):
+        return self.manifest.get("modules") or [self.manifest["module"]]
+
+    def source_of(self, rel: str) -> str:
+        return (self.root / rel).read_text(encoding="utf-8")
 
     @property
     def regime(self) -> str:

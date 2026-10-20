@@ -1,0 +1,21 @@
+{
+  "experiment_id": "study-d-v1",
+  "status": "DRAFT",
+  "requires_freeze": true,
+  "theta": 0.2,
+  "eta": 0.05,
+  "alpha": 0.1,
+  "alpha_alarm": 0.05,
+  "n_max": 300,
+  "cells": [
+    "D1_py_ecc/bool",
+    "D1_py_ecc/int",
+    "D2_cerberus/bool",
+    "D2_cerberus/number"
+  ],
+  "skill": "skills/bool-excluded-from-int.json",
+  "seed_rule": "sha256(FREEZE.json sha256 || drand quicknet randomness of the first round at or after seed_time_utc)",
+  "seed_time_utc": "DECIDE_AT_FREEZE",
+  "multiplicity": "e-Holm FWER over min(e_benefit, e_cert) of all cells; secondary e-BH q=0.1",
+  "census": "target's own tests at the pinned commit, both arms; baseline failures excluded before treatment; any new failure blocks every scope of the target"
+}

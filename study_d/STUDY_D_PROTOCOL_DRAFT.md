@@ -66,6 +66,12 @@ Họ lỗi thứ hai: **loại bool khỏi kiểm tra kiểu int**.
 
 **Kết quả kiểm định lần 1:** Cerberus **đạt** (`test_boolean_is_not_a_number` fail trước/pass sau; 146 test giữ pass). py_ecc chưa kết luận vì một file test import helper mới làm dừng cả phiên pytest; công cụ đã được sửa để tiếp tục chạy các file khác.
 
+**Kết quả kiểm định lần 2 (đã sửa công cụ):** py_ecc **đạt**: 5 test fail trước/pass sau qua API công khai (`FQ(True)`, `FQ(1) + True`, `FQ2([True, 2])`, `FQ2([1, 2]) * True` trên 4 đường cong; `G2Basic.SkToPk(True)`), 96 test giữ pass; 5 test import helper mới bị loại đúng quy tắc. Cerberus **đạt** như lần 1. Diff cho thấy Cerberus kiểm tra kiểu qua bí danh `_int_types`; skill đã đóng băng (học từ PySStuBs ở tuần 3) chỉ nhận `int` viết trực tiếp, nên **dự kiến từ chối ở Cerberus**. Không thêm khả năng phân giải bí danh vào skill chính, vì thông tin này đến từ diff của target; nếu có, chỉ làm biến thể thăm dò, ghi rõ.
+
+**Oracle rút mẫu (đã viết, chưa chạy trên target đánh giá):** `oracles/py_ecc_bool.py` (scope *bool*: kỳ vọng `TypeError`/`ValidationError` theo test upstream; scope *int*: oracle vi sai, hành vi không đổi) và `oracles/cerberus_bool.py` (scope *bool*: `validate` trả False; scope *number*: vi sai).
+
+**Harness đã nghiệm thu trên dữ liệu phát triển** (`DrawHarnessAcceptanceTests`): skill có lợi được ADMIT sau 80 lần rút và dừng thật trước ngân sách; skill có hại bị REJECT_HARM sau 2 lần rút; B8 chạy tiếp tới ngân sách và được ghi riêng.
+
 **Nghiệm thu một target dương:** (1) có test **fail trước fix, pass với gold fix** (`tools/vet_target.py`, workflow `vet-targets.yml`); (2) oracle dùng API công khai, chạy được trên cả bản trước và sau fix (test import helper mới bị loại); (3) bộ regression cũ vẫn pass; (4) test oracle cuối không dùng để chỉnh skill hay chọn patch B9.
 
 Họ Click giữ vai trò dữ liệu phát triển và pilot. Hai bản kế thừa requests (niquests, pip vendored) chỉ dùng làm đối chứng no-op và **không** tính là hai bằng chứng chuyển giao độc lập.

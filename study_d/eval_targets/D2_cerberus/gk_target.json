@@ -1,0 +1,22 @@
+{
+  "target_id": "D2_cerberus",
+  "repository": "pyeve/cerberus",
+  "revision": "2b63c1b9ccaf112c56413c4c1788a5da275032fc",
+  "role": "positive (independent rediscovery of d25ae8f); the int check uses an alias (_int_types)",
+  "python": "3.8",
+  "packages": {},
+  "platform": "linux",
+  "pythonpath": [],
+  "modules": [
+    "cerberus/cerberus.py"
+  ],
+  "checkout": {
+    "repo": "https://github.com/pyeve/cerberus.git",
+    "ref": "2b63c1b9ccaf112c56413c4c1788a5da275032fc"
+  },
+  "draw_oracle": "oracles/cerberus_bool.py",
+  "census_tests": [
+    "cerberus/tests"
+  ],
+  "install": "self-then-uninstall:Cerberus"
+}

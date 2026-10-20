@@ -67,6 +67,27 @@ def bind(skills: Sequence[Skill], target: Target) -> BindOutcome:
     return BindOutcome(True, source, "", sites, sorted(footprint))
 
 
+def bind_modules(skills: Sequence[Skill], target: Target) -> Dict[str, object]:
+    """Apply skills to every module listed by the target; modules where every skill
+    abstains are left unchanged.  Returns {"treated": {rel: source}, "sites": [...],
+    "abstained": {rel: reason}}; nothing treated means the pair is out of scope."""
+    treated, sites, abstained = {}, [], {}
+    for rel in target.modules:
+        source, changed = target.source_of(rel), False
+        for skill in skills:
+            try:
+                res = skill.transform().apply(source, single_site=skill.single_site)
+            except transforms.Abstain as exc:
+                abstained[rel] = exc.reason
+                continue
+            source, changed = res.source, True
+            sites += [dict(module=rel, skill=skill.skill_id, line=s.lineno, function=s.function)
+                      for s in res.sites]
+        if changed:
+            treated[rel] = source
+    return {"treated": treated, "sites": sites, "abstained": abstained}
+
+
 def footprint_overlap(a: Sequence[str], b: Sequence[str]) -> List[str]:
     """K1 ∩ K2, ignoring generic behaviour tags that every skill of a family shares."""
     return sorted((set(a) & set(b)) - {"func:<module>"})

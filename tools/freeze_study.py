@@ -20,11 +20,13 @@ def tracked(study: Path) -> list:
     files = sorted(study.glob("config_*.json")) + sorted(study.glob("*PROTOCOL*.md"))
     files += [study / "AMENDMENTS.md"]
     files += sorted((study / "skills").glob("*.json"))
-    files += sorted((study / "targets").glob("*/gk_target.json"))
+    files += sorted((study / "targets").glob("*/gk_target.json")) + sorted((study / "targets").glob("*.json"))
+    files += sorted((study / "eval_targets").glob("*/gk_target.json")) + sorted((study / "oracles").glob("*.py"))
     files += sorted((study / "oracle_templates").glob("*.py")) + sorted((study / "oracle_templates").glob("*.ini"))
     files += sorted((ROOT / "gatekeeper_lite").glob("*.py"))
     files += sorted((ROOT / "p7").rglob("*.py")) + sorted((ROOT / "p7").rglob("*.json"))
-    files += [ROOT / "tools" / "fetch_real_targets.py", ROOT / "tools" / "install_requirements.py"]
+    files += [ROOT / "tools" / n for n in ("fetch_real_targets.py", "install_requirements.py",
+                                          "run_study_d.py", "aggregate_study_d.py")]
     return [f for f in files if f.is_file()]
 
 

@@ -1,0 +1,24 @@
+{
+  "target_id": "D1_py_ecc",
+  "repository": "ethereum/py_ecc",
+  "revision": "5cb90f33874cd992c2dde088a03a9d78450eb70f",
+  "role": "positive (independent rediscovery of PR #161)",
+  "python": "3.12",
+  "packages": {},
+  "platform": "linux",
+  "pythonpath": [],
+  "modules": [
+    "py_ecc/fields/field_elements.py",
+    "py_ecc/fields/optimized_field_elements.py",
+    "py_ecc/bls/ciphersuites.py"
+  ],
+  "checkout": {
+    "repo": "https://github.com/ethereum/py_ecc.git",
+    "ref": "5cb90f33874cd992c2dde088a03a9d78450eb70f"
+  },
+  "draw_oracle": "oracles/py_ecc_bool.py",
+  "census_tests": [
+    "tests"
+  ],
+  "install": "self-then-uninstall:py_ecc"
+}
