@@ -1,0 +1,95 @@
+{
+  "note": "Study E applicability frame (read-only). The frozen Study D skill is applied as-is; no target code is executed.",
+  "candidates": [
+    {
+      "name": "PyHive",
+      "repo": "https://github.com/dropbox/PyHive.git",
+      "ref": "HEAD",
+      "hypothesis": "H1: ParamEscaper.escape_item nhận bool qua (int, float)"
+    },
+    {
+      "name": "databricks-sql-python v2.9.3",
+      "repo": "https://github.com/databricks/databricks-sql-python.git",
+      "ref": "refs/tags/v2.9.3",
+      "hypothesis": "H2: ParamEscaper.escape_item (inline params)"
+    },
+    {
+      "name": "packaging",
+      "repo": "https://github.com/pypa/packaging.git",
+      "ref": "HEAD",
+      "hypothesis": "M2: Version.from_parts; maintainer bác reject-bool (#1425)"
+    },
+    {
+      "name": "cantools",
+      "repo": "https://github.com/cantools/cantools.git",
+      "ref": "HEAD",
+      "hypothesis": "H4: scaled_to_raw / _is_integer"
+    },
+    {
+      "name": "python-memcached",
+      "repo": "https://github.com/linsomniac/python-memcached.git",
+      "ref": "HEAD",
+      "hypothesis": "M1 (master dùng type()==int: dự đoán không khớp)"
+    },
+    {
+      "name": "trino-python-client",
+      "repo": "https://github.com/trinodb/trino-python-client.git",
+      "ref": "HEAD",
+      "hypothesis": "Đối chứng: bool xử lý trước nhánh int (no-op)"
+    },
+    {
+      "name": "redis-py",
+      "repo": "https://github.com/redis/redis-py.git",
+      "ref": "HEAD",
+      "hypothesis": "Đối chứng: bool bị chặn trước"
+    },
+    {
+      "name": "pymemcache",
+      "repo": "https://github.com/pinterest/pymemcache.git",
+      "ref": "HEAD",
+      "hypothesis": "Đối chứng: type() is int"
+    },
+    {
+      "name": "abseil-py",
+      "repo": "https://github.com/abseil/abseil-py.git",
+      "ref": "HEAD",
+      "hypothesis": "Đối chứng: case int(); kiểm tra idempotence"
+    },
+    {
+      "name": "tomlkit",
+      "repo": "https://github.com/python-poetry/tomlkit.git",
+      "ref": "HEAD",
+      "hypothesis": "Rà soát hệ thống: serializer"
+    },
+    {
+      "name": "cbor2",
+      "repo": "https://github.com/agronholm/cbor2.git",
+      "ref": "HEAD",
+      "hypothesis": "Rà soát hệ thống: encoder thuần Python"
+    },
+    {
+      "name": "msgpack-python",
+      "repo": "https://github.com/msgpack/msgpack-python.git",
+      "ref": "HEAD",
+      "hypothesis": "Rà soát hệ thống: fallback packer"
+    },
+    {
+      "name": "PyMySQL",
+      "repo": "https://github.com/PyMySQL/PyMySQL.git",
+      "ref": "HEAD",
+      "hypothesis": "Rà soát hệ thống: converters"
+    },
+    {
+      "name": "pyyaml",
+      "repo": "https://github.com/yaml/pyyaml.git",
+      "ref": "HEAD",
+      "hypothesis": "Rà soát hệ thống: representer"
+    },
+    {
+      "name": "bencode.py",
+      "repo": "https://github.com/fuzeman/bencode.py.git",
+      "ref": "HEAD",
+      "hypothesis": "Rà soát hệ thống: bencode"
+    }
+  ]
+}

@@ -103,6 +103,12 @@ Click 8.2.1: census VALID (3 baseline, 144/144 test ổn định, 0 regression m
 - Chạy lại C1, D2 với seed giữ nguyên (1141846373569460776). D2 Cerberus: skill áp dụng ở `_validate_allowed`/`_validate_forbidden`, không đổi hành vi; C1 jsonschema: guard thừa trong `is_integer`, không đổi hành vi.
 - **Gatekeeper admit 2 ô (đều có lợi), B2/B6-R/B8 admit 12 ô (3 có lợi, 9 không đổi); 0 ô có hại trong benchmark.** Bỏ lỡ D5/bool (lợi ích trung bình −0,11 < θ). Số lần rút: 3.220 so với B8 3.600; wall-clock 0,99. Chi tiết: `study_d/results/`.
 
+## Sau Study D (không tốn tiền)
+
+- **Kế hoạch phân tích B9** đăng ký trước: `study_d/B9_ANALYSIS_PLAN.md` (gắn tag `b9-analysis-plan` trước lượt gọi trả phí đầu tiên).
+- **Study E (bản nháp):** đối chứng có hại; khảo sát nguồn cho thấy chưa có ứng viên có test upstream khẳng định bool; lượt quét áp dụng chỉ đọc (`study-e-scan.yml`, 15 ứng viên) quyết định tính khả thi.
+- **Lượt tái lập Study D** (cùng seed, cùng bản đóng băng A1): mục đích là xác nhận quyết định giống hệt và đo độ dao động thời gian; không phải lượt đánh giá mới.
+
 ## Ghi chú tái lập Study B
 
 Sau Study B, `gatekeeper_lite/` có thêm admission theo scope (`scoped.py`), nên `freeze_study.py verify study_b` trên `main` sẽ báo file thay đổi — đúng như thiết kế, để không ai chạy lại Study B bằng code mới. Muốn tái lập Study B v1, checkout tag `study-b-freeze-a2`.
