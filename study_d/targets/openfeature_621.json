@@ -1,0 +1,19 @@
+{
+  "repo": "https://github.com/open-feature/python-sdk.git",
+  "default_branch": "main",
+  "pr": 621,
+  "gold": "refs/pull/621/head",
+  "pre": "merge-base",
+  "python": "3.12",
+  "test_requirements": [
+    "pytest-asyncio",
+    "pytest-mock"
+  ],
+  "family": "bool-excluded-from-int",
+  "role": "positive candidate (integer flag type check accepted bool)",
+  "name": "openfeature_621",
+  "extras": [
+    "test",
+    "dev"
+  ]
+}

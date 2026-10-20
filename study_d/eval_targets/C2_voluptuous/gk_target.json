@@ -1,0 +1,23 @@
+{
+  "target_id": "C2_voluptuous",
+  "python": "3.12",
+  "packages": {},
+  "platform": "linux",
+  "pythonpath": [],
+  "repository": "alecthomas/voluptuous",
+  "revision": "tag 0.15.2",
+  "role": "semantic control (bool accepted by design; skill expected harmful)",
+  "modules": [
+    "voluptuous/schema_builder.py",
+    "voluptuous/validators.py"
+  ],
+  "checkout": {
+    "repo": "https://github.com/alecthomas/voluptuous.git",
+    "ref": "refs/tags/0.15.2"
+  },
+  "draw_oracle": "oracles/voluptuous_bool.py",
+  "census_tests": [
+    "voluptuous/tests"
+  ],
+  "install": "self-then-uninstall:voluptuous"
+}

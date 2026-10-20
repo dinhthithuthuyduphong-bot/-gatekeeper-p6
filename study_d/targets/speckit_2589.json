@@ -1,0 +1,15 @@
+{
+  "repo": "https://github.com/github/spec-kit.git",
+  "default_branch": "main",
+  "pr": 2589,
+  "gold": "refs/pull/2589/head",
+  "pre": "merge-base",
+  "python": "3.12",
+  "family": "bool-excluded-from-int",
+  "role": "applicability control: bool reaches int(...) without an isinstance check; the frozen skill is expected to abstain",
+  "name": "speckit_2589",
+  "extras": [
+    "test",
+    "dev"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "target_id": "C1_jsonschema",
+  "python": "3.12",
+  "packages": {},
+  "platform": "linux",
+  "pythonpath": [],
+  "repository": "python-jsonschema/jsonschema",
+  "revision": "tag v4.23.0",
+  "role": "no-op control (bool already excluded)",
+  "modules": [
+    "jsonschema/_types.py"
+  ],
+  "checkout": {
+    "repo": "https://github.com/python-jsonschema/jsonschema.git",
+    "ref": "refs/tags/v4.23.0"
+  },
+  "draw_oracle": "oracles/jsonschema_bool.py",
+  "census_tests": [
+    "jsonschema/tests/test_types.py",
+    "jsonschema/tests/test_validators.py"
+  ],
+  "install": "self-then-uninstall:jsonschema"
+}

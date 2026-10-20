@@ -1,0 +1,21 @@
+{
+  "repo": "https://github.com/cubrid-lab/pycubrid.git",
+  "default_branch": "main",
+  "pr": 479,
+  "gold": "refs/pull/479/head",
+  "pre": "merge-base",
+  "python": "3.12",
+  "test_requirements": [
+    "pytest-asyncio"
+  ],
+  "tests": [
+    "tests/test_types.py"
+  ],
+  "family": "bool-excluded-from-int",
+  "role": "positive candidate (DBAPIType.__eq__/__ne__ treated bool as int type code); merge state to be verified",
+  "name": "pycubrid_479",
+  "extras": [
+    "test",
+    "dev"
+  ]
+}

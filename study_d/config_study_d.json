@@ -11,11 +11,25 @@
     "D1_py_ecc/bool",
     "D1_py_ecc/int",
     "D2_cerberus/bool",
-    "D2_cerberus/number"
+    "D2_cerberus/number",
+    "C1_jsonschema/bool",
+    "C1_jsonschema/int",
+    "C2_voluptuous/bool",
+    "C2_voluptuous/int"
   ],
   "skill": "skills/bool-excluded-from-int.json",
   "seed_rule": "sha256(FREEZE.json sha256 || drand quicknet randomness of the first round at or after seed_time_utc)",
   "seed_time_utc": "DECIDE_AT_FREEZE",
   "multiplicity": "e-Holm FWER over min(e_benefit, e_cert) of all cells; secondary e-BH q=0.1",
-  "census": "target's own tests at the pinned commit, both arms; baseline failures excluded before treatment; any new failure blocks every scope of the target"
+  "census": "target's own tests at the pinned commit, both arms; baseline failures excluded before treatment; any new failure blocks every scope of the target",
+  "pending_targets": "D3 spec-kit #3268, D4 open-feature #621, D5 pycubrid #479 and A1 spec-kit #2589 (applicability control) are added after vetting; cells extended before freeze",
+  "ablations": [
+    "full",
+    "no_harm_cert",
+    "no_census",
+    "bonferroni",
+    "sign_test",
+    "eta_0.10"
+  ],
+  "gk16_scope": "composition and retirement are demonstrated on development fixtures only (demo T7, Click retirement); Study D makes no claim about them"
 }

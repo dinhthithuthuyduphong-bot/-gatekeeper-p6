@@ -25,11 +25,26 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from gatekeeper_lite.runner import parse_junit  # noqa: E402
 
 GIT = ["git", "-c", "gc.auto=0", "-c", "maintenance.auto=false"]
+EXTRA_TEST_REQS: list = []
 
 
 def sh(cmd, cwd=None, check=True, capture=True, env=None, timeout=1800):
     return subprocess.run(cmd, cwd=cwd, check=check, text=True, capture_output=capture,
                           env=env, timeout=timeout)
+
+
+def pr_info(spec: dict) -> dict:
+    """Merged state and merge commit of a PR via the GitHub CLI (needs GH_TOKEN)."""
+    if not spec.get("pr"):
+        return {}
+    slug = spec["repo"].split("github.com/")[1].removesuffix(".git") if hasattr(str, "removesuffix") \
+        else spec["repo"].split("github.com/")[1][:-4]
+    r = sh(["gh", "pr", "view", str(spec["pr"]), "--repo", slug, "--json",
+            "state,mergedAt,mergeCommit,title"], check=False)
+    try:
+        return json.loads(r.stdout)
+    except Exception:
+        return {"error": (r.stderr or r.stdout)[-300:]}
 
 
 def resolve(spec: dict, repo: Path) -> tuple:
@@ -62,7 +77,7 @@ def make_env(root: Path, src: Path, extras: list, log: list) -> Path:
         log.append(f"pip install {target}: exit {r.returncode}")
         if r.returncode == 0:
             break
-    sh([str(py), "-m", "pip", "install", "-q", "pytest"], check=False)
+    sh([str(py), "-m", "pip", "install", "-q", "pytest", *EXTRA_TEST_REQS], check=False)
     return py
 
 
@@ -84,8 +99,14 @@ def _test_sources(root: Path, ids: list) -> dict:
     for tid in ids:
         mod, _, name = tid.partition("::")
         func = name.split("[")[0].split("::")[-1]
-        path = root / (mod.replace(".", "/") + ".py")
-        if not path.exists():
+        parts = mod.split(".")
+        path = None
+        for cut in range(len(parts), 0, -1):          # strip trailing class names
+            cand = root / ("/".join(parts[:cut]) + ".py")
+            if cand.exists():
+                path = cand
+                break
+        if path is None:
             continue
         src = path.read_text(encoding="utf-8", errors="replace")
         for node in ast.walk(ast.parse(src)):
@@ -97,6 +118,7 @@ def _test_sources(root: Path, ids: list) -> dict:
 
 def main(spec_path: str, out_dir: str) -> int:
     spec = json.loads(Path(spec_path).read_text(encoding="utf-8"))
+    EXTRA_TEST_REQS[:] = spec.get("test_requirements", [])
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
     work = Path(tempfile.mkdtemp(prefix="vet_"))
@@ -104,6 +126,10 @@ def main(spec_path: str, out_dir: str) -> int:
     try:
         repo = work / "repo"
         repo.mkdir()
+        info = pr_info(spec)
+        report["pr_info"] = info
+        if info.get("mergeCommit", {}) and info.get("mergeCommit", {}).get("oid"):
+            spec = dict(spec, gold=info["mergeCommit"]["oid"], pre="parent")   # what upstream accepted
         pre, gold = resolve(spec, repo)
         report.update(pre=pre, gold=gold)
         changed = sh([*GIT, "diff", "--name-only", pre, gold], cwd=repo).stdout.split()

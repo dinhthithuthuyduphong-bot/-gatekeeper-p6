@@ -1,0 +1,15 @@
+{
+  "repo": "https://github.com/github/spec-kit.git",
+  "default_branch": "main",
+  "pr": 3268,
+  "gold": "refs/pull/3268/head",
+  "pre": "merge-base",
+  "python": "3.12",
+  "family": "bool-excluded-from-int",
+  "role": "positive candidate (isinstance(raw_priority, int) and ... -> adds not isinstance(..., bool))",
+  "name": "speckit_3268",
+  "extras": [
+    "test",
+    "dev"
+  ]
+}

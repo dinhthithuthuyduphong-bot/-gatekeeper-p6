@@ -78,6 +78,27 @@ Họ Click giữ vai trò dữ liệu phát triển và pilot. Hai bản kế th
 
 **Điểm kiểm tra 25/10:** nếu có ít hơn 2 target dương đã qua nghiệm thu ngoài repository nguồn, thu hẹp tuyên bố chuyển giao hoặc đổi họ lỗi. Không bù bằng các biến thể test gần giống nhau.
 
+## 6b. Bộ dữ liệu Study D (mở rộng 20/10/2026)
+
+| Mã | Target | Vai trò | Trạng thái |
+|---|---|---|---|
+| D1 | py_ecc (trước PR #161) | Dương: tái phát hiện độc lập | Đã kiểm định, có oracle |
+| D2 | Cerberus (trước d25ae8f) | Dương; kiểm tra kiểu qua bí danh `_int_types` | Đã kiểm định, có oracle; skill dự kiến từ chối |
+| D3 | spec-kit (trước PR #3268, merge 13/7/2026) | Dương: `isinstance(raw_priority, int) and ...` | Chờ kiểm định |
+| D4 | open-feature python-sdk (trước PR #621, merge 30/8/2026) | Dương: kiểm tra kiểu cờ số nguyên | Chờ kiểm định |
+| D5 | pycubrid (trước PR #479) | Dương: `DBAPIType.__eq__/__ne__`; trạng thái merge cần xác nhận | Chờ kiểm định |
+| A1 | spec-kit (trước PR #2589) | Đối chứng khả năng áp dụng: bool lọt vào `int(...)`, không có `isinstance`; skill dự kiến từ chối | Chờ kiểm định |
+| C1 | jsonschema v4.23.0 | Đối chứng no-op: đã loại bool; skill không được làm đổi hành vi | Có oracle |
+| C2 | voluptuous 0.15.2 | Đối chứng ngữ nghĩa: chấp nhận bool là có chủ ý; skill (nếu áp dụng) là có hại theo hợp đồng của target | Có oracle |
+
+Oracle của D3–D5 được viết **sau** kiểm định, chỉ từ mã nguồn các test fail-trước/pass-sau mà công cụ kiểm định thu về, và trước khi đóng băng. Target nào không đạt kiểm định thì bị loại, ghi rõ lý do; không bù bằng biến thể gần giống.
+
+**Ablation đăng ký trước** (`tools/ablation_study_d.py`, chạy lại trên kết quả từng lần rút đã ghi, không chạy thêm): đầy đủ; bỏ chứng nhận ít tác hại; bỏ cổng census; e-Bonferroni thay e-Holm; kiểm định dấu thay e-process trung bình; η = 0,10. Trên dữ liệu phát triển, bỏ chứng nhận ít tác hại làm số lần rút để admit giảm từ 80 xuống 13: đây là chi phí đo được của yêu cầu an toàn.
+
+**Composition và retirement (GK-16):** chỉ minh hoạ trên dữ liệu phát triển (demo T7 và retirement trên Click). Study D không đưa ra claim nào về hai cơ chế này.
+
+**Báo cáo cuối** được sinh hoàn toàn từ file kết quả gốc (`tools/report_study_d.py`): bộ dữ liệu, quyết định theo ô (B2, B6-R, B8, Gatekeeper e-Holm, e-BH phụ), chi phí đo được, B9, ablation và giới hạn.
+
 ## 7. B9 (sửa lỗi bằng LLM, khớp ngân sách)
 
 1. **Một repair instance sinh một patch**, rồi patch đó được đánh giá trên các scope, giống skill.
