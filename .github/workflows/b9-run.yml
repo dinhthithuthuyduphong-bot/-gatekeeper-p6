@@ -9,6 +9,7 @@ on:
       mode: {description: "record (paid) or replay", required: true, default: "replay"}
 permissions:
   contents: read
+  actions: read
 jobs:
   b9:
     runs-on: ${{ inputs.target == 'D2_cerberus' && 'ubuntu-22.04' || 'ubuntu-24.04' }}
@@ -20,6 +21,16 @@ jobs:
           python-version: ${{ inputs.target == 'D2_cerberus' && '3.8' || '3.12' }}
       - name: Verify freeze
         run: python tools/freeze_study.py verify study_d
+      - name: Refuse a second paid record run for the same target and model
+        if: ${{ inputs.mode == 'record' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          n=$(gh api "repos/${{ github.repository }}/actions/artifacts?name=B9_RECORD_${{ inputs.target }}_${{ inputs.model }}" --jq '.total_count')
+          if [ "$n" != "0" ]; then
+            echo "::error::a paid record run already exists for this target/model; use mode=replay"
+            exit 1
+          fi
       - name: Run B9
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
@@ -31,5 +42,5 @@ jobs:
       - uses: actions/upload-artifact@v7
         if: always()
         with:
-          name: B9_${{ inputs.target }}_${{ inputs.model }}
+          name: ${{ inputs.mode == 'record' && 'B9_RECORD_' || 'B9_REPLAY_' }}${{ inputs.target }}_${{ inputs.model }}
           path: out_b9
