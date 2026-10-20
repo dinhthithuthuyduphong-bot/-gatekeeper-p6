@@ -43,6 +43,10 @@ Study B/C được hạ xuống **bằng chứng pilot** vì đếm các ca gầ
 | Cerberus `2b63c1b9` → `d25ae8f6` (Python 3.8.18) | **ĐẠT** | 1 test fail trước/pass sau: `TestValidation::test_boolean_is_not_a_number`; 146 test giữ pass |
 | py_ecc `5cb90f33` → `fe448d99` (PR #161, Python 3.12.15) | **ĐẠT** (lần 2) | 5 test fail trước/pass sau qua API công khai; 96 test giữ pass; 5 test import helper mới bị loại. Lần 1 chưa kết luận do lỗi công cụ (pytest dừng cả phiên vì lỗi collection) |
 
+## Mở rộng bộ dữ liệu Study D (20/10/2026)
+
+Thêm ứng viên dương D3 spec-kit #3268, D4 open-feature #621, D5 pycubrid #479; đối chứng khả năng áp dụng A1 spec-kit #2589; đối chứng no-op C1 jsonschema v4.23.0; đối chứng ngữ nghĩa C2 voluptuous 0.15.2. D3–D5 và A1 chờ kiểm định (workflow `vet-targets.yml`).
+
 ## Ghi chú tái lập Study B
 
 Sau Study B, `gatekeeper_lite/` có thêm admission theo scope (`scoped.py`), nên `freeze_study.py verify study_b` trên `main` sẽ báo file thay đổi — đúng như thiết kế, để không ai chạy lại Study B bằng code mới. Muốn tái lập Study B v1, checkout tag `study-b-freeze-a2`.

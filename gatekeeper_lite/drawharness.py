@@ -101,6 +101,7 @@ def run_draw_study(target, treated: Dict[str, str], oracle_path: Path, cfg: dict
             ben, cert = BettingEProcess(cfg["theta"]), HarmCertEProcess(cfg["eta"])
             alarm = HarmAlarmEProcess(cfg["eta"])
             counts = {"help": 0, "tie": 0, "hurt": 0, "harness_error": 0}
+            trace = []          # [z, regressed] per draw: enables pre-registered ablation replays
             decision, t0, n = "UNDECIDED", time.perf_counter(), 0
             gk_n, gk_seconds = None, None
             b8_full = cfg.get("b8_full", False)   # keep drawing after the decision for B8 only
@@ -114,6 +115,7 @@ def run_draw_study(target, treated: Dict[str, str], oracle_path: Path, cfg: dict
                     pw, pt = oracle.judge(scope, draw, ow, ot)
                 z = (0.0 if pt else 1.0) - (0.0 if pw else 1.0)
                 counts["help" if z < 0 else "hurt" if z > 0 else "tie"] += 1
+                trace.append([z, bool(pw and not pt)])
                 if gk_n is None:
                     ben.update(z)
                     cert.update(pw and not pt)
@@ -136,6 +138,7 @@ def run_draw_study(target, treated: Dict[str, str], oracle_path: Path, cfg: dict
                               "e_benefit": ben.value, "e_cert": cert.value,
                               "e_alarm": alarm.value,
                               "e_min": min(ben.value, cert.value),
+                              "trace": trace,
                               "seconds": round(time.perf_counter() - t0, 4)}
         return {"scopes": results,
                 "startup_seconds": {a: round(w.startup_seconds, 4) for a, w in workers.items()},
