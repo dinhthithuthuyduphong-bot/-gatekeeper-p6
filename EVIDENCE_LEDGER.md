@@ -53,9 +53,11 @@ Thêm ứng viên dương D3 spec-kit #3268, D4 open-feature #621, D5 pycubrid #
 |---|---|---|
 | D3 spec-kit #3268 (merge 13/7/2026, `903d707d`) | **ĐẠT** | 1 test fail trước/pass sau (`TestExtensionPriorityCLI::test_set_priority_repairs_corrupted_bool`), 342 test giữ pass; fix upstream trùng dạng skill |
 | D4 open-feature #621 (merge 30/8/2026, `7d945ec5`) | **ĐẠT** | 11 test fail trước/pass sau, 80 test giữ pass; kiểu kiểm tra qua biến `py_type`, fix còn đổi giá trị trả về |
-| D5 pycubrid #479 (merge 2/10/2026, `4efe599d`) | Chạy lại | `conftest.py` cần `hypothesis`; fix upstream trùng dạng skill |
+| D5 pycubrid #479 (merge 2/10/2026, `4efe599d`) | **ĐẠT** (chạy lại với `hypothesis`) | 1 test fail trước/pass sau (`TestDBAPITypeSemantics::test_eq_ne_reject_bool`), 50 test giữ pass; fix upstream trùng dạng skill |
 | A1 spec-kit #2589 (merge 21/5/2026, `0dee2faf`) | **ĐẠT** | 1 test fail trước/pass sau, 245 test giữ pass; fix nằm trước `int(...)`, không qua `isinstance` |
 | D1 py_ecc, D2 Cerberus | Tái lập đúng | |
+
+**Bộ dữ liệu Study D đã chốt:** 8 target, 16 ô; oracle của cả 8 target đã viết từ test và fixture upstream.
 
 ## Ghi chú tái lập Study B
 
