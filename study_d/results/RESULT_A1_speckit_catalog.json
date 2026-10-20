@@ -1,0 +1,44 @@
+{
+  "experiment_id": "study-d-v1",
+  "target": "A1_speckit_catalog",
+  "seed": {
+    "round": 33229360,
+    "randomness": "e43f4105eea9ee26884731272474a5c9d7b562c0856c347599881268186c13d7",
+    "seed": 1141846373569460776,
+    "url": "https://api.drand.sh/52db9ba70e0cc0f6eaf7803dd07447a1f5477735fd3f661792ba94600c84e971/public/33229360"
+  },
+  "python": "3.12.15",
+  "freeze_sha256": "6d964eb1a64791233523b54b036692c3e8f8ed7149e9d2cff55d813b8686ef6a",
+  "commit": "7fda89decb5425b14a3ff9eb1eb825401eb3080a",
+  "bind": {
+    "sites": [],
+    "abstained": {
+      "src/specify_cli/presets.py": "NO_MATCH"
+    },
+    "treated_modules": []
+  },
+  "B6R_replay": {
+    "passed": true,
+    "checks": [
+      {
+        "example": "../../demo/sources/status_before.py",
+        "passed": true,
+        "heldout": false
+      }
+    ]
+  },
+  "B6R_fingerprint": {
+    "relation": "MATCH",
+    "reasons": [],
+    "contract": {
+      "python": ">=3.8"
+    },
+    "environment": {
+      "python": "3.12",
+      "platform": "linux",
+      "packages": {}
+    }
+  },
+  "decision_basis": "OUT_OF_SCOPE (skill abstained on every module)",
+  "scopes": {}
+}

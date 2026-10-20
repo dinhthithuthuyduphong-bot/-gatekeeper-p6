@@ -98,6 +98,11 @@ Click 8.2.1: census VALID (3 baseline, 144/144 test ổn định, 0 regression m
 | C2 voluptuous | Skill áp dụng ở hàm không liên quan (`_get_precision_scale`); không đổi hành vi; census 148 test, 0 regression |
 | C1 jsonschema, D2 Cerberus | Lỗi kỹ thuật trước khi có kết quả (setuptools-scm cần `.git`; `ast.unparse` thiếu trên Python 3.8) → **Amendment A1**, chạy lại chỉ hai target này, seed giữ nguyên |
 
+## Study D v1 — kết quả đủ 8 target (sau Amendment A1)
+
+- Chạy lại C1, D2 với seed giữ nguyên (1141846373569460776). D2 Cerberus: skill áp dụng ở `_validate_allowed`/`_validate_forbidden`, không đổi hành vi; C1 jsonschema: guard thừa trong `is_integer`, không đổi hành vi.
+- **Gatekeeper admit 2 ô (đều có lợi), B2/B6-R/B8 admit 12 ô (3 có lợi, 9 không đổi); 0 ô có hại trong benchmark.** Bỏ lỡ D5/bool (lợi ích trung bình −0,11 < θ). Số lần rút: 3.220 so với B8 3.600; wall-clock 0,99. Chi tiết: `study_d/results/`.
+
 ## Ghi chú tái lập Study B
 
 Sau Study B, `gatekeeper_lite/` có thêm admission theo scope (`scoped.py`), nên `freeze_study.py verify study_b` trên `main` sẽ báo file thay đổi — đúng như thiết kế, để không ai chạy lại Study B bằng code mới. Muốn tái lập Study B v1, checkout tag `study-b-freeze-a2`.
