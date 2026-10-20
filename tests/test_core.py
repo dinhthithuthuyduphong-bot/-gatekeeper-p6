@@ -722,3 +722,38 @@ class B9VerdictTests(unittest.TestCase):
                                      "hidden_oracle": {"bool": {"help": 5, "hurt": 0}, "int": {"help": 0, "hurt": 0}}}), "SUCCESS")
         self.assertEqual(b9_verdict({"status": "SUBMITTED", "census": ok_c,
                                      "hidden_oracle": {"bool": {"help": 0, "hurt": 0}}}), "NO_EFFECT")
+
+
+class AmendmentA1Tests(unittest.TestCase):
+    def test_unparse_fallback_matches_ast_unparse(self):
+        import ast
+        for src in ("value", "self.x.y", "d['k']", "a.b(c, 1)"):
+            node = ast.parse(src).body[0].value
+            real = ast.unparse(node)
+            saved = ast.unparse
+            del ast.unparse
+            try:
+                self.assertEqual(T._unparse(node), real)
+            finally:
+                ast.unparse = saved
+
+    def test_amend_pins_original_seed_hash(self):
+        import hashlib, json, shutil, subprocess, sys, tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp) / "r"
+            shutil.copytree(ROOT, repo, ignore=shutil.ignore_patterns(".git", "__pycache__", "out_*"))
+            d = repo / "study_d"
+            cfg = json.loads((d / "config_study_d.json").read_text())
+            cfg.update(status="FROZEN", seed_time_utc="2026-10-21T00:00:00Z")
+            for k in ("seed_freeze_sha256", "amendments_applied", "amendment_log"):
+                cfg.pop(k, None)                    # the real repo may already carry an applied amendment
+            (d / "config_study_d.json").write_text(json.dumps(cfg))
+            subprocess.run([sys.executable, str(repo / "tools" / "freeze_study.py"), "freeze", "study_d"], check=True,
+                           capture_output=True)
+            original = hashlib.sha256((d / "FREEZE.json").read_bytes()).hexdigest()
+            subprocess.run([sys.executable, str(repo / "tools" / "amend_study_d.py"), "A1"], check=True, capture_output=True)
+            cfg = json.loads((d / "config_study_d.json").read_text())
+            self.assertEqual(cfg["seed_freeze_sha256"], original)
+            self.assertNotEqual(hashlib.sha256((d / "FREEZE.json").read_bytes()).hexdigest(), original)
+            r = subprocess.run([sys.executable, str(repo / "tools" / "amend_study_d.py"), "A1"], capture_output=True)
+            self.assertNotEqual(r.returncode, 0)                       # cannot apply twice

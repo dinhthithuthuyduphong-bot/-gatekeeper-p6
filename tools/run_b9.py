@@ -57,12 +57,14 @@ def main(b9_cfg, d_cfg, target_id, model_name, out_dir, mode="replay") -> int:
         (root / "gk_target.json").write_text(json.dumps(manifest))
         kind, _, pkg = manifest.get("install", "").partition(":")
         if kind == "self-then-uninstall":
-            subprocess.run([sys.executable, "-m", "pip", "install", "-q", str(root)], check=True)
+            env = dict(__import__("os").environ, SETUPTOOLS_SCM_PRETEND_VERSION="0.0.0")
+            subprocess.run([sys.executable, "-m", "pip", "install", "-q", str(root)], check=True, env=env)
             subprocess.run([sys.executable, "-m", "pip", "uninstall", "-y", "-q", pkg], check=True)
         if manifest.get("census_requirements"):          # same environment as the Study D runner
             subprocess.run([sys.executable, "-m", "pip", "install", "-q", *manifest["census_requirements"]], check=True)
         target = Target.load(root)
-        seed = drand_seed(__import__("hashlib").sha256((base / "FREEZE.json").read_bytes()).hexdigest(),
+        seed = drand_seed(dcfg.get("seed_freeze_sha256") or
+                          __import__("hashlib").sha256((base / "FREEZE.json").read_bytes()).hexdigest(),
                           dcfg["seed_time_utc"])
         for rep in range(b9["repetitions"]):
             r = repair(target, inst, cassette, model_name, Budget(**b9["budget"]),

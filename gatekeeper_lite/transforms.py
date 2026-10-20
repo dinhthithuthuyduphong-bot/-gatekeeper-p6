@@ -37,6 +37,27 @@ class ApplyResult:
 
 
 # ---------------------------------------------------------------- helpers
+def _unparse(node: ast.AST) -> str:
+    """ast.unparse on Python >= 3.9; on 3.8 (Study D target Cerberus) a small equivalent
+    for the expression kinds skills use as subjects (Name, Attribute, Subscript, Call),
+    falling back to ast.dump.  Identical output to ast.unparse for those kinds."""
+    if hasattr(ast, "unparse"):
+        return ast.unparse(node)
+    if isinstance(node, ast.Name):
+        return node.id
+    if isinstance(node, ast.Attribute):
+        return f"{_unparse(node.value)}.{node.attr}"
+    if isinstance(node, ast.Subscript):
+        index_cls = getattr(ast, "Index", ())
+        sl = node.slice.value if index_cls and isinstance(node.slice, index_cls) else node.slice
+        return f"{_unparse(node.value)}[{_unparse(sl)}]"
+    if isinstance(node, ast.Constant):
+        return repr(node.value)
+    if isinstance(node, ast.Call):
+        return f"{_unparse(node.func)}({', '.join(_unparse(a) for a in node.args)})"
+    return ast.dump(node)
+
+
 def _parents(tree: ast.AST) -> None:
     for node in ast.walk(tree):
         for child in ast.iter_child_nodes(node):
@@ -222,7 +243,7 @@ class EmptyStringGuard(Transform):
                         func in self.functions
                         or any(p in func for p in self.function_patterns)):
                     continue
-                if self.subjects and ast.unparse(node.left) not in self.subjects:
+                if self.subjects and _unparse(node.left) not in self.subjects:
                     continue
                 out.append(node)
         return out
@@ -241,7 +262,7 @@ class EmptyStringGuard(Transform):
         return [(a, b, f"(isinstance({subject}, str) and {off.text(node)})")]
 
     def touched(self, node):
-        return [f"subject:{ast.unparse(node.left)}"]
+        return [f"subject:{_unparse(node.left)}"]
 
 
 class NegativeTypeGuard(Transform):
@@ -291,7 +312,7 @@ class NegativeTypeGuard(Transform):
         return [(a, b, f"({off.text(node)} and not isinstance({subject}, {self.excluded}))")]
 
     def touched(self, node):
-        return [f"subject:{ast.unparse(node.args[0])}", f"type:{self.base}"]
+        return [f"subject:{_unparse(node.args[0])}", f"type:{self.base}"]
 
 
 _RETRY_HELPER = '''
@@ -347,7 +368,7 @@ class RetryWrap(Transform):
         return [(pos, pos, _RETRY_HELPER)]
 
     def touched(self, node):
-        return [f"call:{node.func.attr}", f"receiver:{ast.unparse(node.func.value)}"]
+        return [f"call:{node.func.attr}", f"receiver:{_unparse(node.func.value)}"]
 
 
 class AsyncWrite(Transform):
@@ -370,7 +391,7 @@ class AsyncWrite(Transform):
 
     def touched(self, node):
         return [f"call:{self.source_method}", f"call:{self.target_method}",
-                f"receiver:{ast.unparse(node.func.value)}"]
+                f"receiver:{_unparse(node.func.value)}"]
 
 
 class ExternalCommand(Transform):

@@ -113,7 +113,9 @@ def main(config: str, target_id: str, out_dir: str) -> int:
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
     freeze_sha = hashlib.sha256((base / "FREEZE.json").read_bytes()).hexdigest()
-    seed = drand_seed(freeze_sha, cfg["seed_time_utc"])
+    # Amendments re-freeze the hashes but must never change the seed: the seed is always
+    # derived from the ORIGINAL freeze hash (recorded as seed_freeze_sha256 by the amendment).
+    seed = drand_seed(cfg.get("seed_freeze_sha256") or freeze_sha, cfg["seed_time_utc"])
     manifest = json.loads((base / "eval_targets" / target_id / "gk_target.json").read_text())
     work = Path(tempfile.mkdtemp(prefix="study_d_"))
     record = {"experiment_id": cfg["experiment_id"], "target": target_id, "seed": seed,
@@ -130,7 +132,10 @@ def main(config: str, target_id: str, out_dir: str) -> int:
         record["commit"] = commit
         kind, _, pkg = manifest.get("install", "").partition(":")
         if kind == "self-then-uninstall":
-            subprocess.run([sys.executable, "-m", "pip", "install", "-q", str(root)], check=True)
+            # setuptools-scm / hatch-vcs read the version from .git, which is removed; the
+            # package itself is uninstalled right after (only its dependencies are kept).
+            env = dict(os.environ, SETUPTOOLS_SCM_PRETEND_VERSION="0.0.0")
+            subprocess.run([sys.executable, "-m", "pip", "install", "-q", str(root)], check=True, env=env)
             subprocess.run([sys.executable, "-m", "pip", "uninstall", "-y", "-q", pkg], check=True)
         if manifest.get("census_requirements"):
             subprocess.run([sys.executable, "-m", "pip", "install", "-q", *manifest["census_requirements"]], check=True)
