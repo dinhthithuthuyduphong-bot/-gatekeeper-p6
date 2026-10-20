@@ -21,7 +21,7 @@ Một skill sửa lỗi học từ một nguồn (bool lọt qua kiểm tra `isi
 
 ## 3. Bộ dữ liệu
 
-8 target trên 6 repository: 5 dương (py_ecc, Cerberus, spec-kit, open-feature, pycubrid — đều là fix đã merge, có test fail trước/pass sau), 1 đối chứng khả năng áp dụng (spec-kit #2589), 1 đối chứng no-op (jsonschema), 1 đối chứng ngữ nghĩa (voluptuous). Dự đoán từ diff (chưa chạy): skill khớp dạng ở 3 target, không khớp ở 2 target dương (bí danh, biến kiểu).
+8 target trên 7 repository (spec-kit có hai target: D3 và A1): 5 dương (py_ecc, Cerberus, spec-kit, open-feature, pycubrid — đều là fix đã merge, có test fail trước/pass sau), 1 đối chứng khả năng áp dụng (spec-kit #2589), 1 đối chứng no-op (jsonschema), 1 đối chứng ngữ nghĩa (voluptuous). Dự đoán từ diff (chưa chạy): skill khớp dạng ở 3 target, không khớp ở 2 target dương (bí danh, biến kiểu).
 
 ## 4. Những gì đã kiểm chứng
 
