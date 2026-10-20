@@ -139,7 +139,7 @@ def run_arm(arm: str, target_root: Path, module: str, treated_source: Optional[s
             (snapshot / module).write_text(treated_source, encoding="utf-8")
         hashes = _hash_tree(snapshot)
         paths = [str(snapshot / p) for p in (pythonpath or [])] + [str(PACKAGE_ROOT)]
-        env = dict(os.environ, PYTHONHASHSEED=str(seed), PYTHONDONTWRITEBYTECODE="1",
+        env = dict(os.environ, PYTHONHASHSEED=str(int(seed) % 4294967296), PYTHONDONTWRITEBYTECODE="1",
                    PYTHONPATH=os.pathsep.join(paths), **(extra_env or {}))
         oracle = oracle or {"kind": "cases"}
         start = time.perf_counter()
@@ -176,7 +176,7 @@ def reach_pass(target, functions: List[str], seed: int, timeout: float = 600.0) 
                         ignore=shutil.ignore_patterns("__pycache__", ".git", "*.egg-info"))
         out = work / "reach.json"
         paths = [str(snapshot / p) for p in target.manifest.get("pythonpath", [])]
-        env = dict(os.environ, PYTHONHASHSEED=str(seed), PYTHONDONTWRITEBYTECODE="1",
+        env = dict(os.environ, PYTHONHASHSEED=str(int(seed) % 4294967296), PYTHONDONTWRITEBYTECODE="1",
                    PYTHONPATH=os.pathsep.join(paths + [str(PACKAGE_ROOT)]),
                    GK_REACH_FUNCS=",".join(functions), GK_REACH_FILE=target.module,
                    GK_REACH_OUT=str(out), **target.manifest.get("env", {}))

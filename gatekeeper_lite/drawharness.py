@@ -31,7 +31,7 @@ PACKAGE_ROOT = Path(__file__).resolve().parent.parent
 class _Worker:
     def __init__(self, snapshot: Path, pythonpath, oracle_path: Path, seed: int):
         paths = [str(snapshot / p) for p in pythonpath] + [str(snapshot), str(PACKAGE_ROOT)]
-        env = dict(os.environ, PYTHONPATH=os.pathsep.join(paths), PYTHONHASHSEED=str(seed),
+        env = dict(os.environ, PYTHONPATH=os.pathsep.join(paths), PYTHONHASHSEED=str(int(seed) % 4294967296),
                    PYTHONDONTWRITEBYTECODE="1")
         t0 = time.perf_counter()
         self.proc = subprocess.Popen([sys.executable, "-m", "gatekeeper_lite.drawworker",
