@@ -152,3 +152,68 @@ def e_bh(e_values: Dict[str, float], fdr: float) -> List[str]:
         if e >= k_total / (fdr * k):
             r = k
     return [cell for cell, _ in ranked[:r]]
+
+
+class HarmCertEProcess:
+    """Certify LOW harm: H0: h = P(regression on a draw) >= eta.
+
+    X_i = 1 if draw i regresses (pass without skill, fail with it).  Wealth
+    prod(1 + lam (eta - X_i)) with predictable lam in [0, 1/(1-eta)) is a non-negative
+    supermartingale under H0 (E[eta - X] <= 0).  With no regressions every draw
+    multiplies wealth by (1 + lam*eta); one regression multiplies it by 1 - lam(1-eta).
+    Valid for i.i.d. draws from a declared generator (the scope).
+    """
+
+    def __init__(self, eta: float = 0.05, frac: float = 0.9):
+        if not 0 < eta < 1:
+            raise ValueError("eta in (0,1)")
+        self.eta, self.lam = eta, frac / (1 - eta)
+        self.log_w, self.n, self.regressions = 0.0, 0, 0
+
+    def update(self, regressed: bool) -> float:
+        x = 1.0 if regressed else 0.0
+        self.n += 1
+        self.regressions += int(regressed)
+        self.log_w += math.log(1.0 + self.lam * (self.eta - x))
+        return self.value
+
+    @property
+    def value(self) -> float:
+        return math.exp(self.log_w)
+
+
+class HarmAlarmEProcess:
+    """Detect harm (fail fast): H0: h <= eta_alarm, wealth prod(1 + mu (X_i - eta_alarm))."""
+
+    def __init__(self, eta_alarm: float = 0.05, alt: float = 0.5):
+        self.eta = eta_alarm
+        self.mu = min((alt - eta_alarm) / (eta_alarm * (1 - eta_alarm)), 0.95 / eta_alarm)
+        self.log_w = 0.0
+
+    def update(self, regressed: bool) -> float:
+        x = 1.0 if regressed else 0.0
+        self.log_w += math.log(1.0 + self.mu * (x - self.eta))
+        return self.value
+
+    @property
+    def value(self) -> float:
+        return math.exp(self.log_w)
+
+
+def e_holm(e_values: Dict[str, float], alpha: float) -> List[str]:
+    """Closed e-Bonferroni (e-Holm): reject H_k iff for every j = 0..K-1 the mean of e_k
+    and the j smallest other e-values is >= 1/alpha.  FWER <= alpha under any dependence
+    (Vovk & Wang 2021; Hartog & Lei 2025), given valid e-values."""
+    out = []
+    for k, ek in e_values.items():
+        others = sorted(v for c, v in e_values.items() if c != k)
+        ok, running = True, ek
+        for j in range(len(others) + 1):
+            if j:
+                running += others[j - 1]
+            if running / (j + 1) < 1.0 / alpha:
+                ok = False
+                break
+        if ok:
+            out.append(k)
+    return out

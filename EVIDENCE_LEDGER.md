@@ -32,6 +32,10 @@ Mỗi dòng là một lần chạy trên GitHub Actions. "Phạm vi" ghi rõ đi
 | Study B run (thử) | (bổ sung) | (bổ sung) | `STUDY_B_OUTPUT` (chỉ PIP_FREEZE) | Dừng có chủ đích: protocol còn DRAFT. Không có kết quả Study B nào được tạo ra |
 | Study B candidate scan v1 | (bổ sung) | (bổ sung) | `STUDY_B_CANDIDATE_SCAN` | rich-click `4ee6d4b27950` có site chưa guard trong `_get_parameter_default`; asyncclick HEAD đã sửa; typer, click-extra, cloup không có site |
 
+## Thay đổi thiết kế sau đánh giá phản biện (20/10/2026)
+
+Study B/C được hạ xuống **bằng chứng pilot** vì đếm các ca gần trùng lặp thành bằng chứng độc lập, dùng thứ tự ưu tiên và FDR. Thiết kế chính mới là Study D (`study_d/STUDY_D_PROTOCOL_DRAFT.md`): scope là bộ sinh đầu vào i.i.d., bộ test gốc là cổng census, chứng nhận ít tác hại η = 0,05, e-Holm (FWER).
+
 ## Ghi chú tái lập Study B
 
 Sau Study B, `gatekeeper_lite/` có thêm admission theo scope (`scoped.py`), nên `freeze_study.py verify study_b` trên `main` sẽ báo file thay đổi — đúng như thiết kế, để không ai chạy lại Study B bằng code mới. Muốn tái lập Study B v1, checkout tag `study-b-freeze-a2`.

@@ -19,7 +19,7 @@ Chỉ dùng thư viện chuẩn của Python (≥ 3.9; đã chạy với 3.12.3)
 
 ```bash
 # ở thư mục gốc của repo (hoặc thư mục chứa gatekeeper_lite/)
-python -m unittest discover -s tests -v                              # 35 test
+python -m unittest discover -s tests -v                              # 38 test
 python -m gatekeeper_lite run --config demo/config.json --out out_demo
 python -m gatekeeper_lite show out_demo/RESULT.json T2_help_lazy     # giải thích 1 cặp
 ```
@@ -111,6 +111,10 @@ Array-like hỏng ở một phép so sánh khác (`default_value not in (None, U
 ## Kết quả Study B v1 (19/10/2026)
 
 Trên rich-click v1.9.9 và asyncclick 8.3.0.6 (chưa từng chạy trước khi đóng băng): B6-R admit 3/3 cặp có hại, B8 và Gatekeeper-Lite từ chối cả 3; Gatekeeper dừng sau 9 task mỗi cặp với chi phí khoảng một nửa B8. Bỏ lớp chuỗi lazy thì cả 3 cặp thành có lợi. Xem `study_b/results/RESULTS_SUMMARY_study-b-v1.md`.
+
+## Study D: thiết kế chính (đang chuẩn bị, đóng băng 30/10)
+
+Study B/C là pilot. Thiết kế chính mới nằm ở `study_d/STUDY_D_PROTOCOL_DRAFT.md`; mô phỏng quy tắc quyết định: `python tools/decision_sim.py`; kiểm định target: workflow `vet-targets.yml`.
 
 ## Kết quả Study C v1 (19/10/2026)
 
