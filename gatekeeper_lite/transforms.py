@@ -259,20 +259,30 @@ class NegativeTypeGuard(Transform):
         for node in ast.walk(tree):
             if _is_isinstance(node, type_name=self.base):
                 parent = _parent(node)
-                in_test = isinstance(parent, (ast.If, ast.While, ast.IfExp)) and parent.test is node
+                ctx = parent
+                if isinstance(parent, ast.UnaryOp) and isinstance(parent.op, ast.Not):
+                    ctx = _parent(parent)          # `if not isinstance(v, int): reject`
+                    if not ((isinstance(ctx, (ast.If, ast.While, ast.IfExp)) and ctx.test is parent)
+                            or isinstance(ctx, (ast.BoolOp, ast.Return, ast.Assert))):
+                        continue
+                    out.append(node)
+                    continue
+                in_test = isinstance(parent, (ast.If, ast.While, ast.IfExp, ast.Assert)) and parent.test is node
                 in_bool = isinstance(parent, ast.BoolOp)
-                if in_test or in_bool:
+                if in_test or in_bool or isinstance(parent, ast.Return):
                     out.append(node)
         return out
 
     def check(self, tree, node):
-        parent = _parent(node)
         subject = node.args[0]
-        if isinstance(parent, ast.BoolOp) and isinstance(parent.op, ast.And):
-            for v in parent.values:
-                if (isinstance(v, ast.UnaryOp) and isinstance(v.op, ast.Not)
-                        and _is_isinstance(v.operand, subject, self.excluded)):
+        # already guarded anywhere in the same boolean expression (`... and not isinstance(v, bool)`
+        # or `not isinstance(v, int) or isinstance(v, bool)`)
+        cur = _parent(node)
+        while isinstance(cur, (ast.BoolOp, ast.UnaryOp)):
+            for sub in ast.walk(cur):
+                if sub is not node and _is_isinstance(sub, subject, self.excluded):
                     return "ALREADY_GUARDED"
+            cur = _parent(cur)
         return None
 
     def edits(self, tree, node, off):
