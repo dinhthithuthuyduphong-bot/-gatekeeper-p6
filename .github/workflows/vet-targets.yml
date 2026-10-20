@@ -1,0 +1,31 @@
+# Vet Study D candidate targets: does the gold fix have fail-before/pass-after tests?
+name: Gatekeeper Study D target vetting
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  vet:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: py_ecc_161
+            python: "3.12"
+          - target: cerberus_144
+            python: "3.8"
+    runs-on: ubuntu-22.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Vet
+        run: |
+          mkdir -p out_vet
+          python tools/vet_target.py study_d/targets/${{ matrix.target }}.json out_vet 2>&1 | tee out_vet/log_${{ matrix.target }}.txt
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: VETTING_${{ matrix.target }}
+          path: out_vet
