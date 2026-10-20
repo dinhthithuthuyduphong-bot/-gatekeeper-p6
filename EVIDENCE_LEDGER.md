@@ -80,6 +80,12 @@ Thêm ứng viên dương D3 spec-kit #3268, D4 open-feature #621, D5 pycubrid #
 
 Click 8.2.1: census VALID (3 baseline, 144/144 test ổn định, 0 regression mới); B6-R fingerprint MATCH; ô *objects* ADMIT sau 80 lần rút, ô *lazy* REJECT_HARM sau 2 lần rút. Wall-clock: Gatekeeper 2,76 s, B8 2,97 s (tỉ lệ 0,93) vì census dùng chung chiếm phần lớn; đã khai báo trước trong protocol (mục 8b): không claim tiết kiệm thời gian nếu số liệu Study D không cho thấy rõ. Clean-room 4/4.
 
+## Khép ba nhóm việc sau đánh giá lần 2 (21/10/2026)
+
+1. **Một nguồn quyết định:** `gatekeeper_lite/studyd_decisions.py` dùng chung cho aggregate, báo cáo và ablation; B6-R yêu cầu fingerprint MATCH ở mọi đường; `CENSUS_INVALID` không bao giờ bị tính là QUARANTINE hay ADMIT. Test `StudyDDecisionConsistencyTests`.
+2. **B9:** cài `census_requirements`; kết luận cuối mỗi lần lặp (`b9_verdict`) gộp census và oracle kín; ước lượng chi phí bảo thủ hơn (2 ký tự/token); workflow từ chối lượt gọi trả phí thứ hai cho cùng target/model; mô tả trần chi tiêu được sửa cho trung thực (không còn "không thể vượt trần"); khuyến nghị nạp trước đúng số tiền trần. Test `B9VerdictTests`.
+3. **Nghiệm thu:** clean-room tái tạo đúng cả ba bảng mô phỏng (K = 8, K = 16 theo ô, cả họ K = 16), 6/6 mục đạt, 74 giây; sửa số repository thành 7 (spec-kit có hai target).
+
 ## Ghi chú tái lập Study B
 
 Sau Study B, `gatekeeper_lite/` có thêm admission theo scope (`scoped.py`), nên `freeze_study.py verify study_b` trên `main` sẽ báo file thay đổi — đúng như thiết kế, để không ai chạy lại Study B bằng code mới. Muốn tái lập Study B v1, checkout tag `study-b-freeze-a2`.

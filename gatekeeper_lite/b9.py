@@ -130,7 +130,7 @@ class SpendGuard:
         self.cap_usd, self.spent_usd, self.calls = cap_usd, 0.0, 0
 
     def check(self, messages: List[dict], max_tokens: int, prices: dict) -> None:
-        est_in = sum(len(m["content"]) for m in messages) / 3.0          # conservative chars/token
+        est_in = sum(len(m["content"]) for m in messages) / 2.0          # very conservative chars/token
         worst = est_in / 1e6 * prices.get("input", 0) + max_tokens / 1e6 * prices.get("output", 0)
         if self.spent_usd + worst > self.cap_usd:
             raise BudgetExceeded(f"next call worst case {worst:.4f} USD would exceed cap "
@@ -140,7 +140,28 @@ class SpendGuard:
         cost = usage.get("input", 0) / 1e6 * prices.get("input", 0) + usage.get("output", 0) / 1e6 * prices.get("output", 0)
         self.spent_usd += cost
         self.calls += 1
+        if self.spent_usd > self.cap_usd:      # only possible if the provider exceeded max_tokens
+            self.overshoot = True
         return cost
+
+    overshoot = False
+
+
+def b9_verdict(run: dict, bug_scope: str = "bool") -> str:
+    """Final B9 outcome of ONE repetition (protocol section 7, primary metric):
+    NO_PATCH | CENSUS_INVALID | HARMFUL (persistent census failure or any hidden regression)
+    | SUCCESS (helps the bug scope, no harm anywhere) | NO_EFFECT (submitted, neither)."""
+    if run.get("status") != "SUBMITTED":
+        return "NO_PATCH"
+    census = run.get("census", {})
+    if census.get("status") == "INVALID":
+        return "CENSUS_INVALID"
+    hidden = run.get("hidden_oracle", {})
+    if census.get("new_failures") or any(v.get("hurt", 0) for v in hidden.values()):
+        return "HARMFUL"
+    if hidden.get(bug_scope, {}).get("help", 0) > 0:
+        return "SUCCESS"
+    return "NO_EFFECT"
 
 
 # ----------------------------------------------------------------- visible filter
