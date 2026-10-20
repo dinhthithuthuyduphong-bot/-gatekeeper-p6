@@ -41,7 +41,7 @@ Study B/C được hạ xuống **bằng chứng pilot** vì đếm các ca gầ
 | Target | Kết quả | Ghi chú |
 |---|---|---|
 | Cerberus `2b63c1b9` → `d25ae8f6` (Python 3.8.18) | **ĐẠT** | 1 test fail trước/pass sau: `TestValidation::test_boolean_is_not_a_number`; 146 test giữ pass |
-| py_ecc `5cb90f33` → `fe448d99` (PR #161, Python 3.12.15) | Chưa kết luận | `tests/core/test_utils.py` import helper mới `is_integer`, làm pytest dừng cả phiên ở commit trước fix; các test qua API công khai chưa được chạy. Công cụ đã sửa (`--continue-on-collection-errors`), cần chạy lại |
+| py_ecc `5cb90f33` → `fe448d99` (PR #161, Python 3.12.15) | **ĐẠT** (lần 2) | 5 test fail trước/pass sau qua API công khai; 96 test giữ pass; 5 test import helper mới bị loại. Lần 1 chưa kết luận do lỗi công cụ (pytest dừng cả phiên vì lỗi collection) |
 
 ## Ghi chú tái lập Study B
 
