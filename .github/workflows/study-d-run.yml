@@ -1,6 +1,12 @@
 # Study D evaluation run.  Refuses unless study_d is FROZEN and every frozen hash matches.
 name: Gatekeeper Study D run
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      only:
+        description: "comma-separated targets to run (empty = all); used after an amendment"
+        required: false
+        default: ""
 permissions:
   contents: read
 jobs:
@@ -35,6 +41,7 @@ jobs:
             os: ubuntu-24.04
     runs-on: ${{ matrix.os }}
     timeout-minutes: 90
+    if: ${{ inputs.only == '' || contains(inputs.only, matrix.target) }}
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v6
