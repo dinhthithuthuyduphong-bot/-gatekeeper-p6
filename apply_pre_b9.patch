@@ -1,0 +1,600 @@
+diff --git a/.github/workflows/b9-run.yml b/.github/workflows/b9-run.yml
+--- a/.github/workflows/b9-run.yml
++++ b/.github/workflows/b9-run.yml
+@@ -1,33 +1,43 @@
+-# B9 runs (paid, after 31/10).  Keys come from repository secrets; cassettes make every
+-# run replayable without paying again.
++# Proposed replacement. Zero-cost preflight; paid B9 remains on REVIEW_HOLD.
+ name: Gatekeeper B9 run
+ on:
+   workflow_dispatch:
+     inputs:
+       target: {description: "D1_py_ecc, D2_cerberus, D3_speckit, D4_openfeature, D5_pycubrid or A1_speckit_catalog", required: true, default: "D1_py_ecc"}
+-      model: {description: "deepseek-flash or gemini-3.1-flash-lite", required: true, default: "deepseek-flash"}
+-      mode: {description: "record (paid) or replay", required: true, default: "replay"}
++      model: {description: "deepseek-flash, gemini-3.1-flash-lite, vertex-gemini-flash, vertex-gemini-pro", required: true, default: "deepseek-flash"}
++      mode: {description: "record (paid, currently on hold) or replay", required: true, default: "replay"}
+       config: {description: "B9 config (study_d/b9_config.json or study_f/b9_config_f.json)", required: true, default: "study_d/b9_config.json"}
+ permissions:
+   contents: read
+   actions: read
++concurrency:
++  group: b9-${{ inputs.target }}-${{ inputs.model }}
++  cancel-in-progress: false
+ jobs:
+   b9:
+     runs-on: ${{ inputs.target == 'D2_cerberus' && 'ubuntu-22.04' || 'ubuntu-24.04' }}
+     timeout-minutes: 90
++    env:
++      B9_CONFIG: ${{ inputs.config }}
++      B9_TARGET: ${{ inputs.target }}
++      B9_MODEL: ${{ inputs.model }}
++      B9_MODE: ${{ inputs.mode }}
+     steps:
+       - uses: actions/checkout@v6
+       - uses: actions/setup-python@v6
+         with:
+           python-version: ${{ inputs.target == 'D2_cerberus' && '3.8' || '3.12' }}
+-      - name: Verify freeze
+-        run: python tools/freeze_study.py verify study_d
++      - name: Verify both frozen studies and pre-B9 review gate (no API calls)
++        run: |
++          python tools/preflight_b9.py \
++            --config "$B9_CONFIG" --target "$B9_TARGET" \
++            --model "$B9_MODEL" --mode "$B9_MODE"
+       - name: Refuse a second paid record run for the same target and model
+         if: ${{ inputs.mode == 'record' }}
+         env:
+           GH_TOKEN: ${{ github.token }}
+         run: |
+-          n=$(gh api "repos/${{ github.repository }}/actions/artifacts?name=B9_RECORD_${{ inputs.target }}_${{ inputs.model }}" --jq '.total_count')
++          n=$(gh api "repos/${{ github.repository }}/actions/artifacts?name=B9_RECORD_${B9_TARGET}_${B9_MODEL}" --jq '.total_count')
+           if [ "$n" != "0" ]; then
+             echo "::error::a paid record run already exists for this target/model; use mode=replay"
+             exit 1
+@@ -49,7 +59,8 @@
+         run: |
+           python -m pip install -q "pytest==8.3.5"
+           mkdir -p out_b9
+-          python tools/run_b9.py ${{ inputs.config }} study_d/config_study_d.json ${{ inputs.target }} ${{ inputs.model }} out_b9 ${{ inputs.mode }}
++          python tools/run_b9.py "$B9_CONFIG" study_d/config_study_d.json \
++            "$B9_TARGET" "$B9_MODEL" out_b9 "$B9_MODE"
+       - uses: actions/upload-artifact@v7
+         if: always()
+         with:
+diff --git a/pre_b9/LAMBDA_SENSITIVITY_EXPLORATORY.md b/pre_b9/LAMBDA_SENSITIVITY_EXPLORATORY.md
+new file mode 100644
+--- /dev/null
++++ b/pre_b9/LAMBDA_SENSITIVITY_EXPLORATORY.md
+@@ -0,0 +1,31 @@
++# Exploratory analytic sensitivity: harm-certificate λ
++
++**NOT prospective evidence.** Analytic Bernoulli scenarios, not observed target outcomes.
++The frozen implementation uses `lambda = frac/(1-eta)` with `frac=0.9`.
++Rows with alternative fractions are hypothetical; do not overwrite frozen settings.
++
++| frac | λ | true h | E[log wealth per draw] | draws to 1/α with 0 regressions |
++|---:|---:|---:|---:|---:|
++| 0.3 | 0.3158 | 0.00 | +0.01567 | 147 |
++| 0.3 | 0.3158 | 0.02 | +0.00822 | 147 |
++| 0.3 | 0.3158 | 0.05 | -0.00295 | 147 |
++| 0.3 | 0.3158 | 0.10 | -0.02157 | 147 |
++| 0.5 | 0.5263 | 0.00 | +0.02598 | 89 |
++| 0.5 | 0.5263 | 0.02 | +0.01159 | 89 |
++| 0.5 | 0.5263 | 0.05 | -0.00998 | 89 |
++| 0.5 | 0.5263 | 0.10 | -0.04594 | 89 |
++| 0.7 | 0.7368 | 0.00 | +0.03618 | 64 |
++| 0.7 | 0.7368 | 0.02 | +0.01138 | 64 |
++| 0.7 | 0.7368 | 0.05 | -0.02583 | 64 |
++| 0.7 | 0.7368 | 0.10 | -0.08784 | 64 |
++| 0.9 | 0.9474 | 0.00 | +0.04628 | 50 |
++| 0.9 | 0.9474 | 0.02 | -0.00070 | 50 |
++| 0.9 | 0.9474 | 0.05 | -0.07116 | 50 |
++| 0.9 | 0.9474 | 0.10 | -0.18861 | 50 |
++
++At the null boundary `h=eta`, expected *wealth multiplier* equals 1;
++expected log growth can be negative by Jensen's inequality.
++The no-regression crossing count is a conditional best-case path,
++NOT expected admission time or statistical power.
++Power and stopping-time distributions require separately labeled Monte Carlo
++simulations or actual prospective draws.
+diff --git a/pre_b9/RELEASE_GATE.json b/pre_b9/RELEASE_GATE.json
+new file mode 100644
+--- /dev/null
++++ b/pre_b9/RELEASE_GATE.json
+@@ -0,0 +1,5 @@
++{
++  "status": "HOLD",
++  "approved_for": null,
++  "reason": "Review statistical method, B6-R comparator, oracle provenance, held-out scoring, and actual billing controls before paid B9."
++}
+diff --git a/tests/test_b6r_contract_audit.py b/tests/test_b6r_contract_audit.py
+new file mode 100644
+--- /dev/null
++++ b/tests/test_b6r_contract_audit.py
+@@ -0,0 +1,33 @@
++"""Read-only B6-R audit tests with synthetic fixtures."""
++import json
++import tempfile
++import unittest
++from pathlib import Path
++from tools.b6r_contract_audit import inventory
++
++
++class ContractInventoryTests(unittest.TestCase):
++    def test_missing_source_package_contract_is_not_misreported_as_match(self):
++        with tempfile.TemporaryDirectory() as d:
++            root = Path(d)
++            base = root / "study_d"
++            (base / "skills").mkdir(parents=True)
++            (base / "eval_targets" / "T1").mkdir(parents=True)
++            (base / "config_study_d.json").write_text(
++                json.dumps({"skill": "skills/skill.json"}), encoding="utf-8")
++            (base / "skills/skill.json").write_text(
++                json.dumps({"skill_id": "synthetic", "D": {"python": ">=3.10"}}),
++                encoding="utf-8")
++            (base / "eval_targets/T1/gk_target.json").write_text(
++                json.dumps({"python": "3.12", "packages": {"pytest": "8.3"}}),
++                encoding="utf-8")
++            result = inventory(root)
++            row = result["targets"][0]
++            self.assertEqual(row["evidence_completeness"], "INCOMPLETE")
++            self.assertIn("source_package_constraints", row["missing"])
++            self.assertEqual(row["admission_decision"], "NOT_EVALUATED")
++            self.assertFalse(row["source_provenance_verified"])
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/tests/test_preflight_b9.py b/tests/test_preflight_b9.py
+new file mode 100644
+--- /dev/null
++++ b/tests/test_preflight_b9.py
+@@ -0,0 +1,88 @@
++"""Zero-cost preflight regression tests. No cloud credentials required."""
++import json
++import tempfile
++import unittest
++from datetime import datetime, timezone
++from pathlib import Path
++from unittest.mock import patch
++
++from tools import preflight_b9
++
++
++class PreflightTests(unittest.TestCase):
++    def setUp(self):
++        self.tmp = tempfile.TemporaryDirectory()
++        self.addCleanup(self.tmp.cleanup)
++        root = Path(self.tmp.name)
++        for folder in ("study_d", "study_f", "pre_b9"):
++            (root / folder).mkdir()
++        self.root = root
++        self.write("study_d/b9_config.json", {
++            "status": "FROZEN", "not_before_utc": "2026-10-31T00:00:00Z",
++            "models": [{"name": "deepseek-flash",
++                        "prices_usd_per_mtok": {"input": 0.3, "output": 1.2}}],
++            "instances": ["D1_py_ecc"]})
++        self.write("study_f/b9_config_f.json", {
++            "status": "FROZEN", "not_before_utc": "2026-10-31T00:00:00Z",
++            "models": [{"name": "vertex-gemini-flash",
++                        "prices_usd_per_mtok": {"input": 0.75, "output": 3.75}}],
++            "instances": ["D1_py_ecc"]})
++        self.write("study_f/config_study_f.json", {
++            "status": "FROZEN", "frozen_on": "2026-10-21T16:06:53Z",
++            "cells": ["D1_py_ecc"],
++            "b9_configs": {"deepseek-flash": "study_d/b9_config.json",
++                           "vertex-gemini-flash": "study_f/b9_config_f.json"}})
++        self.write("pre_b9/RELEASE_GATE.json", {"status": "HOLD", "approved_for": None})
++        self.patch_root = patch.object(preflight_b9, "ROOT", root)
++        self.patch_root.start()
++        self.addCleanup(self.patch_root.stop)
++        self.now = datetime(2026, 11, 1, tzinfo=timezone.utc)
++
++    def write(self, path, obj):
++        (self.root / path).write_text(json.dumps(obj), encoding="utf-8")
++
++    def validate(self, mode="record", config="study_d/b9_config.json",
++                 model="deepseek-flash", now=None):
++        return preflight_b9.validate(config, "D1_py_ecc", model, mode,
++                                     now=now or self.now, verify_freezes=False)
++
++    def test_paid_is_on_hold_even_after_date(self):
++        with self.assertRaisesRegex(ValueError, "PRE_B9_REVIEW_HOLD"):
++            self.validate()
++
++    def test_replay_allowed_without_paid_signoff(self):
++        self.assertIn("REPLAY_PREFLIGHT_OK", self.validate("replay"))
++
++    def test_record_refused_before_oct31_even_if_go(self):
++        self.write("pre_b9/RELEASE_GATE.json",
++                   {"status": "GO", "approved_for": "study-f-v1"})
++        with self.assertRaisesRegex(ValueError, "forbidden before"):
++            self.validate(now=datetime(2026, 10, 22, tzinfo=timezone.utc))
++
++    def test_reject_unknown_config_path(self):
++        with self.assertRaisesRegex(ValueError, "approved repository paths"):
++            self.validate(config="../outside.json")
++
++    def test_reject_wrong_model_config_mapping(self):
++        with self.assertRaisesRegex(ValueError, "does not map"):
++            self.validate(config="study_f/b9_config_f.json")
++
++    def test_reject_unfrozen(self):
++        cfg = json.loads((self.root / "study_d/b9_config.json").read_text())
++        cfg["status"] = "DRAFT"
++        self.write("study_d/b9_config.json", cfg)
++        with self.assertRaisesRegex(ValueError, "FROZEN"):
++            self.validate()
++
++    def test_record_go_only_with_explicit_signoff(self):
++        self.write("pre_b9/RELEASE_GATE.json",
++                   {"status": "GO", "approved_for": "study-f-v1"})
++        self.assertIn("RECORD_PREFLIGHT_OK", self.validate())
++
++    def test_no_implicit_model_substitution(self):
++        with self.assertRaisesRegex(ValueError, "does not map"):
++            self.validate(model="vertex-gemini-flash")
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/tests/test_reviewer_lambda_sensitivity.py b/tests/test_reviewer_lambda_sensitivity.py
+new file mode 100644
+--- /dev/null
++++ b/tests/test_reviewer_lambda_sensitivity.py
+@@ -0,0 +1,25 @@
++"""Analytic sensitivity tests, no simulated/observed target outcomes."""
++import math
++import unittest
++from tools.reviewer_lambda_sensitivity import row
++
++
++class LambdaSensitivityTests(unittest.TestCase):
++    def test_boundary_null_expected_wealth_multiplier_one(self):
++        eta, frac = 0.05, 0.9
++        lam = row(eta, frac, eta, 0.1)["lambda"]
++        multiplier = (1 - eta) * (1 + lam * eta) + eta * (1 - lam * (1 - eta))
++        self.assertAlmostEqual(multiplier, 1.0)
++
++    def test_no_harm_crossing_finite(self):
++        a = row(0.05, 0.9, 0.0, 0.1)
++        self.assertGreater(a["no_harm_draws_to_1_over_alpha"], 0)
++        self.assertTrue(math.isfinite(a["expected_log_growth"]))
++
++    def test_invalid_parameters_fail_closed(self):
++        with self.assertRaises(ValueError):
++            row(0.05, 1.0, 0.0, 0.1)
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/tests/test_reviewer_stat_contract.py b/tests/test_reviewer_stat_contract.py
+new file mode 100644
+--- /dev/null
++++ b/tests/test_reviewer_stat_contract.py
+@@ -0,0 +1,52 @@
++"""Non-mutating statistical contract checks for the FROZEN implementation.
++
++These checks are mathematical smoke tests, NOT empirical validation of Study D/E
++and NOT a substitute for independent theorem review or confidence sequences.
++"""
++import unittest
++
++from gatekeeper_lite.eprocess import (
++    BettingEProcess, HarmCertEProcess, HarmAlarmEProcess, e_holm
++)
++
++
++class StatisticalContractTests(unittest.TestCase):
++    def test_benefit_bet_is_predictable_and_one_step_null_mean_one(self):
++        p = BettingEProcess(theta=0.2)
++        lam = p._bet()  # public implementation's bet before observing any sample
++        self.assertGreaterEqual(lam, 0)
++        self.assertLess(lam, 1 / 1.2)
++        # Boundary null E[Y]=theta, Y in {-1,+1}: P(Y=1)=0.6
++        factor_good = 1 + lam * (1 - 0.2)
++        factor_bad = 1 + lam * (-1 - 0.2)
++        self.assertGreaterEqual(factor_bad, 0)
++        self.assertAlmostEqual(0.6 * factor_good + 0.4 * factor_bad, 1.0)
++
++    def test_harm_certificate_boundary_null_mean_one(self):
++        p = HarmCertEProcess(eta=0.05)
++        lam = p.lam
++        self.assertGreaterEqual(1 - lam * (1 - 0.05), 0)
++        expected = 0.95 * (1 + lam * 0.05) + 0.05 * (1 + lam * (0.05 - 1))
++        self.assertAlmostEqual(expected, 1.0)
++
++    def test_harm_alarm_boundary_null_mean_one(self):
++        p = HarmAlarmEProcess(eta_alarm=0.05)
++        mu = p.mu
++        expected = 0.95 * (1 - mu * 0.05) + 0.05 * (1 + mu * 0.95)
++        self.assertAlmostEqual(expected, 1.0)
++
++    def test_e_holm_inactive_cells_can_reduce_power(self):
++        # Illustrative synthetic e-values, NOT real study results.
++        self.assertEqual(e_holm({"active": 30}, 0.1), ["active"])
++        self.assertNotIn("active", e_holm({"active": 30, "inactive1": 0,
++                                           "inactive2": 0, "inactive3": 0}, 0.1))
++
++    def test_e_holm_requires_all_intersections(self):
++        # With 2 hypotheses, E=30 passes singleton (>=10)
++        # and intersection mean (30+0)/2=15 passes.
++        self.assertIn("a", e_holm({"a": 30, "b": 0}, 0.1))
++        self.assertNotIn("b", e_holm({"a": 30, "b": 0}, 0.1))
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/tools/b6r_contract_audit.py b/tools/b6r_contract_audit.py
+new file mode 100644
+--- /dev/null
++++ b/tools/b6r_contract_audit.py
+@@ -0,0 +1,71 @@
++"""Read-only B6-R source/target environment contract inventory.
++
++No target tests, oracle calls, model calls, or admission decisions.
++Reports missing evidence as MISSING, not as an observed mismatch.
++"""
++from __future__ import annotations
++
++import argparse
++import json
++from pathlib import Path
++
++
++def inventory(root: Path, study: str = "study_d") -> dict:
++    base = root / study
++    cfg = json.loads((base / "config_study_d.json").read_text(encoding="utf-8"))
++    skill = json.loads((base / cfg["skill"]).read_text(encoding="utf-8"))
++    contract = skill.get("D") or {}
++    required_python = contract.get("python")
++    required_packages = contract.get("packages") or {}
++    rows = []
++    for path in sorted((base / "eval_targets").glob("*/gk_target.json")):
++        target = json.loads(path.read_text(encoding="utf-8"))
++        packages = target.get("packages") or {}
++        missing = []
++        if not required_python:
++            missing.append("source_python_constraint")
++        if not required_packages:
++            missing.append("source_package_constraints")
++        if required_python and not target.get("python"):
++            missing.append("target_python_version")
++        for package in required_packages:
++            if packages.get(package) in (None, ""):
++                missing.append("target_package:" + package)
++        rows.append({
++            "target": path.parent.name,
++            "declared_source_python": required_python,
++            "declared_source_packages": required_packages,
++            "target_python": target.get("python"),
++            "target_packages": packages,
++            "missing": missing,
++            "evidence_completeness": "INCOMPLETE" if missing else "DECLARED_ONLY",
++            "admission_decision": "NOT_EVALUATED",
++            "source_provenance_verified": False,
++        })
++    return {
++        "type": "EXPLORATORY_CONTRACT_INVENTORY",
++        "study": study,
++        "skill_id": skill.get("skill_id"),
++        "source_contract": contract,
++        "targets": rows,
++        "interpretation": (
++            "DECLARED_ONLY does not prove provenance, runtime compatibility, "
++            "source replay validity, or semantic safety. Do not use this "
++            "inventory to retroactively change frozen B6-R decisions."
++        ),
++    }
++
++
++def main() -> None:
++    parser = argparse.ArgumentParser()
++    parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parent.parent)
++    parser.add_argument("--out", type=Path, required=True)
++    args = parser.parse_args()
++    data = inventory(args.root)
++    args.out.parent.mkdir(parents=True, exist_ok=True)
++    args.out.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
++    print(f"Inventory written: {args.out} ({len(data['targets'])} targets)")
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/tools/preflight_b9.py b/tools/preflight_b9.py
+new file mode 100644
+--- /dev/null
++++ b/tools/preflight_b9.py
+@@ -0,0 +1,118 @@
++"""Fail-closed, zero-cost preflight for B9 Actions runs.
++
++This tool never authenticates to a model or sends an API request.
++It does not replace a billing hard cap or the provider-side quota.
++"""
++from __future__ import annotations
++
++import argparse
++import json
++import subprocess
++import sys
++from datetime import datetime, timezone
++from pathlib import Path
++
++ROOT = Path(__file__).resolve().parent.parent
++ALLOWED = {
++    "study_d/b9_config.json",
++    "study_f/b9_config_f.json",
++}
++
++
++def fail(message: str) -> None:
++    raise ValueError(message)
++
++
++def load_json(relative: str) -> dict:
++    return json.loads((ROOT / relative).read_text(encoding="utf-8"))
++
++
++def check_freeze(study: str) -> None:
++    proc = subprocess.run(
++        [sys.executable, str(ROOT / "tools/freeze_study.py"), "verify", study],
++        cwd=ROOT, text=True, capture_output=True, check=False,
++    )
++    if proc.returncode != 0:
++        fail(f"{study} freeze verification failed:\n{proc.stdout}\n{proc.stderr}")
++
++
++def validate(config: str, target: str, model: str, mode: str, now=None,
++             *, verify_freezes=True) -> str:
++    """Return a human-readable preflight result or raise ValueError.
++
++    An explicit reviewer signoff is needed to lift the paid-run hold.
++    The hold is not a billing guarantee: direct invocation of the original
++    frozen tools/run_b9.py is outside this Actions workflow.
++    """
++    if config not in ALLOWED:
++        fail("B9 config must be one of the two exact approved repository paths")
++    if mode not in ("record", "replay"):
++        fail("B9 mode must be record or replay")
++    if not target or not model:
++        fail("Target and model are required")
++
++    b9 = load_json(config)
++    study_f = load_json("study_f/config_study_f.json")
++    model_configs = study_f.get("b9_configs", {})
++    if model_configs.get(model) != config:
++        fail(f"Study F does not map model {model!r} to config {config!r}")
++    if model not in {m.get("name") for m in b9.get("models", [])}:
++        fail(f"Model {model!r} is absent from B9 config")
++    if target not in b9.get("instances", []):
++        fail(f"Target {target!r} is absent from B9 instances")
++    if target not in study_f.get("cells", []):
++        fail(f"Target {target!r} is absent from Study F target family")
++    if b9.get("status") != "FROZEN" or study_f.get("status") != "FROZEN":
++        fail("Study F and the selected B9 config must both be FROZEN")
++
++    if verify_freezes:
++        check_freeze("study_d")
++        check_freeze("study_f")
++
++    if mode == "replay":
++        return "REPLAY_PREFLIGHT_OK (no model call authorized by this check)"
++
++    now = now or datetime.now(timezone.utc)
++    for name, cfg in (("B9 config", b9), ("Study F", study_f)):
++        raw = cfg.get("not_before_utc") if name == "B9 config" else cfg.get("frozen_on")
++        if not raw:
++            fail(f"{name}: missing time field")
++        ts = datetime.fromisoformat(raw.replace("Z", "+00:00"))
++        if name == "Study F" and ts >= now:
++            fail("Study F freeze timestamp is not in the past")
++        if name == "B9 config" and now < ts:
++            fail(f"Paid B9 forbidden before {raw}")
++    for item in b9["models"]:
++        if item["name"] != model:
++            continue
++        prices = item.get("prices_usd_per_mtok", {})
++        if any(float(prices.get(k, 0)) <= 0 for k in ("input", "output")):
++            fail("Positive input and output list prices are required")
++        if "VERIFY_AT_FREEZE" in json.dumps(item):
++            fail("Unverified model metadata remains")
++
++    release = load_json("pre_b9/RELEASE_GATE.json")
++    if release.get("status") != "GO":
++        fail("PRE_B9_REVIEW_HOLD: paid record disabled pending independent audit and explicit GO change")
++    if release.get("approved_for") != "study-f-v1":
++        fail("Release gate must explicitly name study-f-v1")
++    return "RECORD_PREFLIGHT_OK (software checks only; not a billing cap)"
++
++
++def main() -> int:
++    parser = argparse.ArgumentParser()
++    parser.add_argument("--config", required=True)
++    parser.add_argument("--target", required=True)
++    parser.add_argument("--model", required=True)
++    parser.add_argument("--mode", required=True)
++    args = parser.parse_args()
++    try:
++        print(validate(args.config, args.target, args.model, args.mode))
++    except (ValueError, OSError, KeyError, json.JSONDecodeError) as exc:
++        print(f"::error::{exc}", file=sys.stderr)
++        return 1
++    return 0
++
++
++if __name__ == "__main__":
++    sys.exit(main())
+diff --git a/tools/reviewer_lambda_sensitivity.py b/tools/reviewer_lambda_sensitivity.py
+new file mode 100644
+--- /dev/null
++++ b/tools/reviewer_lambda_sensitivity.py
+@@ -0,0 +1,68 @@
++"""Exploratory harm-certificate lambda sensitivity, using the frozen formula.
++
++Analytic Bernoulli scenarios only. This is NOT an empirical Study D/E result.
++Does not change frozen implementation, alpha, eta or admission decisions.
++"""
++from __future__ import annotations
++
++import argparse
++import math
++from pathlib import Path
++
++
++def row(eta: float, frac: float, harm: float, alpha: float) -> dict:
++    if not 0 < eta < 1 or not 0 < frac < 1 or not 0 < alpha < 1:
++        raise ValueError("eta, frac and alpha must be in (0, 1)")
++    if not 0 <= harm <= 1:
++        raise ValueError("harm probability must be in [0, 1]")
++    lam = frac / (1 - eta)
++    good = 1 + lam * eta
++    bad = 1 - lam * (1 - eta)
++    expected_log_growth = (1 - harm) * math.log(good) + harm * math.log(bad)
++    no_harm_draws = math.ceil(math.log(1 / alpha) / math.log(good))
++    return {"eta": eta, "frac": frac, "lambda": lam, "harm": harm,
++            "expected_log_growth": expected_log_growth,
++            "no_harm_draws_to_1_over_alpha": no_harm_draws}
++
++
++def main() -> None:
++    ap = argparse.ArgumentParser()
++    ap.add_argument("--eta", type=float, default=0.05)
++    ap.add_argument("--alpha", type=float, default=0.1)
++    ap.add_argument("--out", type=Path, default=Path("pre_b9/LAMBDA_SENSITIVITY_EXPLORATORY.md"))
++    args = ap.parse_args()
++    lines = [
++        "# Exploratory analytic sensitivity: harm-certificate λ",
++        "",
++        "**NOT prospective evidence.** Analytic Bernoulli scenarios, not observed target outcomes.",
++        "The frozen implementation uses `lambda = frac/(1-eta)` with `frac=0.9`.",
++        "Rows with alternative fractions are hypothetical; do not overwrite frozen settings.",
++        "",
++        "| frac | λ | true h | E[log wealth per draw] | draws to 1/α with 0 regressions |",
++        "|---:|---:|---:|---:|---:|",
++    ]
++    for frac in (0.3, 0.5, 0.7, 0.9):
++        for h in (0, 0.02, args.eta, 0.10):
++            r = row(args.eta, frac, h, args.alpha)
++            lines.append(
++                f"| {frac:.1f} | {r['lambda']:.4f} | {h:.2f} | "
++                f"{r['expected_log_growth']:+.5f} | "
++                f"{r['no_harm_draws_to_1_over_alpha']} |"
++            )
++    lines.extend([
++        "",
++        "At the null boundary `h=eta`, expected *wealth multiplier* equals 1;",
++        "expected log growth can be negative by Jensen's inequality.",
++        "The no-regression crossing count is a conditional best-case path,",
++        "NOT expected admission time or statistical power.",
++        "Power and stopping-time distributions require separately labeled Monte Carlo",
++        "simulations or actual prospective draws.",
++        "",
++    ])
++    args.out.parent.mkdir(parents=True, exist_ok=True)
++    args.out.write_text("\n".join(lines), encoding="utf-8")
++    print(f"Wrote {args.out}")
++
++
++if __name__ == "__main__":
++    main()
