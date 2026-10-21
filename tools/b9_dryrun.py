@@ -4,7 +4,10 @@ cassette that the UNCHANGED frozen tools/run_b9.py then replays.  This exercises
 installing, edit rights, git apply, the visible oracle check, census, hidden-oracle scoring
 and the final verdict end to end.  These runs are pipeline acceptance only, NOT B9 evidence.
 
-python tools/b9_dryrun.py D1_py_ecc out_dir
+python tools/b9_dryrun.py D1_py_ecc out_dir [gold|skill]
+  gold  : the answer is the upstream fix restricted to the editable modules (default)
+  skill : the answer is the frozen skill's own rewrite as a diff (exercises scoring paths
+          where the upstream fix needs files outside the edit rights, e.g. py_ecc utils.py)
 """
 import json
 import subprocess
@@ -37,7 +40,24 @@ def gold_diff(manifest: dict, spec: dict, modules: list) -> str:
                               capture_output=True, text=True).stdout
 
 
-def main(target_id: str, out_dir: str) -> int:
+def skill_diff(root: Path, modules: list) -> str:
+    import difflib
+    from gatekeeper_lite import transforms as T
+    from gatekeeper_lite.skill import Skill
+    skill = Skill.load(ROOT / "study_d" / "skills" / "bool-excluded-from-int.json")
+    out = []
+    for rel in modules:
+        src = (root / rel).read_text(encoding="utf-8")
+        try:
+            new = skill.transform().apply(src, single_site=False).source
+        except T.Abstain:
+            continue
+        lines = difflib.unified_diff(src.splitlines(True), new.splitlines(True), fromfile=f"a/{rel}", tofile=f"b/{rel}")
+        out.append(f"diff --git a/{rel} b/{rel}\n" + "".join(lines))
+    return "".join(out)
+
+
+def main(target_id: str, out_dir: str, source: str = "gold") -> int:
     base = ROOT / "study_d"
     b9 = json.loads((base / "b9_config.json").read_text())
     manifest = json.loads((base / "eval_targets" / target_id / "gk_target.json").read_text())
@@ -45,12 +65,12 @@ def main(target_id: str, out_dir: str) -> int:
     inst = json.loads((base / "b9_instances" / f"{target_id}.json").read_text())
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
-    diff = gold_diff(manifest, spec, manifest["modules"])
-    (out / f"GOLD_DIFF_{target_id}.patch").write_text(diff)
     with tempfile.TemporaryDirectory() as tmp:            # sources exactly as run_b9 will see them
         root = Path(tmp) / "t"
         _clone_ref(manifest["checkout"]["repo"], manifest["checkout"]["ref"], root)
         sources = {rel: (root / rel).read_text(encoding="utf-8") for rel in manifest["modules"]}
+        diff = gold_diff(manifest, spec, manifest["modules"]) if source == "gold" else skill_diff(root, manifest["modules"])
+    (out / f"{source.upper()}_DIFF_{target_id}.patch").write_text(diff)
     messages = build_messages(inst["issue"], sources, inst["visible_desc"])
     model = b9["models"][0]["name"]
     cassette = CassetteClient(out / f"cassette_{target_id}_{model}.json", "replay")
@@ -67,4 +87,4 @@ def main(target_id: str, out_dir: str) -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main(*sys.argv[1:3]))
+    sys.exit(main(*sys.argv[1:4]))

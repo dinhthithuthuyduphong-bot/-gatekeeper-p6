@@ -145,6 +145,12 @@ E1 pyyaml/bool, E2 packaging/bool, E3 databricks/bool: **Gatekeeper REJECT_HARM 
 5. **Độ nhạy theo cấp oracle** của Study E (chỉ E1 / E1+E2 / cả ba) trong `RESEARCH_SUMMARY_D_E.md`.
 - **Chạy thử B9 trên 6 target thật** bằng bản fix upstream (workflow `b9-dryrun.yml`, 0 đồng, dùng nguyên `run_b9.py` đã đóng băng).
 
+## Tái lập Study E và chạy thử B9 (0 đồng)
+
+- **Study E chạy lại cùng seed: giống hệt** ở cả 5 target (quyết định, số lần rút, đếm, census). Cả Study D và Study E đều đã tái lập.
+- **Chạy thử B9 bằng bản fix upstream** (dùng nguyên `run_b9.py` đã đóng băng, cassette phát lại): A1, D2, D3, D4, D5 ra **SUCCESS** ở cả 3 lần lặp; census VALID, 0 regression mới. Bản fix upstream cho cùng số lần có lợi như skill ở D3 (149/300) và D5 (33/300): kiểm chứng chéo oracle.
+- **D1 py_ecc: NO_PATCH.** Bản fix upstream thêm helper `is_integer` vào `py_ecc/utils.py`, nằm **ngoài quyền sửa đã khai báo** (ba file skill sửa); diff bị cắt phần helper nên kiểm tra công khai thất bại. Bộ chạy phân loại đúng. Quyền sửa đã đóng băng nên **không đổi**; khi chạy thật, B9 ở D1 phải viết guard trong các file được phép. Điểm này sẽ được ghi trong diễn giải B9. Đường chạy chấm điểm của D1 được nghiệm thu thêm bằng chế độ `skill` (diff của chính skill).
+
 ## Ghi chú tái lập Study B
 
 Sau Study B, `gatekeeper_lite/` có thêm admission theo scope (`scoped.py`), nên `freeze_study.py verify study_b` trên `main` sẽ báo file thay đổi — đúng như thiết kế, để không ai chạy lại Study B bằng code mới. Muốn tái lập Study B v1, checkout tag `study-b-freeze-a2`.
