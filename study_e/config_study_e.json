@@ -1,6 +1,6 @@
 {
   "experiment_id": "study-e-v1",
-  "status": "DRAFT",
+  "status": "FROZEN",
   "requires_freeze": true,
   "theta": 0.2,
   "eta": 0.05,
@@ -21,7 +21,7 @@
   ],
   "skill": "skills/bool-excluded-from-int.json",
   "seed_rule": "sha256(FREEZE.json sha256 || drand quicknet randomness of the first round at or after seed_time_utc)",
-  "seed_time_utc": "SET_AT_FREEZE",
+  "seed_time_utc": "2026-10-21T01:17:24Z",
   "multiplicity": "e-Holm FWER over min(e_benefit, e_cert) of all cells; secondary e-BH q=0.1",
   "census": "target's own tests at the pinned commit, both arms; baseline failures excluded before treatment; any new failure blocks every scope of the target",
   "ablations": [
@@ -49,5 +49,6 @@
   "excluded_before_freeze": {
     "K3_redis": "test suite requires a Redis server (census INVALID in the baseline check); same rule as PyHive",
     "PyHive": "test suite requires Hive/Presto servers"
-  }
+  },
+  "frozen_on": "2026-10-21T00:17:24Z"
 }
