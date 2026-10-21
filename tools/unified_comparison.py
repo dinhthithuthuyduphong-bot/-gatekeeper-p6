@@ -55,8 +55,11 @@ def main(argv=None) -> int:
              "| Target | Skill + Gatekeeper | Skill + B6-R | Skill + B8 | B9 (DeepSeek / Gemini) |", "|---|---|---|---|---|"]
     b9 = {}
     if a.b9:
-        for f in Path(a.b9).glob("RESULT_B9_*.json"):
+        for f in Path(a.b9).glob("*RESULT_B9_*.json"):
             r = json.loads(f.read_text())
+            if r.get("evidence") not in ("PAID_B9", "REPLAY_OF_RECORDED_B9"):
+                raise SystemExit(f"{f.name}: evidence={r.get('evidence')!r} is not B9 evidence "
+                                 "(dry runs and unmarked files are refused)")
             b9.setdefault(r["target"], []).extend(f"{r['model']}:{v}" for v in r.get("verdicts", []))
     for d in a.dirs:
         d = Path(d)

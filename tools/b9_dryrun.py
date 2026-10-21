@@ -82,8 +82,17 @@ def main(target_id: str, out_dir: str, source: str = "gold") -> int:
                                      b9["seed"] + 100 * rep + i)
             cassette.data[key] = reply
     cassette.path.write_text(json.dumps(cassette.data))
-    return run_b9.main(str(base / "b9_config.json"), str(base / "config_study_d.json"), target_id, model,
-                       out_dir, "replay")
+    rc = run_b9.main(str(base / "b9_config.json"), str(base / "config_study_d.json"), target_id, model,
+                     out_dir, "replay")
+    # Mark the output so that no analysis tool can mistake it for B9 evidence.
+    src = out / f"RESULT_B9_{target_id}_{model}.json"
+    if src.exists():
+        data = json.loads(src.read_text())
+        data.update(evidence="DRYRUN_PIPELINE_ACCEPTANCE_NOT_B9", answer_source=source,
+                    usage_note="token counts are estimates (characters/4) written by the dry-run tool, not provider usage")
+        (out / f"DRYRUN_RESULT_B9_{target_id}_{source}.json").write_text(json.dumps(data, indent=2))
+        src.unlink()
+    return rc
 
 
 if __name__ == "__main__":

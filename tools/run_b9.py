@@ -46,8 +46,10 @@ def main(b9_cfg, d_cfg, target_id, model_name, out_dir, mode="replay") -> int:
     manifest = json.loads((base / "eval_targets" / target_id / "gk_target.json").read_text())
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
+    # base_url may reference environment variables, e.g. {GCP_PROJECT} for Vertex AI
+    base_url = model["base_url"].format(**{k: v for k, v in __import__("os").environ.items() if k.isidentifier()})
     cassette = CassetteClient(out / f"cassette_{target_id}_{model_name}.json", mode,
-                              OpenAICompatibleClient(model["base_url"], model["key_env"]))
+                              OpenAICompatibleClient(base_url, model["key_env"], model.get("extra")))
     work = Path(tempfile.mkdtemp(prefix="b9run_"))
     runs = []
     try:
@@ -67,10 +69,11 @@ def main(b9_cfg, d_cfg, target_id, model_name, out_dir, mode="replay") -> int:
                           __import__("hashlib").sha256((base / "FREEZE.json").read_bytes()).hexdigest(),
                           dcfg["seed_time_utc"])
         for rep in range(b9["repetitions"]):
-            r = repair(target, inst, cassette, model_name, Budget(**b9["budget"]),
+            r = repair(target, inst, cassette, model.get("model_id", model_name), Budget(**b9["budget"]),
                        model["prices_usd_per_mtok"], seed=b9["seed"] + 100 * rep,
                        guard=guard if mode == "record" else None)
             entry = {"repetition": rep, "status": r.status, "attempts": r.attempts, "calls": r.calls,
+                     "usage_missing_calls": r.usage_missing,
                      "visible_runs": r.visible_runs, "tokens": r.tokens, "cost_usd": r.cost_usd,
                      "seconds": r.seconds, "patched_modules": sorted(r.treated)}
             if r.status == "SUBMITTED":
@@ -87,6 +90,7 @@ def main(b9_cfg, d_cfg, target_id, model_name, out_dir, mode="replay") -> int:
     total = sum(r["cost_usd"] for r in runs)
     (out / f"RESULT_B9_{target_id}_{model_name}.json").write_text(json.dumps(
         {"target": target_id, "commit": commit, "model": model_name, "mode": mode,
+         "evidence": "PAID_B9" if mode == "record" else "REPLAY_OF_RECORDED_B9",
          "runs": runs, "total_cost_usd": round(total, 4),
          "cap_usd": round(cap_usd, 4), "guard_spent_usd": round(guard.spent_usd, 4),
          "guard_overshoot": guard.overshoot,

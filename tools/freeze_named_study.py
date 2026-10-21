@@ -23,5 +23,11 @@ now = datetime.now(timezone.utc).replace(microsecond=0)
 cfg.update(status="FROZEN", frozen_on=now.isoformat().replace("+00:00", "Z"),
            seed_time_utc=(now + timedelta(minutes=a.delay_minutes)).isoformat().replace("+00:00", "Z"))
 cfg_path.write_text(json.dumps(cfg, indent=2))
+for b9p in d.glob("b9_config*.json"):          # B9 configs of the study are frozen together
+    b9 = json.loads(b9p.read_text())
+    if "VERIFY_AT_FREEZE" in json.dumps(b9):
+        sys.exit(f"{b9p.name}: replace every VERIFY_AT_FREEZE value (model ids, prices) before freezing")
+    b9.update(status="FROZEN", frozen_on=cfg["frozen_on"])
+    b9p.write_text(json.dumps(b9, indent=2, ensure_ascii=False))
 subprocess.run([sys.executable, str(ROOT / "tools" / "freeze_study.py"), "freeze", a.study], check=True)
 print(f"{a.study} frozen at {cfg['frozen_on']}; seed from the first drand round at/after {cfg['seed_time_utc']}")

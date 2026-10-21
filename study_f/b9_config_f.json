@@ -1,0 +1,67 @@
+{
+  "experiment_id": "study-f-b9-extra-models",
+  "status": "DRAFT",
+  "not_before_utc": "2026-10-31T00:00:00Z",
+  "budget": {
+    "max_calls": 5,
+    "max_output_tokens": 4000,
+    "max_visible_runs": 5
+  },
+  "repetitions": 3,
+  "seed": 20261031,
+  "models": [
+    {
+      "name": "vertex-gemini-flash",
+      "model_id": "VERIFY_AT_FREEZE (Vertex AI Gemini Flash model id)",
+      "base_url": "https://aiplatform.googleapis.com/v1/projects/{GCP_PROJECT}/locations/global/endpoints/openapi",
+      "key_env": "GOOGLE_OAUTH_TOKEN",
+      "extra": {
+        "reasoning_effort": "low"
+      },
+      "prices_usd_per_mtok": {
+        "input": 0.75,
+        "output": 3.75
+      },
+      "price_note": "from the attached review (Oct 2026); re-check the official Vertex AI price page at freeze",
+      "billing": "Google Cloud Free Trial credit via Vertex AI"
+    },
+    {
+      "name": "vertex-gemini-pro",
+      "model_id": "VERIFY_AT_FREEZE (Vertex AI Gemini Pro model id)",
+      "base_url": "https://aiplatform.googleapis.com/v1/projects/{GCP_PROJECT}/locations/global/endpoints/openapi",
+      "key_env": "GOOGLE_OAUTH_TOKEN",
+      "extra": {
+        "reasoning_effort": "low"
+      },
+      "prices_usd_per_mtok": {
+        "input": 2.0,
+        "output": 12.0
+      },
+      "price_note": "from the attached review (Oct 2026); re-check at freeze",
+      "billing": "Google Cloud Free Trial credit via Vertex AI"
+    }
+  ],
+  "spend_cap_vnd": 1500000,
+  "scoring": "submitted patch scored on the SAME frozen draw oracle (n_max draws, full budget) and the census gate; primary metric = outcome of the submitted patch; pass@k secondary",
+  "budget_matching": "reported in two currencies: model calls/tokens/USD and visible test runs; Gatekeeper cost reported as draws, test runs and seconds; no single exchange rate is claimed",
+  "instances": [
+    "D1_py_ecc",
+    "D2_cerberus",
+    "D3_speckit",
+    "D4_openfeature",
+    "D5_pycubrid",
+    "A1_speckit_catalog"
+  ],
+  "vnd_per_usd": 27000,
+  "vnd_per_usd_note": "conservative rate fixed in advance; the real rate on the run date is recorded but the cap uses this value",
+  "allocation_vnd": {
+    "D1_py_ecc": 250000,
+    "D2_cerberus": 250000,
+    "D3_speckit": 250000,
+    "D4_openfeature": 250000,
+    "D5_pycubrid": 250000,
+    "A1_speckit_catalog": 250000
+  },
+  "frozen_on": null,
+  "spend_cap_note": "paid from Google Cloud Free Trial credit (Vertex AI); worst-case estimate for both extra models is about 770,000 VND"
+}

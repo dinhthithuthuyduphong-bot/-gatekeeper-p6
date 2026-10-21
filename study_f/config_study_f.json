@@ -1,0 +1,28 @@
+{
+  "experiment_id": "study-f-v1",
+  "status": "DRAFT",
+  "requires_freeze": true,
+  "purpose": "Does Gatekeeper change outcomes for EACH code model, and by how much? Within-model contrast: B9 raw vs B9 + Gatekeeper; held-out scoring for every end state.",
+  "theta": 0.2,
+  "eta": 0.05,
+  "alpha": 0.1,
+  "alpha_alarm": 0.05,
+  "n_max": 300,
+  "k_cells": 48,
+  "k_cells_note": "4 models x 6 targets x 2 scopes; the per-cell early-admission bar is K/alpha = 480",
+  "seed_time_utc": "SET_AT_FREEZE",
+  "b9_configs": {
+    "deepseek-flash": "study_d/b9_config.json",
+    "gemini-3.1-flash-lite": "study_d/b9_config.json",
+    "vertex-gemini-flash": "study_f/b9_config_f.json",
+    "vertex-gemini-pro": "study_f/b9_config_f.json"
+  },
+  "cells": [
+    "D1_py_ecc",
+    "D2_cerberus",
+    "D3_speckit",
+    "D4_openfeature",
+    "D5_pycubrid",
+    "A1_speckit_catalog"
+  ]
+}

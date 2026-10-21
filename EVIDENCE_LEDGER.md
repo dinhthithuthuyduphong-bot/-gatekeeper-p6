@@ -151,6 +151,12 @@ E1 pyyaml/bool, E2 packaging/bool, E3 databricks/bool: **Gatekeeper REJECT_HARM 
 - **Chạy thử B9 bằng bản fix upstream** (dùng nguyên `run_b9.py` đã đóng băng, cassette phát lại): A1, D2, D3, D4, D5 ra **SUCCESS** ở cả 3 lần lặp; census VALID, 0 regression mới. Bản fix upstream cho cùng số lần có lợi như skill ở D3 (149/300) và D5 (33/300): kiểm chứng chéo oracle.
 - **D1 py_ecc: NO_PATCH.** Bản fix upstream thêm helper `is_integer` vào `py_ecc/utils.py`, nằm **ngoài quyền sửa đã khai báo** (ba file skill sửa); diff bị cắt phần helper nên kiểm tra công khai thất bại. Bộ chạy phân loại đúng. Quyền sửa đã đóng băng nên **không đổi**; khi chạy thật, B9 ở D1 phải viết guard trong các file được phép. Điểm này sẽ được ghi trong diễn giải B9. Đường chạy chấm điểm của D1 được nghiệm thu thêm bằng chế độ `skill` (diff của chính skill).
 
+## Trước B9: Amendment A2 và Study F (bản nháp)
+
+- **Study D A2** (chưa có lượt B9 trả phí nào): client lưu metadata phản hồi gốc; thiếu `usage` thì tính theo chi phí xấu nhất; cận trên token là số byte UTF-8; `BUDGET_CAP` báo riêng; kết quả chạy thử đổi tên thành `DRYRUN_RESULT_B9_*` và mang nhãn `DRYRUN_PIPELINE_ACCEPTANCE_NOT_B9`; bảng so sánh chung từ chối mọi kết quả không phải B9 thật.
+- **Phụ thuộc vào model:** Study D/E không có model trong vòng lặp; câu hỏi "đổi model thì sao" chưa được trả lời bằng dữ liệu. **Study F** (bản nháp) giữ cố định target, oracle, mô tả lỗi, quyền sửa và ngân sách, chỉ đổi model sinh patch (4 model, 2 nhà cung cấp), đo hiệu ứng trong cùng model (B9 thô so với B9 + Gatekeeper), và chấm mọi trạng thái cuối trên seed held-out lấy sau khi đóng băng Study F.
+- **Kích thước prompt thật** (từ cassette chạy thử): 11.732–129.228 ký tự mỗi target, tổng 342.312 ký tự; chi phí xấu nhất mỗi model từ khoảng 49.000 đồng (Gemini Flash-Lite) tới khoảng 394.000 đồng (Gemini Pro).
+
 ## Ghi chú tái lập Study B
 
 Sau Study B, `gatekeeper_lite/` có thêm admission theo scope (`scoped.py`), nên `freeze_study.py verify study_b` trên `main` sẽ báo file thay đổi — đúng như thiết kế, để không ai chạy lại Study B bằng code mới. Muốn tái lập Study B v1, checkout tag `study-b-freeze-a2`.

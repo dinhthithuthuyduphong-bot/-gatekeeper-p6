@@ -757,3 +757,26 @@ class AmendmentA1Tests(unittest.TestCase):
             self.assertNotEqual(hashlib.sha256((d / "FREEZE.json").read_bytes()).hexdigest(), original)
             r = subprocess.run([sys.executable, str(repo / "tools" / "amend_study_d.py"), "A1"], capture_output=True)
             self.assertNotEqual(r.returncode, 0)                       # cannot apply twice
+
+
+class AmendmentA2Tests(unittest.TestCase):
+    def test_budget_cap_is_reported_separately(self):
+        from gatekeeper_lite.b9 import b9_verdict
+        self.assertEqual(b9_verdict({"status": "NO_PATCH", "attempts": [{"verdict": "NO_DIFF"},
+                                                                         {"verdict": "BUDGET_CAP"}]}), "BUDGET_CAP")
+        self.assertEqual(b9_verdict({"status": "NO_PATCH", "attempts": [{"verdict": "NO_DIFF"}]}), "NO_PATCH")
+
+    def test_prompt_bound_is_at_least_bytes(self):
+        from gatekeeper_lite.b9 import prompt_token_upper_bound
+        msgs = [{"role": "user", "content": "đ" * 10}]           # 2 UTF-8 bytes per character
+        self.assertGreaterEqual(prompt_token_upper_bound(msgs), 20)
+
+    def test_unified_comparison_refuses_dry_runs(self):
+        import json, sys, tempfile, importlib
+        sys.path.insert(0, str(ROOT / "tools"))
+        uc = importlib.import_module("unified_comparison")
+        with tempfile.TemporaryDirectory() as tmp:
+            Path(tmp, "DRYRUN_RESULT_B9_D1_gold.json").write_text(json.dumps(
+                {"target": "D1", "model": "m", "verdicts": ["SUCCESS"], "evidence": "DRYRUN_PIPELINE_ACCEPTANCE_NOT_B9"}))
+            with self.assertRaises(SystemExit):
+                uc.main([str(ROOT / "study_d" / "results"), "--b9", tmp])

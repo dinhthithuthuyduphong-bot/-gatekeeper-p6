@@ -15,3 +15,15 @@
 **Không đổi:** skill, target, commit, oracle, bộ sinh, quy tắc quyết định, θ, η, α, n_max, ô.
 
 **Phạm vi chạy lại:** chỉ C1 và D2. Kết quả của 6 target đã xong được giữ nguyên từ lượt gốc, không chạy lại.
+
+## A2 (trước mọi lượt B9 trả phí) — củng cố B9, không đổi quy tắc Study D
+
+**Lý do:** rà soát trước khi chi tiền phát hiện các điểm yếu trong đường chạy B9. Chưa có lượt B9 `record` nào, nên chưa có kết quả B9 nào được quan sát.
+
+**Thay đổi:**
+- `gatekeeper_lite/b9.py`: client lưu metadata phản hồi gốc (id, model thực phục vụ, finish reason, toàn bộ `usage` gồm token suy luận, tham số request); phản hồi **thiếu `usage`** được ghi cờ và tính theo chi phí xấu nhất, không bao giờ tính bằng 0; cận trên token đầu vào là số byte UTF-8 cộng phần đệm mỗi message (chứng minh được với tokenizer byte-level/byte-fallback); kết luận `BUDGET_CAP` được báo riêng thay vì gộp vào `NO_PATCH`; hỗ trợ tham số bổ sung (ví dụ mức suy luận) được ghi lại.
+- `tools/run_b9.py`: ghi `evidence` (`PAID_B9` hoặc `REPLAY_OF_RECORDED_B9`) và số lần gọi thiếu `usage`; cho phép `model_id` tách khỏi tên hiển thị và endpoint tham chiếu biến môi trường (Vertex AI).
+
+**Không đổi:** quy tắc quyết định, oracle, target, kết quả và seed của Study D; cấu hình B9 (model, ngân sách, instance).
+
+**Đóng băng lại:** chạy workflow amendment với `A2`; seed giữ nguyên theo hash đóng băng gốc.

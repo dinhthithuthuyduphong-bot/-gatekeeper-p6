@@ -40,23 +40,39 @@ class ModelClient:
         raise NotImplementedError
 
 
-class OpenAICompatibleClient(ModelClient):
-    """Chat-completions over HTTP (DeepSeek and Gemini expose OpenAI-compatible endpoints).
-    The API key is read from an environment variable; never stored in the repository."""
+def prompt_token_upper_bound(messages: List[dict]) -> int:
+    """Sound upper bound for byte-level BPE / byte-fallback tokenizers: every token covers at
+    least one UTF-8 byte, so tokens <= bytes; plus a fixed per-message overhead."""
+    return sum(len(m["content"].encode("utf-8")) + 64 for m in messages)
 
-    def __init__(self, base_url: str, key_env: str):
-        self.base_url, self.key_env = base_url.rstrip("/"), key_env
+
+class OpenAICompatibleClient(ModelClient):
+    """Chat-completions over HTTP (DeepSeek, Gemini via AI Studio, and Vertex AI expose
+    OpenAI-compatible endpoints).  The credential is read from an environment variable and is
+    never stored.  The raw response metadata (id, served model, finish reason, full usage
+    including reasoning tokens) is returned so that the cassette keeps it as evidence.  A
+    response WITHOUT usage is flagged and accounted at the worst case, never as zero."""
+
+    def __init__(self, base_url: str, key_env: str, extra: Optional[dict] = None):
+        self.base_url, self.key_env, self.extra = base_url.rstrip("/"), key_env, dict(extra or {})
 
     def complete(self, model, messages, max_tokens, temperature, seed):
-        body = json.dumps({"model": model, "messages": messages, "max_tokens": max_tokens,
-                           "temperature": temperature, "seed": seed}).encode()
-        req = urllib.request.Request(f"{self.base_url}/chat/completions", data=body, headers={
-            "Content-Type": "application/json", "Authorization": f"Bearer {os.environ[self.key_env]}"})
-        data = json.loads(urllib.request.urlopen(req, timeout=180).read())
-        usage = data.get("usage", {})
-        return {"text": data["choices"][0]["message"]["content"],
-                "usage": {"input": usage.get("prompt_tokens", 0),
-                          "output": usage.get("completion_tokens", 0)}}
+        payload = {"model": model, "messages": messages, "max_tokens": max_tokens,
+                   "temperature": temperature, "seed": seed, **self.extra}
+        req = urllib.request.Request(f"{self.base_url}/chat/completions", data=json.dumps(payload).encode(),
+                                     headers={"Content-Type": "application/json",
+                                              "Authorization": f"Bearer {os.environ[self.key_env]}"})
+        data = json.loads(urllib.request.urlopen(req, timeout=300).read())
+        usage = data.get("usage")
+        choice = (data.get("choices") or [{}])[0]
+        missing = not usage or "prompt_tokens" not in usage or "completion_tokens" not in usage
+        inp = prompt_token_upper_bound(messages) if missing else int(usage["prompt_tokens"])
+        out = max_tokens if missing else int(usage["completion_tokens"])
+        return {"text": (choice.get("message") or {}).get("content") or "",
+                "usage": {"input": inp, "output": out, "usage_missing": missing},
+                "raw": {"id": data.get("id"), "model": data.get("model"),
+                        "finish_reason": choice.get("finish_reason"), "usage": usage,
+                        "request_params": {k: v for k, v in payload.items() if k != "messages"}}}
 
 
 class CassetteClient(ModelClient):
@@ -130,7 +146,7 @@ class SpendGuard:
         self.cap_usd, self.spent_usd, self.calls = cap_usd, 0.0, 0
 
     def check(self, messages: List[dict], max_tokens: int, prices: dict) -> None:
-        est_in = sum(len(m["content"]) for m in messages) / 2.0          # very conservative chars/token
+        est_in = prompt_token_upper_bound(messages)                       # tokens <= UTF-8 bytes
         worst = est_in / 1e6 * prices.get("input", 0) + max_tokens / 1e6 * prices.get("output", 0)
         if self.spent_usd + worst > self.cap_usd:
             raise BudgetExceeded(f"next call worst case {worst:.4f} USD would exceed cap "
@@ -149,9 +165,11 @@ class SpendGuard:
 
 def b9_verdict(run: dict, bug_scope: str = "bool") -> str:
     """Final B9 outcome of ONE repetition (protocol section 7, primary metric):
-    NO_PATCH | CENSUS_INVALID | HARMFUL (persistent census failure or any hidden regression)
+    NO_PATCH | BUDGET_CAP | CENSUS_INVALID | HARMFUL (persistent census failure or any hidden regression)
     | SUCCESS (helps the bug scope, no harm anywhere) | NO_EFFECT (submitted, neither)."""
     if run.get("status") != "SUBMITTED":
+        if any(a.get("verdict") == "BUDGET_CAP" for a in run.get("attempts", [])):
+            return "BUDGET_CAP"          # reported separately (B9 analysis plan, section 4)
         return "NO_PATCH"
     census = run.get("census", {})
     if census.get("status") == "INVALID":
@@ -204,6 +222,7 @@ class RepairResult:
     tokens: Dict[str, int] = field(default_factory=lambda: {"input": 0, "output": 0})
     cost_usd: float = 0.0
     seconds: float = 0.0
+    usage_missing: int = 0
 
 
 def build_messages(issue: str, sources: Dict[str, str], visible_desc: str) -> List[dict]:
@@ -235,6 +254,7 @@ def repair(target, instance: dict, client: ModelClient, model: str, budget: Budg
         res.calls += 1
         for k in ("input", "output"):
             res.tokens[k] += int(reply["usage"].get(k, 0))
+        res.usage_missing += int(bool(reply["usage"].get("usage_missing")))
         att = {"call": i + 1}
         diff = extract_diff(reply["text"])
         files = touched_files(diff)
