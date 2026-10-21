@@ -21,7 +21,7 @@ Mỗi cách tiếp cận được đánh giá bằng **mã mà nó để lại**
 |---|---|---|---|
 | SUCCESS (có lợi, không hại) | 2 | 3 | 3 |
 | **HARMFUL** | **0** | **3** | 0 |
-| NO_EFFECT (thay đổi vô ích) | 0 | 6 | 5 |
+| NO_EFFECT (thay đổi vô ích) | 0 | 5 | 5 |
 | NO_PATCH (mã giữ nguyên) | 11 | 2 | 5 |
 
 Cột B9 sẽ được điền vào cùng bảng sau khi chạy, theo đúng chuẩn này.

@@ -131,14 +131,14 @@ E1 pyyaml/bool, E2 packaging/bool, E3 databricks/bool: **Gatekeeper REJECT_HARM 
 
 ## Phân tích bổ sung không tốn tiền (sau Study E)
 
-- **So sánh theo chuẩn chung** (trạng thái cuối của mã, cùng oracle, cùng hàm kết luận với B9): Gatekeeper 2 SUCCESS / 0 HARMFUL / 0 NO_EFFECT; B6-R 3 / 3 / 6; B8 3 / 0 / 8 (13 target).
+- **So sánh theo chuẩn chung** (trạng thái cuối của mã, cùng oracle, cùng hàm kết luận với B9): Gatekeeper 2 SUCCESS / 0 HARMFUL / 0 NO_EFFECT; B6-R 3 / 3 / 5; B8 3 / 0 / 5 (13 target; đã sửa theo bảng không mô phỏng).
 - **Điểm hòa vốn chi phí:** lần rút ít hơn 19,3% nhưng tiết kiệm thời gian gần bằng 0 trừ spec-kit (khoảng 22%).
 - **Tái tạo bảng quyết định:** 26/26 ô khớp (`tools/results_check.py`, workflow `results-check.yml`).
 - **Kiểm soát sai số khi gộp hai study:** tối đa 0,2; kết luận nêu theo từng study.
 
 ## Khép 5 nhóm việc không tốn tiền (sau review tại commit 1124d3a)
 
-1. **Bảng so sánh chung không còn mô phỏng:** B2/B6-R/B8 quyết định ở mức target; Gatekeeper triển khai toàn bộ skill và tính mọi kết quả đã đo; không target nào cần giới hạn scope. Gatekeeper 2 SUCCESS / 0 HARMFUL / 0 NO_EFFECT; B6-R 3 / 3 / 6; B8 3 / 0 / 5.
+1. **Bảng so sánh chung không còn mô phỏng:** B2/B6-R/B8 quyết định ở mức target; Gatekeeper triển khai toàn bộ skill và tính mọi kết quả đã đo; không target nào cần giới hạn scope. Gatekeeper 2 SUCCESS / 0 HARMFUL / 0 NO_EFFECT; B6-R 3 / 3 / 5; B8 3 / 0 / 5 (sửa: trước đây ghi nhầm B6-R 6 NO_EFFECT).
 2. **Truy vết B6-R:** `study_d/PROVENANCE_B6R.md` + `SUPPLEMENTARY_MANIFEST.json` (hash các file replay; ví dụ replay là fixture tự dựng).
 3. **Chi phí:** tách đo thật và mô hình; đo thật 1.038,82 s so với 1.049,49 s (−1,02%); Study E 2.106 lần rút (sửa từ 2.104).
 4. **Artifact:** `results_check.py` kiểm cả quyết định, số lần rút, đếm, census, tổng; thiếu dữ liệu thì FAIL; workflow bật `pipefail`; workflow chạy D/E ghi `pip freeze`; sửa tài liệu lỗi thời.
