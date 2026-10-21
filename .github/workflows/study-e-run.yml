@@ -51,8 +51,10 @@ jobs:
         run: |
           python -m pip install -q "pytest==8.3.5"
           mkdir -p out_e
+          python -m pip freeze > out_e/PIP_FREEZE_before_${{ matrix.target }}.txt
           set -o pipefail
           python tools/run_study_d.py study_e/config_study_e.json ${{ matrix.target }} out_e 2>&1 | tee out_e/log_${{ matrix.target }}.txt
+          python -m pip freeze > out_e/PIP_FREEZE_after_${{ matrix.target }}.txt
       - uses: actions/upload-artifact@v7
         if: ${{ always() && env.SELECTED == 'true' }}
         with:
