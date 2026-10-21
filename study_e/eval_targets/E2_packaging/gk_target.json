@@ -20,5 +20,8 @@
   "checkout": {
     "repo": "https://github.com/pypa/packaging.git",
     "ref": "1a62a26afe0f4881593e31bed4f7753bd1c8fe27"
-  }
+  },
+  "census_requirements": [
+    "pretend"
+  ]
 }

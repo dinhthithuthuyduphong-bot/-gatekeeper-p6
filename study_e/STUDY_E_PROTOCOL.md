@@ -17,29 +17,30 @@ Nguồn: lượt quét áp dụng chỉ đọc trên 15 ứng viên (`study-e-sc
 | E3 | databricks-sql v2.9.3 `a737ef31` — `ParamEscaper.escape_item` | HARM | **Cấp 3:** chỉ là hành vi hiện hữu | Chỉ minh hoạ |
 | K1 | trino-python-client `74c6156e` — `_format_prepared_param` | CONTROL | bool xử lý trước nhánh int | Đối chứng |
 | K2 | tomlkit `eddd27e4` — `item` | CONTROL | bool xử lý trước nhánh int | Đối chứng |
-| K3 | redis-py `547efc33` — `Encoder.encode` | CONTROL | bool bị chặn trước nhánh int | Đối chứng |
 
-**Ứng viên bị loại và lý do:** PyHive (test cần máy chủ Hive/Presto, census không chạy được); cantools (không có nguồn oracle cho bool); python-memcached, cbor2, bencode.py (skill không khớp); pymemcache, abseil-py, msgpack, PyMySQL, pyyaml `add_path_resolver` (không có đường bool có chủ đích hoặc không có nguồn oracle).
+**Ứng viên bị loại và lý do:** PyHive (test cần máy chủ Hive/Presto, census không chạy được); redis-py (loại sau lượt kiểm tra chạy được, chưa áp skill: bộ test cần máy chủ Redis); cantools (không có nguồn oracle cho bool); python-memcached, cbor2, bencode.py (skill không khớp); pymemcache, abseil-py, msgpack, PyMySQL, pyyaml `add_path_resolver` (không có đường bool có chủ đích hoặc không có nguồn oracle).
 
 **Ghi chú minh bạch:** cấp 2b được **thêm sau khi xem mã nguồn ứng viên và trước khi đóng băng**. Bản nháp ban đầu chỉ có cấp 1 (test upstream), cấp 2 (lời maintainer trong issue/PR), cấp 3 (hành vi hiện hữu). Kết quả được báo cáo riêng theo từng cấp.
+
+**Kiểm tra chạy được trước đóng băng** (workflow `study-e-baseline.yml`, chỉ mã gốc, không áp skill): oracle chạy đúng ở cả 6 target; census VALID ở pyyaml (1.287 test), databricks (130), tomlkit (106); packaging và trino chỉ thiếu thư viện test (`pretend`, `httpretty`) và được bổ sung; redis-py bị loại.
 
 ## 3. Oracle
 
 - **E1:** `yaml.dump` dữ liệu lặp lại cùng một giá trị bool không được chứa `&` hoặc `*`, và phải load lại bằng dữ liệu gốc. Scope int: vi sai.
 - **E2:** theo lập trường maintainer ở #1425, đầu vào nào `Version.from_parts` đang chấp nhận thì vẫn được chấp nhận. Scope int: vi sai.
 - **E3:** `escape_item(True/False)` vẫn trả giá trị, không ném lỗi. Scope int: vi sai.
-- **K1–K3:** vi sai ở cả hai scope; mọi thay đổi khi có skill đều là regression.
+- **K1–K2:** vi sai ở cả hai scope; mọi thay đổi khi có skill đều là regression.
 
 ## 4. Giả thuyết
 
 - **H-E1:** E1/bool: Gatekeeper REJECT_HARM.
 - **H-E2:** E1/bool: B6-R ADMIT (replay ở ví dụ nguồn pass, fingerprint MATCH).
 - **H-E3:** E2/bool: báo động tác hại kích hoạt.
-- **H-E4:** K1–K3: không có thay đổi hành vi; Gatekeeper không admit (không có lợi ích).
+- **H-E4:** K1–K2: không có thay đổi hành vi; Gatekeeper không admit (không có lợi ích).
 
 ## 5. Thống kê
 
-Giữ nguyên Study D: bộ sinh i.i.d. theo scope, census 3 baseline (INVALID nếu < 5 test ổn định), θ = 0,2, η = 0,05, báo động tác hại α = 0,05, e-Holm FWER 0,1 trên **12 ô của Study E** (họ ô riêng, không gộp với Study D), n_max = 300, seed từ drand sau thời điểm đóng băng Study E. Bộ chạy và module quyết định là đúng các file đã đóng băng của Study D, không sửa.
+Giữ nguyên Study D: bộ sinh i.i.d. theo scope, census 3 baseline (INVALID nếu < 5 test ổn định), θ = 0,2, η = 0,05, báo động tác hại α = 0,05, e-Holm FWER 0,1 trên **10 ô của Study E** (họ ô riêng, không gộp với Study D), n_max = 300, seed từ drand sau thời điểm đóng băng Study E. Bộ chạy và module quyết định là đúng các file đã đóng băng của Study D, không sửa.
 
 ## 6. Báo cáo
 

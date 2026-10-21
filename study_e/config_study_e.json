@@ -17,9 +17,7 @@
     "K1_trino/bool",
     "K1_trino/int",
     "K2_tomlkit/bool",
-    "K2_tomlkit/int",
-    "K3_redis/bool",
-    "K3_redis/int"
+    "K2_tomlkit/int"
   ],
   "skill": "skills/bool-excluded-from-int.json",
   "seed_rule": "sha256(FREEZE.json sha256 || drand quicknet randomness of the first round at or after seed_time_utc)",
@@ -46,7 +44,10 @@
     "E2_packaging": "2 maintainer statement (contested)",
     "E3_databricks": "3 characterization",
     "K1_trino": "control",
-    "K2_tomlkit": "control",
-    "K3_redis": "control"
+    "K2_tomlkit": "control"
+  },
+  "excluded_before_freeze": {
+    "K3_redis": "test suite requires a Redis server (census INVALID in the baseline check); same rule as PyHive",
+    "PyHive": "test suite requires Hive/Presto servers"
   }
 }
