@@ -1,0 +1,224 @@
+{
+  "cells": [
+    {
+      "cell": "E1_pyyaml/bool",
+      "binds": true,
+      "stop": "REJECT_HARM",
+      "e": 0.0,
+      "B2": "ADMIT",
+      "B6R": "ADMIT",
+      "B8": "REJECT",
+      "Gatekeeper": "REJECT_HARM",
+      "eBH": "\u2014",
+      "census_invalid": false,
+      "census_bad": false,
+      "fingerprint": "MATCH",
+      "replay_ok": true,
+      "draws": 2,
+      "counts": {
+        "help": 0,
+        "tie": 0,
+        "hurt": 2,
+        "harness_error": 0
+      }
+    },
+    {
+      "cell": "E1_pyyaml/int",
+      "binds": true,
+      "stop": "UNDECIDED",
+      "e": 0.8803630364474071,
+      "B2": "ADMIT",
+      "B6R": "ADMIT",
+      "B8": "ADMIT",
+      "Gatekeeper": "QUARANTINE",
+      "eBH": "\u2014",
+      "census_invalid": false,
+      "census_bad": false,
+      "fingerprint": "MATCH",
+      "replay_ok": true,
+      "draws": 300,
+      "counts": {
+        "help": 0,
+        "tie": 300,
+        "hurt": 0,
+        "harness_error": 0
+      }
+    },
+    {
+      "cell": "E2_packaging/bool",
+      "binds": true,
+      "stop": "REJECT_HARM",
+      "e": 0.0,
+      "B2": "ADMIT",
+      "B6R": "ADMIT",
+      "B8": "REJECT",
+      "Gatekeeper": "REJECT_HARM",
+      "eBH": "\u2014",
+      "census_invalid": false,
+      "census_bad": false,
+      "fingerprint": "MATCH",
+      "replay_ok": true,
+      "draws": 2,
+      "counts": {
+        "help": 0,
+        "tie": 0,
+        "hurt": 2,
+        "harness_error": 0
+      }
+    },
+    {
+      "cell": "E2_packaging/int",
+      "binds": true,
+      "stop": "UNDECIDED",
+      "e": 0.8803630364474071,
+      "B2": "ADMIT",
+      "B6R": "ADMIT",
+      "B8": "ADMIT",
+      "Gatekeeper": "QUARANTINE",
+      "eBH": "\u2014",
+      "census_invalid": false,
+      "census_bad": false,
+      "fingerprint": "MATCH",
+      "replay_ok": true,
+      "draws": 300,
+      "counts": {
+        "help": 0,
+        "tie": 300,
+        "hurt": 0,
+        "harness_error": 0
+      }
+    },
+    {
+      "cell": "E3_databricks/bool",
+      "binds": true,
+      "stop": "REJECT_HARM",
+      "e": 0.0,
+      "B2": "ADMIT",
+      "B6R": "ADMIT",
+      "B8": "REJECT",
+      "Gatekeeper": "REJECT_HARM",
+      "eBH": "\u2014",
+      "census_invalid": false,
+      "census_bad": false,
+      "fingerprint": "MATCH",
+      "replay_ok": true,
+      "draws": 2,
+      "counts": {
+        "help": 0,
+        "tie": 0,
+        "hurt": 2,
+        "harness_error": 0
+      }
+    },
+    {
+      "cell": "E3_databricks/int",
+      "binds": true,
+      "stop": "UNDECIDED",
+      "e": 0.8803630364474071,
+      "B2": "ADMIT",
+      "B6R": "ADMIT",
+      "B8": "ADMIT",
+      "Gatekeeper": "QUARANTINE",
+      "eBH": "\u2014",
+      "census_invalid": false,
+      "census_bad": false,
+      "fingerprint": "MATCH",
+      "replay_ok": true,
+      "draws": 300,
+      "counts": {
+        "help": 0,
+        "tie": 300,
+        "hurt": 0,
+        "harness_error": 0
+      }
+    },
+    {
+      "cell": "K1_trino/bool",
+      "binds": true,
+      "stop": "UNDECIDED",
+      "e": 0.8803630364474071,
+      "B2": "ADMIT",
+      "B6R": "ADMIT",
+      "B8": "ADMIT",
+      "Gatekeeper": "QUARANTINE",
+      "eBH": "\u2014",
+      "census_invalid": false,
+      "census_bad": false,
+      "fingerprint": "MATCH",
+      "replay_ok": true,
+      "draws": 300,
+      "counts": {
+        "help": 0,
+        "tie": 300,
+        "hurt": 0,
+        "harness_error": 0
+      }
+    },
+    {
+      "cell": "K1_trino/int",
+      "binds": true,
+      "stop": "UNDECIDED",
+      "e": 0.8803630364474071,
+      "B2": "ADMIT",
+      "B6R": "ADMIT",
+      "B8": "ADMIT",
+      "Gatekeeper": "QUARANTINE",
+      "eBH": "\u2014",
+      "census_invalid": false,
+      "census_bad": false,
+      "fingerprint": "MATCH",
+      "replay_ok": true,
+      "draws": 300,
+      "counts": {
+        "help": 0,
+        "tie": 300,
+        "hurt": 0,
+        "harness_error": 0
+      }
+    },
+    {
+      "cell": "K2_tomlkit/bool",
+      "binds": true,
+      "stop": "UNDECIDED",
+      "e": 0.8803630364474071,
+      "B2": "ADMIT",
+      "B6R": "ADMIT",
+      "B8": "ADMIT",
+      "Gatekeeper": "QUARANTINE",
+      "eBH": "\u2014",
+      "census_invalid": false,
+      "census_bad": false,
+      "fingerprint": "MATCH",
+      "replay_ok": true,
+      "draws": 300,
+      "counts": {
+        "help": 0,
+        "tie": 300,
+        "hurt": 0,
+        "harness_error": 0
+      }
+    },
+    {
+      "cell": "K2_tomlkit/int",
+      "binds": true,
+      "stop": "UNDECIDED",
+      "e": 0.8803630364474071,
+      "B2": "ADMIT",
+      "B6R": "ADMIT",
+      "B8": "ADMIT",
+      "Gatekeeper": "QUARANTINE",
+      "eBH": "\u2014",
+      "census_invalid": false,
+      "census_bad": false,
+      "fingerprint": "MATCH",
+      "replay_ok": true,
+      "draws": 300,
+      "counts": {
+        "help": 0,
+        "tie": 300,
+        "hurt": 0,
+        "harness_error": 0
+      }
+    }
+  ]
+}

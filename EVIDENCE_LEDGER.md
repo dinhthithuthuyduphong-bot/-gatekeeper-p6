@@ -125,6 +125,10 @@ Từ mã nguồn hàm (quét vòng 2): **E1 pyyaml** `ignore_aliases` (HARM, c�
 
 Oracle đúng trên mã gốc ở cả 6 target (10/10 lần rút mỗi scope). Census VALID: pyyaml 1.287, databricks 130, tomlkit 106. packaging, trino: thiếu thư viện test, đã bổ sung (`pretend`, `httpretty`). **redis-py bị loại** (bộ test cần máy chủ Redis), cùng tiêu chí với PyHive. Study E còn 5 target, 10 ô.
 
+## Study E v1 — kết quả (tag `study-e-freeze`, drand vòng 33247360)
+
+E1 pyyaml/bool, E2 packaging/bool, E3 databricks/bool: **Gatekeeper REJECT_HARM sau 2 lần rút; B2 và B6-R ADMIT; B8 REJECT**. Census (bộ test gốc: 1.287 / 51.524 / 130 test) **không phát hiện regression nào**. Đối chứng K1 trino, K2 tomlkit: không đổi hành vi, Gatekeeper không admit. H-E1 đến H-E4 được xác nhận; 6 ablation cho cùng quyết định. Chi tiết: `study_e/results/`; tổng hợp D+E: `RESEARCH_SUMMARY_D_E.md`.
+
 ## Ghi chú tái lập Study B
 
 Sau Study B, `gatekeeper_lite/` có thêm admission theo scope (`scoped.py`), nên `freeze_study.py verify study_b` trên `main` sẽ báo file thay đổi — đúng như thiết kế, để không ai chạy lại Study B bằng code mới. Muốn tái lập Study B v1, checkout tag `study-b-freeze-a2`.
