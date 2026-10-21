@@ -12,7 +12,7 @@
   "models": [
     {
       "name": "vertex-gemini-flash",
-      "model_id": "VERIFY_AT_FREEZE (Vertex AI Gemini Flash model id)",
+      "model_id": "google/gemini-3.8-flash",
       "base_url": "https://aiplatform.googleapis.com/v1/projects/{GCP_PROJECT}/locations/global/endpoints/openapi",
       "key_env": "GOOGLE_OAUTH_TOKEN",
       "extra": {
@@ -22,12 +22,12 @@
         "input": 0.75,
         "output": 3.75
       },
-      "price_note": "from the attached review (Oct 2026); re-check the official Vertex AI price page at freeze",
+      "price_note": "Checked 2026-10-21: https://cloud.google.com/vertex-ai/generative-ai/pricing ; Global Standard, USD per 1M tokens. Published promotional input/output rates: 0.75/3.75 through 2026-12-31, via credits back on eligible net spend. Credit eligibility is not assumed. Recheck at freeze.",
       "billing": "Google Cloud Free Trial credit via Vertex AI"
     },
     {
       "name": "vertex-gemini-pro",
-      "model_id": "VERIFY_AT_FREEZE (Vertex AI Gemini Pro model id)",
+      "model_id": "google/gemini-3.1-pro-preview",
       "base_url": "https://aiplatform.googleapis.com/v1/projects/{GCP_PROJECT}/locations/global/endpoints/openapi",
       "key_env": "GOOGLE_OAUTH_TOKEN",
       "extra": {
@@ -37,7 +37,7 @@
         "input": 2.0,
         "output": 12.0
       },
-      "price_note": "from the attached review (Oct 2026); re-check at freeze",
+      "price_note": "Checked 2026-10-21: https://cloud.google.com/vertex-ai/generative-ai/pricing ; Global Standard, USD per 1M tokens. Input/output rates 2.00/12.00 apply to requests with input <=200K tokens; above that threshold, rates are 4.00/18.00. Recheck at freeze.",
       "billing": "Google Cloud Free Trial credit via Vertex AI"
     }
   ],
@@ -63,5 +63,5 @@
     "A1_speckit_catalog": 250000
   },
   "frozen_on": null,
-  "spend_cap_note": "paid from Google Cloud Free Trial credit (Vertex AI); worst-case estimate for both extra models is about 770,000 VND"
+  "spend_cap_note": "Planned allocation: 1,500,000 VND across six targets and two models. This is a software token-cost budget, not a Google Cloud billing limit. Actual charges and promotional credit application must be checked in Cloud Billing."
 }
