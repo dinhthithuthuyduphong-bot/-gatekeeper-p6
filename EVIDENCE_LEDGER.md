@@ -129,6 +129,13 @@ Oracle đúng trên mã gốc ở cả 6 target (10/10 lần rút mỗi scope). 
 
 E1 pyyaml/bool, E2 packaging/bool, E3 databricks/bool: **Gatekeeper REJECT_HARM sau 2 lần rút; B2 và B6-R ADMIT; B8 REJECT**. Census (bộ test gốc: 1.287 / 51.524 / 130 test) **không phát hiện regression nào**. Đối chứng K1 trino, K2 tomlkit: không đổi hành vi, Gatekeeper không admit. H-E1 đến H-E4 được xác nhận; 6 ablation cho cùng quyết định. Chi tiết: `study_e/results/`; tổng hợp D+E: `RESEARCH_SUMMARY_D_E.md`.
 
+## Phân tích bổ sung không tốn tiền (sau Study E)
+
+- **So sánh theo chuẩn chung** (trạng thái cuối của mã, cùng oracle, cùng hàm kết luận với B9): Gatekeeper 2 SUCCESS / 0 HARMFUL / 0 NO_EFFECT; B6-R 3 / 3 / 6; B8 3 / 0 / 8 (13 target).
+- **Điểm hòa vốn chi phí:** lần rút ít hơn 19,3% nhưng tiết kiệm thời gian gần bằng 0 trừ spec-kit (khoảng 22%).
+- **Tái tạo bảng quyết định:** 26/26 ô khớp (`tools/results_check.py`, workflow `results-check.yml`).
+- **Kiểm soát sai số khi gộp hai study:** tối đa 0,2; kết luận nêu theo từng study.
+
 ## Ghi chú tái lập Study B
 
 Sau Study B, `gatekeeper_lite/` có thêm admission theo scope (`scoped.py`), nên `freeze_study.py verify study_b` trên `main` sẽ báo file thay đổi — đúng như thiết kế, để không ai chạy lại Study B bằng code mới. Muốn tái lập Study B v1, checkout tag `study-b-freeze-a2`.
