@@ -1,6 +1,6 @@
 {
   "experiment_id": "study-f-b9-extra-models",
-  "status": "DRAFT",
+  "status": "FROZEN",
   "not_before_utc": "2026-10-31T00:00:00Z",
   "budget": {
     "max_calls": 5,
@@ -62,6 +62,6 @@
     "D5_pycubrid": 250000,
     "A1_speckit_catalog": 250000
   },
-  "frozen_on": null,
+  "frozen_on": "2026-10-21T16:06:53Z",
   "spend_cap_note": "Planned allocation: 1,500,000 VND across six targets and two models. This is a software token-cost budget, not a Google Cloud billing limit. Actual charges and promotional credit application must be checked in Cloud Billing."
 }
