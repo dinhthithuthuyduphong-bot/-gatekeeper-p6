@@ -1,6 +1,6 @@
 # Gatekeeper-Lite — Pre-B9 zero-cash fixes (review package, 2026-10-22)
 
-**Status: PROPOSED, NOT APPLIED TO GITHUB.** The connected GitHub integration returned
+**Status: CI VERIFIED — PENDING MERGE.** The connected GitHub integration returned
 `403 Resource not accessible by integration` on branch creation. The files here are
 a reviewable patch set, not a claim that the repository has changed.
 
