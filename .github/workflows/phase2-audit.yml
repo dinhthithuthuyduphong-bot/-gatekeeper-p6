@@ -1,0 +1,47 @@
+# Phase 2 — zero-cost review; does not run B9 or edit frozen studies.
+name: Gatekeeper Phase 2 audit (no model API)
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Phase-2 regression tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m unittest discover -s tests -v
+      - name: Verify frozen Studies D E F
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/freeze_study.py verify study_d
+          python tools/freeze_study.py verify study_e
+          python tools/freeze_study.py verify study_f
+      - name: Read-only B6-R V2 readiness audit
+        run: python tools/phase2_b6r_v2.py --out out_phase2/B6R_V2_READINESS.json
+      - name: Recompute simultaneous anytime-valid CS from frozen traces
+        run: python tools/phase2_cs_audit.py --out out_phase2
+      - name: Study F scoring blocker inventory (audit itself succeeds with known blockers)
+        run: python tools/phase2_integrity_audit.py --out out_phase2
+      - name: Pin current scorer source checksum for review
+        shell: bash
+        run: |
+          mkdir -p out_phase2
+          sha256sum tools/score_heldout.py > out_phase2/SCORE_HELDOUT_SHA256.txt
+          sha256sum study_f/FREEZE.json > out_phase2/STUDY_F_FREEZE_SHA256.txt
+      - name: Upload auditable, free outputs
+        uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: GATEKEEPER_PHASE2_ZERO_COST_AUDIT
+          path: out_phase2/
+          if-no-files-found: warn
