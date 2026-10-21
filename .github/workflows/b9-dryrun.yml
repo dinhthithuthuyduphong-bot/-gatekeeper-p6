@@ -1,7 +1,17 @@
 # B9 pipeline acceptance at 0 cost: the frozen run_b9.py replays a cassette whose "model"
 # answer is the upstream gold fix.  Not B9 evidence; no API key used.
 name: Gatekeeper B9 dry run (gold patches)
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      source:
+        description: "gold (upstream fix) or skill (frozen skill's own diff)"
+        required: true
+        default: gold
+      only:
+        description: "comma-separated targets (empty = all)"
+        required: false
+        default: ""
 permissions:
   contents: read
 jobs:
@@ -30,22 +40,28 @@ jobs:
             os: ubuntu-24.04
     runs-on: ${{ matrix.os }}
     timeout-minutes: 90
+    env:
+      SELECTED: ${{ inputs.only == '' || contains(inputs.only, matrix.target) }}
     steps:
       - uses: actions/checkout@v6
+        if: ${{ env.SELECTED == 'true' }}
       - uses: actions/setup-python@v6
+        if: ${{ env.SELECTED == 'true' }}
         with:
           python-version: ${{ matrix.python }}
       - name: Verify Study D freeze (shared runner unchanged)
+        if: ${{ env.SELECTED == 'true' }}
         run: python tools/freeze_study.py verify study_d
       - name: Dry run
+        if: ${{ env.SELECTED == 'true' }}
         shell: bash
         run: |
           set -euo pipefail
           python -m pip install -q "pytest==8.3.5"
           mkdir -p out_dry
-          python tools/b9_dryrun.py ${{ matrix.target }} out_dry 2>&1 | tee out_dry/log_${{ matrix.target }}.txt
+          python tools/b9_dryrun.py ${{ matrix.target }} out_dry ${{ inputs.source }} 2>&1 | tee out_dry/log_${{ matrix.target }}.txt
       - uses: actions/upload-artifact@v7
-        if: always()
+        if: ${{ always() && env.SELECTED == 'true' }}
         with:
-          name: B9_DRYRUN_${{ matrix.target }}
+          name: B9_DRYRUN_${{ inputs.source }}_${{ matrix.target }}
           path: out_dry
