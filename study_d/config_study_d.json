@@ -42,12 +42,17 @@
   "frozen_on": "2026-10-20T09:17:23Z",
   "seed_freeze_sha256": "6d964eb1a64791233523b54b036692c3e8f8ed7149e9d2cff55d813b8686ef6a",
   "amendments_applied": [
-    "A1"
+    "A1",
+    "A2"
   ],
   "amendment_log": [
     {
       "id": "A1",
       "applied_utc": "2026-10-20T12:04:45+00:00"
+    },
+    {
+      "id": "A2",
+      "applied_utc": "2026-10-21T15:04:09+00:00"
     }
   ]
 }
