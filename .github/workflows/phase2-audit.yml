@@ -19,13 +19,43 @@ jobs:
         run: |
           set -euo pipefail
           python -m unittest discover -s tests -v
-      - name: Verify frozen Studies D E F
+      - name: Verify current Study D and Study F freezes
         shell: bash
         run: |
           set -euo pipefail
           python tools/freeze_study.py verify study_d
-          python tools/freeze_study.py verify study_e
           python tools/freeze_study.py verify study_f
+
+      - name: Checkout original Study E freeze for historical verification
+        uses: actions/checkout@v6
+        with:
+          ref: 736f91f884b124cfc3d478d98d548bc54bf281af
+          path: _historical_study_e
+          persist-credentials: false
+
+      - name: Verify Study E as originally frozen and audit current drift
+        shell: bash
+        run: |
+          set -euo pipefail
+          python _historical_study_e/tools/freeze_study.py verify study_e
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from tools.freeze_study import tracked, digest
+
+          frozen = json.loads(Path("study_e/FREEZE.json").read_text(encoding="utf-8"))["files"]
+          current = digest(tracked(Path.cwd() / "study_e"))
+          changed = {
+              path for path in set(frozen) | set(current)
+              if frozen.get(path) != current.get(path)
+          }
+          expected = {"gatekeeper_lite/b9.py", "tools/run_b9.py"}
+          print("Historical Study E: freeze verified from original commit.")
+          print("Current code divergences vs Study E freeze:", sorted(changed))
+          if changed != expected:
+              raise SystemExit(f"Unexpected divergence in Study E tracked files: {sorted(changed ^ expected)}")
+          print("PASS: only the two documented post-Study-E B9 changes differ.")
+          PY
       - name: Read-only B6-R V2 readiness audit
         run: python tools/phase2_b6r_v2.py --out out_phase2/B6R_V2_READINESS.json
       - name: Recompute simultaneous anytime-valid CS from frozen traces
