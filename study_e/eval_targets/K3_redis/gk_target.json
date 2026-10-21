@@ -1,0 +1,22 @@
+{
+  "repository": "redis/redis-py",
+  "revision": "547efc33d4fbb37cda18b188a65004daff5d5cde",
+  "role": "CONTROL (bool rejected before the int branch)",
+  "python": "3.12",
+  "modules": [
+    "redis/_parsers/encoders.py"
+  ],
+  "pythonpath": [],
+  "draw_oracle": "oracles/controls_bool.py",
+  "census_tests": [
+    "tests/test_encoding.py"
+  ],
+  "install": "self-then-uninstall:redis",
+  "target_id": "K3_redis",
+  "packages": {},
+  "platform": "linux",
+  "checkout": {
+    "repo": "https://github.com/redis/redis-py.git",
+    "ref": "547efc33d4fbb37cda18b188a65004daff5d5cde"
+  }
+}

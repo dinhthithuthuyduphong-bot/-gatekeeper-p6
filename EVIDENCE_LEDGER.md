@@ -117,6 +117,10 @@ Cả 8 target cho kết quả **giống hệt** lượt chính: seed, vị trí 
 
 Skill khớp ở: pyyaml `ignore_aliases` (tuple ghi rõ `bool`: ứng viên có hại mạnh nhất), databricks-sql v2.9.3 `escape_item`, packaging `_validate_*` (tranh cãi, #1425), PyHive `escape_item` (test cần máy chủ), và các chỗ dự kiến không đổi hành vi ở redis-py, tomlkit, trino. Không khớp: python-memcached, cbor2, bencode.py. Vòng 2 thu mã nguồn hàm, cấu hình test và tài liệu để chốt danh sách.
 
+## Study E — chốt danh sách (trước đóng băng)
+
+Từ mã nguồn hàm (quét vòng 2): **E1 pyyaml** `ignore_aliases` (HARM, cấp 2b: bool liệt kê tường minh), **E2 packaging** `Version.from_parts` (MIXED, cấp 2: #1425), **E3 databricks-sql 2.9.3** (cấp 3, chỉ minh hoạ), đối chứng **K1 trino, K2 tomlkit, K3 redis-py** (bool xử lý trước nhánh int). Loại: PyHive (test cần máy chủ), cantools (không có nguồn oracle), và các thư viện skill không khớp. Cấp 2b được thêm trước khi đóng băng, ghi rõ trong protocol. Study E không sửa bất kỳ file dùng chung nào thuộc bản đóng băng Study D. Kiểm tra oracle pyyaml trên mã gốc: 20/20 lần rút đúng kỳ vọng.
+
 ## Ghi chú tái lập Study B
 
 Sau Study B, `gatekeeper_lite/` có thêm admission theo scope (`scoped.py`), nên `freeze_study.py verify study_b` trên `main` sẽ báo file thay đổi — đúng như thiết kế, để không ai chạy lại Study B bằng code mới. Muốn tái lập Study B v1, checkout tag `study-b-freeze-a2`.

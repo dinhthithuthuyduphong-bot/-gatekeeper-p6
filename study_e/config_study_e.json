@@ -1,0 +1,52 @@
+{
+  "experiment_id": "study-e-v1",
+  "status": "DRAFT",
+  "requires_freeze": true,
+  "theta": 0.2,
+  "eta": 0.05,
+  "alpha": 0.1,
+  "alpha_alarm": 0.05,
+  "n_max": 300,
+  "cells": [
+    "E1_pyyaml/bool",
+    "E1_pyyaml/int",
+    "E2_packaging/bool",
+    "E2_packaging/int",
+    "E3_databricks/bool",
+    "E3_databricks/int",
+    "K1_trino/bool",
+    "K1_trino/int",
+    "K2_tomlkit/bool",
+    "K2_tomlkit/int",
+    "K3_redis/bool",
+    "K3_redis/int"
+  ],
+  "skill": "skills/bool-excluded-from-int.json",
+  "seed_rule": "sha256(FREEZE.json sha256 || drand quicknet randomness of the first round at or after seed_time_utc)",
+  "seed_time_utc": "SET_AT_FREEZE",
+  "multiplicity": "e-Holm FWER over min(e_benefit, e_cert) of all cells; secondary e-BH q=0.1",
+  "census": "target's own tests at the pinned commit, both arms; baseline failures excluded before treatment; any new failure blocks every scope of the target",
+  "ablations": [
+    "full",
+    "no_harm_cert",
+    "no_census",
+    "bonferroni",
+    "sign_test",
+    "eta_0.10"
+  ],
+  "primary_cells": [
+    "E1_pyyaml/bool",
+    "E2_packaging/bool"
+  ],
+  "illustrative_cells": [
+    "E3_databricks/bool"
+  ],
+  "oracle_tiers": {
+    "E1_pyyaml": "2b explicit intent in source",
+    "E2_packaging": "2 maintainer statement (contested)",
+    "E3_databricks": "3 characterization",
+    "K1_trino": "control",
+    "K2_tomlkit": "control",
+    "K3_redis": "control"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "repository": "python-poetry/tomlkit",
+  "revision": "eddd27e43a62fe58707c311bfad2f52e72493f53",
+  "role": "CONTROL (bool handled before the int branch)",
+  "python": "3.12",
+  "modules": [
+    "tomlkit/items.py"
+  ],
+  "pythonpath": [],
+  "draw_oracle": "oracles/controls_bool.py",
+  "census_tests": [
+    "tests/test_items.py"
+  ],
+  "install": "self-then-uninstall:tomlkit",
+  "target_id": "K2_tomlkit",
+  "packages": {},
+  "platform": "linux",
+  "checkout": {
+    "repo": "https://github.com/python-poetry/tomlkit.git",
+    "ref": "eddd27e43a62fe58707c311bfad2f52e72493f53"
+  }
+}

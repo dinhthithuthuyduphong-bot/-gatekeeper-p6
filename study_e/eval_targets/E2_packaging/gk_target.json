@@ -1,0 +1,24 @@
+{
+  "repository": "pypa/packaging",
+  "revision": "1a62a26afe0f4881593e31bed4f7753bd1c8fe27",
+  "role": "MIXED/contested (tier 2: maintainer closed PR #1425)",
+  "python": "3.12",
+  "modules": [
+    "src/packaging/version.py"
+  ],
+  "pythonpath": [
+    "src"
+  ],
+  "draw_oracle": "oracles/packaging_from_parts.py",
+  "census_tests": [
+    "tests/test_version.py"
+  ],
+  "install": "self-then-uninstall:packaging",
+  "target_id": "E2_packaging",
+  "packages": {},
+  "platform": "linux",
+  "checkout": {
+    "repo": "https://github.com/pypa/packaging.git",
+    "ref": "1a62a26afe0f4881593e31bed4f7753bd1c8fe27"
+  }
+}

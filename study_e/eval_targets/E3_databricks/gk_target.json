@@ -1,0 +1,24 @@
+{
+  "repository": "databricks/databricks-sql-python",
+  "revision": "a737ef3107f41d64803326cfe59f2fcacea88343",
+  "role": "illustrative (tier 3 characterization; not primary evidence)",
+  "python": "3.11",
+  "modules": [
+    "src/databricks/sql/utils.py"
+  ],
+  "pythonpath": [
+    "src"
+  ],
+  "draw_oracle": "oracles/databricks_escape.py",
+  "census_tests": [
+    "tests/unit"
+  ],
+  "install": "self-then-uninstall:databricks-sql-connector",
+  "target_id": "E3_databricks",
+  "packages": {},
+  "platform": "linux",
+  "checkout": {
+    "repo": "https://github.com/databricks/databricks-sql-python.git",
+    "ref": "a737ef3107f41d64803326cfe59f2fcacea88343"
+  }
+}

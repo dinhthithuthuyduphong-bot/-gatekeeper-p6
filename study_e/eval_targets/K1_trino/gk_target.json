@@ -1,0 +1,22 @@
+{
+  "repository": "trinodb/trino-python-client",
+  "revision": "74c6156ee68e80783f3a6a7dde73bd5ab2fc8288",
+  "role": "CONTROL (bool handled before the int branch)",
+  "python": "3.12",
+  "modules": [
+    "trino/dbapi.py"
+  ],
+  "pythonpath": [],
+  "draw_oracle": "oracles/controls_bool.py",
+  "census_tests": [
+    "tests/unit/test_dbapi.py"
+  ],
+  "install": "self-then-uninstall:trino",
+  "target_id": "K1_trino",
+  "packages": {},
+  "platform": "linux",
+  "checkout": {
+    "repo": "https://github.com/trinodb/trino-python-client.git",
+    "ref": "74c6156ee68e80783f3a6a7dde73bd5ab2fc8288"
+  }
+}

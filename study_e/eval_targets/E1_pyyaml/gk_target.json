@@ -1,0 +1,24 @@
+{
+  "repository": "yaml/pyyaml",
+  "revision": "f5e4504a92f169f65350a1047dccb23bc97028be",
+  "role": "HARM (tier 2b: bool listed explicitly in ignore_aliases)",
+  "python": "3.12",
+  "modules": [
+    "lib/yaml/representer.py"
+  ],
+  "pythonpath": [
+    "lib"
+  ],
+  "draw_oracle": "oracles/pyyaml_alias.py",
+  "census_tests": [
+    "tests"
+  ],
+  "install": "self-then-uninstall:PyYAML",
+  "target_id": "E1_pyyaml",
+  "packages": {},
+  "platform": "linux",
+  "checkout": {
+    "repo": "https://github.com/yaml/pyyaml.git",
+    "ref": "f5e4504a92f169f65350a1047dccb23bc97028be"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "skill_id": "bool-excluded-from-int",
+  "version": "pysstubs-w3",
+  "scope": "int-type-checks",
+  "pi": {
+    "transform": "negative_type_guard",
+    "params": {
+      "base": "int",
+      "excluded": "bool"
+    }
+  },
+  "D": {
+    "python": ">=3.8"
+  },
+  "I": [],
+  "P": [
+    {
+      "before": "../../demo/sources/status_before.py",
+      "after": "../../demo/sources/status_after.py",
+      "heldout": false
+    }
+  ],
+  "K": {
+    "behaviors": [
+      "type-check"
+    ]
+  },
+  "provenance": "IDENTICAL to the frozen Study D skill (learned in Week 3 from PySStuBs); not modified for Study E"
+}
