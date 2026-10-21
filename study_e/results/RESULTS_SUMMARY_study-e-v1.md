@@ -29,7 +29,7 @@ Census chạy **toàn bộ bộ test của chính target** ở cả hai nhánh: 
 
 ## 3. Chi phí
 
-- **Ô có hại:** Gatekeeper dừng sau **2** lần rút; B8 chạy đủ 300. Tổng lần rút: Gatekeeper 2.104, B8 3.000.
+- **Ô có hại:** Gatekeeper dừng sau **2** lần rút; B8 chạy đủ 300. Tổng lần rút: Gatekeeper 2.106, B8 3.000.
 - **Wall-clock:** Gatekeeper/B8 = 1,00, vì census dùng chung chiếm gần toàn bộ thời gian (riêng packaging 176 giây). Đúng như đã khai báo trước, không claim tiết kiệm thời gian.
 
 ## 4. Ablation

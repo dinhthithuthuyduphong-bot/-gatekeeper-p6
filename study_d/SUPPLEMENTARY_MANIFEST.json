@@ -1,0 +1,9 @@
+{
+  "note": "Supplementary provenance manifest, written AFTER the Study D/E freezes. It does not modify FREEZE.json; it records the replay inputs that the frozen skill files reference but that the freeze manifests did not cover.",
+  "files": {
+    "demo/sources/status_before.py": "84cba046a4a1a5cc773db8152bcec13eb35120f67ea490c5436d6c0b1e9e1ce5",
+    "demo/sources/status_after.py": "12c335e1fa43d413e1c4eeba9c0cb96a83999c6b011a288348faf5c01cf17774",
+    "study_d/skills/bool-excluded-from-int.json": "01e469cc1f0a830374cc4200d7eedc8c97171337e0b6e8e0137c6b638d4f1aa1",
+    "study_e/skills/bool-excluded-from-int.json": "8d02bfe3f444b11771a0d714393220b086d77cc4c91ac2e8ae01e05725be5984"
+  }
+}

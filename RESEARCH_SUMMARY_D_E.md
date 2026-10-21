@@ -8,21 +8,21 @@ Hai nghiên cứu prospective, protocol đóng băng trước khi chạy, seed t
 |---|---|---|---|---|
 | B2 (bind được là dùng) | 22 | 3/3 | **3/3** | 16 |
 | B6-R (bind + replay + fingerprint) | 22 | 3/3 | **3/3** | 16 |
-| B8 (chạy đủ 300 lần rút + census) | 19 | 3/3 | 0/3 | 16 |
+| B8 (chạy đủ 300 lần rút + census; tính theo ô) | 19 | 3/3 | 0/3 | 16 |
 | **Gatekeeper-Lite** | **2** | **2/3** | **0/3** | **0** |
 
 *Ô có hại tính cả E3 (cấp 3, minh hoạ); nếu bỏ E3: B2/B6-R admit 2/2 ô có hại chính, Gatekeeper 0/2.*
 
 ## So sánh theo chuẩn chung (trạng thái cuối của mã)
 
-Mỗi cách tiếp cận được đánh giá bằng **mã mà nó để lại** trên target, chấm bằng cùng oracle (300 lần rút mỗi scope) và cùng hàm kết luận mà B9 sẽ dùng (`tools/unified_comparison.py`, `study_e/results/UNIFIED_COMPARISON_D_E.md`). Trên 13 target:
+Mỗi cách tiếp cận được đánh giá bằng **mã mà nó để lại** trên target, chấm bằng cùng oracle (300 lần rút mỗi scope) và cùng hàm kết luận mà B9 sẽ dùng (`tools/unified_comparison.py`, `study_e/results/UNIFIED_COMPARISON_D_E.md`). **Không có kết quả nào được mô phỏng:** B2, B6-R và B8 quyết định ở mức target (B8 từ chối cả skill nếu có hại ở bất kỳ scope nào); Gatekeeper triển khai toàn bộ skill khi có ít nhất một scope được admit, và mọi kết quả scope đã đo đều được tính. Ở mọi target, các scope Gatekeeper không admit đều có 0 thay đổi đo được, nên không cần cơ chế giới hạn scope. Trên 13 target:
 
 | Kết luận cuối | Skill + Gatekeeper | Skill + B6-R | Skill + B8 |
 |---|---|---|---|
 | SUCCESS (có lợi, không hại) | 2 | 3 | 3 |
 | **HARMFUL** | **0** | **3** | 0 |
-| NO_EFFECT (thay đổi vô ích) | 0 | 6 | 8 |
-| NO_PATCH (mã giữ nguyên) | 11 | 2 | 2 |
+| NO_EFFECT (thay đổi vô ích) | 0 | 6 | 5 |
+| NO_PATCH (mã giữ nguyên) | 11 | 2 | 5 |
 
 Cột B9 sẽ được điền vào cùng bảng sau khi chạy, theo đúng chuẩn này.
 
@@ -40,7 +40,21 @@ Cột B9 sẽ được điền vào cùng bảng sau khi chạy, theo đúng chu
 
 ## Chi phí: khi nào lợi ích thời gian xuất hiện
 
-`tools/cost_breakeven.py`, `study_e/results/COST_BREAKEVEN_D_E.md`. Tổng 13 target: Gatekeeper dùng ít hơn 19,3% lần rút so với B8, nhưng chi phí cố định (census) là 1.011 giây trong khi mỗi lần rút chỉ vài mili-giây, nên tiết kiệm thời gian gần bằng 0. Ngoại lệ: **spec-kit** (55 ms/lần rút) đã tiết kiệm khoảng 22% thời gian. Tiết kiệm không bao giờ vượt tỉ lệ lần rút giảm được (tối đa 31,7% ở ô có lợi, 49,7% ở ô có hại) và bằng 0 ở các ô không có lợi cũng không có hại, vì quy tắc không có điểm dừng sớm cho trường hợp "vô ích".
+`tools/cost_breakeven.py`, `study_e/results/COST_BREAKEVEN_D_E.md`. Tách rõ **thời gian đo thật** (census + khởi động worker + thời gian rút mẫu đã ghi; không gồm tải repo và cài đặt) với **ước tính theo mô hình**. Tổng 13 target, đo thật: lần rút Gatekeeper 5.326 so với B8 6.600 (ít hơn 19,3%); thời gian 1.038,82 s so với 1.049,49 s (**ít hơn 1,02%**); riêng Study E ít hơn 0,15%. Ngoại lệ: **spec-kit** đo thật tiết kiệm 21,4%, vì mỗi lần rút tốn khoảng 55 ms. Tiết kiệm không bao giờ vượt tỉ lệ lần rút giảm được (tối đa 31,7% ở ô có lợi, 49,7% ở ô có hại) và bằng 0 ở các ô không có lợi cũng không có hại, vì quy tắc không có điểm dừng sớm cho trường hợp "vô ích".
+
+## Độ nhạy theo cấp nguồn oracle (Study E)
+
+| Tập ô có hại được tính | B6-R admit ô có hại | Gatekeeper admit ô có hại |
+|---|---|---|
+| Chỉ E1 (cấp 2b) | 1/1 | 0/1 |
+| E1 + E2 (cấp 2b + cấp 2, tranh cãi) | 2/2 | 0/2 |
+| E1 + E2 + E3 (thêm cấp 3, minh hoạ) | 3/3 | 0/3 |
+
+Kết luận về chiều so sánh không đổi ở mọi mức; điều thay đổi là **độ mạnh của bằng chứng**. Ở mức chặt nhất (chỉ E1), bằng chứng là **một ô**.
+
+## Truy vết B6-R
+
+Ví dụ replay của skill là một fixture tự dựng mô phỏng mẫu PySStuBs; commit PySStuBs cụ thể không được lưu. Quyết định của B6-R không phụ thuộc vào điều này (skill tái tạo đúng cách sửa trên mọi ví dụ thuộc mẫu), nhưng B6-R phải được mô tả là **bản tái dựng yếu hơn B6 của paper** ở phía nguồn. Chi tiết: `study_d/PROVENANCE_B6R.md`, `study_d/SUPPLEMENTARY_MANIFEST.json`.
 
 ## Giới hạn phải nói rõ
 

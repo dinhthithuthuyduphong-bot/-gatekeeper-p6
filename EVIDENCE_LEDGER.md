@@ -136,12 +136,21 @@ E1 pyyaml/bool, E2 packaging/bool, E3 databricks/bool: **Gatekeeper REJECT_HARM 
 - **Tái tạo bảng quyết định:** 26/26 ô khớp (`tools/results_check.py`, workflow `results-check.yml`).
 - **Kiểm soát sai số khi gộp hai study:** tối đa 0,2; kết luận nêu theo từng study.
 
+## Khép 5 nhóm việc không tốn tiền (sau review tại commit 1124d3a)
+
+1. **Bảng so sánh chung không còn mô phỏng:** B2/B6-R/B8 quyết định ở mức target; Gatekeeper triển khai toàn bộ skill và tính mọi kết quả đã đo; không target nào cần giới hạn scope. Gatekeeper 2 SUCCESS / 0 HARMFUL / 0 NO_EFFECT; B6-R 3 / 3 / 6; B8 3 / 0 / 5.
+2. **Truy vết B6-R:** `study_d/PROVENANCE_B6R.md` + `SUPPLEMENTARY_MANIFEST.json` (hash các file replay; ví dụ replay là fixture tự dựng).
+3. **Chi phí:** tách đo thật và mô hình; đo thật 1.038,82 s so với 1.049,49 s (−1,02%); Study E 2.106 lần rút (sửa từ 2.104).
+4. **Artifact:** `results_check.py` kiểm cả quyết định, số lần rút, đếm, census, tổng; thiếu dữ liệu thì FAIL; workflow bật `pipefail`; workflow chạy D/E ghi `pip freeze`; sửa tài liệu lỗi thời.
+5. **Độ nhạy theo cấp oracle** của Study E (chỉ E1 / E1+E2 / cả ba) trong `RESEARCH_SUMMARY_D_E.md`.
+- **Chạy thử B9 trên 6 target thật** bằng bản fix upstream (workflow `b9-dryrun.yml`, 0 đồng, dùng nguyên `run_b9.py` đã đóng băng).
+
 ## Ghi chú tái lập Study B
 
 Sau Study B, `gatekeeper_lite/` có thêm admission theo scope (`scoped.py`), nên `freeze_study.py verify study_b` trên `main` sẽ báo file thay đổi — đúng như thiết kế, để không ai chạy lại Study B bằng code mới. Muốn tái lập Study B v1, checkout tag `study-b-freeze-a2`.
 
 ## Việc còn thiếu để tái lập
 
-- Mã P7.x đang được **nhúng trong file workflow** dưới dạng base64 nén xz (ví dụ `p7-3-anchored-binder.yml`, bước "Unpack frozen binder revision and exposed target"). Mã chạy được và đóng băng, nhưng người đọc không xem hay diff được. Cần giải nén ra dạng đọc được bằng `python tools/extract_embedded_payload.py .github/workflows/p7-3-anchored-binder.yml p7/p7_3` và commit thư mục `p7/` kèm `MANIFEST.json` (sha256 của payload và từng file).
+- *(Đã xử lý: mã P7.x đã được giải nén ra dạng đọc được qua workflow `p7-extract-sources.yml`; binder v3 nằm trong `p7/p7_3/` kèm `BINDER_FREEZE.json`.)* Ghi chú gốc: mã P7.x từng được **nhúng trong file workflow** dưới dạng base64 nén xz (ví dụ `p7-3-anchored-binder.yml`, bước "Unpack frozen binder revision and exposed target"). Mã chạy được và đóng băng, nhưng người đọc không xem hay diff được. Cần giải nén ra dạng đọc được bằng `python tools/extract_embedded_payload.py .github/workflows/p7-3-anchored-binder.yml p7/p7_3` và commit thư mục `p7/` kèm `MANIFEST.json` (sha256 của payload và từng file).
 - Gắn tag cho các commit bằng chứng, ví dụ `p7.3-evidence` → `e5e4422`, `gk-lite-demo-v1` → `6908381`.
-- Prospective pairs (trên target độc lập, protocol đóng băng trước): **0**.
+- Prospective pairs (trên target độc lập, protocol đóng băng trước): **0 tại thời điểm viết mục này (trước Study D/E)**. Cập nhật: Study D có 16 ô và Study E có 10 ô prospective, xem các mục Study D v1 và Study E v1 bên dưới.
