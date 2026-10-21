@@ -30,9 +30,6 @@ jobs:
           - target: K2_tomlkit
             python: "3.12"
             os: ubuntu-24.04
-          - target: K3_redis
-            python: "3.12"
-            os: ubuntu-24.04
     runs-on: ${{ matrix.os }}
     timeout-minutes: 90
     env:
