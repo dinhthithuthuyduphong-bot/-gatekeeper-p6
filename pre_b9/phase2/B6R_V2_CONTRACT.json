@@ -1,0 +1,7 @@
+{
+  "status": "NOT_READY_NO_SOURCE_PROVENANCE",
+  "origin": null,
+  "replay": null,
+  "smoke": null,
+  "note": "Do not invent package versions or upstream smoke oracle outcomes. Requires independently pinned receipts before any prospective evaluation."
+}
