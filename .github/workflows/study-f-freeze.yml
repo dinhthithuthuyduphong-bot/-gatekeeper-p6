@@ -1,0 +1,23 @@
+# One-click freeze of Study F (FROZEN, seed time = now + 60 min, hashes, tag study-f-freeze).
+name: Gatekeeper Study F freeze
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  freeze:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: python -m unittest discover -s tests
+      - run: |
+          python tools/freeze_named_study.py study_f --delay-minutes 60
+          python tools/freeze_study.py verify study_f
+          git config user.name "gatekeeper-freeze-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add study_f
+          git commit -m "Freeze Study F"
+          git tag study-f-freeze
+          git push origin HEAD --tags
