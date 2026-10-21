@@ -1,0 +1,45 @@
+# Study E runnability check: install + census baseline x3, the skill is NEVER applied.
+name: Gatekeeper Study E baseline check
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  baseline:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: E1_pyyaml
+            python: "3.12"
+            os: ubuntu-24.04
+          - target: E2_packaging
+            python: "3.12"
+            os: ubuntu-24.04
+          - target: E3_databricks
+            python: "3.11"
+            os: ubuntu-24.04
+          - target: K1_trino
+            python: "3.12"
+            os: ubuntu-24.04
+          - target: K2_tomlkit
+            python: "3.12"
+            os: ubuntu-24.04
+          - target: K3_redis
+            python: "3.12"
+            os: ubuntu-24.04
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python }}
+      - run: |
+          python -m pip install -q "pytest==8.3.5"
+          mkdir -p out_b
+          python tools/baseline_check.py study_e/config_study_e.json ${{ matrix.target }} out_b
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: STUDY_E_BASELINE_${{ matrix.target }}
+          path: out_b
