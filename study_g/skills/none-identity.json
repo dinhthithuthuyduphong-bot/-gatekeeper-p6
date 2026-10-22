@@ -1,10 +1,21 @@
 {
   "skill_id": "none-identity",
-  "version": "1.0-draft",
-  "pi": {"transform": "none_identity", "params": {}},
-  "D": {"python": ">=3.8"},
+  "version": "1.0",
+  "pi": {
+    "transform": "none_identity",
+    "params": {}
+  },
+  "D": {
+    "python": ">=3.8"
+  },
   "I": [],
-  "P": [],
-  "K": "PySStuBs-style single-statement fix family 'change binary operator' / pycodestyle E711 (compare with None by identity). Draft: the concrete source fix used for replay must be fixed BEFORE any Study G target is chosen.",
+  "P": [
+    {
+      "before": "replay/get_delays_before.py",
+      "after": "replay/get_delays_after.py",
+      "heldout": false
+    }
+  ],
+  "K": "E711 'comparison to None' fix family (PySStuBs-style single-statement change of comparison operator). Replay example: real upstream fix hera_pspec PR #485 (merge f1235c7) rewriting `n_dlys == None` in get_delays; hera_pspec is not an evaluation target.",
   "scope": "comparisons with None"
 }

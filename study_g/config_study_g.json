@@ -9,24 +9,30 @@
   "n_max": 300,
   "cells": [
     "G1_pydal/null",
-    "G1_pydal/plain",
-    "K1_hera_pspec/none",
-    "K1_hera_pspec/int"
+    "G1_pydal/plain"
   ],
   "skill": "skills/none-identity.json",
   "seed_rule": "sha256(FREEZE.json sha256 || drand quicknet randomness of the first round at or after seed_time_utc)",
   "seed_time_utc": "SET_AT_FREEZE",
   "multiplicity": "e-Holm FWER over min(e_benefit, e_cert) of all cells; secondary e-BH q=0.1",
   "census": "target's own tests at the pinned commit, both arms; baseline failures excluded before treatment; any new failure blocks every scope of the target",
-  "note": "DRAFT: targets fixed by study_g/VETTING_DECISIONS.md; beneficial side BLOCKED; family = cells where the skill binds (decided before draws)",
+  "note": "Study G: second skill family. Beneficial side BLOCKED (29/29 vetted); controls excluded (not runnable). One harmful target with a tier-1 oracle; plain scope is a within-target differential control. Family = 2 cells (both bind; decided before draws).",
   "extra_tracked": [
-    "gatekeeper_ext/none_identity.py",
     "gatekeeper_ext/__init__.py",
+    "gatekeeper_ext/none_identity.py",
+    "study_g/oracles/pydal_none_query.py",
+    "study_g/skills/replay/get_delays_after.py",
+    "study_g/skills/replay/get_delays_before.py",
     "tools/run_study_g.py"
   ],
   "excluded_before_freeze": {
     "G2_emmett": "census INVALID twice: emmett's own ORM tests cannot open their SQLite file in the runner snapshot (no databases/ directory next to tests/); upstream tests may not be modified; excluded after the one allowed fix round (rule 5). Its oracle worked (10/10 on untreated code).",
     "promnesia": "test collection errors after one retry",
-    "emfcamp/Website": "not installable"
-  }
+    "emfcamp/Website": "not installable",
+    "K1_hera_pspec": "not installable on the runner: uvtools>=0.2.0 no longer resolvable (installed during vetting on 2026-10-21); an exact pin did not help; excluded after the one fix round (rule 5)"
+  },
+  "secondary_preregistered": [
+    "B6-S(k) for k in {1,5}: replay + fingerprint + census + no regression in the first k draws of each scope",
+    "futility: stop as QUARANTINE when the upper bound of the 95% hedged-capital CS for E[-Z] falls below theta (replayed on the recorded draws)"
+  ]
 }
