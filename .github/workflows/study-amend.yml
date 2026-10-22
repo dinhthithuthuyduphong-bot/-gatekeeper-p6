@@ -1,0 +1,33 @@
+# Apply a documented amendment to a frozen study (study_e, study_f, ...): pin the seed to the
+# original freeze hash, apply the listed edits, re-freeze, commit and tag.
+name: Gatekeeper study amend
+on:
+  workflow_dispatch:
+    inputs:
+      study: {description: "study directory, e.g. study_e or study_f", required: true}
+      amendment: {description: "amendment id documented in <study>/AMENDMENTS.md", required: true}
+      edits_file: {description: "optional file inside the study with the edits (e.g. F_A1_EDITS.txt)", required: false, default: ""}
+permissions:
+  contents: write
+jobs:
+  amend:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: python -m unittest discover -s tests
+      - shell: bash
+        run: |
+          set -euo pipefail
+          EDITS=""
+          if [ -n "${{ inputs.edits_file }}" ]; then EDITS="$(cat ${{ inputs.study }}/${{ inputs.edits_file }})"; fi
+          eval "python tools/amend_study.py ${{ inputs.study }} ${{ inputs.amendment }} $EDITS"
+          python tools/freeze_study.py verify ${{ inputs.study }}
+          git config user.name "gatekeeper-freeze-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add ${{ inputs.study }}
+          git commit -m "${{ inputs.study }} amendment ${{ inputs.amendment }} (seed unchanged)"
+          git tag "${{ inputs.study }}-$(echo ${{ inputs.amendment }} | tr 'A-Z' 'a-z')"
+          git push origin HEAD --tags
