@@ -11,10 +11,8 @@ jobs:
         include:
           - target: G1_pydal
             python: "3.12"
-          - target: G2_emmett
-            python: "3.12"
           - target: K1_hera_pspec
-            python: "3.11"
+            python: "3.12"
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     steps:
