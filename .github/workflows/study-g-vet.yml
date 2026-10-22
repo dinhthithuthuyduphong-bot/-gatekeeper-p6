@@ -1,0 +1,67 @@
+# Study G vetting (0 cost, skill never applied): beneficial candidates (fail-before / pass-after
+# upstream tests) and harmful candidates (runnability + upstream tests using == None).
+name: Gatekeeper Study G vetting
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  beneficial:
+    strategy:
+      fail-fast: false
+      matrix:
+        name:
+          - algopy_pr43
+          - galsim_pr605
+          - hera_pspec_pr485
+          - icepyx_pr542
+          - lightning_thunder_pr2469
+          - muscle_pr703
+          - pdip_pr58
+          - psyneulink_pr1472
+          - pymechanical_pr1016
+          - sglang_pr19745
+          - sqlobject_pr70
+          - weave_pr5121
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p out_v
+          python tools/vet_target.py study_g/targets/${{ matrix.name }}.json out_v 2>&1 | tail -40 | tee out_v/log_${{ matrix.name }}.txt || true
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: G_VET_${{ matrix.name }}
+          path: out_v
+  harmful:
+    strategy:
+      fail-fast: false
+      matrix:
+        name:
+          - web2py/pydal
+          - emmett-framework/emmett
+          - karlicoss/promnesia
+          - emfcamp/Website
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - shell: bash
+        run: |
+          mkdir -p out_h
+          python tools/runnable_check_g.py study_g/harm_candidates.json "${{ matrix.name }}" out_h 2>&1 | tail -20 | tee out_h/log.txt || true
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: G_RUNNABLE_${{ strategy.job-index }}
+          path: out_h
