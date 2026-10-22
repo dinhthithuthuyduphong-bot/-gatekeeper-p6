@@ -9,14 +9,18 @@
   "n_max": 300,
   "cells": [
     "G1_pydal/null",
-    "G1_pydal/plain"
+    "G1_pydal/plain",
+    "G2_emmett/null",
+    "G2_emmett/plain",
+    "K1_hera_pspec/none",
+    "K1_hera_pspec/int"
   ],
   "skill": "skills/none-identity.json",
   "seed_rule": "sha256(FREEZE.json sha256 || drand quicknet randomness of the first round at or after seed_time_utc)",
   "seed_time_utc": "SET_AT_FREEZE",
   "multiplicity": "e-Holm FWER over min(e_benefit, e_cert) of all cells; secondary e-BH q=0.1",
   "census": "target's own tests at the pinned commit, both arms; baseline failures excluded before treatment; any new failure blocks every scope of the target",
-  "note": "DRAFT: cells grow as targets pass vetting/baseline; family = cells where the skill binds (decided before draws)",
+  "note": "DRAFT: targets fixed by study_g/VETTING_DECISIONS.md; beneficial side BLOCKED; family = cells where the skill binds (decided before draws)",
   "extra_tracked": [
     "gatekeeper_ext/none_identity.py",
     "gatekeeper_ext/__init__.py",

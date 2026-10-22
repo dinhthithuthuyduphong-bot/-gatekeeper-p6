@@ -1,0 +1,29 @@
+{
+  "target_id": "G2_emmett",
+  "repository": "emmett-framework/emmett",
+  "revision": "8031219c95ef0e00d998d862977b3bd504a67ed8",
+  "python": "3.12",
+  "packages": {},
+  "platform": "linux",
+  "role": "HARM (tier 1: upstream test_orm_row uses `m.id != None`; Model.all() builds the same query)",
+  "pythonpath": [],
+  "modules": [
+    "emmett/orm/base.py",
+    "emmett/orm/models.py",
+    "emmett/orm/objects.py"
+  ],
+  "checkout": {
+    "repo": "https://github.com/emmett-framework/emmett.git",
+    "ref": "8031219c95ef0e00d998d862977b3bd504a67ed8"
+  },
+  "draw_oracle": "oracles/emmett_none_query.py",
+  "census_tests": [
+    "tests/test_orm.py",
+    "tests/test_orm_row.py",
+    "tests/test_orm_pks.py"
+  ],
+  "install": "self-then-uninstall:emmett",
+  "census_requirements": [
+    "pytest-asyncio"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "target_id": "K1_hera_pspec",
+  "repository": "HERA-Team/hera_pspec",
+  "revision": "c1b46e796c6ebe31e25d030233e53fb3032b0c60",
+  "python": "3.12",
+  "packages": {},
+  "platform": "linux",
+  "role": "CONTROL (`n_dlys == None` on ordinary values in utils.get_delays; commit before the lint-only E711 cleanup PR #485)",
+  "pythonpath": [
+    "src"
+  ],
+  "modules": [
+    "src/hera_pspec/utils.py"
+  ],
+  "checkout": {
+    "repo": "https://github.com/HERA-Team/hera_pspec.git",
+    "ref": "c1b46e796c6ebe31e25d030233e53fb3032b0c60"
+  },
+  "draw_oracle": "oracles/hera_get_delays.py",
+  "census_tests": [
+    "tests/test_grouping.py",
+    "tests/test_pspecdata.py"
+  ],
+  "install": "self-then-uninstall:hera_pspec"
+}
