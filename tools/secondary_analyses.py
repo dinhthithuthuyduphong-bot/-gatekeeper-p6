@@ -86,14 +86,29 @@ def cs_at(seq, n):
     return c.interval()
 
 
-def family_decisions(cells, k, **kw):
-    out, evals = {}, {}
+def family_decisions(cells, k, zero_cells=(), **kw):
+    """zero_cells: cells of the pre-registered family that have no trace (out of scope);
+    they enter e-Holm with e = 0 exactly as in the primary analysis."""
+    out, evals = {}, {z: 0.0 for z in zero_cells}
     for name, c in cells.items():
         d, n, e = replay(c["trace"], k, **kw)
         out[name] = (d, n)
         evals[name] = 0.0 if (d == "REJECT_HARM" or c["census_bad"]) else e
+    assert len(evals) == k, f"family has {len(evals)} cells but K = {k}"
     adm = set(e_holm(evals, ALPHA))
     return {n: ("ADMIT" if n in adm else ("REJECT_HARM" if out[n][0] == "REJECT_HARM" else "Q"), out[n][1]) for n in out}
+
+
+def wilson(p, n, z=1.96):
+    d = 1 + z * z / n
+    c = (p + z * z / (2 * n)) / d
+    h = z * math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / d
+    return max(0.0, c - h), min(1.0, c + h)
+
+
+def fmt(p, n=2000):
+    lo, hi = wilson(p, n)
+    return f"{p:.3f} [{lo:.3f}; {hi:.3f}]"
 
 
 def sim_cert(frac, h, sims=2000, k=16, seed=7):
@@ -116,6 +131,8 @@ def main(argv=None):
     a = ap.parse_args(argv)
     cells = load(a.dirs)
     D = {k: v for k, v in cells.items() if v["study"] == "D"}
+    d_cfg = json.loads((ROOT / "study_d" / "config_study_d.json").read_text())
+    oos = [c for c in d_cfg["cells"] if c not in D]
     E = {k: v for k, v in cells.items() if v["study"] == "E"}
     L = ["# Phân tích thứ cấp trên trace đã đóng băng (post hoc; không thay kết quả chính)", ""]
 
@@ -130,19 +147,20 @@ def main(argv=None):
           "mỗi regression nhân vốn khoảng 10, nên hai regression vượt 1/0,05 = 20.", ""]
 
     L += ["## 2. Độ nhạy theo λ của chứng nhận (K = 16, mô phỏng 2.000 lần)", "",
+          "Mỗi tỉ lệ kèm khoảng tin cậy Wilson 95% của mô phỏng. Đây là kiểm tra **từng ô** (một ô, ngưỡng K/α với K = 16), không phải FWER của cả họ; FWER cả họ được kiểm tra riêng trong `DECISION_SIM_FAMILY_K16.md`.", "",
           "| Tỉ lệ λ/λmax | Lần rút để admit khi h = 0 | P(admit trong 300 lần rút), h = 0,02 | P(admit), h = η = 0,05 (phải thấp) |",
           "|---|---|---|---|"]
     for frac in (0.5, 0.7, 0.9, 0.99):
         n0 = math.ceil(math.log(160) / math.log(1 + frac * ETA / (1 - ETA)))
-        L.append(f"| {frac} | {n0} | {sim_cert(frac, 0.02):.3f} | {sim_cert(frac, 0.05):.3f} |")
+        L.append(f"| {frac} | {n0} | {fmt(sim_cert(frac, 0.02))} | {fmt(sim_cert(frac, 0.05))} |")
     L += ["", "λ lớn hơn admit nhanh hơn khi không có hại, nhưng mỗi regression làm vốn mất nhiều hơn, nên skill có hại hiếm "
           "khó được admit hơn. Giá trị 0,9 đã được đóng băng trước Study D/E.", ""]
 
     L += ["## 3. Họ e-Holm khi loại các ô ngoài scope", "",
-          "Binding xảy ra trước mọi lần rút, nên loại ô ngoài scope khỏi họ không dùng tới kết quả. Study D: K = 16 → 12 (bỏ D4, A1); "
-          "Study E không có ô ngoài scope.", "",
+          "Binding xảy ra trước mọi lần rút, nên loại ô ngoài scope khỏi họ không dùng tới kết quả. Study D: nhánh K = 16 gồm đủ 16 ô "
+          f"(4 ô ngoài scope {', '.join(oos)} với e = 0, như phân tích chính); nhánh K = 12 bỏ 4 ô đó. Study E không có ô ngoài scope.", "",
           "| Ô | Quyết định (K = 16) | Quyết định (K = 12) |", "|---|---|---|"]
-    k16 = family_decisions(D, 16)
+    k16 = family_decisions(D, 16, zero_cells=oos)
     k12 = family_decisions(D, 12)
     for n in sorted(D):
         if k16[n] != k12[n] or k16[n][0] == "ADMIT":
@@ -203,7 +221,7 @@ def main(argv=None):
     L += ["## 7. Độ nhạy theo θ và η (trên trace thật)", "", "| θ | η | Ô được admit (Study D, K = 16) | Ô REJECT_HARM (Study E) |", "|---|---|---|---|"]
     for th in (0.05, 0.1, 0.2, 0.3):
         for et in (0.02, 0.05, 0.1):
-            dd = family_decisions(D, 16, theta=th, eta=et)
+            dd = family_decisions(D, 16, zero_cells=oos, theta=th, eta=et)
             ee = family_decisions(E, 10, theta=th, eta=et)
             L.append(f"| {th} | {et} | {', '.join(sorted(n for n, v in dd.items() if v[0] == 'ADMIT')) or '—'} | "
                      f"{', '.join(sorted(n for n, v in ee.items() if v[0] == 'REJECT_HARM'))} |")

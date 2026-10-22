@@ -1,0 +1,1 @@
+'config_study_f.json:k_cells=144' 'config_study_f.json:k_cells_note="4 models x 3 repetitions x 6 targets x 2 scopes; provisional per-cell bar K/alpha = 1440"' 'config_study_f.json:repetitions=3' 'config_study_f.json:extra_tracked=["tools/score_heldout.py","tools/aggregate_study_f.py"]'

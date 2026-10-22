@@ -38,11 +38,23 @@ class NoneIdentity(T.Transform):
             return "BOTH_NONE"
         return None
 
+    # Operands that bind at least as tightly as a comparison can be written bare; anything
+    # else (conditional expression, boolean/not, lambda, walrus, comparisons) is parenthesised.
+    _ATOMIC = (ast.Name, ast.Attribute, ast.Call, ast.Subscript, ast.Constant, ast.BinOp, ast.UnaryOp,
+               ast.List, ast.Tuple, ast.Dict, ast.Set, ast.ListComp, ast.SetComp, ast.DictComp,
+               ast.GeneratorExp, ast.JoinedStr, ast.Await, ast.Starred)
+
+    def _operand(self, node, off):
+        text = off.text(node)
+        if isinstance(node, ast.UnaryOp) and isinstance(node.op, ast.Not):
+            return f"({text})"
+        return text if isinstance(node, self._ATOMIC) else f"({text})"
+
     def edits(self, tree, node, off):
         a, b = off.span(node)
         subject = node.comparators[0] if self._is_none(node.left) else node.left
         op = "is" if isinstance(node.ops[0], ast.Eq) else "is not"
-        return [(a, b, f"{off.text(subject)} {op} None")]
+        return [(a, b, f"{self._operand(subject, off)} {op} None")]
 
     def touched(self, node):
         subject = node.comparators[0] if self._is_none(node.left) else node.left

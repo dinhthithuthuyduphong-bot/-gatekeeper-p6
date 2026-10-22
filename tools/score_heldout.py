@@ -43,18 +43,23 @@ def score(target, treated, oracle, cfg, seed, k_cells):
 
 
 def gate(target, treated, oracle, cfg, seed, k_cells):
-    """Gatekeeper per-cell rule on the ADMISSION seed; deploy iff some scope is admitted and
-    the census shows no persistent regression (e-Holm over the Study F family is applied in
-    the aggregation step, which may only remove admissions)."""
+    """Gatekeeper per-cell rule on the ADMISSION seed.  A patch is a CANDIDATE for deployment
+    iff no scope ends in REJECT_HARM, the census is VALID with no persistent regression, and at
+    least one scope reaches the provisional admission bar.  Whether it is finally deployed is
+    decided by tools/aggregate_study_f.py with e-Holm over the whole Study F family (K cells)."""
     if not treated:
-        return False, {}
+        return False, {"submitted": False}
     res = run_draw_study(target, treated, oracle, {"seed": seed, "alpha": cfg["alpha"], "n_max": cfg["n_max"],
                                                     "theta": cfg["theta"], "eta": cfg["eta"]}, k_cells)
     cen = census(target, treated, target.manifest["census_tests"])
-    admitted = [s for s, v in res["scopes"].items() if v["decision"] == "ADMIT"]
-    ok = bool(admitted) and cen.get("status") == "VALID" and not cen.get("new_failures")
-    return ok, {"admitted_scopes": admitted, "e_min": {s: v["e_min"] for s, v in res["scopes"].items()},
-                "census_new_failures": len(cen.get("new_failures", []))}
+    decisions = {s: v["decision"] for s, v in res["scopes"].items()}
+    harm = any(d == "REJECT_HARM" for d in decisions.values())
+    census_ok = cen.get("status") == "VALID" and not cen.get("new_failures")
+    provisional = [s for s, d in decisions.items() if d == "ADMIT"]
+    candidate = bool(provisional) and not harm and census_ok
+    return candidate, {"submitted": True, "decisions": decisions, "reject_harm": harm, "census_ok": census_ok,
+                       "e_min": {s: (0.0 if (harm or not census_ok) else v["e_min"]) for s, v in res["scopes"].items()},
+                       "census_new_failures": len(cen.get("new_failures", []))}
 
 
 def main(config, target_id, out_dir, *b9_dirs) -> int:
@@ -70,7 +75,9 @@ def main(config, target_id, out_dir, *b9_dirs) -> int:
     admission_seed = drand_seed(dcfg.get("seed_freeze_sha256") or
                                 hashlib.sha256((d_base / "FREEZE.json").read_bytes()).hexdigest(),
                                 dcfg["seed_time_utc"])["seed"]
-    heldout = drand_seed(hashlib.sha256((cfg_path.parent / "FREEZE.json").read_bytes()).hexdigest(),
+    # the held-out seed is pinned to the ORIGINAL Study F freeze hash (amendments cannot move it)
+    heldout = drand_seed(cfg.get("seed_freeze_sha256") or
+                         hashlib.sha256((cfg_path.parent / "FREEZE.json").read_bytes()).hexdigest(),
                          cfg["seed_time_utc"])
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
@@ -117,8 +124,8 @@ def main(config, target_id, out_dir, *b9_dirs) -> int:
                     ok, gate_info = gate(target, r.treated, oracle, cfg, admission_seed, k)
                     rows.append({"approach": "B9 raw", "model": model, "repetition": rep, "verdict": b9_verdict(raw),
                                  "cost_usd": r.cost_usd, "state": raw})
-                    rows.append({"approach": "B9+Gatekeeper", "model": model, "repetition": rep,
-                                 "verdict": b9_verdict(raw) if ok else "NO_PATCH", "gate": gate_info,
+                    rows.append({"approach": "B9+Gatekeeper (candidate)", "model": model, "repetition": rep,
+                                 "candidate": ok, "raw_verdict": b9_verdict(raw), "gate": gate_info,
                                  "cost_usd": r.cost_usd})
     finally:
         shutil.rmtree(work, ignore_errors=True)

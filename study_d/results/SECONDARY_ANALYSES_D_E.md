@@ -8,18 +8,20 @@
 
 ## 2. Độ nhạy theo λ của chứng nhận (K = 16, mô phỏng 2.000 lần)
 
+Mỗi tỉ lệ kèm khoảng tin cậy Wilson 95% của mô phỏng. Đây là kiểm tra **từng ô** (một ô, ngưỡng K/α với K = 16), không phải FWER của cả họ; FWER cả họ được kiểm tra riêng trong `DECISION_SIM_FAMILY_K16.md`.
+
 | Tỉ lệ λ/λmax | Lần rút để admit khi h = 0 | P(admit trong 300 lần rút), h = 0,02 | P(admit), h = η = 0,05 (phải thấp) |
 |---|---|---|---|
-| 0.5 | 196 | 0.199 | 0.001 |
-| 0.7 | 141 | 0.399 | 0.003 |
-| 0.9 | 110 | 0.333 | 0.007 |
-| 0.99 | 100 | 0.201 | 0.005 |
+| 0.5 | 196 | 0.199 [0.182; 0.217] | 0.001 [0.000; 0.003] |
+| 0.7 | 141 | 0.399 [0.377; 0.420] | 0.003 [0.001; 0.007] |
+| 0.9 | 110 | 0.333 [0.313; 0.354] | 0.007 [0.004; 0.012] |
+| 0.99 | 100 | 0.201 [0.184; 0.219] | 0.005 [0.003; 0.009] |
 
 λ lớn hơn admit nhanh hơn khi không có hại, nhưng mỗi regression làm vốn mất nhiều hơn, nên skill có hại hiếm khó được admit hơn. Giá trị 0,9 đã được đóng băng trước Study D/E.
 
 ## 3. Họ e-Holm khi loại các ô ngoài scope
 
-Binding xảy ra trước mọi lần rút, nên loại ô ngoài scope khỏi họ không dùng tới kết quả. Study D: K = 16 → 12 (bỏ D4, A1); Study E không có ô ngoài scope.
+Binding xảy ra trước mọi lần rút, nên loại ô ngoài scope khỏi họ không dùng tới kết quả. Study D: nhánh K = 16 gồm đủ 16 ô (4 ô ngoài scope D4_openfeature/bool, D4_openfeature/int, A1_speckit_catalog/bool, A1_speckit_catalog/int với e = 0, như phân tích chính); nhánh K = 12 bỏ 4 ô đó. Study E không có ô ngoài scope.
 
 | Ô | Quyết định (K = 16) | Quyết định (K = 12) |
 |---|---|---|

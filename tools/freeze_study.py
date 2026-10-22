@@ -31,6 +31,10 @@ def tracked(study: Path) -> list:
                                           "ablation_study_d.py", "report_study_d.py", "decision_sim.py",
                                           "freeze_study_d.py", "clean_room_check.py")]
     files += sorted(study.glob("DECISION_SIM*.md"))
+    # study-specific extra files (declared in the study's own config; absent for D/E)
+    for cfg_path in study.glob("config_*.json"):
+        for rel in json.loads(cfg_path.read_text()).get("extra_tracked", []):
+            files.append(ROOT / rel)
     return [f for f in files if f.is_file()]
 
 

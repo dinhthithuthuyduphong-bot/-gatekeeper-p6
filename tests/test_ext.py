@@ -28,3 +28,79 @@ class NoneIdentitySkillTests(unittest.TestCase):
         self.assertEqual(e == None, "IS NULL")               # noqa: E711  intended semantics
         self.assertIs(e is None, False)                      # what the rewrite would produce
         self.assertEqual((5 == None), (5 is None))           # noqa: E711  ordinary objects: unchanged
+
+
+class NoneIdentityPrecedenceTests(unittest.TestCase):
+    """The rewrite must preserve meaning for ordinary objects whatever the operand's syntax."""
+
+    CASES = ["(x if flag else y) == None", "None == (x if flag else y)", "(a or b) == None",
+             "(not a) == None", "(lambda: 1) == None", "(n := x) == None", "a + b == None",
+             "-a != None", "f(x)[0] == None", "(a and b) != None", "x.y == None", "(yield_ := x) != None"]
+
+    def test_semantics_preserved_for_ordinary_values(self):
+        from gatekeeper_ext.none_identity import NoneIdentity
+        env_values = [None, 0, 5, "", [], [1]]
+        for case in self.CASES:
+            src = f"def g(x, y, a, b, flag, f):\n    return {case}\n"
+            new = NoneIdentity().apply(src, single_site=False).source
+            ns_old, ns_new = {}, {}
+            exec(src, ns_old)
+            exec(new, ns_new)
+            for x in env_values:
+                for flag in (True, False):
+                    args = (x, None, x, 1, flag, lambda v: [v])
+                    if "a + b" in case or "-a" in case:
+                        args = (x, None, 2, 3, flag, lambda v: [v])
+                    try:
+                        old = ns_old["g"](*args)
+                    except Exception as exc:
+                        old = type(exc)
+                    try:
+                        got = ns_new["g"](*args)
+                    except Exception as exc:
+                        got = type(exc)
+                    self.assertEqual(old, got, f"{case}: {old!r} vs {got!r} (x={x!r}, flag={flag})\\n{new}")
+
+
+class StudyFAggregationTests(unittest.TestCase):
+    def _run(self, rows_by_target, k=8):
+        import json, tempfile, importlib
+        sys.path.insert(0, str(ROOT / "tools"))
+        agg = importlib.import_module("aggregate_study_f")
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp = Path(tmp)
+            cfg = {"k_cells": k, "alpha": 0.1, "repetitions": 1, "cells": list(rows_by_target),
+                   "b9_configs": {"m1": "x", "m2": "y"}}
+            (tmp / "c.json").write_text(json.dumps(cfg))
+            for t, rows in rows_by_target.items():
+                (tmp / f"HELDOUT_{t}.json").write_text(json.dumps({"target": t, "rows": rows}))
+            agg.main(str(tmp / "c.json"), str(tmp), str(tmp / "o.md"))
+            return (tmp / "o.md").read_text()
+
+    def test_harm_in_another_scope_blocks_deployment(self):
+        rows = lambda m, cand, e: [
+            {"approach": "B9 raw", "model": m, "repetition": 0, "verdict": "HARMFUL"},
+            {"approach": "B9+Gatekeeper (candidate)", "model": m, "repetition": 0, "candidate": cand,
+             "gate": {"e_min": {"bool": e, "int": 0.0}, "reject_harm": not cand}}]
+        out = self._run({"T1": rows("m1", False, 1e9) + rows("m2", True, 1e9),
+                         "T2": rows("m1", False, 0.0) + rows("m2", False, 0.0)})
+        # m1: harm elsewhere -> never deployed; m2: candidate with huge e -> deployed (raw verdict kept)
+        self.assertIn("| m1 | B9 + Gatekeeper | 0 | 0 | 0 | 2 |", out)
+        self.assertIn("| m2 | B9 + Gatekeeper | 0 | 1 | 0 | 1 |", out)
+
+    def test_family_size_must_match_registration(self):
+        with self.assertRaises(SystemExit):
+            self._run({"T1": []}, k=99)
+
+
+class FreezeExtraTrackedTests(unittest.TestCase):
+    def test_extra_tracked_only_affects_its_own_study(self):
+        import importlib, json, tempfile, shutil
+        sys.path.insert(0, str(ROOT / "tools"))
+        fz = importlib.import_module("freeze_study")
+        d_files = {p.name for p in fz.tracked((ROOT / "study_d").resolve())}
+        self.assertNotIn("score_heldout.py", d_files)
+        with tempfile.TemporaryDirectory(dir=ROOT) as tmp:
+            st = Path(tmp)
+            (st / "config_x.json").write_text(json.dumps({"extra_tracked": ["tools/score_heldout.py"]}))
+            self.assertIn("score_heldout.py", {p.name for p in fz.tracked(st.resolve())})

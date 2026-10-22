@@ -16,3 +16,15 @@ Mọi phân tích dưới đây chạy trên **trace đã đóng băng** của S
 | 10 | Oracle có hại E2/E3 yếu | **Không sửa được trên D/E** | Đã giới hạn luận điểm an toàn chính vào E1. Cấp 1 chỉ có thể đến từ target mới (Study G). |
 | 11 | Trial đắt (LLM trong vòng lặp) | **Thiết kế xong (Study F), chờ ngân sách** | B9 vẫn HOLD. Amendment A3 (cho phép chạy bằng credit trước 31/10, hạn mức theo model) đã chuẩn bị nhưng **chưa áp dụng**. |
 | 12 | RTS / baseline kiểm thử lại + ngưỡng lợi ích | **Ghi trong bài** | B6-S chính là "kiểm thử lại + không regression"; thêm ngưỡng lợi ích vào B6-S sẽ biến nó thành Gatekeeper không có bảo đảm sai số. RTS bổ trợ cho census, không thay thế. |
+
+## Sửa sau review ngày 22/10/2026 (commit `6f2d2d2`)
+
+| # | Lỗi reviewer tái hiện | Đánh giá | Đã sửa |
+|---|---|---|---|
+| 1 | `none-identity`: `(x if flag else y) == None` thành `x if flag else y is None` | **Đúng** | Bọc ngoặc mọi toán hạng không nguyên tử; test so sánh ngữ nghĩa trên 12 dạng biểu thức và 6 giá trị |
+| 2 | Công cụ độ bao phủ nuốt exception, ghi 0% khi môi trường hỏng | **Đúng** | Ghi lỗi từng lần rút, kiểm tra module được trace đúng là file trong snapshot, trả `INVALID` và mã thoát 1; **phải chạy lại** `coverage-reach.yml` trước khi dùng bảng độ bao phủ |
+| 3 | Nhánh K = 16 thiếu 4 ô ngoài scope | **Đúng** | Nhánh K = 16 có đủ 16 ô (4 ô e = 0), có kiểm tra kích thước họ; kết luận không đổi (admit sau 110 so với 104 lần rút) |
+| 4 | Study F: triển khai patch dù scope khác REJECT_HARM; thiếu e-Holm cả họ; công cụ chấm ngoài hash | **Đúng, nghiêm trọng** | Amendment **F-A1**: cổng mới, `aggregate_study_f.py` (e-Holm trên **K = 144**, gồm cả lần lặp), `extra_tracked`, seed held-out ghim theo hash gốc; có test |
+| 5 | Hash Study E hỏng (b9.py, run_b9.py) | **Đúng; không ảnh hưởng kết quả** | Amendment **E-A1**: E không dùng B9, đã chạy và tái lập trước A2; chỉ đóng băng lại |
+| 6 | B6-S tính lại từ trace | **Đồng ý một phần** | Tính từ trace là chính xác (k lần smoke = k lần rút đầu của cùng bộ sinh); bằng chứng độc lập sẽ đến từ việc đăng ký B6-S trước trong Study G |
+| 7 | Khoảng bất định Monte Carlo cho độ nhạy λ | **Đúng** | Thêm khoảng Wilson 95%; ghi rõ đây là kiểm tra từng ô, không phải FWER cả họ |

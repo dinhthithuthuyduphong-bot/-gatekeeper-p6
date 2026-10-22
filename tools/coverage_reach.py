@@ -21,13 +21,14 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "tools"))
 
 WORKER = r'''
-import importlib.util, json, sys
+import importlib.util, json, os, sys, traceback
 oracle_path, target_file, lines, draws = sys.argv[1], sys.argv[2], set(json.loads(sys.argv[3])), json.loads(sys.stdin.read())
 spec = importlib.util.spec_from_file_location("gk_cov_oracle", oracle_path)
 o = importlib.util.module_from_spec(spec); spec.loader.exec_module(o)
+target_real = os.path.realpath(target_file)
 hit = [False]
 def tracer(frame, event, arg):
-    if frame.f_code.co_filename != target_file:
+    if os.path.realpath(frame.f_code.co_filename) != target_real:
         return None
     def local(f, ev, a):
         if ev == "line" and f.f_lineno in lines:
@@ -37,15 +38,18 @@ def tracer(frame, event, arg):
 out = []
 for d in draws:
     hit[0] = False
+    err = None
     sys.settrace(tracer)
     try:
-        o.execute(d)
-    except Exception:
-        pass
+        o.execute(d)                  # the oracle catches the TARGET's exceptions itself
+    except BaseException as exc:      # anything escaping is a harness error, never "not reached"
+        err = type(exc).__name__ + ": " + str(exc)[:200]
     finally:
         sys.settrace(None)
-    out.append(hit[0])
-print(json.dumps(out))
+    out.append({"reached": hit[0], "error": err})
+loaded = [m.__file__ for m in list(sys.modules.values())
+          if getattr(m, "__file__", None) and os.path.realpath(m.__file__) == target_real]
+print(json.dumps({"draws": out, "target_module_loaded": bool(loaded)}))
 '''
 
 
@@ -87,23 +91,35 @@ def main(config, target_id, out_dir):
             rng = random.Random(f"{seed}:{target_id}:{scope}")
             draws = [gen(rng) for _ in range(300)]
             reach = [False] * len(draws)
+            errors, loaded_all = 0, True
             for fpath, lines in by_file.items():
                 p = subprocess.run([sys.executable, "-c", WORKER, str((base / m["draw_oracle"]).resolve()), fpath,
                                     json.dumps(lines)], input=json.dumps(draws), capture_output=True, text=True,
                                    cwd=root, env=wenv, timeout=3600)
-                got = json.loads(p.stdout.strip().splitlines()[-1]) if p.stdout.strip() else [False] * len(draws)
-                reach = [a or b for a, b in zip(reach, got)]
+                if p.returncode != 0 or not p.stdout.strip():
+                    raise SystemExit(f"{target_id}/{scope}: coverage worker failed (exit {p.returncode}): {p.stderr[-600:]}")
+                got = json.loads(p.stdout.strip().splitlines()[-1])
+                loaded_all &= got["target_module_loaded"]
+                errors += sum(1 for d in got["draws"] if d["error"])
+                reach = [r or d["reached"] for r, d in zip(reach, got["draws"])]
             trace = result["scopes"].get(scope, {}).get("trace", [])
             cross = {"reach_help": 0, "reach_tie": 0, "reach_hurt": 0, "noreach_help": 0, "noreach_tie": 0, "noreach_hurt": 0}
             for r, (z, reg) in zip(reach, trace):
                 k = ("reach_" if r else "noreach_") + ("hurt" if reg else "help" if z < 0 else "tie")
                 cross[k] += 1
-            rec["scopes"][scope] = {"reach_rate": sum(reach) / len(reach), "cross": cross}
+            rec["scopes"][scope] = {"reach_rate": sum(reach) / len(reach), "cross": cross,
+                                    "harness_errors": errors, "target_module_loaded": loaded_all}
+            if errors or not loaded_all:
+                rec["status"] = "INVALID"
+                rec.setdefault("problems", []).append(
+                    f"{scope}: {errors} draws raised outside the oracle; target module loaded={loaded_all}")
     finally:
         shutil.rmtree(work, ignore_errors=True)
+    rec.setdefault("status", "VALID")
     (out / f"REACH_{target_id}.json").write_text(json.dumps(rec, indent=2))
-    print(json.dumps({s: v["reach_rate"] for s, v in rec["scopes"].items()}), json.dumps({s: v["cross"] for s, v in rec["scopes"].items()}))
-    return 0
+    print(rec["status"], json.dumps({s: v["reach_rate"] for s, v in rec["scopes"].items()}),
+          json.dumps({s: v["cross"] for s, v in rec["scopes"].items()}))
+    return 0 if rec["status"] == "VALID" else 1
 
 
 if __name__ == "__main__":
