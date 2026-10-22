@@ -9,8 +9,18 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT / "tools"))
-from amend_study_d import _set  # noqa: E402
+
+
+def _set(doc, dotted: str, value):
+    """Set doc[a][b][...] = value for a dotted key; integer parts index lists."""
+    keys = dotted.split(".")
+    cur = doc
+    for k in keys[:-1]:
+        cur = cur[int(k)] if isinstance(cur, list) else cur[k]
+    if isinstance(cur, list):
+        cur[int(keys[-1])] = value
+    else:
+        cur[keys[-1]] = value
 
 
 def main(study_dir, amendment_id, *sets):
