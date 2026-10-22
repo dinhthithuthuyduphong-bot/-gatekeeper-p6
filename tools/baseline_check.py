@@ -49,6 +49,9 @@ def main(config, target_id, out_dir):
         stable = [t for t in ids if not t.startswith("::") and all(t in x["results"] and x["results"][t]["passed"] for x in runs)]
         rec.update(collected=len(ids), stable_pass=len(stable), census_would_be="VALID" if len(stable) >= 5 else "INVALID",
                    exits=[x["exit"] for x in runs], tail=runs[0]["tail"][-600:])
+        # diagnostics: the first failing census test's output (the tail shows only the end)
+        rec["census_first_failure"] = next((k + ": " + (v.get("error") or "")[:400] for k, v in runs[0]["results"].items()
+                                            if not v.get("passed")), None)
         # oracle sanity on the UNTREATED code only (10 draws per scope; skill never applied)
         import random
         oracle_path = (base / m["draw_oracle"]).resolve()
@@ -58,7 +61,7 @@ def main(config, target_id, out_dir):
         try:
             for scope, gen in oracle.scopes().items():
                 rng = random.Random(f"baseline-sanity:{scope}")
-                ok = err = 0
+                ok = err = not_ok = 0
                 examples = []
                 for _ in range(10):
                     d = gen(rng)
@@ -68,7 +71,11 @@ def main(config, target_id, out_dir):
                         examples.append(o["harness_error"][:150])
                     else:
                         ok += int(oracle.judge(scope, d, o, o)[0])
-                sanity[scope] = {"baseline_judged_pass": ok, "harness_errors": err, "examples": examples[:2]}
+                        if o.get("ok") is False:          # differential judges pass trivially; check execution too
+                            not_ok += 1
+                            examples.append(json.dumps(o)[:200])
+                sanity[scope] = {"baseline_judged_pass": ok, "harness_errors": err, "execution_not_ok": not_ok,
+                                 "examples": examples[:3]}
         finally:
             w.close()
         rec["oracle_sanity_baseline_only"] = sanity

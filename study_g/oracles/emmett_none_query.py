@@ -24,7 +24,9 @@ def _db():
             foo = Field.string(notnull=True)
             bar = Field.string()
 
+        import os
         root = tempfile.mkdtemp(prefix="gk_emmett_")
+        os.makedirs(os.path.join(root, "databases"), exist_ok=True)   # emmett does not create it
         app = App(__name__, root_path=root)
         db = Database(app, config=sdict(uri=f"sqlite://{uuid.uuid4().hex}.db", auto_connect=True))
         db.define_models(GkOne)

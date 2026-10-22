@@ -2,7 +2,7 @@
   "target_id": "K1_hera_pspec",
   "repository": "HERA-Team/hera_pspec",
   "revision": "c1b46e796c6ebe31e25d030233e53fb3032b0c60",
-  "python": "3.12",
+  "python": "3.11",
   "packages": {},
   "platform": "linux",
   "role": "CONTROL (`n_dlys == None` on ordinary values in utils.get_delays; commit before the lint-only E711 cleanup PR #485)",
