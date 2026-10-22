@@ -14,7 +14,8 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 from gatekeeper_lite.studyd_decisions import decide  # noqa: E402
 
-STUDIES = [("study_d", "config_study_d.json", 3220, 3600), ("study_e", "config_study_e.json", 2106, 3000)]
+STUDIES = [("study_d", "config_study_d.json", 3220, 3600), ("study_e", "config_study_e.json", 2106, 3000),
+           ("study_g", "config_study_g.json", 403, 600)]
 
 
 def main() -> int:
