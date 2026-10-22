@@ -1,0 +1,21 @@
+{
+  "note": "emmett: dump ORM test sources to write the oracle from upstream tests",
+  "candidates": [
+    {
+      "name": "emmett-framework/emmett",
+      "repo": "https://github.com/emmett-framework/emmett.git",
+      "ref": "8031219c95ef0e00d998d862977b3bd504a67ed8",
+      "extras": "",
+      "test_cmd": "python -m pytest -q -p no:cacheprovider tests",
+      "test_requirements": [
+        "pytest",
+        "pytest-asyncio"
+      ],
+      "dump_tests": [
+        "tests/test_orm*.py",
+        "tests/conftest.py",
+        "tests/helpers.py"
+      ]
+    }
+  ]
+}

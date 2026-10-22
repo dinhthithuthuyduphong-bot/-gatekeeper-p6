@@ -1,0 +1,29 @@
+{
+  "note": "Study G CONTROL candidates: the commit BEFORE a lint-only E711 cleanup (runnable P->P tests in vetting). The skill re-applies the same cleanup; on ordinary objects no behaviour change is expected. Order = vetting order; no outcome has been observed.",
+  "candidates": [
+    {
+      "name": "hera_pspec_pr485",
+      "repo": "https://github.com/HERA-Team/hera_pspec.git",
+      "ref": "c1b46e796c6ebe31e25d030233e53fb3032b0c60",
+      "hypothesis": "lint-only E711 cleanup; vetting {'P->P': 57}"
+    },
+    {
+      "name": "pyelftools_f0e6cd6",
+      "repo": "https://github.com/eliben/pyelftools.git",
+      "ref": "5f1b0b62ce8e27c1df364e3d2fb9bfed65102f93",
+      "hypothesis": "lint-only E711 cleanup; vetting {'P->P': 9}"
+    },
+    {
+      "name": "atomic_notes_2d7162d",
+      "repo": "https://github.com/TillQuandel/atomic-notes.git",
+      "ref": "beae327e4a95dc9f852cd76b42e3b7c1b930b4c8",
+      "hypothesis": "lint-only E711 cleanup; vetting {'F->F': 1, 'P->P': 158}"
+    },
+    {
+      "name": "ndsolver_1810bba",
+      "repo": "https://github.com/meawoppl/ndsolver.git",
+      "ref": "c416e6571d9e5bbc1dfce6f580e7bf46fe1275e3",
+      "hypothesis": "lint-only E711 cleanup; vetting {'P->P': 8}"
+    }
+  ]
+}

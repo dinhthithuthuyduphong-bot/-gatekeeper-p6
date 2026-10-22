@@ -41,6 +41,12 @@ def main(spec_file, name, out_dir):
                 if NONE_CMP.search(line) and "assert" not in line.split("==")[0][-12:]:
                     evidence.append(f"{rel}:{i}: {line.strip()[:160]}")
         rec["test_lines_using_none_comparison"] = len(evidence)
+        dumps = {}
+        for pattern in spec.get("dump_tests", []):
+            for p in sorted(root.glob(pattern))[:12]:
+                dumps[p.relative_to(root).as_posix()] = p.read_text(errors="replace")[:40000]
+        if dumps:
+            rec["test_sources"] = dumps
         rec["examples"] = evidence[:25]
         runs = []
         for i in range(3):
