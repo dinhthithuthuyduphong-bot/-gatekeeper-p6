@@ -1,8 +1,8 @@
 {
   "files": {
-    "study_f/config_study_f.json": "90b6926ff107d899ffcab645fc3fbc554f1d9a719ceb2a522a9cf140d8890a7e",
+    "study_f/config_study_f.json": "5465b3480513293347e58ab4508113add8f3af8fa77763d405b7e28dcff1ba9f",
     "study_f/STUDY_F_PROTOCOL.md": "495924c2ba0a3ebe96589db53677d44ca2693d46098f18767f3cbf52ccc8ba2f",
-    "study_f/AMENDMENTS.md": "a9ccef9153565eefe4f3e49141b8bea8467be74fa81815ab9a6d4980c928022f",
+    "study_f/AMENDMENTS.md": "0a9202be3f8783e4060e2798bbf0461fabe7a74686f0b6038df57b06d59451bb",
     "study_f/b9_config_f.json": "64ed13fbc5971fe109fffbe8c05f8223cd97321af2954a560526361e27d1be5d",
     "gatekeeper_lite/__init__.py": "be8ddeba61bbc4885994020bcb9b4f19573f4a22b8a759b079e00e45c3f334e7",
     "gatekeeper_lite/__main__.py": "7aa7d5b275d60de01de9074e0bd8a864c99527435885098a2243986a48699e90",
@@ -37,6 +37,8 @@
     "tools/report_study_d.py": "30deccef12d92040af9e7bb7d6334aadf2a4f89b105487394e4a69d578652b3d",
     "tools/decision_sim.py": "3b5dff1b8564fe8a157f48d03d33a7363689a322a9ad9788238df2c9693b0ddd",
     "tools/freeze_study_d.py": "41ab867add07d9a11447c8f31ca16c0bb6aa0ffbfb59c086cbdcce58ca9777ec",
-    "tools/clean_room_check.py": "edf6a671c7e1f268eac2acd54dd441c99cd6821ee84af1eecad748defdaf007b"
+    "tools/clean_room_check.py": "edf6a671c7e1f268eac2acd54dd441c99cd6821ee84af1eecad748defdaf007b",
+    "tools/score_heldout.py": "bc91a8eae2b82f7b4e061a95c5c319c2e79a59138a8defd334871814206b0d4f",
+    "tools/aggregate_study_f.py": "0acff3b73f44be4a1b1491eab71bc82b3a9fea0fcca6cc00be0b362bdd906faa"
   }
 }
