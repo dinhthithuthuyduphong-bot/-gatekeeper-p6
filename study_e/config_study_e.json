@@ -50,5 +50,16 @@
     "K3_redis": "test suite requires a Redis server (census INVALID in the baseline check); same rule as PyHive",
     "PyHive": "test suite requires Hive/Presto servers"
   },
-  "frozen_on": "2026-10-21T00:17:24Z"
+  "frozen_on": "2026-10-21T00:17:24Z",
+  "seed_freeze_sha256": "313f3aa5dd4d91f013629d9d1a0704ffba4685c2d042db92094346821a85d3e1",
+  "amendments_applied": [
+    "E-A1"
+  ],
+  "amendment_log": [
+    {
+      "id": "E-A1",
+      "edits": [],
+      "applied_utc": "2026-10-22T08:58:22+00:00"
+    }
+  ]
 }
