@@ -1,0 +1,19 @@
+# Verify the frozen hash sets of every study (D, E, F); clean-room covers only Study D.
+name: Gatekeeper freeze verify (all studies)
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - shell: bash
+        run: |
+          set -euo pipefail
+          for s in study_d study_e study_f; do
+            echo "== $s"; python tools/freeze_study.py verify $s | tee -a "$GITHUB_STEP_SUMMARY"
+          done
