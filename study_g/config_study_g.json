@@ -1,6 +1,6 @@
 {
   "experiment_id": "study-g-v1",
-  "status": "DRAFT",
+  "status": "FROZEN",
   "requires_freeze": true,
   "theta": 0.2,
   "eta": 0.05,
@@ -13,7 +13,7 @@
   ],
   "skill": "skills/none-identity.json",
   "seed_rule": "sha256(FREEZE.json sha256 || drand quicknet randomness of the first round at or after seed_time_utc)",
-  "seed_time_utc": "SET_AT_FREEZE",
+  "seed_time_utc": "2026-10-22T12:07:32Z",
   "multiplicity": "e-Holm FWER over min(e_benefit, e_cert) of all cells; secondary e-BH q=0.1",
   "census": "target's own tests at the pinned commit, both arms; baseline failures excluded before treatment; any new failure blocks every scope of the target",
   "note": "Study G: second skill family. Beneficial side BLOCKED (29/29 vetted); controls excluded (not runnable). One harmful target with a tier-1 oracle; plain scope is a within-target differential control. Family = 2 cells (both bind; decided before draws).",
@@ -34,5 +34,6 @@
   "secondary_preregistered": [
     "B6-S(k) for k in {1,5}: replay + fingerprint + census + no regression in the first k draws of each scope",
     "futility: stop as QUARANTINE when the upper bound of the 95% hedged-capital CS for E[-Z] falls below theta (replayed on the recorded draws)"
-  ]
+  ],
+  "frozen_on": "2026-10-22T11:07:32Z"
 }
