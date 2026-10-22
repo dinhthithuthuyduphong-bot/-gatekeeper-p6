@@ -1,0 +1,48 @@
+{
+  "cells": [
+    {
+      "cell": "G1_pydal/null",
+      "binds": true,
+      "stop": "REJECT_HARM",
+      "e": 0.0,
+      "B2": "ADMIT",
+      "B6R": "ADMIT",
+      "B8": "REJECT",
+      "Gatekeeper": "REJECT_HARM",
+      "eBH": "\u2014",
+      "census_invalid": false,
+      "census_bad": true,
+      "fingerprint": "MATCH",
+      "replay_ok": true,
+      "draws": 103,
+      "counts": {
+        "help": 0,
+        "tie": 79,
+        "hurt": 24,
+        "harness_error": 0
+      }
+    },
+    {
+      "cell": "G1_pydal/plain",
+      "binds": true,
+      "stop": "REJECT_HARM",
+      "e": 0.0,
+      "B2": "ADMIT",
+      "B6R": "ADMIT",
+      "B8": "REJECT",
+      "Gatekeeper": "REJECT_HARM",
+      "eBH": "\u2014",
+      "census_invalid": false,
+      "census_bad": true,
+      "fingerprint": "MATCH",
+      "replay_ok": true,
+      "draws": 300,
+      "counts": {
+        "help": 0,
+        "tie": 300,
+        "hurt": 0,
+        "harness_error": 0
+      }
+    }
+  ]
+}

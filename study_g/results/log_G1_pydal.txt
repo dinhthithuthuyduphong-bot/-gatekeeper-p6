@@ -1,0 +1,60 @@
+
+[notice] A new release of pip is available: 26.2.1 -> 26.2.2
+[notice] To update, run: pip install --upgrade pip
+{
+  "target": "G1_pydal",
+  "commit": "bd5eb6d7f61ec10c66b1e673a708d40684d43f84",
+  "bind": {
+    "sites": [
+      {
+        "module": "pydal/backend_base.py",
+        "skill": "none-identity",
+        "line": 1800,
+        "function": "id_query"
+      },
+      {
+        "module": "pydal/backend_base.py",
+        "skill": "none-identity",
+        "line": 1799,
+        "function": "id_query"
+      },
+      {
+        "module": "pydal/base.py",
+        "skill": "none-identity",
+        "line": 796,
+        "function": "where"
+      },
+      {
+        "module": "pydal/objects.py",
+        "skill": "none-identity",
+        "line": 1925,
+        "function": "belongs"
+      },
+      {
+        "module": "pydal/objects.py",
+        "skill": "none-identity",
+        "line": 2963,
+        "function": "where"
+      },
+      {
+        "module": "pydal/querybuilder.py",
+        "skill": "none-identity",
+        "line": 295,
+        "function": "parse"
+      },
+      {
+        "module": "pydal/querybuilder.py",
+        "skill": "none-identity",
+        "line": 297,
+        "function": "parse"
+      }
+    ],
+    "abstained": {},
+    "treated_modules": [
+      "pydal/backend_base.py",
+      "pydal/base.py",
+      "pydal/objects.py",
+      "pydal/querybuilder.py"
+    ]
+  }
+}
