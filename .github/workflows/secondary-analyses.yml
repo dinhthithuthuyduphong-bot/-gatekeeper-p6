@@ -1,0 +1,23 @@
+# Post-hoc secondary analyses on the frozen traces of Studies D/E (0 cost, no target execution).
+name: Gatekeeper secondary analyses
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  analyses:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - shell: bash
+        run: |
+          set -euo pipefail
+          python -m unittest tests.test_ext
+          python tools/secondary_analyses.py study_d/results study_e/results --out SECONDARY_ANALYSES_D_E.md
+          cat SECONDARY_ANALYSES_D_E.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: SECONDARY_ANALYSES
+          path: SECONDARY_ANALYSES_D_E.md
