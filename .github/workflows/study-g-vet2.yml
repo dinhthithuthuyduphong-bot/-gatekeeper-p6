@@ -1,0 +1,83 @@
+# Study G vetting round 2: all remaining beneficial candidates + one promnesia retry + pydal baseline.
+name: Gatekeeper Study G vetting round 2
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  beneficial:
+    strategy:
+      fail-fast: false
+      matrix:
+        name:
+          - proov_km_waechter_fix_aac633b
+          - eigsep_terrain_9f7ea22
+          - proov_km_waechter_fix_575e4ff
+          - pdip_a519a26
+          - pytorch_lab_9573f97
+          - peekview_165997b
+          - atomic_notes_2d7162d
+          - zoho_analytics_connector_c7df0f1
+          - open_dvm_0908b45
+          - pdip_f340c77
+          - ndsolver_1810bba
+          - qanary_quality_assurance_b2800ba
+          - inet_consumption_d677c54
+          - simulation_core_8ddaa75
+          - aiter_p_f08b73c
+          - aiter_5661110
+          - pyelftools_f0e6cd6
+          - aei_eb85a89
+          - quantammsim_379bc0d
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p out_v
+          python tools/vet_target.py study_g/targets/${{ matrix.name }}.json out_v 2>&1 | tail -40 | tee out_v/log_${{ matrix.name }}.txt || true
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: G_VET2_${{ matrix.name }}
+          path: out_v
+  promnesia_retry:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - shell: bash
+        run: |
+          mkdir -p out_h
+          python tools/runnable_check_g.py study_g/harm_candidates_retry.json karlicoss/promnesia out_h 2>&1 | tail -20 | tee out_h/log.txt || true
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: G_RUNNABLE_promnesia_retry
+          path: out_h
+  pydal_baseline:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - shell: bash
+        run: |
+          python -m pip install -q "pytest==8.3.5"
+          mkdir -p out_b
+          python tools/baseline_check.py study_g/config_study_g.json G1_pydal out_b 2>&1 | tail -20 | tee out_b/log.txt || true
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: G_BASELINE_G1_pydal
+          path: out_b
