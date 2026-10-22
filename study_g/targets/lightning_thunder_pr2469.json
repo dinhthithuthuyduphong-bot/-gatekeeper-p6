@@ -1,0 +1,16 @@
+{
+  "name": "lightning_thunder_pr2469",
+  "family": "none-identity (E711)",
+  "role": "beneficial candidate (vetting decides)",
+  "repo": "https://github.com/Lightning-AI/lightning-thunder.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+    "test",
+    "dev"
+  ],
+  "evidence": "fix `E711` none-comparison (https://github.com/Lightning-AI/lightning-thunder/pull/2469); 14 == None rewrites in source files",
+  "pr": 2469,
+  "gold": "PR_MERGE",
+  "pre": "merge-base"
+}

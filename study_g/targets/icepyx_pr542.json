@@ -1,0 +1,16 @@
+{
+  "name": "icepyx_pr542",
+  "family": "none-identity (E711)",
+  "role": "beneficial candidate (vetting decides)",
+  "repo": "https://github.com/icesat2py/icepyx.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+    "test",
+    "dev"
+  ],
+  "evidence": "Autofix flake8 ignores E711, E712, E714, F401, F841 with Ruff (https://github.com/icesat2py/icepyx/pull/542); 14 == None rewrites in source files",
+  "pr": 542,
+  "gold": "PR_MERGE",
+  "pre": "merge-base"
+}

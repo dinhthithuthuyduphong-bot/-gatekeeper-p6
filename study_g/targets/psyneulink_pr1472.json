@@ -1,0 +1,16 @@
+{
+  "name": "psyneulink_pr1472",
+  "family": "none-identity (E711)",
+  "role": "beneficial candidate (vetting decides)",
+  "repo": "https://github.com/PrincetonUniversity/PsyNeuLink.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+    "test",
+    "dev"
+  ],
+  "evidence": "codestyle: Enable checks for E101, E502, E701, E711, W191, and W292 (https://github.com/PrincetonUniversity/PsyNeuLink/pull/1472); 2 == None rewrites in source files",
+  "pr": 1472,
+  "gold": "PR_MERGE",
+  "pre": "merge-base"
+}

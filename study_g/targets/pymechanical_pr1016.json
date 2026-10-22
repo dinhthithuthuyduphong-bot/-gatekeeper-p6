@@ -1,0 +1,16 @@
+{
+  "name": "pymechanical_pr1016",
+  "family": "none-identity (E711)",
+  "role": "beneficial candidate (vetting decides)",
+  "repo": "https://github.com/ansys/pymechanical.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+    "test",
+    "dev"
+  ],
+  "evidence": "CHORE: Follow pythonic standard for comparison to None. (https://github.com/ansys/pymechanical/pull/1016); 6 == None rewrites in source files",
+  "pr": 1016,
+  "gold": "PR_MERGE",
+  "pre": "merge-base"
+}

@@ -1,0 +1,16 @@
+{
+  "name": "sqlobject_pr70",
+  "family": "none-identity (E711)",
+  "role": "beneficial candidate (vetting decides)",
+  "repo": "https://github.com/sqlobject/sqlobject.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+    "test",
+    "dev"
+  ],
+  "evidence": "Issue 44: flake8 e711 - comparison to None (https://github.com/sqlobject/sqlobject/pull/70); 1 == None rewrites in source files",
+  "pr": 70,
+  "gold": "PR_MERGE",
+  "pre": "merge-base"
+}

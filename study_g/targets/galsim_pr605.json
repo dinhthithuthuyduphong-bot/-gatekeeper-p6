@@ -1,0 +1,16 @@
+{
+  "name": "galsim_pr605",
+  "family": "none-identity (E711)",
+  "role": "beneficial candidate (vetting decides)",
+  "repo": "https://github.com/GalSim-developers/GalSim.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+    "test",
+    "dev"
+  ],
+  "evidence": "#604 Change comparisons with None to use `is` or `is not` rather than `==` or `!=` (https://github.com/GalSim-developers/GalSim/pull/605); 71 == None rewrites in source files",
+  "pr": 605,
+  "gold": "PR_MERGE",
+  "pre": "merge-base"
+}

@@ -1,0 +1,16 @@
+{
+  "name": "algopy_pr43",
+  "family": "none-identity (E711)",
+  "role": "beneficial candidate (vetting decides)",
+  "repo": "https://github.com/b45ch1/algopy.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+    "test",
+    "dev"
+  ],
+  "evidence": "MAINT: change comparisons to None (https://github.com/b45ch1/algopy/pull/43); 169 == None rewrites in source files",
+  "pr": 43,
+  "gold": "PR_MERGE",
+  "pre": "merge-base"
+}

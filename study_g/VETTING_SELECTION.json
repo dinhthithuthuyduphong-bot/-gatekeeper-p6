@@ -1,0 +1,63 @@
+{
+  "selected_in_search_order": [
+    "hera_pspec_pr485",
+    "pdip_pr58",
+    "sglang_pr19745",
+    "lightning_thunder_pr2469",
+    "weave_pr5121",
+    "icepyx_pr542",
+    "muscle_pr703",
+    "psyneulink_pr1472",
+    "sqlobject_pr70",
+    "pymechanical_pr1016",
+    "galsim_pr605",
+    "algopy_pr43"
+  ],
+  "not_selected_beyond_cap": [
+    "proov_km_waechter_fix_aac633b",
+    "eigsep_terrain_9f7ea22",
+    "proov_km_waechter_fix_575e4ff",
+    "pdip_a519a26",
+    "pytorch_lab_9573f97",
+    "peekview_165997b",
+    "atomic_notes_2d7162d",
+    "zoho_analytics_connector_c7df0f1",
+    "open_dvm_0908b45",
+    "pdip_f340c77",
+    "ndsolver_1810bba",
+    "qanary_quality_assurance_b2800ba",
+    "inet_consumption_d677c54",
+    "simulation_core_8ddaa75",
+    "aiter_p_f08b73c",
+    "aiter_5661110",
+    "pyelftools_f0e6cd6",
+    "aei_eb85a89",
+    "quantammsim_379bc0d"
+  ],
+  "skipped_duplicates": [
+    {
+      "candidate": "https://github.com/ROCm/aiter/commit/5661110d52533e1f0fd858612b8bf73500a9a26e",
+      "reason": "same commit already selected from another fork"
+    },
+    {
+      "candidate": "https://github.com/mkflyamd/ontrain/commit/5661110d52533e1f0fd858612b8bf73500a9a26e",
+      "reason": "same commit already selected from another fork"
+    },
+    {
+      "candidate": "https://github.com/damien-lejeune/aiter/commit/5661110d52533e1f0fd858612b8bf73500a9a26e",
+      "reason": "same commit already selected from another fork"
+    },
+    {
+      "candidate": "https://github.com/KevGomes1403/aiter-kernel-gen/commit/f08b73cd313acdbc0fc873d61c13c49a0c37a29e",
+      "reason": "same commit already selected from another fork"
+    },
+    {
+      "candidate": "https://github.com/siqiy-cerebras/aiter-review/commit/5661110d52533e1f0fd858612b8bf73500a9a26e",
+      "reason": "same commit already selected from another fork"
+    },
+    {
+      "candidate": "https://github.com/INET-Complexity/macro-main/commit/d677c5452837f69c7a9b5cec1c8b2e9d89236a86",
+      "reason": "same commit already selected from another fork"
+    }
+  ]
+}

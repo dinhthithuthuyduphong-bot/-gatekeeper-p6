@@ -1,0 +1,16 @@
+{
+  "name": "muscle_pr703",
+  "family": "none-identity (E711)",
+  "role": "beneficial candidate (vetting decides)",
+  "repo": "https://github.com/Amsterdam-Music-Lab/MUSCLE.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+    "test",
+    "dev"
+  ],
+  "evidence": "Fixed: Enable E711 flake8 rule and fix linting issues (https://github.com/Amsterdam-Music-Lab/MUSCLE/pull/703); 8 == None rewrites in source files",
+  "pr": 703,
+  "gold": "PR_MERGE",
+  "pre": "merge-base"
+}

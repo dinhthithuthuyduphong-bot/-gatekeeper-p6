@@ -1,0 +1,16 @@
+{
+  "name": "pdip_pr58",
+  "family": "none-identity (E711)",
+  "role": "beneficial candidate (vetting decides)",
+  "repo": "https://github.com/ahmetcagriakca/pdip.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+    "test",
+    "dev"
+  ],
+  "evidence": "flake8: hard-fail E711/E712/E722 and fix 28 real-bug violations (https://github.com/ahmetcagriakca/pdip/pull/58); 1 == None rewrites in source files",
+  "pr": 58,
+  "gold": "PR_MERGE",
+  "pre": "merge-base"
+}

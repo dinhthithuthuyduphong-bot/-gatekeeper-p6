@@ -1,0 +1,16 @@
+{
+  "name": "hera_pspec_pr485",
+  "family": "none-identity (E711)",
+  "role": "beneficial candidate (vetting decides)",
+  "repo": "https://github.com/HERA-Team/hera_pspec.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+    "test",
+    "dev"
+  ],
+  "evidence": "chore: enable ruff E711 and E712 checks (https://github.com/HERA-Team/hera_pspec/pull/485); 9 == None rewrites in source files",
+  "pr": 485,
+  "gold": "PR_MERGE",
+  "pre": "merge-base"
+}

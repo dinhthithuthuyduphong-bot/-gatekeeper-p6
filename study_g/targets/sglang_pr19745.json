@@ -1,0 +1,16 @@
+{
+  "name": "sglang_pr19745",
+  "family": "none-identity (E711)",
+  "role": "beneficial candidate (vetting decides)",
+  "repo": "https://github.com/sgl-project/sglang.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+    "test",
+    "dev"
+  ],
+  "evidence": "Fix none-comparison (E711) warnings (https://github.com/sgl-project/sglang/pull/19745); 12 == None rewrites in source files",
+  "pr": 19745,
+  "gold": "PR_MERGE",
+  "pre": "merge-base"
+}

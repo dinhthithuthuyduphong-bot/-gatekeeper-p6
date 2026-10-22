@@ -1,0 +1,16 @@
+{
+  "name": "weave_pr5121",
+  "family": "none-identity (E711)",
+  "role": "beneficial candidate (vetting decides)",
+  "repo": "https://github.com/wandb/weave.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+    "test",
+    "dev"
+  ],
+  "evidence": "chore(weave): Add E711 lint rule (https://github.com/wandb/weave/pull/5121); 9 == None rewrites in source files",
+  "pr": 5121,
+  "gold": "PR_MERGE",
+  "pre": "merge-base"
+}
