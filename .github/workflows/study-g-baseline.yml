@@ -1,0 +1,31 @@
+# Study G runnability check: install + census baseline x3 + oracle on UNTREATED code (skill never applied).
+name: Gatekeeper Study G baseline check
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  baseline:
+    strategy:
+      fail-fast: false
+      matrix:
+        target:
+          - G1_pydal
+          - G2_emmett
+          - K1_hera_pspec
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - shell: bash
+        run: |
+          python -m pip install -q "pytest==8.3.5"
+          mkdir -p out_b
+          python tools/baseline_check.py study_g/config_study_g.json ${{ matrix.target }} out_b 2>&1 | tail -20 | tee out_b/log.txt || true
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: G_BASELINE_${{ matrix.target }}
+          path: out_b
