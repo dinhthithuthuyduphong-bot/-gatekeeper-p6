@@ -16,11 +16,17 @@ import urllib.request
 from pathlib import Path
 
 API = "https://api.github.com"
+# v2: phrases must appear in the PR TITLE (v1 matched any mention and returned unrelated PRs)
 PR_QUERIES = [
-    '"is None" "== None" is:pr is:merged language:Python',
-    '"E711" is:pr is:merged language:Python',
-    '"comparison to None" is:pr is:merged language:Python',
-    '"use is None" is:pr is:merged language:Python',
+    '"is None" in:title is:pr is:merged language:Python',
+    '"== None" in:title is:pr is:merged language:Python',
+    'E711 in:title is:pr is:merged language:Python',
+    '"comparison to None" in:title is:pr is:merged language:Python',
+]
+COMMIT_QUERIES = [
+    '"== None" "is None" fix',
+    '"use is None" bug',
+    'E711 fix bug',
 ]
 CODE_QUERIES = [
     '"noqa: E711" language:Python',
@@ -52,7 +58,7 @@ def main(out_dir):
     rec = {"pr_queries": {}, "code_queries": {}, "beneficial_candidates": [], "harmful_candidates": [], "excluded": []}
     seen = set()
     for q in PR_QUERIES:
-        res = get(f"{API}/search/issues?q={urllib.parse.quote(q)}&per_page=50&sort=updated")
+        res = get(f"{API}/search/issues?q={urllib.parse.quote(q)}&per_page=100")
         rec["pr_queries"][q] = {"total": res.get("total_count"), "error": res.get("error")}
         for it in res.get("items", []):
             pr_url = it.get("pull_request", {}).get("url")
@@ -72,6 +78,34 @@ def main(out_dir):
                      "source_files": [f["filename"] for f in src][:10], "test_files": [f["filename"] for f in tst][:10],
                      "none_rewrites": min(rewrites, fixed), "changed_files": len(files)}
             if entry["none_rewrites"] == 0:
+                rec["excluded"].append({"pr": entry["pr"], "reason": "no == None -> is None rewrite in source files"})
+            elif not tst:
+                rec["excluded"].append({"pr": entry["pr"], "reason": "no test file changed (no upstream oracle)"})
+            elif len(files) > 30:
+                rec["excluded"].append({"pr": entry["pr"], "reason": "too large to isolate the rewrite (>30 files)"})
+            else:
+                rec["beneficial_candidates"].append(entry)
+    rec["commit_queries"] = {}
+    for q in COMMIT_QUERIES:
+        res = get(f"{API}/search/commits?q={urllib.parse.quote(q)}&per_page=100")
+        rec["commit_queries"][q] = {"total": res.get("total_count"), "error": res.get("error")}
+        for it in res.get("items", []):
+            url = it.get("url")
+            if not url or url in seen:
+                continue
+            seen.add(url)
+            detail = get(url)
+            files = detail.get("files", []) if isinstance(detail, dict) else []
+            py = [f for f in files if f["filename"].endswith(".py")]
+            src = [f for f in py if not re.search(r"(^|/)(tests?|testing)/|(^|/)test_", f["filename"])]
+            tst = [f for f in py if f not in src]
+            n = min(sum(len(REWRITE.findall(f.get("patch", ""))) for f in src),
+                    sum(len(FIXED.findall(f.get("patch", ""))) for f in src))
+            entry = {"pr": it.get("html_url"), "title": it["commit"]["message"].splitlines()[0][:120],
+                     "repo": it["repository"]["full_name"], "sha": it.get("sha"),
+                     "source_files": [f["filename"] for f in src][:10], "test_files": [f["filename"] for f in tst][:10],
+                     "none_rewrites": n, "changed_files": len(files)}
+            if n == 0:
                 rec["excluded"].append({"pr": entry["pr"], "reason": "no == None -> is None rewrite in source files"})
             elif not tst:
                 rec["excluded"].append({"pr": entry["pr"], "reason": "no test file changed (no upstream oracle)"})

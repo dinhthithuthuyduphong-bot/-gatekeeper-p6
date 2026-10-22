@@ -1,0 +1,125 @@
+{
+  "note": "Study G harmful-side applicability scan (read-only). Order = repos with the most files carrying 'noqa: E711' (from G_CANDIDATES.json v1), first 20; no manual selection.",
+  "candidates": [
+    {
+      "name": "ivre/ivre",
+      "repo": "https://github.com/ivre/ivre.git",
+      "ref": "HEAD",
+      "hypothesis": "noqa E711 in ivre/db/sql/__init__.py, ivre/db/sql/duckdb.py"
+    },
+    {
+      "name": "magfest/ubersystem",
+      "repo": "https://github.com/magfest/ubersystem.git",
+      "ref": "HEAD",
+      "hypothesis": "noqa E711 in uber/models/__init__.py, uber/models/art_show.py"
+    },
+    {
+      "name": "hikka-io/hikka",
+      "repo": "https://github.com/hikka-io/hikka.git",
+      "ref": "HEAD",
+      "hypothesis": "noqa E711 in app/edit/service.py, app/feed/service.py"
+    },
+    {
+      "name": "alephdata/aleph",
+      "repo": "https://github.com/alephdata/aleph.git",
+      "ref": "HEAD",
+      "hypothesis": "noqa E711 in aleph/logic/api_keys.py, aleph/model/role.py"
+    },
+    {
+      "name": "emmett-framework/emmett",
+      "repo": "https://github.com/emmett-framework/emmett.git",
+      "ref": "HEAD",
+      "hypothesis": "noqa E711 in emmett/orm/base.py, emmett/orm/objects.py"
+    },
+    {
+      "name": "web2py/pydal",
+      "repo": "https://github.com/web2py/pydal.git",
+      "ref": "HEAD",
+      "hypothesis": "noqa E711 in pydal/base.py, pydal/querybuilder.py"
+    },
+    {
+      "name": "emfcamp/Website",
+      "repo": "https://github.com/emfcamp/Website.git",
+      "ref": "HEAD",
+      "hypothesis": "noqa E711 in apps/metrics.py, models/admin_message.py"
+    },
+    {
+      "name": "tryton/tryton",
+      "repo": "https://github.com/tryton/tryton.git",
+      "ref": "HEAD",
+      "hypothesis": "noqa E711 in modules/project/work.py, modules/stock/move.py"
+    },
+    {
+      "name": "fivetran/great_expectations",
+      "repo": "https://github.com/fivetran/great_expectations.git",
+      "ref": "HEAD",
+      "hypothesis": "noqa E711 in great_expectations/execution_engine/sqlalchemy_execution_engine.py, great_expectations/expectations/metrics/column_map_metrics/column_values_null.py"
+    },
+    {
+      "name": "centergy/flex",
+      "repo": "https://github.com/centergy/flex.git",
+      "ref": "HEAD",
+      "hypothesis": "noqa E711 in build/lib/flex/url_filter/backends/sqlalchemy.py, flex/url_filter/backends/sqlalchemy.py"
+    },
+    {
+      "name": "skyportal/skyportal",
+      "repo": "https://github.com/skyportal/skyportal.git",
+      "ref": "HEAD",
+      "hypothesis": "noqa E711 in skyportal/facility_apis/tess.py, skyportal/handlers/api/catalog_services.py"
+    },
+    {
+      "name": "nditech/apollo",
+      "repo": "https://github.com/nditech/apollo.git",
+      "ref": "HEAD",
+      "hypothesis": "noqa E711 in apollo/messaging/views_messages.py, apollo/submissions/qa/query_builder.py"
+    },
+    {
+      "name": "simple-login/app",
+      "repo": "https://github.com/simple-login/app.git",
+      "ref": "HEAD",
+      "hypothesis": "noqa E711 in app/alias_delete.py"
+    },
+    {
+      "name": "SCons/scons",
+      "repo": "https://github.com/SCons/scons.git",
+      "ref": "HEAD",
+      "hypothesis": "noqa E711 in SCons/Tool/ToolTests.py"
+    },
+    {
+      "name": "fim-ai/fim-one",
+      "repo": "https://github.com/fim-ai/fim-one.git",
+      "ref": "HEAD",
+      "hypothesis": "noqa E711 in src/fim_one/web/deps.py"
+    },
+    {
+      "name": "HazyResearch/meerkat",
+      "repo": "https://github.com/HazyResearch/meerkat.git",
+      "ref": "HEAD",
+      "hypothesis": "noqa E711 in meerkat/ops/sort.py"
+    },
+    {
+      "name": "rachelos/we-mp-rss",
+      "repo": "https://github.com/rachelos/we-mp-rss.git",
+      "ref": "HEAD",
+      "hypothesis": "noqa E711 in core/exporter.py"
+    },
+    {
+      "name": "GrammaTech/ddisasm",
+      "repo": "https://github.com/GrammaTech/ddisasm.git",
+      "ref": "HEAD",
+      "hypothesis": "noqa E711 in conanfile.py"
+    },
+    {
+      "name": "zc-zhangchen/any-auto-register",
+      "repo": "https://github.com/zc-zhangchen/any-auto-register.git",
+      "ref": "HEAD",
+      "hypothesis": "noqa E711 in core/db.py"
+    },
+    {
+      "name": "karlicoss/promnesia",
+      "repo": "https://github.com/karlicoss/promnesia.git",
+      "ref": "HEAD",
+      "hypothesis": "noqa E711 in src/promnesia/server.py"
+    }
+  ]
+}
