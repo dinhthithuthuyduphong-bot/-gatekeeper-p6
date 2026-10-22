@@ -1,0 +1,15 @@
+{
+  "name": "pytorch_lab_9573f97",
+  "family": "none-identity (E711)",
+  "role": "beneficial candidate (vetting decides)",
+  "repo": "https://github.com/universityofprofessorex/pytorch-lab.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+    "test",
+    "dev"
+  ],
+  "evidence": "fix(lint): E711/E741/E721/F821/B028/B017/B008/B905 (real bugs + mechanical) (https://github.com/universityofprofessorex/pytorch-lab/commit/9573f979df5d956e4bd9636331cbad5a3631a7ea)",
+  "gold": "9573f979df5d956e4bd9636331cbad5a3631a7ea",
+  "pre": "parent"
+}

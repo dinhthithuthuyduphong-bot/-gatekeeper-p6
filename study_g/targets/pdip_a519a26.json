@@ -1,0 +1,15 @@
+{
+  "name": "pdip_a519a26",
+  "family": "none-identity (E711)",
+  "role": "beneficial candidate (vetting decides)",
+  "repo": "https://github.com/ahmetcagriakca/pdip.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+    "test",
+    "dev"
+  ],
+  "evidence": "Merge pull request #58: flake8 hard-fail E711/E712/E722 + 28 real-bug fixes (https://github.com/ahmetcagriakca/pdip/commit/a519a26954af7701b95d822edf5c072b8a286c40)",
+  "gold": "a519a26954af7701b95d822edf5c072b8a286c40",
+  "pre": "parent"
+}

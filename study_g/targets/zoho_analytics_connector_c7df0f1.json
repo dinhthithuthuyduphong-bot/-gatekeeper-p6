@@ -1,0 +1,15 @@
+{
+  "name": "zoho_analytics_connector_c7df0f1",
+  "family": "none-identity (E711)",
+  "role": "beneficial candidate (vetting decides)",
+  "repo": "https://github.com/GrowthPath/zoho_analytics_connector.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+    "test",
+    "dev"
+  ],
+  "evidence": "refactor: fix ruff and mypy errors (https://github.com/GrowthPath/zoho_analytics_connector/commit/c7df0f177768abacbaa9d17abe664de7c0f4f6cd)",
+  "gold": "c7df0f177768abacbaa9d17abe664de7c0f4f6cd",
+  "pre": "parent"
+}

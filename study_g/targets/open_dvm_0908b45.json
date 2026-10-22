@@ -1,0 +1,15 @@
+{
+  "name": "open_dvm_0908b45",
+  "family": "none-identity (E711)",
+  "role": "beneficial candidate (vetting decides)",
+  "repo": "https://github.com/dvanmoorselaar/open_dvm.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+    "test",
+    "dev"
+  ],
+  "evidence": "Fix undefined-variable crash bug and clean up mechanical flake8 findings (https://github.com/dvanmoorselaar/open_dvm/commit/0908b4536edfd819c3fd39462046b237799e3b38)",
+  "gold": "0908b4536edfd819c3fd39462046b237799e3b38",
+  "pre": "parent"
+}

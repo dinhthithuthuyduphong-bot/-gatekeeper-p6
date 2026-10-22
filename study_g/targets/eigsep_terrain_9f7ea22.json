@@ -1,0 +1,15 @@
+{
+  "name": "eigsep_terrain_9f7ea22",
+  "family": "none-identity (E711)",
+  "role": "beneficial candidate (vetting decides)",
+  "repo": "https://github.com/EIGSEP/eigsep_terrain.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+    "test",
+    "dev"
+  ],
+  "evidence": "Fix several bugs in img.py and test_ray.py (https://github.com/EIGSEP/eigsep_terrain/commit/9f7ea2292efb7e9d4beadff888c878d8ca5f1aa6)",
+  "gold": "9f7ea2292efb7e9d4beadff888c878d8ca5f1aa6",
+  "pre": "parent"
+}

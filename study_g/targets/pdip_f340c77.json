@@ -1,0 +1,15 @@
+{
+  "name": "pdip_f340c77",
+  "family": "none-identity (E711)",
+  "role": "beneficial candidate (vetting decides)",
+  "repo": "https://github.com/ahmetcagriakca/pdip.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+    "test",
+    "dev"
+  ],
+  "evidence": "lint: promote E711/E712/E722 to hard-fail flake8 set (https://github.com/ahmetcagriakca/pdip/commit/f340c77573cfd74cee161eb529c948b264bbd9cf)",
+  "gold": "f340c77573cfd74cee161eb529c948b264bbd9cf",
+  "pre": "parent"
+}

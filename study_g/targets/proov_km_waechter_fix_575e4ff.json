@@ -1,0 +1,15 @@
+{
+  "name": "proov_km_waechter_fix_575e4ff",
+  "family": "none-identity (E711)",
+  "role": "beneficial candidate (vetting decides)",
+  "repo": "https://github.com/simonepietraroia/proov-km-waechter-fix.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+    "test",
+    "dev"
+  ],
+  "evidence": "Fix bugs, modernize style, add analysis (https://github.com/simonepietraroia/proov-km-waechter-fix/commit/575e4ffde38cb6685214e8e1d4d0d45597ae57c0)",
+  "gold": "575e4ffde38cb6685214e8e1d4d0d45597ae57c0",
+  "pre": "parent"
+}

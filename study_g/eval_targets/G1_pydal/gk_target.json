@@ -1,0 +1,26 @@
+{
+  "target_id": "G1_pydal",
+  "repository": "web2py/pydal",
+  "revision": "bd5eb6d7f61ec10c66b1e673a708d40684d43f84",
+  "python": "3.12",
+  "packages": {},
+  "platform": "linux",
+  "role": "HARM (tier 1: pydal's own tests assert that == None builds IS NULL queries)",
+  "pythonpath": [],
+  "modules": [
+    "pydal/backend_base.py",
+    "pydal/base.py",
+    "pydal/objects.py",
+    "pydal/querybuilder.py"
+  ],
+  "checkout": {
+    "repo": "https://github.com/web2py/pydal.git",
+    "ref": "bd5eb6d7f61ec10c66b1e673a708d40684d43f84"
+  },
+  "draw_oracle": "oracles/pydal_none_query.py",
+  "census_tests": [
+    "tests/sql.py",
+    "tests/nosql.py"
+  ],
+  "install": "self-then-uninstall:pydal"
+}

@@ -1,0 +1,15 @@
+{
+  "name": "aei_eb85a89",
+  "family": "none-identity (E711)",
+  "role": "beneficial candidate (vetting decides)",
+  "repo": "https://github.com/Janzert/AEI.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+    "test",
+    "dev"
+  ],
+  "evidence": "refactor: fix ruff linting warnings (https://github.com/Janzert/AEI/commit/eb85a893862c3d9c47c3b84ff5a48ee63b008de6)",
+  "gold": "eb85a893862c3d9c47c3b84ff5a48ee63b008de6",
+  "pre": "parent"
+}

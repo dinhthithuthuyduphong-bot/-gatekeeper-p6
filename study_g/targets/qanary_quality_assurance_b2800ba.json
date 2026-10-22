@@ -1,0 +1,15 @@
+{
+  "name": "qanary_quality_assurance_b2800ba",
+  "family": "none-identity (E711)",
+  "role": "beneficial candidate (vetting decides)",
+  "repo": "https://github.com/WSE-research/Qanary-quality-assurance.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+    "test",
+    "dev"
+  ],
+  "evidence": "Add test suite, coverage-gated CI, CodeQL, grouped Dependabot & auto-merge (#3) (https://github.com/WSE-research/Qanary-quality-assurance/commit/b2800ba2c1babd488ebe905499ce2042772e643d)",
+  "gold": "b2800ba2c1babd488ebe905499ce2042772e643d",
+  "pre": "parent"
+}

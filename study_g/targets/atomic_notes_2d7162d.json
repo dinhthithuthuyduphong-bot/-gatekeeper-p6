@@ -1,0 +1,15 @@
+{
+  "name": "atomic_notes_2d7162d",
+  "family": "none-identity (E711)",
+  "role": "beneficial candidate (vetting decides)",
+  "repo": "https://github.com/TillQuandel/atomic-notes.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+    "test",
+    "dev"
+  ],
+  "evidence": "chore: ruff check repo-weit sauber (Lint-Hygiene) (#141) (https://github.com/TillQuandel/atomic-notes/commit/2d7162d575d577edb070b0deb5b3a783053f3bf9)",
+  "gold": "2d7162d575d577edb070b0deb5b3a783053f3bf9",
+  "pre": "parent"
+}

@@ -1,0 +1,15 @@
+{
+  "name": "simulation_core_8ddaa75",
+  "family": "none-identity (E711)",
+  "role": "beneficial candidate (vetting decides)",
+  "repo": "https://github.com/pisa-hut/simulation-core.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+    "test",
+    "dev"
+  ],
+  "evidence": "chore(ci): add CI workflow + ruff baseline (https://github.com/pisa-hut/simulation-core/commit/8ddaa75e6ecb67094ccac2b01f7b34dbaee2623e)",
+  "gold": "8ddaa75e6ecb67094ccac2b01f7b34dbaee2623e",
+  "pre": "parent"
+}

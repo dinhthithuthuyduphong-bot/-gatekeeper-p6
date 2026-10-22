@@ -1,0 +1,21 @@
+{
+  "note": "Study G harmful side: candidates whose matched code builds ORM/DSL expressions with == None (from the read-only scan). flex excluded: no test suite. Commits pinned from the scan. | retry list (promnesia only)",
+  "excluded": {
+    "centergy/flex": "no test suite (rule 5)",
+    "HazyResearch/meerkat": "`by == None` is not an ORM/DSL expression; intent unclear",
+    "ivre/ivre, magfest/ubersystem, hikka-io/hikka, alephdata/aleph, simple-login/app": "application test suites need external services (PostgreSQL/MongoDB) by their configuration; not runnable on a standard runner (rule 5) - to be confirmed only if the runnable candidates are insufficient"
+  },
+  "candidates": [
+    {
+      "name": "karlicoss/promnesia",
+      "repo": "https://github.com/karlicoss/promnesia.git",
+      "ref": "197e6d0d655357aeb5c094f90713d9046d8028bc",
+      "extras": "",
+      "test_cmd": "python -m pytest -q -p no:cacheprovider tests --ignore=tests/test_end2end.py --ignore=tests/demos.py --ignore=tests/webdriver_utils.py",
+      "test_requirements": [
+        "pytest"
+      ],
+      "retry_note": "one retry: first run failed at collection on end-to-end/browser tests"
+    }
+  ]
+}

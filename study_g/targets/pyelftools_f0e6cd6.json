@@ -1,0 +1,15 @@
+{
+  "name": "pyelftools_f0e6cd6",
+  "family": "none-identity (E711)",
+  "role": "beneficial candidate (vetting decides)",
+  "repo": "https://github.com/eliben/pyelftools.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+    "test",
+    "dev"
+  ],
+  "evidence": "Cleanup before typing (#635) (https://github.com/eliben/pyelftools/commit/f0e6cd6776e0a80c15210c93807e513f286e73b9)",
+  "gold": "f0e6cd6776e0a80c15210c93807e513f286e73b9",
+  "pre": "parent"
+}

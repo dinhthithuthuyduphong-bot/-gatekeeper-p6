@@ -1,0 +1,15 @@
+{
+  "name": "inet_consumption_d677c54",
+  "family": "none-identity (E711)",
+  "role": "beneficial candidate (vetting decides)",
+  "repo": "https://github.com/INET-Complexity/INET-consumption.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+    "test",
+    "dev"
+  ],
+  "evidence": "Enable E/F lint rules and fix all violations (https://github.com/INET-Complexity/INET-consumption/commit/d677c5452837f69c7a9b5cec1c8b2e9d89236a86)",
+  "gold": "d677c5452837f69c7a9b5cec1c8b2e9d89236a86",
+  "pre": "parent"
+}

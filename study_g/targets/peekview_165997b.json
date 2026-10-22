@@ -1,0 +1,15 @@
+{
+  "name": "peekview_165997b",
+  "family": "none-identity (E711)",
+  "role": "beneficial candidate (vetting decides)",
+  "repo": "https://github.com/randomgitsrc/peekview.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+    "test",
+    "dev"
+  ],
+  "evidence": "fix: lint cleanup — 156→31 (auto-fix + manual fixes) (https://github.com/randomgitsrc/peekview/commit/165997b5754481d8e755ff099526a390602c89a5)",
+  "gold": "165997b5754481d8e755ff099526a390602c89a5",
+  "pre": "parent"
+}

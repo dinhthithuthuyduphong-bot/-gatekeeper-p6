@@ -1,0 +1,15 @@
+{
+  "name": "quantammsim_379bc0d",
+  "family": "none-identity (E711)",
+  "role": "beneficial candidate (vetting decides)",
+  "repo": "https://github.com/QuantAMMProtocol/quantammsim.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+    "test",
+    "dev"
+  ],
+  "evidence": "fix: resolve all critical and high severity lint bugs (https://github.com/QuantAMMProtocol/quantammsim/commit/379bc0d3475bd38212e910bfc7b761df06c6a99e)",
+  "gold": "379bc0d3475bd38212e910bfc7b761df06c6a99e",
+  "pre": "parent"
+}

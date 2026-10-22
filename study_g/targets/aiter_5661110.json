@@ -1,0 +1,15 @@
+{
+  "name": "aiter_5661110",
+  "family": "none-identity (E711)",
+  "role": "beneficial candidate (vetting decides)",
+  "repo": "https://github.com/edwinlim0919/aiter.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+    "test",
+    "dev"
+  ],
+  "evidence": "update ptpc bpreshuffle gemm tune (#719) (https://github.com/edwinlim0919/aiter/commit/5661110d52533e1f0fd858612b8bf73500a9a26e)",
+  "gold": "5661110d52533e1f0fd858612b8bf73500a9a26e",
+  "pre": "parent"
+}

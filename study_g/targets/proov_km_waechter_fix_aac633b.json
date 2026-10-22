@@ -1,0 +1,15 @@
+{
+  "name": "proov_km_waechter_fix_aac633b",
+  "family": "none-identity (E711)",
+  "role": "beneficial candidate (vetting decides)",
+  "repo": "https://github.com/rohanlumia/proov-km-waechter-fix.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+    "test",
+    "dev"
+  ],
+  "evidence": "Fix KM-Waechter bugs, modernize style, add analysis (https://github.com/rohanlumia/proov-km-waechter-fix/commit/aac633b22a015bb0761da3667d6e8e7c5292e6e8)",
+  "gold": "aac633b22a015bb0761da3667d6e8e7c5292e6e8",
+  "pre": "parent"
+}

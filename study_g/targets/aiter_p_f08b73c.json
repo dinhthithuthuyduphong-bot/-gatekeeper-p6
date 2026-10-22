@@ -1,0 +1,15 @@
+{
+  "name": "aiter_p_f08b73c",
+  "family": "none-identity (E711)",
+  "role": "beneficial candidate (vetting decides)",
+  "repo": "https://github.com/benenzhu/aiter_P.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+    "test",
+    "dev"
+  ],
+  "evidence": "update ptpc bpreshuffle gemm tune (#719) (https://github.com/benenzhu/aiter_P/commit/f08b73cd313acdbc0fc873d61c13c49a0c37a29e)",
+  "gold": "f08b73cd313acdbc0fc873d61c13c49a0c37a29e",
+  "pre": "parent"
+}

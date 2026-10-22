@@ -1,0 +1,15 @@
+{
+  "name": "ndsolver_1810bba",
+  "family": "none-identity (E711)",
+  "role": "beneficial candidate (vetting decides)",
+  "repo": "https://github.com/meawoppl/ndsolver.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+    "test",
+    "dev"
+  ],
+  "evidence": "Fix ruff style and bug issues (https://github.com/meawoppl/ndsolver/commit/1810bbae767950b577a126fd23baa4dc4ce07680)",
+  "gold": "1810bbae767950b577a126fd23baa4dc4ce07680",
+  "pre": "parent"
+}
