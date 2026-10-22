@@ -1,0 +1,40 @@
+# Study G round 3 (0 cost, skill never applied): applicability scan of control candidates and
+# emmett ORM test-source dump for the second harmful oracle.
+name: Gatekeeper Study G round 3
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  controls:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - shell: bash
+        run: |
+          set -euo pipefail
+          python tools/applicability_scan_ext.py study_g/candidates_control_scan.json out_c study_g/skills/none-identity.json
+      - uses: actions/upload-artifact@v7
+        with:
+          name: G_CONTROL_SCAN
+          path: out_c
+  emmett:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - shell: bash
+        run: |
+          mkdir -p out_e
+          python tools/runnable_check_g.py study_g/harm_dump_emmett.json emmett-framework/emmett out_e 2>&1 | tail -5 || true
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: G_EMMETT_DUMP
+          path: out_e
