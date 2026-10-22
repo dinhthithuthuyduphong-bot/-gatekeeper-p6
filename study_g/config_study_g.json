@@ -10,8 +10,6 @@
   "cells": [
     "G1_pydal/null",
     "G1_pydal/plain",
-    "G2_emmett/null",
-    "G2_emmett/plain",
     "K1_hera_pspec/none",
     "K1_hera_pspec/int"
   ],
@@ -25,5 +23,10 @@
     "gatekeeper_ext/none_identity.py",
     "gatekeeper_ext/__init__.py",
     "tools/run_study_g.py"
-  ]
+  ],
+  "excluded_before_freeze": {
+    "G2_emmett": "census INVALID twice: emmett's own ORM tests cannot open their SQLite file in the runner snapshot (no databases/ directory next to tests/); upstream tests may not be modified; excluded after the one allowed fix round (rule 5). Its oracle worked (10/10 on untreated code).",
+    "promnesia": "test collection errors after one retry",
+    "emfcamp/Website": "not installable"
+  }
 }

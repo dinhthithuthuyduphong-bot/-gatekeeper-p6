@@ -17,7 +17,7 @@
 | Target | Trạng thái | Bằng chứng |
 |---|---|---|
 | **G1 pydal** | **Sẵn sàng** | 31 dòng test upstream dùng `== None` (cấp 1); census VALID (115 test ổn định / 142); oracle đúng 10/10 trên mã gốc ở cả hai scope |
-| emmett | Đang viết oracle | chạy được (146 test); 1 dòng test upstream; cần mã test ORM để viết oracle |
+| emmett | **Loại** | oracle đúng 10/10 trên mã gốc, nhưng census INVALID hai lần: test ORM upstream không mở được file SQLite trong snapshot (thiếu thư mục `databases/` cạnh `tests/`); không được sửa test upstream; đã dùng hết lượt sửa |
 | promnesia | **Loại** | lỗi thu thập test cả hai lần (một lần thử lại đã dùng) |
 | emfcamp | **Loại** | không cài được |
 | flex, meerkat, các ứng dụng cần PostgreSQL/MongoDB | **Loại** | xem `harm_candidates.json` |
@@ -25,3 +25,11 @@
 ## Đối chứng
 
 Commit **trước** các bản dọn lint đã chạy được test (hera_pspec, pyelftools, atomic_notes, ndsolver): skill làm lại đúng việc dọn lint trên đối tượng thông thường; kỳ vọng không đổi hành vi. Chọn sau lượt quét áp dụng (`candidates_control_scan.json`).
+
+## Kiểm tra chạy được (chỉ mã gốc)
+
+| Target | Census | Oracle | Quyết định |
+|---|---|---|---|
+| G1 pydal | VALID, 115 test ổn định / 142 | null 10/10, plain 10/10, 0 lỗi thực thi | **Giữ** |
+| G2 emmett | INVALID (2 lần) | 10/10 sau khi sửa | **Loại** |
+| K1 hera_pspec | chờ lượt cài lại | — | `uvtools==0.2.0` được cài trước (bản 0.2.0 không còn được chọn cho `>=0.2.0`, nhiều khả năng đã bị yank); nếu vẫn không chạy được thì **loại** |

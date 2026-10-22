@@ -35,6 +35,8 @@ def main(config, target_id, out_dir):
         (root / "gk_target.json").write_text(json.dumps(m))
         kind, _, pkg = m.get("install", "").partition(":")
         env = dict(os.environ, SETUPTOOLS_SCM_PRETEND_VERSION="0.0.0")
+        if m.get("pre_install"):              # environment preparation declared in the manifest
+            subprocess.run([sys.executable, "-m", "pip", "install", "-q", *m["pre_install"]], env=env)
         r = subprocess.run([sys.executable, "-m", "pip", "install", "-q", str(root)], env=env,
                            capture_output=True, text=True)
         rec["install_ok"] = r.returncode == 0

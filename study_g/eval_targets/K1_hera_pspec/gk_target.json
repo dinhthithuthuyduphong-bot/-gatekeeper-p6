@@ -2,7 +2,7 @@
   "target_id": "K1_hera_pspec",
   "repository": "HERA-Team/hera_pspec",
   "revision": "c1b46e796c6ebe31e25d030233e53fb3032b0c60",
-  "python": "3.11",
+  "python": "3.12",
   "packages": {},
   "platform": "linux",
   "role": "CONTROL (`n_dlys == None` on ordinary values in utils.get_delays; commit before the lint-only E711 cleanup PR #485)",
@@ -21,5 +21,9 @@
     "tests/test_grouping.py",
     "tests/test_pspecdata.py"
   ],
-  "install": "self-then-uninstall:hera_pspec"
+  "install": "self-then-uninstall:hera_pspec",
+  "pre_install": [
+    "uvtools==0.2.0"
+  ],
+  "pre_install_note": "uvtools 0.2.0 installed on 2026-10-21 (vetting) but is no longer selected for '>=0.2.0' (most likely yanked on PyPI); an exact pin is installed first. Environment preparation only; recorded in pip freeze."
 }
