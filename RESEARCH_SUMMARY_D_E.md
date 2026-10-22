@@ -56,6 +56,10 @@ Kết luận về chiều so sánh không đổi ở mọi mức; điều thay �
 
 Ví dụ replay của skill là một fixture tự dựng mô phỏng mẫu PySStuBs; commit PySStuBs cụ thể không được lưu. Quyết định của B6-R không phụ thuộc vào điều này (skill tái tạo đúng cách sửa trên mọi ví dụ thuộc mẫu), nhưng B6-R phải được mô tả là **bản tái dựng yếu hơn B6 của paper** ở phía nguồn. Chi tiết: `study_d/PROVENANCE_B6R.md`, `study_d/SUPPLEMENTARY_MANIFEST.json`.
 
+## Study G: họ skill thứ hai (`== None` → `is None`)
+
+Một target (pydal), oracle **cấp 1** (31 dòng test upstream khẳng định `== None` sinh IS NULL), ví dụ replay là **bản fix thật**. B6-R **ADMIT**; Gatekeeper **REJECT_HARM**; B8 REJECT. Tác hại 81/300 lần rút, chỉ ở truy vấn đếm mọi dòng (skill đổi `table._id != None` trong `id_query`). **Census bắt được** (21 test fail mới), khác Study E; e-process báo động cũng tự kích hoạt ở lần rút 103. B6-S không có census với k ≤ 5 sẽ admit. Phía có lợi BLOCKED (29/29 ứng viên là dọn lint, không có test hành vi). Chi tiết: `study_g/results/`.
+
 ## Giới hạn phải nói rõ
 
 - **Bỏ lỡ 1/3 ô có lợi** (pycubrid): lợi ích tập trung ở 11% đầu vào, dưới biên θ = 0,2. Kiểm định dấu (ablation) sẽ admit được.
