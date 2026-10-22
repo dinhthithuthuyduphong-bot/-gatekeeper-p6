@@ -8,17 +8,20 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target:
-          - G1_pydal
-          - G2_emmett
-          - K1_hera_pspec
+        include:
+          - target: G1_pydal
+            python: "3.12"
+          - target: G2_emmett
+            python: "3.12"
+          - target: K1_hera_pspec
+            python: "3.11"
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v6
         with:
-          python-version: "3.12"
+          python-version: ${{ matrix.python }}
       - shell: bash
         run: |
           python -m pip install -q "pytest==8.3.5"
