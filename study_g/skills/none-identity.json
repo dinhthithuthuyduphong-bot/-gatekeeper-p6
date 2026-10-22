@@ -1,0 +1,10 @@
+{
+  "skill_id": "none-identity",
+  "version": "1.0-draft",
+  "pi": {"transform": "none_identity", "params": {}},
+  "D": {"python": ">=3.8"},
+  "I": [],
+  "P": [],
+  "K": "PySStuBs-style single-statement fix family 'change binary operator' / pycodestyle E711 (compare with None by identity). Draft: the concrete source fix used for replay must be fixed BEFORE any Study G target is chosen.",
+  "scope": "comparisons with None"
+}
