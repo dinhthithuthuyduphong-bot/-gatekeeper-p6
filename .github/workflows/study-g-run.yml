@@ -1,0 +1,39 @@
+# Study G evaluation run (refuses unless study_g is FROZEN and hashes match).
+name: Gatekeeper Study G run
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  target:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: G1_pydal
+            python: "3.12"
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Freeze check
+        run: |
+          python -c "import json,sys;c=json.load(open('study_g/config_study_g.json'));sys.exit(0 if c.get('status')=='FROZEN' else 'not FROZEN')"
+          python tools/freeze_study.py verify study_g
+      - name: Run
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install -q "pytest==8.3.5"
+          python -c "import json,subprocess,sys;m=json.load(open('study_g/eval_targets/${{ matrix.target }}/gk_target.json'));p=m.get('pre_install',[]);p and subprocess.run([sys.executable,'-m','pip','install','-q',*p],check=True)"
+          mkdir -p out_g
+          python -m pip freeze > out_g/PIP_FREEZE_before_${{ matrix.target }}.txt
+          python tools/run_study_g.py study_g/config_study_g.json ${{ matrix.target }} out_g 2>&1 | tee out_g/log_${{ matrix.target }}.txt
+          python -m pip freeze > out_g/PIP_FREEZE_after_${{ matrix.target }}.txt
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: STUDY_G_${{ matrix.target }}
+          path: out_g
