@@ -15,5 +15,5 @@ jobs:
         run: |
           set -euo pipefail
           python tools/results_check.py | tee -a "$GITHUB_STEP_SUMMARY"
-          python tools/unified_comparison.py study_d/results study_e/results | tee -a "$GITHUB_STEP_SUMMARY"
-          python tools/cost_breakeven.py study_d/results study_e/results | tee -a "$GITHUB_STEP_SUMMARY"
+          python tools/unified_comparison.py study_d/results study_e/results study_g/results | tee -a "$GITHUB_STEP_SUMMARY"
+          python tools/cost_breakeven.py study_d/results study_e/results study_g/results | tee -a "$GITHUB_STEP_SUMMARY"
