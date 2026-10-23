@@ -104,3 +104,25 @@ class FreezeExtraTrackedTests(unittest.TestCase):
             st = Path(tmp)
             (st / "config_x.json").write_text(json.dumps({"extra_tracked": ["tools/score_heldout.py"]}))
             self.assertIn("score_heldout.py", {p.name for p in fz.tracked(st.resolve())})
+
+
+class MixtureCertTests(unittest.TestCase):
+    def test_type_one_error_at_boundary(self):
+        import random
+        from gatekeeper_ext.mixture_cert import MixtureHarmCert
+        rng, eta, crossed, sims = random.Random(3), 0.05, 0, 2000
+        for _ in range(sims):
+            m = MixtureHarmCert(eta)
+            for _ in range(400):
+                m.update(rng.random() < eta)          # h = eta exactly (null boundary)
+                if m.value >= 20:
+                    crossed += 1
+                    break
+        self.assertLessEqual(crossed / sims, 0.05 + 0.015)
+
+    def test_no_regression_grows(self):
+        from gatekeeper_ext.mixture_cert import MixtureHarmCert
+        m = MixtureHarmCert(0.05)
+        for _ in range(100):
+            m.update(False)
+        self.assertGreater(m.value, 60)
