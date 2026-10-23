@@ -1,0 +1,1 @@
+'config_study_f.json:k_patches=72' 'config_study_f.json:family_unit="patch (model x repetition x target); amendment F-A2"' 'config_study_f.json:extra_tracked=["tools/score_heldout.py","tools/aggregate_study_f.py","gatekeeper_ext/patch_rule.py","gatekeeper_ext/__init__.py"]'

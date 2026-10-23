@@ -42,24 +42,22 @@ def score(target, treated, oracle, cfg, seed, k_cells):
             "hidden_oracle": {s: v["b8"]["counts"] for s, v in res["scopes"].items()}}
 
 
-def gate(target, treated, oracle, cfg, seed, k_cells):
-    """Gatekeeper per-cell rule on the ADMISSION seed.  A patch is a CANDIDATE for deployment
-    iff no scope ends in REJECT_HARM, the census is VALID with no persistent regression, and at
-    least one scope reaches the provisional admission bar.  Whether it is finally deployed is
-    decided by tools/aggregate_study_f.py with e-Holm over the whole Study F family (K cells)."""
+def gate(target, treated, oracle, cfg, seed, k_patches):
+    """Patch-level Gatekeeper rule (F-A2) on the ADMISSION seed: full n_max draws in every declared
+    scope, e_patch = min(mean_s min(e_ben_s, e_cert_s), min_s e_cert_s) (gatekeeper_ext/patch_rule.py),
+    0 if any harm alarm fires or the census regresses.  Deployment is decided by e-Holm over the
+    family of patches in tools/aggregate_study_f.py."""
+    from gatekeeper_ext.patch_rule import patch_evalue
     if not treated:
-        return False, {"submitted": False}
+        return {"submitted": False, "e_patch": 0.0}
     res = run_draw_study(target, treated, oracle, {"seed": seed, "alpha": cfg["alpha"], "n_max": cfg["n_max"],
-                                                    "theta": cfg["theta"], "eta": cfg["eta"]}, k_cells)
+                                                    "theta": cfg["theta"], "eta": cfg["eta"], "b8_full": True}, k_patches)
     cen = census(target, treated, target.manifest["census_tests"])
-    decisions = {s: v["decision"] for s, v in res["scopes"].items()}
-    harm = any(d == "REJECT_HARM" for d in decisions.values())
-    census_ok = cen.get("status") == "VALID" and not cen.get("new_failures")
-    provisional = [s for s, d in decisions.items() if d == "ADMIT"]
-    candidate = bool(provisional) and not harm and census_ok
-    return candidate, {"submitted": True, "decisions": decisions, "reject_harm": harm, "census_ok": census_ok,
-                       "e_min": {s: (0.0 if (harm or not census_ok) else v["e_min"]) for s, v in res["scopes"].items()},
-                       "census_new_failures": len(cen.get("new_failures", []))}
+    census_bad = cen.get("status") != "VALID" or bool(cen.get("new_failures"))
+    e = patch_evalue({s: v["trace"] for s, v in res["scopes"].items()}, cfg["theta"], cfg["eta"], cfg["n_max"], census_bad)
+    return {"submitted": True, "e_patch": e, "census_ok": not census_bad,
+            "scope_counts": {s: v["b8"]["counts"] for s, v in res["scopes"].items()},
+            "census_new_failures": len(cen.get("new_failures", []))}
 
 
 def main(config, target_id, out_dir, *b9_dirs) -> int:
@@ -121,11 +119,11 @@ def main(config, target_id, out_dir, *b9_dirs) -> int:
                     r = repair(target, inst, cas, mcfg.get("model_id", model), Budget(**b9cfg["budget"]), mcfg["prices_usd_per_mtok"],
                                seed=b9cfg["seed"] + 100 * rep)
                     raw = score(target, r.treated, oracle, cfg, heldout["seed"], k)
-                    ok, gate_info = gate(target, r.treated, oracle, cfg, admission_seed, k)
+                    gate_info = gate(target, r.treated, oracle, cfg, admission_seed, k)
                     rows.append({"approach": "B9 raw", "model": model, "repetition": rep, "verdict": b9_verdict(raw),
                                  "cost_usd": r.cost_usd, "state": raw})
                     rows.append({"approach": "B9+Gatekeeper (candidate)", "model": model, "repetition": rep,
-                                 "candidate": ok, "raw_verdict": b9_verdict(raw), "gate": gate_info,
+                                 "e_patch": gate_info["e_patch"], "raw_verdict": b9_verdict(raw), "gate": gate_info,
                                  "cost_usd": r.cost_usd})
     finally:
         shutil.rmtree(work, ignore_errors=True)

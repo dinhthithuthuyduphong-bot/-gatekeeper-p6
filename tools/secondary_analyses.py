@@ -76,7 +76,12 @@ class HedgedCS:
         thr = math.log(1 / self.alpha)
         keep = [m for i, m in enumerate(self.ms)
                 if math.log(0.5 * math.exp(self.logp[i]) + 0.5 * math.exp(self.logm[i])) < thr]
-        return (min(keep), max(keep)) if keep else (float("nan"), float("nan"))
+        if not keep:
+            return (float("nan"), float("nan"))
+        # Conservative on the continuous parameter: a mean strictly between two grid points that
+        # were both rejected is reported as covered too, by widening one grid step on each side.
+        step = self.ms[1] - self.ms[0]
+        return (max(0.0, min(keep) - step), min(1.0, max(keep) + step))
 
 
 def cs_at(seq, n):

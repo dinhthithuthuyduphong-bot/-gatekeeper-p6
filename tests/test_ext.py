@@ -63,13 +63,13 @@ class NoneIdentityPrecedenceTests(unittest.TestCase):
 
 
 class StudyFAggregationTests(unittest.TestCase):
-    def _run(self, rows_by_target, k=8):
+    def _run(self, rows_by_target, k=4):
         import json, tempfile, importlib
         sys.path.insert(0, str(ROOT / "tools"))
         agg = importlib.import_module("aggregate_study_f")
         with tempfile.TemporaryDirectory() as tmp:
             tmp = Path(tmp)
-            cfg = {"k_cells": k, "alpha": 0.1, "repetitions": 1, "cells": list(rows_by_target),
+            cfg = {"k_patches": k, "alpha": 0.1, "repetitions": 1, "cells": list(rows_by_target),
                    "b9_configs": {"m1": "x", "m2": "y"}}
             (tmp / "c.json").write_text(json.dumps(cfg))
             for t, rows in rows_by_target.items():
@@ -77,20 +77,27 @@ class StudyFAggregationTests(unittest.TestCase):
             agg.main(str(tmp / "c.json"), str(tmp), str(tmp / "o.md"))
             return (tmp / "o.md").read_text()
 
-    def test_harm_in_another_scope_blocks_deployment(self):
-        rows = lambda m, cand, e: [
-            {"approach": "B9 raw", "model": m, "repetition": 0, "verdict": "HARMFUL"},
-            {"approach": "B9+Gatekeeper (candidate)", "model": m, "repetition": 0, "candidate": cand,
-             "gate": {"e_min": {"bool": e, "int": 0.0}, "reject_harm": not cand}}]
-        out = self._run({"T1": rows("m1", False, 1e9) + rows("m2", True, 1e9),
-                         "T2": rows("m1", False, 0.0) + rows("m2", False, 0.0)})
-        # m1: harm elsewhere -> never deployed; m2: candidate with huge e -> deployed (raw verdict kept)
-        self.assertIn("| m1 | B9 + Gatekeeper | 0 | 0 | 0 | 2 |", out)
-        self.assertIn("| m2 | B9 + Gatekeeper | 0 | 1 | 0 | 1 |", out)
+    def test_patch_level_family(self):
+        rows = lambda m, e, v: [{"approach": "B9 raw", "model": m, "repetition": 0, "verdict": v},
+                                {"approach": "B9+Gatekeeper (candidate)", "model": m, "repetition": 0, "e_patch": e}]
+        out = self._run({"T1": rows("m1", 0.0, "HARMFUL") + rows("m2", 1e9, "SUCCESS"),
+                         "T2": rows("m1", 0.5, "NO_EFFECT") + rows("m2", 0.0, "NO_PATCH")})
+        self.assertIn("| m1 | B9 + Gatekeeper | 0 | 0 | 0 | 2 |", out)     # harmful patch never deployed
+        self.assertIn("| m2 | B9 + Gatekeeper | 1 | 0 | 0 | 1 |", out)
 
     def test_family_size_must_match_registration(self):
         with self.assertRaises(SystemExit):
             self._run({"T1": []}, k=99)
+
+
+class PatchRuleTests(unittest.TestCase):
+    def test_quarantined_scope_without_certificate_blocks_patch(self):
+        from gatekeeper_ext.patch_rule import patch_evalue
+        good = [[-1.0, False]] * 300
+        few = [[0.0, False]] * 20                      # scope barely sampled: no low-harm certificate
+        self.assertGreater(patch_evalue({"a": good, "b": [[0.0, False]] * 300}, 0.2, 0.05, 300), 60)
+        self.assertLess(patch_evalue({"a": good, "b": few}, 0.2, 0.05, 300), 10)
+        self.assertEqual(patch_evalue({"a": good, "b": [[1.0, True]] * 3 + [[0.0, False]] * 297}, 0.2, 0.05, 300), 0.0)
 
 
 class FreezeExtraTrackedTests(unittest.TestCase):

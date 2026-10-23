@@ -2,10 +2,10 @@
 
 python tools/aggregate_study_f.py study_f/config_study_f.json DIR_WITH_HELDOUT_JSON OUT.md
 
-Family: every (model, repetition, target, scope) cell, K = config k_cells (144 = 4 x 3 x 6 x 2).
-A cell without a submitted patch, with REJECT_HARM in any scope of its patch, or with a census
-regression enters with e = 0.  A patch is deployed under "B9 + Gatekeeper" iff at least one of
-its cells is selected by e-Holm (and, by construction, none of its scopes rejected harm).
+Family (F-A2): every (model, repetition, target) PATCH, K = config k_patches (72 = 4 x 3 x 6).
+Each patch has one e-value e_patch (gatekeeper_ext/patch_rule.py): benefit with low harm in some
+scope AND low harm certified in every scope; 0 without a patch, with a harm alarm or a census
+regression.  A patch is deployed under "B9 + Gatekeeper" iff e-Holm selects it.
 Its end state is then the held-out verdict of the raw patch; otherwise NO_PATCH.
 """
 import json
@@ -22,34 +22,27 @@ VERDICTS = ("SUCCESS", "HARMFUL", "NO_EFFECT", "NO_PATCH", "BUDGET_CAP", "CENSUS
 
 def main(config, heldout_dir, out):
     cfg = json.loads(Path(config).read_text())
-    k, alpha = cfg["k_cells"], cfg["alpha"]
+    k, alpha = cfg["k_patches"], cfg["alpha"]
     models = list(cfg["b9_configs"])
     reps = cfg["repetitions"]
-    scopes = {t: ["bool", "number" if t == "D2_cerberus" else "int"] for t in cfg["cells"]}
-    family = {(m, r, t, s): 0.0 for m in models for r in range(reps) for t in cfg["cells"] for s in scopes[t]}
+    family = {(m, r, t): 0.0 for m in models for r in range(reps) for t in cfg["cells"]}
     if len(family) != k:
-        raise SystemExit(f"family size {len(family)} != registered k_cells {k}")
-    raw, cand = {}, {}
+        raise SystemExit(f"family size {len(family)} != registered k_patches {k}")
+    raw = {}
     files = sorted(Path(heldout_dir).glob("HELDOUT_*.json"))
     if {f.stem.replace("HELDOUT_", "") for f in files} != set(cfg["cells"]):
         raise SystemExit("held-out results missing for some targets")
     for f in files:
         h = json.loads(f.read_text())
         for row in h["rows"]:
+            key = (row.get("model"), row.get("repetition"), h["target"])
             if row["approach"] == "B9 raw":
-                raw[(row["model"], row["repetition"], h["target"])] = row["verdict"]
+                raw[key] = row["verdict"]
             elif row["approach"].startswith("B9+Gatekeeper"):
-                key = (row["model"], row["repetition"], h["target"])
-                cand[key] = row
-                for s, e in row["gate"].get("e_min", {}).items():
-                    family[(row["model"], row["repetition"], h["target"], s)] = e if row["candidate"] else 0.0
+                family[key] = float(row["e_patch"])
     selected = set(e_holm({"|".join(map(str, c)): e for c, e in family.items()}, alpha))
-    gated = {}
-    for key, verdict in raw.items():
-        m, r, t = key
-        deployed = any("|".join(map(str, (m, r, t, s))) in selected for s in scopes[t])
-        gated[key] = verdict if deployed else "NO_PATCH"
-    L = [f"# Study F — kết quả theo model (e-Holm trên K = {k} ô, α = {alpha}; chấm trên seed held-out)", "",
+    gated = {key: (v if "|".join(map(str, key)) in selected else "NO_PATCH") for key, v in raw.items()}
+    L = [f"# Study F — kết quả theo model (e-Holm trên K = {k} patch, α = {alpha}; chấm trên seed held-out)", "",
          "| Model | Điều kiện | " + " | ".join(VERDICTS) + " |", "|---|---|" + "---|" * len(VERDICTS)]
     for m in models:
         for lab, src in (("B9 thô", raw), ("B9 + Gatekeeper", gated)):

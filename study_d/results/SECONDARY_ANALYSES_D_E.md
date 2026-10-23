@@ -48,12 +48,12 @@ Với k ≥ 1, B6-S chặn được cả ba ô có hại vì tác hại xảy ra
 
 | Ô | Lần rút | μ (CS 95%) | h (CS 95%) |
 |---|---|---|---|
-| D1_py_ecc/bool | 110 | [-0.87; -0.64] | [0.000; 0.060] |
-| D3_speckit/bool | 110 | [-0.65; -0.37] | [0.000; 0.060] |
-| D5_pycubrid/bool | 300 | [-0.15; -0.06] | [0.000; 0.020] |
-| E1_pyyaml/bool | 2 | [-0.92; 1.00] | [0.040; 1.000] |
-| E2_packaging/bool | 2 | [-0.92; 1.00] | [0.040; 1.000] |
-| E3_databricks/bool | 2 | [-0.92; 1.00] | [0.040; 1.000] |
+| D1_py_ecc/bool | 110 | [-0.88; -0.63] | [0.000; 0.065] |
+| D3_speckit/bool | 110 | [-0.66; -0.36] | [0.000; 0.065] |
+| D5_pycubrid/bool | 300 | [-0.16; -0.05] | [0.000; 0.025] |
+| E1_pyyaml/bool | 2 | [-0.93; 1.00] | [0.035; 1.000] |
+| E2_packaging/bool | 2 | [-0.93; 1.00] | [0.035; 1.000] |
+| E3_databricks/bool | 2 | [-0.93; 1.00] | [0.035; 1.000] |
 
 Ô có hại dừng sau 2 lần rút nên khoảng còn rất rộng; quyết định dựa trên e-process báo động, không trên khoảng này.
 
@@ -63,8 +63,8 @@ Quy tắc: dừng với QUARANTINE khi cận trên của CS 95% cho E[−Z] nh�
 
 | Họ | Lần rút (quy tắc chính) | Lần rút (có futility) | Quyết định thay đổi |
 |---|---|---|---|
-| Study D | 3220 | 540 | không |
-| Study E | 2106 | 216 | không |
+| Study D | 3220 | 597 | không |
+| Study E | 2106 | 230 | không |
 
 ## 7. Độ nhạy theo θ và η (trên trace thật)
 
