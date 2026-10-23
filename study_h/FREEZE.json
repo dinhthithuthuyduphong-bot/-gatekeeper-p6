@@ -1,9 +1,9 @@
 {
   "files": {
-    "study_h/config_study_h.json": "5cad8561e1bd914f5b8dadf071b98d4dabe4b6184e6cf4a2a18c92e18d50f315",
+    "study_h/config_study_h.json": "bb728e8348a9c638bef05e476935c80402d14ee4c5a857e5a30fc7ad8c945b67",
     "study_h/STUDY_H_PROTOCOL.md": "f7096c14ef0d39d33f0181041cb04ed93856b35d0ce03beb971e1ae646ceaa39",
-    "study_h/AMENDMENTS.md": "550d9b6b7e071e6555a974a658fd6ca7fe1b2487f32774b1ff148399daca7891",
-    "study_h/oracles/rare_missing.py": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "study_h/AMENDMENTS.md": "01d92e7c52cea5608a9f11bcc8319dbc318cc52c931472e1cc86f7cb94356457",
+    "study_h/oracles/rare_missing.py": "7d624ccee0bcb78158cefcfa129534497de53173ff74e810cc26a3cfaadec893",
     "gatekeeper_lite/__init__.py": "be8ddeba61bbc4885994020bcb9b4f19573f4a22b8a759b079e00e45c3f334e7",
     "gatekeeper_lite/__main__.py": "7aa7d5b275d60de01de9074e0bd8a864c99527435885098a2243986a48699e90",
     "gatekeeper_lite/b9.py": "80e274eb9e30f3f51870e2e7939e68fc199029e627d8cf20635ffc6f4b09128e",
@@ -41,7 +41,7 @@
     "gatekeeper_ext/__init__.py": "cfdbf2e9a84038bb5a688a08b24969940aecd604c407f217405ef30e96c87b46",
     "gatekeeper_ext/none_identity.py": "6844f735580719b690b2ff074b87d540c1c559a538bb707df793f3450ac18759",
     "gatekeeper_ext/mixture_cert.py": "5f406d7c45391d4ec4db24d70120ff67c89bbb4bd123759df138ef03e20a2f59",
-    "tools/run_study_h.py": "be8cbbde6e25733740397f4b6f2b619a184e91439a1e43953d12de88576aac9a",
+    "tools/run_study_h.py": "509a5e15b11810e4e1d3f5acb84869e5efa81af1a6b230233521120257adb9f7",
     "tools/analyze_study_h.py": "75528706dc26bd4c2a9fdc019efbac804ed58e5da8fbf529ce8d9594ce01edef",
     "study_h/fixtures/H1_rare/missing.py": "e8b12ece41c3f43552235b01e887351f6b091632f02036d32aa724f899a04c5a",
     "study_h/fixtures/H1_rare/tests/test_missing.py": "0069ff6bc371dd412d22597a9eac2bebb7b1a0bbfd69da5deceed6e76928831f",

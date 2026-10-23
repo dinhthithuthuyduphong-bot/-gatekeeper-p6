@@ -47,5 +47,16 @@
     "study_g/skills/replay/get_delays_before.py",
     "study_g/skills/replay/get_delays_after.py"
   ],
-  "frozen_on": "2026-10-23T00:56:52Z"
+  "frozen_on": "2026-10-23T00:56:52Z",
+  "seed_freeze_sha256": "58e008bc5b77429ca04fb5db66982c09722718df829cccf09d1e395888abfa44",
+  "amendments_applied": [
+    "H-A1"
+  ],
+  "amendment_log": [
+    {
+      "id": "H-A1",
+      "edits": [],
+      "applied_utc": "2026-10-23T04:52:40+00:00"
+    }
+  ]
 }
