@@ -42,6 +42,16 @@ def main(config, out_dir):
         bound = bind_modules([skill], target)
         cen = census(target, bound["treated"], target.manifest["census_tests"])
         oracle = (base / target.manifest["draw_oracle"]).resolve()
+        # fail fast and loudly if the oracle file is not the reviewed one (Study H amendment H-A1)
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("gk_h_oracle_check", oracle)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        digest = hashlib.sha256(oracle.read_bytes()).hexdigest()
+        print(f"oracle {oracle} sha256 {digest} size {oracle.stat().st_size}")
+        missing = [f for f in ("scopes", "execute", "judge") if not hasattr(mod, f)]
+        if missing:
+            raise SystemExit(f"oracle {oracle} lacks {missing}; the file in the repository is not the reviewed oracle")
         k = len(cfg["cells"])
         reps = []
         for rep in range(cfg["replications"]):
@@ -57,7 +67,7 @@ def main(config, out_dir):
                 s: {"decision": ("ADMIT" if s in adm else "REJECT_HARM" if v["decision"] == "REJECT_HARM" else "QUARANTINE"),
                     "draws": v["draws"], "e_min": v["e_min"], "trace": v["trace"]} for s, v in res["scopes"].items()}})
             print(f"rep {rep}: " + ", ".join(f"{s}={r['decision'][:3]}({r['draws']})" for s, r in reps[-1]["scopes"].items()))
-        rec = {"seed": seed_info, "bind": {"sites": [vars(x) if hasattr(x, "__dict__") else x for x in bound.get("sites", [])]},
+        rec = {"seed": seed_info, "oracle_sha256": digest, "bind": {"sites": [vars(x) if hasattr(x, "__dict__") else x for x in bound.get("sites", [])]},
                "B6R_replay": replay(skill), "census": cen, "replications": reps}
         (out / "RESULT_H1_rare.json").write_text(json.dumps(rec, default=str))
     finally:
