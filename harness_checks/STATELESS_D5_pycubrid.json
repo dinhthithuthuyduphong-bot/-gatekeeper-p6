@@ -1,0 +1,21 @@
+{
+  "target": "D5_pycubrid",
+  "seed": 1141846373569460776,
+  "n_per_scope": 100,
+  "chunk": 25,
+  "scopes": {
+    "bool": {
+      "compared": 100,
+      "mismatches": 0,
+      "examples": [],
+      "harness_errors": 0
+    },
+    "int": {
+      "compared": 100,
+      "mismatches": 0,
+      "examples": [],
+      "harness_errors": 0
+    }
+  },
+  "status": "STATELESS"
+}

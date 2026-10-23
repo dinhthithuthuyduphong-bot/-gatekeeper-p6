@@ -1,0 +1,21 @@
+{
+  "target": "G1_pydal",
+  "seed": 396757580158119603,
+  "n_per_scope": 100,
+  "chunk": 25,
+  "scopes": {
+    "null": {
+      "compared": 100,
+      "mismatches": 0,
+      "examples": [],
+      "harness_errors": 0
+    },
+    "plain": {
+      "compared": 100,
+      "mismatches": 0,
+      "examples": [],
+      "harness_errors": 0
+    }
+  },
+  "status": "STATELESS"
+}
