@@ -1,0 +1,77 @@
+# Harness statelessness check (0 cost): recorded draws re-executed in shuffled order with fresh
+# workers every 25 draws; every paired outcome must equal the recorded one.
+name: Gatekeeper statelessness check
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  check:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - study: study_d
+            target: D1_py_ecc
+            python: "3.12"
+            os: ubuntu-24.04
+          - study: study_d
+            target: D2_cerberus
+            python: "3.8"
+            os: ubuntu-22.04
+          - study: study_d
+            target: D3_speckit
+            python: "3.12"
+            os: ubuntu-24.04
+          - study: study_d
+            target: D5_pycubrid
+            python: "3.12"
+            os: ubuntu-24.04
+          - study: study_d
+            target: C1_jsonschema
+            python: "3.12"
+            os: ubuntu-24.04
+          - study: study_d
+            target: C2_voluptuous
+            python: "3.12"
+            os: ubuntu-24.04
+          - study: study_e
+            target: E1_pyyaml
+            python: "3.12"
+            os: ubuntu-24.04
+          - study: study_e
+            target: E2_packaging
+            python: "3.12"
+            os: ubuntu-24.04
+          - study: study_e
+            target: E3_databricks
+            python: "3.11"
+            os: ubuntu-24.04
+          - study: study_e
+            target: K1_trino
+            python: "3.12"
+            os: ubuntu-24.04
+          - study: study_e
+            target: K2_tomlkit
+            python: "3.12"
+            os: ubuntu-24.04
+          - study: study_g
+            target: G1_pydal
+            python: "3.12"
+            os: ubuntu-24.04
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python }}
+      - shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out_s
+          python tools/statelessness_check.py ${{ matrix.study }}/config_${{ matrix.study }}.json ${{ matrix.target }} out_s 100 25 2>&1 | tee out_s/log_${{ matrix.target }}.txt
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: STATELESS_${{ matrix.target }}
+          path: out_s
