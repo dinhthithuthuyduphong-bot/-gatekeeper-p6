@@ -1,0 +1,50 @@
+{
+  "experiment_id": "study-h-v1",
+  "status": "DRAFT",
+  "requires_freeze": true,
+  "seed_time_utc": "SET_AT_FREEZE",
+  "skill": "study_g/skills/none-identity.json",
+  "theta": 0.2,
+  "eta": 0.05,
+  "alpha": 0.1,
+  "alpha_alarm": 0.05,
+  "n_max": 300,
+  "replications": 50,
+  "cells": [
+    "rho_0",
+    "rho_100",
+    "rho_200",
+    "rho_300",
+    "rho_500",
+    "rho_1000"
+  ],
+  "rho_by_cell": {
+    "rho_0": 0.0,
+    "rho_100": 0.01,
+    "rho_200": 0.02,
+    "rho_300": 0.03,
+    "rho_500": 0.05,
+    "rho_1000": 0.1
+  },
+  "benefit_rate": 0.5,
+  "primary": "Gatekeeper with the frozen per-cell rule (fixed-stake certificate c = 0.9), e-Holm over the 6 cells of each replication",
+  "secondary_preregistered": [
+    "Gatekeeper with the mixture harm certificate (gatekeeper_ext/mixture_cert.py), replayed on the same traces",
+    "B6-S(k), k in {5, 20, 50}: replay + fingerprint + census + no regression in the first k draws",
+    "B8: no regression in 300 draws",
+    "B6-R: replay + fingerprint"
+  ],
+  "extra_tracked": [
+    "gatekeeper_ext/__init__.py",
+    "gatekeeper_ext/none_identity.py",
+    "gatekeeper_ext/mixture_cert.py",
+    "tools/run_study_h.py",
+    "tools/analyze_study_h.py",
+    "study_h/fixtures/H1_rare/missing.py",
+    "study_h/fixtures/H1_rare/tests/test_missing.py",
+    "study_h/fixtures/H1_rare/gk_target.json",
+    "study_g/skills/none-identity.json",
+    "study_g/skills/replay/get_delays_before.py",
+    "study_g/skills/replay/get_delays_after.py"
+  ]
+}
