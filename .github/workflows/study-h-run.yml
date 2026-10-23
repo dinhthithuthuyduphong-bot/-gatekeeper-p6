@@ -1,0 +1,33 @@
+# Study H evaluation run (refuses unless study_h is FROZEN and hashes match).
+name: Gatekeeper Study H run
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  run:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Freeze check
+        run: |
+          python -c "import json,sys;c=json.load(open('study_h/config_study_h.json'));sys.exit(0 if c.get('status')=='FROZEN' else 'not FROZEN')"
+          python tools/freeze_study.py verify study_h
+      - name: Run and analyse
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install -q "pytest==8.3.5"
+          mkdir -p out_h
+          python -m pip freeze > out_h/PIP_FREEZE.txt
+          python tools/run_study_h.py study_h/config_study_h.json out_h 2>&1 | tee out_h/log.txt
+          python tools/analyze_study_h.py study_h/config_study_h.json out_h/RESULT_H1_rare.json out_h/STUDY_H_RESULTS.md
+          cat out_h/STUDY_H_RESULTS.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: STUDY_H
+          path: out_h
