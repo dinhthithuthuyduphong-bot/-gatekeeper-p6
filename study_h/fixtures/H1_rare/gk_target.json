@@ -1,0 +1,19 @@
+{
+  "target_id": "H1_rare",
+  "python": "3.12",
+  "packages": {},
+  "platform": "linux",
+  "pythonpath": [],
+  "role": "synthetic rare-harm target; harm rate set by the scope generator (ground truth by construction)",
+  "modules": [
+    "missing.py"
+  ],
+  "checkout": {
+    "local": "study_h/fixtures/H1_rare"
+  },
+  "draw_oracle": "oracles/rare_missing.py",
+  "census_tests": [
+    "tests"
+  ],
+  "install": "none"
+}
