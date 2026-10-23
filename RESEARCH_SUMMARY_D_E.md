@@ -60,6 +60,10 @@ Ví dụ replay của skill là một fixture tự dựng mô phỏng mẫu PySS
 
 Một target (pydal), oracle **cấp 1** (31 dòng test upstream khẳng định `== None` sinh IS NULL), ví dụ replay là **bản fix thật**. B6-R **ADMIT**; Gatekeeper **REJECT_HARM**; B8 REJECT. Tác hại 81/300 lần rút, chỉ ở truy vấn đếm mọi dòng (skill đổi `table._id != None` trong `id_query`). **Census bắt được** (21 test fail mới), khác Study E; e-process báo động cũng tự kích hoạt ở lần rút 103. B6-S không có census với k ≤ 5 sẽ admit. Phía có lợi BLOCKED (29/29 ứng viên là dọn lint, không có test hành vi). Chi tiết: `study_g/results/`.
 
+## Study H: tác hại hiếm (target tổng hợp, 6 tỉ lệ × 50 lần lặp)
+
+Ở các ô **không** được phép (ρ = 5%, 10%): Gatekeeper admit sai **0/100**; B6-S(5) 65/100; B6-S(20) 18/100; B6-R 100/100. Ở ρ = 1% (được phép): Gatekeeper 45/50, B6-S(50) 26/50, B8 1/50. Mọi dự đoán ghi trước đều khớp. Điểm yếu: ở ρ = 2–3%, Gatekeeper chỉ chứng nhận 17/50 và 11/50. Chi tiết: `study_h/results/`.
+
 ## Giới hạn phải nói rõ
 
 - **Bỏ lỡ 1/3 ô có lợi** (pycubrid): lợi ích tập trung ở 11% đầu vào, dưới biên θ = 0,2. Kiểm định dấu (ablation) sẽ admit được.
