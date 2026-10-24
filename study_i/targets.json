@@ -1,0 +1,99 @@
+{
+  "status": "EXPLORATORY_RETROSPECTIVE_EXTENSION",
+  "gatekeeper_commit": "13edea776af145ec897a1a992e9d7e054043ca25",
+  "gatekeeper_sha256": {
+    "gatekeeper_ext/none_identity.py": "6844f735580719b690b2ff074b87d540c1c559a538bb707df793f3450ac18759",
+    "gatekeeper_lite/gatekeeper.py": "a95038ccdb01d2d750f16f43ff462785b5e916aefce85ed53f2bf71de5af4659",
+    "gatekeeper_lite/skill.py": "07fd5a3516f4f9f46315fd9181f31cee3686f92535bd8fbb38ace6ffc24bec4d",
+    "gatekeeper_lite/screen.py": "56fbacba4cff58a1d0864c3ef852ee7c6d5f225f06749a1a84fd8efa2624f112",
+    "gatekeeper_lite/transforms.py": "61c71e5626a08d84775f82c93a3b3e4741be1cee9bc5bc51b65a4367c0205bda",
+    "gatekeeper_lite/eprocess.py": "1a4856af0bbc8fae4f93b25a55254da005245349f23e6d040bdee38b850d746d",
+    "gatekeeper_lite/drawharness.py": "a1fa1b68cb1881e9c858166819f2b916875234cd16d52f41f16a2612ca2e72b2",
+    "gatekeeper_lite/drawworker.py": "9feccd1ade4c3e3238375f4d23c124c8cee85d0dba08a54db7d8f9f42605561f",
+    "study_g/skills/none-identity.json": "89351f56b7ae95df18ed47d4e7d18562a7d43dc0d8f5e540eb4266d8072f7995",
+    "study_g/skills/replay/get_delays_before.py": "6e8fec9df8fd3ab7adc11f03da9650004384722b529f713b457b56a2b6ae3715",
+    "study_g/skills/replay/get_delays_after.py": "8938e463790f938be6560360bb3e0e469da755830a3bcc07aa82d479797181b7"
+  },
+  "vendor_sha256": {
+    "vendor/NETWORKX_LICENSE.txt": "51bb3142e4dfdc5ea65ca7d700e615b63625552eb5ecbdd1df1fa45aec41895f",
+    "vendor/networkx_1_11_test_layout.py": "2c9f3207b5e24bc146d31610e06de6f1ffafa3588eb7e665539a79ef263c196e",
+    "vendor/networkx_layout_gold.py": "d41befbbc267be478bb14149adf014497465e76d9e7f5d1d84a14e56b7d03e66"
+  },
+  "diagnostic_draws": {
+    "seed": 20261024,
+    "alpha": 0.1,
+    "theta": 0.2,
+    "eta": 0.05,
+    "alpha_alarm": 0.05,
+    "n_max": 300,
+    "b8_full": true,
+    "cells": [
+      "I1_sqlalchemy/null_semantics",
+      "I1_sqlalchemy/plain_queries",
+      "I2_networkx/given_positions",
+      "I2_networkx/default_positions"
+    ]
+  },
+  "targets": {
+    "sqlalchemy": {
+      "target_id": "I1_sqlalchemy",
+      "repository": "sqlalchemy/sqlalchemy",
+      "revision": "10f4d1e2d706a7722ca78e79ce05b00333a7aa5b",
+      "python": [
+        3,
+        12
+      ],
+      "modules": [
+        "lib/sqlalchemy/ext/associationproxy.py",
+        "lib/sqlalchemy/orm/relationships.py",
+        "lib/sqlalchemy/sql/schema.py"
+      ],
+      "census": [
+        "test/ext/test_associationproxy.py",
+        "test/orm/test_query.py",
+        "test/sql/test_metadata.py"
+      ],
+      "pythonpath": [
+        "lib"
+      ],
+      "test_runner": "pytest",
+      "site_count": 4,
+      "direction": "harmful",
+      "draw_oracle": "oracles/sqlalchemy_null.py",
+      "oracle_provenance": "Unchanged upstream tests at the target revision. The custom draw adapter is separate, researcher-authored evidence."
+    },
+    "networkx": {
+      "target_id": "I2_networkx",
+      "repository": "networkx/networkx",
+      "revision": "585bb3ee251ab681e7725c07e4e8a569a0e511d5",
+      "python": [
+        3,
+        8
+      ],
+      "modules": [
+        "networkx/drawing/layout.py"
+      ],
+      "census": [
+        "networkx/drawing/tests/test_layout.py",
+        "networkx/classes/tests/test_graph.py"
+      ],
+      "pythonpath": [],
+      "test_runner": "nose",
+      "site_count": 3,
+      "direction": "beneficial",
+      "draw_oracle": "oracles/networkx_layout.py",
+      "witness": {
+        "path": "vendor/networkx_1_11_test_layout.py",
+        "selector": ":TestLayout.test_spring_args",
+        "revision": "0b6f608d46601fb180a0f42eaa8a9a2ca9a42ecf",
+        "upstream_path": "networkx/drawing/tests/test_layout.py",
+        "upstream_blob_sha": "8366d252b129fbae894a443182be58855412e0a1"
+      },
+      "gold": {
+        "networkx/drawing/layout.py": "vendor/networkx_layout_gold.py"
+      },
+      "gold_revision": "2ae63c50fe8eb6647db18ee352bed08b21f21d91",
+      "oracle_provenance": "Unchanged test_spring_args from the later NetworkX 1.11 release, NOT a test added in the fix commit. Historical retrospective rediscovery; no new prospective claim."
+    }
+  }
+}
