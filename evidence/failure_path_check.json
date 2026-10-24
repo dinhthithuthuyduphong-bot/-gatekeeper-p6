@@ -1,0 +1,7 @@
+{
+  "injected_setup_returncode": 1,
+  "final_diagnostic_step_returncode": 0,
+  "artifact_file_created": true,
+  "diagnostic_contents": "status_before_upload=failure\n",
+  "original_setup_failure_not_ignored": true
+}

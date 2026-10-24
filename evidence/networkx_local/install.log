@@ -1,0 +1,14 @@
+Using Python 3.8.20 environment at: runner_temp/study-i-networkx-venv
+Resolved 6 packages in 15.71s
+Downloading scipy (24.8MiB)
+Downloading numpy (19.5MiB)
+ Downloaded numpy
+ Downloaded scipy
+Prepared 6 packages in 687ms
+Installed 6 packages in 11ms
+ + decorator==4.4.2
+ + nose==1.3.7
+ + numpy==1.17.5
+ + scipy==1.4.1
+ + setuptools==68.2.2
+ + six==1.17.0

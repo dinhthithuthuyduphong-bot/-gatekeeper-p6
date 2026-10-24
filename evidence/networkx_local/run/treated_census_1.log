@@ -1,0 +1,7 @@
+/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/treated/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+......................................................
+----------------------------------------------------------------------
+Ran 54 tests in 0.084s
+
+OK

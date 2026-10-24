@@ -1,0 +1,5 @@
+target=networkx
+requested_python=3.8.20
+commit=local-bootstrap-validation
+run_id=LOCAL
+attempt=1

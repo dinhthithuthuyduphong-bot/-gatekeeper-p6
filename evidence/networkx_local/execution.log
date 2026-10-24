@@ -1,0 +1,241 @@
+RUN ["git", "init", "-q"] CWD /workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/upstream
+MEASURE {"command": ["git", "init", "-q"], "cwd": "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/upstream", "returncode": 0, "seconds": 0.004025011000010181, "log": "fetch_0.log"}
+RUN ["git", "fetch", "--depth=1", "https://github.com/networkx/networkx.git", "585bb3ee251ab681e7725c07e4e8a569a0e511d5"] CWD /workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/upstream
+From https://github.com/networkx/networkx
+ * branch            585bb3ee251ab681e7725c07e4e8a569a0e511d5 -> FETCH_HEAD
+MEASURE {"command": ["git", "fetch", "--depth=1", "https://github.com/networkx/networkx.git", "585bb3ee251ab681e7725c07e4e8a569a0e511d5"], "cwd": "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/upstream", "returncode": 0, "seconds": 8.06805618200002, "log": "fetch_1.log"}
+RUN ["git", "checkout", "--detach", "FETCH_HEAD"] CWD /workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/upstream
+HEAD is now at 585bb3e Merge pull request #1669 from OrkoHunter/pip-upgrade
+MEASURE {"command": ["git", "checkout", "--detach", "FETCH_HEAD"], "cwd": "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/upstream", "returncode": 0, "seconds": 0.02528960699999061, "log": "fetch_2.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/baseline_census_1.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/baseline
+/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/baseline/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+......................................................
+----------------------------------------------------------------------
+Ran 54 tests in 0.081s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/baseline_census_1.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/baseline", "returncode": 0, "seconds": 0.8637485410000068, "log": "baseline_census_1.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/baseline_census_2.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/baseline
+/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/baseline/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+......................................................
+----------------------------------------------------------------------
+Ran 54 tests in 0.091s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/baseline_census_2.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/baseline", "returncode": 0, "seconds": 0.8513002709999569, "log": "baseline_census_2.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/baseline_census_3.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/baseline
+/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/baseline/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+......................................................
+----------------------------------------------------------------------
+Ran 54 tests in 0.092s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/baseline_census_3.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/baseline", "returncode": 0, "seconds": 0.8442400870000029, "log": "baseline_census_3.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/baseline_witness_1.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/baseline
+/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/baseline/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+E
+======================================================================
+ERROR: networkx_1_11_test_layout.TestLayout.test_spring_args
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/baseline/networkx/drawing/layout.py", line 292, in fruchterman_reingold_layout
+    raise ValueError
+ValueError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/lib/python3.8/site-packages/nose/case.py", line 198, in runTest
+    self.test(*self.arg)
+  File "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/study_i/vendor/networkx_1_11_test_layout.py", line 124, in test_spring_args
+    vpos = nx.spring_layout(G, fixed=[0,1], pos={1:(0,0), 2:(1,1)})
+  File "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/baseline/networkx/drawing/layout.py", line 305, in fruchterman_reingold_layout
+    pos = _fruchterman_reingold(A, dim, k, pos_arr, fixed, iterations)
+  File "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/baseline/networkx/drawing/layout.py", line 330, in _fruchterman_reingold
+    if pos==None:
+ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+
+----------------------------------------------------------------------
+Ran 1 test in 0.005s
+
+FAILED (errors=1)
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/baseline_witness_1.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/baseline", "returncode": 1, "seconds": 0.7665900540000052, "log": "baseline_witness_1.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/baseline_witness_2.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/baseline
+/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/baseline/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+E
+======================================================================
+ERROR: networkx_1_11_test_layout.TestLayout.test_spring_args
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/baseline/networkx/drawing/layout.py", line 292, in fruchterman_reingold_layout
+    raise ValueError
+ValueError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/lib/python3.8/site-packages/nose/case.py", line 198, in runTest
+    self.test(*self.arg)
+  File "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/study_i/vendor/networkx_1_11_test_layout.py", line 124, in test_spring_args
+    vpos = nx.spring_layout(G, fixed=[0,1], pos={1:(0,0), 2:(1,1)})
+  File "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/baseline/networkx/drawing/layout.py", line 305, in fruchterman_reingold_layout
+    pos = _fruchterman_reingold(A, dim, k, pos_arr, fixed, iterations)
+  File "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/baseline/networkx/drawing/layout.py", line 330, in _fruchterman_reingold
+    if pos==None:
+ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+
+----------------------------------------------------------------------
+Ran 1 test in 0.004s
+
+FAILED (errors=1)
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/baseline_witness_2.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/baseline", "returncode": 1, "seconds": 0.7146662040000251, "log": "baseline_witness_2.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/baseline_witness_3.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/baseline
+/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/baseline/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+E
+======================================================================
+ERROR: networkx_1_11_test_layout.TestLayout.test_spring_args
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/baseline/networkx/drawing/layout.py", line 292, in fruchterman_reingold_layout
+    raise ValueError
+ValueError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/lib/python3.8/site-packages/nose/case.py", line 198, in runTest
+    self.test(*self.arg)
+  File "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/study_i/vendor/networkx_1_11_test_layout.py", line 124, in test_spring_args
+    vpos = nx.spring_layout(G, fixed=[0,1], pos={1:(0,0), 2:(1,1)})
+  File "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/baseline/networkx/drawing/layout.py", line 305, in fruchterman_reingold_layout
+    pos = _fruchterman_reingold(A, dim, k, pos_arr, fixed, iterations)
+  File "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/baseline/networkx/drawing/layout.py", line 330, in _fruchterman_reingold
+    if pos==None:
+ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+
+----------------------------------------------------------------------
+Ran 1 test in 0.005s
+
+FAILED (errors=1)
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/baseline_witness_3.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/baseline", "returncode": 1, "seconds": 0.7718875329999833, "log": "baseline_witness_3.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/treated_census_1.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/treated
+/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/treated/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+......................................................
+----------------------------------------------------------------------
+Ran 54 tests in 0.084s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/treated_census_1.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/treated", "returncode": 0, "seconds": 0.8232516529999998, "log": "treated_census_1.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/treated_census_2.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/treated
+/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/treated/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+......................................................
+----------------------------------------------------------------------
+Ran 54 tests in 0.080s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/treated_census_2.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/treated", "returncode": 0, "seconds": 0.8218307729999879, "log": "treated_census_2.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/treated_census_3.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/treated
+/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/treated/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+......................................................
+----------------------------------------------------------------------
+Ran 54 tests in 0.081s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/treated_census_3.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/treated", "returncode": 0, "seconds": 0.7935294590000126, "log": "treated_census_3.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/treated_witness_1.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/treated
+/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/treated/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.062s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/treated_witness_1.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/treated", "returncode": 0, "seconds": 1.0285107909999738, "log": "treated_witness_1.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/treated_witness_2.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/treated
+/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/treated/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.011s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/treated_witness_2.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/treated", "returncode": 0, "seconds": 0.7557767409999769, "log": "treated_witness_2.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/treated_witness_3.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/treated
+/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/treated/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.011s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/treated_witness_3.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/treated", "returncode": 0, "seconds": 0.7190875100000085, "log": "treated_witness_3.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/gold_census_1.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/gold
+/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/gold/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+......................................................
+----------------------------------------------------------------------
+Ran 54 tests in 0.086s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/gold_census_1.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/gold", "returncode": 0, "seconds": 0.9351844809999648, "log": "gold_census_1.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/gold_census_2.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/gold
+/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/gold/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+......................................................
+----------------------------------------------------------------------
+Ran 54 tests in 0.090s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/gold_census_2.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/gold", "returncode": 0, "seconds": 0.8038438269999801, "log": "gold_census_2.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/gold_census_3.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/gold
+/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/gold/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+......................................................
+----------------------------------------------------------------------
+Ran 54 tests in 0.092s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/gold_census_3.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/gold", "returncode": 0, "seconds": 0.9056072160000213, "log": "gold_census_3.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/gold_witness_1.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/gold
+/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/gold/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.012s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/gold_witness_1.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/gold", "returncode": 0, "seconds": 0.8292484960000479, "log": "gold_witness_1.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/gold_witness_2.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/gold
+/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/gold/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.012s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/gold_witness_2.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/gold", "returncode": 0, "seconds": 0.780229104, "log": "gold_witness_2.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/gold_witness_3.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/gold
+/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/gold/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.016s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/runner_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/gold_witness_3.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/workflow_python38_fix_20261024/local_job/evidence/run/work/gold", "returncode": 0, "seconds": 0.8701438969999913, "log": "gold_witness_3.log"}
+DRAW_PROGRESS I2_networkx given_positions 100
+DRAW_PROGRESS I2_networkx given_positions 200
+DRAW_PROGRESS I2_networkx given_positions 300
+DRAW_PROGRESS I2_networkx default_positions 100
+DRAW_PROGRESS I2_networkx default_positions 200
+DRAW_PROGRESS I2_networkx default_positions 300
+VERIFIED I2_networkx regressions 0 resolved 1

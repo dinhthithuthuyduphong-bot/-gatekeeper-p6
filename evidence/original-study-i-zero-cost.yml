@@ -1,0 +1,81 @@
+name: Gatekeeper Study I - zero-cost target validation
+
+"on":
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reproduce:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: sqlalchemy
+            python: "3.12.14"
+            os: ubuntu-24.04
+          - target: networkx
+            python: "3.8.20"
+            os: ubuntu-22.04
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install pinned local-test dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          python -m pip install -r study_i/requirements-${{ matrix.target }}.txt 2>&1 | tee evidence/install.log
+          python -m pip freeze | tee evidence/environment.txt
+      - name: Reproduce upstream tests and generator diagnostics
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -u study_i/run.py ${{ matrix.target }} --output evidence/run 2>&1 | tee evidence/execution.log
+          python -u study_i/statelessness.py ${{ matrix.target }} --results evidence/run 2>&1 | tee evidence/statelessness.log
+      - name: Preserve raw evidence, including failed attempts
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: study-i-${{ matrix.target }}
+          path: |
+            evidence/
+            !evidence/run/work/**
+          if-no-files-found: error
+          retention-days: 30
+
+  audit:
+    needs: reproduce
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.14"
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: study-i-*
+          path: downloaded
+      - name: Audit all observations and the complete four-cell family
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p audited/inputs
+          cp -R downloaded/study-i-sqlalchemy/run audited/inputs/sqlalchemy
+          cp -R downloaded/study-i-networkx/run audited/inputs/networkx
+          python study_i/verify.py --results audited/inputs --output audited/family 2>&1 | tee audited/verification.log
+          cat audited/family/FAMILY_RESULT.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: study-i-verified
+          path: audited/
+          if-no-files-found: error
+          retention-days: 30
+

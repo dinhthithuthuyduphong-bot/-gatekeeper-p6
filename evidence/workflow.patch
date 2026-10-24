@@ -1,0 +1,104 @@
+--- a/.github/workflows/study-i-zero-cost.yml
++++ b/.github/workflows/study-i-zero-cost.yml
+@@ -22,22 +22,65 @@
+     timeout-minutes: 25
+     steps:
+       - uses: actions/checkout@v6
+-      - uses: actions/setup-python@v6
+-        with:
+-          python-version: ${{ matrix.python }}
+-      - name: Install pinned local-test dependencies
++      - name: Initialize evidence before runtime setup
+         shell: bash
+         run: |
+           set -euo pipefail
+           mkdir -p evidence
+-          python -m pip install -r study_i/requirements-${{ matrix.target }}.txt 2>&1 | tee evidence/install.log
+-          python -m pip freeze | tee evidence/environment.txt
++          printf 'target=%s\nrequested_python=%s\ncommit=%s\nrun_id=%s\nattempt=%s\n' \
++            '${{ matrix.target }}' '${{ matrix.python }}' "$GITHUB_SHA" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" \
++            | tee evidence/run-context.txt
++          uname -a | tee evidence/runner.txt
++          cat /etc/os-release >> evidence/runner.txt
++      - name: Set up Python for SQLAlchemy
++        if: matrix.target != 'networkx'
++        uses: actions/setup-python@v6
++        with:
++          python-version: ${{ matrix.python }}
++      - name: Install uv for the exact historical Python runtime
++        if: matrix.target == 'networkx'
++        uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
++        with:
++          version: "0.13.4"
++          enable-cache: "false"
++      - name: Install Python 3.8.20 for NetworkX
++        if: matrix.target == 'networkx'
++        shell: bash
++        run: |
++          set -euo pipefail
++          uv --version | tee evidence/uv-version.txt
++          uv python install '${{ matrix.python }}' 2>&1 | tee evidence/python-install.log
++          uv venv --no-project --managed-python --python '${{ matrix.python }}' \
++            "$RUNNER_TEMP/study-i-networkx-venv" 2>&1 | tee evidence/venv-create.log
++          printf '%s\n' "$RUNNER_TEMP/study-i-networkx-venv/bin" >> "$GITHUB_PATH"
++      - name: Install pinned local-test dependencies
++        shell: bash
++        env:
++          EXPECTED_PYTHON: ${{ matrix.python }}
++        run: |
++          set -euo pipefail
++          python -c 'import os, sys; print(sys.version); print(sys.executable); actual = ".".join(map(str, sys.version_info[:3])); assert actual == os.environ["EXPECTED_PYTHON"], (actual, os.environ["EXPECTED_PYTHON"])' \
++            2>&1 | tee evidence/python-runtime.log
++          if [ '${{ matrix.target }}' = 'networkx' ]; then
++            uv pip install --python "$RUNNER_TEMP/study-i-networkx-venv/bin/python" \
++              -r study_i/requirements-networkx.txt 2>&1 | tee evidence/install.log
++            uv pip freeze --python "$RUNNER_TEMP/study-i-networkx-venv/bin/python" | tee evidence/environment.txt
++          else
++            python -m pip install -r study_i/requirements-${{ matrix.target }}.txt 2>&1 | tee evidence/install.log
++            python -m pip freeze | tee evidence/environment.txt
++          fi
+       - name: Reproduce upstream tests and generator diagnostics
+         shell: bash
+         run: |
+           set -euo pipefail
+           python -u study_i/run.py ${{ matrix.target }} --output evidence/run 2>&1 | tee evidence/execution.log
+           python -u study_i/statelessness.py ${{ matrix.target }} --results evidence/run 2>&1 | tee evidence/statelessness.log
++      - name: Record final job state even if setup failed
++        if: always()
++        shell: bash
++        run: |
++          mkdir -p evidence
++          printf 'status_before_upload=%s\n' '${{ job.status }}' | tee evidence/job-status.txt
+       - name: Preserve raw evidence, including failed attempts
+         if: always()
+         uses: actions/upload-artifact@v7
+@@ -55,6 +98,11 @@
+     timeout-minutes: 10
+     steps:
+       - uses: actions/checkout@v6
++      - name: Initialize audit evidence
++        shell: bash
++        run: |
++          mkdir -p audited
++          printf 'commit=%s\nrun_id=%s\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" | tee audited/run-context.txt
+       - uses: actions/setup-python@v6
+         with:
+           python-version: "3.12.14"
+@@ -71,6 +119,12 @@
+           cp -R downloaded/study-i-networkx/run audited/inputs/networkx
+           python study_i/verify.py --results audited/inputs --output audited/family 2>&1 | tee audited/verification.log
+           cat audited/family/FAMILY_RESULT.md >> "$GITHUB_STEP_SUMMARY"
++      - name: Record final audit state
++        if: always()
++        shell: bash
++        run: |
++          mkdir -p audited
++          printf 'status_before_upload=%s\n' '${{ job.status }}' | tee audited/job-status.txt
+       - uses: actions/upload-artifact@v7
+         if: always()
+         with:
+@@ -78,4 +132,3 @@
+           path: audited/
+           if-no-files-found: error
+           retention-days: 30
+-

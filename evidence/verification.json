@@ -1,0 +1,48 @@
+{
+  "status": "PASS",
+  "local_only": true,
+  "python": "3.8.20",
+  "uv": "0.13.4",
+  "unchanged_test_and_draw_outcomes": true,
+  "runs_verified": 18,
+  "draw_pairs_verified": 600,
+  "statelessness_pairs_verified": 200,
+  "census_regressions": [],
+  "resolved_witnesses": [
+    "networkx_1_11_test_layout.TestLayout::test_spring_args"
+  ],
+  "scopes": [
+    {
+      "cell": "I2_networkx/given_positions",
+      "raw_decision": "ADMIT",
+      "draws_to_stop": 80,
+      "full_counts": {
+        "help": 300,
+        "tie": 0,
+        "hurt": 0,
+        "harness_error": 0
+      },
+      "e_for_family": 40.546935531670954,
+      "census_veto": false,
+      "gatekeeper_seconds": 1.2774,
+      "full_draw_seconds": 1.6037
+    },
+    {
+      "cell": "I2_networkx/default_positions",
+      "raw_decision": "UNDECIDED",
+      "draws_to_stop": 300,
+      "full_counts": {
+        "help": 0,
+        "tie": 300,
+        "hurt": 0,
+        "harness_error": 0
+      },
+      "e_for_family": 0.8803630364474071,
+      "census_veto": false,
+      "gatekeeper_seconds": 0.7829,
+      "full_draw_seconds": 0.783
+    }
+  ],
+  "model_calls": 0,
+  "B9": "HOLD"
+}

@@ -1,0 +1,32 @@
+{
+  "local_only": true,
+  "github_actions_executed": false,
+  "status": "PASS",
+  "steps": [
+    {
+      "step": "Initialize evidence before runtime setup",
+      "returncode": 0,
+      "seconds": 0.007791233999967062
+    },
+    {
+      "step": "Install Python 3.8.20 for NetworkX",
+      "returncode": 0,
+      "seconds": 7.3569514769999955
+    },
+    {
+      "step": "Install pinned local-test dependencies",
+      "returncode": 0,
+      "seconds": 16.601385298000025
+    },
+    {
+      "step": "Reproduce upstream tests and generator diagnostics",
+      "returncode": 0,
+      "seconds": 36.197857225999996
+    },
+    {
+      "step": "Record final job state even if setup failed",
+      "returncode": 0,
+      "seconds": 0.0035475669999414094
+    }
+  ]
+}
