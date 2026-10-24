@@ -1,0 +1,32 @@
+[
+  {
+    "candidate": "sqlalchemy",
+    "license_sha256": "e862bb5b904fb5513c3e14288d7a25a12eb0ecc7847a0a965d310e9a955e7cb9",
+    "source_tree_clean": "verified by git status for sqlalchemy; no candidate source edits",
+    "scope": "Python production modules only; tests, testing, docs, examples excluded by unchanged repository scan"
+  },
+  {
+    "candidate": "peewee",
+    "license_sha256": "3740096125b08735a247b8dd08cd82e0ba984d3bebd9221d378576637e5240da",
+    "source_tree_clean": "verified by git status for sqlalchemy; no candidate source edits",
+    "scope": "Python production modules only; tests, testing, docs, examples excluded by unchanged repository scan"
+  },
+  {
+    "candidate": "pony",
+    "license_sha256": "7df00c3b7a74fe02666140bb0a8b7db11f0d607eff062f9548b1eca99a7569d4",
+    "source_tree_clean": "verified by git status for sqlalchemy; no candidate source edits",
+    "scope": "Python production modules only; tests, testing, docs, examples excluded by unchanged repository scan"
+  },
+  {
+    "candidate": "sqlalchemy_utils",
+    "license_sha256": "68aa51bd60ab3a6a3e826d91c81d8a8603f816d1bab535a2ff18bf7d69aa9b0a",
+    "source_tree_clean": "verified by git status for sqlalchemy; no candidate source edits",
+    "scope": "Python production modules only; tests, testing, docs, examples excluded by unchanged repository scan"
+  },
+  {
+    "candidate": "sqlobject",
+    "license_sha256": "dc626520dcd53a22f727af3ee42c770e56c97a64fe3adb063799d8ab032fe551",
+    "source_tree_clean": "verified by git status for sqlalchemy; no candidate source edits",
+    "scope": "Python production modules only; tests, testing, docs, examples excluded by unchanged repository scan"
+  }
+]

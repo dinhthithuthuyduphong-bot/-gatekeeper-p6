@@ -1,0 +1,210 @@
+{
+  "sqlalchemy": {
+    "sites": [
+      {
+        "file": "lib/sqlalchemy/ext/associationproxy.py",
+        "line": 1281,
+        "function": "__eq__",
+        "snippet": "self._comparator == None",
+        "function_source": "def __eq__(self, obj: Any) -> ColumnElement[bool]:  # type: ignore[override]  # noqa: E501\n        # note the has() here will fail for collections; eq_()\n        # is only allowed with a scalar.\n        if obj is None:\n            return or_(\n                self._comparator.has(**{self.value_attr: obj}),\n                self._comparator == None,\n            )\n        else:\n            return self._comparator.has(**{self.value_attr: obj})",
+        "bool_tests_referencing_function": [
+          "test/orm/test_composites.py::test_no_name_declarative",
+          "test/orm/test_composites.py::test_no_name_declarative_two"
+        ]
+      },
+      {
+        "file": "lib/sqlalchemy/ext/associationproxy.py",
+        "line": 1346,
+        "function": "__eq__",
+        "snippet": "self._comparator == None",
+        "function_source": "def __eq__(self, other: Any) -> ColumnElement[bool]:  # type: ignore[override]  # noqa: E501\n        # special case \"is None\" to check for no related row as well\n        expr = self._criterion_exists(\n            self.remote_attr.operate(operators.eq, other)\n        )\n        if other is None:\n            return or_(expr, self._comparator == None)\n        else:\n            return expr",
+        "bool_tests_referencing_function": [
+          "test/orm/test_composites.py::test_no_name_declarative",
+          "test/orm/test_composites.py::test_no_name_declarative_two"
+        ]
+      },
+      {
+        "file": "lib/sqlalchemy/orm/relationships.py",
+        "line": 1145,
+        "function": "__negated_contains_or_equals",
+        "snippet": "adapt(x) == None",
+        "function_source": "def __negated_contains_or_equals(\n            self, other: Any\n        ) -> ColumnElement[bool]:\n            if self.prop.direction == MANYTOONE:\n                state = attributes.instance_state(other)\n\n                def state_bindparam(\n                    local_col: ColumnElement[Any],\n                    state: InstanceState[Any],\n                    remote_col: ColumnElement[Any],\n                ) -> BindParameter[Any]:\n                    dict_ = state.dict\n                    return sql.bindparam(\n                        local_col.key,\n                        type_=local_col.type,\n                        unique=True,\n                        callable_=self.prop._get_attr_w_warn_on_none(\n                            self.prop.mapper, state, dict_, remote_col\n                        ),\n                    )\n\n                def adapt(col: _CE) -> _CE:\n                    if self.adapter:\n                        return self.adapter(col)\n                    else:\n                        return col\n\n                if self.property._use_get:\n                    return sql.and_(\n                        *[\n                            sql.or_(\n                                adapt(x)\n                                != state_bindparam(adapt(x), state, y),\n                                adapt(x) == None,\n                            )\n                            for (x, y) in self.property.local_remote_pairs\n                        ]\n                    )\n\n            criterion = sql.and_(\n                *[\n                    x == y\n                    for (x, y) in zip(\n                        self.property.mapper.primary_key,\n                        self.property.mapper.primary_key_from_instance(other),\n                    )\n                ]\n            )\n\n            return ~self._criterion_exists(criterion)",
+        "bool_tests_referencing_function": []
+      },
+      {
+        "file": "lib/sqlalchemy/sql/schema.py",
+        "line": 4399,
+        "function": "_as_dict",
+        "snippet": "v != None",
+        "function_source": "def _as_dict(self) -> Dict[str, Any]:\n        return {\n            k: v\n            for k, v in {\n                \"start\": self.start,\n                \"increment\": self.increment,\n                \"minvalue\": self.minvalue,\n                \"maxvalue\": self.maxvalue,\n                \"nominvalue\": self.nominvalue,\n                \"nomaxvalue\": self.nomaxvalue,\n                \"cycle\": self.cycle,\n                \"cache\": self.cache,\n            }.items()\n            if v != None\n        }",
+        "bool_tests_referencing_function": []
+      }
+    ],
+    "build_config": {
+      "pyproject.toml": "[build-system]\nbuild-backend = \"setuptools.build_meta\"\nrequires = [\n    \"setuptools>=77.0.3\",\n    \"cython>=3.3; platform_python_implementation == 'CPython'\", # Skip cython when using pypy\n]\n\n\n[project]\nname = \"SQLAlchemy\"\ndescription = \"Database Abstraction Library\"\nreadme = \"README.rst\"\nauthors = [{name = \"Mike Bayer\", email = \"mike_mp@zzzcomputing.com\"}]\nlicense = \"MIT\"\nlicense-files = [\"LICENSE\", \"AUTHORS\"]\nclassifiers = [\n    \"Development Status :: 5 - Production/Stable\",\n    \"Intended Audience :: Developers\",\n    \"Operating System :: OS Independent\",\n    \"Programming Language :: Python\",\n    \"Programming Language :: Python :: 3\",\n    \"Programming Language :: Python :: 3.11\",\n    \"Programming Language :: Python :: 3.12\",\n    \"Programming Language :: Python :: 3.13\",\n    \"Programming Language :: Python :: 3.14\",\n    \"Programming Language :: Python :: 3.15\",\n    \"Programming Language :: Python :: Implementation :: CPython\",\n    \"Programming Language :: Python :: Implementation :: PyPy\",\n    \"Topic :: Database :: Front-Ends\",\n]\nrequires-python = \">=3.11\"\ndependencies = [\n    \"typing-extensions >= 4.6.0\",\n]\ndynamic = [\"version\"]\n\n[project.urls]\nHomepage = \"https://www.sqlalchemy.org\"\nDocumentation = \"https://docs.sqlalchemy.org\"\nChangelog = \"https://docs.sqlalchemy.org/latest/changelog/index.html\"\n\"Source Code\" = \"https://github.com/sqlalchemy/sqlalchemy\"\n\"Issue Tracker\" = \"https://github.com/sqlalchemy/sqlalchemy/issues\"\nDiscussions = \"https://github.com/sqlalchemy/sqlalchemy/discussions\"\n\n[project.optional-dependencies]\nasyncio = [\"greenlet>=1\"]\nmypy = [\n    \"mypy >= 2.4\",\n    \"types-greenlet >= 2\",\n]\nmssql = [\"pyodbc\"]\nmssql-pymssql = [\"pymssql\"]\nmssql-pyodbc = [\"pyodbc\"]\nmssql-python = [\"mssql-python>=1.9.0\"]\nmysql = [\"mysqlclient>=1.4.0\"]\nmysql-connector = [\"mysql-connector-python\"]\nmariadb-connector = [\"mariadb>=1.0.1,!=1.1.2,!=1.1.5,!=1.1.10\"]\noracle = [\"oracledb>=2.0.1\"]\noracle-cxoracle = [\"cx_oracle>=8\"]\noracle-oracledb = [\"oracledb>=2.0.1\"]\npostgresql = [\"psycopg>=3.0.7,!=3.1.15\"]\npostgresql-pg8000 = [\"pg8000>=1.29.3\"]\npostgresql-asyncpg = [\n    \"sqlalchemy[asyncio]\",\n    \"asyncpg\",\n]\npostgresql-psycopg2binary = [\"psycopg2-binary\"]\npostgresql-psycopg2cffi = [\"psycopg2cffi\"]\npostgresql-psycopg = [\"psycopg>=3.0.7,!=3.1.15\"]\npostgresql-psycopgbinary = [\"psycopg[binary]>=3.0.7,!=3.1.15\"]\npymysql = [\"pymysql\"]\ncymysql = [\"cymysql\"]\naiomysql = [\n    \"sqlalchemy[asyncio]\",\n    \"aiomysql\",\n]\naioodbc = [\n    \"sqlalchemy[asyncio]\",\n    \"aioodbc\",\n]\nasyncmy = [\n    \"sqlalchemy[asyncio]\",\n    \"asyncmy>=0.2.12\",\n]\naiosqlite = [\n    \"sqlalchemy[asyncio]\",\n    \"aiosqlite\",\n]\nsqlcipher = [\"sqlcipher3_binary\"]\n\n[dependency-groups]\ntests = [\n    \"pytest>=7.0.0,<10\",\n    \"pytest-xdist\",\n]\n\ncoverage = [\"pytest-cov\"]\n\ntests-greenlet = [\"sqlalchemy[asyncio]\"]\n\ntests-sqlite = []\n\ntests-sqlite-asyncio = [\n    {include-group = \"tests-greenlet\"},\n    {include-group = \"tests-sqlite\"},\n    \"sqlalchemy[aiosqlite]\"\n]\n\ntests-sqlite-file = [{include-group = \"tests-sqlite\"}]\ntests-sqlite-file-asyncio = [{include-group = \"tests-sqlite-asyncio\"}]\n\ntests-postgresql = [\n    \"sqlalchemy[postgresql-psycopg2binary]\",\n    \"sqlalchemy[postgresql-psycopgbinary]\",\n    \"sqlalchemy[postgresql-pg8000]\",\n]\n\ntests-postgresql-asyncio = [\n    {include-group = \"tests-greenlet\"},\n    {include-group = \"tests-postgresql\"},\n    \"sqlalchemy[postgresql-asyncpg]\"\n]\n\ntests-mysql = [\n    \"sqlalchemy[mysql]\",\n    \"sqlalchemy[pymysql]\",\n    \"sqlalchemy[mysql-connector]\",\n\n    # originally to fix https://jira.mariadb.org/browse/CONPY-318,\n    # more recent versions still have attribute errors and other random\n    # problems\n    \"mariadb>=1.0.1,!=1.1.2,!=1.1.5,!=1.1.10,<1.1.13\",\n\n]\ntests-mysql-asyncio = [\n    {include-group = \"tests-greenlet\"},\n    {include-group = \"tests-mysql\"},\n    \"sqlalchemy[aiomysql]\",\n    \"sqlalchemy[asyncmy]\",\n]\n\ntests-oracle-asyncio = [\n    {include-group = \"tests-greenlet\"},\n    {include-group = \"tests-oracle\"},\n]\ntests-oracle = [\n    \"sqlalchemy[oracle]",
+      "setup.cfg": "\n[sqla_testing]\nrequirement_cls = test.requirements:DefaultRequirements\nprofile_file = test/profiles.txt\n\n# name of a \"loopback\" link set up on the oracle database.\n# to create this, suppose your DB is scott/tiger@free.  You'd create it\n# like:\n# create public database link test_link connect to scott identified by tiger\n# using 'free';\noracle_db_link = test_link\n# create public database link test_link2 connect to test_schema identified by tiger\n# using 'free';\noracle_db_link2 = test_link2\n\n# host name of a postgres database that has the postgres_fdw extension.\n# to create this run:\n# CREATE EXTENSION postgres_fdw;\n# GRANT USAGE ON FOREIGN DATA WRAPPER postgres_fdw TO public;\n# this can be localhost to create a loopback foreign table\n# postgres_test_db_link = localhost\n\n[db]\ndefault = sqlite:///:memory:\nsqlite = sqlite:///:memory:\nsqlite_numeric = sqlite+pysqlite_numeric:///:memory:\nsqlite_dollar = sqlite+pysqlite_dollar:///:memory:\naiosqlite = sqlite+aiosqlite:///:memory:\nsqlite_file = sqlite:///querytest.db\naiosqlite_file = sqlite+aiosqlite:///async_querytest.db\npysqlcipher_file = sqlite+pysqlcipher://:test@/querytest.db.enc\npostgresql = postgresql+psycopg://scott:tiger@127.0.0.1:5432/test\npsycopg2 = postgresql+psycopg2://scott:tiger@127.0.0.1:5432/test\npsycopg = postgresql+psycopg://scott:tiger@127.0.0.1:5432/test\npsycopg_async = postgresql+psycopg_async://scott:tiger@127.0.0.1:5432/test\nasyncpg = postgresql+asyncpg://scott:tiger@127.0.0.1:5432/test\npg8000 = postgresql+pg8000://scott:tiger@127.0.0.1:5432/test\npostgresql_psycopg2cffi = postgresql+psycopg2cffi://scott:tiger@127.0.0.1:5432/test\nmysql = mysql+mysqldb://scott:tiger@127.0.0.1:3306/test?charset=utf8mb4\npymysql = mysql+pymysql://scott:tiger@127.0.0.1:3306/test?charset=utf8mb4\naiomysql = mysql+aiomysql://scott:tiger@127.0.0.1:3306/test?charset=utf8mb4\nasyncmy = mysql+asyncmy://scott:tiger@127.0.0.1:3306/test?charset=utf8mb4\nmariadb = mariadb+mysqldb://scott:tiger@127.0.0.1:3306/test\nmariadb_connector = mariadb+mariadbconnector://scott:tiger@127.0.0.1:3306/test\nmysql_connector = mariadb+mysqlconnector://scott:tiger@127.0.0.1:3306/test\nmssql = mssql+pyodbc://scott:tiger^5HHH@mssql2022:1433/test?driver=ODBC+Driver+18+for+SQL+Server&TrustServerCertificate=yes&Encrypt=Optional\nmssql_async = mssql+aioodbc://scott:tiger^5HHH@mssql2022:1433/test?driver=ODBC+Driver+18+for+SQL+Server&TrustServerCertificate=yes&Encrypt=Optional\npymssql = mssql+pymssql://scott:tiger^5HHH@mssql2022:1433/test\nmssql_python = mssql+mssqlpython://scott:tiger^5HHH@mssql2022:1433/test?Encrypt=No\ndocker_mssql = mssql+pyodbc://scott:tiger^5HHH@127.0.0.1:1433/test?driver=ODBC+Driver+18+for+SQL+Server&TrustServerCertificate=yes&Encrypt=Optional\noracle = oracle+oracledb://scott:tiger@oracle23c/freepdb1\ncxoracle = oracle+cx_oracle://scott:tiger@oracle23c/freepdb1\noracledb = oracle+oracledb://scott:tiger@oracle23c/freepdb1\noracledb_async = oracle+oracledb_async://scott:tiger@oracle23c/freepdb1\ndocker_oracle = oracle+cx_oracle://scott:tiger@127.0.0.1:1521/?service_name=FREEPDB1\n",
+      "tox.ini": "\n[tox]\nenvlist = py\n\n[greenletextras]\nextras=\n     asyncio\n     sqlite: aiosqlite\n     sqlite_file: aiosqlite\n\n     # asyncpg doesn't build on free threading backends\n     py{38,39,310,311,312,313,314}-postgresql: postgresql_asyncpg\n\n     mysql: asyncmy\n\n     # aioodbc builds on free threading but segfaults once you use it\n     py{38,39,310,311,312,313,314}-mssql: aioodbc\n\n[testenv]\ncov_args=--cov=sqlalchemy --cov-report term --cov-append --cov-report xml --exclude-tag memory-intensive --exclude-tag timing-intensive -k \"not aaa_profiling\"\n\n# this needs to be set as of tox 4.4.0 *if* we have extras (e.g. .[aiosqlite])\n# inside of deps.  But we put them in extras now.\n# see https://github.com/tox-dev/tox/issues/2898\n# constrain_package_deps=false\n\nusedevelop=\n     cov: True\n\nextras=\n     # this can be limited to specific python versions IF there is no\n     # greenlet available for the most recent python.  otherwise\n     # keep this present in all cases\n     # py{38,39,310,311,312,313,314,313t,314t}: {[greenletextras]extras}\n\n     {[greenletextras]extras}\n\n     postgresql: postgresql\n     postgresql: postgresql_pg8000\n     postgresql: postgresql_psycopg\n\n     mysql: mysql\n     mysql: pymysql\n\n     # see https://jira.mariadb.org/browse/CONPY-318.\n     # installed manually as part of deps w/ version pin\n     # mysql: mariadb_connector\n\n     oracle: oracle\n     oracle: oracle_oracledb\n     mssql: mssql\n     mssql-py{38,39,310,311,312,313}: mssql_pymssql\n     mssql: mssql-python\n\ninstall_command=\n     # TODO: I can find no way to get pip / tox / anyone to have this\n     # --only-binary option local to the pymssql install, rather than global\n     # as it is here.\n     python -I -m pip install --only-binary=pymssql {opts} {packages}\n\ndeps=\n     typing-extensions>=4.13.0rc1\n\n     # see https://jira.mariadb.org/browse/CONPY-318.\n     # using < to block all future versions for now as it's not clear\n     # if newer versions will fix the segfault or not\n     mysql: mariadb<1.1.13\n\n     pytest>=7.0.0,<10\n     # tracked by https://github.com/pytest-dev/pytest-xdist/issues/907\n     pytest-xdist!=3.3.0\n\n     dbapimain-sqlite: git+https://github.com/omnilib/aiosqlite.git\\#egg=aiosqlite\n\n     dbapimain-postgresql: git+https://github.com/psycopg/psycopg2.git\\#egg=psycopg2\n     dbapimain-postgresql: git+https://github.com/MagicStack/asyncpg.git\\#egg=asyncpg\n     dbapimain-postgresql: git+https://github.com/tlocke/pg8000.git\\#egg=pg8000\n     dbapimain-postgresql: git+https://github.com/psycopg/psycopg.git\\#egg=psycopg&subdirectory=psycopg\n     # dbapimain-postgresql: git+https://github.com/psycopg/psycopg.git\\#egg=psycopg-c&subdirectory=psycopg_c\n\n     dbapimain-mysql: git+https://github.com/PyMySQL/mysqlclient-python.git\\#egg=mysqlclient\n     dbapimain-mysql: git+https://github.com/PyMySQL/PyMySQL.git\\#egg=pymysql\n\n#    dbapimain-mysql: git+https://github.com/mariadb-corporation/mariadb-connector-python\\#egg=mariadb\n\n     dbapimain-oracle: git+https://github.com/oracle/python-cx_Oracle.git\\#egg=cx_Oracle\n\n     py313-mssql: git+https://github.com/mkleehammer/pyodbc.git\\#egg=pyodbc\n     dbapimain-mssql: git+https://github.com/mkleehammer/pyodbc.git\\#egg=pyodbc\n\n     cov: pytest-cov\n\nallowlist_externals=sh\n\n# PYTHONPATH - erased so that we use the build that's present\n# in .tox as the SQLAlchemy library to be imported\n#\n# PYTHONNOUSERSITE - this *MUST* be set so that the ./lib/ import\n# set up explicitly in test/conftest.py is *disabled*, again so that\n# when SQLAlchemy is built into the .tox area, we use that and not the\n# local checkout, at least when usedevelop=False\n#\n# BASECOMMAND - using an env variable here so we can use it\n# as a substitution in a command (see https://bitbucket.org/hpk42/tox/issues/307/)\n#\n# only use --dropfirst option if we're *not* using -n;\n# if -n is used, we're working in brand new DBs anyway, dropfirst\n# will collide on CI environments\nsetenv=\n    PYTHONPATH=\n    PYTHONNOUSERSITE=1\n    PYTEST_EXCLUDES=-m \"not memory_inte",
+      "setup.py": "from __future__ import annotations\n\nimport os\nimport platform\nimport sys\nfrom typing import Any\nfrom typing import cast\nfrom typing import Dict\nfrom typing import TYPE_CHECKING\n\nfrom setuptools import setup\n\nif TYPE_CHECKING:\n    from setuptools import Extension\n\ntry:\n    from Cython.Build import build_ext as _cy_build_ext\n    from Cython.Distutils.extension import Extension as _cy_Extension\n\n    HAS_CYTHON = True\nexcept ImportError:\n    _cy_build_ext = _cy_Extension = None\n    HAS_CYTHON = False\n\nIS_CPYTHON = platform.python_implementation() == \"CPython\"\nDISABLE_EXTENSION = bool(os.environ.get(\"DISABLE_SQLALCHEMY_CEXT\"))\nREQUIRE_EXTENSION = bool(os.environ.get(\"REQUIRE_SQLALCHEMY_CEXT\"))\n\nif DISABLE_EXTENSION and REQUIRE_EXTENSION:\n    raise RuntimeError(\n        \"Cannot set both 'DISABLE_SQLALCHEMY_CEXT' and \"\n        \"'REQUIRE_SQLALCHEMY_CEXT' environment variables\"\n    )\n\n# when adding a cython module, also update the imports in _has_cython\n# it is tested in test_setup_defines_all_files\nCYTHON_MODULES = (\n    \"engine._processors_cy\",\n    \"engine._row_cy\",\n    \"engine._result_cy\",\n    \"engine._util_cy\",\n    \"sql._cache_key_cy\",\n    \"sql._util_cy\",\n    \"util._collections_cy\",\n    \"util._immutabledict_cy\",\n)\n\nif HAS_CYTHON and IS_CPYTHON and not DISABLE_EXTENSION:\n    assert _cy_Extension is not None\n    assert _cy_build_ext is not None\n    from Cython.Compiler import Options\n\n    Options.docstrings = False\n    Options.clear_to_none = False\n\n    cython_directives: Dict[str, Any] = {\n        \"language_level\": \"3\",\n        # \"initializedcheck\": False,\n    }\n\n    if sys.version_info >= (3, 13):\n        cython_directives[\"freethreading_compatible\"] = True\n\n    module_prefix = \"sqlalchemy.\"\n    source_prefix = \"lib/sqlalchemy/\"\n\n    ext_modules = cast(\n        \"list[Extension]\",\n        [\n            _cy_Extension(\n                f\"{module_prefix}{module}\",\n                sources=[f\"{source_prefix}{module.replace('.', '/')}.py\"],\n                cython_directives=cython_directives,\n                optional=not REQUIRE_EXTENSION,\n            )\n            for module in CYTHON_MODULES\n        ],\n    )\n\n    cmdclass = {\"build_ext\": _cy_build_ext}\n\nelif REQUIRE_EXTENSION:\n    reasons = []\n    if not HAS_CYTHON:\n        reasons.append(\"Cython is missing\")\n    if not IS_CPYTHON:\n        reasons.append(\"Not CPython, build is supported only on it\")\n    raise RuntimeError(\n        \"Cython extension build is required because REQUIRE_SQLALCHEMY_CEXT \"\n        f\"is set but it was deselected because: {'; '.join(reasons)}; \"\n        \"will not degrade to pure python install\"\n    )\n\nelse:\n    ext_modules = []\n    cmdclass = {}\n\nsetup(cmdclass=cmdclass, ext_modules=ext_modules)\n"
+    },
+    "doc_mentions": [
+      "doc/build/errors.rst:329: resolve it, add ``uri=true`` to the URL if the arguments are intended for",
+      "doc/build/errors.rst:640: id = Column(Integer, primary_key=True)",
+      "doc/build/errors.rst:664: id = Column(Integer, primary_key=True)",
+      "doc/build/errors.rst:871: id = Column(Integer, primary_key=True)",
+      "doc/build/errors.rst:886: id = Column(Integer, ForeignKey(\"employee.id\"), primary_key=True)",
+      "doc/build/errors.rst:940: >>> manager_alias = aliased(Manager, flat=True)",
+      "doc/build/errors.rst:1111: id = Column(Integer, primary_key=True)",
+      "doc/build/errors.rst:1118: id = Column(Integer, primary_key=True)",
+      "doc/build/errors.rst:1150: id = Column(Integer, primary_key=True)",
+      "doc/build/errors.rst:1157: id = Column(Integer, primary_key=True)",
+      "doc/build/errors.rst:1178: id = Column(Integer, primary_key=True)",
+      "doc/build/errors.rst:1185: id = Column(Integer, primary_key=True)",
+      "doc/build/errors.rst:1280: id = Column(Integer, primary_key=True)",
+      "doc/build/errors.rst:1285: id = Column(Integer, primary_key=True)",
+      "doc/build/errors.rst:1338: id = Column(Integer, primary_key=True)",
+      "doc/build/errors.rst:1344: id = Column(Integer, primary_key=True)",
+      "doc/build/errors.rst:1360: id = Column(Integer, primary_key=True)",
+      "doc/build/errors.rst:1366: id = Column(Integer, primary_key=True)",
+      "doc/build/errors.rst:1380: id = Column(Integer, primary_key=True)",
+      "doc/build/errors.rst:1396: id = Column(Integer, primary_key=True)",
+      "doc/build/errors.rst:1650: use of parameters such as ``init=False``, ``kw_only=True``, etc.   **SQLAlchemy",
+      "doc/build/errors.rst:1860: by passing ``True`` for the :paramref:`_orm.Session.future` parameter.",
+      "doc/build/glossary.rst:356: id = Column(Integer, primary_key=True)",
+      "doc/build/glossary.rst:1210: id = Column(Integer, primary_key=True)",
+      "doc/build/glossary.rst:1217: id = Column(Integer, primary_key=True)",
+      "doc/build/glossary.rst:1262: id = Column(Integer, primary_key=True)",
+      "doc/build/glossary.rst:1268: id = Column(Integer, primary_key=True)",
+      "doc/build/glossary.rst:1296: id = Column(Integer, primary_key=True)",
+      "doc/build/glossary.rst:1303: id = Column(Integer, primary_key=True)",
+      "doc/build/glossary.rst:1359: id = Column(Integer, primary_key=True)",
+      "doc/build/glossary.rst:1367: Column(\"employee_id\", Integer, ForeignKey(\"employee.id\"), primary_key=True),",
+      "doc/build/glossary.rst:1368: Column(\"project_id\", Integer, ForeignKey(\"project.id\"), primary_key=True),",
+      "doc/build/glossary.rst:1377: id = Column(Integer, primary_key=True)",
+      "doc/build/glossary.rst:1473: id = Column(Integer, primary_key=True)",
+      "doc/build/glossary.rst:1480: id = Column(Integer, primary_key=True)",
+      "doc/build/glossary.rst:1487: employee_id = Column(Integer, ForeignKey(\"employee.id\"), primary_key=True)",
+      "doc/build/glossary.rst:1488: project_id = Column(Integer, ForeignKey(\"project.id\"), primary_key=True)",
+      "doc/build/orm/mapped_sql_expr.rst:27: id = mapped_column(Integer, primary_key=True)",
+      "doc/build/orm/mapped_sql_expr.rst:60: id = mapped_column(Integer, primary_key=True)",
+      "doc/build/orm/mapped_sql_expr.rst:106: id = mapped_column(Integer, primary_key=True)",
+      "doc/build/orm/mapped_sql_expr.rst:129: id = mapped_column(Integer, primary_key=True)",
+      "doc/build/orm/mapped_sql_expr.rst:135: id = mapped_column(Integer, primary_key=True)",
+      "doc/build/orm/mapped_sql_expr.rst:265: id = mapped_column(Integer, primary_key=True)",
+      "doc/build/orm/mapped_sql_expr.rst:292: id: Mapped[int] = mapped_column(primary_key=True)",
+      "doc/build/orm/mapped_sql_expr.rst:321: id = mapped_column(Integer, primary_key=True)",
+      "doc/build/orm/composites.rst:58: id: Mapped[int] = mapped_column(primary_key=True)",
+      "doc/build/orm/composites.rst:112: id: Mapped[int] = mapped_column(primary_key=True)",
+      "doc/build/orm/composites.rst:214: dataclasses ``order=True`` parameter for the above SQL operations to work.",
+      "doc/build/orm/composites.rst:273: id: Mapped[int] = mapped_column(primary_key=True)",
+      "doc/build/orm/composites.rst:331: id = mapped_column(Integer, primary_key=True)",
+      "doc/build/orm/composites.rst:355: id: Mapped[int] = mapped_column(primary_key=True)",
+      "doc/build/orm/composites.rst:481: id: Mapped[int] = mapped_column(primary_key=True)",
+      "doc/build/orm/composites.rst:575: id: Mapped[int] = mapped_column(primary_key=True)",
+      "doc/build/orm/session_basics.rst:776: :paramref:`_orm.Session.close_resets_only` is set to ``True``.",
+      "doc/build/orm/mapping_styles.rst:86: id: Mapped[int] = mapped_column(primary_key=True)",
+      "doc/build/orm/mapping_styles.rst:180: Column(\"id\", Integer, primary_key=True),",
+      "doc/build/orm/mapping_styles.rst:200: Column(\"id\", Integer, primary_key=True),",
+      "doc/build/orm/mapping_styles.rst:357: id: Mapped[int] = mapped_column(primary_key=True)",
+      "doc/build/orm/mapping_styles.rst:396: Column(\"id\", Integer, primary_key=True),",
+      "doc/build/orm/mapping_styles.rst:449: id: Mapped[int] = mapped_column(primary_key=True)"
+    ],
+    "test_roots": [
+      "examples",
+      "lib",
+      "test"
+    ],
+    "n_sites": 4,
+    "n_sites_with_bool_test": 2
+  },
+  "peewee": {
+    "sites": [],
+    "build_config": {
+      "pyproject.toml": "[build-system]\nbuild-backend=\"setuptools.build_meta\"\nrequires = [\n    \"setuptools\",\n    \"cython>=3; platform_python_implementation == 'CPython'\",\n]\n\n[project]\nname = \"peewee\"\ndynamic = [\"version\"]\ndescription = \"a little orm\"\nreadme = \"README.rst\"\nauthors = [\n    { name = \"Charles Leifer\", email = \"coleifer@gmail.com\" }\n]\nclassifiers = [\n    \"Development Status :: 5 - Production/Stable\",\n    \"Intended Audience :: Developers\",\n    \"Operating System :: OS Independent\",\n    \"Programming Language :: Python :: 3\",\n    \"Programming Language :: Python :: Implementation :: CPython\",\n    \"Programming Language :: Python :: Implementation :: PyPy\",\n    \"Topic :: Database\",\n    \"Topic :: Database :: Front-Ends\",\n    \"Topic :: Software Development :: Libraries :: Python Modules\",\n]\nrequires-python = \">=3.8\"\n\n[project.scripts]\npwiz = \"pwiz:main\"\npwmigrate = \"playhouse.migrations:main\"\n\n[project.urls]\nRepository = \"https://github.com/coleifer/peewee\"\nDocumentation = \"https://docs.peewee-orm.com/\"\nChangelog = \"https://github.com/coleifer/peewee/blob/master/CHANGELOG.md\"\n\n[project.optional-dependencies]\nmysql = [\"pymysql\"]\npostgres = [\"psycopg2-binary\"]\npsycopg3 = [\"psycopg[binary]\"]\ncysqlite = [\"cysqlite>=0.3.5\"]\naiosqlite = [\"aiosqlite \", \"greenlet\"]\naiomysql = [\"aiomysql\", \"greenlet\"]\nasyncpg = [\"asyncpg \", \"greenlet\"]\n\n[tool.setuptools]\n# packages declared in setup.py: the -stubs dir names have hyphens, rejected here.\npy-modules = [\"peewee\", \"pwiz\"]\nexclude-package-data = {\"playhouse\" = [\"*.pyx\"]}\n\n[tool.setuptools.dynamic]\nversion = { attr = \"peewee.__version__\" }\n",
+      "setup.py": "import platform\nimport os\nfrom setuptools import setup\nfrom setuptools.extension import Extension\ntry:\n    from Cython.Build import cythonize\n    cython_installed = True\nexcept ImportError:\n    cython_installed = False\n\n\nif platform.python_implementation() != 'CPython':\n    extension_support = False\nelif os.environ.get('NO_SQLITE'):\n    # Retain backward-compat for not building C extensions.\n    extension_support = False\nelse:\n    extension_support = True\n\nif cython_installed:\n    src_ext = '.pyx'\nelse:\n    src_ext = '.c'\n    cythonize = lambda obj: obj\n\nif extension_support:\n    sqlite_udf_module = Extension(\n        'playhouse._sqlite_udf',\n        ['playhouse/_sqlite_udf' + src_ext])\n    ext_modules = cythonize([sqlite_udf_module])\nelse:\n    ext_modules = []\n\nsetup(\n    name='peewee',\n    packages=['playhouse', 'peewee-stubs'],\n    py_modules=['peewee', 'pwiz'],\n    package_data={'peewee-stubs': ['*.pyi']},\n    ext_modules=ext_modules)\n"
+    },
+    "doc_mentions": [
+      "CHANGELOG.md:1390: `True` and is compatible with previous versions of Peewee, in which executing",
+      "CHANGELOG.md:3153: As of 2.3.3, all peewee `Database` instances have a default of `True` for the `threadlocals` parameter. This means that a connection is opened for each thread. It seemed to me that by sharing connecti",
+      "CHANGELOG.md:3395: * #227, was using wrong column type for boolean with MySQL.",
+      "docs/peewee/postgres.rst:52: :param bool server_side_cursors: Whether ``SELECT`` queries should use",
+      "docs/peewee/postgres.rst:54: :param bool register_hstore: Register the hstore extension.",
+      "docs/peewee/postgres.rst:55: :param bool prefer_psycopg3: If both psycopg2 and psycopg3 are installed,",
+      "docs/peewee/postgres.rst:744: :param bool convert_values: Apply ``field_class`` value conversion to",
+      "docs/peewee/postgres.rst:908: :param bool plain: Parse ``query`` with ``plainto_tsquery()``.",
+      "docs/peewee/postgres.rst:909: :param bool websearch: Parse ``query`` with ``websearch_to_tsquery()``.",
+      "docs/peewee/postgres.rst:928: :param bool plain: Use the plain (simple) query parser instead of the",
+      "docs/peewee/postgres.rst:930: :param bool websearch: Parse with ``websearch_to_tsquery`` (postgres",
+      "docs/peewee/api.rst:15: .. class:: Database(database, thread_safe=True, field_types=None, operations=None, autoconnect=True, **kwargs)",
+      "docs/peewee/api.rst:20: :param bool thread_safe: Whether to store connection state in a",
+      "docs/peewee/api.rst:24: :param bool autoconnect: Automatically connect to database if attempting to",
+      "docs/peewee/api.rst:114: :param bool reuse_if_open: Do not raise an exception if a connection is",
+      "docs/peewee/api.rst:117: :rtype: bool",
+      "docs/peewee/api.rst:134: :rtype: bool",
+      "docs/peewee/api.rst:152: :rtype: bool",
+      "docs/peewee/api.rst:495: :rtype: bool",
+      "docs/peewee/api.rst:683: :rtype: bool",
+      "docs/peewee/api.rst:716: :param bool bind_refs: Bind related models.",
+      "docs/peewee/api.rst:717: :param bool bind_backrefs: Bind back-reference related models.",
+      "docs/peewee/api.rst:732: :param bool bind_refs: Bind models that are referenced using",
+      "docs/peewee/api.rst:734: :param bool bind_backrefs: Bind models that reference the given model",
+      "docs/peewee/api.rst:842: :param bool regexp_function: Make the REGEXP function available.",
+      "docs/peewee/api.rst:843: :param bool rank_functions: Make the full-text search ranking functions",
+      "docs/peewee/api.rst:848: :param bool returning_clause: Use `RETURNING` clause automatically for bulk",
+      "docs/peewee/api.rst:943: :param bool deterministic: Whether the function is deterministic for a",
+      "docs/peewee/api.rst:966: :param bool deterministic: Whether the function is deterministic for a",
+      "docs/peewee/api.rst:1195: :param bool register_unicode: Register unicode types.",
+      "docs/peewee/api.rst:1201: :param bool prefer_psycopg3: If both psycopg2 and psycopg3 are installed,",
+      "docs/peewee/api.rst:1288: :param bool mariadb: Ensure proper SQL generation on MariaDB, which has some",
+      "docs/peewee/api.rst:1368: :param bool begin: If ``True`` (default), automatically start a new",
+      "docs/peewee/api.rst:1376: :param bool begin: If ``True`` (default), automatically start a new",
+      "docs/peewee/api.rst:1398: :param bool begin: If ``True`` (default), automatically begin a",
+      "docs/peewee/api.rst:1406: :param bool begin: If ``True`` (default), automatically begin a",
+      "docs/peewee/api.rst:2065: :param bool force_insert: Force INSERT query.",
+      "docs/peewee/api.rst:2143: :param bool recursive: Delete related models.",
+      "docs/peewee/api.rst:2144: :param bool delete_nullable: Delete related models that have a null",
+      "docs/peewee/api.rst:2165: :param bool bind_refs: Bind related models.",
+      "docs/peewee/api.rst:2166: :param bool bind_backrefs: Bind back-reference related models.",
+      "docs/peewee/api.rst:2191: :param bool safe: When ``True``, the create table query will",
+      "docs/peewee/api.rst:2205: :param bool safe: If set to ``True``, the drop table query will",
+      "docs/peewee/api.rst:2207: :param bool drop_sequences: Drop any sequences associated with the",
+      "docs/peewee/api.rst:2214: :param bool restart_identity: Restart the id sequence (postgresql-only).",
+      "docs/peewee/api.rst:2215: :param bool cascade: Truncate related tables as well (postgresql-only).",
+      "docs/peewee/api.rst:2222: :param bool unique: Whether index is UNIQUE.",
+      "docs/peewee/api.rst:2223: :param bool safe: Whether to add IF NOT EXISTS clause.",
+      "docs/peewee/api.rst:2227: :param bool nulls_distinct: Postgres-only - specify True (NULLS",
+      "docs/peewee/api.rst:2315: :param bool search_nullable: Follow dependencies reachable via nullable",
+      "docs/peewee/api.rst:2317: :param bool exclude_null_children: Do not descend into the dependencies",
+      "docs/peewee/api.rst:2389: :param bool only_save_dirty: When :meth:`~Model.save` is called, only",
+      "docs/peewee/api.rst:2392: :param bool without_rowid: Specify WITHOUT ROWID (sqlite only).",
+      "docs/peewee/api.rst:2393: :param bool strict_tables: Specify STRICT (sqlite only, requires 3.37+).",
+      "docs/peewee/api.rst:2425: :param bool refs: Follow foreign-key references.",
+      "docs/peewee/api.rst:2426: :param bool backrefs: Follow foreign-key back-references.",
+      "docs/peewee/api.rst:2427: :param bool depth_first: Do a depth-first search (``False`` for",
+      "docs/peewee/api.rst:2543: :param bool as_tuple: Return the result as a tuple?",
+      "docs/peewee/api.rst:2544: :param bool as_dict: Return the result as a dict?",
+      "docs/peewee/api.rst:2593: :param bool clear_limit: Clear any LIMIT clause when counting."
+    ],
+    "test_roots": [
+      "playhouse",
+      "tests"
+    ],
+    "n_sites": 0,
+    "n_sites_with_bool_test": 0
+  },
+  "pony": {
+    "sites": [],
+    "build_config": {
+      "pyproject.toml": "[build-system]\nrequires = [\"setuptools>=77.0.3\"]\nbuild-backend = \"setuptools.build_meta\"\n\n[project]\nname = \"pony\"\ndynamic = [\"version\"]\ndescription = \"Pony Object-Relational Mapper\"\nreadme = { file = \"README.md\", content-type = \"text/markdown\" }\nrequires-python = \">=3.10,<3.15\"\nlicense = \"Apache-2.0\"\nlicense-files = [\"LICENSE\"]\nauthors = [\n    { name = \"Alexander Kozlovsky\", email = \"alexander.kozlovsky@gmail.com\" },\n    { name = \"Alexey Malashkevich\", email = \"alexey@ponyorm.org\" },\n    { name = \"Alexander Tischenko\", email = \"sashaaero@yandex.ru\" },\n]\nmaintainers = [\n    { name = \"Pony ORM Team\", email = \"team@ponyorm.com\" },\n]\nclassifiers = [\n    \"Development Status :: 4 - Beta\",\n    \"Intended Audience :: Developers\",\n    \"Operating System :: OS Independent\",\n    \"Programming Language :: Python\",\n    \"Programming Language :: Python :: 3\",\n    \"Programming Language :: Python :: 3.10\",\n    \"Programming Language :: Python :: 3.11\",\n    \"Programming Language :: Python :: 3.12\",\n    \"Programming Language :: Python :: 3.13\",\n    \"Programming Language :: Python :: 3.14\",\n    \"Programming Language :: Python :: Implementation :: PyPy\",\n    \"Topic :: Software Development :: Libraries\",\n    \"Topic :: Database\",\n]\n\n[project.urls]\nHomepage = \"https://ponyorm.com\"\nDocumentation = \"https://docs.ponyorm.org\"\nSource = \"https://github.com/ponyorm/pony\"\n\n[tool.setuptools]\ninclude-package-data = false\npackages = [\n    \"pony\",\n    \"pony.flask\",\n    \"pony.flask.example\",\n    \"pony.orm\",\n    \"pony.orm.dbproviders\",\n    \"pony.orm.examples\",\n    \"pony.orm.integration\",\n    \"pony.orm.tests\",\n    \"pony.thirdparty\",\n    \"pony.utils\",\n]\n\n[tool.setuptools.dynamic]\nversion = { attr = \"pony.__version__\" }\n\n[tool.setuptools.package-data]\n\"pony.flask.example\" = [\"templates/*.html\"]\n\"pony.orm.tests\" = [\"queries.txt\"]\n\n[tool.ruff]\ntarget-version = \"py310\"\nline-length = 88\ninclude = [\"pony/**/*.py\", \"setup.py\"]\nextend-exclude = [\"pony/thirdparty\"]\n\n[tool.ruff.lint]\nselect = [\n    \"E4\",\n    \"E7\",\n    \"E9\",\n    \"F\",\n    \"W\",\n    \"I\",\n    \"N804\",\n    \"N805\",\n    \"UP\",\n    \"B\",\n    \"RUF100\",\n]\nignore = [\n    # Pony expressions intentionally overload comparisons with None and booleans.\n    \"E711\",\n    \"E712\",\n    # Exact type checks are intentional in converter and ORM internals.\n    \"E721\",\n    # Named lambdas are used as expression objects by the query translator.\n    \"E731\",\n    # Keep the existing interpolation style; changing SQL and error strings is\n    # unrelated to formatting and carries a higher compatibility risk.\n    \"UP031\",\n    # These assertions document unreachable internal states.\n    \"B011\",\n    # Pony wraps database exceptions deliberately and preserves its historical\n    # exception surface instead of exposing implementation exception chains.\n    \"B904\",\n]\n\n[tool.ruff.lint.per-file-ignores]\n\"pony/orm/dbproviders/mysql.py\" = [\"E402\"]\n\"pony/orm/dbproviders/postgres.py\" = [\"E402\"]\n\"pony/orm/__init__.py\" = [\"F403\"]\n\"pony/orm/examples/*.py\" = [\"F841\"]\n\"pony/orm/examples/inheritance1.py\" = [\"E402\"]\n\"pony/orm/sqltranslation.py\" = [\"B007\", \"B023\"]\n\"pony/orm/tests/*.py\" = [\"B018\", \"F403\", \"F405\", \"F811\", \"F841\"]\n\"pony/orm/tests/fixtures.py\" = [\"E402\"]\n\"pony/orm/tests/test_frames.py\" = [\"B023\"]\n\"pony/orm/tests/test_getattr.py\" = [\"B023\"]\n\"pony/orm/tests/test_hybrid_methods_and_properties.py\" = [\"B015\"]\n\"pony/utils/__init__.py\" = [\"F403\"]\n\n[tool.ruff.format]\nline-ending = \"lf\"\n",
+      "setup.py": "import re\nimport sys\nfrom pathlib import Path\n\nfrom setuptools import setup\n\n\nname = \"pony\"\nversion_file = Path(__file__).parent / \"pony\" / \"__init__.py\"\nversion_match = re.search(\n    r'^__version__ = [\"\\']([^\"\\']+)[\"\\']',\n    version_file.read_text(encoding=\"utf-8\"),\n    re.MULTILINE,\n)\nif version_match is None:\n    raise RuntimeError(\"Cannot find Pony version\")\nversion = version_match.group(1)\ndescription = \"Pony Object-Relational Mapper\"\nlong_description = \"\"\"\nAbout\n=========\nPony ORM is easy to use and powerful object-relational mapper for Python.\nUsing Pony, developers can create and maintain database-oriented software applications\nfaster and with less effort. One of the most interesting features of Pony is\nits ability to write queries to the database using generator expressions.\nPony then analyzes the abstract syntax tree of a generator and translates it\nto its SQL equivalent.\n\nFollowing is an example of a query in Pony::\n\n    select(p for p in Product if p.name.startswith('A') and p.cost <= 1000)\n\nSuch approach simplify the code and allows a programmer to concentrate\non the business logic of the application.\n\nPony translates queries to SQL using a specific database dialect.\nCurrently Pony works with SQLite, MySQL, PostgreSQL and Oracle databases.\n\nThe package `pony.orm.examples <https://github.com/ponyorm/pony/tree/orm/pony/orm/examples>`_\ncontains several examples.\n\nInstallation\n=================\n::\n\n    pip install pony\n\nEntity-Relationship Diagram Editor\n=============================================\n`Pony online ER Diagram Editor <https://editor.ponyorm.com>`_ is a great tool for prototyping.\nYou can draw your ER diagram online, generate  Pony entity declarations or SQL script for\ncreating database schema based on the diagram and start working with the database in seconds.\n\nPony ORM Links:\n=================\n- Main site: https://ponyorm.com\n- Documentation: https://docs.ponyorm.com\n- GitHub: https://github.com/ponyorm/pony\n- Mailing list:  http://ponyorm-list.ponyorm.com\n- ER Diagram Editor: https://editor.ponyorm.com\n- Blog: https://blog.ponyorm.com\n\"\"\"\n\nclassifiers = [\n    \"Development Status :: 4 - Beta\",\n    \"Intended Audience :: Developers\",\n    \"License :: OSI Approved :: Apache Software License\",\n    \"Operating System :: OS Independent\",\n    \"Programming Language :: Python\",\n    \"Programming Language :: Python :: 3\",\n    \"Programming Language :: Python :: 3.10\",\n    \"Programming Language :: Python :: 3.11\",\n    \"Programming Language :: Python :: 3.12\",\n    \"Programming Language :: Python :: 3.13\",\n    \"Programming Language :: Python :: 3.14\",\n    \"Programming Language :: Python :: Implementation :: PyPy\",\n    \"Topic :: Software Development :: Libraries\",\n    \"Topic :: Database\",\n]\n\nauthor = \", \".join(\n    [\n        \"Alexander Kozlovsky <alexander.kozlovsky@gmail.com>\",\n        \"Alexey Malashkevich <alexey@ponyorm.org>\",\n        \"Alexander Tischenko <sashaaero@yandex.ru>\",\n    ]\n)\nauthor_email = \"team@ponyorm.com\"\nurl = \"https://ponyorm.com\"\nproject_urls = {\n    \"Documentation\": \"https://docs.ponyorm.org\",\n    \"Source\": \"https://github.com/ponyorm/pony\",\n}\npackages = [\n    \"pony\",\n    \"pony.flask\",\n    \"pony.flask.example\",\n    \"pony.orm\",\n    \"pony.orm.dbproviders\",\n    \"pony.orm.examples\",\n    \"pony.orm.integration\",\n    \"pony.orm.tests\",\n    \"pony.thirdparty\",\n    \"pony.utils\",\n]\n\npackage_data = {\n    \"pony.flask.example\": [\"templates/*.html\"],\n    \"pony.orm.tests\": [\"queries.txt\"],\n}\n\ndownload_url = \"http://pypi.python.org/pypi/pony/\"\n\nif __name__ == \"__main__\":\n    pv = sys.version_info[:2]\n    if pv < (3, 10) or pv > (3, 14):\n        s = (\n            \"Sorry, but %s %s requires Python of one of the following versions: 3.10-3.14.\"\n            \" You have version %s\"\n        )\n        print(s % (name, version, sys.version.split(\" \", 1)[0]))\n        sys.exit(1)\n\n    setup(\n        name=name,\n        version=version,\n        description=description,\n        long_description=long_description,\n        classifier"
+    },
+    "doc_mentions": [
+      "CHANGELOG.md:238: * #374: `auto=True` can be used with all PrimaryKey types, not only `int`",
+      "CHANGELOG.md:591: * [`py_check`](http://doc.ponyorm.com/entities.html#py_check) parameter for attributes added. This parameter allows you to specify a function which will be used for checking the value before it is ass"
+    ],
+    "test_roots": [
+      "pony"
+    ],
+    "n_sites": 0,
+    "n_sites_with_bool_test": 0
+  }
+}

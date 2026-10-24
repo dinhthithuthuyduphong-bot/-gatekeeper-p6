@@ -1,0 +1,65 @@
+[
+  {
+    "repo": "onnx/onnx",
+    "number": 6588,
+    "isError": false,
+    "title": "Fix wrong comparison between numpy dtypes to None",
+    "url": "https://github.com/onnx/onnx/pull/6588"
+  },
+  {
+    "repo": "microsoft/onnxruntime",
+    "number": 13103,
+    "isError": false,
+    "title": "fix Numpy array None judgement bug",
+    "url": "https://github.com/microsoft/onnxruntime/pull/13103"
+  },
+  {
+    "repo": "googleapis/proto-plus-python",
+    "number": 477,
+    "isError": false,
+    "title": "fix: fix issue with equality comparison of repeated field with None",
+    "url": "https://github.com/googleapis/proto-plus-python/pull/477"
+  },
+  {
+    "repo": "SheffieldML/GPyOpt",
+    "number": 104,
+    "isError": false,
+    "title": "Fix bad comparison against None using ==",
+    "url": "https://github.com/SheffieldML/GPyOpt/pull/104"
+  },
+  {
+    "repo": "SheffieldML/GPyOpt",
+    "number": 106,
+    "isError": false,
+    "title": "Fix bad None comparison.",
+    "url": "https://github.com/SheffieldML/GPyOpt/pull/106"
+  },
+  {
+    "repo": "matplotlib/matplotlib",
+    "number": 4057,
+    "isError": false,
+    "title": "mplot3d: Avoid comparing None & numpy arrays",
+    "url": "https://github.com/matplotlib/matplotlib/pull/4057"
+  },
+  {
+    "repo": "JDASoftwareGroup/kartothek",
+    "number": 106,
+    "isError": false,
+    "title": "Avoid shema comparison to None",
+    "url": "https://github.com/JDASoftwareGroup/kartothek/pull/106"
+  },
+  {
+    "repo": "python-attrs/attrs",
+    "number": 1374,
+    "isError": false,
+    "title": "Use an explicit comparison to None for the converter of a field",
+    "url": "https://github.com/python-attrs/attrs/pull/1374"
+  },
+  {
+    "repo": "scikit-image/scikit-image",
+    "number": 1026,
+    "isError": false,
+    "title": "Correctly compare mask to None",
+    "url": "https://github.com/scikit-image/scikit-image/pull/1026"
+  }
+]

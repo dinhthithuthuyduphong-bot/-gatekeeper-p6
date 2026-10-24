@@ -1,0 +1,80 @@
+
+==================================== ERRORS ====================================
+__________________ ERROR collecting pymbar/tests/test_mbar.py __________________
+ImportError while importing test module '/workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/upstream/pymbar/pymbar/tests/test_mbar.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/root/.local/share/uv/python/cpython-3.8-linux-x86_64-gnu/lib/python3.8/importlib/__init__.py:127: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+pymbar/tests/test_mbar.py:9: in <module>
+    from pymbar.utils_for_testing import eq
+pymbar/utils_for_testing.py:30: in <module>
+    from numpy.testing.decorators import skipif, slow
+E   ModuleNotFoundError: No module named 'numpy.testing.decorators'
+=============================== warnings summary ===============================
+pymbar/utils.py:228
+  /workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/upstream/pymbar/pymbar/utils.py:228: DeprecationWarning: invalid escape sequence \l
+    """Compute the log of a sum of exponentiated terms exp(a_n) in a numerically-stable manner.
+
+pymbar/testsystems/gaussian_work.py:5
+  /workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/upstream/pymbar/pymbar/testsystems/gaussian_work.py:5: DeprecationWarning: invalid escape sequence \e
+    """Generate samples from forward and reverse Gaussian work distributions.
+
+pymbar/mbar.py:309
+  /workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/upstream/pymbar/pymbar/mbar.py:309: DeprecationWarning: invalid escape sequence \s
+    """
+
+pymbar/mbar.py:366
+  /workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/upstream/pymbar/pymbar/mbar.py:366: DeprecationWarning: invalid escape sequence \i
+    """Compute estimate of overlap matrix between the states.
+
+pymbar/mbar.py:725
+  /workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/upstream/pymbar/pymbar/mbar.py:725: DeprecationWarning: invalid escape sequence \s
+    """
+
+pymbar/mbar.py:1206
+  /workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/upstream/pymbar/pymbar/mbar.py:1206: DeprecationWarning: invalid escape sequence \s
+    """Compute the free energy of occupying a number of bins.
+
+pymbar/mbar.py:1498
+  /workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/upstream/pymbar/pymbar/mbar.py:1498: DeprecationWarning: invalid escape sequence \s
+    'Warning: Should have \sum_n W_nk = 1.  Actual column sum for state %d was %f. %d other columns have similar problems' %
+
+pymbar/mbar.py:1507
+  /workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/upstream/pymbar/pymbar/mbar.py:1507: DeprecationWarning: invalid escape sequence \s
+    'Warning: Should have \sum_k N_k W_nk = 1.  Actual row sum for sample %d was %f. %d other rows have similar problems' %
+
+pymbar/mbar.py:1638
+  /workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/upstream/pymbar/pymbar/mbar.py:1638: DeprecationWarning: invalid escape sequence \l
+    """
+
+pymbar/bar.py:56
+  /workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/upstream/pymbar/pymbar/bar.py:56: DeprecationWarning: invalid escape sequence \s
+    """A function that when zeroed is equivalent to the solution of
+
+pymbar/old_mbar.py:958
+  /workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/upstream/pymbar/pymbar/old_mbar.py:958: DeprecationWarning: invalid escape sequence \i
+    """Compute estimate of overlap matrix between the states.
+
+pymbar/old_mbar.py:1377
+  /workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/upstream/pymbar/pymbar/old_mbar.py:1377: DeprecationWarning: invalid escape sequence \s
+    """Compute the free energy of occupying a number of bins.
+
+pymbar/old_mbar.py:1865
+  /workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/upstream/pymbar/pymbar/old_mbar.py:1865: DeprecationWarning: invalid escape sequence \s
+    'Warning: Should have \sum_n W_nk = 1.  Actual column sum for state %d was %f. %d other columns have similar problems' %
+
+pymbar/old_mbar.py:1874
+  /workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/upstream/pymbar/pymbar/old_mbar.py:1874: DeprecationWarning: invalid escape sequence \s
+    'Warning: Should have \sum_k N_k W_nk = 1.  Actual row sum for sample %d was %f. %d other rows have similar problems' %
+
+pymbar/old_mbar.py:2079
+  /workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/upstream/pymbar/pymbar/old_mbar.py:2079: DeprecationWarning: invalid escape sequence \l
+    """
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/pymbar38_baseline_pilot.xml -
+=========================== short test summary info ============================
+ERROR pymbar/tests/test_mbar.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+15 warnings, 1 error in 0.63s

@@ -1,0 +1,17 @@
+{
+  "recorded_utc": "2026-10-23T19:25:54.174969+00:00",
+  "reason": "peewee and Pony current production code have no matches; add two ORM repositories to broaden independent-source search",
+  "candidates": [
+    {
+      "id": "sqlalchemy_utils",
+      "repo": "kvesteri/sqlalchemy-utils",
+      "commit": "fbffdaca45a7835f128b79d392602a3c088df794"
+    },
+    {
+      "id": "sqlobject",
+      "repo": "sqlobject/sqlobject",
+      "commit": "1dfb07bca80c35f2575e00e05fc9bdf6a40d6421"
+    }
+  ],
+  "eligibility": "same as initial selection; exploratory discovery only"
+}

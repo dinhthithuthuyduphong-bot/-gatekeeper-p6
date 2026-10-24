@@ -1,0 +1,1012 @@
+.FFFFFFFFFFFF.F                                                          [100%]
+=================================== FAILURES ===================================
+_________________________________ test_sample __________________________________
+
+    def test_sample():
+        """Draw samples via test object."""
+    
+        for system_generator in system_generators:
+            name, test = system_generator()
+            print(name)
+    
+>           x_n, u_kn, N_k, s_n = test.sample([5, 6, 7, 8], mode='u_kn')
+
+pymbar/tests/test_mbar.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <pymbar.testsystems.exponential_distributions.ExponentialTestCase object at 0x7fae58653a90>
+N_k = array([5., 6., 7., 8.]), mode = 'u_kn'
+
+    def sample(self, N_k=[10, 20, 30, 40, 50], mode='u_kln'):
+        """Draw samples from the distribution.
+    
+        Parameters
+        ----------
+    
+        N_k : np.ndarray, int
+            number of samples per state
+        mode : str, optional, default='u_kln'
+            If 'u_kln', return K x K x N_max matrix where u_kln[k,l,n] is reduced potential of sample n from state k evaluated at state l.
+            If 'u_kn', return K x N_tot matrix where u_kn[k,n] is reduced potential of sample n (in concatenated indexing) evaluated at state k.
+    
+        Returns
+        -------
+        if mode == 'u_kn':
+    
+        x_n : np.ndarray, shape=(n_states*n_samples), dtype=float
+           x_n[n] is sample n (in concatenated indexing)
+        u_kn : np.ndarray, shape=(n_states, n_states*n_samples), dtype=float
+           u_kn[k,n] is reduced potential of sample n (in concatenated indexing) evaluated at state k.
+        N_k : np.ndarray, shape=(n_states), dtype=float
+           N_k[k] is the number of samples generated from state k
+        s_n : np.ndarray, shape=(n_samples), dtype='int'
+            s_n is the state of origin of x_n
+    
+        x_kn : np.ndarray, shape=(n_states, n_samples), dtype=float
+            1D harmonic oscillator positions
+        u_kln : np.ndarray, shape=(n_states, n_states, n_samples), dytpe=float, only if mode='u_kln'
+           u_kln[k,l,n] is reduced potential of sample n from state k evaluated at state l.
+        N_k : np.ndarray, shape=(n_states), dtype=float
+           N_k[k] is the number of samples generated from state k
+    
+        """
+        N_k = np.array(N_k, np.float64)
+        if len(N_k) != self.n_states:
+            raise Exception("N_k has %d states while self.n_states has %d states." % (len(N_k), self.n_states))
+    
+        states = ["state %d" % k for k in range(self.n_states)]
+    
+        N_max = N_k.max()  # maximum number of samples per state
+        N_tot = N_k.sum()  # total number of samples
+>       x_kn = np.zeros([self.n_states, N_max], np.float64)
+E       TypeError: 'numpy.float64' object cannot be interpreted as an integer
+
+pymbar/testsystems/exponential_distributions.py:134: TypeError
+----------------------------- Captured stdout call -----------------------------
+Harmonic Oscillators
+Exponentials
+___________________________ test_mbar_free_energies ____________________________
+
+    def test_mbar_free_energies():
+    
+        """Can MBAR calculate moderately correct free energy differences?"""
+    
+        for system_generator in system_generators:
+            name, test = system_generator()
+>           x_n, u_kn, N_k_output, s_n = test.sample(N_k, mode='u_kn')
+
+pymbar/tests/test_mbar.py:70: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <pymbar.testsystems.exponential_distributions.ExponentialTestCase object at 0x7fae40aea520>
+N_k = array([1000.,  500.,    0.,  800.]), mode = 'u_kn'
+
+    def sample(self, N_k=[10, 20, 30, 40, 50], mode='u_kln'):
+        """Draw samples from the distribution.
+    
+        Parameters
+        ----------
+    
+        N_k : np.ndarray, int
+            number of samples per state
+        mode : str, optional, default='u_kln'
+            If 'u_kln', return K x K x N_max matrix where u_kln[k,l,n] is reduced potential of sample n from state k evaluated at state l.
+            If 'u_kn', return K x N_tot matrix where u_kn[k,n] is reduced potential of sample n (in concatenated indexing) evaluated at state k.
+    
+        Returns
+        -------
+        if mode == 'u_kn':
+    
+        x_n : np.ndarray, shape=(n_states*n_samples), dtype=float
+           x_n[n] is sample n (in concatenated indexing)
+        u_kn : np.ndarray, shape=(n_states, n_states*n_samples), dtype=float
+           u_kn[k,n] is reduced potential of sample n (in concatenated indexing) evaluated at state k.
+        N_k : np.ndarray, shape=(n_states), dtype=float
+           N_k[k] is the number of samples generated from state k
+        s_n : np.ndarray, shape=(n_samples), dtype='int'
+            s_n is the state of origin of x_n
+    
+        x_kn : np.ndarray, shape=(n_states, n_samples), dtype=float
+            1D harmonic oscillator positions
+        u_kln : np.ndarray, shape=(n_states, n_states, n_samples), dytpe=float, only if mode='u_kln'
+           u_kln[k,l,n] is reduced potential of sample n from state k evaluated at state l.
+        N_k : np.ndarray, shape=(n_states), dtype=float
+           N_k[k] is the number of samples generated from state k
+    
+        """
+        N_k = np.array(N_k, np.float64)
+        if len(N_k) != self.n_states:
+            raise Exception("N_k has %d states while self.n_states has %d states." % (len(N_k), self.n_states))
+    
+        states = ["state %d" % k for k in range(self.n_states)]
+    
+        N_max = N_k.max()  # maximum number of samples per state
+        N_tot = N_k.sum()  # total number of samples
+>       x_kn = np.zeros([self.n_states, N_max], np.float64)
+E       TypeError: 'numpy.float64' object cannot be interpreted as an integer
+
+pymbar/testsystems/exponential_distributions.py:134: TypeError
+_______________ test_mbar_computeExpectations_position_averages ________________
+
+    def test_mbar_computeExpectations_position_averages():
+    
+        """Can MBAR calculate E(x_n)??"""
+    
+        for system_generator in system_generators:
+            name, test = system_generator()
+>           x_n, u_kn, N_k_output, s_n = test.sample(N_k, mode='u_kn')
+
+pymbar/tests/test_mbar.py:89: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <pymbar.testsystems.exponential_distributions.ExponentialTestCase object at 0x7fae40b89ca0>
+N_k = array([1000.,  500.,    0.,  800.]), mode = 'u_kn'
+
+    def sample(self, N_k=[10, 20, 30, 40, 50], mode='u_kln'):
+        """Draw samples from the distribution.
+    
+        Parameters
+        ----------
+    
+        N_k : np.ndarray, int
+            number of samples per state
+        mode : str, optional, default='u_kln'
+            If 'u_kln', return K x K x N_max matrix where u_kln[k,l,n] is reduced potential of sample n from state k evaluated at state l.
+            If 'u_kn', return K x N_tot matrix where u_kn[k,n] is reduced potential of sample n (in concatenated indexing) evaluated at state k.
+    
+        Returns
+        -------
+        if mode == 'u_kn':
+    
+        x_n : np.ndarray, shape=(n_states*n_samples), dtype=float
+           x_n[n] is sample n (in concatenated indexing)
+        u_kn : np.ndarray, shape=(n_states, n_states*n_samples), dtype=float
+           u_kn[k,n] is reduced potential of sample n (in concatenated indexing) evaluated at state k.
+        N_k : np.ndarray, shape=(n_states), dtype=float
+           N_k[k] is the number of samples generated from state k
+        s_n : np.ndarray, shape=(n_samples), dtype='int'
+            s_n is the state of origin of x_n
+    
+        x_kn : np.ndarray, shape=(n_states, n_samples), dtype=float
+            1D harmonic oscillator positions
+        u_kln : np.ndarray, shape=(n_states, n_states, n_samples), dytpe=float, only if mode='u_kln'
+           u_kln[k,l,n] is reduced potential of sample n from state k evaluated at state l.
+        N_k : np.ndarray, shape=(n_states), dtype=float
+           N_k[k] is the number of samples generated from state k
+    
+        """
+        N_k = np.array(N_k, np.float64)
+        if len(N_k) != self.n_states:
+            raise Exception("N_k has %d states while self.n_states has %d states." % (len(N_k), self.n_states))
+    
+        states = ["state %d" % k for k in range(self.n_states)]
+    
+        N_max = N_k.max()  # maximum number of samples per state
+        N_tot = N_k.sum()  # total number of samples
+>       x_kn = np.zeros([self.n_states, N_max], np.float64)
+E       TypeError: 'numpy.float64' object cannot be interpreted as an integer
+
+pymbar/testsystems/exponential_distributions.py:134: TypeError
+______________ test_mbar_computeExpectations_position_differences ______________
+
+    def test_mbar_computeExpectations_position_differences():
+    
+        """Can MBAR calculate E(x_n)??"""
+    
+        for system_generator in system_generators:
+            name, test = system_generator()
+>           x_n, u_kn, N_k_output, s_n = test.sample(N_k, mode='u_kn')
+
+pymbar/tests/test_mbar.py:104: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <pymbar.testsystems.exponential_distributions.ExponentialTestCase object at 0x7fae40e65400>
+N_k = array([1000.,  500.,    0.,  800.]), mode = 'u_kn'
+
+    def sample(self, N_k=[10, 20, 30, 40, 50], mode='u_kln'):
+        """Draw samples from the distribution.
+    
+        Parameters
+        ----------
+    
+        N_k : np.ndarray, int
+            number of samples per state
+        mode : str, optional, default='u_kln'
+            If 'u_kln', return K x K x N_max matrix where u_kln[k,l,n] is reduced potential of sample n from state k evaluated at state l.
+            If 'u_kn', return K x N_tot matrix where u_kn[k,n] is reduced potential of sample n (in concatenated indexing) evaluated at state k.
+    
+        Returns
+        -------
+        if mode == 'u_kn':
+    
+        x_n : np.ndarray, shape=(n_states*n_samples), dtype=float
+           x_n[n] is sample n (in concatenated indexing)
+        u_kn : np.ndarray, shape=(n_states, n_states*n_samples), dtype=float
+           u_kn[k,n] is reduced potential of sample n (in concatenated indexing) evaluated at state k.
+        N_k : np.ndarray, shape=(n_states), dtype=float
+           N_k[k] is the number of samples generated from state k
+        s_n : np.ndarray, shape=(n_samples), dtype='int'
+            s_n is the state of origin of x_n
+    
+        x_kn : np.ndarray, shape=(n_states, n_samples), dtype=float
+            1D harmonic oscillator positions
+        u_kln : np.ndarray, shape=(n_states, n_states, n_samples), dytpe=float, only if mode='u_kln'
+           u_kln[k,l,n] is reduced potential of sample n from state k evaluated at state l.
+        N_k : np.ndarray, shape=(n_states), dtype=float
+           N_k[k] is the number of samples generated from state k
+    
+        """
+        N_k = np.array(N_k, np.float64)
+        if len(N_k) != self.n_states:
+            raise Exception("N_k has %d states while self.n_states has %d states." % (len(N_k), self.n_states))
+    
+        states = ["state %d" % k for k in range(self.n_states)]
+    
+        N_max = N_k.max()  # maximum number of samples per state
+        N_tot = N_k.sum()  # total number of samples
+>       x_kn = np.zeros([self.n_states, N_max], np.float64)
+E       TypeError: 'numpy.float64' object cannot be interpreted as an integer
+
+pymbar/testsystems/exponential_distributions.py:134: TypeError
+___________________ test_mbar_computeExpectations_position2 ____________________
+
+    def test_mbar_computeExpectations_position2():
+    
+        """Can MBAR calculate E(x_n^2)??"""
+    
+        for system_generator in system_generators:
+            name, test = system_generator()
+>           x_n, u_kn, N_k_output, s_n = test.sample(N_k, mode='u_kn')
+
+pymbar/tests/test_mbar.py:118: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <pymbar.testsystems.exponential_distributions.ExponentialTestCase object at 0x7fae40a6ef70>
+N_k = array([1000.,  500.,    0.,  800.]), mode = 'u_kn'
+
+    def sample(self, N_k=[10, 20, 30, 40, 50], mode='u_kln'):
+        """Draw samples from the distribution.
+    
+        Parameters
+        ----------
+    
+        N_k : np.ndarray, int
+            number of samples per state
+        mode : str, optional, default='u_kln'
+            If 'u_kln', return K x K x N_max matrix where u_kln[k,l,n] is reduced potential of sample n from state k evaluated at state l.
+            If 'u_kn', return K x N_tot matrix where u_kn[k,n] is reduced potential of sample n (in concatenated indexing) evaluated at state k.
+    
+        Returns
+        -------
+        if mode == 'u_kn':
+    
+        x_n : np.ndarray, shape=(n_states*n_samples), dtype=float
+           x_n[n] is sample n (in concatenated indexing)
+        u_kn : np.ndarray, shape=(n_states, n_states*n_samples), dtype=float
+           u_kn[k,n] is reduced potential of sample n (in concatenated indexing) evaluated at state k.
+        N_k : np.ndarray, shape=(n_states), dtype=float
+           N_k[k] is the number of samples generated from state k
+        s_n : np.ndarray, shape=(n_samples), dtype='int'
+            s_n is the state of origin of x_n
+    
+        x_kn : np.ndarray, shape=(n_states, n_samples), dtype=float
+            1D harmonic oscillator positions
+        u_kln : np.ndarray, shape=(n_states, n_states, n_samples), dytpe=float, only if mode='u_kln'
+           u_kln[k,l,n] is reduced potential of sample n from state k evaluated at state l.
+        N_k : np.ndarray, shape=(n_states), dtype=float
+           N_k[k] is the number of samples generated from state k
+    
+        """
+        N_k = np.array(N_k, np.float64)
+        if len(N_k) != self.n_states:
+            raise Exception("N_k has %d states while self.n_states has %d states." % (len(N_k), self.n_states))
+    
+        states = ["state %d" % k for k in range(self.n_states)]
+    
+        N_max = N_k.max()  # maximum number of samples per state
+        N_tot = N_k.sum()  # total number of samples
+>       x_kn = np.zeros([self.n_states, N_max], np.float64)
+E       TypeError: 'numpy.float64' object cannot be interpreted as an integer
+
+pymbar/testsystems/exponential_distributions.py:134: TypeError
+___________________ test_mbar_computeExpectations_potential ____________________
+
+    def test_mbar_computeExpectations_potential():
+    
+        """Can MBAR calculate E(u_kn)??"""
+    
+        for system_generator in system_generators:
+            name, test = system_generator()
+>           x_n, u_kn, N_k_output, s_n = test.sample(N_k, mode='u_kn')
+
+pymbar/tests/test_mbar.py:133: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <pymbar.testsystems.exponential_distributions.ExponentialTestCase object at 0x7fae40a7dfa0>
+N_k = array([1000.,  500.,    0.,  800.]), mode = 'u_kn'
+
+    def sample(self, N_k=[10, 20, 30, 40, 50], mode='u_kln'):
+        """Draw samples from the distribution.
+    
+        Parameters
+        ----------
+    
+        N_k : np.ndarray, int
+            number of samples per state
+        mode : str, optional, default='u_kln'
+            If 'u_kln', return K x K x N_max matrix where u_kln[k,l,n] is reduced potential of sample n from state k evaluated at state l.
+            If 'u_kn', return K x N_tot matrix where u_kn[k,n] is reduced potential of sample n (in concatenated indexing) evaluated at state k.
+    
+        Returns
+        -------
+        if mode == 'u_kn':
+    
+        x_n : np.ndarray, shape=(n_states*n_samples), dtype=float
+           x_n[n] is sample n (in concatenated indexing)
+        u_kn : np.ndarray, shape=(n_states, n_states*n_samples), dtype=float
+           u_kn[k,n] is reduced potential of sample n (in concatenated indexing) evaluated at state k.
+        N_k : np.ndarray, shape=(n_states), dtype=float
+           N_k[k] is the number of samples generated from state k
+        s_n : np.ndarray, shape=(n_samples), dtype='int'
+            s_n is the state of origin of x_n
+    
+        x_kn : np.ndarray, shape=(n_states, n_samples), dtype=float
+            1D harmonic oscillator positions
+        u_kln : np.ndarray, shape=(n_states, n_states, n_samples), dytpe=float, only if mode='u_kln'
+           u_kln[k,l,n] is reduced potential of sample n from state k evaluated at state l.
+        N_k : np.ndarray, shape=(n_states), dtype=float
+           N_k[k] is the number of samples generated from state k
+    
+        """
+        N_k = np.array(N_k, np.float64)
+        if len(N_k) != self.n_states:
+            raise Exception("N_k has %d states while self.n_states has %d states." % (len(N_k), self.n_states))
+    
+        states = ["state %d" % k for k in range(self.n_states)]
+    
+        N_max = N_k.max()  # maximum number of samples per state
+        N_tot = N_k.sum()  # total number of samples
+>       x_kn = np.zeros([self.n_states, N_max], np.float64)
+E       TypeError: 'numpy.float64' object cannot be interpreted as an integer
+
+pymbar/testsystems/exponential_distributions.py:134: TypeError
+----------------------------- Captured stdout call -----------------------------
+[0.51724016 0.49515144 0.51938667 0.490169  ]
+[0.5 0.5 0.5 0.5]
+____________________ test_mbar_computeMultipleExpectations _____________________
+
+    def test_mbar_computeMultipleExpectations():
+    
+        """Can MBAR calculate E(u_kn)??"""
+    
+        for system_generator in system_generators:
+            name, test = system_generator()
+>           x_n, u_kn, N_k_output, s_n = test.sample(N_k, mode='u_kn')
+
+pymbar/tests/test_mbar.py:149: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <pymbar.testsystems.exponential_distributions.ExponentialTestCase object at 0x7fae40ac6c10>
+N_k = array([1000.,  500.,    0.,  800.]), mode = 'u_kn'
+
+    def sample(self, N_k=[10, 20, 30, 40, 50], mode='u_kln'):
+        """Draw samples from the distribution.
+    
+        Parameters
+        ----------
+    
+        N_k : np.ndarray, int
+            number of samples per state
+        mode : str, optional, default='u_kln'
+            If 'u_kln', return K x K x N_max matrix where u_kln[k,l,n] is reduced potential of sample n from state k evaluated at state l.
+            If 'u_kn', return K x N_tot matrix where u_kn[k,n] is reduced potential of sample n (in concatenated indexing) evaluated at state k.
+    
+        Returns
+        -------
+        if mode == 'u_kn':
+    
+        x_n : np.ndarray, shape=(n_states*n_samples), dtype=float
+           x_n[n] is sample n (in concatenated indexing)
+        u_kn : np.ndarray, shape=(n_states, n_states*n_samples), dtype=float
+           u_kn[k,n] is reduced potential of sample n (in concatenated indexing) evaluated at state k.
+        N_k : np.ndarray, shape=(n_states), dtype=float
+           N_k[k] is the number of samples generated from state k
+        s_n : np.ndarray, shape=(n_samples), dtype='int'
+            s_n is the state of origin of x_n
+    
+        x_kn : np.ndarray, shape=(n_states, n_samples), dtype=float
+            1D harmonic oscillator positions
+        u_kln : np.ndarray, shape=(n_states, n_states, n_samples), dytpe=float, only if mode='u_kln'
+           u_kln[k,l,n] is reduced potential of sample n from state k evaluated at state l.
+        N_k : np.ndarray, shape=(n_states), dtype=float
+           N_k[k] is the number of samples generated from state k
+    
+        """
+        N_k = np.array(N_k, np.float64)
+        if len(N_k) != self.n_states:
+            raise Exception("N_k has %d states while self.n_states has %d states." % (len(N_k), self.n_states))
+    
+        states = ["state %d" % k for k in range(self.n_states)]
+    
+        N_max = N_k.max()  # maximum number of samples per state
+        N_tot = N_k.sum()  # total number of samples
+>       x_kn = np.zeros([self.n_states, N_max], np.float64)
+E       TypeError: 'numpy.float64' object cannot be interpreted as an integer
+
+pymbar/testsystems/exponential_distributions.py:134: TypeError
+_____________________ test_mbar_computeEntropyAndEnthalpy ______________________
+
+    def test_mbar_computeEntropyAndEnthalpy():
+    
+        """Can MBAR calculate f_k, <u_k> and s_k ??"""
+    
+        for system_generator in system_generators:
+            name, test = system_generator()
+            x_n, u_kn, N_k_output, s_n = test.sample(N_k, mode='u_kn')
+            eq(N_k, N_k_output)
+            mbar = MBAR(u_kn, N_k)
+>           f_ij, df_ij, u_ij, du_ij, s_ij, ds_ij = mbar.computeEntropyAndEnthalpy(u_kn)
+
+pymbar/tests/test_mbar.py:173: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <pymbar.mbar.MBAR object at 0x7fae4078f7f0>
+u_kn = array([[6.47915961e-03, 1.42546095e-01, 2.07435920e+00, ...,
+        6.07557421e-01, 2.10912724e+00, 1.27446544e+00],
+...
+       [9.99183536e+00, 5.03955113e+00, 1.42737565e-02, ...,
+        2.07671331e+00, 9.10747400e-03, 5.50794798e-01]])
+uncertainty_method = None, verbose = False, warning_cutoff = 1e-10
+
+    def computeEntropyAndEnthalpy(self, u_kn=None, uncertainty_method=None, verbose=False, warning_cutoff=1.0e-10):
+        """Decompose free energy differences into enthalpy and entropy differences.
+    
+        Compute the decomposition of the free energy difference between
+        states 1 and N into reduced free energy differences, reduced potential
+        (enthalpy) differences, and reduced entropy (S/k) differences.
+    
+        Parameters
+        ----------
+        u_kn : float, NxK array
+            The energies of the state that are being used.
+        uncertainty_method : string , optional
+            Choice of method used to compute asymptotic covariance method, or None to use default
+            See help for computeAsymptoticCovarianceMatrix() for more information on various methods. (default: None)
+        warning_cutoff : float, optional
+            Warn if squared-uncertainty is negative and larger in magnitude than this number (default: 1.0e-10)
+    
+        Returns
+        -------
+        Delta_f_ij : np.ndarray, float, shape=(K, K)
+            Delta_f_ij[i,j] is the dimensionless free energy difference f_j - f_i
+        dDelta_f_ij : np.ndarray, float, shape=(K, K)
+            uncertainty in Delta_f_ij
+        Delta_u_ij : np.ndarray, float, shape=(K, K)
+            Delta_u_ij[i,j] is the reduced potential energy difference u_j - u_i
+        dDelta_u_ij : np.ndarray, float, shape=(K, K)
+            uncertainty in Delta_f_ij
+        Delta_s_ij : np.ndarray, float, shape=(K, K)
+            Delta_s_ij[i,j] is the reduced entropy difference S/k between states i and j (s_j - s_i)
+        dDelta_s_ij : np.ndarray, float, shape=(K, K)
+            uncertainty in Delta_s_ij
+    
+        Examples
+        --------
+    
+        >>> from pymbar import testsystems
+        >>> (x_n, u_kn, N_k, s_n) = testsystems.HarmonicOscillatorsTestCase().sample(mode='u_kn')
+        >>> mbar = MBAR(u_kn, N_k)
+        >>> [Delta_f_ij, dDelta_f_ij, Delta_u_ij, dDelta_u_ij, Delta_s_ij, dDelta_s_ij] = mbar.computeEntropyAndEnthalpy()
+    
+        """
+        if verbose:
+            print("Computing average energy and entropy by MBAR.")
+    
+        dims = len(np.shape(u_kn))
+        if dims==3:
+            u_kn = kln_to_kn(u_kn, N_k=self.N_k)
+    
+>       if u_kn == None:
+E       ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+
+pymbar/mbar.py:1139: ValueError
+____________________ test_mbar_computeEffectiveSampleNumber ____________________
+
+    def test_mbar_computeEffectiveSampleNumber():
+        """ testing computeEffectiveSampleNumber """
+    
+        for system_generator in system_generators:
+            name, test = system_generator()
+>           x_n, u_kn, N_k_output, s_n = test.sample(N_k, mode='u_kn')
+
+pymbar/tests/test_mbar.py:195: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <pymbar.testsystems.exponential_distributions.ExponentialTestCase object at 0x7fae40ac6c10>
+N_k = array([1000.,  500.,    0.,  800.]), mode = 'u_kn'
+
+    def sample(self, N_k=[10, 20, 30, 40, 50], mode='u_kln'):
+        """Draw samples from the distribution.
+    
+        Parameters
+        ----------
+    
+        N_k : np.ndarray, int
+            number of samples per state
+        mode : str, optional, default='u_kln'
+            If 'u_kln', return K x K x N_max matrix where u_kln[k,l,n] is reduced potential of sample n from state k evaluated at state l.
+            If 'u_kn', return K x N_tot matrix where u_kn[k,n] is reduced potential of sample n (in concatenated indexing) evaluated at state k.
+    
+        Returns
+        -------
+        if mode == 'u_kn':
+    
+        x_n : np.ndarray, shape=(n_states*n_samples), dtype=float
+           x_n[n] is sample n (in concatenated indexing)
+        u_kn : np.ndarray, shape=(n_states, n_states*n_samples), dtype=float
+           u_kn[k,n] is reduced potential of sample n (in concatenated indexing) evaluated at state k.
+        N_k : np.ndarray, shape=(n_states), dtype=float
+           N_k[k] is the number of samples generated from state k
+        s_n : np.ndarray, shape=(n_samples), dtype='int'
+            s_n is the state of origin of x_n
+    
+        x_kn : np.ndarray, shape=(n_states, n_samples), dtype=float
+            1D harmonic oscillator positions
+        u_kln : np.ndarray, shape=(n_states, n_states, n_samples), dytpe=float, only if mode='u_kln'
+           u_kln[k,l,n] is reduced potential of sample n from state k evaluated at state l.
+        N_k : np.ndarray, shape=(n_states), dtype=float
+           N_k[k] is the number of samples generated from state k
+    
+        """
+        N_k = np.array(N_k, np.float64)
+        if len(N_k) != self.n_states:
+            raise Exception("N_k has %d states while self.n_states has %d states." % (len(N_k), self.n_states))
+    
+        states = ["state %d" % k for k in range(self.n_states)]
+    
+        N_max = N_k.max()  # maximum number of samples per state
+        N_tot = N_k.sum()  # total number of samples
+>       x_kn = np.zeros([self.n_states, N_max], np.float64)
+E       TypeError: 'numpy.float64' object cannot be interpreted as an integer
+
+pymbar/testsystems/exponential_distributions.py:134: TypeError
+___________________________ test_mbar_computeOverlap ___________________________
+
+    def test_mbar_computeOverlap():
+    
+        # tests with identical states, which gives analytical results.
+    
+        d = len(N_k)
+        even_O_k = 2.0*np.ones(d)
+        even_K_k = 0.5*np.ones(d)
+        even_N_k = 100*np.ones(d)
+        name, test = generate_ho(O_k = even_O_k, K_k = even_K_k)
+        x_n, u_kn, N_k_output, s_n = test.sample(even_N_k, mode='u_kn')
+>       mbar = MBAR(u_kn, even_N_k)
+
+pymbar/tests/test_mbar.py:215: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <pymbar.mbar.MBAR object at 0x7fae40781ac0>
+u_kn = array([[1.60681739e-01, 8.96671086e-04, 9.67441020e-01, ...,
+        7.15690462e-03, 6.44868009e-03, 2.54661339e-01],
+...
+       [1.60681739e-01, 8.96671086e-04, 9.67441020e-01, ...,
+        7.15690462e-03, 6.44868009e-03, 2.54661339e-01]])
+N_k = array([100., 100., 100., 100.]), maximum_iterations = 10000
+relative_tolerance = 1e-07, verbose = False, initial_f_k = None
+solver_protocol = ({'method': 'hybr'},), initialize = 'zeros', x_kindices = None
+subsampling = 6, subsampling_protocol = ({'method': 'L-BFGS-B'},), kwargs = {}
+K = 4, N = 400, Nsum = 0, k = 0
+
+    def __init__(self, u_kn, N_k, maximum_iterations=10000, relative_tolerance=1.0e-7, verbose=False, initial_f_k=None, solver_protocol=DEFAULT_SOLVER_PROTOCOL, initialize='zeros', x_kindices=None, subsampling=6, subsampling_protocol=DEFAULT_SUBSAMPLING_PROTOCOL, **kwargs):
+        """Initialize multistate Bennett acceptance ratio (MBAR) on a set of simulation data.
+    
+        Upon initialization, the dimensionless free energies for all states are computed.
+        This may take anywhere from seconds to minutes, depending upon the quantity of data.
+        After initialization, the computed free energies may be obtained by a call to 'getFreeEnergies()', or
+        free energies or expectation at any state of interest can be computed by calls to 'computeFreeEnergy()' or
+        'computeExpectations()'.
+    
+        ----------
+        u_kn : np.ndarray, float, shape=(K, N_max)
+            u_kn[k,n] is the reduced potential energy of uncorrelated
+            configuration n evaluated at state k.
+            u_kln: np.ndarray, float, shape (K, L, N_max)
+               if the simulation is in form u_kln[k,l,n] it is converted to u_kn format
+    
+        u_kn = [ u_1(x_1) u_1(x_2) u_1(x_3) . . . u_1(x_n)
+                 u_2(x_1) u_2(x_2) u_2(x_3) . . . u_2(x_n)
+                                .  .  .
+                 u_k(x_1) u_k(x_2) u_k(x_3) . . . u_k(x_n)]
+    
+        N_k :  np.ndarray, int, shape=(K)
+            N_k[k] is the number of uncorrelated snapshots sampled from state k.
+            Some may be zero, indicating that there are no samples from that state.
+    
+        We assume that the states are ordered such that the first N_k
+        are from the first state, the 2nd N_k the second state, and so
+        forth. This only becomes important for BAR -- MBAR does not
+        care which samples are from which state.  We should eventually
+        allow this assumption to be overwritten by parameters passed
+        from above, once u_kln is phased out.
+    
+        maximum_iterations : int, optional
+            Set to limit the maximum number of iterations performed (default 1000)
+        relative_tolerance : float, optional
+            Set to determine the relative tolerance convergence criteria (default 1.0e-6)
+        verbosity : bool, optional
+            Set to True if verbose debug output is desired (default False)
+        initial_f_k : np.ndarray, float, shape=(K), optional
+            Set to the initial dimensionless free energies to use as a
+            guess (default None, which sets all f_k = 0)
+        method : list(dict), optional, default=None
+            List of dictionaries to define a sequence of solver algorithms
+            and options used to estimate the dimensionless free energies.
+            See `pymbar.mbar_solvers.solve_mbar()` for details.  If None,
+            use the developers best guess at an appropriate algorithm.
+        initialize : string, optional
+            If equal to 'BAR', use BAR between the pairwise state to
+            initialize the free energies.  Eventually, should specify a path;
+            for now, it just does it zipping up the states.
+            (default: 'zeros', unless specific values are passed in.)
+        x_kindices
+            Which state is each x from?  Usually doesn't matter, but does for BAR. We assume the samples
+            are in K order (the first N_k[0] samples are from the 0th state, the next N_k[1] samples from
+            the 1st state, and so forth.
+    
+        Notes
+        -----
+        The reduced potential energy u_kn[k,n] = u_k(x_{ln}), where the reduced potential energy u_l(x) is defined (as in the text) by:
+        u_k(x) = beta_k [ U_k(x) + p_k V(x) + mu_k' n(x) ]
+        where
+        beta_k = 1/(kB T_k) is the inverse temperature of condition k, where kB is Boltzmann's constant
+        U_k(x) is the potential energy function for state k
+        p_k is the pressure at state k (if an isobaric ensemble is specified)
+        V(x) is the volume of configuration x
+        mu_k is the M-vector of chemical potentials for the various species, if a (semi)grand ensemble is specified, and ' denotes transpose
+        n(x) is the M-vector of numbers of the various molecular species for configuration x, corresponding to the chemical potential components of mu_m.
+        x_n indicates that the samples are from k different simulations of the n states. These simulations need only be a subset of the k states.
+        The configurations x_ln must be uncorrelated.  This can be ensured by subsampling a correlated timeseries with a period larger than the statistical inefficiency,
+        which can be estimated from the potential energy timeseries {u_k(x_ln)}_{n=1}^{N_k} using the provided utility function 'statisticalInefficiency()'.
+        See the help for this function for more information.
+    
+        Examples
+        --------
+    
+        >>> from pymbar import testsystems
+        >>> (x_n, u_kn, N_k, s_n) = testsystems.HarmonicOscillatorsTestCase().sample(mode='u_kn')
+        >>> mbar = MBAR(u_kn, N_k)
+    
+        """
+        for key, val in kwargs.items():
+            print(("Warning: parameter %s=%s is unrecognized and unused." % (key, val)))
+    
+        # Store local copies of necessary data.
+        # N_k[k] is the number of samples from state k, some of which might be zero.
+        self.N_k = np.array(N_k, dtype=np.int64)
+        self.N = np.sum(self.N_k)
+    
+        # Get dimensions of reduced potential energy matrix, and convert to KxN form if needed.
+        if len(np.shape(u_kn)) == 3:
+            self.K = np.shape(u_kn)[1]  # need to set self.K, and it's the second index
+            u_kn = kln_to_kn(u_kn, N_k=self.N_k)
+    
+        # u_kn[k,n] is the reduced potential energy of sample n evaluated at state k
+        self.u_kn = np.array(u_kn, dtype=np.float64)
+    
+        K, N = np.shape(u_kn)
+    
+        if verbose:
+            print("K (total states) = %d, total samples = %d" % (K, N))
+    
+        if np.sum(N_k) != N:
+            raise ParameterError(
+                'The sum of all N_k must equal the total number of samples (length of second dimension of u_kn.')
+    
+        # Store local copies of other data
+        self.K = K  # number of thermodynamic states energies are evaluated at
+        # N = \sum_{k=1}^K N_k is the total number of samples
+        self.N = N  # maximum number of configurations
+    
+        # if not defined, identify from which state each sample comes from.
+        if x_kindices is not None:
+            self.x_kindices = x_kindices
+        else:
+            self.x_kindices = np.arange(N, dtype=np.int64)
+            Nsum = 0
+            for k in range(K):
+>               self.x_kindices[Nsum:Nsum+N_k[k]] = k
+E               TypeError: slice indices must be integers or None or have an __index__ method
+
+pymbar/mbar.py:190: TypeError
+_____________________________ test_mbar_getWeights _____________________________
+
+    def test_mbar_getWeights():
+    
+        """ testing getWeights """
+    
+        for system_generator in system_generators:
+            name, test = system_generator()
+>           x_n, u_kn, N_k_output, s_n = test.sample(N_k, mode='u_kn')
+
+pymbar/tests/test_mbar.py:246: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <pymbar.testsystems.exponential_distributions.ExponentialTestCase object at 0x7fae40e4ec10>
+N_k = array([1000.,  500.,    0.,  800.]), mode = 'u_kn'
+
+    def sample(self, N_k=[10, 20, 30, 40, 50], mode='u_kln'):
+        """Draw samples from the distribution.
+    
+        Parameters
+        ----------
+    
+        N_k : np.ndarray, int
+            number of samples per state
+        mode : str, optional, default='u_kln'
+            If 'u_kln', return K x K x N_max matrix where u_kln[k,l,n] is reduced potential of sample n from state k evaluated at state l.
+            If 'u_kn', return K x N_tot matrix where u_kn[k,n] is reduced potential of sample n (in concatenated indexing) evaluated at state k.
+    
+        Returns
+        -------
+        if mode == 'u_kn':
+    
+        x_n : np.ndarray, shape=(n_states*n_samples), dtype=float
+           x_n[n] is sample n (in concatenated indexing)
+        u_kn : np.ndarray, shape=(n_states, n_states*n_samples), dtype=float
+           u_kn[k,n] is reduced potential of sample n (in concatenated indexing) evaluated at state k.
+        N_k : np.ndarray, shape=(n_states), dtype=float
+           N_k[k] is the number of samples generated from state k
+        s_n : np.ndarray, shape=(n_samples), dtype='int'
+            s_n is the state of origin of x_n
+    
+        x_kn : np.ndarray, shape=(n_states, n_samples), dtype=float
+            1D harmonic oscillator positions
+        u_kln : np.ndarray, shape=(n_states, n_states, n_samples), dytpe=float, only if mode='u_kln'
+           u_kln[k,l,n] is reduced potential of sample n from state k evaluated at state l.
+        N_k : np.ndarray, shape=(n_states), dtype=float
+           N_k[k] is the number of samples generated from state k
+    
+        """
+        N_k = np.array(N_k, np.float64)
+        if len(N_k) != self.n_states:
+            raise Exception("N_k has %d states while self.n_states has %d states." % (len(N_k), self.n_states))
+    
+        states = ["state %d" % k for k in range(self.n_states)]
+    
+        N_max = N_k.max()  # maximum number of samples per state
+        N_tot = N_k.sum()  # total number of samples
+>       x_kn = np.zeros([self.n_states, N_max], np.float64)
+E       TypeError: 'numpy.float64' object cannot be interpreted as an integer
+
+pymbar/testsystems/exponential_distributions.py:134: TypeError
+___________________ test_mbar_computePerturbedFreeEnergeies ____________________
+
+    def test_mbar_computePerturbedFreeEnergeies():
+    
+        """ testing computePerturbedFreeEnergies """
+    
+        for system_generator in system_generators:
+            name, test = system_generator()
+>           x_n, u_kn, N_k_output, s_n = test.sample(N_k, mode='u_kn')
+
+pymbar/tests/test_mbar.py:259: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <pymbar.testsystems.exponential_distributions.ExponentialTestCase object at 0x7fae40a43ee0>
+N_k = array([1000.,  500.,    0.,  800.]), mode = 'u_kn'
+
+    def sample(self, N_k=[10, 20, 30, 40, 50], mode='u_kln'):
+        """Draw samples from the distribution.
+    
+        Parameters
+        ----------
+    
+        N_k : np.ndarray, int
+            number of samples per state
+        mode : str, optional, default='u_kln'
+            If 'u_kln', return K x K x N_max matrix where u_kln[k,l,n] is reduced potential of sample n from state k evaluated at state l.
+            If 'u_kn', return K x N_tot matrix where u_kn[k,n] is reduced potential of sample n (in concatenated indexing) evaluated at state k.
+    
+        Returns
+        -------
+        if mode == 'u_kn':
+    
+        x_n : np.ndarray, shape=(n_states*n_samples), dtype=float
+           x_n[n] is sample n (in concatenated indexing)
+        u_kn : np.ndarray, shape=(n_states, n_states*n_samples), dtype=float
+           u_kn[k,n] is reduced potential of sample n (in concatenated indexing) evaluated at state k.
+        N_k : np.ndarray, shape=(n_states), dtype=float
+           N_k[k] is the number of samples generated from state k
+        s_n : np.ndarray, shape=(n_samples), dtype='int'
+            s_n is the state of origin of x_n
+    
+        x_kn : np.ndarray, shape=(n_states, n_samples), dtype=float
+            1D harmonic oscillator positions
+        u_kln : np.ndarray, shape=(n_states, n_states, n_samples), dytpe=float, only if mode='u_kln'
+           u_kln[k,l,n] is reduced potential of sample n from state k evaluated at state l.
+        N_k : np.ndarray, shape=(n_states), dtype=float
+           N_k[k] is the number of samples generated from state k
+    
+        """
+        N_k = np.array(N_k, np.float64)
+        if len(N_k) != self.n_states:
+            raise Exception("N_k has %d states while self.n_states has %d states." % (len(N_k), self.n_states))
+    
+        states = ["state %d" % k for k in range(self.n_states)]
+    
+        N_max = N_k.max()  # maximum number of samples per state
+        N_tot = N_k.sum()  # total number of samples
+>       x_kn = np.zeros([self.n_states, N_max], np.float64)
+E       TypeError: 'numpy.float64' object cannot be interpreted as an integer
+
+pymbar/testsystems/exponential_distributions.py:134: TypeError
+----------------------------- Captured stdout call -----------------------------
+[0.3618128] [0.08638578]
+______________________ test_mbar_computeExpectationsInner ______________________
+
+    def test_mbar_computeExpectationsInner():
+    
+        """Can MBAR calculate general expectations inner code (note: this just tests completion)"""
+    
+        for system_generator in system_generators:
+            name, test = system_generator()
+>           x_n, u_kn, N_k_output, s_n = test.sample(N_k, mode='u_kn')
+
+pymbar/tests/test_mbar.py:303: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <pymbar.testsystems.exponential_distributions.ExponentialTestCase object at 0x7fae40a572b0>
+N_k = array([1000.,  500.,    0.,  800.]), mode = 'u_kn'
+
+    def sample(self, N_k=[10, 20, 30, 40, 50], mode='u_kln'):
+        """Draw samples from the distribution.
+    
+        Parameters
+        ----------
+    
+        N_k : np.ndarray, int
+            number of samples per state
+        mode : str, optional, default='u_kln'
+            If 'u_kln', return K x K x N_max matrix where u_kln[k,l,n] is reduced potential of sample n from state k evaluated at state l.
+            If 'u_kn', return K x N_tot matrix where u_kn[k,n] is reduced potential of sample n (in concatenated indexing) evaluated at state k.
+    
+        Returns
+        -------
+        if mode == 'u_kn':
+    
+        x_n : np.ndarray, shape=(n_states*n_samples), dtype=float
+           x_n[n] is sample n (in concatenated indexing)
+        u_kn : np.ndarray, shape=(n_states, n_states*n_samples), dtype=float
+           u_kn[k,n] is reduced potential of sample n (in concatenated indexing) evaluated at state k.
+        N_k : np.ndarray, shape=(n_states), dtype=float
+           N_k[k] is the number of samples generated from state k
+        s_n : np.ndarray, shape=(n_samples), dtype='int'
+            s_n is the state of origin of x_n
+    
+        x_kn : np.ndarray, shape=(n_states, n_samples), dtype=float
+            1D harmonic oscillator positions
+        u_kln : np.ndarray, shape=(n_states, n_states, n_samples), dytpe=float, only if mode='u_kln'
+           u_kln[k,l,n] is reduced potential of sample n from state k evaluated at state l.
+        N_k : np.ndarray, shape=(n_states), dtype=float
+           N_k[k] is the number of samples generated from state k
+    
+        """
+        N_k = np.array(N_k, np.float64)
+        if len(N_k) != self.n_states:
+            raise Exception("N_k has %d states while self.n_states has %d states." % (len(N_k), self.n_states))
+    
+        states = ["state %d" % k for k in range(self.n_states)]
+    
+        N_max = N_k.max()  # maximum number of samples per state
+        N_tot = N_k.sum()  # total number of samples
+>       x_kn = np.zeros([self.n_states, N_max], np.float64)
+E       TypeError: 'numpy.float64' object cannot be interpreted as an integer
+
+pymbar/testsystems/exponential_distributions.py:134: TypeError
+=============================== warnings summary ===============================
+pymbar/utils_for_testing.py:30
+  /workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/upstream/pymbar/pymbar/utils_for_testing.py:30: DeprecationWarning: Importing from numpy.testing.decorators is deprecated since numpy 1.15.0, import from numpy.testing instead.
+    from numpy.testing.decorators import skipif, slow
+
+../../pymbar38/lib/python3.8/site-packages/nose/config.py:142
+  /workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/pymbar38/lib/python3.8/site-packages/nose/config.py:142: DeprecationWarning: invalid escape sequence \.
+    """nose configuration.
+
+../../pymbar38/lib/python3.8/site-packages/nose/plugins/manager.py:418
+  /workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/pymbar38/lib/python3.8/site-packages/nose/plugins/manager.py:418: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html
+    import pkg_resources
+
+../../pymbar38/lib/python3.8/site-packages/nose/importer.py:12
+  /workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/pymbar38/lib/python3.8/site-packages/nose/importer.py:12: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+    from imp import find_module, load_module, acquire_lock, release_lock
+
+pymbar/tests/test_mbar.py::test_mbar_free_energies
+  /workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/upstream/pymbar/pymbar/mbar.py:459: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    f_i = np.matrix(self.f_k)
+
+pymbar/tests/test_mbar.py::test_mbar_free_energies
+pymbar/tests/test_mbar.py::test_mbar_computeExpectations_position_averages
+pymbar/tests/test_mbar.py::test_mbar_computeExpectations_position_differences
+pymbar/tests/test_mbar.py::test_mbar_computeExpectations_position2
+pymbar/tests/test_mbar.py::test_mbar_computeExpectations_potential
+pymbar/tests/test_mbar.py::test_mbar_computeMultipleExpectations
+pymbar/tests/test_mbar.py::test_mbar_computePerturbedFreeEnergeies
+pymbar/tests/test_mbar.py::test_mbar_computePMF
+  /workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/upstream/pymbar/pymbar/mbar.py:1545: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    Ndiag = np.matrix(np.diag(N_k), dtype=np.float64)
+
+pymbar/tests/test_mbar.py::test_mbar_free_energies
+pymbar/tests/test_mbar.py::test_mbar_computeExpectations_position_averages
+pymbar/tests/test_mbar.py::test_mbar_computeExpectations_position_differences
+pymbar/tests/test_mbar.py::test_mbar_computeExpectations_position2
+pymbar/tests/test_mbar.py::test_mbar_computeExpectations_potential
+pymbar/tests/test_mbar.py::test_mbar_computeMultipleExpectations
+pymbar/tests/test_mbar.py::test_mbar_computePerturbedFreeEnergeies
+pymbar/tests/test_mbar.py::test_mbar_computePMF
+  /workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/upstream/pymbar/pymbar/mbar.py:1546: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    W = np.matrix(W, dtype=np.float64)
+
+pymbar/tests/test_mbar.py: 77 warnings
+  /workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/pymbar38/lib/python3.8/site-packages/numpy/matrixlib/defmatrix.py:71: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    return matrix(data, dtype=dtype, copy=False)
+
+pymbar/tests/test_mbar.py::test_mbar_free_energies
+pymbar/tests/test_mbar.py::test_mbar_computeExpectations_position_averages
+pymbar/tests/test_mbar.py::test_mbar_computeExpectations_position_differences
+pymbar/tests/test_mbar.py::test_mbar_computeExpectations_position2
+pymbar/tests/test_mbar.py::test_mbar_computeExpectations_potential
+pymbar/tests/test_mbar.py::test_mbar_computeMultipleExpectations
+pymbar/tests/test_mbar.py::test_mbar_computePerturbedFreeEnergeies
+pymbar/tests/test_mbar.py::test_mbar_computePMF
+  /workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/upstream/pymbar/pymbar/mbar.py:1556: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    Sigma = np.matrix(np.diag(np.sqrt(S2)))
+
+pymbar/tests/test_mbar.py::test_mbar_free_energies
+pymbar/tests/test_mbar.py::test_mbar_computeExpectations_position_averages
+pymbar/tests/test_mbar.py::test_mbar_computeExpectations_position_differences
+pymbar/tests/test_mbar.py::test_mbar_computeExpectations_position2
+pymbar/tests/test_mbar.py::test_mbar_computeExpectations_potential
+pymbar/tests/test_mbar.py::test_mbar_computeMultipleExpectations
+pymbar/tests/test_mbar.py::test_mbar_computePerturbedFreeEnergeies
+pymbar/tests/test_mbar.py::test_mbar_computePMF
+  /workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/upstream/pymbar/pymbar/mbar.py:1557: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    V = np.matrix(V)
+
+pymbar/tests/test_mbar.py::test_mbar_free_energies
+pymbar/tests/test_mbar.py::test_mbar_computeExpectations_position_differences
+pymbar/tests/test_mbar.py::test_mbar_computePerturbedFreeEnergeies
+  /workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/upstream/pymbar/pymbar/mbar.py:1394: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    diag = np.matrix(cov.diagonal())
+
+pymbar/tests/test_mbar.py::test_mbar_computeExpectations_position_differences
+  /workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/upstream/pymbar/pymbar/mbar.py:919: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    A_im = np.matrix(inner_results['observables'])
+
+pymbar/tests/test_mbar.py::test_mbar_computeExpectations_position_differences
+pymbar/tests/test_mbar.py::test_mbar_computeExpectations_position_differences
+  /workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/upstream/pymbar/pymbar/tests/test_mbar.py:23: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    xa_ij = np.array(np.matrix(xa) - np.matrix(xa).transpose())
+
+pymbar/tests/test_mbar.py::test_mbar_computePerturbedFreeEnergeies
+  /workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/upstream/pymbar/pymbar/mbar.py:1080: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    f_k = np.matrix(inner_results['free energies'])
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/pymbar38_numpy117_baseline.xml -
+=========================== short test summary info ============================
+FAILED pymbar/tests/test_mbar.py::test_sample - TypeError: 'numpy.float64' ob...
+FAILED pymbar/tests/test_mbar.py::test_mbar_free_energies - TypeError: 'numpy...
+FAILED pymbar/tests/test_mbar.py::test_mbar_computeExpectations_position_averages
+FAILED pymbar/tests/test_mbar.py::test_mbar_computeExpectations_position_differences
+FAILED pymbar/tests/test_mbar.py::test_mbar_computeExpectations_position2 - T...
+FAILED pymbar/tests/test_mbar.py::test_mbar_computeExpectations_potential - T...
+FAILED pymbar/tests/test_mbar.py::test_mbar_computeMultipleExpectations - Typ...
+FAILED pymbar/tests/test_mbar.py::test_mbar_computeEntropyAndEnthalpy - Value...
+FAILED pymbar/tests/test_mbar.py::test_mbar_computeEffectiveSampleNumber - Ty...
+FAILED pymbar/tests/test_mbar.py::test_mbar_computeOverlap - TypeError: slice...
+FAILED pymbar/tests/test_mbar.py::test_mbar_getWeights - TypeError: 'numpy.fl...
+FAILED pymbar/tests/test_mbar.py::test_mbar_computePerturbedFreeEnergeies - T...
+FAILED pymbar/tests/test_mbar.py::test_mbar_computeExpectationsInner - TypeEr...
+13 failed, 2 passed, 121 warnings in 0.68s

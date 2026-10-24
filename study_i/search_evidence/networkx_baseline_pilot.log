@@ -1,0 +1,35 @@
+E
+======================================================================
+ERROR: Failure: ModuleNotFoundError (No module named 'decorator')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/pymbar38/lib/python3.8/site-packages/nose/failure.py", line 39, in runTest
+    raise self.exc_val.with_traceback(self.tb)
+  File "/workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/pymbar38/lib/python3.8/site-packages/nose/loader.py", line 417, in loadTestsFromName
+    module = self.importer.importFromPath(
+  File "/workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/pymbar38/lib/python3.8/site-packages/nose/importer.py", line 47, in importFromPath
+    return self.importFromDir(dir_path, fqname)
+  File "/workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/pymbar38/lib/python3.8/site-packages/nose/importer.py", line 94, in importFromDir
+    mod = load_module(part_fqname, fh, filename, desc)
+  File "/root/.local/share/uv/python/cpython-3.8-linux-x86_64-gnu/lib/python3.8/imp.py", line 234, in load_module
+    return load_source(name, filename, file)
+  File "/root/.local/share/uv/python/cpython-3.8-linux-x86_64-gnu/lib/python3.8/imp.py", line 171, in load_source
+    module = _load(spec)
+  File "<frozen importlib._bootstrap>", line 702, in _load
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 843, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/upstream/networkx/networkx/drawing/tests/test_layout.py", line 5, in <module>
+    import networkx as nx
+  File "/workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/upstream/networkx/networkx/__init__.py", line 68, in <module>
+    import networkx.utils
+  File "/workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/upstream/networkx/networkx/utils/__init__.py", line 2, in <module>
+    from networkx.utils.decorators import *
+  File "/workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/upstream/networkx/networkx/utils/decorators.py", line 7, in <module>
+    from decorator import decorator
+ModuleNotFoundError: No module named 'decorator'
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (errors=1)

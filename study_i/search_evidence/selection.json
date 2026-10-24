@@ -1,0 +1,25 @@
+{
+  "status": "EXPLORATORY_DISCOVERY_NOT_PROSPECTIVE_EVALUATION",
+  "recorded_utc": "2026-10-23T19:23:52.462967+00:00",
+  "gatekeeper_commit": "13edea776af145ec897a1a992e9d7e054043ca25",
+  "order": "user supplied: SQLAlchemy, peewee, Pony",
+  "eligibility": "unchanged upstream behavioral tests PASS on original and FAIL after frozen transform applied to production source only; no external database; pinned commit; open-source license",
+  "candidates": [
+    {
+      "id": "sqlalchemy",
+      "repo": "sqlalchemy/sqlalchemy",
+      "commit": "10f4d1e2d706a7722ca78e79ce05b00333a7aa5b"
+    },
+    {
+      "id": "peewee",
+      "repo": "coleifer/peewee",
+      "commit": "beae2f0cf902841c8f72038b1e6f57faa8870ac4"
+    },
+    {
+      "id": "pony",
+      "repo": "ponyorm/pony",
+      "commit": "07136c853b180a5987523877a471a90296a5e2d8"
+    }
+  ],
+  "existing_study_G": "FROZEN; no mutation or pooling with its original primary results"
+}
