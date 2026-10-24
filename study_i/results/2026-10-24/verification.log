@@ -1,0 +1,8 @@
+VERIFIED_RAW sqlalchemy runs 6 draws 600 regressions 9 resolved 0
+VERIFIED_RAW networkx runs 18 draws 600 regressions 0 resolved 1
+{
+  "status": "VERIFIED_EXPLORATORY",
+  "admitted_diagnostic_cells": [
+    "I2_networkx/given_positions"
+  ]
+}

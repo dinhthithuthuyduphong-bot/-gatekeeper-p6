@@ -1,0 +1,20 @@
+[
+  {
+    "case": "missing_draw",
+    "returncode": 1,
+    "failed_closed": true,
+    "log": "missing_draw_negative_check.log"
+  },
+  {
+    "case": "altered_label",
+    "returncode": 1,
+    "failed_closed": true,
+    "log": "altered_label_negative_check.log"
+  },
+  {
+    "case": "empty_result",
+    "returncode": 1,
+    "failed_closed": true,
+    "log": "empty_result_negative_check.log"
+  }
+]

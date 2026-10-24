@@ -1,0 +1,13 @@
+COMMAND ["/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python", "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/main_update/study_i/verify.py", "--gatekeeper", "/workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/gatekeeper", "--results", "/tmp/gk_i_corruption_yzv37jwz/results", "--output", "/tmp/gk_i_corruption_yzv37jwz/audit"]
+RETURN_CODE 1
+VERIFIED_RAW sqlalchemy runs 6 draws 600 regressions 9 resolved 0
+Traceback (most recent call last):
+  File "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/main_update/study_i/verify.py", line 203, in <module>
+    main()
+  File "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/main_update/study_i/verify.py", line 176, in main
+    cells += audit_target(args.results / name, name, target, cfg["diagnostic_draws"], digest(HERE / "targets.json"))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/main_update/study_i/verify.py", line 39, in audit_target
+    require(result["status"] == "VERIFIED_EXPLORATORY", "Incomplete target: " + name)
+            ~~~~~~^^^^^^^^^^
+KeyError: 'status'

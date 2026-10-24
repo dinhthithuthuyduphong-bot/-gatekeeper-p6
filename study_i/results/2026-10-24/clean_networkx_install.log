@@ -1,0 +1,16 @@
+Using CPython 3.8.20
+Creating virtual environment at: skill2_extension_20261024/clean_networkx_env
+Using Python 3.8.20 environment at: skill2_extension_20261024/clean_networkx_env
+Resolved 6 packages in 9.21s
+Downloading scipy (24.8MiB)
+Downloading numpy (19.5MiB)
+ Downloaded numpy
+ Downloaded scipy
+Prepared 6 packages in 2.82s
+Installed 6 packages in 65ms
+ + decorator==4.4.2
+ + nose==1.3.7
+ + numpy==1.17.5
+ + scipy==1.4.1
+ + setuptools==68.2.2
+ + six==1.17.0

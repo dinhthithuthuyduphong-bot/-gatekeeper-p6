@@ -1,0 +1,232 @@
+RUN ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/baseline_census_1.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/baseline
+/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/baseline/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+......................................................
+----------------------------------------------------------------------
+Ran 54 tests in 0.594s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/baseline_census_1.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/baseline", "returncode": 0, "seconds": 2.6378145959999983, "log": "baseline_census_1.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/baseline_census_2.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/baseline
+/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/baseline/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+......................................................
+----------------------------------------------------------------------
+Ran 54 tests in 0.662s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/baseline_census_2.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/baseline", "returncode": 0, "seconds": 3.261269181999978, "log": "baseline_census_2.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/baseline_census_3.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/baseline
+/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/baseline/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+......................................................
+----------------------------------------------------------------------
+Ran 54 tests in 0.344s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/baseline_census_3.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/baseline", "returncode": 0, "seconds": 2.169608607999976, "log": "baseline_census_3.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/main_update/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/baseline_witness_1.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/baseline
+/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/baseline/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+E
+======================================================================
+ERROR: networkx_1_11_test_layout.TestLayout.test_spring_args
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/baseline/networkx/drawing/layout.py", line 292, in fruchterman_reingold_layout
+    raise ValueError
+ValueError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/lib/python3.8/site-packages/nose/case.py", line 198, in runTest
+    self.test(*self.arg)
+  File "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/main_update/study_i/vendor/networkx_1_11_test_layout.py", line 124, in test_spring_args
+    vpos = nx.spring_layout(G, fixed=[0,1], pos={1:(0,0), 2:(1,1)})
+  File "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/baseline/networkx/drawing/layout.py", line 305, in fruchterman_reingold_layout
+    pos = _fruchterman_reingold(A, dim, k, pos_arr, fixed, iterations)
+  File "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/baseline/networkx/drawing/layout.py", line 330, in _fruchterman_reingold
+    if pos==None:
+ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+
+----------------------------------------------------------------------
+Ran 1 test in 0.010s
+
+FAILED (errors=1)
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/main_update/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/baseline_witness_1.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/baseline", "returncode": 1, "seconds": 2.1591581179999366, "log": "baseline_witness_1.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/main_update/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/baseline_witness_2.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/baseline
+/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/baseline/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+E
+======================================================================
+ERROR: networkx_1_11_test_layout.TestLayout.test_spring_args
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/baseline/networkx/drawing/layout.py", line 292, in fruchterman_reingold_layout
+    raise ValueError
+ValueError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/lib/python3.8/site-packages/nose/case.py", line 198, in runTest
+    self.test(*self.arg)
+  File "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/main_update/study_i/vendor/networkx_1_11_test_layout.py", line 124, in test_spring_args
+    vpos = nx.spring_layout(G, fixed=[0,1], pos={1:(0,0), 2:(1,1)})
+  File "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/baseline/networkx/drawing/layout.py", line 305, in fruchterman_reingold_layout
+    pos = _fruchterman_reingold(A, dim, k, pos_arr, fixed, iterations)
+  File "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/baseline/networkx/drawing/layout.py", line 330, in _fruchterman_reingold
+    if pos==None:
+ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+
+----------------------------------------------------------------------
+Ran 1 test in 0.010s
+
+FAILED (errors=1)
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/main_update/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/baseline_witness_2.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/baseline", "returncode": 1, "seconds": 1.7187916089999362, "log": "baseline_witness_2.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/main_update/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/baseline_witness_3.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/baseline
+/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/baseline/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+E
+======================================================================
+ERROR: networkx_1_11_test_layout.TestLayout.test_spring_args
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/baseline/networkx/drawing/layout.py", line 292, in fruchterman_reingold_layout
+    raise ValueError
+ValueError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/lib/python3.8/site-packages/nose/case.py", line 198, in runTest
+    self.test(*self.arg)
+  File "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/main_update/study_i/vendor/networkx_1_11_test_layout.py", line 124, in test_spring_args
+    vpos = nx.spring_layout(G, fixed=[0,1], pos={1:(0,0), 2:(1,1)})
+  File "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/baseline/networkx/drawing/layout.py", line 305, in fruchterman_reingold_layout
+    pos = _fruchterman_reingold(A, dim, k, pos_arr, fixed, iterations)
+  File "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/baseline/networkx/drawing/layout.py", line 330, in _fruchterman_reingold
+    if pos==None:
+ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+
+----------------------------------------------------------------------
+Ran 1 test in 0.009s
+
+FAILED (errors=1)
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/main_update/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/baseline_witness_3.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/baseline", "returncode": 1, "seconds": 1.951064745999929, "log": "baseline_witness_3.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/treated_census_1.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/treated
+/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/treated/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+......................................................
+----------------------------------------------------------------------
+Ran 54 tests in 0.293s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/treated_census_1.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/treated", "returncode": 0, "seconds": 2.1060203279999996, "log": "treated_census_1.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/treated_census_2.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/treated
+/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/treated/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+......................................................
+----------------------------------------------------------------------
+Ran 54 tests in 0.377s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/treated_census_2.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/treated", "returncode": 0, "seconds": 2.215269637000006, "log": "treated_census_2.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/treated_census_3.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/treated
+/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/treated/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+......................................................
+----------------------------------------------------------------------
+Ran 54 tests in 0.656s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/treated_census_3.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/treated", "returncode": 0, "seconds": 2.6843729290000056, "log": "treated_census_3.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/main_update/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/treated_witness_1.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/treated
+/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/treated/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.042s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/main_update/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/treated_witness_1.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/treated", "returncode": 0, "seconds": 7.805194966000045, "log": "treated_witness_1.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/main_update/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/treated_witness_2.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/treated
+/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/treated/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.021s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/main_update/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/treated_witness_2.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/treated", "returncode": 0, "seconds": 11.044426557000065, "log": "treated_witness_2.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/main_update/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/treated_witness_3.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/treated
+/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/treated/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.019s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/main_update/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/treated_witness_3.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/treated", "returncode": 0, "seconds": 1.6135585219999484, "log": "treated_witness_3.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/gold_census_1.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/gold
+/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/gold/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+......................................................
+----------------------------------------------------------------------
+Ran 54 tests in 0.299s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/gold_census_1.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/gold", "returncode": 0, "seconds": 2.005012283000042, "log": "gold_census_1.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/gold_census_2.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/gold
+/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/gold/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+......................................................
+----------------------------------------------------------------------
+Ran 54 tests in 0.672s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/gold_census_2.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/gold", "returncode": 0, "seconds": 2.5778899709999905, "log": "gold_census_2.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/gold_census_3.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/gold
+/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/gold/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+......................................................
+----------------------------------------------------------------------
+Ran 54 tests in 0.370s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/gold_census_3.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/gold", "returncode": 0, "seconds": 2.6271668780000255, "log": "gold_census_3.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/main_update/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/gold_witness_1.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/gold
+/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/gold/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.038s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/main_update/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/gold_witness_1.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/gold", "returncode": 0, "seconds": 1.8884801620000644, "log": "gold_witness_1.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/main_update/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/gold_witness_2.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/gold
+/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/gold/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.022s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/main_update/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/gold_witness_2.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/gold", "returncode": 0, "seconds": 1.7617193130000715, "log": "gold_witness_2.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/main_update/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/gold_witness_3.xml", "-v"] CWD /workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/gold
+/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/gold/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.026s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/main_update/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/gold_witness_3.xml", "-v"], "cwd": "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_replay/networkx/work/gold", "returncode": 0, "seconds": 1.7144747759999746, "log": "gold_witness_3.log"}
+DRAW_PROGRESS I2_networkx given_positions 100
+DRAW_PROGRESS I2_networkx given_positions 200
+DRAW_PROGRESS I2_networkx given_positions 300
+DRAW_PROGRESS I2_networkx default_positions 100
+DRAW_PROGRESS I2_networkx default_positions 200
+DRAW_PROGRESS I2_networkx default_positions 300
+VERIFIED I2_networkx regressions 0 resolved 1
