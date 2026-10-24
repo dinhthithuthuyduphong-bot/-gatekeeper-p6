@@ -1,0 +1,120 @@
+{
+  "status": "RUNNING_EXPLORATORY",
+  "target": "I1_sqlalchemy",
+  "started_utc": "2026-10-24T08:39:48.507873+00:00",
+  "upstream_revision": "10f4d1e2d706a7722ca78e79ce05b00333a7aa5b",
+  "gatekeeper_commit": "13edea776af145ec897a1a992e9d7e054043ca25",
+  "target_config": {
+    "target_id": "I1_sqlalchemy",
+    "repository": "sqlalchemy/sqlalchemy",
+    "revision": "10f4d1e2d706a7722ca78e79ce05b00333a7aa5b",
+    "python": [
+      3,
+      12
+    ],
+    "modules": [
+      "lib/sqlalchemy/ext/associationproxy.py",
+      "lib/sqlalchemy/orm/relationships.py",
+      "lib/sqlalchemy/sql/schema.py"
+    ],
+    "census": [
+      "test/ext/test_associationproxy.py",
+      "test/orm/test_query.py",
+      "test/sql/test_metadata.py"
+    ],
+    "pythonpath": [
+      "lib"
+    ],
+    "test_runner": "pytest",
+    "site_count": 4,
+    "direction": "harmful",
+    "draw_oracle": "oracles/sqlalchemy_null.py",
+    "oracle_provenance": "Unchanged upstream tests at the target revision. The custom draw adapter is separate, researcher-authored evidence."
+  },
+  "config_sha256": "52d633b3efd4e38012ff6de99f569ab27a511a60e9ec03c20877fd7605170fe6",
+  "study_code_sha256": {
+    "run.py": "8e79c5d21f8e614a7e90255328f50f5a09345aac372c81b83112382020a58cad",
+    "oracles/sqlalchemy_null.py": "04c669646b04a4e71f4db969b5c4048cbb2756d6556b31c2986c8bc321eea80c",
+    "oracles/networkx_layout.py": "6b431de30090527085ea024d2e49928211be43e34c645f6c1a87a1c57e84ec67",
+    "vendor/networkx_1_11_test_layout.py": "2c9f3207b5e24bc146d31610e06de6f1ffafa3588eb7e665539a79ef263c196e",
+    "vendor/networkx_layout_gold.py": "d41befbbc267be478bb14149adf014497465e76d9e7f5d1d84a14e56b7d03e66"
+  },
+  "source_and_test_sha256": {
+    "lib/sqlalchemy/ext/associationproxy.py": "8b98e9cb191d10d2d45f66cac540eb1b54cd98ccf9cdeb87759abcbf9a87ddb2",
+    "lib/sqlalchemy/orm/relationships.py": "86e0d2bd480ac4a9ace73723de358c281aa811acecd3ebe352b9f51e9d9e9d73",
+    "lib/sqlalchemy/sql/schema.py": "bfe1792d4ae85c53754e32b3e2af5b8f6f73ea07fba007be9377a3c30f35fb45",
+    "test/ext/test_associationproxy.py": "74b7f5c6714f77a59d024657bdbdefc8f4543fcb9df11edeb5159d9e4b10212f",
+    "test/orm/test_query.py": "a61b55ee63d0ed18077440f2011a037f2dce315079119307955708048ae67050",
+    "test/sql/test_metadata.py": "2b3d6f60963a89e7420efcd67effecb0cf9d8f8755a74872cf3d831103332862"
+  },
+  "bindings": [
+    {
+      "module": "lib/sqlalchemy/ext/associationproxy.py",
+      "skill": "none-identity",
+      "line": 1281,
+      "function": "__eq__"
+    },
+    {
+      "module": "lib/sqlalchemy/ext/associationproxy.py",
+      "skill": "none-identity",
+      "line": 1346,
+      "function": "__eq__"
+    },
+    {
+      "module": "lib/sqlalchemy/orm/relationships.py",
+      "skill": "none-identity",
+      "line": 1145,
+      "function": "__negated_contains_or_equals"
+    },
+    {
+      "module": "lib/sqlalchemy/sql/schema.py",
+      "skill": "none-identity",
+      "line": 4399,
+      "function": "_as_dict"
+    }
+  ],
+  "source_replay": {
+    "passed": true,
+    "checks": [
+      {
+        "example": "replay/get_delays_before.py",
+        "passed": true,
+        "heldout": false
+      }
+    ]
+  },
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "environment": [
+    [
+      "greenlet",
+      "3.5.6"
+    ],
+    [
+      "iniconfig",
+      "2.3.1"
+    ],
+    [
+      "packaging",
+      "26.3"
+    ],
+    [
+      "pip",
+      "25.0.1"
+    ],
+    [
+      "pluggy",
+      "1.7.0"
+    ],
+    [
+      "pytest",
+      "8.3.5"
+    ],
+    [
+      "typing_extensions",
+      "4.16.0"
+    ]
+  ],
+  "llm_calls": 0,
+  "model_cost_usd": 0,
+  "runs": []
+}
