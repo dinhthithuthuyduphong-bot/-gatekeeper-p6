@@ -1,0 +1,28 @@
+/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/measured/networkx/work/baseline/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+E
+======================================================================
+ERROR: networkx_1_11_test_layout.TestLayout.test_spring_args
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/measured/networkx/work/baseline/networkx/drawing/layout.py", line 292, in fruchterman_reingold_layout
+    raise ValueError
+ValueError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/scratch/cde4f976cfa9/orm_target_audit_20261024/pymbar38/lib/python3.8/site-packages/nose/case.py", line 198, in runTest
+    self.test(*self.arg)
+  File "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/main_update/study_i/vendor/networkx_1_11_test_layout.py", line 124, in test_spring_args
+    vpos = nx.spring_layout(G, fixed=[0,1], pos={1:(0,0), 2:(1,1)})
+  File "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/measured/networkx/work/baseline/networkx/drawing/layout.py", line 305, in fruchterman_reingold_layout
+    pos = _fruchterman_reingold(A, dim, k, pos_arr, fixed, iterations)
+  File "/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/measured/networkx/work/baseline/networkx/drawing/layout.py", line 330, in _fruchterman_reingold
+    if pos==None:
+ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+
+----------------------------------------------------------------------
+Ran 1 test in 0.017s
+
+FAILED (errors=1)

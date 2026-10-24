@@ -1,0 +1,75 @@
+{
+  "status": "VERIFIED_EXPLORATORY",
+  "not_preregistered": true,
+  "model_calls": 0,
+  "B9": "HOLD",
+  "cells": [
+    {
+      "cell": "I1_sqlalchemy/null_semantics",
+      "raw_decision": "REJECT_HARM",
+      "draws_to_stop": 3,
+      "full_counts": {
+        "help": 0,
+        "tie": 69,
+        "hurt": 231,
+        "harness_error": 0
+      },
+      "e_for_family": 0.0,
+      "census_veto": true,
+      "gatekeeper_seconds": 3.094,
+      "full_draw_seconds": 20.9258,
+      "final_decision": "REJECT_CENSUS"
+    },
+    {
+      "cell": "I1_sqlalchemy/plain_queries",
+      "raw_decision": "UNDECIDED",
+      "draws_to_stop": 300,
+      "full_counts": {
+        "help": 0,
+        "tie": 300,
+        "hurt": 0,
+        "harness_error": 0
+      },
+      "e_for_family": 0.0,
+      "census_veto": true,
+      "gatekeeper_seconds": 13.4621,
+      "full_draw_seconds": 13.4621,
+      "final_decision": "REJECT_CENSUS"
+    },
+    {
+      "cell": "I2_networkx/given_positions",
+      "raw_decision": "ADMIT",
+      "draws_to_stop": 80,
+      "full_counts": {
+        "help": 300,
+        "tie": 0,
+        "hurt": 0,
+        "harness_error": 0
+      },
+      "e_for_family": 40.546935531670954,
+      "census_veto": false,
+      "gatekeeper_seconds": 1.8334,
+      "full_draw_seconds": 2.5061,
+      "final_decision": "ADMIT_DIAGNOSTIC"
+    },
+    {
+      "cell": "I2_networkx/default_positions",
+      "raw_decision": "UNDECIDED",
+      "draws_to_stop": 300,
+      "full_counts": {
+        "help": 0,
+        "tie": 300,
+        "hurt": 0,
+        "harness_error": 0
+      },
+      "e_for_family": 0.8803630364474071,
+      "census_veto": false,
+      "gatekeeper_seconds": 1.4716,
+      "full_draw_seconds": 1.4716,
+      "final_decision": "QUARANTINE"
+    }
+  ],
+  "admitted_diagnostic_cells": [
+    "I2_networkx/given_positions"
+  ]
+}

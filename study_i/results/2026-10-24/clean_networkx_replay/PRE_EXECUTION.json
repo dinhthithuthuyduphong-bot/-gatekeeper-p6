@@ -1,0 +1,115 @@
+{
+  "status": "RUNNING_EXPLORATORY",
+  "target": "I2_networkx",
+  "started_utc": "2026-10-24T08:47:28.262421+00:00",
+  "upstream_revision": "585bb3ee251ab681e7725c07e4e8a569a0e511d5",
+  "gatekeeper_commit": "13edea776af145ec897a1a992e9d7e054043ca25",
+  "target_config": {
+    "target_id": "I2_networkx",
+    "repository": "networkx/networkx",
+    "revision": "585bb3ee251ab681e7725c07e4e8a569a0e511d5",
+    "python": [
+      3,
+      8
+    ],
+    "modules": [
+      "networkx/drawing/layout.py"
+    ],
+    "census": [
+      "networkx/drawing/tests/test_layout.py",
+      "networkx/classes/tests/test_graph.py"
+    ],
+    "pythonpath": [],
+    "test_runner": "nose",
+    "site_count": 3,
+    "direction": "beneficial",
+    "draw_oracle": "oracles/networkx_layout.py",
+    "witness": {
+      "path": "vendor/networkx_1_11_test_layout.py",
+      "selector": ":TestLayout.test_spring_args",
+      "revision": "0b6f608d46601fb180a0f42eaa8a9a2ca9a42ecf",
+      "upstream_path": "networkx/drawing/tests/test_layout.py",
+      "upstream_blob_sha": "8366d252b129fbae894a443182be58855412e0a1"
+    },
+    "gold": {
+      "networkx/drawing/layout.py": "vendor/networkx_layout_gold.py"
+    },
+    "gold_revision": "2ae63c50fe8eb6647db18ee352bed08b21f21d91",
+    "oracle_provenance": "Unchanged test_spring_args from the later NetworkX 1.11 release, NOT a test added in the fix commit. Historical retrospective rediscovery; no new prospective claim."
+  },
+  "config_sha256": "52d633b3efd4e38012ff6de99f569ab27a511a60e9ec03c20877fd7605170fe6",
+  "study_code_sha256": {
+    "run.py": "8e79c5d21f8e614a7e90255328f50f5a09345aac372c81b83112382020a58cad",
+    "verify.py": "aaa563c26ac497758112bcb31e7b4e5b5c346ac964375aa4297f0f3689007f69",
+    "statelessness.py": "4bc1091cd94c882dcbc7f95940e54cfaa5f1ec551b05d440a2d2199924452c71",
+    "oracles/sqlalchemy_null.py": "04c669646b04a4e71f4db969b5c4048cbb2756d6556b31c2986c8bc321eea80c",
+    "oracles/networkx_layout.py": "6b431de30090527085ea024d2e49928211be43e34c645f6c1a87a1c57e84ec67",
+    "vendor/networkx_1_11_test_layout.py": "2c9f3207b5e24bc146d31610e06de6f1ffafa3588eb7e665539a79ef263c196e",
+    "vendor/networkx_layout_gold.py": "d41befbbc267be478bb14149adf014497465e76d9e7f5d1d84a14e56b7d03e66"
+  },
+  "source_and_test_sha256": {
+    "networkx/drawing/layout.py": "7bf380aa4af4f0d9a2b500460241e02ae2088be9dbad31f48d876ba3c6dea7cf",
+    "networkx/drawing/tests/test_layout.py": "090e4f6629616fdcd61e6e8d6755671828666648d6bb82217155d93af7e0f1a6",
+    "networkx/classes/tests/test_graph.py": "7de4cb2309091aecfa6a59f0fbe5044de630a7cd5265f7be9dfec3ad56c8d8fd"
+  },
+  "bindings": [
+    {
+      "module": "networkx/drawing/layout.py",
+      "skill": "none-identity",
+      "line": 330,
+      "function": "_fruchterman_reingold"
+    },
+    {
+      "module": "networkx/drawing/layout.py",
+      "skill": "none-identity",
+      "line": 401,
+      "function": "_sparse_fruchterman_reingold"
+    },
+    {
+      "module": "networkx/drawing/layout.py",
+      "skill": "none-identity",
+      "line": 409,
+      "function": "_sparse_fruchterman_reingold"
+    }
+  ],
+  "source_replay": {
+    "passed": true,
+    "checks": [
+      {
+        "example": "replay/get_delays_before.py",
+        "passed": true,
+        "heldout": false
+      }
+    ]
+  },
+  "python": "3.8.20 (default, Oct  2 2024, 16:34:12) \n[Clang 18.1.8 ]",
+  "environment": [
+    [
+      "decorator",
+      "4.4.2"
+    ],
+    [
+      "nose",
+      "1.3.7"
+    ],
+    [
+      "numpy",
+      "1.17.5"
+    ],
+    [
+      "scipy",
+      "1.4.1"
+    ],
+    [
+      "setuptools",
+      "68.2.2"
+    ],
+    [
+      "six",
+      "1.17.0"
+    ]
+  ],
+  "llm_calls": 0,
+  "model_cost_usd": 0,
+  "runs": []
+}

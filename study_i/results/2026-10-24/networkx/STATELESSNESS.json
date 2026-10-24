@@ -1,0 +1,19 @@
+{
+  "status": "STABLE_ON_CHECKED_DRAWS",
+  "seed": 20261024,
+  "chunk": 25,
+  "n_per_scope": 100,
+  "scopes": {
+    "given_positions": {
+      "compared": 100,
+      "mismatches": 0,
+      "harness_errors": 0
+    },
+    "default_positions": {
+      "compared": 100,
+      "mismatches": 0,
+      "harness_errors": 0
+    }
+  },
+  "seconds": 19.32334588799995
+}
