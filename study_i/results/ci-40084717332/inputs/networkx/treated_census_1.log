@@ -1,0 +1,7 @@
+/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/treated/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+......................................................
+----------------------------------------------------------------------
+Ran 54 tests in 0.113s
+
+OK

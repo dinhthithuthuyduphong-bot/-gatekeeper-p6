@@ -1,0 +1,42 @@
+--- a/lib/sqlalchemy/ext/associationproxy.py
++++ b/lib/sqlalchemy/ext/associationproxy.py
+@@ -1278,7 +1278,7 @@
+         if obj is None:
+             return or_(
+                 self._comparator.has(**{self.value_attr: obj}),
+-                self._comparator == None,
++                self._comparator is None,
+             )
+         else:
+             return self._comparator.has(**{self.value_attr: obj})
+@@ -1343,7 +1343,7 @@
+             self.remote_attr.operate(operators.eq, other)
+         )
+         if other is None:
+-            return or_(expr, self._comparator == None)
++            return or_(expr, self._comparator is None)
+         else:
+             return expr
+ 
+--- a/lib/sqlalchemy/orm/relationships.py
++++ b/lib/sqlalchemy/orm/relationships.py
+@@ -1142,7 +1142,7 @@
+                             sql.or_(
+                                 adapt(x)
+                                 != state_bindparam(adapt(x), state, y),
+-                                adapt(x) == None,
++                                adapt(x) is None,
+                             )
+                             for (x, y) in self.property.local_remote_pairs
+                         ]
+--- a/lib/sqlalchemy/sql/schema.py
++++ b/lib/sqlalchemy/sql/schema.py
+@@ -4396,7 +4396,7 @@
+                 "cycle": self.cycle,
+                 "cache": self.cache,
+             }.items()
+-            if v != None
++            if v is not None
+         }
+ 
+ 

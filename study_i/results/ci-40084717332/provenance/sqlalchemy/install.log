@@ -1,0 +1,22 @@
+Collecting greenlet==3.5.6 (from -r study_i/requirements-sqlalchemy.txt (line 1))
+  Downloading greenlet-3.5.6-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+Collecting iniconfig==2.3.1 (from -r study_i/requirements-sqlalchemy.txt (line 2))
+  Downloading iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)
+Collecting packaging==26.3 (from -r study_i/requirements-sqlalchemy.txt (line 3))
+  Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+Collecting pluggy==1.7.0 (from -r study_i/requirements-sqlalchemy.txt (line 4))
+  Downloading pluggy-1.7.0-py3-none-any.whl.metadata (5.0 kB)
+Collecting pytest==8.3.5 (from -r study_i/requirements-sqlalchemy.txt (line 5))
+  Downloading pytest-8.3.5-py3-none-any.whl.metadata (7.6 kB)
+Collecting typing_extensions==4.16.0 (from -r study_i/requirements-sqlalchemy.txt (line 6))
+  Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+Downloading greenlet-3.5.6-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (621 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 621.4/621.4 kB 14.9 MB/s  0:00:00
+Downloading iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+Downloading packaging-26.3-py3-none-any.whl (129 kB)
+Downloading pluggy-1.7.0-py3-none-any.whl (27 kB)
+Downloading pytest-8.3.5-py3-none-any.whl (343 kB)
+Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+Installing collected packages: typing_extensions, pluggy, packaging, iniconfig, greenlet, pytest
+
+Successfully installed greenlet-3.5.6 iniconfig-2.3.1 packaging-26.3 pluggy-1.7.0 pytest-8.3.5 typing_extensions-4.16.0

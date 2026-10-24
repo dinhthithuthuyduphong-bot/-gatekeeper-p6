@@ -1,0 +1,322 @@
+{
+  "run_id": 40084717332,
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40084717332",
+  "head_sha": "5292b6a16ab4e68a62c24032e44c2d99b327498e",
+  "conclusion": "success",
+  "status": "completed",
+  "event": "workflow_dispatch",
+  "run_attempt": 1,
+  "created_at": "2026-10-24T10:08:21Z",
+  "updated_at": "2026-10-24T10:10:06Z",
+  "jobs": [
+    {
+      "id": 120845176332,
+      "name": "reproduce (networkx, 3.8.20, ubuntu-22.04)",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 40084717332,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Initialize evidence before runtime setup",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Set up Python for SQLAlchemy",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 4
+        },
+        {
+          "name": "Install uv for the exact historical Python runtime",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Install Python 3.8.20 for NetworkX",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Install pinned local-test dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Reproduce upstream tests and generator diagnostics",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Record final job state even if setup failed",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Preserve raw evidence, including failed attempts",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Post Install uv for the exact historical Python runtime",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 19
+        },
+        {
+          "name": "Post Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 20
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 21
+        }
+      ]
+    },
+    {
+      "id": 120845176561,
+      "name": "reproduce (sqlalchemy, 3.12.14, ubuntu-24.04)",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 40084717332,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Initialize evidence before runtime setup",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Set up Python for SQLAlchemy",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Install uv for the exact historical Python runtime",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 5
+        },
+        {
+          "name": "Install Python 3.8.20 for NetworkX",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 6
+        },
+        {
+          "name": "Install pinned local-test dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Reproduce upstream tests and generator diagnostics",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Record final job state even if setup failed",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Preserve raw evidence, including failed attempts",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Post Set up Python for SQLAlchemy",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 19
+        },
+        {
+          "name": "Post Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 20
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 21
+        }
+      ]
+    },
+    {
+      "id": 120845444127,
+      "name": "audit",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 40084717332,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Initialize audit evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Run actions/setup-python@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Run actions/download-artifact@v8",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Audit all observations and the complete four-cell family",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Record final audit state",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Run actions/upload-artifact@v7",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Post Run actions/setup-python@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15
+        },
+        {
+          "name": "Post Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 17
+        }
+      ]
+    }
+  ],
+  "evidence_directory_on_run_commit": [
+    {
+      "path": "evidence/bootstrap_console.log",
+      "type": "file",
+      "size": 34258
+    },
+    {
+      "path": "evidence/bootstrap_result.json",
+      "type": "file",
+      "size": 758
+    },
+    {
+      "path": "evidence/failure_path_check.json",
+      "type": "file",
+      "size": 216
+    },
+    {
+      "path": "evidence/networkx_github_failure.log",
+      "type": "file",
+      "size": 15448
+    },
+    {
+      "path": "evidence/networkx_local",
+      "type": "dir",
+      "size": 0
+    },
+    {
+      "path": "evidence/original-study-i-zero-cost.yml",
+      "type": "file",
+      "size": 2619
+    },
+    {
+      "path": "evidence/python_manifest_check.json",
+      "type": "file",
+      "size": 917
+    },
+    {
+      "path": "evidence/sqlalchemy_github_success.log",
+      "type": "file",
+      "size": 205193
+    },
+    {
+      "path": "evidence/validate_bootstrap.py",
+      "type": "file",
+      "size": 2022
+    },
+    {
+      "path": "evidence/verification.json",
+      "type": "file",
+      "size": 1147
+    },
+    {
+      "path": "evidence/workflow.patch",
+      "type": "file",
+      "size": 4878
+    }
+  ]
+}

@@ -1,0 +1,241 @@
+RUN ["git", "init", "-q"] CWD /home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/upstream
+MEASURE {"command": ["git", "init", "-q"], "cwd": "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/upstream", "returncode": 0, "seconds": 0.0055692459999932, "log": "fetch_0.log"}
+RUN ["git", "fetch", "--depth=1", "https://github.com/networkx/networkx.git", "585bb3ee251ab681e7725c07e4e8a569a0e511d5"] CWD /home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/upstream
+From https://github.com/networkx/networkx
+ * branch            585bb3ee251ab681e7725c07e4e8a569a0e511d5 -> FETCH_HEAD
+MEASURE {"command": ["git", "fetch", "--depth=1", "https://github.com/networkx/networkx.git", "585bb3ee251ab681e7725c07e4e8a569a0e511d5"], "cwd": "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/upstream", "returncode": 0, "seconds": 0.43784066099999563, "log": "fetch_1.log"}
+RUN ["git", "checkout", "--detach", "FETCH_HEAD"] CWD /home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/upstream
+HEAD is now at 585bb3e Merge pull request #1669 from OrkoHunter/pip-upgrade
+MEASURE {"command": ["git", "checkout", "--detach", "FETCH_HEAD"], "cwd": "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/upstream", "returncode": 0, "seconds": 0.04458173599999782, "log": "fetch_2.log"}
+RUN ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/baseline_census_1.xml", "-v"] CWD /home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/baseline
+/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/baseline/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+......................................................
+----------------------------------------------------------------------
+Ran 54 tests in 0.112s
+
+OK
+MEASURE {"command": ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/baseline_census_1.xml", "-v"], "cwd": "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/baseline", "returncode": 0, "seconds": 1.0857993960000272, "log": "baseline_census_1.log"}
+RUN ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/baseline_census_2.xml", "-v"] CWD /home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/baseline
+/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/baseline/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+......................................................
+----------------------------------------------------------------------
+Ran 54 tests in 0.114s
+
+OK
+MEASURE {"command": ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/baseline_census_2.xml", "-v"], "cwd": "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/baseline", "returncode": 0, "seconds": 1.0734873279999988, "log": "baseline_census_2.log"}
+RUN ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/baseline_census_3.xml", "-v"] CWD /home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/baseline
+/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/baseline/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+......................................................
+----------------------------------------------------------------------
+Ran 54 tests in 0.110s
+
+OK
+MEASURE {"command": ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/baseline_census_3.xml", "-v"], "cwd": "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/baseline", "returncode": 0, "seconds": 1.0740141920000497, "log": "baseline_census_3.log"}
+RUN ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/baseline_witness_1.xml", "-v"] CWD /home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/baseline
+/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/baseline/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+E
+======================================================================
+ERROR: networkx_1_11_test_layout.TestLayout.test_spring_args
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/baseline/networkx/drawing/layout.py", line 292, in fruchterman_reingold_layout
+    raise ValueError
+ValueError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/work/_temp/study-i-networkx-venv/lib/python3.8/site-packages/nose/case.py", line 198, in runTest
+    self.test(*self.arg)
+  File "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/study_i/vendor/networkx_1_11_test_layout.py", line 124, in test_spring_args
+    vpos = nx.spring_layout(G, fixed=[0,1], pos={1:(0,0), 2:(1,1)})
+  File "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/baseline/networkx/drawing/layout.py", line 305, in fruchterman_reingold_layout
+    pos = _fruchterman_reingold(A, dim, k, pos_arr, fixed, iterations)
+  File "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/baseline/networkx/drawing/layout.py", line 330, in _fruchterman_reingold
+    if pos==None:
+ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+
+----------------------------------------------------------------------
+Ran 1 test in 0.006s
+
+FAILED (errors=1)
+MEASURE {"command": ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/baseline_witness_1.xml", "-v"], "cwd": "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/baseline", "returncode": 1, "seconds": 0.9437804390000224, "log": "baseline_witness_1.log"}
+RUN ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/baseline_witness_2.xml", "-v"] CWD /home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/baseline
+/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/baseline/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+E
+======================================================================
+ERROR: networkx_1_11_test_layout.TestLayout.test_spring_args
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/baseline/networkx/drawing/layout.py", line 292, in fruchterman_reingold_layout
+    raise ValueError
+ValueError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/work/_temp/study-i-networkx-venv/lib/python3.8/site-packages/nose/case.py", line 198, in runTest
+    self.test(*self.arg)
+  File "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/study_i/vendor/networkx_1_11_test_layout.py", line 124, in test_spring_args
+    vpos = nx.spring_layout(G, fixed=[0,1], pos={1:(0,0), 2:(1,1)})
+  File "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/baseline/networkx/drawing/layout.py", line 305, in fruchterman_reingold_layout
+    pos = _fruchterman_reingold(A, dim, k, pos_arr, fixed, iterations)
+  File "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/baseline/networkx/drawing/layout.py", line 330, in _fruchterman_reingold
+    if pos==None:
+ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+
+----------------------------------------------------------------------
+Ran 1 test in 0.006s
+
+FAILED (errors=1)
+MEASURE {"command": ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/baseline_witness_2.xml", "-v"], "cwd": "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/baseline", "returncode": 1, "seconds": 0.9341030890000184, "log": "baseline_witness_2.log"}
+RUN ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/baseline_witness_3.xml", "-v"] CWD /home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/baseline
+/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/baseline/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+E
+======================================================================
+ERROR: networkx_1_11_test_layout.TestLayout.test_spring_args
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/baseline/networkx/drawing/layout.py", line 292, in fruchterman_reingold_layout
+    raise ValueError
+ValueError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/work/_temp/study-i-networkx-venv/lib/python3.8/site-packages/nose/case.py", line 198, in runTest
+    self.test(*self.arg)
+  File "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/study_i/vendor/networkx_1_11_test_layout.py", line 124, in test_spring_args
+    vpos = nx.spring_layout(G, fixed=[0,1], pos={1:(0,0), 2:(1,1)})
+  File "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/baseline/networkx/drawing/layout.py", line 305, in fruchterman_reingold_layout
+    pos = _fruchterman_reingold(A, dim, k, pos_arr, fixed, iterations)
+  File "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/baseline/networkx/drawing/layout.py", line 330, in _fruchterman_reingold
+    if pos==None:
+ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+
+----------------------------------------------------------------------
+Ran 1 test in 0.006s
+
+FAILED (errors=1)
+MEASURE {"command": ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/baseline_witness_3.xml", "-v"], "cwd": "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/baseline", "returncode": 1, "seconds": 0.9364295640000364, "log": "baseline_witness_3.log"}
+RUN ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/treated_census_1.xml", "-v"] CWD /home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/treated
+/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/treated/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+......................................................
+----------------------------------------------------------------------
+Ran 54 tests in 0.113s
+
+OK
+MEASURE {"command": ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/treated_census_1.xml", "-v"], "cwd": "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/treated", "returncode": 0, "seconds": 1.0908339220000016, "log": "treated_census_1.log"}
+RUN ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/treated_census_2.xml", "-v"] CWD /home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/treated
+/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/treated/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+......................................................
+----------------------------------------------------------------------
+Ran 54 tests in 0.118s
+
+OK
+MEASURE {"command": ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/treated_census_2.xml", "-v"], "cwd": "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/treated", "returncode": 0, "seconds": 1.0999629600000276, "log": "treated_census_2.log"}
+RUN ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/treated_census_3.xml", "-v"] CWD /home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/treated
+/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/treated/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+......................................................
+----------------------------------------------------------------------
+Ran 54 tests in 0.112s
+
+OK
+MEASURE {"command": ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/treated_census_3.xml", "-v"], "cwd": "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/treated", "returncode": 0, "seconds": 1.0903661959999909, "log": "treated_census_3.log"}
+RUN ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/treated_witness_1.xml", "-v"] CWD /home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/treated
+/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/treated/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.017s
+
+OK
+MEASURE {"command": ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/treated_witness_1.xml", "-v"], "cwd": "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/treated", "returncode": 0, "seconds": 0.9641178260000061, "log": "treated_witness_1.log"}
+RUN ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/treated_witness_2.xml", "-v"] CWD /home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/treated
+/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/treated/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.017s
+
+OK
+MEASURE {"command": ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/treated_witness_2.xml", "-v"], "cwd": "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/treated", "returncode": 0, "seconds": 1.0387319720000505, "log": "treated_witness_2.log"}
+RUN ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/treated_witness_3.xml", "-v"] CWD /home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/treated
+/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/treated/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.016s
+
+OK
+MEASURE {"command": ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/treated_witness_3.xml", "-v"], "cwd": "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/treated", "returncode": 0, "seconds": 0.9952107039999873, "log": "treated_witness_3.log"}
+RUN ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/gold_census_1.xml", "-v"] CWD /home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/gold
+/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/gold/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+......................................................
+----------------------------------------------------------------------
+Ran 54 tests in 0.151s
+
+OK
+MEASURE {"command": ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/gold_census_1.xml", "-v"], "cwd": "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/gold", "returncode": 0, "seconds": 1.1650120309999465, "log": "gold_census_1.log"}
+RUN ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/gold_census_2.xml", "-v"] CWD /home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/gold
+/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/gold/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+......................................................
+----------------------------------------------------------------------
+Ran 54 tests in 0.113s
+
+OK
+MEASURE {"command": ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/gold_census_2.xml", "-v"], "cwd": "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/gold", "returncode": 0, "seconds": 1.1251353819999963, "log": "gold_census_2.log"}
+RUN ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/gold_census_3.xml", "-v"] CWD /home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/gold
+/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/gold/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+......................................................
+----------------------------------------------------------------------
+Ran 54 tests in 0.111s
+
+OK
+MEASURE {"command": ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/gold_census_3.xml", "-v"], "cwd": "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/gold", "returncode": 0, "seconds": 1.0921307909999882, "log": "gold_census_3.log"}
+RUN ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/gold_witness_1.xml", "-v"] CWD /home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/gold
+/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/gold/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.016s
+
+OK
+MEASURE {"command": ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/gold_witness_1.xml", "-v"], "cwd": "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/gold", "returncode": 0, "seconds": 0.9475979540000026, "log": "gold_witness_1.log"}
+RUN ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/gold_witness_2.xml", "-v"] CWD /home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/gold
+/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/gold/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.016s
+
+OK
+MEASURE {"command": ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/gold_witness_2.xml", "-v"], "cwd": "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/gold", "returncode": 0, "seconds": 0.9443538300000114, "log": "gold_witness_2.log"}
+RUN ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/gold_witness_3.xml", "-v"] CWD /home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/gold
+/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/gold/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.016s
+
+OK
+MEASURE {"command": ["/home/runner/work/_temp/study-i-networkx-venv/bin/python", "-m", "nose", "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/study_i/vendor/networkx_1_11_test_layout.py:TestLayout.test_spring_args", "--with-xunit", "--xunit-file=/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/gold_witness_3.xml", "-v"], "cwd": "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/evidence/run/work/gold", "returncode": 0, "seconds": 0.9360143370000173, "log": "gold_witness_3.log"}
+DRAW_PROGRESS I2_networkx given_positions 100
+DRAW_PROGRESS I2_networkx given_positions 200
+DRAW_PROGRESS I2_networkx given_positions 300
+DRAW_PROGRESS I2_networkx default_positions 100
+DRAW_PROGRESS I2_networkx default_positions 200
+DRAW_PROGRESS I2_networkx default_positions 300
+VERIFIED I2_networkx regressions 0 resolved 1

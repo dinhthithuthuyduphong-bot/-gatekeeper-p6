@@ -1,0 +1,81 @@
+{
+  "run_id": 40084717332,
+  "head_sha": "5292b6a16ab4e68a62c24032e44c2d99b327498e",
+  "status": "PASS_WITH_DOCUMENTED_ENVIRONMENT_DIFFERENCE",
+  "model_calls": 0,
+  "B9": "HOLD",
+  "targets": {
+    "sqlalchemy": {
+      "runs_verified": 6,
+      "raw_draw_pairs": 600,
+      "state_order_pairs": 200,
+      "identical_draw_inputs_and_z_to_previous_local": true,
+      "raw_test_ids_identical_to_local": false,
+      "sqlite_version_in_ci_test_ids": "3.45.1",
+      "sqlite_version_in_local_test_ids": "3.53.1",
+      "test_identity_comparison": [
+        {
+          "arm": "baseline",
+          "repetition": 1,
+          "version_label_only_id_differences": 87,
+          "changed_functional_outcomes_after_label_mapping": 0
+        },
+        {
+          "arm": "baseline",
+          "repetition": 2,
+          "version_label_only_id_differences": 87,
+          "changed_functional_outcomes_after_label_mapping": 0
+        },
+        {
+          "arm": "baseline",
+          "repetition": 3,
+          "version_label_only_id_differences": 87,
+          "changed_functional_outcomes_after_label_mapping": 0
+        },
+        {
+          "arm": "treated",
+          "repetition": 1,
+          "version_label_only_id_differences": 87,
+          "changed_functional_outcomes_after_label_mapping": 0
+        },
+        {
+          "arm": "treated",
+          "repetition": 2,
+          "version_label_only_id_differences": 87,
+          "changed_functional_outcomes_after_label_mapping": 0
+        },
+        {
+          "arm": "treated",
+          "repetition": 3,
+          "version_label_only_id_differences": 87,
+          "changed_functional_outcomes_after_label_mapping": 0
+        }
+      ],
+      "counts_and_version_normalized_outcomes_identical": true
+    },
+    "networkx": {
+      "runs_verified": 18,
+      "raw_draw_pairs": 600,
+      "state_order_pairs": 200,
+      "identical_draw_inputs_and_z_to_previous_local": true,
+      "raw_test_ids_and_outcomes_identical_to_local": true
+    }
+  },
+  "input_archives": {
+    "study-i-verified.zip": {
+      "sha256": "2ba5ae7ef91e0d0e0753ea6797d17eef406f0f1a99fadbd4e9b1fbd3cdb15cd4",
+      "bytes": 530839
+    },
+    "study-i-sqlalchemy.zip": {
+      "sha256": "b20b4bcf5aa14a282c4d13774cfbc2e30997924c102a1ee6aaa17db4e934b702",
+      "bytes": 587308
+    },
+    "study-i-networkx.zip": {
+      "sha256": "3777961cd1226d71c8db149cea0d664d87e08ccea40a887fab71766fc2e46b3f",
+      "bytes": 547633
+    }
+  },
+  "all_70_target_files_match_verified_inputs_byte_for_byte": true,
+  "recomputed_family_matches_uploaded_family": true,
+  "caveat": "Old local bootstrap logs are bundled in target artifacts; excluded from counts. New run/ data preserved in full. SQLAlchemy local-vs-CI test IDs differ only by the documented SQLite version suffix."
+}

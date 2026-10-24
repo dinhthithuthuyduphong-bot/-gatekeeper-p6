@@ -1,0 +1,2 @@
+STATELESSNESS I1_sqlalchemy null_semantics {"compared": 100, "mismatches": 0, "harness_errors": 0}
+STATELESSNESS I1_sqlalchemy plain_queries {"compared": 100, "mismatches": 0, "harness_errors": 0}
