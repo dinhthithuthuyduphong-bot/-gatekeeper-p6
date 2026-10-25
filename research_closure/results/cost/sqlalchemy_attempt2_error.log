@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/tools/benchmark_admission_cost.py", line 136, in <module>
+    a=p.parse_args();benchmark(a.target,a.checkout,a.out,a.repetitions)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/tools/benchmark_admission_cost.py", line 32, in benchmark
+    out.mkdir(parents=True)
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+FileExistsError: [Errno 17] File exists: '/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/sqlalchemy'

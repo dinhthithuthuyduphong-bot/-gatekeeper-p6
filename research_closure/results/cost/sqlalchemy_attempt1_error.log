@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/tools/benchmark_admission_cost.py", line 136, in <module>
+    a=p.parse_args();benchmark(a.target,a.checkout,a.out,a.repetitions)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/tools/benchmark_admission_cost.py", line 47, in benchmark
+    'code_sha256':digest(__file__),'scope':'selected-module census + paired generated draws',
+                  ^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_i/run.py", line 27, in digest
+    return hashlib.sha256(p.read_bytes()).hexdigest()
+                          ^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'read_bytes'

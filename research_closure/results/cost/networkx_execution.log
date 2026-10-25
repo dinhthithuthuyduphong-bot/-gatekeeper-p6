@@ -1,0 +1,116 @@
+RUN ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/0_full_draws/baseline.xml", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py"] CWD /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/0_full_draws/work/baseline
+/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/0_full_draws/work/baseline/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+----------------------------------------------------------------------
+Ran 54 tests in 0.425s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/0_full_draws/baseline.xml", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py"], "cwd": "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/0_full_draws/work/baseline", "returncode": 0, "seconds": 1.3615494040000158, "log": "baseline.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/0_full_draws/treated.xml", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py"] CWD /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/0_full_draws/work/treated
+/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/0_full_draws/work/treated/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+----------------------------------------------------------------------
+Ran 54 tests in 0.190s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/0_full_draws/treated.xml", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py"], "cwd": "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/0_full_draws/work/treated", "returncode": 0, "seconds": 1.2801764179998827, "log": "treated.log"}
+MEASURED_POLICY {"rep": 0, "mode": "full_draws", "seconds": 6.666448861999925, "setup_copy_seconds": 0.15924754600018787, "census_seconds": 2.6417258219998985, "draw_pipeline_seconds": 3.8654628550000325, "paired_draws": 600}
+RUN ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/0_sequential/baseline.xml", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py"] CWD /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/0_sequential/work/baseline
+/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/0_sequential/work/baseline/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+----------------------------------------------------------------------
+Ran 54 tests in 0.197s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/0_sequential/baseline.xml", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py"], "cwd": "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/0_sequential/work/baseline", "returncode": 0, "seconds": 1.1925245400000222, "log": "baseline.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/0_sequential/treated.xml", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py"] CWD /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/0_sequential/work/treated
+/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/0_sequential/work/treated/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+----------------------------------------------------------------------
+Ran 54 tests in 0.173s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/0_sequential/treated.xml", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py"], "cwd": "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/0_sequential/work/treated", "returncode": 0, "seconds": 1.2621620459999576, "log": "treated.log"}
+MEASURED_POLICY {"rep": 0, "mode": "sequential", "seconds": 5.894551411000066, "setup_copy_seconds": 0.15721410600008312, "census_seconds": 2.45468658599998, "draw_pipeline_seconds": 3.282633236000038, "paired_draws": 380}
+RUN ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/1_sequential/baseline.xml", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py"] CWD /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/1_sequential/work/baseline
+/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/1_sequential/work/baseline/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+----------------------------------------------------------------------
+Ran 54 tests in 0.183s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/1_sequential/baseline.xml", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py"], "cwd": "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/1_sequential/work/baseline", "returncode": 0, "seconds": 1.3873788169998988, "log": "baseline.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/1_sequential/treated.xml", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py"] CWD /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/1_sequential/work/treated
+/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/1_sequential/work/treated/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+----------------------------------------------------------------------
+Ran 54 tests in 0.338s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/1_sequential/treated.xml", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py"], "cwd": "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/1_sequential/work/treated", "returncode": 0, "seconds": 1.4064495469999656, "log": "treated.log"}
+MEASURED_POLICY {"rep": 1, "mode": "sequential", "seconds": 6.136780672999976, "setup_copy_seconds": 0.22437508900020475, "census_seconds": 2.7938283639998645, "draw_pipeline_seconds": 3.118561455999952, "paired_draws": 380}
+RUN ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/1_full_draws/baseline.xml", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py"] CWD /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/1_full_draws/work/baseline
+/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/1_full_draws/work/baseline/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+----------------------------------------------------------------------
+Ran 54 tests in 0.189s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/1_full_draws/baseline.xml", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py"], "cwd": "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/1_full_draws/work/baseline", "returncode": 0, "seconds": 1.4152181060001112, "log": "baseline.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/1_full_draws/treated.xml", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py"] CWD /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/1_full_draws/work/treated
+/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/1_full_draws/work/treated/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+----------------------------------------------------------------------
+Ran 54 tests in 0.128s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/1_full_draws/treated.xml", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py"], "cwd": "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/1_full_draws/work/treated", "returncode": 0, "seconds": 0.9946090120001827, "log": "treated.log"}
+MEASURED_POLICY {"rep": 1, "mode": "full_draws", "seconds": 6.234116277000112, "setup_copy_seconds": 0.402223192999827, "census_seconds": 2.409827118000294, "draw_pipeline_seconds": 3.422050137000042, "paired_draws": 600}
+RUN ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/2_full_draws/baseline.xml", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py"] CWD /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/2_full_draws/work/baseline
+/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/2_full_draws/work/baseline/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+----------------------------------------------------------------------
+Ran 54 tests in 0.338s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/2_full_draws/baseline.xml", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py"], "cwd": "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/2_full_draws/work/baseline", "returncode": 0, "seconds": 1.18276350799988, "log": "baseline.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/2_full_draws/treated.xml", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py"] CWD /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/2_full_draws/work/treated
+/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/2_full_draws/work/treated/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+----------------------------------------------------------------------
+Ran 54 tests in 0.186s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/2_full_draws/treated.xml", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py"], "cwd": "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/2_full_draws/work/treated", "returncode": 0, "seconds": 1.3637599369999407, "log": "treated.log"}
+MEASURED_POLICY {"rep": 2, "mode": "full_draws", "seconds": 6.399315010000009, "setup_copy_seconds": 0.24100729800011322, "census_seconds": 2.5465234449998206, "draw_pipeline_seconds": 3.6117681150001317, "paired_draws": 600}
+RUN ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/2_sequential/baseline.xml", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py"] CWD /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/2_sequential/work/baseline
+/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/2_sequential/work/baseline/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+----------------------------------------------------------------------
+Ran 54 tests in 0.180s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/2_sequential/baseline.xml", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py"], "cwd": "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/2_sequential/work/baseline", "returncode": 0, "seconds": 1.0303548539998246, "log": "baseline.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/2_sequential/treated.xml", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py"] CWD /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/2_sequential/work/treated
+/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/2_sequential/work/treated/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+----------------------------------------------------------------------
+Ran 54 tests in 0.284s
+
+OK
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/skill2_extension_20261024/clean_networkx_env/bin/python", "-m", "nose", "--with-xunit", "--xunit-file=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/2_sequential/treated.xml", "networkx/drawing/tests/test_layout.py", "networkx/classes/tests/test_graph.py"], "cwd": "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/2_sequential/work/treated", "returncode": 0, "seconds": 1.1474594489998253, "log": "treated.log"}
+MEASURED_POLICY {"rep": 2, "mode": "sequential", "seconds": 5.449173501000132, "setup_copy_seconds": 0.24199904200031597, "census_seconds": 2.17781430299965, "draw_pipeline_seconds": 3.0293091399998957, "paired_draws": 380}
+# Chi phí chạy thật: I2_networkx
+
+Hậu kiểm trên target đã biết; 0 lượt gọi model. Cả hai chính sách trả cùng census và worker/snapshot setup.
+
+| Chính sách | Tổng giây TB | Census giây TB | Draw pipeline giây TB | Paired draws TB |
+|---|---|---|---|---|
+| sequential | 5.8268 | 2.4754 | 3.1435 | 380 |
+| full_draws | 6.4333 | 2.5327 | 3.6331 | 600 |
+
+Chênh lệch tổng thời gian trung bình: 9.43% ít hơn khi sequential (âm nghĩa là chậm hơn).
+Ba lần lặp thời gian trên cùng workload/seed không phải ba target độc lập; không suy ra speedup tổng quát.
+So sánh này đo dừng thật với tiếp tục đủ draws, không chứng minh thắng baseline chỉ chạy census.
+Census-only đã bắt được SQLAlchemy; phần draw bổ sung vẫn là overhead so với census-only trên case đó.
+Không cộng thời gian download/install vào warm evaluation. Raw log, XML, paired outcomes và số đo từng lần được giữ cạnh báo cáo.
