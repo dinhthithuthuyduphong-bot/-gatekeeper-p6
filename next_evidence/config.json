@@ -1,0 +1,80 @@
+{
+  "status": "PREPARED_NOT_EXECUTED",
+  "kind": "BASELINE_AND_EXPLORATORY_COST_FOLLOWUP",
+  "model_calls_allowed": false,
+  "api_budget_usd": 0,
+  "B9": "HOLD",
+  "repetitions": 3,
+  "pydantic": {
+    "repository": "pydantic/pydantic-settings",
+    "revision": "7e2dacb6db07b41abb0c80d0608e46e197265554",
+    "python": "3.12.14",
+    "tests": [
+      "tests/test_settings.py",
+      "tests/test_source_cli.py",
+      "tests/test_utils.py"
+    ],
+    "modules": [
+      "pydantic_settings/sources/providers/cli.py",
+      "pydantic_settings/sources/utils.py"
+    ],
+    "source_sha256": {
+      "pyproject.toml": "7bea6054e0da3b48f9860d8a0eae22d40f35f94ca6f427fe9f2a78ac375cbd08",
+      "uv.lock": "a6c5b41872992fbdd21621bed21c3d3ca592bc02ab0765530d35697708136534",
+      "tests/conftest.py": "b1b23287b68a42649df7259af095dece01eca18954f2699dae213f48899b7e3b",
+      "tests/test_settings.py": "19992278ecaa74576c9bbd2701d04300397d0a0eb11455b41809822a7134becc",
+      "tests/test_source_cli.py": "bd70fa0f7acf8936e68817eb0ca8034401313d64bf5bbc97675efb757ecf7744",
+      "tests/test_utils.py": "252c2fb52d2a93e27d9917643859bffcfe33711f9b69cb0120bac98a7ba5ea63",
+      "pydantic_settings/sources/providers/cli.py": "3355ec996ca275091750586cc528ec892f412d45a9b1bed8bf044ec51bf4a0a9",
+      "pydantic_settings/sources/utils.py": "212e13b3c59c93f2199b7b538db1f49bbc9dbcc2fd60ae3ad91b69459b621be6",
+      "LICENSE": "eb355a753e020346d33d83bf9769135b89fc610568ac531a01c295bcee7fd998"
+    },
+    "bool_sites": [
+      {
+        "file": "pydantic_settings/sources/providers/cli.py",
+        "line": 108,
+        "function": "_count_option_values"
+      },
+      {
+        "file": "pydantic_settings/sources/utils.py",
+        "line": 385,
+        "function": "_literal_has_numeric_enum"
+      },
+      {
+        "file": "pydantic_settings/sources/utils.py",
+        "line": 449,
+        "function": "_get_alias_names"
+      }
+    ],
+    "treatment_allowed": false
+  },
+  "airflow": {
+    "repository": "apache/airflow",
+    "revision": "b35972fc9c727065097f0654a40a0fe39890b204",
+    "source_sha256": {
+      "airflow/www/security.py": "93d997fcd9fbf40f094dc26464c72ce0c8e20bd2c72817d11c0f6cb10da45ab3",
+      "tests/www/test_security.py": "31598a549d4418206035fb833493c9ac90c8a1529906c8504a658afc87c6e875"
+    },
+    "test_focus_symbols": [
+      "clean_perms",
+      "sync_roles",
+      "PermissionView"
+    ],
+    "runtime_allowed": false
+  },
+  "cost": {
+    "targets": [
+      "sqlalchemy",
+      "networkx"
+    ],
+    "modes": [
+      "census_only",
+      "census_then_gate",
+      "census_then_full"
+    ],
+    "schedule_seed": 20261025,
+    "early_census_veto": true,
+    "b9_allowed": false,
+    "label": "EXPLORATORY_KNOWN_TARGET_COST_NOT_NEW_PROSPECTIVE_EVIDENCE"
+  }
+}

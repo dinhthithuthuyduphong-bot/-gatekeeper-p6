@@ -1,0 +1,35 @@
+[
+  {
+    "command": [
+      "git",
+      "init",
+      "-q"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "fetch",
+      "--depth=1",
+      "https://github.com/pydantic/pydantic-settings.git",
+      "7e2dacb6db07b41abb0c80d0608e46e197265554"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "From https://github.com/pydantic/pydantic-settings\n * branch            7e2dacb6db07b41abb0c80d0608e46e197265554 -> FETCH_HEAD\n"
+  },
+  {
+    "command": [
+      "git",
+      "checkout",
+      "--detach",
+      "FETCH_HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "HEAD is now at 7e2dacb Fix CliApp reconstruction of AliasPath inputs (#1096)\n"
+  }
+]

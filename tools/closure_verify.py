@@ -48,7 +48,8 @@ def main(output):
     if release['status']!='HOLD':raise RuntimeError('release gate was changed')
     # Parse workflow events with BaseLoader so YAML 1.1 does not turn `on` into True.
     import yaml
-    for name in ['study-i-zero-cost.yml','study-k-zero-cost.yml','research-closure-zero-cost.yml']:
+    for name in ['study-i-zero-cost.yml','study-k-zero-cost.yml','research-closure-zero-cost.yml',
+                 'next-evidence-zero-cost.yml']:
         path=ROOT/'.github/workflows'/name
         doc=yaml.load(path.read_text(),Loader=yaml.BaseLoader)
         if path.stat().st_size>500*1024 or 'workflow_dispatch' not in doc.get('on',{}):

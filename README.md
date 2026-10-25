@@ -1,5 +1,11 @@
 # Gatekeeper-Lite — kiểm soát rủi ro khi tái sử dụng kỹ năng sửa code
 
+**Lượt chuẩn bị tiếp theo 25/10/2026:** [kết quả đọc source và phần chưa chạy](next_evidence/STATUS_AND_SCAN_VI.md),
+[hướng dẫn chạy trên main](next_evidence/RUN_ON_GITHUB_VI.md). Có workflow quét 7
+snapshot, baseline Pydantic và so chi phí census-only/census-first. Code mới chỉ
+kiểm cấu trúc, chưa chạy thử; không có kết quả thực nghiệm mới trong lượt này.
+Các PASS bên dưới thuộc gói trước. B9 vẫn HOLD.
+
 **25/10/2026 — zero-cost follow-up:** [python-control result](study_k/RESULT_VI.md), [reproduce / raw audit](study_k/README.md). A retrospective beneficial transfer was reproduced; B9 remains HOLD. See [cumulative update instructions](research_closure/UPDATE_MAIN.md).
 
 

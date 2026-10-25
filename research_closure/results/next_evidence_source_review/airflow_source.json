@@ -1,0 +1,35 @@
+[
+  {
+    "command": [
+      "git",
+      "init",
+      "-q"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "fetch",
+      "--depth=1",
+      "https://github.com/apache/airflow.git",
+      "b35972fc9c727065097f0654a40a0fe39890b204"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "From https://github.com/apache/airflow\n * branch            b35972fc9c727065097f0654a40a0fe39890b204 -> FETCH_HEAD\n"
+  },
+  {
+    "command": [
+      "git",
+      "checkout",
+      "--detach",
+      "FETCH_HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "HEAD is now at b35972f Revert \"[AIRFLOW-5490] Fix incorrect None comparison (#6109)\" (#6222)\n"
+  }
+]

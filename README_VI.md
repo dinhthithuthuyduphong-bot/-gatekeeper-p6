@@ -1,5 +1,10 @@
 # Gatekeeper-Lite — bản demo end-to-end
 
+**Trạng thái mới nhất 25/10/2026:** đọc [báo cáo source](next_evidence/STATUS_AND_SCAN_VI.md)
+và [cách chạy workflow tiếp theo](next_evidence/RUN_ON_GITHUB_VI.md). Script mới
+chưa chạy thử; kết quả test cũ bên dưới không chứng nhận code follow-up. Artifact
+cần gửi lại là `next-evidence-return-a1` (hoặc attempt mới nhất); B9 vẫn HOLD.
+
 **25/10/2026 — zero-cost follow-up:** [python-control result](study_k/RESULT_VI.md), [reproduce / raw audit](study_k/README.md). A retrospective beneficial transfer was reproduced; B9 remains HOLD. See [cumulative update instructions](research_closure/UPDATE_MAIN.md).
 
 

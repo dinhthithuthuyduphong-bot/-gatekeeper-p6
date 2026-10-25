@@ -1,0 +1,45 @@
+{
+  "status": "PINNED_EXPLORATORY_STATIC_SEARCH_NO_EXECUTION",
+  "candidates": [
+    {
+      "id": "pydantic",
+      "repo": "pydantic/pydantic-settings",
+      "sha": "7e2dacb6db07b41abb0c80d0608e46e197265554"
+    },
+    {
+      "id": "airflow",
+      "repo": "apache/airflow",
+      "sha": "b35972fc9c727065097f0654a40a0fe39890b204"
+    },
+    {
+      "id": "pandas",
+      "repo": "pandas-dev/pandas",
+      "ref": "v1.5.3",
+      "sha": "2e218d10984e9919f0296931d92ea851c6a6faf5"
+    },
+    {
+      "id": "numpy",
+      "repo": "numpy/numpy",
+      "ref": "v1.24.4",
+      "sha": "9315a9072b2636f75c831b4eca9f42a5f67ca2fb"
+    },
+    {
+      "id": "sqlalchemy_utils",
+      "repo": "kvesteri/sqlalchemy-utils",
+      "ref": "0.36.8",
+      "sha": "9b300357637d5c97f9197ae5a6806d9156ac44da"
+    },
+    {
+      "id": "peewee",
+      "repo": "coleifer/peewee",
+      "ref": "2.10.2",
+      "sha": "761f9144a0e17381147a81658019cffe14c118ca"
+    },
+    {
+      "id": "pony",
+      "repo": "ponyorm/pony",
+      "ref": "v0.7.16",
+      "sha": "faa1277eba3c62260d4732240c63d68fa3b5805e"
+    }
+  ]
+}
