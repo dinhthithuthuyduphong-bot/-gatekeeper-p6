@@ -1,8 +1,8 @@
 {
   "experiment_id": "study-l-v1",
-  "status": "DRAFT",
+  "status": "FROZEN",
   "requires_freeze": true,
-  "seed_time_utc": "SET_AT_FREEZE",
+  "seed_time_utc": "2026-10-25T19:19:20Z",
   "purpose": "zero-cost go/no-go gates before any paid model run; thresholds in GATES.md are immutable",
   "gates": [
     "G1",
@@ -27,5 +27,6 @@
     "gatekeeper_ext/patch_rule.py",
     "gatekeeper_ext/mixture_cert.py",
     "gatekeeper_ext/__init__.py"
-  ]
+  ],
+  "frozen_on": "2026-10-25T18:19:20Z"
 }
