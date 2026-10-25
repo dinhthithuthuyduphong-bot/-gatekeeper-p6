@@ -1,7 +1,7 @@
 {
   "files": {
-    "study_l/config_study_l.json": "98a37da8542da438271612bcad019a48cac58efdcc8019e35e0a92eed5774057",
-    "study_l/AMENDMENTS.md": "9e85645a53d50aafd1d10387f08967b334f65a7a469fb13736d8fcd76dd9d99d",
+    "study_l/config_study_l.json": "b6c5595b7b9e73aeacc345be5598307fa4aea7dc60f093d7b0ee93763a628e53",
+    "study_l/AMENDMENTS.md": "a3d00a154ce3892a4218ed8086eb06f198c69aba439816a1c6b047913399b8f6",
     "gatekeeper_lite/__init__.py": "be8ddeba61bbc4885994020bcb9b4f19573f4a22b8a759b079e00e45c3f334e7",
     "gatekeeper_lite/__main__.py": "7aa7d5b275d60de01de9074e0bd8a864c99527435885098a2243986a48699e90",
     "gatekeeper_lite/b9.py": "80e274eb9e30f3f51870e2e7939e68fc199029e627d8cf20635ffc6f4b09128e",
@@ -36,11 +36,18 @@
     "tools/decision_sim.py": "3b5dff1b8564fe8a157f48d03d33a7363689a322a9ad9788238df2c9693b0ddd",
     "tools/freeze_study_d.py": "41ab867add07d9a11447c8f31ca16c0bb6aa0ffbfb59c086cbdcce58ca9777ec",
     "tools/clean_room_check.py": "edf6a671c7e1f268eac2acd54dd441c99cd6821ee84af1eecad748defdaf007b",
+    "gatekeeper_ext/__init__.py": "cfdbf2e9a84038bb5a688a08b24969940aecd604c407f217405ef30e96c87b46",
+    "gatekeeper_ext/golddiff.py": "6ae0d9c3c84ea93d261b1f141fd3b9f58b7d5029eb16ec377916d99a25dc2362",
+    "gatekeeper_ext/golddiff_oracle.py": "58a7b7a9174e6a5646380b4245f28219ea6723144adb25b6596616633298f69f",
+    "gatekeeper_ext/mixture_cert.py": "5f406d7c45391d4ec4db24d70120ff67c89bbb4bd123759df138ef03e20a2f59",
+    "gatekeeper_ext/mutants.py": "f4b34528c32e231c96774253996121de11d9c55ed4f16de56fc30a66f55ddc6c",
+    "gatekeeper_ext/patch_rule.py": "a47655aedf33b84da39f4620196af2d84a6f6d84a7c6dc62bed011808bf96010",
+    "gatekeeper_ext/record_run.py": "d3ce176f3f92e64cb5f0dd4f180203f69bcf883290d0672793ea13206b17cf78",
     "study_l/GATES.md": "a424a03e34f17cb033d4beb0bea93ddfd78928aa1474d5c6e7dbd93bfb57d7b6",
     "study_l/PHASE_DIAGRAM.md": "f4ce3fe7436bf47d2562f9978f64f4d777843a65679ecb40a4423c5527dc9e9f",
-    "tools/gate_phase_diagram.py": "26c5fddc2f54df2c5ca4af72031985b4ca5632a67a2c83a5bfee557985cbc78e",
-    "gatekeeper_ext/patch_rule.py": "a47655aedf33b84da39f4620196af2d84a6f6d84a7c6dc62bed011808bf96010",
-    "gatekeeper_ext/mixture_cert.py": "5f406d7c45391d4ec4db24d70120ff67c89bbb4bd123759df138ef03e20a2f59",
-    "gatekeeper_ext/__init__.py": "cfdbf2e9a84038bb5a688a08b24969940aecd604c407f217405ef30e96c87b46"
+    "tests/test_golddiff.py": "69e60b5e8f11ceb8019bac3315830089f819f5d92a01bfb54b04bb8b7bb493e8",
+    "tools/g1_check.py": "51fa8d63530262f6e53f683fef498b4a4c3d63a21caac4b50d43c62e9d0e2c0a",
+    "tools/g1_summary.py": "805ba5959e5846609504f9fcf928ddd3f0468f123631213231719986846ebb7e",
+    "tools/gate_phase_diagram.py": "26c5fddc2f54df2c5ca4af72031985b4ca5632a67a2c83a5bfee557985cbc78e"
   }
 }

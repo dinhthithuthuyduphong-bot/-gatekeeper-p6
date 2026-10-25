@@ -21,12 +21,32 @@
   "held_out_draws": 10000,
   "screen_size": 300,
   "extra_tracked": [
+    "gatekeeper_ext/__init__.py",
+    "gatekeeper_ext/golddiff.py",
+    "gatekeeper_ext/golddiff_oracle.py",
+    "gatekeeper_ext/mixture_cert.py",
+    "gatekeeper_ext/mutants.py",
+    "gatekeeper_ext/patch_rule.py",
+    "gatekeeper_ext/record_run.py",
     "study_l/GATES.md",
     "study_l/PHASE_DIAGRAM.md",
-    "tools/gate_phase_diagram.py",
-    "gatekeeper_ext/patch_rule.py",
-    "gatekeeper_ext/mixture_cert.py",
-    "gatekeeper_ext/__init__.py"
+    "tests/test_golddiff.py",
+    "tools/g1_check.py",
+    "tools/g1_summary.py",
+    "tools/gate_phase_diagram.py"
   ],
-  "frozen_on": "2026-10-25T18:19:20Z"
+  "frozen_on": "2026-10-25T18:19:20Z",
+  "seed_freeze_sha256": "ac222250fc2a95c55c51c89d1c037fb0f3e42e6b2050c261b11afeaedfb4a35b",
+  "amendments_applied": [
+    "L-A1"
+  ],
+  "amendment_log": [
+    {
+      "id": "L-A1",
+      "edits": [
+        "config_study_l.json:extra_tracked=[\"gatekeeper_ext/__init__.py\",\"gatekeeper_ext/golddiff.py\",\"gatekeeper_ext/golddiff_oracle.py\",\"gatekeeper_ext/mixture_cert.py\",\"gatekeeper_ext/mutants.py\",\"gatekeeper_ext/patch_rule.py\",\"gatekeeper_ext/record_run.py\",\"study_l/GATES.md\",\"study_l/PHASE_DIAGRAM.md\",\"tests/test_golddiff.py\",\"tools/g1_check.py\",\"tools/g1_summary.py\",\"tools/gate_phase_diagram.py\"]"
+      ],
+      "applied_utc": "2026-10-25T18:33:28+00:00"
+    }
+  ]
 }
