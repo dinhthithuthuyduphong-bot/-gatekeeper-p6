@@ -23,6 +23,8 @@ def main(output):
         records.append(row);print('CHECK',json.dumps(row),flush=True)
         (out/'CHECKS.json').write_text(json.dumps({'model_calls':0,'checks':records},indent=2))
         if p.returncode:raise RuntimeError(label+' failed; inspect '+str(out/(label+'.log')))
+    execute('study_k_evidence_inventory',['study_k/check_evidence_inventory.py',
+                                         '--out',str(out/'EVIDENCE_INVENTORY.json')])
     execute('unit_tests',['-m','unittest','discover','-s','tests','-v'])
     for study in ['study_d','study_e','study_f','study_g','study_h']:
         execute('freeze_'+study,['tools/freeze_study.py','verify',study])
