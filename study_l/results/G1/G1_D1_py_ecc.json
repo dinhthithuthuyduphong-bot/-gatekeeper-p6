@@ -1,0 +1,246 @@
+{
+  "seed": 467406173,
+  "n_draws": 300,
+  "modules": [
+    "py_ecc/fields/field_elements.py",
+    "py_ecc/fields/optimized_field_elements.py",
+    "py_ecc/bls/ciphersuites.py"
+  ],
+  "edited_functions": [
+    "FQ.__init__",
+    "FQ.__add__",
+    "FQ.__mul__",
+    "FQ.__rsub__",
+    "FQ.__sub__",
+    "FQ.__div__",
+    "FQ.__rdiv__",
+    "FQ.__eq__",
+    "FQ.__lt__",
+    "mod_int",
+    "FQ.__init__",
+    "FQ.__add__",
+    "FQ.__mul__",
+    "FQ.__rsub__",
+    "FQ.__sub__",
+    "FQ.__div__",
+    "FQ.__rdiv__",
+    "FQ.__eq__",
+    "FQ.__lt__",
+    "FQP.__init__",
+    "FQP.__mul__",
+    "FQP.__div__",
+    "BaseG2Ciphersuite._is_valid_privkey"
+  ],
+  "record_tail": "te[py_ecc.bn128]\n21.20s call     tests/core/test_bn128_and_bls12_381.py::test_pairing_negative_G2[py_ecc.bn128]\n15.86s call     tests/core/test_bn128_and_bls12_381.py::test_pairing_negative_G1[py_ecc.bls12_381]\n15.86s call     tests/core/test_bn128_and_bls12_381.py::test_pairing_composit_check[py_ecc.bls12_381]\n15.77s call     tests/core/test_bn128_and_bls12_381.py::test_pairing_bilinearity_on_G2[py_ecc.bls12_381]\n14.25s call     tests/core/test_bn128_and_bls12_381.py::test_pairing_bilinearity_on_G2[py_ecc.bn128]\n================== 210 passed, 4 skipped in 297.88s (0:04:57) ==================\n",
+  "recorded": [
+    {
+      "qualname": "FQ.__init__",
+      "calls": 300,
+      "note": null,
+      "unpicklable": 12228
+    },
+    {
+      "qualname": "FQ.__add__",
+      "calls": 300,
+      "note": null,
+      "unpicklable": 2332
+    },
+    {
+      "qualname": "FQ.__mul__",
+      "calls": 300,
+      "note": null,
+      "unpicklable": 4638
+    },
+    {
+      "qualname": "FQ.__rsub__",
+      "calls": 0,
+      "note": null,
+      "unpicklable": 94570
+    },
+    {
+      "qualname": "FQ.__sub__",
+      "calls": 300,
+      "note": null,
+      "unpicklable": 2298
+    },
+    {
+      "qualname": "FQ.__div__",
+      "calls": 300,
+      "note": null,
+      "unpicklable": 24
+    },
+    {
+      "qualname": "FQ.__rdiv__",
+      "calls": 0,
+      "note": null,
+      "unpicklable": 29738
+    },
+    {
+      "qualname": "FQ.__eq__",
+      "calls": 300,
+      "note": null,
+      "unpicklable": 78
+    },
+    {
+      "qualname": "FQ.__lt__",
+      "calls": 0,
+      "note": null,
+      "unpicklable": 0
+    },
+    {
+      "qualname": "mod_int",
+      "calls": 300,
+      "note": null,
+      "unpicklable": 0
+    },
+    {
+      "qualname": "FQ.__init__",
+      "calls": 300,
+      "note": null,
+      "unpicklable": 0
+    },
+    {
+      "qualname": "FQ.__add__",
+      "calls": 300,
+      "note": null,
+      "unpicklable": 0
+    },
+    {
+      "qualname": "FQ.__mul__",
+      "calls": 300,
+      "note": null,
+      "unpicklable": 0
+    },
+    {
+      "qualname": "FQ.__rsub__",
+      "calls": 0,
+      "note": null,
+      "unpicklable": 0
+    },
+    {
+      "qualname": "FQ.__sub__",
+      "calls": 300,
+      "note": null,
+      "unpicklable": 0
+    },
+    {
+      "qualname": "FQ.__div__",
+      "calls": 66,
+      "note": null,
+      "unpicklable": 0
+    },
+    {
+      "qualname": "FQ.__rdiv__",
+      "calls": 0,
+      "note": null,
+      "unpicklable": 0
+    },
+    {
+      "qualname": "FQ.__eq__",
+      "calls": 300,
+      "note": null,
+      "unpicklable": 0
+    },
+    {
+      "qualname": "FQ.__lt__",
+      "calls": 0,
+      "note": null,
+      "unpicklable": 0
+    },
+    {
+      "qualname": "FQP.__init__",
+      "calls": 300,
+      "note": null,
+      "unpicklable": 0
+    },
+    {
+      "qualname": "FQP.__mul__",
+      "calls": 300,
+      "note": null,
+      "unpicklable": 0
+    },
+    {
+      "qualname": "FQP.__div__",
+      "calls": 300,
+      "note": null,
+      "unpicklable": 0
+    },
+    {
+      "qualname": "BaseG2Ciphersuite._is_valid_privkey",
+      "calls": 0,
+      "note": "static/class method (not supported)",
+      "unpicklable": 0
+    }
+  ],
+  "mutated_draw_fraction": 0.49333333333333335,
+  "deterministic": true,
+  "patches": {
+    "skill": {
+      "help": 0,
+      "hurt": 0,
+      "tie": 0,
+      "bug_trigger": 0,
+      "harness_errors": 300
+    }
+  },
+  "mutants": [
+    {
+      "desc": "cmp_flip at BaseG2Ciphersuite._is_valid_privkey:70:39 -> '>='",
+      "help": 0,
+      "hurt": 0,
+      "tie": 0,
+      "bug_trigger": 0,
+      "harness_errors": 300
+    },
+    {
+      "desc": "cmp_flip at BaseG2Ciphersuite._is_valid_privkey:70:55 -> '<='",
+      "help": 0,
+      "hurt": 0,
+      "tie": 0,
+      "bug_trigger": 0,
+      "harness_errors": 300
+    },
+    {
+      "desc": "if_negate at FQ.__init__:49:11 -> 'not (not hasattr(self, \"field_modulus\"))'",
+      "help": 0,
+      "hurt": 0,
+      "tie": 0,
+      "bug_trigger": 0,
+      "harness_errors": 300
+    },
+    {
+      "desc": "if_negate at FQ.__init__:52:11 -> 'not (isinstance(val, FQ))'",
+      "help": 0,
+      "hurt": 0,
+      "tie": 0,
+      "bug_trigger": 0,
+      "harness_errors": 300
+    },
+    {
+      "desc": "if_negate at FQ.__init__:54:13 -> 'not (is_integer(val))'",
+      "help": 0,
+      "hurt": 0,
+      "tie": 0,
+      "bug_trigger": 0,
+      "harness_errors": 300
+    }
+  ],
+  "bug_trigger_rate": 0.0,
+  "eligible": true,
+  "g1": {
+    "a_detects_bug_with_known_good_patch": false,
+    "b_no_regression_for_known_good_patch": true,
+    "c_deterministic_in_three_fresh_runs": true,
+    "d_catches_a_mutant": false,
+    "no_harness_errors": false,
+    "pass": false
+  },
+  "target": "D1_py_ecc",
+  "orig_sha": "5cb90f33874cd992c2dde088a03a9d78450eb70f",
+  "gold_sha": "fe448d99e1565f687b283b43a6bfec43254b1758",
+  "known_good_patch": [
+    "skill"
+  ],
+  "note": null,
+  "python": "3.12.15"
+}

@@ -1,0 +1,90 @@
+{
+  "seed": 3484906784,
+  "n_draws": 300,
+  "modules": [
+    "src/specify_cli/presets.py"
+  ],
+  "edited_functions": [
+    "PresetCatalog._load_catalog_config"
+  ],
+  "record_tail": "============================\nplatform linux -- Python 3.12.15, pytest-8.3.5, pluggy-1.7.0\nrootdir: /tmp/tmpbvdsd5tg/orig\nconfigfile: pyproject.toml\nplugins: platformdirs-4.13.5\ncollected 245 items\n\ntests/test_presets.py .................................................. [ 20%]\n........................................................................ [ 49%]\n........................................................................ [ 79%]\n...................................................                      [100%]\n\n============================= 245 passed in 2.76s ==============================\n",
+  "recorded": [
+    {
+      "qualname": "PresetCatalog._load_catalog_config",
+      "calls": 15,
+      "note": null,
+      "unpicklable": 0
+    }
+  ],
+  "mutated_draw_fraction": 0.5033333333333333,
+  "deterministic": true,
+  "patches": {
+    "gold_itself": {
+      "help": 0,
+      "hurt": 0,
+      "tie": 300,
+      "bug_trigger": 0,
+      "harness_errors": 0
+    }
+  },
+  "mutants": [
+    {
+      "desc": "if_negate at PresetCatalog._load_catalog_config:1877:11 -> 'not (not config_path.exists())'",
+      "help": 0,
+      "hurt": 149,
+      "tie": 151,
+      "bug_trigger": 0,
+      "harness_errors": 0
+    },
+    {
+      "desc": "and_or at PresetCatalog._load_catalog_config:1880:19 -> 'and'",
+      "help": 0,
+      "hurt": 0,
+      "tie": 300,
+      "bug_trigger": 0,
+      "harness_errors": 0
+    },
+    {
+      "desc": "if_negate at PresetCatalog._load_catalog_config:1885:11 -> 'not (not isinstance(data, dict))'",
+      "help": 0,
+      "hurt": 0,
+      "tie": 300,
+      "bug_trigger": 0,
+      "harness_errors": 0
+    },
+    {
+      "desc": "if_negate at PresetCatalog._load_catalog_config:1890:11 -> 'not (not catalogs_data)'",
+      "help": 0,
+      "hurt": 0,
+      "tie": 300,
+      "bug_trigger": 0,
+      "harness_errors": 0
+    },
+    {
+      "desc": "if_negate at PresetCatalog._load_catalog_config:1892:11 -> 'not (not isinstance(catalogs_data, list))'",
+      "help": 0,
+      "hurt": 0,
+      "tie": 300,
+      "bug_trigger": 0,
+      "harness_errors": 0
+    }
+  ],
+  "bug_trigger_rate": 0.0,
+  "eligible": true,
+  "g1": {
+    "a_detects_bug_with_known_good_patch": false,
+    "b_no_regression_for_known_good_patch": true,
+    "c_deterministic_in_three_fresh_runs": true,
+    "d_catches_a_mutant": true,
+    "no_harness_errors": true,
+    "pass": false
+  },
+  "target": "A1_speckit_catalog",
+  "orig_sha": "7fda89decb5425b14a3ff9eb1eb825401eb3080a",
+  "gold_sha": "f7bb6694be9184f005d9a74c94c339d75e9accae",
+  "known_good_patch": [
+    "gold_itself"
+  ],
+  "note": "skill does not bind on this instance; the gold fix is used as the known-good patch (criterion (b) is then vacuous)",
+  "python": "3.12.15"
+}

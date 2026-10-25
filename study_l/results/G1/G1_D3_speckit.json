@@ -1,0 +1,29 @@
+{
+  "seed": 3685026423,
+  "n_draws": 300,
+  "modules": [
+    "src/specify_cli/extensions/_commands.py"
+  ],
+  "edited_functions": [
+    "extension_set_priority"
+  ],
+  "record_tail": "tformdirs-4.13.5\ncollected 342 items\n\ntests/test_extensions.py ............................................... [ 13%]\n........................................................................ [ 34%]\n........................................................................ [ 55%]\n........................................................................ [ 76%]\n........................................................................ [ 97%]\n.......                                                                  [100%]\n\n============================= 342 passed in 3.00s ==============================\n",
+  "recorded": [
+    {
+      "qualname": "extension_set_priority",
+      "calls": 0,
+      "note": null,
+      "unpicklable": 0
+    }
+  ],
+  "eligible": false,
+  "reason": "no call of an edited function was recorded",
+  "target": "D3_speckit",
+  "orig_sha": "f6f3540409badcbe570a9d5cccca35beee932845",
+  "gold_sha": "d20b4529284ffdd37e60eba6ab3a91ecf4fc2d3c",
+  "known_good_patch": [
+    "skill"
+  ],
+  "note": null,
+  "python": "3.12.15"
+}

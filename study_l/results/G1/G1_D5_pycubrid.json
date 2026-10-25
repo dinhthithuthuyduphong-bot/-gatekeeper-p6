@@ -1,0 +1,97 @@
+{
+  "seed": 3770579958,
+  "n_draws": 300,
+  "modules": [
+    "pycubrid/types.py"
+  ],
+  "edited_functions": [
+    "DBAPIType.__eq__",
+    "DBAPIType.__ne__"
+  ],
+  "record_tail": "============================= test session starts ==============================\nplatform linux -- Python 3.12.15, pytest-9.1.1, pluggy-1.7.0\nrootdir: /tmp/tmpgsl8mjuz/orig\nconfigfile: pyproject.toml\nplugins: asyncio-1.4.0, hypothesis-6.170.9\nasyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 49 items\n\ntests/test_types.py .................................................    [100%]\n\n============================== 49 passed in 0.06s ==============================\n",
+  "recorded": [
+    {
+      "qualname": "DBAPIType.__eq__",
+      "calls": 28,
+      "note": null,
+      "unpicklable": 0
+    },
+    {
+      "qualname": "DBAPIType.__ne__",
+      "calls": 7,
+      "note": null,
+      "unpicklable": 0
+    }
+  ],
+  "mutated_draw_fraction": 0.49333333333333335,
+  "deterministic": true,
+  "patches": {
+    "skill": {
+      "help": 26,
+      "hurt": 0,
+      "tie": 274,
+      "bug_trigger": 26,
+      "harness_errors": 0
+    }
+  },
+  "mutants": [
+    {
+      "desc": "if_negate at DBAPIType.__eq__:35:11 -> 'not (isinstance(other, int) and not isinstance(other, bool))'",
+      "help": 9,
+      "hurt": 133,
+      "tie": 158,
+      "bug_trigger": 26,
+      "harness_errors": 0
+    },
+    {
+      "desc": "and_or at DBAPIType.__eq__:35:11 -> 'or'",
+      "help": 9,
+      "hurt": 41,
+      "tie": 250,
+      "bug_trigger": 26,
+      "harness_errors": 0
+    },
+    {
+      "desc": "cmp_flip at DBAPIType.__eq__:36:19 -> 'not in'",
+      "help": 26,
+      "hurt": 92,
+      "tie": 182,
+      "bug_trigger": 26,
+      "harness_errors": 0
+    },
+    {
+      "desc": "if_negate at DBAPIType.__eq__:37:11 -> 'not (isinstance(other, DBAPIType))'",
+      "help": 9,
+      "hurt": 41,
+      "tie": 250,
+      "bug_trigger": 26,
+      "harness_errors": 0
+    },
+    {
+      "desc": "cmp_flip at DBAPIType.__eq__:38:19 -> '!='",
+      "help": 26,
+      "hurt": 1,
+      "tie": 273,
+      "bug_trigger": 26,
+      "harness_errors": 0
+    }
+  ],
+  "bug_trigger_rate": 0.08666666666666667,
+  "eligible": true,
+  "g1": {
+    "a_detects_bug_with_known_good_patch": true,
+    "b_no_regression_for_known_good_patch": true,
+    "c_deterministic_in_three_fresh_runs": true,
+    "d_catches_a_mutant": true,
+    "no_harness_errors": true,
+    "pass": true
+  },
+  "target": "D5_pycubrid",
+  "orig_sha": "068325e75abb068a6b9d4f9bc841038cb7743a1e",
+  "gold_sha": "9d779739a092590f27bd2e5661e49fce89a07eb2",
+  "known_good_patch": [
+    "skill"
+  ],
+  "note": null,
+  "python": "3.12.15"
+}

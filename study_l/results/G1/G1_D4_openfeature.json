@@ -1,0 +1,97 @@
+{
+  "seed": 2431830556,
+  "n_draws": 300,
+  "modules": [
+    "openfeature/client.py"
+  ],
+  "edited_functions": [
+    "OpenFeatureClient._create_provider_evaluation_async",
+    "_typecheck_flag_value"
+  ],
+  "record_tail": "........................................................................ [ 40%]\n........................................................................ [ 81%]\n................................                                         [100%]\n176 passed in 0.87s\n",
+  "recorded": [
+    {
+      "qualname": "OpenFeatureClient._create_provider_evaluation_async",
+      "calls": 0,
+      "note": "generator/coroutine (not supported)",
+      "unpicklable": 0
+    },
+    {
+      "qualname": "_typecheck_flag_value",
+      "calls": 14,
+      "note": null,
+      "unpicklable": 0
+    }
+  ],
+  "mutated_draw_fraction": 0.49,
+  "deterministic": true,
+  "patches": {
+    "gold_itself": {
+      "help": 2,
+      "hurt": 0,
+      "tie": 298,
+      "bug_trigger": 2,
+      "harness_errors": 0
+    }
+  },
+  "mutants": [
+    {
+      "desc": "if_negate at OpenFeatureClient._create_provider_evaluation_async:872:11 -> 'not (not get_details_callable)'",
+      "help": 2,
+      "hurt": 0,
+      "tie": 298,
+      "bug_trigger": 2,
+      "harness_errors": 0
+    },
+    {
+      "desc": "if_negate at OpenFeatureClient._create_provider_evaluation_async:886:11 -> 'not (resolution.error_code)'",
+      "help": 2,
+      "hurt": 0,
+      "tie": 298,
+      "bug_trigger": 2,
+      "harness_errors": 0
+    },
+    {
+      "desc": "if_negate at OpenFeatureClient._create_provider_evaluation_async:890:11 -> 'not (err := _typecheck_flag_value(value=resolution.value, flag_type=flag_type))'",
+      "help": 2,
+      "hurt": 0,
+      "tie": 298,
+      "bug_trigger": 2,
+      "harness_errors": 0
+    },
+    {
+      "desc": "if_negate at _typecheck_flag_value:1002:7 -> 'not (not py_type)'",
+      "help": 0,
+      "hurt": 282,
+      "tie": 18,
+      "bug_trigger": 2,
+      "harness_errors": 0
+    },
+    {
+      "desc": "if_negate at _typecheck_flag_value:1005:7 -> 'not (not isinstance(value, py_type) or (\\n        flag_type == FlagType.INTEGER and isinstance(value, bool)\\n    ))'",
+      "help": 0,
+      "hurt": 206,
+      "tie": 94,
+      "bug_trigger": 2,
+      "harness_errors": 0
+    }
+  ],
+  "bug_trigger_rate": 0.006666666666666667,
+  "eligible": true,
+  "g1": {
+    "a_detects_bug_with_known_good_patch": true,
+    "b_no_regression_for_known_good_patch": true,
+    "c_deterministic_in_three_fresh_runs": true,
+    "d_catches_a_mutant": true,
+    "no_harness_errors": true,
+    "pass": true
+  },
+  "target": "D4_openfeature",
+  "orig_sha": "93296c6e7788d74699746c553993352ece693816",
+  "gold_sha": "6c851d2ef3441f1f3fd16aca2be9b463596cdc00",
+  "known_good_patch": [
+    "gold_itself"
+  ],
+  "note": "skill does not bind on this instance; the gold fix is used as the known-good patch (criterion (b) is then vacuous)",
+  "python": "3.12.15"
+}

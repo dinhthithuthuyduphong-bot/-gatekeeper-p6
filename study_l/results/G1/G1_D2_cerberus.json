@@ -1,0 +1,29 @@
+{
+  "seed": 127914513,
+  "n_draws": 300,
+  "modules": [
+    "cerberus/cerberus.py"
+  ],
+  "edited_functions": [
+    "Validator._validate_type_number"
+  ],
+  "record_tail": "mp/tmpc9iafck_/orig/cerberus/schema.py:221: DeprecationWarning: The 'items'-rule with a mapping as constraint is deprecated. Use the 'schema'-rule instead.\n    warn(\"The 'items'-rule with a mapping as constraint is \"\n\ncerberus/tests/tests.py::BackwardCompatibility::test_keyschema\n  /tmp/tmpc9iafck_/orig/cerberus/schema.py:254: DeprecationWarning: The 'keyschema'-rule is deprecated. Use 'valueschema' instead.\n    warn(\"The 'keyschema'-rule is deprecated. Use 'valueschema' instead.\",  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n146 passed, 7 warnings in 0.38s\n",
+  "recorded": [
+    {
+      "qualname": "Validator._validate_type_number",
+      "calls": 0,
+      "note": null,
+      "unpicklable": 32
+    }
+  ],
+  "eligible": false,
+  "reason": "no call of an edited function was recorded",
+  "target": "D2_cerberus",
+  "orig_sha": "2b63c1b9ccaf112c56413c4c1788a5da275032fc",
+  "gold_sha": "d25ae8f69c785addc1af3bdb283104263fcfdba9",
+  "known_good_patch": [
+    "skill"
+  ],
+  "note": null,
+  "python": "3.8.18"
+}
