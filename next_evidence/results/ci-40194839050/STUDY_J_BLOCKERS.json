@@ -1,0 +1,14 @@
+{
+  "status": "BLOCKED",
+  "model_calls": 0,
+  "reasons": [
+    "design has not been publicly frozen",
+    "missing public freeze commit",
+    "missing public freeze time",
+    "missing post-freeze beacon receipt",
+    "not enough distinct unseen repositories",
+    "insufficient repositories for bool-int",
+    "insufficient repositories for none-identity"
+  ],
+  "note": "A JSON field is not proof of public timing, oracle correctness or unseen outcomes."
+}

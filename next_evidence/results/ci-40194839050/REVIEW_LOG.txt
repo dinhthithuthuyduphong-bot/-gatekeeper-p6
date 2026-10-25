@@ -1,0 +1,23 @@
+READ_ONLY_REVIEW run=40194839050 attempt=1
+ZIP SHA256 MATCH GitHub artifact metadata
+uploaded_zip_matches_github_artifact_digest PASS
+included_file_hashes PASS
+baseline_xml_phases_site_reports PASS
+source_hashes PASS
+before_after_outcomes PASS
+previous_patch_matches_current_main PASS
+CI_UNIT_TESTS 140 PASS (executed on GitHub, not here)
+CI_AUDIT_GROUPS 13 PASS
+STUDY_K_INVENTORY 38/38 MATCH
+PYDANTIC rep=1 collected=1025 passed=1021 skipped=4 failures=0 errors=0 seconds=16.728110213
+PYDANTIC rep=2 collected=1025 passed=1021 skipped=4 failures=0 errors=0 seconds=16.479835250
+PYDANTIC rep=3 collected=1025 passed=1021 skipped=4 failures=0 errors=0 seconds=16.444948921
+PHYSICAL_SITE_CONTEXT_COUNTS 43,33,52; all executed flags true
+RETURN_ZIP_BYTES 2299318
+RAW_BASELINE_ZIP_BYTES 34946886
+COST_RERUN false
+STUDY_J BLOCKED
+B9 HOLD
+LOCAL_PROJECT_TESTS 0
+MODEL_CALLS 0
+REMOTE_MUTATIONS 0

@@ -1,0 +1,273 @@
+{
+  "run_url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40194839050",
+  "run_id": 40194839050,
+  "attempt": 1,
+  "head_sha": "1177d8936ff844caa8814b9dadf2bbe335126e65",
+  "conclusion": "success",
+  "completed_at_utc": "2026-10-25T12:52:17Z",
+  "jobs": [
+    {
+      "name": "audit",
+      "conclusion": "success"
+    },
+    {
+      "name": "pydantic_baseline",
+      "conclusion": "success"
+    },
+    {
+      "name": "source_scout (pydantic)",
+      "conclusion": "success"
+    },
+    {
+      "name": "source_scout (airflow)",
+      "conclusion": "success"
+    },
+    {
+      "name": "source_scout (pandas)",
+      "conclusion": "success"
+    },
+    {
+      "name": "source_scout (peewee)",
+      "conclusion": "success"
+    },
+    {
+      "name": "source_scout (sqlalchemy_utils)",
+      "conclusion": "success"
+    },
+    {
+      "name": "source_scout (pony)",
+      "conclusion": "success"
+    },
+    {
+      "name": "source_scout (numpy)",
+      "conclusion": "success"
+    },
+    {
+      "name": "cost",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "collect",
+      "conclusion": "success"
+    }
+  ],
+  "successful_jobs": 10,
+  "skipped_jobs": 1,
+  "ci_unit_tests_passed": 140,
+  "audit_groups_passed": 13,
+  "study_k_inventory": {
+    "status": "EVIDENCE_INVENTORY_OK",
+    "expected_files": 38,
+    "matching_files": 38,
+    "problems": []
+  },
+  "prior_patch_files_matching_main": 38,
+  "pydantic": {
+    "status": "BASELINE_STABLE_ORACLE_REVIEW_PENDING",
+    "repetitions": 3,
+    "per_run": [
+      {
+        "repetition": 1,
+        "collected": 1025,
+        "counts": {
+          "passed": 1021,
+          "failure": 0,
+          "error": 0,
+          "skipped": 4
+        },
+        "seconds": 16.728110213
+      },
+      {
+        "repetition": 2,
+        "collected": 1025,
+        "counts": {
+          "passed": 1021,
+          "failure": 0,
+          "error": 0,
+          "skipped": 4
+        },
+        "seconds": 16.479835249999994
+      },
+      {
+        "repetition": 3,
+        "collected": 1025,
+        "counts": {
+          "passed": 1021,
+          "failure": 0,
+          "error": 0,
+          "skipped": 4
+        },
+        "seconds": 16.444948921000005
+      }
+    ],
+    "mean_instrumented_seconds": 16.550964794666665,
+    "site_reach": [
+      {
+        "file": "pydantic_settings/sources/providers/cli.py",
+        "line": 108,
+        "executed": true,
+        "executed_in_test_call": true,
+        "call_context_count": 43
+      },
+      {
+        "file": "pydantic_settings/sources/utils.py",
+        "line": 385,
+        "executed": true,
+        "executed_in_test_call": true,
+        "call_context_count": 33
+      },
+      {
+        "file": "pydantic_settings/sources/utils.py",
+        "line": 449,
+        "executed": true,
+        "executed_in_test_call": true,
+        "call_context_count": 52
+      }
+    ],
+    "oracle_validated": false,
+    "treatment_runs": 0
+  },
+  "artifact": {
+    "old_return_bytes": 420744121,
+    "new_return_bytes": 2299318,
+    "return_size_reduction_percent": 99.45351155601769,
+    "old_raw_baseline_bytes": 416822142,
+    "new_raw_baseline_bytes": 34946886,
+    "included_files": 123,
+    "omitted_raw_databases": 3
+  },
+  "scans": [
+    {
+      "candidate": {
+        "id": "airflow",
+        "repo": "apache/airflow",
+        "sha": "b35972fc9c727065097f0654a40a0fe39890b204"
+      },
+      "status": "STATIC_SCAN_COMPLETE_NOT_ELIGIBLE",
+      "site_counts": {
+        "bool_guard": 6,
+        "none_identity": 6
+      },
+      "parse_errors": 0,
+      "matcher_errors": 0,
+      "test_runs": 0,
+      "treatment_runs": 0,
+      "model_calls": 0
+    },
+    {
+      "candidate": {
+        "id": "numpy",
+        "repo": "numpy/numpy",
+        "ref": "v1.24.4",
+        "sha": "9315a9072b2636f75c831b4eca9f42a5f67ca2fb"
+      },
+      "status": "STATIC_SCAN_COMPLETE_NOT_ELIGIBLE",
+      "site_counts": {
+        "bool_guard": 25,
+        "none_identity": 0
+      },
+      "parse_errors": 0,
+      "matcher_errors": 0,
+      "test_runs": 0,
+      "treatment_runs": 0,
+      "model_calls": 0
+    },
+    {
+      "candidate": {
+        "id": "pandas",
+        "repo": "pandas-dev/pandas",
+        "ref": "v1.5.3",
+        "sha": "2e218d10984e9919f0296931d92ea851c6a6faf5"
+      },
+      "status": "STATIC_SCAN_COMPLETE_NOT_ELIGIBLE",
+      "site_counts": {
+        "bool_guard": 35,
+        "none_identity": 0
+      },
+      "parse_errors": 0,
+      "matcher_errors": 0,
+      "test_runs": 0,
+      "treatment_runs": 0,
+      "model_calls": 0
+    },
+    {
+      "candidate": {
+        "id": "peewee",
+        "repo": "coleifer/peewee",
+        "ref": "2.10.2",
+        "sha": "761f9144a0e17381147a81658019cffe14c118ca"
+      },
+      "status": "STATIC_SCAN_COMPLETE_NOT_ELIGIBLE",
+      "site_counts": {
+        "bool_guard": 4,
+        "none_identity": 0
+      },
+      "parse_errors": 0,
+      "matcher_errors": 0,
+      "test_runs": 0,
+      "treatment_runs": 0,
+      "model_calls": 0
+    },
+    {
+      "candidate": {
+        "id": "pony",
+        "repo": "ponyorm/pony",
+        "ref": "v0.7.16",
+        "sha": "faa1277eba3c62260d4732240c63d68fa3b5805e"
+      },
+      "status": "STATIC_SCAN_COMPLETE_NOT_ELIGIBLE",
+      "site_counts": {
+        "bool_guard": 9,
+        "none_identity": 0
+      },
+      "parse_errors": 0,
+      "matcher_errors": 0,
+      "test_runs": 0,
+      "treatment_runs": 0,
+      "model_calls": 0
+    },
+    {
+      "candidate": {
+        "id": "pydantic",
+        "repo": "pydantic/pydantic-settings",
+        "sha": "7e2dacb6db07b41abb0c80d0608e46e197265554"
+      },
+      "status": "STATIC_SCAN_COMPLETE_NOT_ELIGIBLE",
+      "site_counts": {
+        "bool_guard": 3,
+        "none_identity": 0
+      },
+      "parse_errors": 0,
+      "matcher_errors": 0,
+      "test_runs": 0,
+      "treatment_runs": 0,
+      "model_calls": 0
+    },
+    {
+      "candidate": {
+        "id": "sqlalchemy_utils",
+        "repo": "kvesteri/sqlalchemy-utils",
+        "ref": "0.36.8",
+        "sha": "9b300357637d5c97f9197ae5a6806d9156ac44da"
+      },
+      "status": "STATIC_SCAN_COMPLETE_NOT_ELIGIBLE",
+      "site_counts": {
+        "bool_guard": 5,
+        "none_identity": 0
+      },
+      "parse_errors": 0,
+      "matcher_errors": 0,
+      "test_runs": 0,
+      "treatment_runs": 0,
+      "model_calls": 0
+    }
+  ],
+  "cost_rerun": false,
+  "B9": "HOLD",
+  "model_calls": 0,
+  "study_j": "BLOCKED",
+  "new_confirmed_harmful_targets": 0,
+  "new_confirmed_beneficial_targets": 0,
+  "review_runtime_tests": 0,
+  "repository_code_changed_by_this_review": false
+}

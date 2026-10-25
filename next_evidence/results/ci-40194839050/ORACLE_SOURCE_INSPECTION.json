@@ -1,0 +1,532 @@
+{
+  "kind": "STATIC_SOURCE_REVIEW_NOT_RUNTIME_TREATMENT",
+  "files": [
+    {
+      "file": "pydantic_settings/sources/utils.py",
+      "sha256": "212e13b3c59c93f2199b7b538db1f49bbc9dbcc2fd60ae3ad91b69459b621be6",
+      "matches_frozen_config": true,
+      "static_aliaspath_calls": []
+    },
+    {
+      "file": "pydantic_settings/sources/providers/cli.py",
+      "sha256": "3355ec996ca275091750586cc528ec892f412d45a9b1bed8bf044ec51bf4a0a9",
+      "matches_frozen_config": true,
+      "static_aliaspath_calls": []
+    },
+    {
+      "file": "tests/test_source_cli.py",
+      "sha256": "bd70fa0f7acf8936e68817eb0ca8034401313d64bf5bbc97675efb757ecf7744",
+      "matches_frozen_config": true,
+      "static_aliaspath_calls": [
+        {
+          "line": 5431,
+          "argument_count": 2,
+          "second_arg_ast": "IfExp(test=Call(func=Name(id='isinstance', ctx=Load()), args=[Name(id='payload', ctx=Load()), Name(id='dict', ctx=Load())], keywords=[]), body=Constant(value='value'), orelse=Constant(value=0))",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5385,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value='value')",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5385,
+          "argument_count": 1,
+          "second_arg_ast": null,
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5240,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value='value')",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5241,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=1)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5242,
+          "argument_count": 4,
+          "second_arg_ast": "Constant(value='rows')",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5243,
+          "argument_count": 2,
+          "second_arg_ast": "UnaryOp(op=USub(), operand=Constant(value=1))",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5398,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value='value')",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5399,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=0)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 176,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=0)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 342,
+          "argument_count": 3,
+          "second_arg_ast": "Constant(value='deep')",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 343,
+          "argument_count": 5,
+          "second_arg_ast": "Constant(value='deep')",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 398,
+          "argument_count": 3,
+          "second_arg_ast": "Constant(value='deep')",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 399,
+          "argument_count": 5,
+          "second_arg_ast": "Constant(value='deep')",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 4936,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=0)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 4937,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=1)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 4938,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=0)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 4939,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=1)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 4969,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=0)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 4970,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=1)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 4971,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=0)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 4972,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=1)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5245,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value='value')",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5245,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value='value')",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5248,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=0)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5260,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=1)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5261,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=3)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5310,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=0)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5322,
+          "argument_count": 4,
+          "second_arg_ast": "Constant(value='rows')",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5323,
+          "argument_count": 4,
+          "second_arg_ast": "Constant(value='rows')",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5331,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=0)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5332,
+          "argument_count": 2,
+          "second_arg_ast": "UnaryOp(op=USub(), operand=Constant(value=1))",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5341,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value='value')",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5350,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value='value')",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5357,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value='value')",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5361,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value='value')",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5372,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value='value')",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5388,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=0)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5461,
+          "argument_count": 2,
+          "second_arg_ast": "Name(id='second_index', ctx=Load())",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5469,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=0)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5475,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=0)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5512,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value='value')",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5523,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value='value')",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5527,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value='value')",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5547,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=0)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5562,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value='b')",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 339,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=1)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 340,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=1)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 395,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=1)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 396,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=1)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 4996,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=0)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 4997,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=1)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5231,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=0)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5279,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=0)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5279,
+          "argument_count": 2,
+          "second_arg_ast": "Starred(value=Name(id='path', ctx=Load()), ctx=Load())",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5280,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=0)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5280,
+          "argument_count": 2,
+          "second_arg_ast": "Starred(value=Name(id='path', ctx=Load()), ctx=Load())",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5291,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=0)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5291,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=0)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5292,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=0)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5292,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=0)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5301,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=0)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5301,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=0)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5302,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=0)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5302,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=0)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5460,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=0)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5474,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=0)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 5491,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=0)",
+          "explicit_bool_second_arg": false
+        }
+      ]
+    },
+    {
+      "file": "tests/test_settings.py",
+      "sha256": "19992278ecaa74576c9bbd2701d04300397d0a0eb11455b41809822a7134becc",
+      "matches_frozen_config": true,
+      "static_aliaspath_calls": [
+        {
+          "line": 342,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=0)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 353,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=0)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 1953,
+          "argument_count": 3,
+          "second_arg_ast": "Constant(value='bar')",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 1970,
+          "argument_count": 1,
+          "second_arg_ast": null,
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 1987,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value='bar')",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 2003,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value='tail')",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 2033,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=0)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 2034,
+          "argument_count": 3,
+          "second_arg_ast": "Constant(value='bar')",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 2011,
+          "argument_count": 3,
+          "second_arg_ast": "Constant(value='bar')",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 2011,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=2)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 2056,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value=0)",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 2080,
+          "argument_count": 2,
+          "second_arg_ast": "Constant(value='key')",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 2592,
+          "argument_count": 3,
+          "second_arg_ast": "Constant(value='b')",
+          "explicit_bool_second_arg": false
+        },
+        {
+          "line": 3148,
+          "argument_count": 3,
+          "second_arg_ast": "Constant(value='bar')",
+          "explicit_bool_second_arg": false
+        }
+      ]
+    },
+    {
+      "file": "tests/test_utils.py",
+      "sha256": "252c2fb52d2a93e27d9917643859bffcfe33711f9b69cb0120bac98a7ba5ea63",
+      "matches_frozen_config": true,
+      "static_aliaspath_calls": []
+    }
+  ],
+  "limitation": "Literal AST inspection only; it does not rule out dynamically constructed bool indices. A parameterized test ID with True or False can concern a separate setting rather than the operand tested by the skill.",
+  "model_calls": 0,
+  "test_runs": 0
+}

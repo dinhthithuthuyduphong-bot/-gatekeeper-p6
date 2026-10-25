@@ -1,0 +1,95 @@
+{
+  "review_kind": "READ_ONLY_ARTIFACT_REANALYSIS",
+  "checks": [
+    {
+      "check": "uploaded_zip_matches_github_artifact_digest",
+      "status": "PASS",
+      "sha256": "8d9ddb38e748699b3394fa1392fb084f8d8c3163e8ebd6fff5a95a0d73486a57"
+    },
+    {
+      "check": "included_file_hashes",
+      "status": "PASS",
+      "files": 123
+    },
+    {
+      "check": "baseline_xml_phases_site_reports",
+      "status": "PASS",
+      "repetitions": [
+        {
+          "repetition": 1,
+          "xml_counts": {
+            "passed": 1021,
+            "failure": 0,
+            "error": 0,
+            "skipped": 4
+          },
+          "collected": 1025,
+          "seconds": 16.728110213,
+          "context_counts": [
+            43,
+            33,
+            52
+          ],
+          "site_hashes_and_omission_receipt_match": true
+        },
+        {
+          "repetition": 2,
+          "xml_counts": {
+            "passed": 1021,
+            "failure": 0,
+            "error": 0,
+            "skipped": 4
+          },
+          "collected": 1025,
+          "seconds": 16.479835249999994,
+          "context_counts": [
+            43,
+            33,
+            52
+          ],
+          "site_hashes_and_omission_receipt_match": true
+        },
+        {
+          "repetition": 3,
+          "xml_counts": {
+            "passed": 1021,
+            "failure": 0,
+            "error": 0,
+            "skipped": 4
+          },
+          "collected": 1025,
+          "seconds": 16.444948921000005,
+          "context_counts": [
+            43,
+            33,
+            52
+          ],
+          "site_hashes_and_omission_receipt_match": true
+        }
+      ],
+      "limitation": "The raw coverage databases are omitted from this supplied compact ZIP. Their reported hashes agree; their bytes were not independently downloaded in this review."
+    },
+    {
+      "check": "source_hashes",
+      "status": "PASS",
+      "files": 5
+    },
+    {
+      "check": "before_after_outcomes",
+      "status": "PASS",
+      "details": {
+        "same_inventory": true,
+        "same_phase_signatures": true,
+        "same_reported_raw_coverage_hashes": true
+      }
+    },
+    {
+      "check": "previous_patch_matches_current_main",
+      "status": "PASS",
+      "matched_files": 38,
+      "files": 38
+    }
+  ],
+  "runtime_test_runs_here": 0,
+  "model_calls": 0
+}
