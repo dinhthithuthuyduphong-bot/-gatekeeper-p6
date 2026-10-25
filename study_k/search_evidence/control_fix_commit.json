@@ -1,0 +1,125 @@
+{
+  "sha": "60aba3ab39cef2ac11c4bc08c2b08a9abd084205",
+  "node_id": "MDY6Q29tbWl0MjI3OTE3NTI6NjBhYmEzYWIzOWNlZjJhYzExYzRiYzA4YzJiMDhhOWFiZDA4NDIwNQ==",
+  "commit": {
+    "author": {
+      "name": "Clancy Rowley",
+      "email": "cwrowley@princeton.edu",
+      "date": "2014-12-02T02:55:07Z"
+    },
+    "committer": {
+      "name": "Clancy Rowley",
+      "email": "cwrowley@princeton.edu",
+      "date": "2014-12-02T02:55:07Z"
+    },
+    "message": "Change comparisons to None\n\nComparisons like\n    if A == None:\ngive a FutureWarning: comparison to `None` will result in an\nelementwise object comparison in the future.\n\nThis resuits in a bunch of warnings when running nosetests, so\nthis commit changes these to\n    if A is None:",
+    "tree": {
+      "sha": "8af5053f47cd958155e769961a502368fd33860c",
+      "url": "https://api.github.com/repos/python-control/python-control/git/trees/8af5053f47cd958155e769961a502368fd33860c"
+    },
+    "url": "https://api.github.com/repos/python-control/python-control/git/commits/60aba3ab39cef2ac11c4bc08c2b08a9abd084205",
+    "comment_count": 0,
+    "verification": {
+      "verified": false,
+      "reason": "unsigned",
+      "signature": null,
+      "payload": null,
+      "verified_at": null
+    }
+  },
+  "url": "https://api.github.com/repos/python-control/python-control/commits/60aba3ab39cef2ac11c4bc08c2b08a9abd084205",
+  "html_url": "https://github.com/python-control/python-control/commit/60aba3ab39cef2ac11c4bc08c2b08a9abd084205",
+  "comments_url": "https://api.github.com/repos/python-control/python-control/commits/60aba3ab39cef2ac11c4bc08c2b08a9abd084205/comments",
+  "author": {
+    "login": "cwrowley",
+    "id": 2033951,
+    "node_id": "MDQ6VXNlcjIwMzM5NTE=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/2033951?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/cwrowley",
+    "html_url": "https://github.com/cwrowley",
+    "followers_url": "https://api.github.com/users/cwrowley/followers",
+    "following_url": "https://api.github.com/users/cwrowley/following{/other_user}",
+    "gists_url": "https://api.github.com/users/cwrowley/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/cwrowley/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/cwrowley/subscriptions",
+    "organizations_url": "https://api.github.com/users/cwrowley/orgs",
+    "repos_url": "https://api.github.com/users/cwrowley/repos",
+    "events_url": "https://api.github.com/users/cwrowley/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/cwrowley/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "committer": {
+    "login": "cwrowley",
+    "id": 2033951,
+    "node_id": "MDQ6VXNlcjIwMzM5NTE=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/2033951?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/cwrowley",
+    "html_url": "https://github.com/cwrowley",
+    "followers_url": "https://api.github.com/users/cwrowley/followers",
+    "following_url": "https://api.github.com/users/cwrowley/following{/other_user}",
+    "gists_url": "https://api.github.com/users/cwrowley/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/cwrowley/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/cwrowley/subscriptions",
+    "organizations_url": "https://api.github.com/users/cwrowley/orgs",
+    "repos_url": "https://api.github.com/users/cwrowley/repos",
+    "events_url": "https://api.github.com/users/cwrowley/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/cwrowley/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "parents": [
+    {
+      "sha": "fb5ebf6296079229705792cc508ad23d45e326aa",
+      "url": "https://api.github.com/repos/python-control/python-control/commits/fb5ebf6296079229705792cc508ad23d45e326aa",
+      "html_url": "https://github.com/python-control/python-control/commit/fb5ebf6296079229705792cc508ad23d45e326aa"
+    }
+  ],
+  "stats": {
+    "total": 70,
+    "additions": 35,
+    "deletions": 35
+  },
+  "files": [
+    {
+      "sha": "dc19f39dc4b0fe937ed8089c5db6b968a1bf7cc5",
+      "filename": "control/freqplot.py",
+      "status": "modified",
+      "additions": 3,
+      "deletions": 3,
+      "changes": 6,
+      "blob_url": "https://github.com/python-control/python-control/blob/60aba3ab39cef2ac11c4bc08c2b08a9abd084205/control%2Ffreqplot.py",
+      "raw_url": "https://github.com/python-control/python-control/raw/60aba3ab39cef2ac11c4bc08c2b08a9abd084205/control%2Ffreqplot.py",
+      "contents_url": "https://api.github.com/repos/python-control/python-control/contents/control%2Ffreqplot.py?ref=60aba3ab39cef2ac11c4bc08c2b08a9abd084205",
+      "patch": "@@ -121,7 +121,7 @@ def bode_plot(syslist, omega=None, dB=None, Hz=None, deg=None,\n             #TODO: Add MIMO bode plots.\n             raise NotImplementedError(\"Bode is currently only implemented for SISO systems.\")\n         else:\n-            if (omega == None):\n+            if omega is None:\n                 # Select a default range if none is provided\n                 omega = default_frequency_range(syslist)\n \n@@ -211,7 +211,7 @@ def nyquist_plot(syslist, omega=None, Plot=True, color='b',\n         syslist = (syslist,)\n \n     # Select a default range if none is provided\n-    if (omega == None):\n+    if omega is None:\n         #! TODO: think about doing something smarter for discrete\n         omega = default_frequency_range(syslist)\n \n@@ -294,7 +294,7 @@ def gangof4_plot(P, C, omega=None):\n \n         # Select a default range if none is provided\n         #! TODO: This needs to be made more intelligent\n-        if (omega == None):\n+        if omega is None:\n             omega = default_frequency_range((P,C))\n \n         # Compute the senstivity functions"
+    },
+    {
+      "sha": "3d210f44a436615b701963e7a2514e8593d1a87e",
+      "filename": "control/mateqn.py",
+      "status": "modified",
+      "additions": 21,
+      "deletions": 21,
+      "changes": 42,
+      "blob_url": "https://github.com/python-control/python-control/blob/60aba3ab39cef2ac11c4bc08c2b08a9abd084205/control%2Fmateqn.py",
+      "raw_url": "https://github.com/python-control/python-control/raw/60aba3ab39cef2ac11c4bc08c2b08a9abd084205/control%2Fmateqn.py",
+      "contents_url": "https://api.github.com/repos/python-control/python-control/contents/control%2Fmateqn.py?ref=60aba3ab39cef2ac11c4bc08c2b08a9abd084205",
+      "patch": "@@ -88,10 +88,10 @@ def lyap(A,Q,C=None,E=None):\n     if len(shape(Q)) == 1:\n         Q = Q.reshape(1,Q.size)\n \n-    if C != None and len(shape(C)) == 1:\n+    if C is not None and len(shape(C)) == 1:\n         C = C.reshape(1,C.size)\n \n-    if E != None and len(shape(E)) == 1:\n+    if E is not None and len(shape(E)) == 1:\n         E = E.reshape(1,E.size)\n \n     # Determine main dimensions\n@@ -106,7 +106,7 @@ def lyap(A,Q,C=None,E=None):\n         m = size(Q,0)\n \n     # Solve standard Lyapunov equation\n-    if C==None and E==None:\n+    if C is None and E is None:\n         # Check input data for consistency\n         if shape(A) != shape(Q):\n             raise ControlArgument(\"A and Q must be matrices of identical \\\n@@ -139,7 +139,7 @@ def lyap(A,Q,C=None,E=None):\n             raise e\n \n     # Solve the Sylvester equation\n-    elif C != None and E==None:\n+    elif C is not None and E is None:\n         # Check input data for consistency\n         if size(A) > 1 and shape(A)[0] != shape(A)[1]:\n             raise ControlArgument(\"A must be a quadratic matrix.\")\n@@ -170,7 +170,7 @@ def lyap(A,Q,C=None,E=None):\n             raise e\n \n     # Solve the generalized Lyapunov equation\n-    elif C == None and E != None:\n+    elif C is None and E is not None:\n         # Check input data for consistency\n         if (size(Q) > 1 and shape(Q)[0] != shape(Q)[1]) or \\\n             (size(Q) > 1 and shape(Q)[0] != n) or \\\n@@ -275,10 +275,10 @@ def dlyap(A,Q,C=None,E=None):\n     if len(shape(Q)) == 1:\n         Q = Q.reshape(1,Q.size)\n \n-    if C != None and len(shape(C)) == 1:\n+    if C is not None and len(shape(C)) == 1:\n         C = C.reshape(1,C.size)\n \n-    if E != None and len(shape(E)) == 1:\n+    if E is not None and len(shape(E)) == 1:\n         E = E.reshape(1,E.size)\n \n     # Determine main dimensions\n@@ -293,7 +293,7 @@ def dlyap(A,Q,C=None,E=None):\n         m = size(Q,0)\n \n     # Solve standard Lyapunov equation\n-    if C==None and E==None:\n+    if C is None and E is None:\n         # Check input data for consistency\n         if shape(A) != shape(Q):\n             raise ControlArgument(\"A and Q must be matrices of identical \\\n@@ -322,7 +322,7 @@ def dlyap(A,Q,C=None,E=None):\n             raise e\n \n     # Solve the Sylvester equation\n-    elif C != None and E==None:\n+    elif C is not None and E is None:\n         # Check input data for consistency\n         if size(A) > 1 and shape(A)[0] != shape(A)[1]:\n             raise ControlArgument(\"A must be a quadratic matrix\")\n@@ -353,7 +353,7 @@ def dlyap(A,Q,C=None,E=None):\n             raise e\n \n     # Solve the generalized Lyapunov equation\n-    elif C == None and E != None:\n+    elif C is None and E is not None:\n         # Check input data for consistency\n         if (size(Q) > 1 and shape(Q)[0] != shape(Q)[1]) or \\\n             (size(Q) > 1 and shape(Q)[0] != n) or \\\n@@ -458,13 +458,13 @@ def care(A,B,Q,R=None,S=None,E=None):\n     if len(shape(Q)) == 1:\n         Q = Q.reshape(1,Q.size)\n \n-    if R != None and len(shape(R)) == 1:\n+    if R is not None and len(shape(R)) == 1:\n         R = R.reshape(1,R.size)\n \n-    if S != None and len(shape(S)) == 1:\n+    if S is not None and len(shape(S)) == 1:\n         S = S.reshape(1,S.size)\n \n-    if E != None and len(shape(E)) == 1:\n+    if E is not None and len(shape(E)) == 1:\n         E = E.reshape(1,E.size)\n \n     # Determine main dimensions\n@@ -477,11 +477,11 @@ def care(A,B,Q,R=None,S=None,E=None):\n         m = 1\n     else:\n         m = size(B,1)\n-    if R==None:\n+    if R is None:\n         R = eye(m,m)\n \n     # Solve the standard algebraic Riccati equation\n-    if S==None and E==None:\n+    if S is None and E is None:\n         # Check input data for consistency\n         if size(A) > 1 and shape(A)[0] != shape(A)[1]:\n             raise ControlArgument(\"A must be a quadratic matrix.\")\n@@ -562,7 +562,7 @@ def care(A,B,Q,R=None,S=None,E=None):\n         return (X , w[:n] , G )\n \n     # Solve the generalized algebraic Riccati equation\n-    elif S != None and E != None:\n+    elif S is not None and E is not None:\n         # Check input data for consistency\n         if size(A) > 1 and shape(A)[0] != shape(A)[1]:\n             raise ControlArgument(\"A must be a quadratic matrix.\")\n@@ -728,13 +728,13 @@ def dare_old(A,B,Q,R,S=None,E=None):\n     if len(shape(Q)) == 1:\n         Q = Q.reshape(1,Q.size)\n \n-    if R != None and len(shape(R)) == 1:\n+    if R is not None and len(shape(R)) == 1:\n         R = R.reshape(1,R.size)\n \n-    if S != None and len(shape(S)) == 1:\n+    if S is not None and len(shape(S)) == 1:\n         S = S.reshape(1,S.size)\n \n-    if E != None and len(shape(E)) == 1:\n+    if E is not None and len(shape(E)) == 1:\n         E = E.reshape(1,E.size)\n \n     # Determine main dimensions\n@@ -749,7 +749,7 @@ def dare_old(A,B,Q,R,S=None,E=None):\n         m = size(B,1)\n \n     # Solve the standard algebraic Riccati equation\n-    if S==None and E==None:\n+    if S is None and E is None:\n         # Check input data for consistency\n         if size(A) > 1 and shape(A)[0] != shape(A)[1]:\n             raise ControlArgument(\"A must be a quadratic matrix.\")\n@@ -833,7 +833,7 @@ def dare_old(A,B,Q,R,S=None,E=None):\n         return (X , w[:n] , G)\n \n     # Solve the generalized algebraic Riccati equation\n-    elif S != None and E != None:\n+    elif S is not None and E is not None:\n         # Check input data for consistency\n         if size(A) > 1 and shape(A)[0] != shape(A)[1]:\n             raise ControlArgument(\"A must be a quadratic matrix.\")"
+    },
+    {
+      "sha": "4c3e700ae80c0138222a767c1544a06fda6d6708",
+      "filename": "control/phaseplot.py",
+      "status": "modified",
+      "additions": 11,
+      "deletions": 11,
+      "changes": 22,
+      "blob_url": "https://github.com/python-control/python-control/blob/60aba3ab39cef2ac11c4bc08c2b08a9abd084205/control%2Fphaseplot.py",
+      "raw_url": "https://github.com/python-control/python-control/raw/60aba3ab39cef2ac11c4bc08c2b08a9abd084205/control%2Fphaseplot.py",
+      "contents_url": "https://api.github.com/repos/python-control/python-control/contents/control%2Fphaseplot.py?ref=60aba3ab39cef2ac11c4bc08c2b08a9abd084205",
+      "patch": "@@ -119,20 +119,20 @@ def phase_plot(odefun, X=None, Y=None, scale=1, X0=None, T=None,\n     #\n     #! TODO: need to add error checking to arguments\n     autoFlag = False; logtimeFlag = False; timeptsFlag = False; Narrows = 0;\n-    if (lingrid != None):\n+    if lingrid is not None:\n         autoFlag = True;\n         Narrows = lingrid;\n         if (verbose):\n             print('Using auto arrows\\n')\n \n-    elif (logtime != None):\n+    elif logtime is not None:\n         logtimeFlag = True;\n         Narrows = logtime[0];\n         timefactor = logtime[1];\n         if (verbose):\n             print('Using logtime arrows\\n')\n \n-    elif (timepts != None):\n+    elif timepts is not None:\n         timeptsFlag = True;\n         Narrows = len(timepts);\n \n@@ -153,7 +153,7 @@ def phase_plot(odefun, X=None, Y=None, scale=1, X0=None, T=None,\n \n         # Plot the quiver plot\n         #! TODO: figure out arguments to make arrows show up correctly\n-        if (scale == None):\n+        if scale is None:\n             mpl.quiver(x1, x2, dx[:,:,1], dx[:,:,2], angles='xy')\n         elif (scale != 0):\n             #! TODO: optimize parameters for arrows\n@@ -168,7 +168,7 @@ def phase_plot(odefun, X=None, Y=None, scale=1, X0=None, T=None,\n         mpl.xlabel('x1'); mpl.ylabel('x2');\n \n     # See if we should also generate the streamlines\n-    if (X0 == None or len(X0) == 0):\n+    if X0 is None or len(X0) == 0:\n         return\n \n     # Convert initial conditions to a numpy array\n@@ -180,7 +180,7 @@ def phase_plot(odefun, X=None, Y=None, scale=1, X0=None, T=None,\n     dx = np.empty((nr, Narrows, 2))\n \n     # See if we were passed a simulation time\n-    if (T == None):\n+    if T is None:\n         T = 50\n \n     # Parse the time we were passed\n@@ -189,7 +189,7 @@ def phase_plot(odefun, X=None, Y=None, scale=1, X0=None, T=None,\n         TSPAN = np.linspace(0, T, 100);\n \n     # Figure out the limits for the plot\n-    if (scale == None):\n+    if scale is None:\n         # Assume that the current axis are set as we want them\n         alim = mpl.axis();\n         xmin = alim[0]; xmax = alim[1];\n@@ -216,7 +216,7 @@ def phase_plot(odefun, X=None, Y=None, scale=1, X0=None, T=None,\n             for j in range(Narrows):\n \n                 # Figure out starting index; headless arrows start at 0\n-                k = -1 if scale == None else 0;\n+                k = -1 if scale is None else 0;\n \n                 # Figure out what time index to use for the next point\n                 if (autoFlag):\n@@ -234,15 +234,15 @@ def phase_plot(odefun, X=None, Y=None, scale=1, X0=None, T=None,\n                     tind = tarr[-1] if len(tarr) else 0;\n \n                 # For tailless arrows, skip the first point\n-                if (tind == 0 and scale == None):\n+                if tind == 0 and scale is None:\n                     continue;\n \n                 # Figure out the arrow at this point on the curve\n                 x1[i,j] = state[tind, 0];\n                 x2[i,j] = state[tind, 1];\n \n                 # Skip arrows outside of initial condition box\n-                if (scale != None or\n+                if (scale is not None or\n                      (x1[i,j] <= xmax and x1[i,j] >= xmin and\n                       x2[i,j] <= ymax and x2[i,j] >= ymin)):\n                     v = odefun((x1[i,j], x2[i,j]), 0, *parms)\n@@ -259,7 +259,7 @@ def phase_plot(odefun, X=None, Y=None, scale=1, X0=None, T=None,\n     # set(a, 'Box', 'on');\n \n     # Plot arrows on the streamlines\n-    if (scale == None and Narrows > 0):\n+    if scale is None and Narrows > 0:\n         # Use a tailless arrow\n         #! TODO: figure out arguments to make arrows show up correctly\n         mpl.quiver(x1, x2, dx[:,:,0], dx[:,:,1], angles='xy')"
+    }
+  ]
+}

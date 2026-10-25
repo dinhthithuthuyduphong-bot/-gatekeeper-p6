@@ -1,0 +1,12 @@
+{"command": ["uv", "pip", "install", "--python", "/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/bin/python", "--no-build-isolation", "--no-deps", "/workspace/scratch/cde4f976cfa9/continuation_20261025/build_deps/matplotlib-2.2.5"], "CFLAGS": "-I/workspace/scratch/cde4f976cfa9/continuation_20261025/build_deps/prefix/include -I/workspace/scratch/cde4f976cfa9/continuation_20261025/build_deps/prefix/include/freetype2", "LDFLAGS": "-L/workspace/scratch/cde4f976cfa9/continuation_20261025/build_deps/prefix/lib", "CPLUS_INCLUDE_PATH": "/workspace/scratch/cde4f976cfa9/continuation_20261025/build_deps/prefix/include/freetype2"}
+Using Python 3.8.20 environment at: continuation_20261025/env-control
+Resolved 1 package in 417ms
+   Building matplotlib @ file:///workspace/scratch/cde4f976cfa9/continuation_20261025/build_deps/matplotlib-2.2.5
+      Built matplotlib @ file:///workspace/scratch/cde4f976cfa9/continuation_20261025/build_deps/matplotlib-2.2.5
+Prepared 1 package in 43.62s
+Uninstalled 1 package in 4ms
+Installed 1 package in 5ms
+ - matplotlib==3.3.4
+ + matplotlib==2.2.5 (from file:///workspace/scratch/cde4f976cfa9/continuation_20261025/build_deps/matplotlib-2.2.5)
+
+returncode=0

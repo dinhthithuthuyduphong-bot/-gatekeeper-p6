@@ -1,0 +1,14 @@
+[
+  {
+    "sha": "12e93a318c502d3b144cac8d501fe6dde2f81765",
+    "filename": "airflow/www/security.py",
+    "status": "modified",
+    "additions": 2,
+    "deletions": 2,
+    "changes": 4,
+    "blob_url": "https://github.com/apache/airflow/blob/7268d841ffe3f9e9bf2758a45f8e0afb35c1b109/airflow%2Fwww%2Fsecurity.py",
+    "raw_url": "https://github.com/apache/airflow/raw/7268d841ffe3f9e9bf2758a45f8e0afb35c1b109/airflow%2Fwww%2Fsecurity.py",
+    "contents_url": "https://api.github.com/repos/apache/airflow/contents/airflow%2Fwww%2Fsecurity.py?ref=7268d841ffe3f9e9bf2758a45f8e0afb35c1b109",
+    "patch": "@@ -340,8 +340,8 @@ def clean_perms(self):\n         pvms = (\n             sesh.query(sqla_models.PermissionView)\n             .filter(or_(\n-                sqla_models.PermissionView.permission is None,  # noqa pylint: disable=singleton-comparison\n-                sqla_models.PermissionView.view_menu is None,  # noqa pylint: disable=singleton-comparison\n+                sqla_models.PermissionView.permission == None,  # noqa pylint: disable=singleton-comparison\n+                sqla_models.PermissionView.view_menu == None,  # noqa pylint: disable=singleton-comparison\n             ))\n         )\n         # Since FAB doesn't define ON DELETE CASCADE on these tables, we need"
+  }
+]

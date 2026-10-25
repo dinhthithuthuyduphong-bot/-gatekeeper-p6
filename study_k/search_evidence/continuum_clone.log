@@ -1,0 +1,20 @@
+{"command": ["git", "init", "/workspace/scratch/cde4f976cfa9/continuation_20261025/historical/continuum"], "returncode": 0}
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint:
+hint: 	git config --global init.defaultBranch <name>
+hint:
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint:
+hint: 	git branch -m <name>
+hint:
+hint: Disable this message with "git config set advice.defaultBranchName false"
+Initialized empty Git repository in /workspace/scratch/cde4f976cfa9/continuation_20261025/historical/continuum/.git/
+{"command": ["git", "-C", "/workspace/scratch/cde4f976cfa9/continuation_20261025/historical/continuum", "remote", "add", "origin", "https://github.com/kvesteri/sqlalchemy-continuum.git"], "returncode": 0}
+{"command": ["git", "-C", "/workspace/scratch/cde4f976cfa9/continuation_20261025/historical/continuum", "fetch", "--depth=1", "origin", "12c2980dfbece0315962a613d0966a002bcd3d26"], "returncode": 0}
+From https://github.com/kvesteri/sqlalchemy-continuum
+ * branch            12c2980dfbece0315962a613d0966a002bcd3d26 -> FETCH_HEAD
+{"command": ["git", "-C", "/workspace/scratch/cde4f976cfa9/continuation_20261025/historical/continuum", "checkout", "--detach", "FETCH_HEAD"], "returncode": 0}
+HEAD is now at 12c2980 Fix date

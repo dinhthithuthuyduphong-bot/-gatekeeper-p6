@@ -1,0 +1,2173 @@
+{
+  "url": "https://api.anaconda.org/package/conda-forge/slycot",
+  "files": [
+    {
+      "description": null,
+      "dependencies": {
+        "depends": [
+          {
+            "name": "libblas",
+            "specs": [
+              [
+                ">=",
+                "3.8.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "libcblas",
+            "specs": [
+              [
+                ">=",
+                "3.8.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "libgcc-ng",
+            "specs": [
+              [
+                ">=",
+                "7.3.0"
+              ]
+            ]
+          },
+          {
+            "name": "libgfortran-ng",
+            "specs": [
+              [
+                ">=",
+                "7,<8.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "liblapack",
+            "specs": [
+              [
+                ">=",
+                "3.8.0,<3.9.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "numpy",
+            "specs": [
+              [
+                ">=",
+                "1.14.6,<2.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "python",
+            "specs": [
+              [
+                ">=",
+                "3.8,<3.9.0a0"
+              ]
+            ]
+          }
+        ]
+      },
+      "distribution_type": "conda",
+      "basename": "linux-64/slycot-0.3.5.0-py38h950b918_2.tar.bz2",
+      "attrs": {
+        "build_number": 2,
+        "license": "GPL-2.0",
+        "has_prefix": false,
+        "license_family": "GPL",
+        "machine": "x86_64",
+        "platform": "linux",
+        "depends": [
+          "libblas >=3.8.0,<4.0a0",
+          "libcblas >=3.8.0,<4.0a0",
+          "libgcc-ng >=7.3.0",
+          "libgfortran-ng >=7,<8.0a0",
+          "liblapack >=3.8.0,<3.9.0a0",
+          "numpy >=1.14.6,<2.0a0",
+          "python >=3.8,<3.9.0a0"
+        ],
+        "build": "py38h950b918_2",
+        "timestamp": 1580145054596,
+        "arch": "x86_64",
+        "operatingsystem": "linux",
+        "target-triplet": "x86_64-any-linux",
+        "subdir": "linux-64"
+      },
+      "upload_time": "2020-01-27 17:12:16.679000+00:00",
+      "md5": "0a5f9de3e8816901752cf36326e20bda",
+      "sha256": "",
+      "size": 618857,
+      "full_name": "conda-forge/slycot/0.3.5.0/linux-64/slycot-0.3.5.0-py38h950b918_2.tar.bz2",
+      "download_url": "//api.anaconda.org/download/conda-forge/slycot/0.3.5.0/linux-64/slycot-0.3.5.0-py38h950b918_2.tar.bz2",
+      "type": "conda",
+      "version": "0.3.5.0",
+      "ndownloads": 4057,
+      "owner": "conda-forge",
+      "labels": [
+        "main",
+        "cf202003"
+      ]
+    },
+    {
+      "description": null,
+      "dependencies": {
+        "depends": [
+          {
+            "name": "libblas",
+            "specs": [
+              [
+                ">=",
+                "3.8.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "libcblas",
+            "specs": [
+              [
+                ">=",
+                "3.8.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "libgcc-ng",
+            "specs": [
+              [
+                ">=",
+                "7.5.0"
+              ]
+            ]
+          },
+          {
+            "name": "libgfortran-ng",
+            "specs": [
+              [
+                ">=",
+                "7,<8.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "liblapack",
+            "specs": [
+              [
+                ">=",
+                "3.8.0,<3.9.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "numpy",
+            "specs": [
+              [
+                ">=",
+                "1.14.6,<2.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "python",
+            "specs": [
+              [
+                ">=",
+                "3.8,<3.9.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "python_abi",
+            "specs": [
+              [
+                "==",
+                "3.8.* *_cp38"
+              ]
+            ]
+          }
+        ]
+      },
+      "distribution_type": "conda",
+      "basename": "linux-64/slycot-0.4.0.0-py38h8872ae6_0.tar.bz2",
+      "attrs": {
+        "build_number": 0,
+        "license": "GPL-2.0-only",
+        "has_prefix": false,
+        "license_family": "GPL",
+        "machine": "x86_64",
+        "platform": "linux",
+        "depends": [
+          "libblas >=3.8.0,<4.0a0",
+          "libcblas >=3.8.0,<4.0a0",
+          "libgcc-ng >=7.5.0",
+          "libgfortran-ng >=7,<8.0a0",
+          "liblapack >=3.8.0,<3.9.0a0",
+          "numpy >=1.14.6,<2.0a0",
+          "python >=3.8,<3.9.0a0",
+          "python_abi 3.8.* *_cp38"
+        ],
+        "build": "py38h8872ae6_0",
+        "timestamp": 1590854213618,
+        "arch": "x86_64",
+        "operatingsystem": "linux",
+        "target-triplet": "x86_64-any-linux",
+        "subdir": "linux-64"
+      },
+      "upload_time": "2020-05-30 15:57:26.336000+00:00",
+      "md5": "a7e49fc14e3bcb66696affa7de019e6d",
+      "sha256": "",
+      "size": 702938,
+      "full_name": "conda-forge/slycot/0.4.0.0/linux-64/slycot-0.4.0.0-py38h8872ae6_0.tar.bz2",
+      "download_url": "//api.anaconda.org/download/conda-forge/slycot/0.4.0.0/linux-64/slycot-0.4.0.0-py38h8872ae6_0.tar.bz2",
+      "type": "conda",
+      "version": "0.4.0.0",
+      "ndownloads": 3803,
+      "owner": "conda-forge",
+      "labels": [
+        "main"
+      ]
+    },
+    {
+      "description": null,
+      "dependencies": {
+        "depends": [
+          {
+            "name": "libblas",
+            "specs": [
+              [
+                ">=",
+                "3.8.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "libcblas",
+            "specs": [
+              [
+                ">=",
+                "3.8.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "libgcc-ng",
+            "specs": [
+              [
+                ">=",
+                "7.5.0"
+              ]
+            ]
+          },
+          {
+            "name": "libgfortran-ng",
+            "specs": [
+              [
+                ">=",
+                "7,<8.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "liblapack",
+            "specs": [
+              [
+                ">=",
+                "3.8.0,<3.9.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "numpy",
+            "specs": [
+              [
+                ">=",
+                "1.14.6,<2.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "python",
+            "specs": [
+              [
+                ">=",
+                "3.8,<3.9.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "python_abi",
+            "specs": [
+              [
+                "==",
+                "3.8.* *_cp38"
+              ]
+            ]
+          }
+        ]
+      },
+      "distribution_type": "conda",
+      "basename": "linux-64/slycot-0.4.0.0-py38h8872ae6_1.tar.bz2",
+      "attrs": {
+        "build_number": 1,
+        "license": "GPL-2.0-only",
+        "has_prefix": false,
+        "license_family": "GPL",
+        "machine": "x86_64",
+        "platform": "linux",
+        "depends": [
+          "libblas >=3.8.0,<4.0a0",
+          "libcblas >=3.8.0,<4.0a0",
+          "libgcc-ng >=7.5.0",
+          "libgfortran-ng >=7,<8.0a0",
+          "liblapack >=3.8.0,<3.9.0a0",
+          "numpy >=1.14.6,<2.0a0",
+          "python >=3.8,<3.9.0a0",
+          "python_abi 3.8.* *_cp38"
+        ],
+        "build": "py38h8872ae6_1",
+        "timestamp": 1590874245033,
+        "arch": "x86_64",
+        "operatingsystem": "linux",
+        "target-triplet": "x86_64-any-linux",
+        "subdir": "linux-64"
+      },
+      "upload_time": "2020-05-30 21:31:22.818000+00:00",
+      "md5": "34beb5c45d10f1fb8018c993d9c62ef1",
+      "sha256": "",
+      "size": 692719,
+      "full_name": "conda-forge/slycot/0.4.0.0/linux-64/slycot-0.4.0.0-py38h8872ae6_1.tar.bz2",
+      "download_url": "//api.anaconda.org/download/conda-forge/slycot/0.4.0.0/linux-64/slycot-0.4.0.0-py38h8872ae6_1.tar.bz2",
+      "type": "conda",
+      "version": "0.4.0.0",
+      "ndownloads": 5086,
+      "owner": "conda-forge",
+      "labels": [
+        "main"
+      ]
+    },
+    {
+      "description": null,
+      "dependencies": {
+        "depends": [
+          {
+            "name": "libblas",
+            "specs": [
+              [
+                ">=",
+                "3.8.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "libcblas",
+            "specs": [
+              [
+                ">=",
+                "3.8.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "libgcc-ng",
+            "specs": [
+              [
+                ">=",
+                "9.3.0"
+              ]
+            ]
+          },
+          {
+            "name": "libgfortran-ng",
+            "specs": []
+          },
+          {
+            "name": "libgfortran5",
+            "specs": [
+              [
+                ">=",
+                "9.3.0"
+              ]
+            ]
+          },
+          {
+            "name": "liblapack",
+            "specs": [
+              [
+                ">=",
+                "3.8.0,<3.9.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "numpy",
+            "specs": [
+              [
+                ">=",
+                "1.16.5,<2.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "python",
+            "specs": [
+              [
+                ">=",
+                "3.8,<3.9.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "python_abi",
+            "specs": [
+              [
+                "==",
+                "3.8.* *_cp38"
+              ]
+            ]
+          }
+        ]
+      },
+      "distribution_type": "conda",
+      "basename": "linux-64/slycot-0.4.0.0-py38h792fa6c_3.tar.bz2",
+      "attrs": {
+        "build_number": 3,
+        "license": "GPL-2.0-only",
+        "has_prefix": false,
+        "license_family": "GPL",
+        "machine": "x86_64",
+        "platform": "linux",
+        "depends": [
+          "libblas >=3.8.0,<4.0a0",
+          "libcblas >=3.8.0,<4.0a0",
+          "libgcc-ng >=9.3.0",
+          "libgfortran-ng",
+          "libgfortran5 >=9.3.0",
+          "liblapack >=3.8.0,<3.9.0a0",
+          "numpy >=1.16.5,<2.0a0",
+          "python >=3.8,<3.9.0a0",
+          "python_abi 3.8.* *_cp38"
+        ],
+        "build": "py38h792fa6c_3",
+        "timestamp": 1602915187322,
+        "arch": "x86_64",
+        "operatingsystem": "linux",
+        "target-triplet": "x86_64-any-linux",
+        "subdir": "linux-64"
+      },
+      "upload_time": "2020-10-17 06:13:47.801000+00:00",
+      "md5": "04cbff6cd0c511656313d753f2cdfdaa",
+      "sha256": "",
+      "size": 674007,
+      "full_name": "conda-forge/slycot/0.4.0.0/linux-64/slycot-0.4.0.0-py38h792fa6c_3.tar.bz2",
+      "download_url": "//api.anaconda.org/download/conda-forge/slycot/0.4.0.0/linux-64/slycot-0.4.0.0-py38h792fa6c_3.tar.bz2",
+      "type": "conda",
+      "version": "0.4.0.0",
+      "ndownloads": 3427,
+      "owner": "conda-forge",
+      "labels": [
+        "main"
+      ]
+    },
+    {
+      "description": null,
+      "dependencies": {
+        "depends": [
+          {
+            "name": "libblas",
+            "specs": [
+              [
+                ">=",
+                "3.8.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "libcblas",
+            "specs": [
+              [
+                ">=",
+                "3.8.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "libgcc-ng",
+            "specs": [
+              [
+                ">=",
+                "7.5.0"
+              ]
+            ]
+          },
+          {
+            "name": "libgfortran-ng",
+            "specs": []
+          },
+          {
+            "name": "libgfortran4",
+            "specs": [
+              [
+                ">=",
+                "7.5.0"
+              ]
+            ]
+          },
+          {
+            "name": "liblapack",
+            "specs": [
+              [
+                ">=",
+                "3.8.0,<3.9.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "numpy",
+            "specs": [
+              [
+                ">=",
+                "1.16.5,<2.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "python",
+            "specs": [
+              [
+                ">=",
+                "3.8,<3.9.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "python_abi",
+            "specs": [
+              [
+                "==",
+                "3.8.* *_cp38"
+              ]
+            ]
+          }
+        ]
+      },
+      "distribution_type": "conda",
+      "basename": "linux-64/slycot-0.4.0.0-py38hba23e71_3.tar.bz2",
+      "attrs": {
+        "build_number": 3,
+        "license": "GPL-2.0-only",
+        "has_prefix": false,
+        "license_family": "GPL",
+        "machine": "x86_64",
+        "platform": "linux",
+        "depends": [
+          "libblas >=3.8.0,<4.0a0",
+          "libcblas >=3.8.0,<4.0a0",
+          "libgcc-ng >=7.5.0",
+          "libgfortran-ng",
+          "libgfortran4 >=7.5.0",
+          "liblapack >=3.8.0,<3.9.0a0",
+          "numpy >=1.16.5,<2.0a0",
+          "python >=3.8,<3.9.0a0",
+          "python_abi 3.8.* *_cp38"
+        ],
+        "build": "py38hba23e71_3",
+        "timestamp": 1602915207130,
+        "arch": "x86_64",
+        "operatingsystem": "linux",
+        "target-triplet": "x86_64-any-linux",
+        "subdir": "linux-64"
+      },
+      "upload_time": "2020-10-17 06:14:08.549000+00:00",
+      "md5": "d88eaf5156896a1b424ab2d90683bfa1",
+      "sha256": "",
+      "size": 664063,
+      "full_name": "conda-forge/slycot/0.4.0.0/linux-64/slycot-0.4.0.0-py38hba23e71_3.tar.bz2",
+      "download_url": "//api.anaconda.org/download/conda-forge/slycot/0.4.0.0/linux-64/slycot-0.4.0.0-py38hba23e71_3.tar.bz2",
+      "type": "conda",
+      "version": "0.4.0.0",
+      "ndownloads": 3466,
+      "owner": "conda-forge",
+      "labels": [
+        "main"
+      ]
+    },
+    {
+      "description": null,
+      "dependencies": {
+        "depends": [
+          {
+            "name": "libblas",
+            "specs": [
+              [
+                ">=",
+                "3.8.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "libcblas",
+            "specs": [
+              [
+                ">=",
+                "3.8.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "libgcc-ng",
+            "specs": [
+              [
+                ">=",
+                "9.3.0"
+              ]
+            ]
+          },
+          {
+            "name": "libgfortran-ng",
+            "specs": []
+          },
+          {
+            "name": "libgfortran5",
+            "specs": [
+              [
+                ">=",
+                "9.3.0"
+              ]
+            ]
+          },
+          {
+            "name": "liblapack",
+            "specs": [
+              [
+                ">=",
+                "3.8.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "numpy",
+            "specs": [
+              [
+                ">=",
+                "1.16.5,<2.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "python",
+            "specs": [
+              [
+                ">=",
+                "3.8,<3.9.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "python_abi",
+            "specs": [
+              [
+                "==",
+                "3.8.* *_cp38"
+              ]
+            ]
+          }
+        ]
+      },
+      "distribution_type": "conda",
+      "basename": "linux-64/slycot-0.4.0.0-py38hf9f4372_4.tar.bz2",
+      "attrs": {
+        "build_number": 4,
+        "license": "GPL-2.0-only",
+        "has_prefix": false,
+        "license_family": "GPL",
+        "machine": "x86_64",
+        "platform": "linux",
+        "depends": [
+          "libblas >=3.8.0,<4.0a0",
+          "libcblas >=3.8.0,<4.0a0",
+          "libgcc-ng >=9.3.0",
+          "libgfortran-ng",
+          "libgfortran5 >=9.3.0",
+          "liblapack >=3.8.0,<4.0a0",
+          "numpy >=1.16.5,<2.0a0",
+          "python >=3.8,<3.9.0a0",
+          "python_abi 3.8.* *_cp38"
+        ],
+        "build": "py38hf9f4372_4",
+        "timestamp": 1604219477345,
+        "arch": "x86_64",
+        "operatingsystem": "linux",
+        "target-triplet": "x86_64-any-linux",
+        "subdir": "linux-64"
+      },
+      "upload_time": "2020-11-01 08:31:58.743000+00:00",
+      "md5": "652e1b5602b130135c8a590fe3bf64c1",
+      "sha256": "",
+      "size": 678284,
+      "full_name": "conda-forge/slycot/0.4.0.0/linux-64/slycot-0.4.0.0-py38hf9f4372_4.tar.bz2",
+      "download_url": "//api.anaconda.org/download/conda-forge/slycot/0.4.0.0/linux-64/slycot-0.4.0.0-py38hf9f4372_4.tar.bz2",
+      "type": "conda",
+      "version": "0.4.0.0",
+      "ndownloads": 5086,
+      "owner": "conda-forge",
+      "labels": [
+        "main"
+      ]
+    },
+    {
+      "description": null,
+      "dependencies": {
+        "depends": [
+          {
+            "name": "libblas",
+            "specs": [
+              [
+                ">=",
+                "3.8.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "libcblas",
+            "specs": [
+              [
+                ">=",
+                "3.8.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "libgcc-ng",
+            "specs": [
+              [
+                ">=",
+                "7.5.0"
+              ]
+            ]
+          },
+          {
+            "name": "libgfortran-ng",
+            "specs": []
+          },
+          {
+            "name": "libgfortran4",
+            "specs": [
+              [
+                ">=",
+                "7.5.0"
+              ]
+            ]
+          },
+          {
+            "name": "liblapack",
+            "specs": [
+              [
+                ">=",
+                "3.8.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "numpy",
+            "specs": [
+              [
+                ">=",
+                "1.16.5,<2.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "python",
+            "specs": [
+              [
+                ">=",
+                "3.8,<3.9.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "python_abi",
+            "specs": [
+              [
+                "==",
+                "3.8.* *_cp38"
+              ]
+            ]
+          }
+        ]
+      },
+      "distribution_type": "conda",
+      "basename": "linux-64/slycot-0.4.0.0-py38h7b08dd1_4.tar.bz2",
+      "attrs": {
+        "build_number": 4,
+        "license": "GPL-2.0-only",
+        "has_prefix": false,
+        "license_family": "GPL",
+        "machine": "x86_64",
+        "platform": "linux",
+        "depends": [
+          "libblas >=3.8.0,<4.0a0",
+          "libcblas >=3.8.0,<4.0a0",
+          "libgcc-ng >=7.5.0",
+          "libgfortran-ng",
+          "libgfortran4 >=7.5.0",
+          "liblapack >=3.8.0,<4.0a0",
+          "numpy >=1.16.5,<2.0a0",
+          "python >=3.8,<3.9.0a0",
+          "python_abi 3.8.* *_cp38"
+        ],
+        "build": "py38h7b08dd1_4",
+        "timestamp": 1604219489920,
+        "arch": "x86_64",
+        "operatingsystem": "linux",
+        "target-triplet": "x86_64-any-linux",
+        "subdir": "linux-64"
+      },
+      "upload_time": "2020-11-01 08:32:11.864000+00:00",
+      "md5": "852a892a250e19c771adcca0a88b75b8",
+      "sha256": "",
+      "size": 686543,
+      "full_name": "conda-forge/slycot/0.4.0.0/linux-64/slycot-0.4.0.0-py38h7b08dd1_4.tar.bz2",
+      "download_url": "//api.anaconda.org/download/conda-forge/slycot/0.4.0.0/linux-64/slycot-0.4.0.0-py38h7b08dd1_4.tar.bz2",
+      "type": "conda",
+      "version": "0.4.0.0",
+      "ndownloads": 4962,
+      "owner": "conda-forge",
+      "labels": [
+        "main"
+      ]
+    },
+    {
+      "description": null,
+      "dependencies": {
+        "depends": [
+          {
+            "name": "libblas",
+            "specs": [
+              [
+                ">=",
+                "3.8.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "libcblas",
+            "specs": [
+              [
+                ">=",
+                "3.8.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "libgcc-ng",
+            "specs": [
+              [
+                ">=",
+                "9.4.0"
+              ]
+            ]
+          },
+          {
+            "name": "libgfortran-ng",
+            "specs": []
+          },
+          {
+            "name": "libgfortran5",
+            "specs": [
+              [
+                ">=",
+                "9.4.0"
+              ]
+            ]
+          },
+          {
+            "name": "liblapack",
+            "specs": [
+              [
+                ">=",
+                "3.8.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "numpy",
+            "specs": [
+              [
+                ">=",
+                "1.18.5,<2.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "python",
+            "specs": [
+              [
+                ">=",
+                "3.8,<3.9.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "python_abi",
+            "specs": [
+              [
+                "==",
+                "3.8.* *_cp38"
+              ]
+            ]
+          }
+        ]
+      },
+      "distribution_type": "conda",
+      "basename": "linux-64/slycot-0.4.0.0-py38h47c67d9_6.tar.bz2",
+      "attrs": {
+        "build_number": 6,
+        "license": "GPL-2.0-only",
+        "has_prefix": false,
+        "license_family": "GPL",
+        "machine": "x86_64",
+        "platform": "linux",
+        "depends": [
+          "libblas >=3.8.0,<4.0a0",
+          "libcblas >=3.8.0,<4.0a0",
+          "libgcc-ng >=9.4.0",
+          "libgfortran-ng",
+          "libgfortran5 >=9.4.0",
+          "liblapack >=3.8.0,<4.0a0",
+          "numpy >=1.18.5,<2.0a0",
+          "python >=3.8,<3.9.0a0",
+          "python_abi 3.8.* *_cp38"
+        ],
+        "build": "py38h47c67d9_6",
+        "timestamp": 1640829613555,
+        "arch": "x86_64",
+        "operatingsystem": "linux",
+        "target-triplet": "x86_64-any-linux",
+        "subdir": "linux-64"
+      },
+      "upload_time": "2021-12-30 02:00:43.066000+00:00",
+      "md5": "cc4b83c04319b216d1eea1b0b78a9d50",
+      "sha256": "",
+      "size": 679280,
+      "full_name": "conda-forge/slycot/0.4.0.0/linux-64/slycot-0.4.0.0-py38h47c67d9_6.tar.bz2",
+      "download_url": "//api.anaconda.org/download/conda-forge/slycot/0.4.0.0/linux-64/slycot-0.4.0.0-py38h47c67d9_6.tar.bz2",
+      "type": "conda",
+      "version": "0.4.0.0",
+      "ndownloads": 2881,
+      "owner": "conda-forge",
+      "labels": [
+        "main"
+      ]
+    },
+    {
+      "description": null,
+      "dependencies": {
+        "depends": [
+          {
+            "name": "libblas",
+            "specs": [
+              [
+                ">=",
+                "3.8.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "libcblas",
+            "specs": [
+              [
+                ">=",
+                "3.8.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "libgcc-ng",
+            "specs": [
+              [
+                ">=",
+                "9.4.0"
+              ]
+            ]
+          },
+          {
+            "name": "libgfortran-ng",
+            "specs": []
+          },
+          {
+            "name": "libgfortran5",
+            "specs": [
+              [
+                ">=",
+                "9.4.0"
+              ]
+            ]
+          },
+          {
+            "name": "liblapack",
+            "specs": [
+              [
+                ">=",
+                "3.8.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "numpy",
+            "specs": [
+              [
+                ">=",
+                "1.18.5,<2.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "python",
+            "specs": [
+              [
+                ">=",
+                "3.8,<3.9.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "python_abi",
+            "specs": [
+              [
+                "==",
+                "3.8.* *_cp38"
+              ]
+            ]
+          }
+        ]
+      },
+      "distribution_type": "conda",
+      "basename": "linux-64/slycot-0.4.0.0-py38h47c67d9_7.tar.bz2",
+      "attrs": {
+        "build_number": 7,
+        "license": "GPL-2.0-only",
+        "has_prefix": false,
+        "license_family": "GPL",
+        "machine": "x86_64",
+        "platform": "linux",
+        "depends": [
+          "libblas >=3.8.0,<4.0a0",
+          "libcblas >=3.8.0,<4.0a0",
+          "libgcc-ng >=9.4.0",
+          "libgfortran-ng",
+          "libgfortran5 >=9.4.0",
+          "liblapack >=3.8.0,<4.0a0",
+          "numpy >=1.18.5,<2.0a0",
+          "python >=3.8,<3.9.0a0",
+          "python_abi 3.8.* *_cp38"
+        ],
+        "build": "py38h47c67d9_7",
+        "timestamp": 1640883177466,
+        "arch": "x86_64",
+        "operatingsystem": "linux",
+        "target-triplet": "x86_64-any-linux",
+        "subdir": "linux-64"
+      },
+      "upload_time": "2021-12-30 16:53:31.075000+00:00",
+      "md5": "a0fa64db9bbb63776e355bded897ea78",
+      "sha256": "",
+      "size": 678289,
+      "full_name": "conda-forge/slycot/0.4.0.0/linux-64/slycot-0.4.0.0-py38h47c67d9_7.tar.bz2",
+      "download_url": "//api.anaconda.org/download/conda-forge/slycot/0.4.0.0/linux-64/slycot-0.4.0.0-py38h47c67d9_7.tar.bz2",
+      "type": "conda",
+      "version": "0.4.0.0",
+      "ndownloads": 2920,
+      "owner": "conda-forge",
+      "labels": [
+        "main"
+      ]
+    },
+    {
+      "description": null,
+      "dependencies": {
+        "depends": [
+          {
+            "name": "libblas",
+            "specs": [
+              [
+                ">=",
+                "3.8.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "libcblas",
+            "specs": [
+              [
+                ">=",
+                "3.8.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "libgcc-ng",
+            "specs": [
+              [
+                ">=",
+                "9.4.0"
+              ]
+            ]
+          },
+          {
+            "name": "libgfortran-ng",
+            "specs": []
+          },
+          {
+            "name": "libgfortran5",
+            "specs": [
+              [
+                ">=",
+                "9.4.0"
+              ]
+            ]
+          },
+          {
+            "name": "liblapack",
+            "specs": [
+              [
+                ">=",
+                "3.8.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "numpy",
+            "specs": [
+              [
+                ">=",
+                "1.18.5,<2.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "python",
+            "specs": [
+              [
+                ">=",
+                "3.8,<3.9.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "python_abi",
+            "specs": [
+              [
+                "==",
+                "3.8.* *_cp38"
+              ]
+            ]
+          }
+        ]
+      },
+      "distribution_type": "conda",
+      "basename": "linux-64/slycot-0.4.0.0-py38h47c67d9_8.tar.bz2",
+      "attrs": {
+        "build_number": 8,
+        "license": "GPL-2.0-only",
+        "has_prefix": false,
+        "license_family": "GPL",
+        "machine": "x86_64",
+        "platform": "linux",
+        "depends": [
+          "libblas >=3.8.0,<4.0a0",
+          "libcblas >=3.8.0,<4.0a0",
+          "libgcc-ng >=9.4.0",
+          "libgfortran-ng",
+          "libgfortran5 >=9.4.0",
+          "liblapack >=3.8.0,<4.0a0",
+          "numpy >=1.18.5,<2.0a0",
+          "python >=3.8,<3.9.0a0",
+          "python_abi 3.8.* *_cp38"
+        ],
+        "build": "py38h47c67d9_8",
+        "timestamp": 1641709723769,
+        "arch": "x86_64",
+        "operatingsystem": "linux",
+        "target-triplet": "x86_64-any-linux",
+        "subdir": "linux-64"
+      },
+      "upload_time": "2022-01-09 06:29:17.844000+00:00",
+      "md5": "c330dbb87254eea39b4fd4af3a8dc2e9",
+      "sha256": "",
+      "size": 637411,
+      "full_name": "conda-forge/slycot/0.4.0.0/linux-64/slycot-0.4.0.0-py38h47c67d9_8.tar.bz2",
+      "download_url": "//api.anaconda.org/download/conda-forge/slycot/0.4.0.0/linux-64/slycot-0.4.0.0-py38h47c67d9_8.tar.bz2",
+      "type": "conda",
+      "version": "0.4.0.0",
+      "ndownloads": 5844,
+      "owner": "conda-forge",
+      "labels": [
+        "main"
+      ]
+    },
+    {
+      "description": null,
+      "dependencies": {
+        "depends": [
+          {
+            "name": "libblas",
+            "specs": [
+              [
+                ">=",
+                "3.9.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "libcblas",
+            "specs": [
+              [
+                ">=",
+                "3.9.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "libgcc-ng",
+            "specs": [
+              [
+                ">=",
+                "12"
+              ]
+            ]
+          },
+          {
+            "name": "libgfortran-ng",
+            "specs": []
+          },
+          {
+            "name": "libgfortran5",
+            "specs": [
+              [
+                ">=",
+                "10.3.0"
+              ]
+            ]
+          },
+          {
+            "name": "liblapack",
+            "specs": [
+              [
+                ">=",
+                "3.9.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "numpy",
+            "specs": [
+              [
+                ">=",
+                "1.23.1,<2.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "python",
+            "specs": [
+              [
+                ">=",
+                "3.8,<3.9.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "python_abi",
+            "specs": [
+              [
+                "==",
+                "3.8.* *_cp38"
+              ]
+            ]
+          }
+        ]
+      },
+      "distribution_type": "conda",
+      "basename": "linux-64/slycot-0.5.0.0-py38h7d5576d_0.tar.bz2",
+      "attrs": {
+        "build_number": 0,
+        "license": "GPL-2.0-only",
+        "has_prefix": false,
+        "license_family": "GPL",
+        "machine": "x86_64",
+        "platform": "linux",
+        "depends": [
+          "libblas >=3.9.0,<4.0a0",
+          "libcblas >=3.9.0,<4.0a0",
+          "libgcc-ng >=12",
+          "libgfortran-ng",
+          "libgfortran5 >=10.3.0",
+          "liblapack >=3.9.0,<4.0a0",
+          "numpy >=1.23.1,<2.0a0",
+          "python >=3.8,<3.9.0a0",
+          "python_abi 3.8.* *_cp38"
+        ],
+        "build": "py38h7d5576d_0",
+        "timestamp": 1657726013284,
+        "arch": "x86_64",
+        "operatingsystem": "linux",
+        "target-triplet": "x86_64-any-linux",
+        "subdir": "linux-64"
+      },
+      "upload_time": "2022-07-13 15:27:29.507000+00:00",
+      "md5": "cc5ecd6eace4b49bbc8cf62e8d910a1f",
+      "sha256": "",
+      "size": 708599,
+      "full_name": "conda-forge/slycot/0.5.0.0/linux-64/slycot-0.5.0.0-py38h7d5576d_0.tar.bz2",
+      "download_url": "//api.anaconda.org/download/conda-forge/slycot/0.5.0.0/linux-64/slycot-0.5.0.0-py38h7d5576d_0.tar.bz2",
+      "type": "conda",
+      "version": "0.5.0.0",
+      "ndownloads": 2953,
+      "owner": "conda-forge",
+      "labels": [
+        "main"
+      ]
+    },
+    {
+      "description": null,
+      "dependencies": {
+        "depends": [
+          {
+            "name": "libblas",
+            "specs": [
+              [
+                ">=",
+                "3.9.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "libcblas",
+            "specs": [
+              [
+                ">=",
+                "3.9.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "libgcc-ng",
+            "specs": [
+              [
+                ">=",
+                "12"
+              ]
+            ]
+          },
+          {
+            "name": "libgfortran-ng",
+            "specs": []
+          },
+          {
+            "name": "libgfortran5",
+            "specs": [
+              [
+                ">=",
+                "10.3.0"
+              ]
+            ]
+          },
+          {
+            "name": "liblapack",
+            "specs": [
+              [
+                ">=",
+                "3.9.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "numpy",
+            "specs": [
+              [
+                ">=",
+                "1.23.1,<2.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "python",
+            "specs": [
+              [
+                ">=",
+                "3.8,<3.9.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "python_abi",
+            "specs": [
+              [
+                "==",
+                "3.8.* *_cp38"
+              ]
+            ]
+          }
+        ]
+      },
+      "distribution_type": "conda",
+      "basename": "linux-64/slycot-0.5.0.0-py38h7d5576d_1.tar.bz2",
+      "attrs": {
+        "build_number": 1,
+        "license": "GPL-2.0-only",
+        "has_prefix": false,
+        "license_family": "GPL",
+        "machine": "x86_64",
+        "platform": "linux",
+        "depends": [
+          "libblas >=3.9.0,<4.0a0",
+          "libcblas >=3.9.0,<4.0a0",
+          "libgcc-ng >=12",
+          "libgfortran-ng",
+          "libgfortran5 >=10.3.0",
+          "liblapack >=3.9.0,<4.0a0",
+          "numpy >=1.23.1,<2.0a0",
+          "python >=3.8,<3.9.0a0",
+          "python_abi 3.8.* *_cp38"
+        ],
+        "build": "py38h7d5576d_1",
+        "timestamp": 1658871556910,
+        "arch": "x86_64",
+        "operatingsystem": "linux",
+        "target-triplet": "x86_64-any-linux",
+        "subdir": "linux-64"
+      },
+      "upload_time": "2022-07-26 21:39:46.859000+00:00",
+      "md5": "4d0cd1d554156fa9ce272499e5e494c9",
+      "sha256": "",
+      "size": 695983,
+      "full_name": "conda-forge/slycot/0.5.0.0/linux-64/slycot-0.5.0.0-py38h7d5576d_1.tar.bz2",
+      "download_url": "//api.anaconda.org/download/conda-forge/slycot/0.5.0.0/linux-64/slycot-0.5.0.0-py38h7d5576d_1.tar.bz2",
+      "type": "conda",
+      "version": "0.5.0.0",
+      "ndownloads": 3436,
+      "owner": "conda-forge",
+      "labels": [
+        "main"
+      ]
+    },
+    {
+      "description": null,
+      "dependencies": {
+        "depends": [
+          {
+            "name": "libblas",
+            "specs": [
+              [
+                ">=",
+                "3.9.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "libcblas",
+            "specs": [
+              [
+                ">=",
+                "3.9.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "libgcc-ng",
+            "specs": [
+              [
+                ">=",
+                "12"
+              ]
+            ]
+          },
+          {
+            "name": "libgfortran-ng",
+            "specs": []
+          },
+          {
+            "name": "libgfortran5",
+            "specs": [
+              [
+                ">=",
+                "10.3.0"
+              ]
+            ]
+          },
+          {
+            "name": "liblapack",
+            "specs": [
+              [
+                ">=",
+                "3.9.0,<4.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "numpy",
+            "specs": [
+              [
+                ">=",
+                "1.23.1,<2.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "pypy3.8",
+            "specs": [
+              [
+                ">=",
+                "7.3.9"
+              ]
+            ]
+          },
+          {
+            "name": "python",
+            "specs": [
+              [
+                ">=",
+                "3.8,<3.9.0a0"
+              ]
+            ]
+          },
+          {
+            "name": "python_abi",
+            "specs": [
+              [
+                "==",
+                "3.8 *_pypy38_pp73"
+              ]
+            ]
+          }
+        ]
+      },
+      "distribution_type": "conda",
+      "basename": "linux-64/slycot-0.5.0.0-py38h9b9d855_1.tar.bz2",
+      "attrs": {
+        "build_number": 1,
+        "license": "GPL-2.0-only",
+        "has_prefix": false,
+        "license_family": "GPL",
+        "machine": "x86_64",
+        "platform": "linux",
+        "depends": [
+          "libblas >=3.9.0,<4.0a0",
+          "libcblas >=3.9.0,<4.0a0",
+          "libgcc-ng >=12",
+          "libgfortran-ng",
+          "libgfortran5 >=10.3.0",
+          "liblapack >=3.9.0,<4.0a0",
+          "numpy >=1.23.1,<2.0a0",
+          "pypy3.8 >=7.3.9",
+          "python >=3.8,<3.9.0a0",
+          "python_abi 3.8 *_pypy38_pp73"
+        ],
+        "build": "py38h9b9d855_1",
+        "timestamp": 1658871557217,
+        "arch": "x86_64",
+        "operatingsystem": "linux",
+        "target-triplet": "x86_64-any-linux",
+        "subdir": "linux-64"
+      },
+      "upload_time": "2022-07-26 21:39:55.786000+00:00",
+      "md5": "af38881dc4a7b7785cd835fb98a84bee",
+      "sha256": "",
+      "size": 724116,
+      "full_name": "conda-forge/slycot/0.5.0.0/linux-64/slycot-0.5.0.0-py38h9b9d855_1.tar.bz2",
+      "download_url": "//api.anaconda.org/download/conda-forge/slycot/0.5.0.0/linux-64/slycot-0.5.0.0-py38h9b9d855_1.tar.bz2",
+      "type": "conda",
+      "version": "0.5.0.0",
+      "ndownloads": 2809,
+      "owner": "conda-forge",
+      "labels": [
+        "main"
+      ]
+    },
+    {
+      "description": null,
+      "dependencies": [],
+      "distribution_type": "conda",
+      "basename": "linux-64/slycot-0.5.0.0-py38h9b9d855_2.tar.bz2",
+      "attrs": {
+        "build_number": 2,
+        "license": "GPL-2.0-only",
+        "has_prefix": false,
+        "license_family": "GPL",
+        "machine": "x86_64",
+        "platform": "linux",
+        "depends": [
+          "libblas >=3.9.0,<4.0a0",
+          "libcblas >=3.9.0,<4.0a0",
+          "libgcc-ng >=12",
+          "libgfortran-ng",
+          "libgfortran5 >=10.4.0",
+          "liblapack >=3.9.0,<4.0a0",
+          "numpy >=1.23.4,<2.0a0",
+          "pypy3.8 >=7.3.9",
+          "python >=3.8,<3.9.0a0",
+          "python_abi 3.8 *_pypy38_pp73"
+        ],
+        "build": "py38h9b9d855_2",
+        "timestamp": 1667031012115,
+        "arch": "x86_64",
+        "operatingsystem": "linux",
+        "target-triplet": "x86_64-any-linux",
+        "subdir": "linux-64"
+      },
+      "upload_time": "2022-10-29 08:10:45.771000+00:00",
+      "md5": "45491ba873eb1717ac78d28e28dd9975",
+      "sha256": "",
+      "size": 721906,
+      "full_name": "conda-forge/slycot/0.5.0.0/linux-64/slycot-0.5.0.0-py38h9b9d855_2.tar.bz2",
+      "download_url": "//api.anaconda.org/download/conda-forge/slycot/0.5.0.0/linux-64/slycot-0.5.0.0-py38h9b9d855_2.tar.bz2",
+      "type": "conda",
+      "version": "0.5.0.0",
+      "ndownloads": 2668,
+      "owner": "conda-forge",
+      "labels": [
+        "main"
+      ]
+    },
+    {
+      "description": null,
+      "dependencies": [],
+      "distribution_type": "conda",
+      "basename": "linux-64/slycot-0.5.0.0-py38h7d5576d_2.tar.bz2",
+      "attrs": {
+        "build_number": 2,
+        "license": "GPL-2.0-only",
+        "has_prefix": false,
+        "license_family": "GPL",
+        "machine": "x86_64",
+        "platform": "linux",
+        "depends": [
+          "libblas >=3.9.0,<4.0a0",
+          "libcblas >=3.9.0,<4.0a0",
+          "libgcc-ng >=12",
+          "libgfortran-ng",
+          "libgfortran5 >=10.4.0",
+          "liblapack >=3.9.0,<4.0a0",
+          "numpy >=1.23.4,<2.0a0",
+          "python >=3.8,<3.9.0a0",
+          "python_abi 3.8.* *_cp38"
+        ],
+        "build": "py38h7d5576d_2",
+        "timestamp": 1667031042340,
+        "arch": "x86_64",
+        "operatingsystem": "linux",
+        "target-triplet": "x86_64-any-linux",
+        "subdir": "linux-64"
+      },
+      "upload_time": "2022-10-29 08:11:16.283000+00:00",
+      "md5": "198336098781d19c3432361e7d900523",
+      "sha256": "",
+      "size": 728892,
+      "full_name": "conda-forge/slycot/0.5.0.0/linux-64/slycot-0.5.0.0-py38h7d5576d_2.tar.bz2",
+      "download_url": "//api.anaconda.org/download/conda-forge/slycot/0.5.0.0/linux-64/slycot-0.5.0.0-py38h7d5576d_2.tar.bz2",
+      "type": "conda",
+      "version": "0.5.0.0",
+      "ndownloads": 2767,
+      "owner": "conda-forge",
+      "labels": [
+        "main"
+      ]
+    },
+    {
+      "description": null,
+      "dependencies": [],
+      "distribution_type": "conda",
+      "basename": "linux-64/slycot-0.5.1-py38h7d5576d_0.conda",
+      "attrs": {
+        "build_number": 0,
+        "license": "GPL-2.0-only",
+        "has_prefix": false,
+        "license_family": "GPL",
+        "machine": "x86_64",
+        "platform": "linux",
+        "depends": [
+          "libblas >=3.9.0,<4.0a0",
+          "libcblas >=3.9.0,<4.0a0",
+          "libgcc-ng >=12",
+          "libgfortran-ng",
+          "libgfortran5 >=10.4.0",
+          "liblapack >=3.9.0,<4.0a0",
+          "numpy >=1.23.5,<2.0a0",
+          "python >=3.8,<3.9.0a0",
+          "python_abi 3.8.* *_cp38"
+        ],
+        "build": "py38h7d5576d_0",
+        "timestamp": 1669212189373,
+        "arch": "x86_64",
+        "operatingsystem": "linux",
+        "target-triplet": "x86_64-any-linux",
+        "subdir": "linux-64"
+      },
+      "upload_time": "2022-11-23 14:03:42.668000+00:00",
+      "md5": "c15ba6d10f48417486dcb1d1772b43c8",
+      "sha256": "f560411f6be66f2ff575114c23d401ffee69cfbf4ef7b0fe8797b720d1a65be3",
+      "size": 668848,
+      "full_name": "conda-forge/slycot/0.5.1/linux-64/slycot-0.5.1-py38h7d5576d_0.conda",
+      "download_url": "//api.anaconda.org/download/conda-forge/slycot/0.5.1/linux-64/slycot-0.5.1-py38h7d5576d_0.conda",
+      "type": "conda",
+      "version": "0.5.1",
+      "ndownloads": 2804,
+      "owner": "conda-forge",
+      "labels": [
+        "main"
+      ]
+    },
+    {
+      "description": null,
+      "dependencies": [],
+      "distribution_type": "conda",
+      "basename": "linux-64/slycot-0.5.1-py38h9b9d855_0.conda",
+      "attrs": {
+        "build_number": 0,
+        "license": "GPL-2.0-only",
+        "has_prefix": false,
+        "license_family": "GPL",
+        "machine": "x86_64",
+        "platform": "linux",
+        "depends": [
+          "libblas >=3.9.0,<4.0a0",
+          "libcblas >=3.9.0,<4.0a0",
+          "libgcc-ng >=12",
+          "libgfortran-ng",
+          "libgfortran5 >=10.4.0",
+          "liblapack >=3.9.0,<4.0a0",
+          "numpy >=1.23.5,<2.0a0",
+          "pypy3.8 >=7.3.9",
+          "python >=3.8,<3.9.0a0",
+          "python_abi 3.8 *_pypy38_pp73"
+        ],
+        "build": "py38h9b9d855_0",
+        "timestamp": 1669212207166,
+        "arch": "x86_64",
+        "operatingsystem": "linux",
+        "target-triplet": "x86_64-any-linux",
+        "subdir": "linux-64"
+      },
+      "upload_time": "2022-11-23 14:04:03.612000+00:00",
+      "md5": "73bde64829aa1f6d67c2322be5f46a80",
+      "sha256": "3fe8d7d639f8e3cfbea532c55d40010c61fa3769f8d7a59e6230847c75963388",
+      "size": 663884,
+      "full_name": "conda-forge/slycot/0.5.1/linux-64/slycot-0.5.1-py38h9b9d855_0.conda",
+      "download_url": "//api.anaconda.org/download/conda-forge/slycot/0.5.1/linux-64/slycot-0.5.1-py38h9b9d855_0.conda",
+      "type": "conda",
+      "version": "0.5.1",
+      "ndownloads": 2796,
+      "owner": "conda-forge",
+      "labels": [
+        "main"
+      ]
+    },
+    {
+      "description": null,
+      "dependencies": [],
+      "distribution_type": "conda",
+      "basename": "linux-64/slycot-0.5.2-py38h9b9d855_0.conda",
+      "attrs": {
+        "build_number": 0,
+        "license": "GPL-2.0-only",
+        "has_prefix": false,
+        "license_family": "GPL",
+        "machine": "x86_64",
+        "platform": "linux",
+        "depends": [
+          "libblas >=3.9.0,<4.0a0",
+          "libcblas >=3.9.0,<4.0a0",
+          "libgcc-ng >=12",
+          "libgfortran-ng",
+          "libgfortran5 >=10.4.0",
+          "liblapack >=3.9.0,<4.0a0",
+          "numpy >=1.23.5,<2.0a0",
+          "pypy3.8 >=7.3.9",
+          "python >=3.8,<3.9.0a0",
+          "python_abi 3.8 *_pypy38_pp73"
+        ],
+        "build": "py38h9b9d855_0",
+        "timestamp": 1669237686123,
+        "arch": "x86_64",
+        "operatingsystem": "linux",
+        "target-triplet": "x86_64-any-linux",
+        "subdir": "linux-64"
+      },
+      "upload_time": "2022-11-23 21:08:43.497000+00:00",
+      "md5": "7f334747ad1b6a34323d3ff71bb5096a",
+      "sha256": "d13693eb781ac029426968b4d066ad67006d5779bcf61bc99516e35113fe7c82",
+      "size": 664364,
+      "full_name": "conda-forge/slycot/0.5.2/linux-64/slycot-0.5.2-py38h9b9d855_0.conda",
+      "download_url": "//api.anaconda.org/download/conda-forge/slycot/0.5.2/linux-64/slycot-0.5.2-py38h9b9d855_0.conda",
+      "type": "conda",
+      "version": "0.5.2",
+      "ndownloads": 2809,
+      "owner": "conda-forge",
+      "labels": [
+        "main"
+      ]
+    },
+    {
+      "description": null,
+      "dependencies": [],
+      "distribution_type": "conda",
+      "basename": "linux-64/slycot-0.5.2-py38h7d5576d_0.conda",
+      "attrs": {
+        "build_number": 0,
+        "license": "GPL-2.0-only",
+        "has_prefix": false,
+        "license_family": "GPL",
+        "machine": "x86_64",
+        "platform": "linux",
+        "depends": [
+          "libblas >=3.9.0,<4.0a0",
+          "libcblas >=3.9.0,<4.0a0",
+          "libgcc-ng >=12",
+          "libgfortran-ng",
+          "libgfortran5 >=10.4.0",
+          "liblapack >=3.9.0,<4.0a0",
+          "numpy >=1.23.5,<2.0a0",
+          "python >=3.8,<3.9.0a0",
+          "python_abi 3.8.* *_cp38"
+        ],
+        "build": "py38h7d5576d_0",
+        "timestamp": 1669237706310,
+        "arch": "x86_64",
+        "operatingsystem": "linux",
+        "target-triplet": "x86_64-any-linux",
+        "subdir": "linux-64"
+      },
+      "upload_time": "2022-11-23 21:09:02.882000+00:00",
+      "md5": "9bb9de9454e03b7e810156ad9216df12",
+      "sha256": "06e2b36a117fb54b452902f36ec8177d9f3340c4bfd0502502ceae26743884cc",
+      "size": 668621,
+      "full_name": "conda-forge/slycot/0.5.2/linux-64/slycot-0.5.2-py38h7d5576d_0.conda",
+      "download_url": "//api.anaconda.org/download/conda-forge/slycot/0.5.2/linux-64/slycot-0.5.2-py38h7d5576d_0.conda",
+      "type": "conda",
+      "version": "0.5.2",
+      "ndownloads": 4059,
+      "owner": "conda-forge",
+      "labels": [
+        "main"
+      ]
+    },
+    {
+      "description": null,
+      "dependencies": [],
+      "distribution_type": "conda",
+      "basename": "linux-64/slycot-0.5.3-py38hb3b678d_0.conda",
+      "attrs": {
+        "build_number": 0,
+        "license": "GPL-2.0-only",
+        "has_prefix": false,
+        "license_family": "GPL",
+        "machine": "x86_64",
+        "platform": "linux",
+        "depends": [
+          "libblas >=3.9.0,<4.0a0",
+          "libcblas >=3.9.0,<4.0a0",
+          "libgcc-ng >=12",
+          "libgfortran-ng",
+          "libgfortran5 >=11.3.0",
+          "liblapack >=3.9.0,<4.0a0",
+          "numpy >=1.24.0,<2.0a0",
+          "python >=3.8,<3.9.0a0",
+          "python_abi 3.8.* *_cp38"
+        ],
+        "build": "py38hb3b678d_0",
+        "timestamp": 1671636610598,
+        "arch": "x86_64",
+        "operatingsystem": "linux",
+        "target-triplet": "x86_64-any-linux",
+        "subdir": "linux-64"
+      },
+      "upload_time": "2022-12-21 15:30:39.861000+00:00",
+      "md5": "620efec57df24cb1e5fe1a619b6d0591",
+      "sha256": "b82557fd650e1c6c66564f9a8fec59d3a8d846dad2c7175ec0744d760154fc86",
+      "size": 654166,
+      "full_name": "conda-forge/slycot/0.5.3/linux-64/slycot-0.5.3-py38hb3b678d_0.conda",
+      "download_url": "//api.anaconda.org/download/conda-forge/slycot/0.5.3/linux-64/slycot-0.5.3-py38hb3b678d_0.conda",
+      "type": "conda",
+      "version": "0.5.3",
+      "ndownloads": 3628,
+      "owner": "conda-forge",
+      "labels": [
+        "main"
+      ]
+    },
+    {
+      "description": null,
+      "dependencies": [],
+      "distribution_type": "conda",
+      "basename": "linux-64/slycot-0.5.3-py38ha418f67_0.conda",
+      "attrs": {
+        "build_number": 0,
+        "license": "GPL-2.0-only",
+        "has_prefix": false,
+        "license_family": "GPL",
+        "machine": "x86_64",
+        "platform": "linux",
+        "depends": [
+          "libblas >=3.9.0,<4.0a0",
+          "libcblas >=3.9.0,<4.0a0",
+          "libgcc-ng >=12",
+          "libgfortran-ng",
+          "libgfortran5 >=11.3.0",
+          "liblapack >=3.9.0,<4.0a0",
+          "numpy >=1.24.0,<2.0a0",
+          "pypy3.8 >=7.3.9",
+          "python >=3.8,<3.9.0a0",
+          "python_abi 3.8 *_pypy38_pp73"
+        ],
+        "build": "py38ha418f67_0",
+        "timestamp": 1671636622184,
+        "arch": "x86_64",
+        "operatingsystem": "linux",
+        "target-triplet": "x86_64-any-linux",
+        "subdir": "linux-64"
+      },
+      "upload_time": "2022-12-21 15:30:56.160000+00:00",
+      "md5": "f1a15151e8a4597f3bd51e06f0b4c8ba",
+      "sha256": "508686cb0b7048abdaede35be618ae276f0bdd38942730e615d4e24fa402a129",
+      "size": 651422,
+      "full_name": "conda-forge/slycot/0.5.3/linux-64/slycot-0.5.3-py38ha418f67_0.conda",
+      "download_url": "//api.anaconda.org/download/conda-forge/slycot/0.5.3/linux-64/slycot-0.5.3-py38ha418f67_0.conda",
+      "type": "conda",
+      "version": "0.5.3",
+      "ndownloads": 2706,
+      "owner": "conda-forge",
+      "labels": [
+        "main"
+      ]
+    },
+    {
+      "description": null,
+      "dependencies": [],
+      "distribution_type": "conda",
+      "basename": "linux-64/slycot-0.5.4-py38hc91afca_0.conda",
+      "attrs": {
+        "build_number": 0,
+        "license": "GPL-2.0-only",
+        "has_prefix": false,
+        "license_family": "GPL",
+        "machine": "x86_64",
+        "platform": "linux",
+        "depends": [
+          "libblas >=3.9.0,<4.0a0",
+          "libcblas >=3.9.0,<4.0a0",
+          "libgcc-ng >=12",
+          "libgfortran-ng",
+          "libgfortran5 >=12.2.0",
+          "liblapack >=3.9.0,<4.0a0",
+          "numpy >=1.24.3,<2.0a0",
+          "python >=3.8,<3.9.0a0",
+          "python_abi 3.8.* *_cp38"
+        ],
+        "build": "py38hc91afca_0",
+        "timestamp": 1682627692536,
+        "arch": "x86_64",
+        "operatingsystem": "linux",
+        "target-triplet": "x86_64-any-linux",
+        "subdir": "linux-64"
+      },
+      "upload_time": "2023-04-27 20:35:24.341000+00:00",
+      "md5": "de602a9fce16214dda21e8ba4b2a5f86",
+      "sha256": "e90e65c4b6f2931faaf018ce34947728dae9048027c3833e3d8af1f02978349a",
+      "size": 679787,
+      "full_name": "conda-forge/slycot/0.5.4/linux-64/slycot-0.5.4-py38hc91afca_0.conda",
+      "download_url": "//api.anaconda.org/download/conda-forge/slycot/0.5.4/linux-64/slycot-0.5.4-py38hc91afca_0.conda",
+      "type": "conda",
+      "version": "0.5.4",
+      "ndownloads": 3516,
+      "owner": "conda-forge",
+      "labels": [
+        "main"
+      ]
+    },
+    {
+      "description": null,
+      "dependencies": [],
+      "distribution_type": "conda",
+      "basename": "linux-64/slycot-0.5.4-py38h37a24eb_0.conda",
+      "attrs": {
+        "build_number": 0,
+        "license": "GPL-2.0-only",
+        "has_prefix": false,
+        "license_family": "GPL",
+        "machine": "x86_64",
+        "platform": "linux",
+        "depends": [
+          "libblas >=3.9.0,<4.0a0",
+          "libcblas >=3.9.0,<4.0a0",
+          "libgcc-ng >=12",
+          "libgfortran-ng",
+          "libgfortran5 >=12.2.0",
+          "liblapack >=3.9.0,<4.0a0",
+          "numpy >=1.24.3,<2.0a0",
+          "pypy3.8 >=7.3.11",
+          "python >=3.8,<3.9.0a0",
+          "python_abi 3.8 *_pypy38_pp73"
+        ],
+        "build": "py38h37a24eb_0",
+        "timestamp": 1682627781959,
+        "arch": "x86_64",
+        "operatingsystem": "linux",
+        "target-triplet": "x86_64-any-linux",
+        "subdir": "linux-64"
+      },
+      "upload_time": "2023-04-27 20:37:00.970000+00:00",
+      "md5": "4793163a30c5d19daa510a3561d913da",
+      "sha256": "4bd7965d716a7f1062fcc466260f06021889b23dbd430023e1f26a25f0648bb5",
+      "size": 676460,
+      "full_name": "conda-forge/slycot/0.5.4/linux-64/slycot-0.5.4-py38h37a24eb_0.conda",
+      "download_url": "//api.anaconda.org/download/conda-forge/slycot/0.5.4/linux-64/slycot-0.5.4-py38h37a24eb_0.conda",
+      "type": "conda",
+      "version": "0.5.4",
+      "ndownloads": 2716,
+      "owner": "conda-forge",
+      "labels": [
+        "main"
+      ]
+    },
+    {
+      "description": null,
+      "dependencies": [
+        "depends"
+      ],
+      "distribution_type": "conda",
+      "basename": "linux-64/slycot-0.5.4-py38hc91afca_1.conda",
+      "attrs": {
+        "build_number": 1,
+        "license": "GPL-2.0-only",
+        "has_prefix": false,
+        "license_family": "GPL",
+        "machine": "x86_64",
+        "platform": "linux",
+        "depends": [
+          "libblas >=3.9.0,<4.0a0",
+          "libcblas >=3.9.0,<4.0a0",
+          "libgcc-ng >=12",
+          "libgfortran-ng",
+          "libgfortran5 >=12.3.0",
+          "liblapack >=3.9.0,<4.0a0",
+          "numpy >=1.24.4,<2.0a0",
+          "python >=3.8,<3.9.0a0",
+          "python_abi 3.8.* *_cp38"
+        ],
+        "subdir": "linux-64",
+        "timestamp": 1696568219753,
+        "arch": "x86_64",
+        "operatingsystem": "linux",
+        "target-triplet": "x86_64-any-linux",
+        "build": "py38hc91afca_1"
+      },
+      "upload_time": "2023-10-06 04:57:39.753000+00:00",
+      "md5": "7a6dddc42c426a5429a1f0b4d6d368c5",
+      "sha256": "6b5ff38ef6ac2706ee5a1b2dc1e083341a2554f86355c944333731969a493a18",
+      "size": 679748,
+      "full_name": "conda-forge/slycot/0.5.4/linux-64/slycot-0.5.4-py38hc91afca_1.conda",
+      "download_url": "//api.anaconda.org/download/conda-forge/slycot/0.5.4/linux-64/slycot-0.5.4-py38hc91afca_1.conda",
+      "type": "conda",
+      "version": "0.5.4",
+      "ndownloads": 2630,
+      "owner": "conda-forge",
+      "labels": [
+        "main"
+      ]
+    },
+    {
+      "description": null,
+      "dependencies": [
+        "depends"
+      ],
+      "distribution_type": "conda",
+      "basename": "linux-64/slycot-0.5.4-py38hc91afca_3.conda",
+      "attrs": {
+        "build_number": 3,
+        "license": "GPL-2.0-only",
+        "has_prefix": false,
+        "license_family": "GPL",
+        "machine": "x86_64",
+        "platform": "linux",
+        "depends": [
+          "libblas >=3.9.0,<4.0a0",
+          "libcblas >=3.9.0,<4.0a0",
+          "libgcc-ng >=12",
+          "libgfortran-ng",
+          "libgfortran5 >=12.3.0",
+          "liblapack >=3.9.0,<4.0a0",
+          "numpy >=1.24.4,<2.0a0",
+          "python >=3.8,<3.9.0a0",
+          "python_abi 3.8.* *_cp38"
+        ],
+        "subdir": "linux-64",
+        "timestamp": 1697834379901,
+        "arch": "x86_64",
+        "operatingsystem": "linux",
+        "target-triplet": "x86_64-any-linux",
+        "build": "py38hc91afca_3"
+      },
+      "upload_time": "2023-10-20 20:40:12.226000+00:00",
+      "md5": "91de966a68e964ccfa978232e6006106",
+      "sha256": "88df4ccfb484cb4d1af7ae23a2e646b24394816d1f6fedb3c7a835770ced5cf7",
+      "size": 680825,
+      "full_name": "conda-forge/slycot/0.5.4/linux-64/slycot-0.5.4-py38hc91afca_3.conda",
+      "download_url": "//api.anaconda.org/download/conda-forge/slycot/0.5.4/linux-64/slycot-0.5.4-py38hc91afca_3.conda",
+      "type": "conda",
+      "version": "0.5.4",
+      "ndownloads": 2695,
+      "owner": "conda-forge",
+      "labels": [
+        "main"
+      ]
+    },
+    {
+      "description": null,
+      "dependencies": [
+        "depends"
+      ],
+      "distribution_type": "conda",
+      "basename": "linux-64/slycot-0.5.4-py38h7bc2648_4.conda",
+      "attrs": {
+        "operatingsystem": "linux",
+        "machine": "x86_64",
+        "target-triplet": "x86_64-any-linux",
+        "has_prefix": false,
+        "subdir": "linux-64",
+        "arch": "x86_64",
+        "build": "py38h7bc2648_4",
+        "build_number": 4,
+        "depends": [
+          "libblas >=3.9.0,<4.0a0",
+          "libcblas >=3.9.0,<4.0a0",
+          "libgcc-ng >=12",
+          "libgfortran-ng",
+          "libgfortran5 >=12.3.0",
+          "liblapack >=3.9.0,<4.0a0",
+          "numpy >=1.22.4,<2.0a0",
+          "python >=3.8,<3.9.0a0",
+          "python_abi 3.8.* *_cp38"
+        ],
+        "license": "GPL-2.0-only",
+        "license_family": "GPL",
+        "platform": "linux",
+        "timestamp": 1701634427954
+      },
+      "upload_time": "2023-12-03 20:14:16.444000+00:00",
+      "md5": "28c66ae3806b4da34fd39cefe0d19213",
+      "sha256": "c57464baeef5ebac1be9c3b3fdf9dd366c5651ff177e36609508473627485c25",
+      "size": 688502,
+      "full_name": "conda-forge/slycot/0.5.4/linux-64/slycot-0.5.4-py38h7bc2648_4.conda",
+      "download_url": "//api.anaconda.org/download/conda-forge/slycot/0.5.4/linux-64/slycot-0.5.4-py38h7bc2648_4.conda",
+      "type": "conda",
+      "version": "0.5.4",
+      "ndownloads": 3059,
+      "owner": "conda-forge",
+      "labels": [
+        "main"
+      ]
+    }
+  ]
+}

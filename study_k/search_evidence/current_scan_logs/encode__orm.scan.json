@@ -1,0 +1,12 @@
+{
+  "repository": "encode/orm",
+  "evidence": "EXPLORATORY_STATIC_SCREEN",
+  "test_runs": 0,
+  "revision": "062f7e03d62d7b30bd1d7ae68152c7b0a6b3535e",
+  "license_files": {
+    "LICENSE.md": "ad1a8fd69f2a30207790a4e850c97c6be4708cdd84f449e863b64c52ae84bb47"
+  },
+  "status": "STATIC_ONLY",
+  "sites": [],
+  "errors": []
+}

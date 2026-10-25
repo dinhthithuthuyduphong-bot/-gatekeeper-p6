@@ -1,0 +1,12 @@
+{
+  "repository": "tortoise/tortoise-orm",
+  "evidence": "EXPLORATORY_STATIC_SCREEN",
+  "test_runs": 0,
+  "revision": "536fc3abd4e214bc870936c45280cded6f384754",
+  "license_files": {
+    "LICENSE.txt": "f955d347b975d5867ee364f978476b3012878a706d468571b9758cac74de6041"
+  },
+  "status": "STATIC_ONLY",
+  "sites": [],
+  "errors": []
+}

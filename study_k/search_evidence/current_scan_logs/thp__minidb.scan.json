@@ -1,0 +1,19 @@
+{
+  "repository": "thp/minidb",
+  "evidence": "EXPLORATORY_STATIC_SCREEN",
+  "test_runs": 0,
+  "revision": "b18571efe558491f692d9a8413a91772c920435e",
+  "license_files": {
+    "LICENSE": "ccdcdf3aee10ef4bc842f5f57f7e288397579522dc868ce7c7d9ac65778900e0"
+  },
+  "status": "STATIC_ONLY",
+  "sites": [
+    {
+      "file": "example.py",
+      "function": "<module>",
+      "line": 168,
+      "snippet": "Person.c.username != None"
+    }
+  ],
+  "errors": []
+}

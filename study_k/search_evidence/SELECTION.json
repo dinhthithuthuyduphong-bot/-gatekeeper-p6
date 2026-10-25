@@ -1,0 +1,16 @@
+{
+  "date_local": "2026-10-25",
+  "purpose": "Exploratory second-skill discovery in ORM/DSL source. No prospective claim.",
+  "ordered_repositories": [
+    "pudo/dataset",
+    "thp/minidb",
+    "kvesteri/sqlalchemy-continuum",
+    "coleifer/sqlite-web",
+    "kayak/pypika",
+    "encode/orm",
+    "tortoise/tortoise-orm",
+    "pudo/normality"
+  ],
+  "selection_note": "Convenience discovery based on library domain, retain failures/no-matches. Outcomes not yet executed.",
+  "model_calls": 0
+}

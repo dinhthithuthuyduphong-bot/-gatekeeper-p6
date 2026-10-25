@@ -1,0 +1,12 @@
+{
+  "repository": "coleifer/sqlite-web",
+  "evidence": "EXPLORATORY_STATIC_SCREEN",
+  "test_runs": 0,
+  "revision": "974a910019a31078df69fbe98901fe859d3089a3",
+  "license_files": {
+    "LICENSE": "3740096125b08735a247b8dd08cd82e0ba984d3bebd9221d378576637e5240da"
+  },
+  "status": "STATIC_ONLY",
+  "sites": [],
+  "errors": []
+}

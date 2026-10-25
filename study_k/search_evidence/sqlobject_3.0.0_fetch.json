@@ -1,0 +1,27 @@
+[
+  {
+    "command": [
+      "git",
+      "fetch",
+      "--depth=1",
+      "origin",
+      "27ff3d8110f76cc8b9e4565b3dda5cd767f417ec"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "From https://github.com/sqlobject/sqlobject\n * branch            27ff3d8110f76cc8b9e4565b3dda5cd767f417ec -> FETCH_HEAD\n"
+  },
+  {
+    "command": [
+      "git",
+      "worktree",
+      "add",
+      "--detach",
+      "/workspace/scratch/cde4f976cfa9/continuation_20261025/historical/sqlobject_3.0.0",
+      "27ff3d8110f76cc8b9e4565b3dda5cd767f417ec"
+    ],
+    "returncode": 0,
+    "stdout": "HEAD is now at 27ff3d8 Release 3.0.0\n",
+    "stderr": "Preparing worktree (detached HEAD 27ff3d8)\n"
+  }
+]

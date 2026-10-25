@@ -1,0 +1,3 @@
+{"command": ["git", "fetch", "--depth=1", "origin", "ef924611dd83842b1cdef0e7763ccbe00c726755"], "returncode": 0}
+From https://github.com/kvesteri/sqlalchemy-continuum
+ * branch            ef924611dd83842b1cdef0e7763ccbe00c726755 -> FETCH_HEAD

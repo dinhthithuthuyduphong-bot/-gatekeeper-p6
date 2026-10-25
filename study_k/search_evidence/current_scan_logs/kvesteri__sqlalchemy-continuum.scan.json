@@ -1,0 +1,12 @@
+{
+  "repository": "kvesteri/sqlalchemy-continuum",
+  "evidence": "EXPLORATORY_STATIC_SCREEN",
+  "test_runs": 0,
+  "revision": "3d3c86bde8fcca29b7232f196ce7525f827c051d",
+  "license_files": {
+    "LICENSE": "0fce5da3cb715e153a3b429564d6b9c4bf3c82b45dbb8b16da95c827d1cdc27d"
+  },
+  "status": "STATIC_ONLY",
+  "sites": [],
+  "errors": []
+}

@@ -1,0 +1,51 @@
+COMMAND ["uv", "venv", "--python", "3.8.20", "/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control-clean"]
+Downloading cpython-3.8.20-linux-x86_64-gnu (download) (19.9MiB)
+ Downloaded cpython-3.8.20-linux-x86_64-gnu (download)
+Using CPython 3.8.20
+Creating virtual environment at: continuation_20261025/env-control-clean
+RETURN 0
+COMMAND ["uv", "pip", "install", "--python", "/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control-clean/bin/python", "-r", "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/requirements-build.txt"]
+Using Python 3.8.20 environment at: continuation_20261025/env-control-clean
+Resolved 19 packages in 10.77s
+Downloading scipy (24.8MiB)
+Downloading numpy (19.5MiB)
+Downloading pillow (4.3MiB)
+Downloading kiwisolver (1.1MiB)
+ Downloaded kiwisolver
+ Downloaded pillow
+ Downloaded numpy
+ Downloaded scipy
+Prepared 19 packages in 845ms
+Installed 19 packages in 14ms
+ + cycler==0.12.1
+ + exceptiongroup==1.3.1
+ + iniconfig==2.1.0
+ + kiwisolver==1.4.7
+ + nose==1.3.7
+ + numpy==1.17.5
+ + packaging==26.2
+ + pillow==10.4.0
+ + pluggy==1.5.0
+ + pyparsing==3.1.4
+ + pytest==7.4.4
+ + python-dateutil==3.0.0
+ + scipy==1.4.1
+ + setuptools==59.8.0
+ + six==1.17.0
+ + tomli==2.5.0
+ + typing-extensions==4.13.2
+ + tzdata==2026.5
+ + wheel==0.45.1
+RETURN 0
+COMMAND ["uv", "pip", "install", "--python", "/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control-clean/bin/python", "--no-build-isolation", "--no-deps", "/workspace/scratch/cde4f976cfa9/continuation_20261025/build_deps/matplotlib-2.2.5"]
+Using Python 3.8.20 environment at: continuation_20261025/env-control-clean
+Resolved 1 package in 1.07s
+   Building matplotlib @ file:///workspace/scratch/cde4f976cfa9/continuation_20261025/build_deps/matplotlib-2.2.5
+      Built matplotlib @ file:///workspace/scratch/cde4f976cfa9/continuation_20261025/build_deps/matplotlib-2.2.5
+Prepared 1 package in 2.30s
+Installed 1 package in 4ms
+ + matplotlib==2.2.5 (from file:///workspace/scratch/cde4f976cfa9/continuation_20261025/build_deps/matplotlib-2.2.5)
+RETURN 0
+COMMAND ["/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control-clean/bin/python", "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/install_slycot.py", "--receipt", "/workspace/scratch/cde4f976cfa9/continuation_20261025/runtime_logs/clean_slycot_install.json"]
+{"source_url": "https://api.anaconda.org/download/conda-forge/slycot/0.4.0.0/linux-64/slycot-0.4.0.0-py38hf9f4372_4.tar.bz2", "sha256": "6ca4f5e8df4140f3ee9361a6449b4074226e3422f67976a5967946ee174b4fd3", "returncode": 0, "stdout": "0.4.0.0 /workspace/scratch/cde4f976cfa9/continuation_20261025/env-control-clean/lib/python3.8/site-packages/slycot/__init__.py\n", "stderr": ""}
+RETURN 0

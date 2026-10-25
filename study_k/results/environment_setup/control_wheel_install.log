@@ -1,0 +1,6 @@
+{"command": ["uv", "pip", "install", "--python", "/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/bin/python", "wheel==0.45.1"], "returncode": 0}
+Using Python 3.8.20 environment at: continuation_20261025/env-control
+Resolved 1 package in 10.75s
+Prepared 1 package in 59ms
+Installed 1 package in 2ms
+ + wheel==0.45.1

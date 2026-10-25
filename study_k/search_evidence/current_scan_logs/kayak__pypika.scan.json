@@ -1,0 +1,12 @@
+{
+  "repository": "kayak/pypika",
+  "evidence": "EXPLORATORY_STATIC_SCREEN",
+  "test_runs": 0,
+  "revision": "465fb9ae12f7727d28785d087b64e6226da5714e",
+  "license_files": {
+    "LICENSE.txt": "c5accbbd8546e94c34aed24afe689a617627d18eed5a6c48277e48db57c23851"
+  },
+  "status": "STATIC_ONLY",
+  "sites": [],
+  "errors": []
+}

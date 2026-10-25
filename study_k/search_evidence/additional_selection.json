@@ -1,0 +1,9 @@
+{
+  "exploratory": true,
+  "reason": "Modern first batch and historical continuum no production match; broaden to SQLObject and SQLAlchemy adapters",
+  "repos": [
+    "sqlobject/sqlobject",
+    "python-gino/gino",
+    "marshmallow-code/marshmallow-sqlalchemy"
+  ]
+}

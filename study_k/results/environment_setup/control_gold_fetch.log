@@ -1,0 +1,3 @@
+{"command": ["git", "fetch", "--depth=1", "origin", "60aba3ab39cef2ac11c4bc08c2b08a9abd084205"], "returncode": 0}
+From https://github.com/python-control/python-control
+ * branch            60aba3ab39cef2ac11c4bc08c2b08a9abd084205 -> FETCH_HEAD

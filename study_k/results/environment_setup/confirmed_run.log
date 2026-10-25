@@ -1,0 +1,935 @@
+RUN ["/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/bin/python", "-m", "pytest", "control/tests/frd_test.py", "-q", "--tb=short", "-o", "addopts=", "-p", "no:cacheprovider", "--junitxml=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/baseline_1.xml"] CWD /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline
+...........F....                                                         [100%]
+=================================== FAILURES ===================================
+_____________________________ TestFRD.testNyquist ______________________________
+control/tests/frd_test.py:176: in testNyquist
+    freqplot.nyquist(f1, np.logspace(-1, 2, 100))
+control/freqplot.py:214: in nyquist_plot
+    if (omega == None):
+E   ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+=============================== warnings summary ===============================
+control/freqplot.py:62
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/freqplot.py:62: DeprecationWarning: invalid escape sequence \o
+    """Bode plot for a system
+
+control/statefbk.py:145
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/statefbk.py:145: DeprecationWarning: invalid escape sequence \i
+    """Linear quadratic regulator design
+
+control/matlab.py:2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/matlab.py:2: DeprecationWarning: invalid escape sequence \*
+    """matlab.py
+
+control/matlab.py:400
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/matlab.py:400: DeprecationWarning: invalid escape sequence \d
+    """
+
+control/matlab.py:489
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/matlab.py:489: DeprecationWarning: invalid escape sequence \c
+    """
+
+control/matlab.py:1187
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/matlab.py:1187: DeprecationWarning: invalid escape sequence \c
+    '''
+
+tests/frd_test.py::TestFRD::testAgainstOctave
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/tests/frd_test.py:265: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    sys = StateSpace(np.matrix('-2.0 0 0; 0 -1 1; 0 0 -3'),
+
+tests/frd_test.py::TestFRD::testAgainstOctave
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/tests/frd_test.py:266: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    np.matrix('1.0 0; 0 0; 0 1'),
+
+tests/frd_test.py: 68 warnings
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/statesp.py:149: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    matrices[i] = matrix(matrices[i])
+
+tests/frd_test.py: 266 warnings
+  /workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/lib/python3.8/site-packages/numpy/matrixlib/defmatrix.py:71: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    return matrix(data, dtype=dtype, copy=False)
+
+tests/frd_test.py::TestFRD::testAgainstOctave
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/tests/frd_test.py:273: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    np.matrix('0.4-0.2j 0; 0 0.1-0.2j; 0 0.3-0.1j'))
+
+tests/frd_test.py::TestFRD::testAuto
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/tests/frd_test.py:168: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    f2 = _convertToFRD(np.matrix([[1, 0], [0.1, -1]]), omega)
+
+tests/frd_test.py::TestFRD::testMIMOSmooth
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/tests/frd_test.py:246: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    sys2 = np.matrix([[1, 0, 0], [0, 1, 0]]) * sys
+
+tests/frd_test.py::TestFRD::testMIMOSmooth
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/statesp.py:355: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    X = matrix(other)
+
+tests/frd_test.py::TestFRD::testMIMOfb
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/statesp.py:689: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    D = matrix(sys)
+
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/tests/frd_test.py:212: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    sys = StateSpace(np.matrix('-2.0 0 0; 0 -1 1; 0 0 -3'),
+
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/tests/frd_test.py:213: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    np.matrix('1.0 0; 0 0; 0 1'),
+
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/tests/frd_test.py:216: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    K = np.matrix('1 0.3 0; 0.1 0 0')
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/baseline_1.xml -
+=========================== short test summary info ============================
+FAILED control/tests/frd_test.py::TestFRD::testNyquist - ValueError: The trut...
+1 failed, 15 passed, 351 warnings in 1.08s
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/bin/python", "-m", "pytest", "control/tests/frd_test.py", "-q", "--tb=short", "-o", "addopts=", "-p", "no:cacheprovider", "--junitxml=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/baseline_1.xml"], "cwd": "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline", "returncode": 1, "seconds": 1.431523334000076, "log": "baseline_1.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/bin/python", "-m", "pytest", "control/tests/frd_test.py", "-q", "--tb=short", "-o", "addopts=", "-p", "no:cacheprovider", "--junitxml=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/baseline_2.xml"] CWD /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline
+...........F....                                                         [100%]
+=================================== FAILURES ===================================
+_____________________________ TestFRD.testNyquist ______________________________
+control/tests/frd_test.py:176: in testNyquist
+    freqplot.nyquist(f1, np.logspace(-1, 2, 100))
+control/freqplot.py:214: in nyquist_plot
+    if (omega == None):
+E   ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+=============================== warnings summary ===============================
+control/freqplot.py:62
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/freqplot.py:62: DeprecationWarning: invalid escape sequence \o
+    """Bode plot for a system
+
+control/statefbk.py:145
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/statefbk.py:145: DeprecationWarning: invalid escape sequence \i
+    """Linear quadratic regulator design
+
+control/matlab.py:2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/matlab.py:2: DeprecationWarning: invalid escape sequence \*
+    """matlab.py
+
+control/matlab.py:400
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/matlab.py:400: DeprecationWarning: invalid escape sequence \d
+    """
+
+control/matlab.py:489
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/matlab.py:489: DeprecationWarning: invalid escape sequence \c
+    """
+
+control/matlab.py:1187
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/matlab.py:1187: DeprecationWarning: invalid escape sequence \c
+    '''
+
+tests/frd_test.py::TestFRD::testAgainstOctave
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/tests/frd_test.py:265: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    sys = StateSpace(np.matrix('-2.0 0 0; 0 -1 1; 0 0 -3'),
+
+tests/frd_test.py::TestFRD::testAgainstOctave
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/tests/frd_test.py:266: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    np.matrix('1.0 0; 0 0; 0 1'),
+
+tests/frd_test.py: 68 warnings
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/statesp.py:149: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    matrices[i] = matrix(matrices[i])
+
+tests/frd_test.py: 266 warnings
+  /workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/lib/python3.8/site-packages/numpy/matrixlib/defmatrix.py:71: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    return matrix(data, dtype=dtype, copy=False)
+
+tests/frd_test.py::TestFRD::testAgainstOctave
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/tests/frd_test.py:273: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    np.matrix('0.4-0.2j 0; 0 0.1-0.2j; 0 0.3-0.1j'))
+
+tests/frd_test.py::TestFRD::testAuto
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/tests/frd_test.py:168: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    f2 = _convertToFRD(np.matrix([[1, 0], [0.1, -1]]), omega)
+
+tests/frd_test.py::TestFRD::testMIMOSmooth
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/tests/frd_test.py:246: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    sys2 = np.matrix([[1, 0, 0], [0, 1, 0]]) * sys
+
+tests/frd_test.py::TestFRD::testMIMOSmooth
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/statesp.py:355: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    X = matrix(other)
+
+tests/frd_test.py::TestFRD::testMIMOfb
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/statesp.py:689: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    D = matrix(sys)
+
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/tests/frd_test.py:212: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    sys = StateSpace(np.matrix('-2.0 0 0; 0 -1 1; 0 0 -3'),
+
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/tests/frd_test.py:213: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    np.matrix('1.0 0; 0 0; 0 1'),
+
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/tests/frd_test.py:216: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    K = np.matrix('1 0.3 0; 0.1 0 0')
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/baseline_2.xml -
+=========================== short test summary info ============================
+FAILED control/tests/frd_test.py::TestFRD::testNyquist - ValueError: The trut...
+1 failed, 15 passed, 351 warnings in 1.10s
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/bin/python", "-m", "pytest", "control/tests/frd_test.py", "-q", "--tb=short", "-o", "addopts=", "-p", "no:cacheprovider", "--junitxml=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/baseline_2.xml"], "cwd": "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline", "returncode": 1, "seconds": 1.4224752289999287, "log": "baseline_2.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/bin/python", "-m", "pytest", "control/tests/frd_test.py", "-q", "--tb=short", "-o", "addopts=", "-p", "no:cacheprovider", "--junitxml=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/baseline_3.xml"] CWD /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline
+...........F....                                                         [100%]
+=================================== FAILURES ===================================
+_____________________________ TestFRD.testNyquist ______________________________
+control/tests/frd_test.py:176: in testNyquist
+    freqplot.nyquist(f1, np.logspace(-1, 2, 100))
+control/freqplot.py:214: in nyquist_plot
+    if (omega == None):
+E   ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+=============================== warnings summary ===============================
+control/freqplot.py:62
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/freqplot.py:62: DeprecationWarning: invalid escape sequence \o
+    """Bode plot for a system
+
+control/statefbk.py:145
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/statefbk.py:145: DeprecationWarning: invalid escape sequence \i
+    """Linear quadratic regulator design
+
+control/matlab.py:2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/matlab.py:2: DeprecationWarning: invalid escape sequence \*
+    """matlab.py
+
+control/matlab.py:400
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/matlab.py:400: DeprecationWarning: invalid escape sequence \d
+    """
+
+control/matlab.py:489
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/matlab.py:489: DeprecationWarning: invalid escape sequence \c
+    """
+
+control/matlab.py:1187
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/matlab.py:1187: DeprecationWarning: invalid escape sequence \c
+    '''
+
+tests/frd_test.py::TestFRD::testAgainstOctave
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/tests/frd_test.py:265: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    sys = StateSpace(np.matrix('-2.0 0 0; 0 -1 1; 0 0 -3'),
+
+tests/frd_test.py::TestFRD::testAgainstOctave
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/tests/frd_test.py:266: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    np.matrix('1.0 0; 0 0; 0 1'),
+
+tests/frd_test.py: 68 warnings
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/statesp.py:149: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    matrices[i] = matrix(matrices[i])
+
+tests/frd_test.py: 266 warnings
+  /workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/lib/python3.8/site-packages/numpy/matrixlib/defmatrix.py:71: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    return matrix(data, dtype=dtype, copy=False)
+
+tests/frd_test.py::TestFRD::testAgainstOctave
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/tests/frd_test.py:273: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    np.matrix('0.4-0.2j 0; 0 0.1-0.2j; 0 0.3-0.1j'))
+
+tests/frd_test.py::TestFRD::testAuto
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/tests/frd_test.py:168: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    f2 = _convertToFRD(np.matrix([[1, 0], [0.1, -1]]), omega)
+
+tests/frd_test.py::TestFRD::testMIMOSmooth
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/tests/frd_test.py:246: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    sys2 = np.matrix([[1, 0, 0], [0, 1, 0]]) * sys
+
+tests/frd_test.py::TestFRD::testMIMOSmooth
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/statesp.py:355: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    X = matrix(other)
+
+tests/frd_test.py::TestFRD::testMIMOfb
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/statesp.py:689: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    D = matrix(sys)
+
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/tests/frd_test.py:212: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    sys = StateSpace(np.matrix('-2.0 0 0; 0 -1 1; 0 0 -3'),
+
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/tests/frd_test.py:213: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    np.matrix('1.0 0; 0 0; 0 1'),
+
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline/control/tests/frd_test.py:216: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    K = np.matrix('1 0.3 0; 0.1 0 0')
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/baseline_3.xml -
+=========================== short test summary info ============================
+FAILED control/tests/frd_test.py::TestFRD::testNyquist - ValueError: The trut...
+1 failed, 15 passed, 351 warnings in 1.04s
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/bin/python", "-m", "pytest", "control/tests/frd_test.py", "-q", "--tb=short", "-o", "addopts=", "-p", "no:cacheprovider", "--junitxml=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/baseline_3.xml"], "cwd": "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/baseline", "returncode": 1, "seconds": 1.3775631990001784, "log": "baseline_3.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/bin/python", "-m", "pytest", "control/tests/frd_test.py", "-q", "--tb=short", "-o", "addopts=", "-p", "no:cacheprovider", "--junitxml=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/treated_1.xml"] CWD /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated
+................                                                         [100%]
+=============================== warnings summary ===============================
+control/freqplot.py:62
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/freqplot.py:62: DeprecationWarning: invalid escape sequence \o
+    """Bode plot for a system
+
+control/statefbk.py:145
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/statefbk.py:145: DeprecationWarning: invalid escape sequence \i
+    """Linear quadratic regulator design
+
+control/matlab.py:2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/matlab.py:2: DeprecationWarning: invalid escape sequence \*
+    """matlab.py
+
+control/matlab.py:400
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/matlab.py:400: DeprecationWarning: invalid escape sequence \d
+    """
+
+control/matlab.py:489
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/matlab.py:489: DeprecationWarning: invalid escape sequence \c
+    """
+
+control/matlab.py:1187
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/matlab.py:1187: DeprecationWarning: invalid escape sequence \c
+    '''
+
+tests/frd_test.py::TestFRD::testAgainstOctave
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/tests/frd_test.py:265: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    sys = StateSpace(np.matrix('-2.0 0 0; 0 -1 1; 0 0 -3'),
+
+tests/frd_test.py::TestFRD::testAgainstOctave
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/tests/frd_test.py:266: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    np.matrix('1.0 0; 0 0; 0 1'),
+
+tests/frd_test.py: 68 warnings
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/statesp.py:149: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    matrices[i] = matrix(matrices[i])
+
+tests/frd_test.py: 266 warnings
+  /workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/lib/python3.8/site-packages/numpy/matrixlib/defmatrix.py:71: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    return matrix(data, dtype=dtype, copy=False)
+
+tests/frd_test.py::TestFRD::testAgainstOctave
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/tests/frd_test.py:273: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    np.matrix('0.4-0.2j 0; 0 0.1-0.2j; 0 0.3-0.1j'))
+
+tests/frd_test.py::TestFRD::testAuto
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/tests/frd_test.py:168: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    f2 = _convertToFRD(np.matrix([[1, 0], [0.1, -1]]), omega)
+
+tests/frd_test.py::TestFRD::testMIMOSmooth
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/tests/frd_test.py:246: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    sys2 = np.matrix([[1, 0, 0], [0, 1, 0]]) * sys
+
+tests/frd_test.py::TestFRD::testMIMOSmooth
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/statesp.py:355: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    X = matrix(other)
+
+tests/frd_test.py::TestFRD::testMIMOfb
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/statesp.py:689: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    D = matrix(sys)
+
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/tests/frd_test.py:212: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    sys = StateSpace(np.matrix('-2.0 0 0; 0 -1 1; 0 0 -3'),
+
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/tests/frd_test.py:213: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    np.matrix('1.0 0; 0 0; 0 1'),
+
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/tests/frd_test.py:216: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    K = np.matrix('1 0.3 0; 0.1 0 0')
+
+tests/frd_test.py::TestFRD::testNyquist
+tests/frd_test.py::TestFRD::testNyquist
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/freqplot.py:236: DeprecationWarning: scipy.cos is deprecated and will be removed in SciPy 2.0.0, use numpy.cos instead
+    x = sp.multiply(mag, sp.cos(phase));
+
+tests/frd_test.py::TestFRD::testNyquist
+tests/frd_test.py::TestFRD::testNyquist
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/freqplot.py:236: DeprecationWarning: scipy.multiply is deprecated and will be removed in SciPy 2.0.0, use numpy.multiply instead
+    x = sp.multiply(mag, sp.cos(phase));
+
+tests/frd_test.py::TestFRD::testNyquist
+tests/frd_test.py::TestFRD::testNyquist
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/freqplot.py:237: DeprecationWarning: scipy.sin is deprecated and will be removed in SciPy 2.0.0, use numpy.sin instead
+    y = sp.multiply(mag, sp.sin(phase));
+
+tests/frd_test.py::TestFRD::testNyquist
+tests/frd_test.py::TestFRD::testNyquist
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/freqplot.py:237: DeprecationWarning: scipy.multiply is deprecated and will be removed in SciPy 2.0.0, use numpy.multiply instead
+    y = sp.multiply(mag, sp.sin(phase));
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/treated_1.xml -
+16 passed, 359 warnings in 1.03s
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/bin/python", "-m", "pytest", "control/tests/frd_test.py", "-q", "--tb=short", "-o", "addopts=", "-p", "no:cacheprovider", "--junitxml=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/treated_1.xml"], "cwd": "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated", "returncode": 0, "seconds": 1.344631776000142, "log": "treated_1.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/bin/python", "-m", "pytest", "control/tests/frd_test.py", "-q", "--tb=short", "-o", "addopts=", "-p", "no:cacheprovider", "--junitxml=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/treated_2.xml"] CWD /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated
+................                                                         [100%]
+=============================== warnings summary ===============================
+control/freqplot.py:62
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/freqplot.py:62: DeprecationWarning: invalid escape sequence \o
+    """Bode plot for a system
+
+control/statefbk.py:145
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/statefbk.py:145: DeprecationWarning: invalid escape sequence \i
+    """Linear quadratic regulator design
+
+control/matlab.py:2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/matlab.py:2: DeprecationWarning: invalid escape sequence \*
+    """matlab.py
+
+control/matlab.py:400
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/matlab.py:400: DeprecationWarning: invalid escape sequence \d
+    """
+
+control/matlab.py:489
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/matlab.py:489: DeprecationWarning: invalid escape sequence \c
+    """
+
+control/matlab.py:1187
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/matlab.py:1187: DeprecationWarning: invalid escape sequence \c
+    '''
+
+tests/frd_test.py::TestFRD::testAgainstOctave
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/tests/frd_test.py:265: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    sys = StateSpace(np.matrix('-2.0 0 0; 0 -1 1; 0 0 -3'),
+
+tests/frd_test.py::TestFRD::testAgainstOctave
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/tests/frd_test.py:266: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    np.matrix('1.0 0; 0 0; 0 1'),
+
+tests/frd_test.py: 68 warnings
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/statesp.py:149: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    matrices[i] = matrix(matrices[i])
+
+tests/frd_test.py: 266 warnings
+  /workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/lib/python3.8/site-packages/numpy/matrixlib/defmatrix.py:71: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    return matrix(data, dtype=dtype, copy=False)
+
+tests/frd_test.py::TestFRD::testAgainstOctave
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/tests/frd_test.py:273: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    np.matrix('0.4-0.2j 0; 0 0.1-0.2j; 0 0.3-0.1j'))
+
+tests/frd_test.py::TestFRD::testAuto
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/tests/frd_test.py:168: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    f2 = _convertToFRD(np.matrix([[1, 0], [0.1, -1]]), omega)
+
+tests/frd_test.py::TestFRD::testMIMOSmooth
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/tests/frd_test.py:246: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    sys2 = np.matrix([[1, 0, 0], [0, 1, 0]]) * sys
+
+tests/frd_test.py::TestFRD::testMIMOSmooth
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/statesp.py:355: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    X = matrix(other)
+
+tests/frd_test.py::TestFRD::testMIMOfb
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/statesp.py:689: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    D = matrix(sys)
+
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/tests/frd_test.py:212: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    sys = StateSpace(np.matrix('-2.0 0 0; 0 -1 1; 0 0 -3'),
+
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/tests/frd_test.py:213: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    np.matrix('1.0 0; 0 0; 0 1'),
+
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/tests/frd_test.py:216: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    K = np.matrix('1 0.3 0; 0.1 0 0')
+
+tests/frd_test.py::TestFRD::testNyquist
+tests/frd_test.py::TestFRD::testNyquist
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/freqplot.py:236: DeprecationWarning: scipy.cos is deprecated and will be removed in SciPy 2.0.0, use numpy.cos instead
+    x = sp.multiply(mag, sp.cos(phase));
+
+tests/frd_test.py::TestFRD::testNyquist
+tests/frd_test.py::TestFRD::testNyquist
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/freqplot.py:236: DeprecationWarning: scipy.multiply is deprecated and will be removed in SciPy 2.0.0, use numpy.multiply instead
+    x = sp.multiply(mag, sp.cos(phase));
+
+tests/frd_test.py::TestFRD::testNyquist
+tests/frd_test.py::TestFRD::testNyquist
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/freqplot.py:237: DeprecationWarning: scipy.sin is deprecated and will be removed in SciPy 2.0.0, use numpy.sin instead
+    y = sp.multiply(mag, sp.sin(phase));
+
+tests/frd_test.py::TestFRD::testNyquist
+tests/frd_test.py::TestFRD::testNyquist
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/freqplot.py:237: DeprecationWarning: scipy.multiply is deprecated and will be removed in SciPy 2.0.0, use numpy.multiply instead
+    y = sp.multiply(mag, sp.sin(phase));
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/treated_2.xml -
+16 passed, 359 warnings in 0.96s
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/bin/python", "-m", "pytest", "control/tests/frd_test.py", "-q", "--tb=short", "-o", "addopts=", "-p", "no:cacheprovider", "--junitxml=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/treated_2.xml"], "cwd": "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated", "returncode": 0, "seconds": 1.2606005530001312, "log": "treated_2.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/bin/python", "-m", "pytest", "control/tests/frd_test.py", "-q", "--tb=short", "-o", "addopts=", "-p", "no:cacheprovider", "--junitxml=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/treated_3.xml"] CWD /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated
+................                                                         [100%]
+=============================== warnings summary ===============================
+control/freqplot.py:62
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/freqplot.py:62: DeprecationWarning: invalid escape sequence \o
+    """Bode plot for a system
+
+control/statefbk.py:145
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/statefbk.py:145: DeprecationWarning: invalid escape sequence \i
+    """Linear quadratic regulator design
+
+control/matlab.py:2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/matlab.py:2: DeprecationWarning: invalid escape sequence \*
+    """matlab.py
+
+control/matlab.py:400
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/matlab.py:400: DeprecationWarning: invalid escape sequence \d
+    """
+
+control/matlab.py:489
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/matlab.py:489: DeprecationWarning: invalid escape sequence \c
+    """
+
+control/matlab.py:1187
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/matlab.py:1187: DeprecationWarning: invalid escape sequence \c
+    '''
+
+tests/frd_test.py::TestFRD::testAgainstOctave
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/tests/frd_test.py:265: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    sys = StateSpace(np.matrix('-2.0 0 0; 0 -1 1; 0 0 -3'),
+
+tests/frd_test.py::TestFRD::testAgainstOctave
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/tests/frd_test.py:266: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    np.matrix('1.0 0; 0 0; 0 1'),
+
+tests/frd_test.py: 68 warnings
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/statesp.py:149: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    matrices[i] = matrix(matrices[i])
+
+tests/frd_test.py: 266 warnings
+  /workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/lib/python3.8/site-packages/numpy/matrixlib/defmatrix.py:71: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    return matrix(data, dtype=dtype, copy=False)
+
+tests/frd_test.py::TestFRD::testAgainstOctave
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/tests/frd_test.py:273: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    np.matrix('0.4-0.2j 0; 0 0.1-0.2j; 0 0.3-0.1j'))
+
+tests/frd_test.py::TestFRD::testAuto
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/tests/frd_test.py:168: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    f2 = _convertToFRD(np.matrix([[1, 0], [0.1, -1]]), omega)
+
+tests/frd_test.py::TestFRD::testMIMOSmooth
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/tests/frd_test.py:246: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    sys2 = np.matrix([[1, 0, 0], [0, 1, 0]]) * sys
+
+tests/frd_test.py::TestFRD::testMIMOSmooth
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/statesp.py:355: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    X = matrix(other)
+
+tests/frd_test.py::TestFRD::testMIMOfb
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/statesp.py:689: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    D = matrix(sys)
+
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/tests/frd_test.py:212: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    sys = StateSpace(np.matrix('-2.0 0 0; 0 -1 1; 0 0 -3'),
+
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/tests/frd_test.py:213: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    np.matrix('1.0 0; 0 0; 0 1'),
+
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/tests/frd_test.py:216: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    K = np.matrix('1 0.3 0; 0.1 0 0')
+
+tests/frd_test.py::TestFRD::testNyquist
+tests/frd_test.py::TestFRD::testNyquist
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/freqplot.py:236: DeprecationWarning: scipy.cos is deprecated and will be removed in SciPy 2.0.0, use numpy.cos instead
+    x = sp.multiply(mag, sp.cos(phase));
+
+tests/frd_test.py::TestFRD::testNyquist
+tests/frd_test.py::TestFRD::testNyquist
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/freqplot.py:236: DeprecationWarning: scipy.multiply is deprecated and will be removed in SciPy 2.0.0, use numpy.multiply instead
+    x = sp.multiply(mag, sp.cos(phase));
+
+tests/frd_test.py::TestFRD::testNyquist
+tests/frd_test.py::TestFRD::testNyquist
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/freqplot.py:237: DeprecationWarning: scipy.sin is deprecated and will be removed in SciPy 2.0.0, use numpy.sin instead
+    y = sp.multiply(mag, sp.sin(phase));
+
+tests/frd_test.py::TestFRD::testNyquist
+tests/frd_test.py::TestFRD::testNyquist
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated/control/freqplot.py:237: DeprecationWarning: scipy.multiply is deprecated and will be removed in SciPy 2.0.0, use numpy.multiply instead
+    y = sp.multiply(mag, sp.sin(phase));
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/treated_3.xml -
+16 passed, 359 warnings in 1.12s
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/bin/python", "-m", "pytest", "control/tests/frd_test.py", "-q", "--tb=short", "-o", "addopts=", "-p", "no:cacheprovider", "--junitxml=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/treated_3.xml"], "cwd": "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/treated", "returncode": 0, "seconds": 1.4768228099999305, "log": "treated_3.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/bin/python", "-m", "pytest", "control/tests/frd_test.py", "-q", "--tb=short", "-o", "addopts=", "-p", "no:cacheprovider", "--junitxml=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/gold_1.xml"] CWD /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold
+................                                                         [100%]
+=============================== warnings summary ===============================
+control/freqplot.py:62
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/freqplot.py:62: DeprecationWarning: invalid escape sequence \o
+    """Bode plot for a system
+
+control/statefbk.py:145
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/statefbk.py:145: DeprecationWarning: invalid escape sequence \i
+    """Linear quadratic regulator design
+
+control/matlab.py:2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/matlab.py:2: DeprecationWarning: invalid escape sequence \*
+    """matlab.py
+
+control/matlab.py:400
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/matlab.py:400: DeprecationWarning: invalid escape sequence \d
+    """
+
+control/matlab.py:489
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/matlab.py:489: DeprecationWarning: invalid escape sequence \c
+    """
+
+control/matlab.py:1187
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/matlab.py:1187: DeprecationWarning: invalid escape sequence \c
+    '''
+
+tests/frd_test.py::TestFRD::testAgainstOctave
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/tests/frd_test.py:265: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    sys = StateSpace(np.matrix('-2.0 0 0; 0 -1 1; 0 0 -3'),
+
+tests/frd_test.py::TestFRD::testAgainstOctave
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/tests/frd_test.py:266: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    np.matrix('1.0 0; 0 0; 0 1'),
+
+tests/frd_test.py: 68 warnings
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/statesp.py:149: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    matrices[i] = matrix(matrices[i])
+
+tests/frd_test.py: 266 warnings
+  /workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/lib/python3.8/site-packages/numpy/matrixlib/defmatrix.py:71: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    return matrix(data, dtype=dtype, copy=False)
+
+tests/frd_test.py::TestFRD::testAgainstOctave
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/tests/frd_test.py:273: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    np.matrix('0.4-0.2j 0; 0 0.1-0.2j; 0 0.3-0.1j'))
+
+tests/frd_test.py::TestFRD::testAuto
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/tests/frd_test.py:168: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    f2 = _convertToFRD(np.matrix([[1, 0], [0.1, -1]]), omega)
+
+tests/frd_test.py::TestFRD::testMIMOSmooth
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/tests/frd_test.py:246: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    sys2 = np.matrix([[1, 0, 0], [0, 1, 0]]) * sys
+
+tests/frd_test.py::TestFRD::testMIMOSmooth
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/statesp.py:355: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    X = matrix(other)
+
+tests/frd_test.py::TestFRD::testMIMOfb
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/statesp.py:689: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    D = matrix(sys)
+
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/tests/frd_test.py:212: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    sys = StateSpace(np.matrix('-2.0 0 0; 0 -1 1; 0 0 -3'),
+
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/tests/frd_test.py:213: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    np.matrix('1.0 0; 0 0; 0 1'),
+
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/tests/frd_test.py:216: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    K = np.matrix('1 0.3 0; 0.1 0 0')
+
+tests/frd_test.py::TestFRD::testNyquist
+tests/frd_test.py::TestFRD::testNyquist
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/freqplot.py:236: DeprecationWarning: scipy.cos is deprecated and will be removed in SciPy 2.0.0, use numpy.cos instead
+    x = sp.multiply(mag, sp.cos(phase));
+
+tests/frd_test.py::TestFRD::testNyquist
+tests/frd_test.py::TestFRD::testNyquist
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/freqplot.py:236: DeprecationWarning: scipy.multiply is deprecated and will be removed in SciPy 2.0.0, use numpy.multiply instead
+    x = sp.multiply(mag, sp.cos(phase));
+
+tests/frd_test.py::TestFRD::testNyquist
+tests/frd_test.py::TestFRD::testNyquist
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/freqplot.py:237: DeprecationWarning: scipy.sin is deprecated and will be removed in SciPy 2.0.0, use numpy.sin instead
+    y = sp.multiply(mag, sp.sin(phase));
+
+tests/frd_test.py::TestFRD::testNyquist
+tests/frd_test.py::TestFRD::testNyquist
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/freqplot.py:237: DeprecationWarning: scipy.multiply is deprecated and will be removed in SciPy 2.0.0, use numpy.multiply instead
+    y = sp.multiply(mag, sp.sin(phase));
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/gold_1.xml -
+16 passed, 359 warnings in 1.02s
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/bin/python", "-m", "pytest", "control/tests/frd_test.py", "-q", "--tb=short", "-o", "addopts=", "-p", "no:cacheprovider", "--junitxml=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/gold_1.xml"], "cwd": "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold", "returncode": 0, "seconds": 1.3410746100000779, "log": "gold_1.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/bin/python", "-m", "pytest", "control/tests/frd_test.py", "-q", "--tb=short", "-o", "addopts=", "-p", "no:cacheprovider", "--junitxml=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/gold_2.xml"] CWD /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold
+................                                                         [100%]
+=============================== warnings summary ===============================
+control/freqplot.py:62
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/freqplot.py:62: DeprecationWarning: invalid escape sequence \o
+    """Bode plot for a system
+
+control/statefbk.py:145
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/statefbk.py:145: DeprecationWarning: invalid escape sequence \i
+    """Linear quadratic regulator design
+
+control/matlab.py:2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/matlab.py:2: DeprecationWarning: invalid escape sequence \*
+    """matlab.py
+
+control/matlab.py:400
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/matlab.py:400: DeprecationWarning: invalid escape sequence \d
+    """
+
+control/matlab.py:489
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/matlab.py:489: DeprecationWarning: invalid escape sequence \c
+    """
+
+control/matlab.py:1187
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/matlab.py:1187: DeprecationWarning: invalid escape sequence \c
+    '''
+
+tests/frd_test.py::TestFRD::testAgainstOctave
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/tests/frd_test.py:265: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    sys = StateSpace(np.matrix('-2.0 0 0; 0 -1 1; 0 0 -3'),
+
+tests/frd_test.py::TestFRD::testAgainstOctave
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/tests/frd_test.py:266: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    np.matrix('1.0 0; 0 0; 0 1'),
+
+tests/frd_test.py: 68 warnings
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/statesp.py:149: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    matrices[i] = matrix(matrices[i])
+
+tests/frd_test.py: 266 warnings
+  /workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/lib/python3.8/site-packages/numpy/matrixlib/defmatrix.py:71: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    return matrix(data, dtype=dtype, copy=False)
+
+tests/frd_test.py::TestFRD::testAgainstOctave
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/tests/frd_test.py:273: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    np.matrix('0.4-0.2j 0; 0 0.1-0.2j; 0 0.3-0.1j'))
+
+tests/frd_test.py::TestFRD::testAuto
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/tests/frd_test.py:168: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    f2 = _convertToFRD(np.matrix([[1, 0], [0.1, -1]]), omega)
+
+tests/frd_test.py::TestFRD::testMIMOSmooth
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/tests/frd_test.py:246: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    sys2 = np.matrix([[1, 0, 0], [0, 1, 0]]) * sys
+
+tests/frd_test.py::TestFRD::testMIMOSmooth
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/statesp.py:355: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    X = matrix(other)
+
+tests/frd_test.py::TestFRD::testMIMOfb
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/statesp.py:689: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    D = matrix(sys)
+
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/tests/frd_test.py:212: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    sys = StateSpace(np.matrix('-2.0 0 0; 0 -1 1; 0 0 -3'),
+
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/tests/frd_test.py:213: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    np.matrix('1.0 0; 0 0; 0 1'),
+
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/tests/frd_test.py:216: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    K = np.matrix('1 0.3 0; 0.1 0 0')
+
+tests/frd_test.py::TestFRD::testNyquist
+tests/frd_test.py::TestFRD::testNyquist
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/freqplot.py:236: DeprecationWarning: scipy.cos is deprecated and will be removed in SciPy 2.0.0, use numpy.cos instead
+    x = sp.multiply(mag, sp.cos(phase));
+
+tests/frd_test.py::TestFRD::testNyquist
+tests/frd_test.py::TestFRD::testNyquist
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/freqplot.py:236: DeprecationWarning: scipy.multiply is deprecated and will be removed in SciPy 2.0.0, use numpy.multiply instead
+    x = sp.multiply(mag, sp.cos(phase));
+
+tests/frd_test.py::TestFRD::testNyquist
+tests/frd_test.py::TestFRD::testNyquist
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/freqplot.py:237: DeprecationWarning: scipy.sin is deprecated and will be removed in SciPy 2.0.0, use numpy.sin instead
+    y = sp.multiply(mag, sp.sin(phase));
+
+tests/frd_test.py::TestFRD::testNyquist
+tests/frd_test.py::TestFRD::testNyquist
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/freqplot.py:237: DeprecationWarning: scipy.multiply is deprecated and will be removed in SciPy 2.0.0, use numpy.multiply instead
+    y = sp.multiply(mag, sp.sin(phase));
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/gold_2.xml -
+16 passed, 359 warnings in 1.11s
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/bin/python", "-m", "pytest", "control/tests/frd_test.py", "-q", "--tb=short", "-o", "addopts=", "-p", "no:cacheprovider", "--junitxml=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/gold_2.xml"], "cwd": "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold", "returncode": 0, "seconds": 1.4476692539999476, "log": "gold_2.log"}
+RUN ["/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/bin/python", "-m", "pytest", "control/tests/frd_test.py", "-q", "--tb=short", "-o", "addopts=", "-p", "no:cacheprovider", "--junitxml=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/gold_3.xml"] CWD /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold
+................                                                         [100%]
+=============================== warnings summary ===============================
+control/freqplot.py:62
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/freqplot.py:62: DeprecationWarning: invalid escape sequence \o
+    """Bode plot for a system
+
+control/statefbk.py:145
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/statefbk.py:145: DeprecationWarning: invalid escape sequence \i
+    """Linear quadratic regulator design
+
+control/matlab.py:2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/matlab.py:2: DeprecationWarning: invalid escape sequence \*
+    """matlab.py
+
+control/matlab.py:400
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/matlab.py:400: DeprecationWarning: invalid escape sequence \d
+    """
+
+control/matlab.py:489
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/matlab.py:489: DeprecationWarning: invalid escape sequence \c
+    """
+
+control/matlab.py:1187
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/matlab.py:1187: DeprecationWarning: invalid escape sequence \c
+    '''
+
+tests/frd_test.py::TestFRD::testAgainstOctave
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/tests/frd_test.py:265: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    sys = StateSpace(np.matrix('-2.0 0 0; 0 -1 1; 0 0 -3'),
+
+tests/frd_test.py::TestFRD::testAgainstOctave
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/tests/frd_test.py:266: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    np.matrix('1.0 0; 0 0; 0 1'),
+
+tests/frd_test.py: 68 warnings
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/statesp.py:149: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    matrices[i] = matrix(matrices[i])
+
+tests/frd_test.py: 266 warnings
+  /workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/lib/python3.8/site-packages/numpy/matrixlib/defmatrix.py:71: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    return matrix(data, dtype=dtype, copy=False)
+
+tests/frd_test.py::TestFRD::testAgainstOctave
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/tests/frd_test.py:273: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    np.matrix('0.4-0.2j 0; 0 0.1-0.2j; 0 0.3-0.1j'))
+
+tests/frd_test.py::TestFRD::testAuto
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/tests/frd_test.py:168: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    f2 = _convertToFRD(np.matrix([[1, 0], [0.1, -1]]), omega)
+
+tests/frd_test.py::TestFRD::testMIMOSmooth
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/tests/frd_test.py:246: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    sys2 = np.matrix([[1, 0, 0], [0, 1, 0]]) * sys
+
+tests/frd_test.py::TestFRD::testMIMOSmooth
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/statesp.py:355: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    X = matrix(other)
+
+tests/frd_test.py::TestFRD::testMIMOfb
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/statesp.py:689: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    D = matrix(sys)
+
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/tests/frd_test.py:212: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    sys = StateSpace(np.matrix('-2.0 0 0; 0 -1 1; 0 0 -3'),
+
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/tests/frd_test.py:213: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    np.matrix('1.0 0; 0 0; 0 1'),
+
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/tests/frd_test.py:216: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    K = np.matrix('1 0.3 0; 0.1 0 0')
+
+tests/frd_test.py::TestFRD::testNyquist
+tests/frd_test.py::TestFRD::testNyquist
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/freqplot.py:236: DeprecationWarning: scipy.cos is deprecated and will be removed in SciPy 2.0.0, use numpy.cos instead
+    x = sp.multiply(mag, sp.cos(phase));
+
+tests/frd_test.py::TestFRD::testNyquist
+tests/frd_test.py::TestFRD::testNyquist
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/freqplot.py:236: DeprecationWarning: scipy.multiply is deprecated and will be removed in SciPy 2.0.0, use numpy.multiply instead
+    x = sp.multiply(mag, sp.cos(phase));
+
+tests/frd_test.py::TestFRD::testNyquist
+tests/frd_test.py::TestFRD::testNyquist
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/freqplot.py:237: DeprecationWarning: scipy.sin is deprecated and will be removed in SciPy 2.0.0, use numpy.sin instead
+    y = sp.multiply(mag, sp.sin(phase));
+
+tests/frd_test.py::TestFRD::testNyquist
+tests/frd_test.py::TestFRD::testNyquist
+  /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold/control/freqplot.py:237: DeprecationWarning: scipy.multiply is deprecated and will be removed in SciPy 2.0.0, use numpy.multiply instead
+    y = sp.multiply(mag, sp.sin(phase));
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/gold_3.xml -
+16 passed, 359 warnings in 1.05s
+MEASURE {"command": ["/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/bin/python", "-m", "pytest", "control/tests/frd_test.py", "-q", "--tb=short", "-o", "addopts=", "-p", "no:cacheprovider", "--junitxml=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/gold_3.xml"], "cwd": "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025/work/gold", "returncode": 0, "seconds": 1.4303579280001486, "log": "gold_3.log"}
+DRAW_PROGRESS array_frequencies 100
+DRAW_PROGRESS array_frequencies 200
+DRAW_PROGRESS array_frequencies 300
+DRAW_PROGRESS default_frequencies 100
+DRAW_PROGRESS default_frequencies 200
+DRAW_PROGRESS default_frequencies 300
+STATELESSNESS array_frequencies {'compared': 100, 'mismatches': 0}
+STATELESSNESS default_frequencies {'compared': 100, 'mismatches': 0}
+{
+  "status": "VERIFIED_EXPLORATORY",
+  "not_preregistered": true,
+  "model_calls": 0,
+  "B9": "HOLD",
+  "runs": 9,
+  "upstream_test_executions": 144,
+  "baseline_passing_tests_preserved": 15,
+  "resolved_upstream_tests": [
+    "tests.frd_test.TestFRD::testNyquist"
+  ],
+  "new_regressions": 0,
+  "paired_draws": 600,
+  "state_rechecks": 200,
+  "cells": [
+    {
+      "cell": "K1_python_control/array_frequencies",
+      "raw_decision": "ADMIT",
+      "draws_to_stop": 65,
+      "full_counts": {
+        "help": 300,
+        "tie": 0,
+        "hurt": 0,
+        "harness_error": 0
+      },
+      "e_for_family": 20.251906082635777,
+      "baseline_line_reach": {
+        "214": 152,
+        "297": 0,
+        "124": 148
+      },
+      "final_decision": "ADMIT_DIAGNOSTIC"
+    },
+    {
+      "cell": "K1_python_control/default_frequencies",
+      "raw_decision": "UNDECIDED",
+      "draws_to_stop": 300,
+      "full_counts": {
+        "help": 0,
+        "tie": 300,
+        "hurt": 0,
+        "harness_error": 0
+      },
+      "e_for_family": 0.8803630364474071,
+      "baseline_line_reach": {
+        "214": 158,
+        "297": 0,
+        "124": 142
+      },
+      "final_decision": "QUARANTINE"
+    }
+  ],
+  "limitations": [
+    "Historical convenience selection; not prospective or population-representative.",
+    "Upstream testNyquist is a smoke oracle, not numerical accuracy.",
+    "Draw oracle is researcher-authored; only supplied SISO scopes are covered.",
+    "Selected 16-test module; not full repository census; gangof4_plot not covered.",
+    "Diagnostics execute the full draw budget; not a cost-saving experiment."
+  ]
+}

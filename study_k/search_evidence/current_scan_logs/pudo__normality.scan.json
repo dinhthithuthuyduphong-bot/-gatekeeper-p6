@@ -1,0 +1,12 @@
+{
+  "repository": "pudo/normality",
+  "evidence": "EXPLORATORY_STATIC_SCREEN",
+  "test_runs": 0,
+  "revision": "29333c9b1de4bc40489edeaa124112b0cfaaa316",
+  "license_files": {
+    "LICENSE": "b01a685c7331a2bcd3ccacce4ee4634310fd579cf71f753d8c5440e47e0d5888"
+  },
+  "status": "STATIC_ONLY",
+  "sites": [],
+  "errors": []
+}
