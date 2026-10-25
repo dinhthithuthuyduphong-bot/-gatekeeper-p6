@@ -1,0 +1,54 @@
+name: Gatekeeper Study K zero-cost reproduction
+
+"on":
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reproduce:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 25
+    steps:
+      - name: Preserve context before environment setup
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/study-k-envelope"
+          printf 'commit=%s\nrun_id=%s\nB9=HOLD\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" > "$RUNNER_TEMP/study-k-envelope/context.txt"
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e
+        with:
+          version: "0.13.4"
+          enable-cache: "false"
+      - name: Restore native dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update 2>&1 | tee "$RUNNER_TEMP/study-k-envelope/apt-update.log"
+          sudo apt-get install -y pkg-config libfreetype6-dev libpng-dev libblas3 liblapack3 libgfortran5 2>&1 | tee "$RUNNER_TEMP/study-k-envelope/apt-install.log"
+      - name: Restore pinned Python packages
+        shell: bash
+        run: |
+          set -euo pipefail
+          uv python install 3.8.20 2>&1 | tee "$RUNNER_TEMP/study-k-envelope/python-install.log"
+          uv venv --managed-python --python 3.8.20 "$RUNNER_TEMP/study-k-venv"
+          uv pip install --python "$RUNNER_TEMP/study-k-venv/bin/python" -r study_k/requirements-build.txt 2>&1 | tee "$RUNNER_TEMP/study-k-envelope/packages.log"
+          uv pip install --python "$RUNNER_TEMP/study-k-venv/bin/python" --no-build-isolation --no-deps matplotlib==2.2.5 2>&1 | tee "$RUNNER_TEMP/study-k-envelope/matplotlib-build.log"
+          "$RUNNER_TEMP/study-k-venv/bin/python" study_k/install_slycot.py --receipt "$RUNNER_TEMP/study-k-envelope/slycot-install.json" 2>&1 | tee "$RUNNER_TEMP/study-k-envelope/slycot-install.log"
+          uv pip freeze --python "$RUNNER_TEMP/study-k-venv/bin/python" > "$RUNNER_TEMP/study-k-envelope/environment.txt"
+      - name: Reproduce unchanged tests and diagnostic scopes
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/study-k-venv/bin/python" -u study_k/run.py --output "$RUNNER_TEMP/study-k-evidence" 2>&1 | tee "$RUNNER_TEMP/study-k-envelope/execution.log"
+          cat "$RUNNER_TEMP/study-k-evidence/RESULT.md" >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: study-k-python-control
+          path: |
+            ${{ runner.temp }}/study-k-envelope/
+            ${{ runner.temp }}/study-k-evidence/
+            !${{ runner.temp }}/study-k-evidence/work/**
+          if-no-files-found: error

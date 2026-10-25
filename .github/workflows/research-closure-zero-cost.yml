@@ -1,0 +1,112 @@
+name: Gatekeeper zero-cost closure audit
+
+"on":
+  workflow_dispatch:
+    inputs:
+      cost_recheck:
+        description: "Also rerun actual wall-clock benchmarks (no model calls)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.14"
+      - name: Install workflow parser
+        run: python -m pip install PyYAML==6.0.2
+      - name: Verify code, frozen evidence, statistics and paid HOLD
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/closure-envelope"
+          printf 'commit=%s\nrun_id=%s\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" > "$RUNNER_TEMP/closure-envelope/context.txt"
+          python -u tools/closure_verify.py --out "$RUNNER_TEMP/closure-checks" 2>&1 | tee "$RUNNER_TEMP/closure-envelope/execution.log"
+          cp -R "$RUNNER_TEMP/closure-checks" "$RUNNER_TEMP/closure-envelope/checks"
+          cat "$RUNNER_TEMP/closure-checks/RESULT.md" >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: gatekeeper-zero-cost-closure
+          path: |
+            ${{ runner.temp }}/closure-envelope/
+            ${{ runner.temp }}/closure-checks/
+          if-no-files-found: error
+
+  cost:
+    needs: audit
+    if: ${{ inputs.cost_recheck }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: sqlalchemy
+            python: "3.12.14"
+            os: ubuntu-24.04
+            repo: sqlalchemy/sqlalchemy
+            revision: 10f4d1e2d706a7722ca78e79ce05b00333a7aa5b
+          - target: networkx
+            python: "3.8.20"
+            os: ubuntu-22.04
+            repo: networkx/networkx
+            revision: 585bb3ee251ab681e7725c07e4e8a569a0e511d5
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v6
+      - name: Prepare logs before setup
+        shell: bash
+        run: mkdir -p "$RUNNER_TEMP/cost-envelope"
+      - uses: actions/setup-python@v6
+        if: matrix.target == 'sqlalchemy'
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e
+        if: matrix.target == 'networkx'
+        with:
+          version: "0.13.4"
+          enable-cache: "false"
+      - name: Restore historical runtime
+        if: matrix.target == 'networkx'
+        shell: bash
+        run: |
+          set -euo pipefail
+          uv python install '${{ matrix.python }}' 2>&1 | tee "$RUNNER_TEMP/cost-envelope/runtime-install.log"
+          uv venv --managed-python --python '${{ matrix.python }}' "$RUNNER_TEMP/cost-venv"
+          printf '%s\n' "$RUNNER_TEMP/cost-venv/bin" >> "$GITHUB_PATH"
+      - name: Prepare pinned environment and source
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ '${{ matrix.target }}' = 'networkx' ]; then
+            uv pip install --python "$RUNNER_TEMP/cost-venv/bin/python" -r study_i/requirements-networkx.txt
+          else
+            python -m pip install -r study_i/requirements-sqlalchemy.txt
+          fi
+          mkdir -p "$RUNNER_TEMP/cost-source"
+          git -C "$RUNNER_TEMP/cost-source" init -q
+          git -C "$RUNNER_TEMP/cost-source" fetch --depth=1 'https://github.com/${{ matrix.repo }}.git' '${{ matrix.revision }}'
+          git -C "$RUNNER_TEMP/cost-source" checkout --detach FETCH_HEAD
+          python -V | tee "$RUNNER_TEMP/cost-envelope/python.txt"
+      - name: Measure both policies serially on this runner
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -u tools/benchmark_admission_cost.py '${{ matrix.target }}' --checkout "$RUNNER_TEMP/cost-source" --out "$RUNNER_TEMP/cost-measured" 2>&1 | tee "$RUNNER_TEMP/cost-envelope/execution.log"
+          cat "$RUNNER_TEMP/cost-measured/COST_RESULT.md" >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: closure-cost-${{ matrix.target }}
+          path: |
+            ${{ runner.temp }}/cost-envelope/
+            ${{ runner.temp }}/cost-measured/
+            !${{ runner.temp }}/cost-measured/**/work/**
+          if-no-files-found: error

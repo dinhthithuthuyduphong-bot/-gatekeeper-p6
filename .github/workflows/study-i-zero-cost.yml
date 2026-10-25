@@ -26,12 +26,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p evidence
+          mkdir -p "$RUNNER_TEMP/study-i-evidence"
           printf 'target=%s\nrequested_python=%s\ncommit=%s\nrun_id=%s\nattempt=%s\n' \
             '${{ matrix.target }}' '${{ matrix.python }}' "$GITHUB_SHA" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" \
-            | tee evidence/run-context.txt
-          uname -a | tee evidence/runner.txt
-          cat /etc/os-release >> evidence/runner.txt
+            | tee "$RUNNER_TEMP/study-i-evidence/run-context.txt"
+          uname -a | tee "$RUNNER_TEMP/study-i-evidence/runner.txt"
+          cat /etc/os-release >> "$RUNNER_TEMP/study-i-evidence/runner.txt"
       - name: Set up Python for SQLAlchemy
         if: matrix.target != 'networkx'
         uses: actions/setup-python@v6
@@ -48,10 +48,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          uv --version | tee evidence/uv-version.txt
-          uv python install '${{ matrix.python }}' 2>&1 | tee evidence/python-install.log
+          uv --version | tee "$RUNNER_TEMP/study-i-evidence/uv-version.txt"
+          uv python install '${{ matrix.python }}' 2>&1 | tee "$RUNNER_TEMP/study-i-evidence/python-install.log"
           uv venv --no-project --managed-python --python '${{ matrix.python }}' \
-            "$RUNNER_TEMP/study-i-networkx-venv" 2>&1 | tee evidence/venv-create.log
+            "$RUNNER_TEMP/study-i-networkx-venv" 2>&1 | tee "$RUNNER_TEMP/study-i-evidence/venv-create.log"
           printf '%s\n' "$RUNNER_TEMP/study-i-networkx-venv/bin" >> "$GITHUB_PATH"
       - name: Install pinned local-test dependencies
         shell: bash
@@ -60,35 +60,35 @@ jobs:
         run: |
           set -euo pipefail
           python -c 'import os, sys; print(sys.version); print(sys.executable); actual = ".".join(map(str, sys.version_info[:3])); assert actual == os.environ["EXPECTED_PYTHON"], (actual, os.environ["EXPECTED_PYTHON"])' \
-            2>&1 | tee evidence/python-runtime.log
+            2>&1 | tee "$RUNNER_TEMP/study-i-evidence/python-runtime.log"
           if [ '${{ matrix.target }}' = 'networkx' ]; then
             uv pip install --python "$RUNNER_TEMP/study-i-networkx-venv/bin/python" \
-              -r study_i/requirements-networkx.txt 2>&1 | tee evidence/install.log
-            uv pip freeze --python "$RUNNER_TEMP/study-i-networkx-venv/bin/python" | tee evidence/environment.txt
+              -r study_i/requirements-networkx.txt 2>&1 | tee "$RUNNER_TEMP/study-i-evidence/install.log"
+            uv pip freeze --python "$RUNNER_TEMP/study-i-networkx-venv/bin/python" | tee "$RUNNER_TEMP/study-i-evidence/environment.txt"
           else
-            python -m pip install -r study_i/requirements-${{ matrix.target }}.txt 2>&1 | tee evidence/install.log
-            python -m pip freeze | tee evidence/environment.txt
+            python -m pip install -r study_i/requirements-${{ matrix.target }}.txt 2>&1 | tee "$RUNNER_TEMP/study-i-evidence/install.log"
+            python -m pip freeze | tee "$RUNNER_TEMP/study-i-evidence/environment.txt"
           fi
       - name: Reproduce upstream tests and generator diagnostics
         shell: bash
         run: |
           set -euo pipefail
-          python -u study_i/run.py ${{ matrix.target }} --output evidence/run 2>&1 | tee evidence/execution.log
-          python -u study_i/statelessness.py ${{ matrix.target }} --results evidence/run 2>&1 | tee evidence/statelessness.log
+          python -u study_i/run.py ${{ matrix.target }} --output "$RUNNER_TEMP/study-i-evidence/run" 2>&1 | tee "$RUNNER_TEMP/study-i-evidence/execution.log"
+          python -u study_i/statelessness.py ${{ matrix.target }} --results "$RUNNER_TEMP/study-i-evidence/run" 2>&1 | tee "$RUNNER_TEMP/study-i-evidence/statelessness.log"
       - name: Record final job state even if setup failed
         if: always()
         shell: bash
         run: |
-          mkdir -p evidence
-          printf 'status_before_upload=%s\n' '${{ job.status }}' | tee evidence/job-status.txt
+          mkdir -p "$RUNNER_TEMP/study-i-evidence"
+          printf 'status_before_upload=%s\n' '${{ job.status }}' | tee "$RUNNER_TEMP/study-i-evidence/job-status.txt"
       - name: Preserve raw evidence, including failed attempts
         if: always()
         uses: actions/upload-artifact@v7
         with:
           name: study-i-${{ matrix.target }}
           path: |
-            evidence/
-            !evidence/run/work/**
+            ${{ runner.temp }}/study-i-evidence/
+            !${{ runner.temp }}/study-i-evidence/run/work/**
           if-no-files-found: error
           retention-days: 30
 
