@@ -1,0 +1,40 @@
+{
+  "status": "PASS",
+  "base_commit": "fcdd1b8b179f0ba8a312a7b8ec60d489e3c9b293",
+  "files": 449,
+  "all_applied_hashes_match": true,
+  "commands": [
+    {
+      "command": [
+        "git",
+        "clone",
+        "--no-hardlinks",
+        "--branch",
+        "main",
+        "/workspace/scratch/cde4f976cfa9/research_closure_20261024/apply_check",
+        "/workspace/scratch/cde4f976cfa9/continuation_20261025/package_check_repo"
+      ],
+      "returncode": 0
+    },
+    {
+      "command": [
+        "python",
+        "/workspace/scratch/cde4f976cfa9/continuation_20261025/deliverables/Gatekeeper_Final_ZeroCost_20261025/APPLY_UPDATE.py",
+        "--repo",
+        "/workspace/scratch/cde4f976cfa9/continuation_20261025/package_check_repo",
+        "--check-only"
+      ],
+      "returncode": 0
+    },
+    {
+      "command": [
+        "python",
+        "/workspace/scratch/cde4f976cfa9/continuation_20261025/deliverables/Gatekeeper_Final_ZeroCost_20261025/APPLY_UPDATE.py",
+        "--repo",
+        "/workspace/scratch/cde4f976cfa9/continuation_20261025/package_check_repo"
+      ],
+      "returncode": 0
+    }
+  ],
+  "note": "The code and raw evidence passed 129 tests and 12 audits before packaging. The helper then applied the same bytes to a clean checkout. No push or remote workflow dispatch."
+}

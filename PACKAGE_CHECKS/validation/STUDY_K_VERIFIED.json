@@ -1,0 +1,60 @@
+{
+  "status": "VERIFIED_EXPLORATORY",
+  "not_preregistered": true,
+  "model_calls": 0,
+  "B9": "HOLD",
+  "runs": 9,
+  "upstream_test_executions": 144,
+  "baseline_passing_tests_preserved": 15,
+  "resolved_upstream_tests": [
+    "tests.frd_test.TestFRD::testNyquist"
+  ],
+  "new_regressions": 0,
+  "paired_draws": 600,
+  "state_rechecks": 200,
+  "cells": [
+    {
+      "cell": "K1_python_control/array_frequencies",
+      "raw_decision": "ADMIT",
+      "draws_to_stop": 65,
+      "full_counts": {
+        "help": 300,
+        "tie": 0,
+        "hurt": 0,
+        "harness_error": 0
+      },
+      "e_for_family": 20.251906082635777,
+      "baseline_line_reach": {
+        "214": 152,
+        "297": 0,
+        "124": 148
+      },
+      "final_decision": "ADMIT_DIAGNOSTIC"
+    },
+    {
+      "cell": "K1_python_control/default_frequencies",
+      "raw_decision": "UNDECIDED",
+      "draws_to_stop": 300,
+      "full_counts": {
+        "help": 0,
+        "tie": 300,
+        "hurt": 0,
+        "harness_error": 0
+      },
+      "e_for_family": 0.8803630364474071,
+      "baseline_line_reach": {
+        "214": 158,
+        "297": 0,
+        "124": 142
+      },
+      "final_decision": "QUARANTINE"
+    }
+  ],
+  "limitations": [
+    "Historical convenience selection; not prospective or population-representative.",
+    "Upstream testNyquist is a smoke oracle, not numerical accuracy.",
+    "Draw oracle is researcher-authored; only supplied SISO scopes are covered.",
+    "Selected 16-test module; not full repository census; gangof4_plot not covered.",
+    "Diagnostics execute the full draw budget; not a cost-saving experiment."
+  ]
+}

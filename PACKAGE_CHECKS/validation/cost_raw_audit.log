@@ -1,0 +1,15 @@
+{
+  "status": "VERIFIED_FROM_RAW",
+  "targets": {
+    "sqlalchemy": {
+      "measurements": 6,
+      "paired_draws": 2709,
+      "saving_fraction": 0.14525038040543736
+    },
+    "networkx": {
+      "measurements": 6,
+      "paired_draws": 2940,
+      "saving_fraction": 0.09426869752318834
+    }
+  }
+}

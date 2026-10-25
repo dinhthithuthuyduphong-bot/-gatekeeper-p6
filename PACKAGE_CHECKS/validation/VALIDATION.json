@@ -1,0 +1,147 @@
+{
+  "status": "PASS_ZERO_PAID_API_CHECKS",
+  "model_calls": 0,
+  "B9": "HOLD",
+  "checks": [
+    {
+      "check": "unit_tests",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "returncode": 0,
+      "seconds": 22.22868533799999
+    },
+    {
+      "check": "freeze_study_d",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "tools/freeze_study.py",
+        "verify",
+        "study_d"
+      ],
+      "returncode": 0,
+      "seconds": 0.028673484000023564
+    },
+    {
+      "check": "freeze_study_e",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "tools/freeze_study.py",
+        "verify",
+        "study_e"
+      ],
+      "returncode": 0,
+      "seconds": 0.02665283599998247
+    },
+    {
+      "check": "freeze_study_f",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "tools/freeze_study.py",
+        "verify",
+        "study_f"
+      ],
+      "returncode": 0,
+      "seconds": 0.02851894500003027
+    },
+    {
+      "check": "freeze_study_g",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "tools/freeze_study.py",
+        "verify",
+        "study_g"
+      ],
+      "returncode": 0,
+      "seconds": 0.026785786999994343
+    },
+    {
+      "check": "freeze_study_h",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "tools/freeze_study.py",
+        "verify",
+        "study_h"
+      ],
+      "returncode": 0,
+      "seconds": 0.026474790000008852
+    },
+    {
+      "check": "results_check",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "tools/results_check.py"
+      ],
+      "returncode": 0,
+      "seconds": 0.03511888699995325
+    },
+    {
+      "check": "study_i_ci_raw_audit",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "study_i/verify.py",
+        "--results",
+        "study_i/results/ci-40084717332/inputs",
+        "--output",
+        "/workspace/scratch/cde4f976cfa9/continuation_20261025/final_validation/study_i_verified"
+      ],
+      "returncode": 0,
+      "seconds": 0.11604393300001448
+    },
+    {
+      "check": "study_k_raw_audit",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "study_k/verify.py",
+        "--results",
+        "study_k/results/local-20261025-clean",
+        "--output",
+        "/workspace/scratch/cde4f976cfa9/continuation_20261025/final_validation/STUDY_K_VERIFIED.json"
+      ],
+      "returncode": 0,
+      "seconds": 0.135126788999969
+    },
+    {
+      "check": "statistics_replay",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "tools/closure_statistics.py",
+        "--out",
+        "/workspace/scratch/cde4f976cfa9/continuation_20261025/final_validation/statistics"
+      ],
+      "returncode": 0,
+      "seconds": 3.2175924109999983
+    },
+    {
+      "check": "cost_raw_audit",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "tools/verify_cost_evidence.py",
+        "--out",
+        "/workspace/scratch/cde4f976cfa9/continuation_20261025/final_validation/COST_VERIFIED.json"
+      ],
+      "returncode": 0,
+      "seconds": 0.1679299499999729
+    },
+    {
+      "check": "prospective_status",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "tools/prospective_preflight.py",
+        "--report-only",
+        "--out",
+        "/workspace/scratch/cde4f976cfa9/continuation_20261025/final_validation/PROSPECTIVE_STATUS.json"
+      ],
+      "returncode": 0,
+      "seconds": 0.024212212000009004
+    }
+  ],
+  "prospective_status": "BLOCKED",
+  "note": "PASS validates implementation and recorded evidence; it does not mean empirical weaknesses are closed."
+}
