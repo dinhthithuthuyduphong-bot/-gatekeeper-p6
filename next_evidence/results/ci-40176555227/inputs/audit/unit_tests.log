@@ -1,0 +1,190 @@
+payload 0: zip, 1 file(s) -> /tmp/tmpgul6g5b0/out
+A/bool ADMIT ADMIT ADMIT ADMIT 110
+B/bool ADMIT ADMIT CENSUS_INVALID CENSUS_INVALID 110
+C/bool ADMIT REJECT ADMIT ADMIT 110
+written /tmp/tmpf44w48ek/R.md
+| Biến thể | A/bool | B/bool | C/bool |
+|---|---|---|---|
+| full | ADMIT@74 | CENSUS_INVALID | ADMIT@74 |
+| no_harm_cert | ADMIT@12 | CENSUS_INVALID | ADMIT@12 |
+| no_census | ADMIT@74 | CENSUS_INVALID | ADMIT@74 |
+| bonferroni | ADMIT@74 | CENSUS_INVALID | ADMIT@74 |
+| sign_test | ADMIT@74 | CENSUS_INVALID | ADMIT@74 |
+| eta_0.10 | ADMIT@36 | CENSUS_INVALID | ADMIT@36 |
+
+# Study F — kết quả theo model (e-Holm trên K = 4 patch, α = 0.1; chấm trên seed held-out)
+
+| Model | Điều kiện | SUCCESS | HARMFUL | NO_EFFECT | NO_PATCH | BUDGET_CAP | CENSUS_INVALID |
+|---|---|---|---|---|---|---|---|
+| m1 | B9 thô | 0 | 1 | 1 | 0 | 0 | 0 |
+| m1 | B9 + Gatekeeper | 0 | 0 | 0 | 2 | 0 | 0 |
+| m2 | B9 thô | 1 | 0 | 0 | 1 | 0 | 0 |
+| m2 | B9 + Gatekeeper | 1 | 0 | 0 | 1 | 0 | 0 |
+
+| Model | Δ SUCCESS (GK − thô) | Δ HARMFUL (GK − thô) | n |
+|---|---|---|---|
+| m1 | +0 | -1 | 2 |
+| m2 | +0 | +0 | 2 |
+
+| Model | SUCCESS được giữ / SUCCESS thô | HARMFUL bị chặn / HARMFUL thô | Δ SUCCESS (điểm %) | Δ HARMFUL (điểm %) |
+|---|---|---|---|---|
+| m1 | 0/0 (không xác định tỷ lệ) | 1/1 | +0.00 | -50.00 |
+| m2 | 1/1 | 0/0 (không có harm để đánh giá) | +0.00 | +0.00 |
+
+## Theo target (đơn vị cụm)
+
+| Model | Target | n | SUCCESS thô → GK | HARMFUL thô → GK |
+|---|---|---|---|---|
+| m1 | T1 | 1 | 0 → 0 | 1 → 0 |
+| m1 | T2 | 1 | 0 → 0 | 0 → 0 |
+| m2 | T1 | 1 | 1 → 1 | 0 → 0 |
+| m2 | T2 | 1 | 0 → 0 | 0 → 0 |
+
+Đơn vị cụm là target; các lần lặp trong một target không phải target độc lập.
+Gatekeeper ở đây là bộ lọc trên cùng patch: không thể tăng số SUCCESS thô; phải báo cáo cả harm bị chặn và SUCCESS bị loại.
+Không có HARMFUL thô không chứng minh khả năng chặn hại. Không suy ra model independence từ kết quả không khác biệt.
+Chi phí sinh patch dùng chung giữa hai điều kiện; phải cộng riêng chi phí admission để so hiệu quả kinh tế.
+/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/tests/test_ext.py:30: SyntaxWarning: "is" with 'int' literal. Did you mean "=="?
+  self.assertEqual((5 == None), (5 is None))           # noqa: E711  ordinary objects: unchanged
+test_missing_source_package_contract_is_not_misreported_as_match (test_b6r_contract_audit.ContractInventoryTests.test_missing_source_package_contract_is_not_misreported_as_match) ... ok
+test_enumerated_small_sample_mean_wealth (test_closure_statistics.StatisticalContracts.test_enumerated_small_sample_mean_wealth) ... ok
+test_exact_binomial_tail (test_closure_statistics.StatisticalContracts.test_exact_binomial_tail) ... ok
+test_holm_keeps_entire_family (test_closure_statistics.StatisticalContracts.test_holm_keeps_entire_family) ... ok
+test_iut_keeps_harm_and_mean_nulls (test_closure_statistics.StatisticalContracts.test_iut_keeps_harm_and_mean_nulls) ... ok
+test_predictable_stakes_and_null_expectation (test_closure_statistics.StatisticalContracts.test_predictable_stakes_and_null_expectation) ... ok
+test_total_variation_excess_loss_factor (test_closure_statistics.StatisticalContracts.test_total_variation_excess_loss_factor) ... ok
+test_amend_pins_original_seed_hash (test_core.AmendmentA1Tests.test_amend_pins_original_seed_hash) ... ok
+test_unparse_fallback_matches_ast_unparse (test_core.AmendmentA1Tests.test_unparse_fallback_matches_ast_unparse) ... ok
+test_budget_cap_is_reported_separately (test_core.AmendmentA2Tests.test_budget_cap_is_reported_separately) ... ok
+test_prompt_bound_is_at_least_bytes (test_core.AmendmentA2Tests.test_prompt_bound_is_at_least_bytes) ... ok
+test_unified_comparison_refuses_dry_runs (test_core.AmendmentA2Tests.test_unified_comparison_refuses_dry_runs) ... ok
+test_bad_replies_and_budget (test_core.B9AcceptanceTests.test_bad_replies_and_budget) ... ok
+test_cassette_replay_never_calls_out (test_core.B9AcceptanceTests.test_cassette_replay_never_calls_out) ... ok
+test_gold_patch_submitted_and_scored_on_hidden_oracle (test_core.B9AcceptanceTests.test_gold_patch_submitted_and_scored_on_hidden_oracle) ... ok
+test_visible_pass_but_hidden_harm_is_caught (test_core.B9AcceptanceTests.test_visible_pass_but_hidden_harm_is_caught) ... ok
+test_b9_allocations_respect_cap (test_core.B9GuardAndVisibleTests.test_b9_allocations_respect_cap) ... ok
+test_oracle_draw_visible_check (test_core.B9GuardAndVisibleTests.test_oracle_draw_visible_check) ... ok
+test_spend_guard_blocks_before_overspending (test_core.B9GuardAndVisibleTests.test_spend_guard_blocks_before_overspending) ... ok
+test_verdicts (test_core.B9VerdictTests.test_verdicts) ... ok
+test_negated_and_multi_site_and_idempotent (test_core.BoolGuardFamilyTests.test_negated_and_multi_site_and_idempotent) ... ok
+test_invalid_when_too_few_stable (test_core.CensusProtocolTests.test_invalid_when_too_few_stable) ... ok
+test_three_baselines_flaky_excluded_and_retest (test_core.CensusProtocolTests.test_three_baselines_flaky_excluded_and_retest) ... ok
+test_admission_type_one_error (test_core.DiscordantSignTests.test_admission_type_one_error) ... ok
+test_harm_type_one_error (test_core.DiscordantSignTests.test_harm_type_one_error) ... ok
+test_priority_order_is_outcome_independent (test_core.DiscordantSignTests.test_priority_order_is_outcome_independent) ... ok
+test_ties_cost_nothing_and_clear_benefit_admits (test_core.DiscordantSignTests.test_ties_cost_nothing_and_clear_benefit_admits) ... ok
+test_beneficial_scope_admitted_and_stops_for_real (test_core.DrawHarnessAcceptanceTests.test_beneficial_scope_admitted_and_stops_for_real) ... ok
+test_harmful_scope_rejected_fast (test_core.DrawHarnessAcceptanceTests.test_harmful_scope_rejected_fast) ... ok
+test_e_bh (test_core.EBHTests.test_e_bh) ... ok
+test_out_of_range (test_core.EProcessTests.test_out_of_range) ... ok
+test_power_under_clear_benefit (test_core.EProcessTests.test_power_under_clear_benefit) ... ok
+test_type_one_error_under_null (test_core.EProcessTests.test_type_one_error_under_null)
+Under H0 (E[-Z] < theta) the crossing rate must stay <= alpha (Ville). ... ok
+test_extract_xz_zip_payload_from_workflow (test_core.EmbeddedPayloadTests.test_extract_xz_zip_payload_from_workflow) ... ok
+test_abstentions (test_core.EndToEndTests.test_abstentions) ... ok
+test_beneficial_admitted_harmful_quarantined (test_core.EndToEndTests.test_beneficial_admitted_harmful_quarantined) ... ok
+test_composition (test_core.EndToEndTests.test_composition) ... ok
+test_pair_integrity (test_core.EndToEndTests.test_pair_integrity) ... ok
+test_retirement (test_core.EndToEndTests.test_retirement) ... ok
+test_draft_study_refuses_to_run (test_core.FreezeLockTests.test_draft_study_refuses_to_run) ... ok
+test_family_anchor_matches_help_default_functions_only (test_core.FreezeLockTests.test_family_anchor_matches_help_default_functions_only) ... ok
+test_parse (test_core.JunitTests.test_parse) ... ok
+test_drand_sized_seed_starts_workers (test_core.LargeSeedTests.test_drand_sized_seed_starts_workers)
+drand-derived seeds are ~60-bit; PYTHONHASHSEED must be reduced into [0, 2^32). ... ok
+test_no_overallocation_or_recycling (test_core.LedgerTests.test_no_overallocation_or_recycling) ... ok
+test_all_groups_broken_raises (test_core.OracleGroupTests.test_all_groups_broken_raises) ... ok
+test_broken_group_is_recorded_not_fatal (test_core.OracleGroupTests.test_broken_group_is_recorded_not_fatal) ... ok
+test_v3_wrapper_abstains_outside_scope_and_checks_freeze (test_core.P73WrapperTests.test_v3_wrapper_abstains_outside_scope_and_checks_freeze) ... ok
+test_filter_without_reaching_tasks_quarantines (test_core.ReachPluginTests.test_filter_without_reaching_tasks_quarantines) ... ok
+test_junit_id_and_tracer (test_core.ReachPluginTests.test_junit_id_and_tracer) ... ok
+test_src_layout_anchor_and_function_replay (test_core.RealLayoutTests.test_src_layout_anchor_and_function_replay) ... ok
+test_same_skill_admitted_in_safe_scope_blocked_in_risky_scope (test_core.ScopedAdmissionTests.test_same_skill_admitted_in_safe_scope_blocked_in_risky_scope) ... ok
+test_relations (test_core.ScreenTests.test_relations) ... ok
+test_version_specs (test_core.ScreenTests.test_version_specs) ... ok
+test_three_paths_agree (test_core.StudyDDecisionConsistencyTests.test_three_paths_agree) ... ok
+test_e_holm (test_core.StudyDStatsTests.test_e_holm) ... ok
+test_harm_certificate_needs_many_clean_draws (test_core.StudyDStatsTests.test_harm_certificate_needs_many_clean_draws) ... ok
+test_harm_certificate_valid_at_boundary (test_core.StudyDStatsTests.test_harm_certificate_valid_at_boundary) ... ok
+test_abstain_reasons (test_core.TransformTests.test_abstain_reasons) ... ok
+test_composition_order (test_core.TransformTests.test_composition_order) ... ok
+test_empty_string_guard_replays_source_fix (test_core.TransformTests.test_empty_string_guard_replays_source_fix) ... ok
+test_footprint_overlap (test_core.TransformTests.test_footprint_overlap) ... ok
+test_negative_type_guard (test_core.TransformTests.test_negative_type_guard) ... ok
+test_retry_requires_exception_symbol (test_core.TransformTests.test_retry_requires_exception_symbol) ... ok
+test_rewrite_keeps_rest_of_file (test_core.TransformTests.test_rewrite_keeps_rest_of_file) ... ok
+test_second_application_abstains (test_core.TransformTests.test_second_application_abstains) ... ok
+test_extra_tracked_only_affects_its_own_study (test_ext.FreezeExtraTrackedTests.test_extra_tracked_only_affects_its_own_study) ... ok
+test_no_regression_grows (test_ext.MixtureCertTests.test_no_regression_grows) ... ok
+test_type_one_error_at_boundary (test_ext.MixtureCertTests.test_type_one_error_at_boundary) ... ok
+test_semantics_preserved_for_ordinary_values (test_ext.NoneIdentityPrecedenceTests.test_semantics_preserved_for_ordinary_values) ... ok
+test_behaviour_changes_only_for_overridden_eq (test_ext.NoneIdentitySkillTests.test_behaviour_changes_only_for_overridden_eq) ... ok
+test_rewrite_and_semantics (test_ext.NoneIdentitySkillTests.test_rewrite_and_semantics) ... ok
+test_quarantined_scope_without_certificate_blocks_patch (test_ext.PatchRuleTests.test_quarantined_scope_without_certificate_blocks_patch) ... ok
+test_family_size_must_match_registration (test_ext.StudyFAggregationTests.test_family_size_must_match_registration) ... ok
+test_patch_level_family (test_ext.StudyFAggregationTests.test_patch_level_family) ... ok
+test_changed_test_inventory_is_not_stable (test_next_evidence_contracts.NextEvidenceContracts.test_changed_test_inventory_is_not_stable) ... ok
+test_exit_failure_without_phase_failure_is_not_success (test_next_evidence_contracts.NextEvidenceContracts.test_exit_failure_without_phase_failure_is_not_success) ... ok
+test_green_baseline_does_not_claim_a_validated_oracle (test_next_evidence_contracts.NextEvidenceContracts.test_green_baseline_does_not_claim_a_validated_oracle) ... ok
+test_missing_attempt_or_collection_error_cannot_pass (test_next_evidence_contracts.NextEvidenceContracts.test_missing_attempt_or_collection_error_cannot_pass) ... ok
+test_root_examples_and_test_suffixes_are_not_production (test_next_evidence_contracts.NextEvidenceContracts.test_root_examples_and_test_suffixes_are_not_production) ... ok
+test_setup_failure_is_not_a_functional_regression (test_next_evidence_contracts.NextEvidenceContracts.test_setup_failure_is_not_a_functional_regression) ... ok
+test_no_implicit_model_substitution (test_preflight_b9.PreflightTests.test_no_implicit_model_substitution) ... ok
+test_paid_is_on_hold_even_after_date (test_preflight_b9.PreflightTests.test_paid_is_on_hold_even_after_date) ... ok
+test_record_go_only_with_explicit_signoff (test_preflight_b9.PreflightTests.test_record_go_only_with_explicit_signoff) ... ok
+test_record_refused_before_oct31_even_if_go (test_preflight_b9.PreflightTests.test_record_refused_before_oct31_even_if_go) ... ok
+test_reject_unfrozen (test_preflight_b9.PreflightTests.test_reject_unfrozen) ... ok
+test_reject_unknown_config_path (test_preflight_b9.PreflightTests.test_reject_unknown_config_path) ... ok
+test_reject_wrong_model_config_mapping (test_preflight_b9.PreflightTests.test_reject_wrong_model_config_mapping) ... ok
+test_replay_allowed_without_paid_signoff (test_preflight_b9.PreflightTests.test_replay_allowed_without_paid_signoff) ... ok
+test_command_limits (test_remote.RemoteTests.test_command_limits) ... ok
+test_configuration_valid (test_remote.RemoteTests.test_configuration_valid) ... ok
+test_does_not_remove_unowned_container (test_remote.RemoteTests.test_does_not_remove_unowned_container) ... ok
+test_no_install_or_shell_runner (test_remote.RemoteTests.test_no_install_or_shell_runner) ... ok
+test_reject_extra_host_mount (test_remote.RemoteTests.test_reject_extra_host_mount) ... ok
+test_reject_injection (test_remote.RemoteTests.test_reject_injection) ... ok
+test_reject_mutable_image (test_remote.RemoteTests.test_reject_mutable_image) ... ok
+test_reject_network (test_remote.RemoteTests.test_reject_network) ... ok
+test_reject_root (test_remote.RemoteTests.test_reject_root) ... ok
+test_reject_token (test_remote.RemoteTests.test_reject_token) ... ok
+test_reject_writable_mount (test_remote.RemoteTests.test_reject_writable_mount) ... ok
+test_reject_wrong_owner (test_remote.RemoteTests.test_reject_wrong_owner) ... ok
+test_synthetic_control (test_remote.RemoteTests.test_synthetic_control) ... ok
+test_timeout_cleans_only_owned_container (test_remote.RemoteTests.test_timeout_cleans_only_owned_container) ... ok
+test_boundary_null_expected_wealth_multiplier_one (test_reviewer_lambda_sensitivity.LambdaSensitivityTests.test_boundary_null_expected_wealth_multiplier_one) ... ok
+test_invalid_parameters_fail_closed (test_reviewer_lambda_sensitivity.LambdaSensitivityTests.test_invalid_parameters_fail_closed) ... ok
+test_no_harm_crossing_finite (test_reviewer_lambda_sensitivity.LambdaSensitivityTests.test_no_harm_crossing_finite) ... ok
+test_benefit_bet_is_predictable_and_one_step_null_mean_one (test_reviewer_stat_contract.StatisticalContractTests.test_benefit_bet_is_predictable_and_one_step_null_mean_one) ... ok
+test_e_holm_inactive_cells_can_reduce_power (test_reviewer_stat_contract.StatisticalContractTests.test_e_holm_inactive_cells_can_reduce_power) ... ok
+test_e_holm_requires_all_intersections (test_reviewer_stat_contract.StatisticalContractTests.test_e_holm_requires_all_intersections) ... ok
+test_harm_alarm_boundary_null_mean_one (test_reviewer_stat_contract.StatisticalContractTests.test_harm_alarm_boundary_null_mean_one) ... ok
+test_harm_certificate_boundary_null_mean_one (test_reviewer_stat_contract.StatisticalContractTests.test_harm_certificate_boundary_null_mean_one) ... ok
+test_aggregation_complete_and_no_positive_success_delta (test_study_f_integrity.IntegrityTests.test_aggregation_complete_and_no_positive_success_delta) ... ok
+test_budget_cap_replay_needs_no_cassette_entry (test_study_f_integrity.IntegrityTests.test_budget_cap_replay_needs_no_cassette_entry) ... ok
+test_candidate_print_does_not_claim_final_verdict (test_study_f_integrity.IntegrityTests.test_candidate_print_does_not_claim_final_verdict) ... ok
+test_complete_family (test_study_f_integrity.IntegrityTests.test_complete_family) ... ok
+test_counts_must_match_raw_observations (test_study_f_integrity.IntegrityTests.test_counts_must_match_raw_observations) ... ok
+test_duplicate_rows (test_study_f_integrity.IntegrityTests.test_duplicate_rows) ... ok
+test_each_required_row_is_required (test_study_f_integrity.IntegrityTests.test_each_required_row_is_required) ... ok
+test_empty_rows (test_study_f_integrity.IntegrityTests.test_empty_rows) ... ok
+test_harness_error_is_not_harm_or_benefit (test_study_f_integrity.IntegrityTests.test_harness_error_is_not_harm_or_benefit) ... ok
+test_missing_artifact_provenance (test_study_f_integrity.IntegrityTests.test_missing_artifact_provenance) ... ok
+test_missing_model_inventory_prevents_execution (test_study_f_integrity.IntegrityTests.test_missing_model_inventory_prevents_execution) ... ok
+test_missing_provider_usage_cannot_become_evidence (test_study_f_integrity.IntegrityTests.test_missing_provider_usage_cannot_become_evidence) ... ok
+test_missing_scope_cannot_be_omitted (test_study_f_integrity.IntegrityTests.test_missing_scope_cannot_be_omitted) ... ok
+test_mock_label_is_rejected (test_study_f_integrity.IntegrityTests.test_mock_label_is_rejected) ... ok
+test_nonfinite_negative_evidence (test_study_f_integrity.IntegrityTests.test_nonfinite_negative_evidence) ... ok
+test_out_of_family (test_study_f_integrity.IntegrityTests.test_out_of_family) ... ok
+test_replay_cannot_silently_change_patch_selection (test_study_f_integrity.IntegrityTests.test_replay_cannot_silently_change_patch_selection) ... ok
+test_replay_miss_never_calls_provider (test_study_f_integrity.IntegrityTests.test_replay_miss_never_calls_provider) ... ok
+test_seeds_and_config_consistency (test_study_f_integrity.IntegrityTests.test_seeds_and_config_consistency) ... ok
+test_tampered_admission_evalue (test_study_f_integrity.IntegrityTests.test_tampered_admission_evalue) ... ok
+test_wrong_verdict (test_study_f_integrity.IntegrityTests.test_wrong_verdict) ... ok
+test_changed_generator_input_is_rejected (test_study_k_evidence.StudyKEvidence.test_changed_generator_input_is_rejected) ... ok
+test_independent_numeric_oracle_rejects_wrong_response (test_study_k_evidence.StudyKEvidence.test_independent_numeric_oracle_rejects_wrong_response) ... ok
+test_missing_raw_draw_is_not_silently_accepted (test_study_k_evidence.StudyKEvidence.test_missing_raw_draw_is_not_silently_accepted) ... ok
+test_retrospective_result_cannot_be_relabeled (test_study_k_evidence.StudyKEvidence.test_retrospective_result_cannot_be_relabeled) ... ok
+
+----------------------------------------------------------------------
+Ran 135 tests in 33.301s
+
+OK

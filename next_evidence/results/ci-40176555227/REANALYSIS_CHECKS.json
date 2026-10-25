@@ -1,0 +1,22 @@
+{
+  "kind": "READ_ONLY_ARTIFACT_REANALYSIS",
+  "new_test_runs": 0,
+  "cost_raw_hash_checks": [
+    {
+      "target": "networkx",
+      "raw_files_checked": 51,
+      "summary_hash_matches": true,
+      "raw_hashes_match": true
+    },
+    {
+      "target": "sqlalchemy",
+      "raw_files_checked": 45,
+      "summary_hash_matches": true,
+      "raw_hashes_match": true
+    }
+  ],
+  "pydantic_xml_and_phase_hash_checks": "MATCH_3_RUNS",
+  "first_coverage_database_sha256": "995c8962582a26aeb3ec1f359b1e75a7aa03996b7938bae8318077473ff14ab6",
+  "raw_database_reads": 1,
+  "old_result_files_modified": false
+}

@@ -1,0 +1,114 @@
+{
+  "status": "STATIC_LEAD_NOT_RUNTIME_VALIDATED",
+  "candidate": {
+    "id": "airflow",
+    "repo": "apache/airflow",
+    "sha": "b35972fc9c727065097f0654a40a0fe39890b204"
+  },
+  "sites": [
+    {
+      "file": "airflow/jobs/scheduler_job.py",
+      "line": 854,
+      "function": "_find_executable_task_instances",
+      "snippet": "DM.dag_id == None",
+      "sha256": "7f7bd479b413c2aadc29d8e6a0f47d79b8b22ed36c7bb9959418f2471834b4f6"
+    },
+    {
+      "file": "airflow/jobs/scheduler_job.py",
+      "line": 861,
+      "function": "_find_executable_task_instances",
+      "snippet": "TI.state == None",
+      "sha256": "7f7bd479b413c2aadc29d8e6a0f47d79b8b22ed36c7bb9959418f2471834b4f6"
+    },
+    {
+      "file": "airflow/jobs/scheduler_job.py",
+      "line": 1029,
+      "function": "_change_state_for_executable_task_instances",
+      "snippet": "TI.state == None",
+      "sha256": "7f7bd479b413c2aadc29d8e6a0f47d79b8b22ed36c7bb9959418f2471834b4f6"
+    },
+    {
+      "file": "airflow/jobs/scheduler_job.py",
+      "line": 851,
+      "function": "_find_executable_task_instances",
+      "snippet": "DR.run_id == None",
+      "sha256": "7f7bd479b413c2aadc29d8e6a0f47d79b8b22ed36c7bb9959418f2471834b4f6"
+    },
+    {
+      "file": "airflow/www/security.py",
+      "line": 342,
+      "function": "clean_perms",
+      "snippet": "sqla_models.PermissionView.permission == None",
+      "sha256": "93d997fcd9fbf40f094dc26464c72ce0c8e20bd2c72817d11c0f6cb10da45ab3"
+    },
+    {
+      "file": "airflow/www/security.py",
+      "line": 343,
+      "function": "clean_perms",
+      "snippet": "sqla_models.PermissionView.view_menu == None",
+      "sha256": "93d997fcd9fbf40f094dc26464c72ce0c8e20bd2c72817d11c0f6cb10da45ab3"
+    }
+  ],
+  "upstream_test_leads": [
+    {
+      "file": "tests/jobs/test_scheduler_job.py",
+      "function": "test_execute_task_instances_no_dagrun_task_will_execute",
+      "line": 215,
+      "sha256": "6ffb8ae3666d824c0643862c732adea0bc9c3c7e24f92cedef3225f0c1f6adf9",
+      "calls": [
+        "DAG",
+        "DummyOperator",
+        "SchedulerJob",
+        "Session",
+        "TI",
+        "_execute_task_instances",
+        "_make_simple_dag_bag",
+        "assertEqual",
+        "commit",
+        "create_dag_run",
+        "merge",
+        "refresh_from_db",
+        "timedelta"
+      ],
+      "assertions": [
+        "self.assertEqual(State.QUEUED, ti1.state)"
+      ],
+      "id": "tests/jobs/test_scheduler_job.py::test_execute_task_instances_no_dagrun_task_will_execute@L215"
+    },
+    {
+      "file": "tests/jobs/test_scheduler_job.py",
+      "function": "test_find_executable_task_instances_pool",
+      "line": 307,
+      "sha256": "6ffb8ae3666d824c0643862c732adea0bc9c3c7e24f92cedef3225f0c1f6adf9",
+      "calls": [
+        "DAG",
+        "DummyOperator",
+        "Pool",
+        "SchedulerJob",
+        "Session",
+        "TI",
+        "_find_executable_task_instances",
+        "_make_simple_dag_bag",
+        "add",
+        "append",
+        "assertEqual",
+        "assertIn",
+        "commit",
+        "create_dag_run",
+        "len",
+        "merge"
+      ],
+      "assertions": [
+        "self.assertEqual(3, len(res))",
+        "self.assertIn(tis[0].key, res_keys)",
+        "self.assertIn(tis[1].key, res_keys)",
+        "self.assertIn(tis[3].key, res_keys)"
+      ],
+      "id": "tests/jobs/test_scheduler_job.py::test_find_executable_task_instances_pool@L307"
+    }
+  ],
+  "test_runs": 0,
+  "treatment_runs": 0,
+  "oracle_tier": null,
+  "limitation": "Function-name references are an overapproximation, not dynamic reach. No harmful or beneficial outcome was measured. Airflow also uses SQLAlchemy; an application-level transfer is not an independent operator-semantics family."
+}

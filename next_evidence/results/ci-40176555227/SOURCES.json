@@ -1,0 +1,940 @@
+{
+  "run": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40176555227",
+  "artifacts": [
+    {
+      "id": 12593135617,
+      "name": "next-raw-scan-pony-a1",
+      "size_in_bytes": 50282,
+      "url": "https://api.github.com/repos/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/artifacts/12593135617",
+      "archive_download_url": "https://api.github.com/repos/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/artifacts/12593135617/zip",
+      "expired": false,
+      "created_at": "2026-10-25T08:28:26Z",
+      "expires_at": "2026-11-24T08:28:24Z",
+      "updated_at": "2026-10-25T08:28:26Z",
+      "digest": "sha256:1fad6fbbd311ae19c6379c90885317a0f4f29eef900b78879c9cec401b4c0ca2",
+      "workflow_run": {
+        "id": 40176555227,
+        "repository_id": 1415795256,
+        "head_repository_id": 1415795256,
+        "head_branch": "main",
+        "head_sha": "d2078d9895938b7e411bc95417959af5370db555"
+      }
+    },
+    {
+      "id": 12593110631,
+      "name": "next-raw-scan-sqlalchemy_utils-a1",
+      "size_in_bytes": 4205,
+      "url": "https://api.github.com/repos/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/artifacts/12593110631",
+      "archive_download_url": "https://api.github.com/repos/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/artifacts/12593110631/zip",
+      "expired": false,
+      "created_at": "2026-10-25T08:28:00Z",
+      "expires_at": "2026-11-24T08:27:59Z",
+      "updated_at": "2026-10-25T08:28:00Z",
+      "digest": "sha256:3b1f6a02e1a3ef4348e3aec0f664b6de7eb541d9f7b2613a597739335b4b696c",
+      "workflow_run": {
+        "id": 40176555227,
+        "repository_id": 1415795256,
+        "head_repository_id": 1415795256,
+        "head_branch": "main",
+        "head_sha": "d2078d9895938b7e411bc95417959af5370db555"
+      }
+    },
+    {
+      "id": 12592920788,
+      "name": "next-raw-scan-pydantic-a1",
+      "size_in_bytes": 3888,
+      "url": "https://api.github.com/repos/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/artifacts/12592920788",
+      "archive_download_url": "https://api.github.com/repos/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/artifacts/12592920788/zip",
+      "expired": false,
+      "created_at": "2026-10-25T08:26:41Z",
+      "expires_at": "2026-11-24T08:26:40Z",
+      "updated_at": "2026-10-25T08:26:41Z",
+      "digest": "sha256:b8dd63b5f8a3d6082e6da44bef99692b57425c1f731487982d073131ee046fcd",
+      "workflow_run": {
+        "id": 40176555227,
+        "repository_id": 1415795256,
+        "head_repository_id": 1415795256,
+        "head_branch": "main",
+        "head_sha": "d2078d9895938b7e411bc95417959af5370db555"
+      }
+    },
+    {
+      "id": 12592876483,
+      "name": "next-raw-pydantic-baseline-a1",
+      "size_in_bytes": 416822142,
+      "url": "https://api.github.com/repos/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/artifacts/12592876483",
+      "archive_download_url": "https://api.github.com/repos/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/artifacts/12592876483/zip",
+      "expired": false,
+      "created_at": "2026-10-25T08:31:00Z",
+      "expires_at": "2026-11-24T08:29:54Z",
+      "updated_at": "2026-10-25T08:31:00Z",
+      "digest": "sha256:948185dcfad485ac9040b60aeefd88ba8f272e134ec5aaba72723058c4a7ba89",
+      "workflow_run": {
+        "id": 40176555227,
+        "repository_id": 1415795256,
+        "head_repository_id": 1415795256,
+        "head_branch": "main",
+        "head_sha": "d2078d9895938b7e411bc95417959af5370db555"
+      }
+    },
+    {
+      "id": 12592826165,
+      "name": "next-raw-scan-pandas-a1",
+      "size_in_bytes": 1050795,
+      "url": "https://api.github.com/repos/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/artifacts/12592826165",
+      "archive_download_url": "https://api.github.com/repos/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/artifacts/12592826165/zip",
+      "expired": false,
+      "created_at": "2026-10-25T08:27:44Z",
+      "expires_at": "2026-11-24T08:27:43Z",
+      "updated_at": "2026-10-25T08:27:44Z",
+      "digest": "sha256:6f5af4fcc10d09fd111da7af43c8b11133a18ba1ee30a2787bd4a822b2a75ae8",
+      "workflow_run": {
+        "id": 40176555227,
+        "repository_id": 1415795256,
+        "head_repository_id": 1415795256,
+        "head_branch": "main",
+        "head_sha": "d2078d9895938b7e411bc95417959af5370db555"
+      }
+    },
+    {
+      "id": 12592816206,
+      "name": "next-raw-scan-numpy-a1",
+      "size_in_bytes": 562218,
+      "url": "https://api.github.com/repos/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/artifacts/12592816206",
+      "archive_download_url": "https://api.github.com/repos/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/artifacts/12592816206/zip",
+      "expired": false,
+      "created_at": "2026-10-25T08:27:45Z",
+      "expires_at": "2026-11-24T08:27:44Z",
+      "updated_at": "2026-10-25T08:27:45Z",
+      "digest": "sha256:622422dd15fc584644df24f959163846bb0276c762e55d768e6e791f49ef0a90",
+      "workflow_run": {
+        "id": 40176555227,
+        "repository_id": 1415795256,
+        "head_repository_id": 1415795256,
+        "head_branch": "main",
+        "head_sha": "d2078d9895938b7e411bc95417959af5370db555"
+      }
+    },
+    {
+      "id": 12592686982,
+      "name": "next-evidence-return-a1",
+      "size_in_bytes": 420744121,
+      "url": "https://api.github.com/repos/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/artifacts/12592686982",
+      "archive_download_url": "https://api.github.com/repos/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/artifacts/12592686982/zip",
+      "expired": false,
+      "created_at": "2026-10-25T08:32:33Z",
+      "expires_at": "2026-11-24T08:31:55Z",
+      "updated_at": "2026-10-25T08:32:33Z",
+      "digest": "sha256:fa771ffda9c2e76d517e4141c9b418217d147e94aa321a4ba4727c41ef8fd2fb",
+      "workflow_run": {
+        "id": 40176555227,
+        "repository_id": 1415795256,
+        "head_repository_id": 1415795256,
+        "head_branch": "main",
+        "head_sha": "d2078d9895938b7e411bc95417959af5370db555"
+      }
+    },
+    {
+      "id": 12592496621,
+      "name": "next-raw-cost-sqlalchemy-a1",
+      "size_in_bytes": 1026374,
+      "url": "https://api.github.com/repos/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/artifacts/12592496621",
+      "archive_download_url": "https://api.github.com/repos/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/artifacts/12592496621/zip",
+      "expired": false,
+      "created_at": "2026-10-25T08:30:33Z",
+      "expires_at": "2026-11-24T08:30:32Z",
+      "updated_at": "2026-10-25T08:30:33Z",
+      "digest": "sha256:c311891c2cce7c5066c80ff0f2a45da3de58f98caf4b9dc34aded25a5e966467",
+      "workflow_run": {
+        "id": 40176555227,
+        "repository_id": 1415795256,
+        "head_repository_id": 1415795256,
+        "head_branch": "main",
+        "head_sha": "d2078d9895938b7e411bc95417959af5370db555"
+      }
+    },
+    {
+      "id": 12592311937,
+      "name": "next-raw-cost-networkx-a1",
+      "size_in_bytes": 986299,
+      "url": "https://api.github.com/repos/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/artifacts/12592311937",
+      "archive_download_url": "https://api.github.com/repos/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/artifacts/12592311937/zip",
+      "expired": false,
+      "created_at": "2026-10-25T08:31:24Z",
+      "expires_at": "2026-11-24T08:31:24Z",
+      "updated_at": "2026-10-25T08:31:24Z",
+      "digest": "sha256:1b2e4ba2912c3c32a581ecdfce4970296aeb5f27b6298d09cfce1cdde472d6ef",
+      "workflow_run": {
+        "id": 40176555227,
+        "repository_id": 1415795256,
+        "head_repository_id": 1415795256,
+        "head_branch": "main",
+        "head_sha": "d2078d9895938b7e411bc95417959af5370db555"
+      }
+    },
+    {
+      "id": 12592276708,
+      "name": "next-raw-scan-peewee-a1",
+      "size_in_bytes": 44167,
+      "url": "https://api.github.com/repos/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/artifacts/12592276708",
+      "archive_download_url": "https://api.github.com/repos/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/artifacts/12592276708/zip",
+      "expired": false,
+      "created_at": "2026-10-25T08:28:05Z",
+      "expires_at": "2026-11-24T08:28:05Z",
+      "updated_at": "2026-10-25T08:28:05Z",
+      "digest": "sha256:afbb4cf7f728a65da09de101aa25b6dee8a3b17a6e667850097ad355cea16e71",
+      "workflow_run": {
+        "id": 40176555227,
+        "repository_id": 1415795256,
+        "head_repository_id": 1415795256,
+        "head_branch": "main",
+        "head_sha": "d2078d9895938b7e411bc95417959af5370db555"
+      }
+    },
+    {
+      "id": 12592181677,
+      "name": "next-raw-audit-a1",
+      "size_in_bytes": 35871,
+      "url": "https://api.github.com/repos/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/artifacts/12592181677",
+      "archive_download_url": "https://api.github.com/repos/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/artifacts/12592181677/zip",
+      "expired": false,
+      "created_at": "2026-10-25T08:26:21Z",
+      "expires_at": "2026-11-24T08:26:21Z",
+      "updated_at": "2026-10-25T08:26:21Z",
+      "digest": "sha256:4b7ccf50181075a444ff28ec63dd67c9fcd147b7b6ca5f647d1d5f9e3d8baf1a",
+      "workflow_run": {
+        "id": 40176555227,
+        "repository_id": 1415795256,
+        "head_repository_id": 1415795256,
+        "head_branch": "main",
+        "head_sha": "d2078d9895938b7e411bc95417959af5370db555"
+      }
+    },
+    {
+      "id": 12592136933,
+      "name": "next-raw-scan-airflow-a1",
+      "size_in_bytes": 139319,
+      "url": "https://api.github.com/repos/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/artifacts/12592136933",
+      "archive_download_url": "https://api.github.com/repos/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/artifacts/12592136933/zip",
+      "expired": false,
+      "created_at": "2026-10-25T08:26:45Z",
+      "expires_at": "2026-11-24T08:26:45Z",
+      "updated_at": "2026-10-25T08:26:45Z",
+      "digest": "sha256:c551e27703e48d209b33d2f9c9dd1c7e29e1c7f9b2e06a8719d1852c3db134ad",
+      "workflow_run": {
+        "id": 40176555227,
+        "repository_id": 1415795256,
+        "head_repository_id": 1415795256,
+        "head_branch": "main",
+        "head_sha": "d2078d9895938b7e411bc95417959af5370db555"
+      }
+    }
+  ],
+  "small_archive_download_receipts": [
+    {
+      "name": "next-raw-scan-pony-a1",
+      "artifact_id": 12593135617,
+      "zip_sha256": "1fad6fbbd311ae19c6379c90885317a0f4f29eef900b78879c9cec401b4c0ca2",
+      "bytes": 50282
+    },
+    {
+      "name": "next-raw-scan-sqlalchemy_utils-a1",
+      "artifact_id": 12593110631,
+      "zip_sha256": "3b1f6a02e1a3ef4348e3aec0f664b6de7eb541d9f7b2613a597739335b4b696c",
+      "bytes": 4205
+    },
+    {
+      "name": "next-raw-scan-pydantic-a1",
+      "artifact_id": 12592920788,
+      "zip_sha256": "b8dd63b5f8a3d6082e6da44bef99692b57425c1f731487982d073131ee046fcd",
+      "bytes": 3888
+    },
+    {
+      "name": "next-raw-scan-pandas-a1",
+      "artifact_id": 12592826165,
+      "zip_sha256": "6f5af4fcc10d09fd111da7af43c8b11133a18ba1ee30a2787bd4a822b2a75ae8",
+      "bytes": 1050795
+    },
+    {
+      "name": "next-raw-scan-numpy-a1",
+      "artifact_id": 12592816206,
+      "zip_sha256": "622422dd15fc584644df24f959163846bb0276c762e55d768e6e791f49ef0a90",
+      "bytes": 562218
+    },
+    {
+      "name": "next-raw-cost-sqlalchemy-a1",
+      "artifact_id": 12592496621,
+      "zip_sha256": "c311891c2cce7c5066c80ff0f2a45da3de58f98caf4b9dc34aded25a5e966467",
+      "bytes": 1026374
+    },
+    {
+      "name": "next-raw-cost-networkx-a1",
+      "artifact_id": 12592311937,
+      "zip_sha256": "1b2e4ba2912c3c32a581ecdfce4970296aeb5f27b6298d09cfce1cdde472d6ef",
+      "bytes": 986299
+    },
+    {
+      "name": "next-raw-scan-peewee-a1",
+      "artifact_id": 12592276708,
+      "zip_sha256": "afbb4cf7f728a65da09de101aa25b6dee8a3b17a6e667850097ad355cea16e71",
+      "bytes": 44167
+    },
+    {
+      "name": "next-raw-audit-a1",
+      "artifact_id": 12592181677,
+      "zip_sha256": "4b7ccf50181075a444ff28ec63dd67c9fcd147b7b6ca5f647d1d5f9e3d8baf1a",
+      "bytes": 35871
+    },
+    {
+      "name": "next-raw-scan-airflow-a1",
+      "artifact_id": 12592136933,
+      "zip_sha256": "c551e27703e48d209b33d2f9c9dd1c7e29e1c7f9b2e06a8719d1852c3db134ad",
+      "bytes": 139319
+    }
+  ],
+  "pydantic_selection": {
+    "artifact_id": 12592876483,
+    "zip_bytes": 416822142,
+    "method": "HTTP range selection; ZIP CRC checked per selected member; no full ZIP hash",
+    "transferred_bytes": 386533,
+    "range_requests": 96,
+    "files": [
+      {
+        "path": "context.txt",
+        "bytes": 96,
+        "compressed_bytes": 92,
+        "selected": true,
+        "sha256": "243f81f49099cbee5fe5638b1aec4ada5a797345c54334c3c68eeaabcda6c3fb"
+      },
+      {
+        "path": "environment.txt",
+        "bytes": 249,
+        "compressed_bytes": 167,
+        "selected": true,
+        "sha256": "078d665824f4a2de1d58b0f6554dd26f0cbcb66c8d946e5407829e8afe18632e"
+      },
+      {
+        "path": "execution.log",
+        "bytes": 265,
+        "compressed_bytes": 151,
+        "selected": true,
+        "sha256": "6663cccfffefb0022d4fe4e53f9d80a9c10992c26ff765d3b4a7bad27ab78297"
+      },
+      {
+        "path": "fetch.log",
+        "bytes": 165,
+        "compressed_bytes": 73,
+        "selected": true,
+        "sha256": "2441cea8b1129195a42fe402f35013ab6b070c9e7653574dd332bc055884f357"
+      },
+      {
+        "path": "install.log",
+        "bytes": 3726,
+        "compressed_bytes": 748,
+        "selected": true,
+        "sha256": "9b78346dae5e63f161fdeb487ca916dfcad3a5866813cef2b7ffe8780fe29068"
+      },
+      {
+        "path": "job-status.txt",
+        "bytes": 15,
+        "compressed_bytes": 17,
+        "selected": true,
+        "sha256": "f557382a19dd8ed0e546e643d5aeb8f6082d657da7c1612d6d784cf9989f4712"
+      },
+      {
+        "path": "run/BASELINE_RESULT.json",
+        "bytes": 1895849,
+        "compressed_bytes": 89553,
+        "selected": true,
+        "sha256": "4119140392016ad4a050b1a78f0b3f86f8d6b03df2870ec6145510ad0627497b"
+      },
+      {
+        "path": "run/BASELINE_RESULT.md",
+        "bytes": 917,
+        "compressed_bytes": 491,
+        "selected": true,
+        "sha256": "98a412fddcf9b5858fb209f7eeb46c5c66ad0e8c4513c3a40f2172614db3db38"
+      },
+      {
+        "path": "run/PRE_EXECUTION.json",
+        "bytes": 3001,
+        "compressed_bytes": 1247,
+        "selected": true,
+        "sha256": "e19d8d27a747a72fd1a5685304b68a8ab84608aa9031f9a2bec430362cabadbe"
+      },
+      {
+        "path": "run/baseline_1.log",
+        "bytes": 1233,
+        "compressed_bytes": 120,
+        "selected": true,
+        "sha256": "69ebfdab68580efcc1468f651468e035322e9e37c67ba75bcd72cf61ffe083de"
+      },
+      {
+        "path": "run/baseline_1.xml",
+        "bytes": 122343,
+        "compressed_bytes": 9963,
+        "selected": true,
+        "sha256": "5a2e08f5001af9dd3bcbeaf7175324d28acc0630652b291b342e04ceb9fc32c5"
+      },
+      {
+        "path": "run/baseline_2.log",
+        "bytes": 1233,
+        "compressed_bytes": 120,
+        "selected": true,
+        "sha256": "301f37b6386cc3502386e155793bd0f06d4d2132dc02bf94918a5a370a659e0d"
+      },
+      {
+        "path": "run/baseline_2.xml",
+        "bytes": 122343,
+        "compressed_bytes": 9965,
+        "selected": true,
+        "sha256": "ff5c5b4a6f21c3840d535479667e6fd785cbac08b0015e8b1b663c0b9f5121b7"
+      },
+      {
+        "path": "run/baseline_3.log",
+        "bytes": 1233,
+        "compressed_bytes": 119,
+        "selected": true,
+        "sha256": "829ebd5bfdb3ccc796abf4c506cedafeb7fa4d8785bc00e75dff6b62fea19ea5"
+      },
+      {
+        "path": "run/baseline_3.xml",
+        "bytes": 122343,
+        "compressed_bytes": 9994,
+        "selected": true,
+        "sha256": "0e11b7e16fe6058cfd5975e2fc34c42af675b44fa31ad412305f983459991869"
+      },
+      {
+        "path": "run/execution_progress.json",
+        "bytes": 1895786,
+        "compressed_bytes": 89513,
+        "selected": true,
+        "sha256": "91be1734bcbf53d917ddc0ac8374af289a662ab4ea00cf81c51768aaf8a9e912"
+      },
+      {
+        "path": "run/probe_1/SESSION.json",
+        "bytes": 318,
+        "compressed_bytes": 176,
+        "selected": true,
+        "sha256": "a6c9fb6a5d3dd6bb15a675cd14e6c5703b055f2ec49c706465596c5fa526b74a"
+      },
+      {
+        "path": "run/probe_1/coverage.data",
+        "bytes": 29458432,
+        "compressed_bytes": 11518110,
+        "selected": false
+      },
+      {
+        "path": "run/probe_1/coverage.json",
+        "bytes": 2118163222,
+        "compressed_bytes": 127293459,
+        "selected": false
+      },
+      {
+        "path": "run/probe_1/inventory.json",
+        "bytes": 85139,
+        "compressed_bytes": 8172,
+        "selected": true,
+        "sha256": "ceacd4095419884eb85a9fae331bdc2740a1095b42cc91086b0ac3427d7b3e75"
+      },
+      {
+        "path": "run/probe_1/phases.jsonl",
+        "bytes": 562988,
+        "compressed_bytes": 47685,
+        "selected": true,
+        "sha256": "2ce17a02a422c3a91f552246d714e64ac5b9f06409bbb20c943ae984b1bbd6e7"
+      },
+      {
+        "path": "run/probe_2/SESSION.json",
+        "bytes": 318,
+        "compressed_bytes": 176,
+        "selected": true,
+        "sha256": "a6c9fb6a5d3dd6bb15a675cd14e6c5703b055f2ec49c706465596c5fa526b74a"
+      },
+      {
+        "path": "run/probe_2/coverage.data",
+        "bytes": 29458432,
+        "compressed_bytes": 11518110,
+        "selected": false
+      },
+      {
+        "path": "run/probe_2/coverage.json",
+        "bytes": 2118163222,
+        "compressed_bytes": 127293459,
+        "selected": false
+      },
+      {
+        "path": "run/probe_2/inventory.json",
+        "bytes": 85139,
+        "compressed_bytes": 8172,
+        "selected": true,
+        "sha256": "ceacd4095419884eb85a9fae331bdc2740a1095b42cc91086b0ac3427d7b3e75"
+      },
+      {
+        "path": "run/probe_2/phases.jsonl",
+        "bytes": 562994,
+        "compressed_bytes": 47743,
+        "selected": true,
+        "sha256": "435abd8bbb3bef7c49e921f55ba823f0638e95f474f483a7114555d14ad9671f"
+      },
+      {
+        "path": "run/probe_3/SESSION.json",
+        "bytes": 318,
+        "compressed_bytes": 176,
+        "selected": true,
+        "sha256": "a6c9fb6a5d3dd6bb15a675cd14e6c5703b055f2ec49c706465596c5fa526b74a"
+      },
+      {
+        "path": "run/probe_3/coverage.data",
+        "bytes": 29458432,
+        "compressed_bytes": 11518110,
+        "selected": false
+      },
+      {
+        "path": "run/probe_3/coverage.json",
+        "bytes": 2118163222,
+        "compressed_bytes": 127293459,
+        "selected": false
+      },
+      {
+        "path": "run/probe_3/inventory.json",
+        "bytes": 85139,
+        "compressed_bytes": 8172,
+        "selected": true,
+        "sha256": "ceacd4095419884eb85a9fae331bdc2740a1095b42cc91086b0ac3427d7b3e75"
+      },
+      {
+        "path": "run/probe_3/phases.jsonl",
+        "bytes": 563002,
+        "compressed_bytes": 48202,
+        "selected": true,
+        "sha256": "1f4889f02052c969d360f88355659529e4b1e6661c8f24dace3dcb878decb317"
+      },
+      {
+        "path": "runner.txt",
+        "bytes": 113,
+        "compressed_bytes": 100,
+        "selected": true,
+        "sha256": "40e1b96798b16f24a59a712a1088b111fc257a3b3f4b48594a8c7995e6a0c523"
+      },
+      {
+        "path": "source/FETCH.json",
+        "bytes": 870,
+        "compressed_bytes": 394,
+        "selected": true,
+        "sha256": "684a8f96745f5974d375c8a3818212fff5df878a5439a4d4ebf206ae668a9314"
+      },
+      {
+        "path": "source/SOURCE.json",
+        "bytes": 1843,
+        "compressed_bytes": 821,
+        "selected": true,
+        "sha256": "5bff837b229567426c23cf5b6412ffad23ca57f0a65504112eb4e83b93b61aeb"
+      },
+      {
+        "path": "source/fetch_0.log",
+        "bytes": 0,
+        "compressed_bytes": 2,
+        "selected": true,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "source/fetch_1.log",
+        "bytes": 127,
+        "compressed_bytes": 112,
+        "selected": true,
+        "sha256": "5612139c7a00c2fd7e765ad2f172242c79ac11510f53945f98c9772ef4232d72"
+      },
+      {
+        "path": "source/fetch_2.log",
+        "bytes": 77,
+        "compressed_bytes": 79,
+        "selected": true,
+        "sha256": "ba63d0e5046670f8f4cc0e829fcd6313de75ef729ed76f8685c090be866557ba"
+      }
+    ]
+  },
+  "pydantic_raw_selection": {
+    "artifact_id": 12592876483,
+    "zip_bytes": 416822142,
+    "method": "HTTP range selection; ZIP CRC checked per selected member; no full ZIP hash",
+    "transferred_bytes": 11520656,
+    "range_requests": 6,
+    "files": [
+      {
+        "path": "context.txt",
+        "bytes": 96,
+        "compressed_bytes": 92,
+        "selected": false
+      },
+      {
+        "path": "environment.txt",
+        "bytes": 249,
+        "compressed_bytes": 167,
+        "selected": false
+      },
+      {
+        "path": "execution.log",
+        "bytes": 265,
+        "compressed_bytes": 151,
+        "selected": false
+      },
+      {
+        "path": "fetch.log",
+        "bytes": 165,
+        "compressed_bytes": 73,
+        "selected": false
+      },
+      {
+        "path": "install.log",
+        "bytes": 3726,
+        "compressed_bytes": 748,
+        "selected": false
+      },
+      {
+        "path": "job-status.txt",
+        "bytes": 15,
+        "compressed_bytes": 17,
+        "selected": false
+      },
+      {
+        "path": "run/BASELINE_RESULT.json",
+        "bytes": 1895849,
+        "compressed_bytes": 89553,
+        "selected": false
+      },
+      {
+        "path": "run/BASELINE_RESULT.md",
+        "bytes": 917,
+        "compressed_bytes": 491,
+        "selected": false
+      },
+      {
+        "path": "run/PRE_EXECUTION.json",
+        "bytes": 3001,
+        "compressed_bytes": 1247,
+        "selected": false
+      },
+      {
+        "path": "run/baseline_1.log",
+        "bytes": 1233,
+        "compressed_bytes": 120,
+        "selected": false
+      },
+      {
+        "path": "run/baseline_1.xml",
+        "bytes": 122343,
+        "compressed_bytes": 9963,
+        "selected": false
+      },
+      {
+        "path": "run/baseline_2.log",
+        "bytes": 1233,
+        "compressed_bytes": 120,
+        "selected": false
+      },
+      {
+        "path": "run/baseline_2.xml",
+        "bytes": 122343,
+        "compressed_bytes": 9965,
+        "selected": false
+      },
+      {
+        "path": "run/baseline_3.log",
+        "bytes": 1233,
+        "compressed_bytes": 119,
+        "selected": false
+      },
+      {
+        "path": "run/baseline_3.xml",
+        "bytes": 122343,
+        "compressed_bytes": 9994,
+        "selected": false
+      },
+      {
+        "path": "run/execution_progress.json",
+        "bytes": 1895786,
+        "compressed_bytes": 89513,
+        "selected": false
+      },
+      {
+        "path": "run/probe_1/SESSION.json",
+        "bytes": 318,
+        "compressed_bytes": 176,
+        "selected": false
+      },
+      {
+        "path": "run/probe_1/coverage.data",
+        "bytes": 29458432,
+        "compressed_bytes": 11518110,
+        "selected": true,
+        "sha256": "995c8962582a26aeb3ec1f359b1e75a7aa03996b7938bae8318077473ff14ab6"
+      },
+      {
+        "path": "run/probe_1/coverage.json",
+        "bytes": 2118163222,
+        "compressed_bytes": 127293459,
+        "selected": false
+      },
+      {
+        "path": "run/probe_1/inventory.json",
+        "bytes": 85139,
+        "compressed_bytes": 8172,
+        "selected": false
+      },
+      {
+        "path": "run/probe_1/phases.jsonl",
+        "bytes": 562988,
+        "compressed_bytes": 47685,
+        "selected": false
+      },
+      {
+        "path": "run/probe_2/SESSION.json",
+        "bytes": 318,
+        "compressed_bytes": 176,
+        "selected": false
+      },
+      {
+        "path": "run/probe_2/coverage.data",
+        "bytes": 29458432,
+        "compressed_bytes": 11518110,
+        "selected": false
+      },
+      {
+        "path": "run/probe_2/coverage.json",
+        "bytes": 2118163222,
+        "compressed_bytes": 127293459,
+        "selected": false
+      },
+      {
+        "path": "run/probe_2/inventory.json",
+        "bytes": 85139,
+        "compressed_bytes": 8172,
+        "selected": false
+      },
+      {
+        "path": "run/probe_2/phases.jsonl",
+        "bytes": 562994,
+        "compressed_bytes": 47743,
+        "selected": false
+      },
+      {
+        "path": "run/probe_3/SESSION.json",
+        "bytes": 318,
+        "compressed_bytes": 176,
+        "selected": false
+      },
+      {
+        "path": "run/probe_3/coverage.data",
+        "bytes": 29458432,
+        "compressed_bytes": 11518110,
+        "selected": false
+      },
+      {
+        "path": "run/probe_3/coverage.json",
+        "bytes": 2118163222,
+        "compressed_bytes": 127293459,
+        "selected": false
+      },
+      {
+        "path": "run/probe_3/inventory.json",
+        "bytes": 85139,
+        "compressed_bytes": 8172,
+        "selected": false
+      },
+      {
+        "path": "run/probe_3/phases.jsonl",
+        "bytes": 563002,
+        "compressed_bytes": 48202,
+        "selected": false
+      },
+      {
+        "path": "runner.txt",
+        "bytes": 113,
+        "compressed_bytes": 100,
+        "selected": false
+      },
+      {
+        "path": "source/FETCH.json",
+        "bytes": 870,
+        "compressed_bytes": 394,
+        "selected": false
+      },
+      {
+        "path": "source/SOURCE.json",
+        "bytes": 1843,
+        "compressed_bytes": 821,
+        "selected": false
+      },
+      {
+        "path": "source/fetch_0.log",
+        "bytes": 0,
+        "compressed_bytes": 2,
+        "selected": false
+      },
+      {
+        "path": "source/fetch_1.log",
+        "bytes": 127,
+        "compressed_bytes": 112,
+        "selected": false
+      },
+      {
+        "path": "source/fetch_2.log",
+        "bytes": 77,
+        "compressed_bytes": 79,
+        "selected": false
+      }
+    ]
+  },
+  "copied_original_files": [
+    {
+      "source_path": "raw/next-raw-audit-a1/checks/VALIDATION.json",
+      "package_path": "inputs/audit/VALIDATION.json",
+      "bytes": 3870,
+      "sha256": "00b6dc535f22a11738c0efa1ce6966263b665d00ed7f71c0912f72c4575b24f9"
+    },
+    {
+      "source_path": "raw/next-raw-audit-a1/checks/unit_tests.log",
+      "package_path": "inputs/audit/unit_tests.log",
+      "bytes": 17990,
+      "sha256": "c2445a215a7179c09e6830d803da74a9d2156ddd35febd6b312796e0d6aa4a24"
+    },
+    {
+      "source_path": "raw/next-raw-audit-a1/checks/RESULT.md",
+      "package_path": "inputs/audit/RESULT.md",
+      "bytes": 584,
+      "sha256": "cb671f79063cab700974459cf9d525f2e3adfde98613d2407d310d6e08b0821e"
+    },
+    {
+      "source_path": "raw/next-raw-scan-airflow-a1/run/SCAN_RESULT.md",
+      "package_path": "inputs/scans/airflow.md",
+      "bytes": 544,
+      "sha256": "13d1951ac28fb0fd3630fe3d6ff4e31d0f201c582132b2c7d3874224313dc439"
+    },
+    {
+      "source_path": "raw/next-raw-scan-numpy-a1/run/SCAN_RESULT.md",
+      "package_path": "inputs/scans/numpy.md",
+      "bytes": 543,
+      "sha256": "0a4311d15d0cfde58fdd0a99c7114e6eb6d8006a9fe371c6dc36e4091ffe274b"
+    },
+    {
+      "source_path": "raw/next-raw-scan-pandas-a1/run/SCAN_RESULT.md",
+      "package_path": "inputs/scans/pandas.md",
+      "bytes": 549,
+      "sha256": "169f545c6573735cbc486dc7d0ea6b0825b00bf8962d00e2b3bb5e632e433854"
+    },
+    {
+      "source_path": "raw/next-raw-scan-peewee-a1/run/SCAN_RESULT.md",
+      "package_path": "inputs/scans/peewee.md",
+      "bytes": 545,
+      "sha256": "7bb9d57f937472bd85f7efb70ab2ecf94ccca02555239463fd03ae66474db99c"
+    },
+    {
+      "source_path": "raw/next-raw-scan-pony-a1/run/SCAN_RESULT.md",
+      "package_path": "inputs/scans/pony.md",
+      "bytes": 542,
+      "sha256": "e16615f6f82de866c1c5449a3a91608bb5fd208e784c285fac19a82b9bf1355c"
+    },
+    {
+      "source_path": "raw/next-raw-scan-pydantic-a1/run/SCAN_RESULT.md",
+      "package_path": "inputs/scans/pydantic.md",
+      "bytes": 556,
+      "sha256": "43d61528bf6e7f72fb7471256934205eaa66fca8d1765f218befc1e6b9c9547c"
+    },
+    {
+      "source_path": "raw/next-raw-scan-sqlalchemy_utils-a1/run/SCAN_RESULT.md",
+      "package_path": "inputs/scans/sqlalchemy_utils.md",
+      "bytes": 555,
+      "sha256": "f54c93e649f2a1343be7f720e0297e63b7a72257bc5ef77bcdad3e93947d483e"
+    },
+    {
+      "source_path": "raw/next-raw-cost-networkx-a1/run/COST_RESULT.json",
+      "package_path": "inputs/cost/networkx/COST_RESULT.json",
+      "bytes": 315328,
+      "sha256": "241f909fc37973132e36222271e244b61c002825f92b7bb81e17dd741511b0dc"
+    },
+    {
+      "source_path": "raw/next-raw-cost-networkx-a1/run/COST_RESULT.md",
+      "package_path": "inputs/cost/networkx/COST_RESULT.md",
+      "bytes": 866,
+      "sha256": "155416c58943aad77040dc08166ac55084f2b9d6fc3b7bedfc5b9bcde822d051"
+    },
+    {
+      "source_path": "raw/next-raw-cost-networkx-a1/run/RAW_AUDIT.json",
+      "package_path": "inputs/cost/networkx/RAW_AUDIT.json",
+      "bytes": 5716,
+      "sha256": "1c34d5c5a3ca524c71a14090e68b3014713f79b85f7582b347ac3ec392113e2d"
+    },
+    {
+      "source_path": "raw/next-raw-cost-networkx-a1/audit.log",
+      "package_path": "inputs/cost/networkx/audit.log",
+      "bytes": 102,
+      "sha256": "e8d71c16d0ca3c926903d2faef4f7fca65fc151f8409eab56298d458f33dfe71"
+    },
+    {
+      "source_path": "raw/next-raw-cost-sqlalchemy-a1/run/COST_RESULT.json",
+      "package_path": "inputs/cost/sqlalchemy/COST_RESULT.json",
+      "bytes": 2924459,
+      "sha256": "0a10454a965d758c019c9a87bb4bb5580641dcc91de4393b0813580469e26c7b"
+    },
+    {
+      "source_path": "raw/next-raw-cost-sqlalchemy-a1/run/COST_RESULT.md",
+      "package_path": "inputs/cost/sqlalchemy/COST_RESULT.md",
+      "bytes": 870,
+      "sha256": "f1f1ccb649c183a9a44ba3af301cb041eb13f6fcfc3d94af209a4c0b9ca4330e"
+    },
+    {
+      "source_path": "raw/next-raw-cost-sqlalchemy-a1/run/RAW_AUDIT.json",
+      "package_path": "inputs/cost/sqlalchemy/RAW_AUDIT.json",
+      "bytes": 5079,
+      "sha256": "aede07cd66bad04da848e228d25d5a9b5310a08e75d6ae83d127ca1398244eec"
+    },
+    {
+      "source_path": "raw/next-raw-cost-sqlalchemy-a1/audit.log",
+      "package_path": "inputs/cost/sqlalchemy/audit.log",
+      "bytes": 101,
+      "sha256": "4cb648b4760557c75e3d86582c5e71c097a8aecb397da55cbd64c49ea0081b8b"
+    },
+    {
+      "source_path": "raw/pydantic_baseline/run/BASELINE_RESULT.json",
+      "package_path": "inputs/pydantic/BASELINE_RESULT.json",
+      "bytes": 1895849,
+      "sha256": "4119140392016ad4a050b1a78f0b3f86f8d6b03df2870ec6145510ad0627497b"
+    },
+    {
+      "source_path": "raw/pydantic_baseline/run/BASELINE_RESULT.md",
+      "package_path": "inputs/pydantic/BASELINE_RESULT.md",
+      "bytes": 917,
+      "sha256": "98a412fddcf9b5858fb209f7eeb46c5c66ad0e8c4513c3a40f2172614db3db38"
+    },
+    {
+      "source_path": "raw/pydantic_baseline/run/baseline_1.log",
+      "package_path": "inputs/pydantic/baseline_1.log",
+      "bytes": 1233,
+      "sha256": "69ebfdab68580efcc1468f651468e035322e9e37c67ba75bcd72cf61ffe083de"
+    },
+    {
+      "source_path": "raw/pydantic_baseline/run/baseline_2.log",
+      "package_path": "inputs/pydantic/baseline_2.log",
+      "bytes": 1233,
+      "sha256": "301f37b6386cc3502386e155793bd0f06d4d2132dc02bf94918a5a370a659e0d"
+    },
+    {
+      "source_path": "raw/pydantic_baseline/run/baseline_3.log",
+      "package_path": "inputs/pydantic/baseline_3.log",
+      "bytes": 1233,
+      "sha256": "829ebd5bfdb3ccc796abf4c506cedafeb7fa4d8785bc00e75dff6b62fea19ea5"
+    },
+    {
+      "source_path": "TRACE_REVIEW.log",
+      "package_path": "inputs/pydantic/TRACE_REVIEW.log",
+      "bytes": 544,
+      "sha256": "5bea8b03e6c2e1fee4177cc165216f55f9820ed366d13a479f9f4a1c83432645"
+    }
+  ],
+  "scope": "Original selected reports/logs are copied byte-for-byte. Raw DB, large coverage JSON and complete raw artifacts are not bundled. Keep the GitHub raw artifacts before their retention period expires.",
+  "primary_documentation": [
+    "https://coverage.readthedocs.io/en/7.13.4/api_coveragedata.html",
+    "https://coverage.readthedocs.io/en/7.13.4/dbschema.html"
+  ]
+}

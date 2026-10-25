@@ -23,6 +23,8 @@ def main(output):
         records.append(row);print('CHECK',json.dumps(row),flush=True)
         (out/'CHECKS.json').write_text(json.dumps({'model_calls':0,'checks':records},indent=2))
         if p.returncode:raise RuntimeError(label+' failed; inspect '+str(out/(label+'.log')))
+    execute('study_k_inventory',['study_k/check_evidence_inventory.py',
+                                 '--out',str(out/'STUDY_K_INVENTORY.json')])
     execute('unit_tests',['-m','unittest','discover','-s','tests','-v'])
     for study in ['study_d','study_e','study_f','study_g','study_h']:
         execute('freeze_'+study,['tools/freeze_study.py','verify',study])
@@ -48,7 +50,8 @@ def main(output):
     if release['status']!='HOLD':raise RuntimeError('release gate was changed')
     # Parse workflow events with BaseLoader so YAML 1.1 does not turn `on` into True.
     import yaml
-    for name in ['study-i-zero-cost.yml','study-k-zero-cost.yml','research-closure-zero-cost.yml']:
+    for name in ['study-i-zero-cost.yml','study-k-zero-cost.yml','research-closure-zero-cost.yml',
+                 'next-evidence-zero-cost.yml']:
         path=ROOT/'.github/workflows'/name
         doc=yaml.load(path.read_text(),Loader=yaml.BaseLoader)
         if path.stat().st_size>500*1024 or 'workflow_dispatch' not in doc.get('on',{}):

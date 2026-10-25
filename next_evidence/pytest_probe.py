@@ -6,6 +6,8 @@ import sys
 
 import pytest
 
+from next_evidence.site_coverage import site_report
+
 _coverage=None
 _out=None
 
@@ -54,10 +56,12 @@ def pytest_sessionfinish(session, exitstatus):
     if _coverage is None:return
     _coverage.stop();_coverage.save()
     source=Path(os.environ["GK_PROBE_SOURCE"]).resolve()
-    modules=json.loads(os.environ["GK_PROBE_MODULES"])
-    _coverage.json_report(morfs=[str(source/p) for p in modules],outfile=str(_out/"coverage.json"),
-                          show_contexts=True,pretty_print=True)
+    import coverage
+    sites=json.loads(os.environ["GK_PROBE_SITES"])
+    report=site_report(_coverage.get_data(),source,sites,_out/"coverage.data",coverage.__version__)
+    (_out/"site_coverage.json").write_text(json.dumps(report,indent=2)+"\n")
     module=sys.modules.get("pydantic_settings")
     receipt={"exitstatus":int(exitstatus),"loaded_module":getattr(module,"__file__",None),
-             "source_root":str(source),"instrumentation":"coverage.py test-phase contexts; timings are instrumented, not performance benchmarks"}
+             "source_root":str(source),"site_report_format":report["format"],
+             "instrumentation":"coverage.py raw physical-line test-phase contexts; timings are instrumented, not performance benchmarks"}
     (_out/"SESSION.json").write_text(json.dumps(receipt,indent=2)+"\n")

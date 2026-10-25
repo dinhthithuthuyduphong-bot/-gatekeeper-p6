@@ -1,0 +1,252 @@
+{
+  "run_url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40176555227",
+  "head_sha": "d2078d9895938b7e411bc95417959af5370db555",
+  "run_attempt": 1,
+  "review_date_local": "2026-10-25",
+  "timezone": "Asia/Bangkok",
+  "ci": {
+    "conclusion": "success",
+    "successful_jobs": 12,
+    "unit_tests_passed": 135,
+    "audit_groups_passed": 12,
+    "study_j": "BLOCKED"
+  },
+  "pydantic": {
+    "status": "BASELINE_STABLE_ORACLE_REVIEW_PENDING",
+    "source_revision": "7e2dacb6db07b41abb0c80d0608e46e197265554",
+    "runs": [
+      {
+        "repetition": 1,
+        "collected": 1025,
+        "xml_counts": {
+          "passed": 1021,
+          "failure": 0,
+          "error": 0,
+          "skipped": 4
+        },
+        "seconds": 55.853874280000014
+      },
+      {
+        "repetition": 2,
+        "collected": 1025,
+        "xml_counts": {
+          "passed": 1021,
+          "failure": 0,
+          "error": 0,
+          "skipped": 4
+        },
+        "seconds": 57.534575071000006
+      },
+      {
+        "repetition": 3,
+        "collected": 1025,
+        "xml_counts": {
+          "passed": 1021,
+          "failure": 0,
+          "error": 0,
+          "skipped": 4
+        },
+        "seconds": 56.14029279099998
+      }
+    ],
+    "raw_trace_call_context_counts": [
+      43,
+      33,
+      52
+    ],
+    "newly_confirmed_beneficial_targets": 0,
+    "newly_confirmed_harmful_targets": 0,
+    "treatment_runs": 0,
+    "oracle_validated": false
+  },
+  "scans": [
+    {
+      "candidate": {
+        "id": "airflow",
+        "repo": "apache/airflow",
+        "sha": "b35972fc9c727065097f0654a40a0fe39890b204"
+      },
+      "status": "STATIC_SCAN_COMPLETE_NOT_ELIGIBLE",
+      "sites": {
+        "bool_guard": 6,
+        "none_identity": 6
+      },
+      "parse_errors": 0,
+      "matcher_errors": 0,
+      "test_runs": 0,
+      "treatment_runs": 0,
+      "model_calls": 0,
+      "raw_result_sha256": "f9351535b53c2963d517389d57b0c2552f58a4367994f90cf5f493a9bd6a144b"
+    },
+    {
+      "candidate": {
+        "id": "numpy",
+        "repo": "numpy/numpy",
+        "ref": "v1.24.4",
+        "sha": "9315a9072b2636f75c831b4eca9f42a5f67ca2fb"
+      },
+      "status": "STATIC_SCAN_COMPLETE_NOT_ELIGIBLE",
+      "sites": {
+        "bool_guard": 25,
+        "none_identity": 0
+      },
+      "parse_errors": 0,
+      "matcher_errors": 0,
+      "test_runs": 0,
+      "treatment_runs": 0,
+      "model_calls": 0,
+      "raw_result_sha256": "e7d2cc553fc12acab22e6371e626d1116f05ed74ed2cfd24eecfaf3e28b6a523"
+    },
+    {
+      "candidate": {
+        "id": "pandas",
+        "repo": "pandas-dev/pandas",
+        "ref": "v1.5.3",
+        "sha": "2e218d10984e9919f0296931d92ea851c6a6faf5"
+      },
+      "status": "STATIC_SCAN_COMPLETE_NOT_ELIGIBLE",
+      "sites": {
+        "bool_guard": 35,
+        "none_identity": 0
+      },
+      "parse_errors": 0,
+      "matcher_errors": 0,
+      "test_runs": 0,
+      "treatment_runs": 0,
+      "model_calls": 0,
+      "raw_result_sha256": "756806b3e3ac9db847875091becc2cad7752475ffa3d5d61632b985a3c0a27ff"
+    },
+    {
+      "candidate": {
+        "id": "peewee",
+        "repo": "coleifer/peewee",
+        "ref": "2.10.2",
+        "sha": "761f9144a0e17381147a81658019cffe14c118ca"
+      },
+      "status": "STATIC_SCAN_COMPLETE_NOT_ELIGIBLE",
+      "sites": {
+        "bool_guard": 4,
+        "none_identity": 0
+      },
+      "parse_errors": 0,
+      "matcher_errors": 0,
+      "test_runs": 0,
+      "treatment_runs": 0,
+      "model_calls": 0,
+      "raw_result_sha256": "31b9d1f48a6c9550b62ecbe7bc7a2b8f17cb5d9728b19bc408c147c4b1b6a9e8"
+    },
+    {
+      "candidate": {
+        "id": "pony",
+        "repo": "ponyorm/pony",
+        "ref": "v0.7.16",
+        "sha": "faa1277eba3c62260d4732240c63d68fa3b5805e"
+      },
+      "status": "STATIC_SCAN_COMPLETE_NOT_ELIGIBLE",
+      "sites": {
+        "bool_guard": 9,
+        "none_identity": 0
+      },
+      "parse_errors": 0,
+      "matcher_errors": 0,
+      "test_runs": 0,
+      "treatment_runs": 0,
+      "model_calls": 0,
+      "raw_result_sha256": "9b3dd5dad7e12092d169afec247a2b26a8b4dfc65ee0da9a9cda58bb23c6d557"
+    },
+    {
+      "candidate": {
+        "id": "pydantic",
+        "repo": "pydantic/pydantic-settings",
+        "sha": "7e2dacb6db07b41abb0c80d0608e46e197265554"
+      },
+      "status": "STATIC_SCAN_COMPLETE_NOT_ELIGIBLE",
+      "sites": {
+        "bool_guard": 3,
+        "none_identity": 0
+      },
+      "parse_errors": 0,
+      "matcher_errors": 0,
+      "test_runs": 0,
+      "treatment_runs": 0,
+      "model_calls": 0,
+      "raw_result_sha256": "ecfe2c61a7872ec38fa57adfb91613fb1169cf803c253380583829b753ec272d"
+    },
+    {
+      "candidate": {
+        "id": "sqlalchemy_utils",
+        "repo": "kvesteri/sqlalchemy-utils",
+        "ref": "0.36.8",
+        "sha": "9b300357637d5c97f9197ae5a6806d9156ac44da"
+      },
+      "status": "STATIC_SCAN_COMPLETE_NOT_ELIGIBLE",
+      "sites": {
+        "bool_guard": 5,
+        "none_identity": 0
+      },
+      "parse_errors": 0,
+      "matcher_errors": 0,
+      "test_runs": 0,
+      "treatment_runs": 0,
+      "model_calls": 0,
+      "raw_result_sha256": "4716f4f62bdf8c2b46e1b33c4ea2a045196da138b0c12b7699354dc1778811cf"
+    }
+  ],
+  "cost": {
+    "networkx": {
+      "means": {
+        "census_only": {
+          "seconds": 2.2861992516666683,
+          "paired_draws": 0
+        },
+        "census_then_full": {
+          "seconds": 5.311622635666663,
+          "paired_draws": 600
+        },
+        "census_then_gate": {
+          "seconds": 4.9611733209999995,
+          "paired_draws": 380
+        }
+      },
+      "repetitions_per_policy": 3,
+      "source_revision": "585bb3ee251ab681e7725c07e4e8a569a0e511d5",
+      "census_regression_counts": [
+        0
+      ],
+      "census_veto_all": false,
+      "ci_raw_audit_status": "RAW_CONSISTENCY_VERIFIED"
+    },
+    "sqlalchemy": {
+      "means": {
+        "census_only": {
+          "seconds": 25.42810525066666,
+          "paired_draws": 0
+        },
+        "census_then_full": {
+          "seconds": 25.036325377999987,
+          "paired_draws": 0
+        },
+        "census_then_gate": {
+          "seconds": 24.939885067333332,
+          "paired_draws": 0
+        }
+      },
+      "repetitions_per_policy": 3,
+      "source_revision": "10f4d1e2d706a7722ca78e79ce05b00333a7aa5b",
+      "census_regression_counts": [
+        9
+      ],
+      "census_veto_all": true,
+      "ci_raw_audit_status": "RAW_CONSISTENCY_VERIFIED"
+    }
+  },
+  "networkx_comparisons": {
+    "gate_vs_full_wall_time_reduction_percent": 6.597782611917024,
+    "gate_vs_full_draw_reduction_percent": 36.66666666666667,
+    "gate_vs_census_wall_time_ratio": 2.170052902162067
+  },
+  "B9": "HOLD",
+  "model_calls": 0,
+  "new_code_runtime_validation": "NOT_RUN_LOCALLY; WAITING_FOR_USER_GITHUB_RUN",
+  "review_method": "Read-only reanalysis of CI logs, hashes, summaries and the first saved coverage database; no new target tests."
+}
