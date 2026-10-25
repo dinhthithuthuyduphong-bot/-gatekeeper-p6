@@ -1,0 +1,31 @@
+{
+  "experiment_id": "study-l-v1",
+  "status": "DRAFT",
+  "requires_freeze": true,
+  "seed_time_utc": "SET_AT_FREEZE",
+  "purpose": "zero-cost go/no-go gates before any paid model run; thresholds in GATES.md are immutable",
+  "gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G4"
+  ],
+  "theta": 0.2,
+  "eta": 0.05,
+  "alpha": 0.1,
+  "alpha_alarm": 0.05,
+  "band_h": [
+    0.0025,
+    0.1
+  ],
+  "held_out_draws": 10000,
+  "screen_size": 300,
+  "extra_tracked": [
+    "study_l/GATES.md",
+    "study_l/PHASE_DIAGRAM.md",
+    "tools/gate_phase_diagram.py",
+    "gatekeeper_ext/patch_rule.py",
+    "gatekeeper_ext/mixture_cert.py",
+    "gatekeeper_ext/__init__.py"
+  ]
+}
