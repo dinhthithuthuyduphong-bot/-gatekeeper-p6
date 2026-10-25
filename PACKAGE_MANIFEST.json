@@ -1,0 +1,53 @@
+{
+  "reviewed_commit": "1177d8936ff844caa8814b9dadf2bbe335126e65",
+  "payload_kind": "REPORTS_ONLY",
+  "new_files": 7,
+  "modified_files": 0,
+  "unchanged_files_included": 0,
+  "code_changes": 0,
+  "model_calls": 0,
+  "files": [
+    {
+      "path": "next_evidence/results/ci-40194839050/ARTIFACT_CHECKS.json",
+      "bytes": 2364,
+      "sha256": "5450153bdea812e12501c4973cc00b2330e81e4f581b06c5380303a941f64e64",
+      "change": "new_report"
+    },
+    {
+      "path": "next_evidence/results/ci-40194839050/ORACLE_SOURCE_INSPECTION.json",
+      "bytes": 15715,
+      "sha256": "8d15867f724175afc98ccf5d9d7205660c9bcf334f620483d42b0809bd474b09",
+      "change": "new_report"
+    },
+    {
+      "path": "next_evidence/results/ci-40194839050/RESULT_VI.md",
+      "bytes": 9982,
+      "sha256": "99c02f7958a2a1cc62f8e0472bae63512db71ff3e48f75ef4bcd125035e57918",
+      "change": "new_report"
+    },
+    {
+      "path": "next_evidence/results/ci-40194839050/REVIEW_LOG.txt",
+      "bytes": 888,
+      "sha256": "5e2e5545e318faac96dd91e67522be064946f42b0f0acd64ba42028230e2ac95",
+      "change": "new_report"
+    },
+    {
+      "path": "next_evidence/results/ci-40194839050/SOURCES.json",
+      "bytes": 2234,
+      "sha256": "d048db45ce6bfc28ac95da4ba0a2b36a7e97f1ae23eb18994bf4dbe788c849c0",
+      "change": "new_report"
+    },
+    {
+      "path": "next_evidence/results/ci-40194839050/STUDY_J_BLOCKERS.json",
+      "bytes": 460,
+      "sha256": "caffd1b99734802f62ff20e0d82ba3480b94e44c6627b84da7c82f6d349482a5",
+      "change": "new_report"
+    },
+    {
+      "path": "next_evidence/results/ci-40194839050/SUMMARY.json",
+      "bytes": 6610,
+      "sha256": "e81c88f4066593fce8f28b747ecb605ec95745bc551dda6ef80152df9a4e697f",
+      "change": "new_report"
+    }
+  ]
+}
