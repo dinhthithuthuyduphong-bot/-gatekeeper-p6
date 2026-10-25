@@ -1,0 +1,17 @@
+[
+  {
+    "lineno": 214,
+    "function": "nyquist_plot",
+    "snippet": "omega == None"
+  },
+  {
+    "lineno": 297,
+    "function": "gangof4_plot",
+    "snippet": "omega == None"
+  },
+  {
+    "lineno": 124,
+    "function": "bode_plot",
+    "snippet": "omega == None"
+  }
+]

@@ -1,0 +1,29 @@
+{"command": ["/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/bin/python", "-m", "pytest", "control/tests/frd_test.py", "-q", "--tb=short", "--junitxml=/workspace/scratch/cde4f976cfa9/continuation_20261025/pilot_control/baseline.xml"], "returncode": 2, "seconds": 2.4359527139999955}
+
+==================================== ERRORS ====================================
+______________________ ERROR collecting tests/frd_test.py ______________________
+ImportError while importing test module '/workspace/scratch/cde4f976cfa9/continuation_20261025/historical/control/control/tests/frd_test.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/root/.local/share/uv/python/cpython-3.8.20-linux-x86_64-gnu/lib/python3.8/importlib/__init__.py:127: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+control/__init__.py:82: in <module>
+    from .phaseplot import phase_plot, box_grid
+control/phaseplot.py:42: in <module>
+    from matplotlib.mlab import frange, find
+E   ImportError: cannot import name 'frange' from 'matplotlib.mlab' (/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/lib/python3.8/site-packages/matplotlib/mlab.py)
+=============================== warnings summary ===============================
+control/freqplot.py:62
+  /workspace/scratch/cde4f976cfa9/continuation_20261025/historical/control/control/freqplot.py:62: DeprecationWarning: invalid escape sequence \o
+    """Bode plot for a system
+
+control/statefbk.py:145
+  /workspace/scratch/cde4f976cfa9/continuation_20261025/historical/control/control/statefbk.py:145: DeprecationWarning: invalid escape sequence \i
+    """Linear quadratic regulator design
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /workspace/scratch/cde4f976cfa9/continuation_20261025/pilot_control/baseline.xml -
+=========================== short test summary info ============================
+ERROR control/tests/frd_test.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+2 warnings, 1 error in 2.06s
