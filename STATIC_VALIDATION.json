@@ -1,0 +1,20 @@
+{
+  "status": "STATIC_PARSE_AND_SCOPE_OK",
+  "python_files": [
+    "next_evidence/baseline.py",
+    "next_evidence/pytest_probe.py",
+    "next_evidence/review_bundle.py",
+    "next_evidence/site_coverage.py",
+    "tests/test_site_coverage.py",
+    "tools/closure_verify.py",
+    "tools/review_saved_site_trace.py"
+  ],
+  "python_ast": "PASS",
+  "json_parse": "PASS",
+  "workflow_trigger_permissions_and_size": "PASS",
+  "workflow_bytes": 11128,
+  "frozen_and_B9_payload_changes": 0,
+  "runtime_tests": "NOT_RUN_LOCALLY",
+  "target_experiments": "NOT_RUN_LOCALLY",
+  "model_calls": 0
+}
