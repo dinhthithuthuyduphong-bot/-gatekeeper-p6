@@ -1,0 +1,11 @@
+{
+  "classification": "EXPLORATORY_RETROSPECTIVE",
+  "revision": "fb5ebf6296079229705792cc508ad23d45e326aa",
+  "source_file": "control/freqplot.py",
+  "selected_tests": [
+    "control/tests/frd_test.py"
+  ],
+  "reason": "FRD testNyquist supplies ndarray omega; full containing module selected before treated run; unchanged upstream tests",
+  "environment": "Python3.8.20 numpy1.17.5 scipy1.4.1 matplotlib3.3.4",
+  "known_environment_limit": "Matplotlib3 removes plt.hold used by bode; frd module selected because Nyquist does not use hold. Attempt matplotlib2.2.5 build failed and log retained."
+}

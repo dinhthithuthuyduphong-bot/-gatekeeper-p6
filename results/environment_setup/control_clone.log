@@ -1,0 +1,20 @@
+{"command": ["git", "init", "/workspace/scratch/cde4f976cfa9/continuation_20261025/historical/control"], "returncode": 0}
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint:
+hint: 	git config --global init.defaultBranch <name>
+hint:
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint:
+hint: 	git branch -m <name>
+hint:
+hint: Disable this message with "git config set advice.defaultBranchName false"
+Initialized empty Git repository in /workspace/scratch/cde4f976cfa9/continuation_20261025/historical/control/.git/
+{"command": ["git", "-C", "/workspace/scratch/cde4f976cfa9/continuation_20261025/historical/control", "remote", "add", "origin", "https://github.com/python-control/python-control.git"], "returncode": 0}
+{"command": ["git", "-C", "/workspace/scratch/cde4f976cfa9/continuation_20261025/historical/control", "fetch", "--depth=1", "origin", "fb5ebf6296079229705792cc508ad23d45e326aa"], "returncode": 0}
+From https://github.com/python-control/python-control
+ * branch            fb5ebf6296079229705792cc508ad23d45e326aa -> FETCH_HEAD
+{"command": ["git", "-C", "/workspace/scratch/cde4f976cfa9/continuation_20261025/historical/control", "checkout", "--detach", "FETCH_HEAD"], "returncode": 0}
+HEAD is now at fb5ebf6 Merge branch 'master' into improve-docs

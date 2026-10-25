@@ -1,0 +1,5 @@
+Using Python 3.8.20 environment at: continuation_20261025/env-control
+error: No solution found when resolving dependencies
+  cause: Because slycot==0.5.4 has no usable wheels and you require slycot==0.5.4, we can conclude that your requirements are unsatisfiable.
+
+hint: Wheels are required for `slycot` because building from source is disabled for all packages (i.e., with `--no-build`)

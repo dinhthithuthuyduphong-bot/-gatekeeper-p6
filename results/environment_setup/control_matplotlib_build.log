@@ -1,0 +1,84 @@
+{"command": ["uv", "pip", "install", "--python", "/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/bin/python", "--no-build-isolation", "--no-deps", "/workspace/scratch/cde4f976cfa9/continuation_20261025/build_deps/matplotlib-2.2.5"], "CFLAGS": "-I/workspace/scratch/cde4f976cfa9/continuation_20261025/build_deps/prefix/include -I/workspace/scratch/cde4f976cfa9/continuation_20261025/build_deps/prefix/include/freetype2", "LDFLAGS": "-L/workspace/scratch/cde4f976cfa9/continuation_20261025/build_deps/prefix/lib"}
+Using Python 3.8.20 environment at: continuation_20261025/env-control
+error: Failed to build `matplotlib @ file:///workspace/scratch/cde4f976cfa9/continuation_20261025/build_deps/matplotlib-2.2.5`
+  cause: The build backend returned an error
+  cause: Call to `setuptools.build_meta:__legacy__.prepare_metadata_for_build_wheel` failed (exit status: 1)
+
+         [stdout]
+         IMPORTANT WARNING:
+             pkg-config is not installed.
+             matplotlib may not be able to find some of its dependencies
+         ============================================================================
+         Edit setup.cfg to change the build options
+
+         BUILDING MATPLOTLIB
+                     matplotlib: yes [2.2.5]
+                         python: yes [3.8.20 (default, Oct  2 2024, 16:34:12)  [Clang
+                                 18.1.8 ]]
+                       platform: yes [linux]
+
+         REQUIRED DEPENDENCIES AND EXTENSIONS
+                          numpy: yes [version 1.17.5]
+               install_requires: yes [handled by setuptools]
+                         libagg: yes [pkg-config information for 'libagg' could not
+                                 be found. Using local copy.]
+                       freetype: no  [The C/C++ header for freetype2 (ft2build.h)
+                                 could not be found.  You may need to install the
+                                 development package.]
+                            png: yes [pkg-config information for 'libpng' could not
+                                 be found. Using unknown version found on system.]
+                          qhull: yes [pkg-config information for 'libqhull' could not
+                                 be found. Using local copy.]
+
+         OPTIONAL SUBPACKAGES
+                    sample_data: yes [installing]
+                       toolkits: yes [installing]
+                          tests: no  [skipping due to configuration]
+                 toolkits_tests: no  [skipping due to configuration]
+
+         OPTIONAL BACKEND EXTENSIONS
+                         macosx: no  [Mac OS-X only]
+                         qt5agg: no  [PySide2 not found; PyQt5 not found]
+                         qt4agg: no  [PySide not found; PyQt4 not found]
+                        gtk3agg: no  [Requires pygobject to be installed.]
+                      gtk3cairo: no  [Requires cairocffi or pycairo to be installed.]
+                         gtkagg: no  [Requires pygtk]
+                          tkagg: yes [installing; run-time loading from Python Tcl /
+                                 Tk]
+                          wxagg: no  [requires wxPython]
+                            gtk: no  [Requires pygtk]
+                            agg: yes [installing]
+                          cairo: no  [cairocffi or pycairo not found]
+                      windowing: no  [Microsoft Windows only]
+
+         OPTIONAL LATEX DEPENDENCIES
+                         dvipng: no
+                    ghostscript: yes [version 10.02.1]
+                          latex: yes [version 3.141592653]
+                        pdftops: yes [version 24.02.0]
+
+         OPTIONAL PACKAGE DATA
+                           dlls: no  [skipping due to configuration]
+
+         ============================================================================
+                                 * The following required packages can not be built:
+                                 * freetype
+
+         [stderr]
+         Traceback (most recent call last):
+           File "<string>", line 14, in <module>
+           File "/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/lib/python3.8/site-packages/setuptools/build_meta.py", line 174, in prepare_metadata_for_build_wheel
+             self.run_setup()
+           File "/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/lib/python3.8/site-packages/setuptools/build_meta.py", line 267, in run_setup
+             super(_BuildMetaLegacyBackend,
+           File "/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/lib/python3.8/site-packages/setuptools/build_meta.py", line 158, in run_setup
+             exec(compile(code, __file__, 'exec'), locals())
+           File "setup.py", line 252, in <module>
+             msg = pkg.install_help_msg()
+           File "/workspace/scratch/cde4f976cfa9/continuation_20261025/build_deps/matplotlib-2.2.5/setupext.py", line 718, in install_help_msg
+             release = platform.linux_distribution()[0].lower()
+         AttributeError: module 'platform' has no attribute 'linux_distribution'
+
+hint: Build failures usually indicate a problem with the package or the build environment
+
+returncode=1

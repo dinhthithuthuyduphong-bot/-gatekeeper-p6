@@ -1,0 +1,130 @@
+{"command": ["/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/bin/python", "-m", "pytest", "control/tests/frd_test.py", "-q", "--tb=short", "--junitxml=/workspace/scratch/cde4f976cfa9/continuation_20261025/pilot_control/baseline_mpl225.xml"], "returncode": 1, "seconds": 2.18986114300003}
+......FFF..F....                                                         [100%]
+=================================== FAILURES ===================================
+_______________________________ TestFRD.testMIMO _______________________________
+control/xferfcn.py:1097: in _convertToTransferFunction
+    from slycot import tb04ad
+E   ModuleNotFoundError: No module named 'slycot'
+
+During handling of the above exception, another exception occurred:
+control/tests/frd_test.py:190: in testMIMO
+    sys.freqresp([0.1, 1.0, 10])[0],
+control/statesp.py:419: in freqresp
+    tf = _convertToTransferFunction(self)
+control/xferfcn.py:1123: in _convertToTransferFunction
+    raise TypeError("No support for MIMO without slycot")
+E   TypeError: No support for MIMO without slycot
+_____________________________ TestFRD.testMIMOMult _____________________________
+control/xferfcn.py:1097: in _convertToTransferFunction
+    from slycot import tb04ad
+E   ModuleNotFoundError: No module named 'slycot'
+
+During handling of the above exception, another exception occurred:
+control/tests/frd_test.py:236: in testMIMOMult
+    (sys*sys).freqresp([0.1, 1.0, 10])[0])
+control/statesp.py:419: in freqresp
+    tf = _convertToTransferFunction(self)
+control/xferfcn.py:1123: in _convertToTransferFunction
+    raise TypeError("No support for MIMO without slycot")
+E   TypeError: No support for MIMO without slycot
+____________________________ TestFRD.testMIMOSmooth ____________________________
+control/xferfcn.py:1097: in _convertToTransferFunction
+    from slycot import tb04ad
+E   ModuleNotFoundError: No module named 'slycot'
+
+During handling of the above exception, another exception occurred:
+control/tests/frd_test.py:252: in testMIMOSmooth
+    (sys*sys2).freqresp([0.1, 1.0, 10])[0])
+control/statesp.py:419: in freqresp
+    tf = _convertToTransferFunction(self)
+control/xferfcn.py:1123: in _convertToTransferFunction
+    raise TypeError("No support for MIMO without slycot")
+E   TypeError: No support for MIMO without slycot
+_____________________________ TestFRD.testNyquist ______________________________
+control/tests/frd_test.py:176: in testNyquist
+    freqplot.nyquist(f1, np.logspace(-1, 2, 100))
+control/freqplot.py:214: in nyquist_plot
+    if (omega == None):
+E   ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+=============================== warnings summary ===============================
+control/freqplot.py:62
+  /workspace/scratch/cde4f976cfa9/continuation_20261025/historical/control/control/freqplot.py:62: DeprecationWarning: invalid escape sequence \o
+    """Bode plot for a system
+
+control/statefbk.py:145
+  /workspace/scratch/cde4f976cfa9/continuation_20261025/historical/control/control/statefbk.py:145: DeprecationWarning: invalid escape sequence \i
+    """Linear quadratic regulator design
+
+control/matlab.py:2
+  /workspace/scratch/cde4f976cfa9/continuation_20261025/historical/control/control/matlab.py:2: DeprecationWarning: invalid escape sequence \*
+    """matlab.py
+
+control/matlab.py:400
+  /workspace/scratch/cde4f976cfa9/continuation_20261025/historical/control/control/matlab.py:400: DeprecationWarning: invalid escape sequence \d
+    """
+
+control/matlab.py:489
+  /workspace/scratch/cde4f976cfa9/continuation_20261025/historical/control/control/matlab.py:489: DeprecationWarning: invalid escape sequence \c
+    """
+
+control/matlab.py:1187
+  /workspace/scratch/cde4f976cfa9/continuation_20261025/historical/control/control/matlab.py:1187: DeprecationWarning: invalid escape sequence \c
+    '''
+
+tests/frd_test.py::TestFRD::testAgainstOctave
+  /workspace/scratch/cde4f976cfa9/continuation_20261025/historical/control/control/tests/frd_test.py:265: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    sys = StateSpace(np.matrix('-2.0 0 0; 0 -1 1; 0 0 -3'),
+
+tests/frd_test.py::TestFRD::testAgainstOctave
+  /workspace/scratch/cde4f976cfa9/continuation_20261025/historical/control/control/tests/frd_test.py:266: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    np.matrix('1.0 0; 0 0; 0 1'),
+
+tests/frd_test.py: 56 warnings
+  /workspace/scratch/cde4f976cfa9/continuation_20261025/historical/control/control/statesp.py:149: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    matrices[i] = matrix(matrices[i])
+
+tests/frd_test.py: 254 warnings
+  /workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/lib/python3.8/site-packages/numpy/matrixlib/defmatrix.py:71: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    return matrix(data, dtype=dtype, copy=False)
+
+tests/frd_test.py::TestFRD::testAgainstOctave
+  /workspace/scratch/cde4f976cfa9/continuation_20261025/historical/control/control/tests/frd_test.py:273: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    np.matrix('0.4-0.2j 0; 0 0.1-0.2j; 0 0.3-0.1j'))
+
+tests/frd_test.py::TestFRD::testAuto
+  /workspace/scratch/cde4f976cfa9/continuation_20261025/historical/control/control/tests/frd_test.py:168: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    f2 = _convertToFRD(np.matrix([[1, 0], [0.1, -1]]), omega)
+
+tests/frd_test.py::TestFRD::testMIMOSmooth
+  /workspace/scratch/cde4f976cfa9/continuation_20261025/historical/control/control/tests/frd_test.py:246: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    sys2 = np.matrix([[1, 0, 0], [0, 1, 0]]) * sys
+
+tests/frd_test.py::TestFRD::testMIMOSmooth
+  /workspace/scratch/cde4f976cfa9/continuation_20261025/historical/control/control/statesp.py:355: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    X = matrix(other)
+
+tests/frd_test.py::TestFRD::testMIMOfb
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/continuation_20261025/historical/control/control/statesp.py:689: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    D = matrix(sys)
+
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/continuation_20261025/historical/control/control/tests/frd_test.py:212: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    sys = StateSpace(np.matrix('-2.0 0 0; 0 -1 1; 0 0 -3'),
+
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/continuation_20261025/historical/control/control/tests/frd_test.py:213: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    np.matrix('1.0 0; 0 0; 0 1'),
+
+tests/frd_test.py::TestFRD::testMIMOfb2
+  /workspace/scratch/cde4f976cfa9/continuation_20261025/historical/control/control/tests/frd_test.py:216: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    K = np.matrix('1 0.3 0; 0.1 0 0')
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /workspace/scratch/cde4f976cfa9/continuation_20261025/pilot_control/baseline_mpl225.xml -
+=========================== short test summary info ============================
+FAILED control/tests/frd_test.py::TestFRD::testMIMO - TypeError: No support f...
+FAILED control/tests/frd_test.py::TestFRD::testMIMOMult - TypeError: No suppo...
+FAILED control/tests/frd_test.py::TestFRD::testMIMOSmooth - TypeError: No sup...
+FAILED control/tests/frd_test.py::TestFRD::testNyquist - ValueError: The trut...
+4 failed, 12 passed, 327 warnings in 1.83s

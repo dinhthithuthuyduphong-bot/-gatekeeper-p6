@@ -1,0 +1,20 @@
+{"command": ["git", "clone", "--depth=1", "--branch", "VER-2-13-2", "https://github.com/freetype/freetype.git", "/workspace/scratch/cde4f976cfa9/continuation_20261025/build_deps/freetype"], "returncode": 0}
+Cloning into '/workspace/scratch/cde4f976cfa9/continuation_20261025/build_deps/freetype'...
+warning: refs/tags/VER-2-13-2 934c366090b19542d5a4204307c72c5b69bc75cc is not a commit!
+Note: switching to '920c5502cc3ddda88f6c7d85ee834ac611bb11cc'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+

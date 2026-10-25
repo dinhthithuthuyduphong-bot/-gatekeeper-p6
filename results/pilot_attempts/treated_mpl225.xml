@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="16" time="1.196" timestamp="2026-10-24T14:55:26.281555" hostname="01150c8506fe"><testcase classname="tests.frd_test.TestFRD" name="testAgainstOctave" time="0.002" /><testcase classname="tests.frd_test.TestFRD" name="testAuto" time="0.000" /><testcase classname="tests.frd_test.TestFRD" name="testBadInputType" time="0.000" /><testcase classname="tests.frd_test.TestFRD" name="testFeedback" time="0.002" /><testcase classname="tests.frd_test.TestFRD" name="testFeedback2" time="0.001" /><testcase classname="tests.frd_test.TestFRD" name="testInconsistentDimension" time="0.000" /><testcase classname="tests.frd_test.TestFRD" name="testMIMO" time="0.001"><failure message="TypeError: No support for MIMO without slycot">control/xferfcn.py:1097: in _convertToTransferFunction
+    from slycot import tb04ad
+E   ModuleNotFoundError: No module named 'slycot'
+
+During handling of the above exception, another exception occurred:
+control/tests/frd_test.py:190: in testMIMO
+    sys.freqresp([0.1, 1.0, 10])[0],
+control/statesp.py:419: in freqresp
+    tf = _convertToTransferFunction(self)
+control/xferfcn.py:1123: in _convertToTransferFunction
+    raise TypeError("No support for MIMO without slycot")
+E   TypeError: No support for MIMO without slycot</failure></testcase><testcase classname="tests.frd_test.TestFRD" name="testMIMOMult" time="0.002"><failure message="TypeError: No support for MIMO without slycot">control/xferfcn.py:1097: in _convertToTransferFunction
+    from slycot import tb04ad
+E   ModuleNotFoundError: No module named 'slycot'
+
+During handling of the above exception, another exception occurred:
+control/tests/frd_test.py:236: in testMIMOMult
+    (sys*sys).freqresp([0.1, 1.0, 10])[0])
+control/statesp.py:419: in freqresp
+    tf = _convertToTransferFunction(self)
+control/xferfcn.py:1123: in _convertToTransferFunction
+    raise TypeError("No support for MIMO without slycot")
+E   TypeError: No support for MIMO without slycot</failure></testcase><testcase classname="tests.frd_test.TestFRD" name="testMIMOSmooth" time="0.004"><failure message="TypeError: No support for MIMO without slycot">control/xferfcn.py:1097: in _convertToTransferFunction
+    from slycot import tb04ad
+E   ModuleNotFoundError: No module named 'slycot'
+
+During handling of the above exception, another exception occurred:
+control/tests/frd_test.py:252: in testMIMOSmooth
+    (sys*sys2).freqresp([0.1, 1.0, 10])[0])
+control/statesp.py:419: in freqresp
+    tf = _convertToTransferFunction(self)
+control/xferfcn.py:1123: in _convertToTransferFunction
+    raise TypeError("No support for MIMO without slycot")
+E   TypeError: No support for MIMO without slycot</failure></testcase><testcase classname="tests.frd_test.TestFRD" name="testMIMOfb" time="0.002" /><testcase classname="tests.frd_test.TestFRD" name="testMIMOfb2" time="0.002" /><testcase classname="tests.frd_test.TestFRD" name="testNyquist" time="0.016" /><testcase classname="tests.frd_test.TestFRD" name="testOperators" time="0.003" /><testcase classname="tests.frd_test.TestFRD" name="testOperatorsTf" time="0.003" /><testcase classname="tests.frd_test.TestFRD" name="testSISOtf" time="0.001" /><testcase classname="tests.frd_test.TestFRD" name="testbdalg" time="0.002" /></testsuite></testsuites>

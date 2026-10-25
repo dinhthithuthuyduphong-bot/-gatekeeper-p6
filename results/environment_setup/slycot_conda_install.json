@@ -1,0 +1,191 @@
+{
+  "source_url": "https://api.anaconda.org/download/conda-forge/slycot/0.4.0.0/linux-64/slycot-0.4.0.0-py38hf9f4372_4.tar.bz2",
+  "metadata": {
+    "description": null,
+    "dependencies": {
+      "depends": [
+        {
+          "name": "libblas",
+          "specs": [
+            [
+              ">=",
+              "3.8.0,<4.0a0"
+            ]
+          ]
+        },
+        {
+          "name": "libcblas",
+          "specs": [
+            [
+              ">=",
+              "3.8.0,<4.0a0"
+            ]
+          ]
+        },
+        {
+          "name": "libgcc-ng",
+          "specs": [
+            [
+              ">=",
+              "9.3.0"
+            ]
+          ]
+        },
+        {
+          "name": "libgfortran-ng",
+          "specs": []
+        },
+        {
+          "name": "libgfortran5",
+          "specs": [
+            [
+              ">=",
+              "9.3.0"
+            ]
+          ]
+        },
+        {
+          "name": "liblapack",
+          "specs": [
+            [
+              ">=",
+              "3.8.0,<4.0a0"
+            ]
+          ]
+        },
+        {
+          "name": "numpy",
+          "specs": [
+            [
+              ">=",
+              "1.16.5,<2.0a0"
+            ]
+          ]
+        },
+        {
+          "name": "python",
+          "specs": [
+            [
+              ">=",
+              "3.8,<3.9.0a0"
+            ]
+          ]
+        },
+        {
+          "name": "python_abi",
+          "specs": [
+            [
+              "==",
+              "3.8.* *_cp38"
+            ]
+          ]
+        }
+      ]
+    },
+    "distribution_type": "conda",
+    "basename": "linux-64/slycot-0.4.0.0-py38hf9f4372_4.tar.bz2",
+    "attrs": {
+      "build_number": 4,
+      "license": "GPL-2.0-only",
+      "has_prefix": false,
+      "license_family": "GPL",
+      "machine": "x86_64",
+      "platform": "linux",
+      "depends": [
+        "libblas >=3.8.0,<4.0a0",
+        "libcblas >=3.8.0,<4.0a0",
+        "libgcc-ng >=9.3.0",
+        "libgfortran-ng",
+        "libgfortran5 >=9.3.0",
+        "liblapack >=3.8.0,<4.0a0",
+        "numpy >=1.16.5,<2.0a0",
+        "python >=3.8,<3.9.0a0",
+        "python_abi 3.8.* *_cp38"
+      ],
+      "build": "py38hf9f4372_4",
+      "timestamp": 1604219477345,
+      "arch": "x86_64",
+      "operatingsystem": "linux",
+      "target-triplet": "x86_64-any-linux",
+      "subdir": "linux-64"
+    },
+    "upload_time": "2020-11-01 08:31:58.743000+00:00",
+    "md5": "652e1b5602b130135c8a590fe3bf64c1",
+    "sha256": "",
+    "size": 678284,
+    "full_name": "conda-forge/slycot/0.4.0.0/linux-64/slycot-0.4.0.0-py38hf9f4372_4.tar.bz2",
+    "download_url": "//api.anaconda.org/download/conda-forge/slycot/0.4.0.0/linux-64/slycot-0.4.0.0-py38hf9f4372_4.tar.bz2",
+    "type": "conda",
+    "version": "0.4.0.0",
+    "ndownloads": 5086,
+    "owner": "conda-forge",
+    "labels": [
+      "main"
+    ]
+  },
+  "sha256": "6ca4f5e8df4140f3ee9361a6449b4074226e3422f67976a5967946ee174b4fd3",
+  "bytes": 678284,
+  "installed_files": [
+    "lib/python3.8/site-packages/slycot-0.4.0.0-py3.8-linux-x86_64.egg-info/not-zip-safe",
+    "lib/python3.8/site-packages/slycot-0.4.0.0-py3.8-linux-x86_64.egg-info/PKG-INFO",
+    "lib/python3.8/site-packages/slycot/version.py",
+    "lib/python3.8/site-packages/slycot/tests/test_transform.py",
+    "lib/python3.8/site-packages/slycot/__init__.py",
+    "lib/python3.8/site-packages/slycot/tests/test_sg02ad.py",
+    "lib/python3.8/site-packages/slycot/tests/test_mc.py",
+    "lib/python3.8/site-packages/slycot/tests/test_ab01.py",
+    "lib/python3.8/site-packages/slycot/tests/test_examples.py",
+    "lib/python3.8/site-packages/slycot/tests/test_analysis.py",
+    "lib/python3.8/site-packages/slycot/tests/test_tg01ad.py",
+    "lib/python3.8/site-packages/slycot/tests/test_sg03ad.py",
+    "lib/python3.8/site-packages/slycot/tests/test_ab08n.py",
+    "lib/python3.8/site-packages/slycot/tests/test_ag08bd.py",
+    "lib/python3.8/site-packages/slycot/tests/test_exceptions.py",
+    "lib/python3.8/site-packages/slycot/tests/test_tg01fd.py",
+    "lib/python3.8/site-packages/slycot/tests/test_td04ad.py",
+    "lib/python3.8/site-packages/slycot/tests/test_sb.py",
+    "lib/python3.8/site-packages/slycot/exceptions.py",
+    "lib/python3.8/site-packages/slycot/tests/test_tb05ad.py",
+    "lib/python3.8/site-packages/slycot/examples.py",
+    "lib/python3.8/site-packages/slycot/tests/test_mb.py",
+    "lib/python3.8/site-packages/slycot/math.py",
+    "lib/python3.8/site-packages/slycot/transform.py",
+    "lib/python3.8/site-packages/slycot/analysis.py",
+    "lib/python3.8/site-packages/slycot/tests/__init__.py",
+    "lib/python3.8/site-packages/slycot/synthesis.py",
+    "lib/python3.8/site-packages/slycot/_wrapper.cpython-38-x86_64-linux-gnu.so",
+    "lib/python3.8/site-packages/slycot-0.4.0.0-py3.8-linux-x86_64.egg-info/dependency_links.txt",
+    "lib/python3.8/site-packages/slycot-0.4.0.0-py3.8-linux-x86_64.egg-info/requires.txt",
+    "lib/python3.8/site-packages/slycot-0.4.0.0-py3.8-linux-x86_64.egg-info/top_level.txt",
+    "lib/python3.8/site-packages/slycot-0.4.0.0-py3.8-linux-x86_64.egg-info/native_libs.txt",
+    "lib/python3.8/site-packages/slycot-0.4.0.0-py3.8-linux-x86_64.egg-info/SOURCES.txt",
+    "lib/python3.8/site-packages/slycot/tests/__pycache__/__init__.cpython-38.pyc",
+    "lib/python3.8/site-packages/slycot/__pycache__/version.cpython-38.pyc",
+    "lib/python3.8/site-packages/slycot/tests/__pycache__/test_transform.cpython-38.pyc",
+    "lib/python3.8/site-packages/slycot/tests/__pycache__/test_analysis.cpython-38.pyc",
+    "lib/python3.8/site-packages/slycot/tests/__pycache__/test_ab01.cpython-38.pyc",
+    "lib/python3.8/site-packages/slycot/__pycache__/__init__.cpython-38.pyc",
+    "lib/python3.8/site-packages/slycot/tests/__pycache__/test_sg02ad.cpython-38.pyc",
+    "lib/python3.8/site-packages/slycot/tests/__pycache__/test_mc.cpython-38.pyc",
+    "lib/python3.8/site-packages/slycot/tests/__pycache__/test_examples.cpython-38.pyc",
+    "lib/python3.8/site-packages/slycot/tests/__pycache__/test_tg01ad.cpython-38.pyc",
+    "lib/python3.8/site-packages/slycot/tests/__pycache__/test_sg03ad.cpython-38.pyc",
+    "lib/python3.8/site-packages/slycot/tests/__pycache__/test_ab08n.cpython-38.pyc",
+    "lib/python3.8/site-packages/slycot/tests/__pycache__/test_tg01fd.cpython-38.pyc",
+    "lib/python3.8/site-packages/slycot/tests/__pycache__/test_ag08bd.cpython-38.pyc",
+    "lib/python3.8/site-packages/slycot/tests/__pycache__/test_exceptions.cpython-38.pyc",
+    "lib/python3.8/site-packages/slycot/tests/__pycache__/test_sb.cpython-38.pyc",
+    "lib/python3.8/site-packages/slycot/tests/__pycache__/test_td04ad.cpython-38.pyc",
+    "lib/python3.8/site-packages/slycot/tests/__pycache__/test_tb05ad.cpython-38.pyc",
+    "lib/python3.8/site-packages/slycot/__pycache__/exceptions.cpython-38.pyc",
+    "lib/python3.8/site-packages/slycot/__pycache__/examples.cpython-38.pyc",
+    "lib/python3.8/site-packages/slycot/tests/__pycache__/test_mb.cpython-38.pyc",
+    "lib/python3.8/site-packages/slycot/__pycache__/math.cpython-38.pyc",
+    "lib/python3.8/site-packages/slycot/__pycache__/transform.cpython-38.pyc",
+    "lib/python3.8/site-packages/slycot/__pycache__/analysis.cpython-38.pyc",
+    "lib/python3.8/site-packages/slycot/__pycache__/synthesis.cpython-38.pyc"
+  ],
+  "returncode": 0,
+  "stdout": "0.4.0.0 /workspace/scratch/cde4f976cfa9/continuation_20261025/env-control/lib/python3.8/site-packages/slycot/__init__.py\n",
+  "stderr": ""
+}

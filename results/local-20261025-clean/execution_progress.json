@@ -1,0 +1,597 @@
+{
+  "status": "RUNNING",
+  "not_preregistered": true,
+  "config": {
+    "status": "EXPLORATORY_RETROSPECTIVE_NOT_PREREGISTERED",
+    "research_base_commit": "fcdd1b8b179f0ba8a312a7b8ec60d489e3c9b293",
+    "target_id": "K1_python_control",
+    "repository": "python-control/python-control",
+    "revision": "fb5ebf6296079229705792cc508ad23d45e326aa",
+    "gold_revision": "60aba3ab39cef2ac11c4bc08c2b08a9abd084205",
+    "python": [
+      3,
+      8,
+      20
+    ],
+    "module": "control/freqplot.py",
+    "test_module": "control/tests/frd_test.py",
+    "witness": "TestFRD.testNyquist",
+    "site_count": 3,
+    "n_tests": 16,
+    "repetitions": 3,
+    "scope_note": "Only SISO frequency-response scopes; selected FRD test module, not the whole repository. gangof4_plot is changed by the module-level transform but not covered by these scopes.",
+    "oracle_note": "Unchanged parent-revision testNyquist is a no-exception smoke test (not a numerical-accuracy assertion). The independent analytic response check in the draw adapter is researcher-authored.",
+    "runtime_versions": {
+      "numpy": "1.17.5",
+      "scipy": "1.4.1",
+      "matplotlib": "2.2.5",
+      "slycot": "0.4.0.0",
+      "pytest": "7.4.4"
+    },
+    "source_sha256": {
+      "control/freqplot.py": "a9e928d1ad2b396c439f234a6c9346c691dcb22a989e3aa2ffbbcc858238f3e5",
+      "control/tests/frd_test.py": "8991217c99fcd424ab2bfd539465df16d4376fcf7b948639bb45cef547eadd2d"
+    },
+    "vendor_sha256": {
+      "vendor/frd_test.py": "8991217c99fcd424ab2bfd539465df16d4376fcf7b948639bb45cef547eadd2d",
+      "vendor/control_freqplot_before.py": "a9e928d1ad2b396c439f234a6c9346c691dcb22a989e3aa2ffbbcc858238f3e5",
+      "vendor/control_freqplot_gold.py": "42f8cb65d1f54ed63e2c0503175a71ab2cd7de374122255705fad510e134b2ea"
+    },
+    "gatekeeper_sha256": {
+      "gatekeeper_ext/none_identity.py": "6844f735580719b690b2ff074b87d540c1c559a538bb707df793f3450ac18759",
+      "gatekeeper_lite/gatekeeper.py": "a95038ccdb01d2d750f16f43ff462785b5e916aefce85ed53f2bf71de5af4659",
+      "gatekeeper_lite/skill.py": "07fd5a3516f4f9f46315fd9181f31cee3686f92535bd8fbb38ace6ffc24bec4d",
+      "gatekeeper_lite/screen.py": "56fbacba4cff58a1d0864c3ef852ee7c6d5f225f06749a1a84fd8efa2624f112",
+      "gatekeeper_lite/transforms.py": "61c71e5626a08d84775f82c93a3b3e4741be1cee9bc5bc51b65a4367c0205bda",
+      "gatekeeper_lite/eprocess.py": "1a4856af0bbc8fae4f93b25a55254da005245349f23e6d040bdee38b850d746d",
+      "gatekeeper_lite/drawharness.py": "a1fa1b68cb1881e9c858166819f2b916875234cd16d52f41f16a2612ca2e72b2",
+      "gatekeeper_lite/drawworker.py": "9feccd1ade4c3e3238375f4d23c124c8cee85d0dba08a54db7d8f9f42605561f",
+      "study_g/skills/none-identity.json": "89351f56b7ae95df18ed47d4e7d18562a7d43dc0d8f5e540eb4266d8072f7995",
+      "study_g/skills/replay/get_delays_before.py": "6e8fec9df8fd3ab7adc11f03da9650004384722b529f713b457b56a2b6ae3715",
+      "study_g/skills/replay/get_delays_after.py": "8938e463790f938be6560360bb3e0e469da755830a3bcc07aa82d479797181b7"
+    },
+    "diagnostic_draws": {
+      "seed": 20261025,
+      "alpha": 0.1,
+      "theta": 0.2,
+      "eta": 0.05,
+      "alpha_alarm": 0.05,
+      "n_max": 300,
+      "b8_full": true,
+      "cells": [
+        "K1_python_control/array_frequencies",
+        "K1_python_control/default_frequencies"
+      ]
+    }
+  },
+  "config_sha256": "aa16ff64017f9f15f917c5c7b09ddee7797986a244c823a384c0448dc36cd1c8",
+  "code_sha256": {
+    "study_k/run.py": "a476f6d91083d19ed5c87eabe46e0c96c43f44e0bdd132737defd3f44564ae5b",
+    "study_k/oracles/control_frequency.py": "22743903b6fc5be64938d90412a1e99b083ae13d75f9a970c09104d968c6fd20",
+    "study_i/run.py": "8e79c5d21f8e614a7e90255328f50f5a09345aac372c81b83112382020a58cad"
+  },
+  "source_revision": "fb5ebf6296079229705792cc508ad23d45e326aa",
+  "source_test_sha256": {
+    "control/freqplot.py": "a9e928d1ad2b396c439f234a6c9346c691dcb22a989e3aa2ffbbcc858238f3e5",
+    "control/tests/frd_test.py": "8991217c99fcd424ab2bfd539465df16d4376fcf7b948639bb45cef547eadd2d"
+  },
+  "started_utc": "2026-10-25T00:07:44.224675+00:00",
+  "python": "3.8.20 (default, Oct  2 2024, 16:34:12) \n[Clang 18.1.8 ]",
+  "environment": [
+    [
+      "cycler",
+      "0.12.1"
+    ],
+    [
+      "exceptiongroup",
+      "1.3.1"
+    ],
+    [
+      "iniconfig",
+      "2.1.0"
+    ],
+    [
+      "kiwisolver",
+      "1.4.7"
+    ],
+    [
+      "matplotlib",
+      "2.2.5"
+    ],
+    [
+      "nose",
+      "1.3.7"
+    ],
+    [
+      "numpy",
+      "1.17.5"
+    ],
+    [
+      "packaging",
+      "26.2"
+    ],
+    [
+      "pillow",
+      "10.4.0"
+    ],
+    [
+      "pluggy",
+      "1.5.0"
+    ],
+    [
+      "pyparsing",
+      "3.1.4"
+    ],
+    [
+      "pytest",
+      "7.4.4"
+    ],
+    [
+      "python-dateutil",
+      "3.0.0"
+    ],
+    [
+      "scipy",
+      "1.4.1"
+    ],
+    [
+      "setuptools",
+      "59.8.0"
+    ],
+    [
+      "six",
+      "1.17.0"
+    ],
+    [
+      "slycot",
+      "0.4.0.0"
+    ],
+    [
+      "tomli",
+      "2.5.0"
+    ],
+    [
+      "typing_extensions",
+      "4.13.2"
+    ],
+    [
+      "tzdata",
+      "2026.5"
+    ],
+    [
+      "wheel",
+      "0.45.1"
+    ]
+  ],
+  "bindings": [
+    {
+      "module": "control/freqplot.py",
+      "skill": "none-identity",
+      "line": 214,
+      "function": "nyquist_plot"
+    },
+    {
+      "module": "control/freqplot.py",
+      "skill": "none-identity",
+      "line": 297,
+      "function": "gangof4_plot"
+    },
+    {
+      "module": "control/freqplot.py",
+      "skill": "none-identity",
+      "line": 124,
+      "function": "bode_plot"
+    }
+  ],
+  "gold_ast_equal": true,
+  "source_replay": {
+    "passed": true,
+    "checks": [
+      {
+        "example": "replay/get_delays_before.py",
+        "passed": true,
+        "heldout": false
+      }
+    ]
+  },
+  "llm_calls": 0,
+  "model_cost_usd": 0,
+  "runs": [
+    {
+      "command": [
+        "/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control-clean/bin/python",
+        "-m",
+        "pytest",
+        "control/tests/frd_test.py",
+        "-q",
+        "--tb=short",
+        "-o",
+        "addopts=",
+        "-p",
+        "no:cacheprovider",
+        "--junitxml=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025-clean/baseline_1.xml"
+      ],
+      "cwd": "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025-clean/work/baseline",
+      "returncode": 1,
+      "seconds": 2.170304834999911,
+      "log": "baseline_1.log",
+      "arm": "baseline",
+      "repetition": 1,
+      "xml": "baseline_1.xml",
+      "case_status": {
+        "tests.frd_test.TestFRD::testAgainstOctave": "passed",
+        "tests.frd_test.TestFRD::testAuto": "passed",
+        "tests.frd_test.TestFRD::testBadInputType": "passed",
+        "tests.frd_test.TestFRD::testFeedback": "passed",
+        "tests.frd_test.TestFRD::testFeedback2": "passed",
+        "tests.frd_test.TestFRD::testInconsistentDimension": "passed",
+        "tests.frd_test.TestFRD::testMIMO": "passed",
+        "tests.frd_test.TestFRD::testMIMOMult": "passed",
+        "tests.frd_test.TestFRD::testMIMOSmooth": "passed",
+        "tests.frd_test.TestFRD::testMIMOfb": "passed",
+        "tests.frd_test.TestFRD::testMIMOfb2": "passed",
+        "tests.frd_test.TestFRD::testNyquist": "failure",
+        "tests.frd_test.TestFRD::testOperators": "passed",
+        "tests.frd_test.TestFRD::testOperatorsTf": "passed",
+        "tests.frd_test.TestFRD::testSISOtf": "passed",
+        "tests.frd_test.TestFRD::testbdalg": "passed"
+      },
+      "counts": {
+        "passed": 15,
+        "failure": 1
+      }
+    },
+    {
+      "command": [
+        "/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control-clean/bin/python",
+        "-m",
+        "pytest",
+        "control/tests/frd_test.py",
+        "-q",
+        "--tb=short",
+        "-o",
+        "addopts=",
+        "-p",
+        "no:cacheprovider",
+        "--junitxml=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025-clean/baseline_2.xml"
+      ],
+      "cwd": "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025-clean/work/baseline",
+      "returncode": 1,
+      "seconds": 1.4948606240000117,
+      "log": "baseline_2.log",
+      "arm": "baseline",
+      "repetition": 2,
+      "xml": "baseline_2.xml",
+      "case_status": {
+        "tests.frd_test.TestFRD::testAgainstOctave": "passed",
+        "tests.frd_test.TestFRD::testAuto": "passed",
+        "tests.frd_test.TestFRD::testBadInputType": "passed",
+        "tests.frd_test.TestFRD::testFeedback": "passed",
+        "tests.frd_test.TestFRD::testFeedback2": "passed",
+        "tests.frd_test.TestFRD::testInconsistentDimension": "passed",
+        "tests.frd_test.TestFRD::testMIMO": "passed",
+        "tests.frd_test.TestFRD::testMIMOMult": "passed",
+        "tests.frd_test.TestFRD::testMIMOSmooth": "passed",
+        "tests.frd_test.TestFRD::testMIMOfb": "passed",
+        "tests.frd_test.TestFRD::testMIMOfb2": "passed",
+        "tests.frd_test.TestFRD::testNyquist": "failure",
+        "tests.frd_test.TestFRD::testOperators": "passed",
+        "tests.frd_test.TestFRD::testOperatorsTf": "passed",
+        "tests.frd_test.TestFRD::testSISOtf": "passed",
+        "tests.frd_test.TestFRD::testbdalg": "passed"
+      },
+      "counts": {
+        "passed": 15,
+        "failure": 1
+      }
+    },
+    {
+      "command": [
+        "/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control-clean/bin/python",
+        "-m",
+        "pytest",
+        "control/tests/frd_test.py",
+        "-q",
+        "--tb=short",
+        "-o",
+        "addopts=",
+        "-p",
+        "no:cacheprovider",
+        "--junitxml=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025-clean/baseline_3.xml"
+      ],
+      "cwd": "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025-clean/work/baseline",
+      "returncode": 1,
+      "seconds": 1.4918938309999703,
+      "log": "baseline_3.log",
+      "arm": "baseline",
+      "repetition": 3,
+      "xml": "baseline_3.xml",
+      "case_status": {
+        "tests.frd_test.TestFRD::testAgainstOctave": "passed",
+        "tests.frd_test.TestFRD::testAuto": "passed",
+        "tests.frd_test.TestFRD::testBadInputType": "passed",
+        "tests.frd_test.TestFRD::testFeedback": "passed",
+        "tests.frd_test.TestFRD::testFeedback2": "passed",
+        "tests.frd_test.TestFRD::testInconsistentDimension": "passed",
+        "tests.frd_test.TestFRD::testMIMO": "passed",
+        "tests.frd_test.TestFRD::testMIMOMult": "passed",
+        "tests.frd_test.TestFRD::testMIMOSmooth": "passed",
+        "tests.frd_test.TestFRD::testMIMOfb": "passed",
+        "tests.frd_test.TestFRD::testMIMOfb2": "passed",
+        "tests.frd_test.TestFRD::testNyquist": "failure",
+        "tests.frd_test.TestFRD::testOperators": "passed",
+        "tests.frd_test.TestFRD::testOperatorsTf": "passed",
+        "tests.frd_test.TestFRD::testSISOtf": "passed",
+        "tests.frd_test.TestFRD::testbdalg": "passed"
+      },
+      "counts": {
+        "passed": 15,
+        "failure": 1
+      }
+    },
+    {
+      "command": [
+        "/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control-clean/bin/python",
+        "-m",
+        "pytest",
+        "control/tests/frd_test.py",
+        "-q",
+        "--tb=short",
+        "-o",
+        "addopts=",
+        "-p",
+        "no:cacheprovider",
+        "--junitxml=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025-clean/treated_1.xml"
+      ],
+      "cwd": "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025-clean/work/treated",
+      "returncode": 0,
+      "seconds": 1.3866357670001435,
+      "log": "treated_1.log",
+      "arm": "treated",
+      "repetition": 1,
+      "xml": "treated_1.xml",
+      "case_status": {
+        "tests.frd_test.TestFRD::testAgainstOctave": "passed",
+        "tests.frd_test.TestFRD::testAuto": "passed",
+        "tests.frd_test.TestFRD::testBadInputType": "passed",
+        "tests.frd_test.TestFRD::testFeedback": "passed",
+        "tests.frd_test.TestFRD::testFeedback2": "passed",
+        "tests.frd_test.TestFRD::testInconsistentDimension": "passed",
+        "tests.frd_test.TestFRD::testMIMO": "passed",
+        "tests.frd_test.TestFRD::testMIMOMult": "passed",
+        "tests.frd_test.TestFRD::testMIMOSmooth": "passed",
+        "tests.frd_test.TestFRD::testMIMOfb": "passed",
+        "tests.frd_test.TestFRD::testMIMOfb2": "passed",
+        "tests.frd_test.TestFRD::testNyquist": "passed",
+        "tests.frd_test.TestFRD::testOperators": "passed",
+        "tests.frd_test.TestFRD::testOperatorsTf": "passed",
+        "tests.frd_test.TestFRD::testSISOtf": "passed",
+        "tests.frd_test.TestFRD::testbdalg": "passed"
+      },
+      "counts": {
+        "passed": 16,
+        "failure": 0
+      }
+    },
+    {
+      "command": [
+        "/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control-clean/bin/python",
+        "-m",
+        "pytest",
+        "control/tests/frd_test.py",
+        "-q",
+        "--tb=short",
+        "-o",
+        "addopts=",
+        "-p",
+        "no:cacheprovider",
+        "--junitxml=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025-clean/treated_2.xml"
+      ],
+      "cwd": "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025-clean/work/treated",
+      "returncode": 0,
+      "seconds": 1.3469610089998696,
+      "log": "treated_2.log",
+      "arm": "treated",
+      "repetition": 2,
+      "xml": "treated_2.xml",
+      "case_status": {
+        "tests.frd_test.TestFRD::testAgainstOctave": "passed",
+        "tests.frd_test.TestFRD::testAuto": "passed",
+        "tests.frd_test.TestFRD::testBadInputType": "passed",
+        "tests.frd_test.TestFRD::testFeedback": "passed",
+        "tests.frd_test.TestFRD::testFeedback2": "passed",
+        "tests.frd_test.TestFRD::testInconsistentDimension": "passed",
+        "tests.frd_test.TestFRD::testMIMO": "passed",
+        "tests.frd_test.TestFRD::testMIMOMult": "passed",
+        "tests.frd_test.TestFRD::testMIMOSmooth": "passed",
+        "tests.frd_test.TestFRD::testMIMOfb": "passed",
+        "tests.frd_test.TestFRD::testMIMOfb2": "passed",
+        "tests.frd_test.TestFRD::testNyquist": "passed",
+        "tests.frd_test.TestFRD::testOperators": "passed",
+        "tests.frd_test.TestFRD::testOperatorsTf": "passed",
+        "tests.frd_test.TestFRD::testSISOtf": "passed",
+        "tests.frd_test.TestFRD::testbdalg": "passed"
+      },
+      "counts": {
+        "passed": 16,
+        "failure": 0
+      }
+    },
+    {
+      "command": [
+        "/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control-clean/bin/python",
+        "-m",
+        "pytest",
+        "control/tests/frd_test.py",
+        "-q",
+        "--tb=short",
+        "-o",
+        "addopts=",
+        "-p",
+        "no:cacheprovider",
+        "--junitxml=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025-clean/treated_3.xml"
+      ],
+      "cwd": "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025-clean/work/treated",
+      "returncode": 0,
+      "seconds": 1.377740415000062,
+      "log": "treated_3.log",
+      "arm": "treated",
+      "repetition": 3,
+      "xml": "treated_3.xml",
+      "case_status": {
+        "tests.frd_test.TestFRD::testAgainstOctave": "passed",
+        "tests.frd_test.TestFRD::testAuto": "passed",
+        "tests.frd_test.TestFRD::testBadInputType": "passed",
+        "tests.frd_test.TestFRD::testFeedback": "passed",
+        "tests.frd_test.TestFRD::testFeedback2": "passed",
+        "tests.frd_test.TestFRD::testInconsistentDimension": "passed",
+        "tests.frd_test.TestFRD::testMIMO": "passed",
+        "tests.frd_test.TestFRD::testMIMOMult": "passed",
+        "tests.frd_test.TestFRD::testMIMOSmooth": "passed",
+        "tests.frd_test.TestFRD::testMIMOfb": "passed",
+        "tests.frd_test.TestFRD::testMIMOfb2": "passed",
+        "tests.frd_test.TestFRD::testNyquist": "passed",
+        "tests.frd_test.TestFRD::testOperators": "passed",
+        "tests.frd_test.TestFRD::testOperatorsTf": "passed",
+        "tests.frd_test.TestFRD::testSISOtf": "passed",
+        "tests.frd_test.TestFRD::testbdalg": "passed"
+      },
+      "counts": {
+        "passed": 16,
+        "failure": 0
+      }
+    },
+    {
+      "command": [
+        "/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control-clean/bin/python",
+        "-m",
+        "pytest",
+        "control/tests/frd_test.py",
+        "-q",
+        "--tb=short",
+        "-o",
+        "addopts=",
+        "-p",
+        "no:cacheprovider",
+        "--junitxml=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025-clean/gold_1.xml"
+      ],
+      "cwd": "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025-clean/work/gold",
+      "returncode": 0,
+      "seconds": 1.368669645999944,
+      "log": "gold_1.log",
+      "arm": "gold",
+      "repetition": 1,
+      "xml": "gold_1.xml",
+      "case_status": {
+        "tests.frd_test.TestFRD::testAgainstOctave": "passed",
+        "tests.frd_test.TestFRD::testAuto": "passed",
+        "tests.frd_test.TestFRD::testBadInputType": "passed",
+        "tests.frd_test.TestFRD::testFeedback": "passed",
+        "tests.frd_test.TestFRD::testFeedback2": "passed",
+        "tests.frd_test.TestFRD::testInconsistentDimension": "passed",
+        "tests.frd_test.TestFRD::testMIMO": "passed",
+        "tests.frd_test.TestFRD::testMIMOMult": "passed",
+        "tests.frd_test.TestFRD::testMIMOSmooth": "passed",
+        "tests.frd_test.TestFRD::testMIMOfb": "passed",
+        "tests.frd_test.TestFRD::testMIMOfb2": "passed",
+        "tests.frd_test.TestFRD::testNyquist": "passed",
+        "tests.frd_test.TestFRD::testOperators": "passed",
+        "tests.frd_test.TestFRD::testOperatorsTf": "passed",
+        "tests.frd_test.TestFRD::testSISOtf": "passed",
+        "tests.frd_test.TestFRD::testbdalg": "passed"
+      },
+      "counts": {
+        "passed": 16,
+        "failure": 0
+      }
+    },
+    {
+      "command": [
+        "/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control-clean/bin/python",
+        "-m",
+        "pytest",
+        "control/tests/frd_test.py",
+        "-q",
+        "--tb=short",
+        "-o",
+        "addopts=",
+        "-p",
+        "no:cacheprovider",
+        "--junitxml=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025-clean/gold_2.xml"
+      ],
+      "cwd": "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025-clean/work/gold",
+      "returncode": 0,
+      "seconds": 1.3509458030000587,
+      "log": "gold_2.log",
+      "arm": "gold",
+      "repetition": 2,
+      "xml": "gold_2.xml",
+      "case_status": {
+        "tests.frd_test.TestFRD::testAgainstOctave": "passed",
+        "tests.frd_test.TestFRD::testAuto": "passed",
+        "tests.frd_test.TestFRD::testBadInputType": "passed",
+        "tests.frd_test.TestFRD::testFeedback": "passed",
+        "tests.frd_test.TestFRD::testFeedback2": "passed",
+        "tests.frd_test.TestFRD::testInconsistentDimension": "passed",
+        "tests.frd_test.TestFRD::testMIMO": "passed",
+        "tests.frd_test.TestFRD::testMIMOMult": "passed",
+        "tests.frd_test.TestFRD::testMIMOSmooth": "passed",
+        "tests.frd_test.TestFRD::testMIMOfb": "passed",
+        "tests.frd_test.TestFRD::testMIMOfb2": "passed",
+        "tests.frd_test.TestFRD::testNyquist": "passed",
+        "tests.frd_test.TestFRD::testOperators": "passed",
+        "tests.frd_test.TestFRD::testOperatorsTf": "passed",
+        "tests.frd_test.TestFRD::testSISOtf": "passed",
+        "tests.frd_test.TestFRD::testbdalg": "passed"
+      },
+      "counts": {
+        "passed": 16,
+        "failure": 0
+      }
+    },
+    {
+      "command": [
+        "/workspace/scratch/cde4f976cfa9/continuation_20261025/env-control-clean/bin/python",
+        "-m",
+        "pytest",
+        "control/tests/frd_test.py",
+        "-q",
+        "--tb=short",
+        "-o",
+        "addopts=",
+        "-p",
+        "no:cacheprovider",
+        "--junitxml=/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025-clean/gold_3.xml"
+      ],
+      "cwd": "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/study_k/results/local-20261025-clean/work/gold",
+      "returncode": 0,
+      "seconds": 1.4957917579999958,
+      "log": "gold_3.log",
+      "arm": "gold",
+      "repetition": 3,
+      "xml": "gold_3.xml",
+      "case_status": {
+        "tests.frd_test.TestFRD::testAgainstOctave": "passed",
+        "tests.frd_test.TestFRD::testAuto": "passed",
+        "tests.frd_test.TestFRD::testBadInputType": "passed",
+        "tests.frd_test.TestFRD::testFeedback": "passed",
+        "tests.frd_test.TestFRD::testFeedback2": "passed",
+        "tests.frd_test.TestFRD::testInconsistentDimension": "passed",
+        "tests.frd_test.TestFRD::testMIMO": "passed",
+        "tests.frd_test.TestFRD::testMIMOMult": "passed",
+        "tests.frd_test.TestFRD::testMIMOSmooth": "passed",
+        "tests.frd_test.TestFRD::testMIMOfb": "passed",
+        "tests.frd_test.TestFRD::testMIMOfb2": "passed",
+        "tests.frd_test.TestFRD::testNyquist": "passed",
+        "tests.frd_test.TestFRD::testOperators": "passed",
+        "tests.frd_test.TestFRD::testOperatorsTf": "passed",
+        "tests.frd_test.TestFRD::testSISOtf": "passed",
+        "tests.frd_test.TestFRD::testbdalg": "passed"
+      },
+      "counts": {
+        "passed": 16,
+        "failure": 0
+      }
+    }
+  ]
+}
