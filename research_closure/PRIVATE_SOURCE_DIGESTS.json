@@ -1,0 +1,20 @@
+{
+  "note": "User-supplied drafts read locally; PDFs are excluded from the public update. Numeric headlines remain projected, not observed repository outcomes.",
+  "sources": [
+    {
+      "file": "01-FSE-2027-13-paper.pdf",
+      "sha256": "9786e4df56883d5cb0c4da36d7e334b896f8535becc82cd3da759c092d7f63ab",
+      "bytes": 553680
+    },
+    {
+      "file": "02-FSE-2027-13-reading.pdf",
+      "sha256": "9e0d73e04120848c9251318c7eebfce8f01f6bd6054a6be77a935710f35e656b",
+      "bytes": 269119
+    },
+    {
+      "file": "03-FSE-2027-13-summary.pdf",
+      "sha256": "e2836a710c6e99d06ecafa751e3f5ce5d7d7bf097d28dd93d750da708b127538",
+      "bytes": 259893
+    }
+  ]
+}
