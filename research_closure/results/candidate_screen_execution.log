@@ -1,0 +1,12 @@
+{"repo": "agronholm/apscheduler", "status": "STATIC_ONLY_NOT_ELIGIBLE", "matches": {"bool_guard": 2, "none_identity": 0}}
+{"repo": "dbader/schedule", "status": "STATIC_ONLY_NOT_ELIGIBLE", "matches": {"bool_guard": 0, "none_identity": 0}}
+{"repo": "arrow-py/arrow", "status": "STATIC_ONLY_NOT_ELIGIBLE", "matches": {"bool_guard": 1, "none_identity": 0}}
+{"repo": "agronholm/anyio", "status": "STATIC_ONLY_NOT_ELIGIBLE", "matches": {"bool_guard": 17, "none_identity": 0}}
+{"repo": "hynek/structlog", "status": "STATIC_ONLY_NOT_ELIGIBLE", "matches": {"bool_guard": 0, "none_identity": 0}}
+{"repo": "Kludex/starlette", "status": "STATIC_ONLY_NOT_ELIGIBLE", "matches": {"bool_guard": 1, "none_identity": 0}}
+{"repo": "python-pendulum/pendulum", "status": "STATIC_ONLY_NOT_ELIGIBLE", "matches": {"bool_guard": 11, "none_identity": 0}}
+{"repo": "pallets/itsdangerous", "status": "STATIC_ONLY_NOT_ELIGIBLE", "matches": {"bool_guard": 0, "none_identity": 0}}
+{"repo": "marshmallow-code/marshmallow", "status": "STATIC_ONLY_NOT_ELIGIBLE", "matches": {"bool_guard": 0, "none_identity": 0}}
+{"repo": "pydantic/pydantic-settings", "status": "STATIC_ONLY_NOT_ELIGIBLE", "matches": {"bool_guard": 3, "none_identity": 0}}
+{"repo": "python-jsonschema/referencing", "status": "STATIC_ONLY_NOT_ELIGIBLE", "matches": {"bool_guard": 0, "none_identity": 0}}
+{"repo": "encode/httpx", "status": "STATIC_ONLY_NOT_ELIGIBLE", "matches": {"bool_guard": 2, "none_identity": 0}}

@@ -1,0 +1,12 @@
+{
+  "evidence": "STATIC_SCREEN_NOT_PROSPECTIVE_OUTCOMES",
+  "model_calls": 0,
+  "treatment_runs": 0,
+  "test_runs": 0,
+  "roster_sha256": "aad513c6d09aabe35ca56f00b654765e96a04ab3a599567b200e62e3f08b6aaa",
+  "code_sha256": "7cd1c2c67526f74e6dd50a1b1a1cb6d020da10b88f76826ae7b034c53443304e",
+  "skill_sha256": {
+    "study_d/skills/bool-excluded-from-int.json": "01e469cc1f0a830374cc4200d7eedc8c97171337e0b6e8e0137c6b638d4f1aa1",
+    "study_g/skills/none-identity.json": "89351f56b7ae95df18ed47d4e7d18562a7d43dc0d8f5e540eb4266d8072f7995"
+  }
+}

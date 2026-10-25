@@ -1,0 +1,294 @@
+{
+  "repository": "agronholm/anyio",
+  "default_branch": "master",
+  "archived": false,
+  "license_metadata": "MIT",
+  "language": "Python",
+  "url": "https://github.com/agronholm/anyio",
+  "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+  "revision": "4d5115466d923e7eb3de4ca0ff59ad683556c248",
+  "source_ref_url": "https://api.github.com/repos/agronholm/anyio/git/ref/heads/master",
+  "status": "SCREEN_ERROR",
+  "treatment_runs": 0,
+  "test_runs": 0,
+  "license_files": {
+    "LICENSE": "5361ac9dc58f2ef5fd2e9b09c68297c17f04950909bbc8023bdb82eacf22c2b0"
+  },
+  "skills": {
+    "bool_guard": {
+      "n_sites": 17,
+      "n_sites_with_possible_test_reference": 11,
+      "sites": [
+        {
+          "file": "src/anyio/_backends/_asyncio.py",
+          "line": 1644,
+          "function": "send_fds",
+          "snippet": "isinstance(fd, int)",
+          "sha256": "8502570afae1bffed2918135b9057ec59255033832ed97ce3846120efd846d05",
+          "possible_test_references": [
+            {
+              "file": "tests/test_sockets.py",
+              "test": "test_send_fds",
+              "line": 1592,
+              "sha256": "c005ff715721c87fa4541ed9d3822126b8ae7b8ea34af16ccd3478662a02ca89"
+            },
+            {
+              "file": "tests/test_sockets.py",
+              "test": "test_send_fds_large_message",
+              "line": 1628,
+              "sha256": "c005ff715721c87fa4541ed9d3822126b8ae7b8ea34af16ccd3478662a02ca89"
+            }
+          ]
+        },
+        {
+          "file": "src/anyio/_backends/_asyncio.py",
+          "line": 3045,
+          "function": "wait_readable",
+          "snippet": "isinstance(obj, int)",
+          "sha256": "8502570afae1bffed2918135b9057ec59255033832ed97ce3846120efd846d05",
+          "possible_test_references": [
+            {
+              "file": "tests/test_sockets.py",
+              "test": "test_interrupted_by_close",
+              "line": 3462,
+              "sha256": "c005ff715721c87fa4541ed9d3822126b8ae7b8ea34af16ccd3478662a02ca89"
+            },
+            {
+              "file": "tests/test_sockets.py",
+              "test": "test_cancelled_send_does_not_send_the_next_one",
+              "line": 277,
+              "sha256": "c005ff715721c87fa4541ed9d3822126b8ae7b8ea34af16ccd3478662a02ca89"
+            }
+          ]
+        },
+        {
+          "file": "src/anyio/_backends/_asyncio.py",
+          "line": 3098,
+          "function": "wait_writable",
+          "snippet": "isinstance(obj, int)",
+          "sha256": "8502570afae1bffed2918135b9057ec59255033832ed97ce3846120efd846d05",
+          "possible_test_references": [
+            {
+              "file": "tests/test_sockets.py",
+              "test": "test_interrupted_by_close",
+              "line": 3462,
+              "sha256": "c005ff715721c87fa4541ed9d3822126b8ae7b8ea34af16ccd3478662a02ca89"
+            }
+          ]
+        },
+        {
+          "file": "src/anyio/_backends/_asyncio.py",
+          "line": 3145,
+          "function": "notify_closing",
+          "snippet": "isinstance(obj, int)",
+          "sha256": "8502570afae1bffed2918135b9057ec59255033832ed97ce3846120efd846d05",
+          "possible_test_references": [
+            {
+              "file": "tests/test_sockets.py",
+              "test": "test_interrupted_by_close",
+              "line": 3462,
+              "sha256": "c005ff715721c87fa4541ed9d3822126b8ae7b8ea34af16ccd3478662a02ca89"
+            }
+          ]
+        },
+        {
+          "file": "src/anyio/_backends/_asyncio.py",
+          "line": 1597,
+          "function": "receive_fds",
+          "snippet": "isinstance(msglen, int)",
+          "sha256": "8502570afae1bffed2918135b9057ec59255033832ed97ce3846120efd846d05",
+          "possible_test_references": [
+            {
+              "file": "tests/test_sockets.py",
+              "test": "test_receive_fds",
+              "line": 1547,
+              "sha256": "c005ff715721c87fa4541ed9d3822126b8ae7b8ea34af16ccd3478662a02ca89"
+            },
+            {
+              "file": "tests/test_sockets.py",
+              "test": "test_send_fds_large_message",
+              "line": 1628,
+              "sha256": "c005ff715721c87fa4541ed9d3822126b8ae7b8ea34af16ccd3478662a02ca89"
+            }
+          ]
+        },
+        {
+          "file": "src/anyio/_backends/_asyncio.py",
+          "line": 1599,
+          "function": "receive_fds",
+          "snippet": "isinstance(maxfds, int)",
+          "sha256": "8502570afae1bffed2918135b9057ec59255033832ed97ce3846120efd846d05",
+          "possible_test_references": [
+            {
+              "file": "tests/test_sockets.py",
+              "test": "test_receive_fds",
+              "line": 1547,
+              "sha256": "c005ff715721c87fa4541ed9d3822126b8ae7b8ea34af16ccd3478662a02ca89"
+            },
+            {
+              "file": "tests/test_sockets.py",
+              "test": "test_send_fds_large_message",
+              "line": 1628,
+              "sha256": "c005ff715721c87fa4541ed9d3822126b8ae7b8ea34af16ccd3478662a02ca89"
+            }
+          ]
+        },
+        {
+          "file": "src/anyio/_backends/_asyncio.py",
+          "line": 2216,
+          "function": "total_tokens",
+          "snippet": "isinstance(value, int)",
+          "sha256": "8502570afae1bffed2918135b9057ec59255033832ed97ce3846120efd846d05",
+          "possible_test_references": []
+        },
+        {
+          "file": "src/anyio/_backends/_trio.py",
+          "line": 559,
+          "function": "send_fds",
+          "snippet": "isinstance(fd, int)",
+          "sha256": "653a8de2ba2ce0165edaf298119ca49a9d3327f8636c4e25fbbe5aee6d21eaae",
+          "possible_test_references": [
+            {
+              "file": "tests/test_sockets.py",
+              "test": "test_send_fds",
+              "line": 1592,
+              "sha256": "c005ff715721c87fa4541ed9d3822126b8ae7b8ea34af16ccd3478662a02ca89"
+            },
+            {
+              "file": "tests/test_sockets.py",
+              "test": "test_send_fds_large_message",
+              "line": 1628,
+              "sha256": "c005ff715721c87fa4541ed9d3822126b8ae7b8ea34af16ccd3478662a02ca89"
+            }
+          ]
+        },
+        {
+          "file": "src/anyio/_backends/_trio.py",
+          "line": 519,
+          "function": "receive_fds",
+          "snippet": "isinstance(msglen, int)",
+          "sha256": "653a8de2ba2ce0165edaf298119ca49a9d3327f8636c4e25fbbe5aee6d21eaae",
+          "possible_test_references": [
+            {
+              "file": "tests/test_sockets.py",
+              "test": "test_receive_fds",
+              "line": 1547,
+              "sha256": "c005ff715721c87fa4541ed9d3822126b8ae7b8ea34af16ccd3478662a02ca89"
+            },
+            {
+              "file": "tests/test_sockets.py",
+              "test": "test_send_fds_large_message",
+              "line": 1628,
+              "sha256": "c005ff715721c87fa4541ed9d3822126b8ae7b8ea34af16ccd3478662a02ca89"
+            }
+          ]
+        },
+        {
+          "file": "src/anyio/_backends/_trio.py",
+          "line": 521,
+          "function": "receive_fds",
+          "snippet": "isinstance(maxfds, int)",
+          "sha256": "653a8de2ba2ce0165edaf298119ca49a9d3327f8636c4e25fbbe5aee6d21eaae",
+          "possible_test_references": [
+            {
+              "file": "tests/test_sockets.py",
+              "test": "test_receive_fds",
+              "line": 1547,
+              "sha256": "c005ff715721c87fa4541ed9d3822126b8ae7b8ea34af16ccd3478662a02ca89"
+            },
+            {
+              "file": "tests/test_sockets.py",
+              "test": "test_send_fds_large_message",
+              "line": 1628,
+              "sha256": "c005ff715721c87fa4541ed9d3822126b8ae7b8ea34af16ccd3478662a02ca89"
+            }
+          ]
+        },
+        {
+          "file": "src/anyio/_core/_streams.py",
+          "line": 39,
+          "function": "__new__",
+          "snippet": "isinstance(max_buffer_size, int)",
+          "sha256": "15ccc5c08803a6790ad1b3835895cca6c50961dbc00f4e24694686cc953c0cad",
+          "possible_test_references": []
+        },
+        {
+          "file": "src/anyio/_core/_synchronization.py",
+          "line": 412,
+          "function": "__init__",
+          "snippet": "isinstance(initial_value, int)",
+          "sha256": "814b478ed64c7ff4c13f23767e5f3b3977e676b31f6b1f0ae31ab36b06c9fb4e",
+          "possible_test_references": [
+            {
+              "file": "tests/test_contextmanagers.py",
+              "test": "test_call_superclass_method",
+              "line": 124,
+              "sha256": "f7b30ad5c1b4bf8c5db09ca5d34f914274af4054dc459a66c90a2b9e01949c80"
+            },
+            {
+              "file": "tests/test_contextmanagers.py",
+              "test": "test_call_superclass_method",
+              "line": 228,
+              "sha256": "f7b30ad5c1b4bf8c5db09ca5d34f914274af4054dc459a66c90a2b9e01949c80"
+            }
+          ]
+        },
+        {
+          "file": "src/anyio/_core/_synchronization.py",
+          "line": 417,
+          "function": "__init__",
+          "snippet": "isinstance(max_value, int)",
+          "sha256": "814b478ed64c7ff4c13f23767e5f3b3977e676b31f6b1f0ae31ab36b06c9fb4e",
+          "possible_test_references": [
+            {
+              "file": "tests/test_contextmanagers.py",
+              "test": "test_call_superclass_method",
+              "line": 124,
+              "sha256": "f7b30ad5c1b4bf8c5db09ca5d34f914274af4054dc459a66c90a2b9e01949c80"
+            },
+            {
+              "file": "tests/test_contextmanagers.py",
+              "test": "test_call_superclass_method",
+              "line": 228,
+              "sha256": "f7b30ad5c1b4bf8c5db09ca5d34f914274af4054dc459a66c90a2b9e01949c80"
+            }
+          ]
+        },
+        {
+          "file": "src/anyio/_core/_synchronization.py",
+          "line": 693,
+          "function": "total_tokens",
+          "snippet": "isinstance(value, int)",
+          "sha256": "814b478ed64c7ff4c13f23767e5f3b3977e676b31f6b1f0ae31ab36b06c9fb4e",
+          "possible_test_references": []
+        },
+        {
+          "file": "src/anyio/abc/_sockets.py",
+          "line": 40,
+          "function": "_validate_socket",
+          "snippet": "isinstance(sock_or_fd, int)",
+          "sha256": "8d05a73d7ee20c80f2bf2bd591bb858637b3c38a08d96820cdb5ba565dbe7aab",
+          "possible_test_references": []
+        },
+        {
+          "file": "src/anyio/abc/_sockets.py",
+          "line": 92,
+          "function": "_validate_socket",
+          "snippet": "isinstance(sock_or_fd, int)",
+          "sha256": "8d05a73d7ee20c80f2bf2bd591bb858637b3c38a08d96820cdb5ba565dbe7aab",
+          "possible_test_references": []
+        },
+        {
+          "file": "src/anyio/itertools.py",
+          "line": 497,
+          "function": "permutations",
+          "snippet": "isinstance(r, int)",
+          "sha256": "902bde51444e81ed472d45f9aedddbe4193ccc60014a53802ddb5027357deec7",
+          "possible_test_references": []
+        }
+      ],
+      "matcher_errors": []
+    }
+  },
+  "error": "KeyError: \"unknown transform 'none_identity'\""
+}

@@ -1,0 +1,26 @@
+{
+  "repository": "dbader/schedule",
+  "default_branch": "master",
+  "archived": false,
+  "license_metadata": "MIT",
+  "language": "Python",
+  "url": "https://github.com/dbader/schedule",
+  "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+  "revision": "82a43db1b938d8fdf60103bd41f329e06c8d3651",
+  "source_ref_url": "https://api.github.com/repos/dbader/schedule/git/ref/heads/master",
+  "status": "SCREEN_ERROR",
+  "treatment_runs": 0,
+  "test_runs": 0,
+  "license_files": {
+    "LICENSE.txt": "30a8352c318ce1b645acde0299697342d4380ed2637d7ca18a8ad25661e3b41b"
+  },
+  "skills": {
+    "bool_guard": {
+      "n_sites": 0,
+      "n_sites_with_possible_test_reference": 0,
+      "sites": [],
+      "matcher_errors": []
+    }
+  },
+  "error": "KeyError: \"unknown transform 'none_identity'\""
+}

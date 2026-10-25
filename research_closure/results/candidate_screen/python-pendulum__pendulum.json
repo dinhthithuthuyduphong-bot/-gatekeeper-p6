@@ -1,0 +1,140 @@
+{
+  "repository": "python-pendulum/pendulum",
+  "default_branch": "master",
+  "archived": false,
+  "license_metadata": "MIT",
+  "language": "Python",
+  "url": "https://github.com/python-pendulum/pendulum",
+  "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+  "revision": "e06dacedc4cdea90fa1286b3965d180ab94cf251",
+  "source_ref_url": "https://api.github.com/repos/python-pendulum/pendulum/git/ref/heads/master",
+  "status": "STATIC_ONLY_NOT_ELIGIBLE",
+  "treatment_runs": 0,
+  "test_runs": 0,
+  "license_files": {
+    "LICENSE": "79d76bbec3899d16482163a365c7f65e87a729993a1d65f960f4181e2ecb81a0"
+  },
+  "skills": {
+    "bool_guard": {
+      "n_sites": 11,
+      "n_sites_with_possible_test_reference": 1,
+      "sites": [
+        {
+          "file": "src/pendulum/__init__.py",
+          "line": 77,
+          "function": "timezone",
+          "snippet": "isinstance(name, int)",
+          "sha256": "6affdc6da84d0ac31a259941649c4eaa3049b6afe079113c8ba65896ed9236c4",
+          "possible_test_references": [
+            {
+              "file": "tests/datetime/test_diff.py",
+              "test": "test_diff_for_humans_now_and_second_with_timezone",
+              "line": 206,
+              "sha256": "08e7a5e9a82e5e29c960021025830ecedb749be246ffc502d758ad511395dd3a"
+            },
+            {
+              "file": "tests/tz/test_timezone.py",
+              "test": "test_skipped_time_with_error",
+              "line": 91,
+              "sha256": "6857e66b0f9accc10f4e849c65cfa76c5dbeb4af66f1676143d54405a3633a4b"
+            },
+            {
+              "file": "tests/tz/test_timezone.py",
+              "test": "test_repeated_time_with_error",
+              "line": 132,
+              "sha256": "6857e66b0f9accc10f4e849c65cfa76c5dbeb4af66f1676143d54405a3633a4b"
+            }
+          ]
+        },
+        {
+          "file": "src/pendulum/__init__.py",
+          "line": 100,
+          "function": "_safe_timezone",
+          "snippet": "isinstance(obj, (int, float))",
+          "sha256": "6affdc6da84d0ac31a259941649c4eaa3049b6afe079113c8ba65896ed9236c4",
+          "possible_test_references": []
+        },
+        {
+          "file": "src/pendulum/duration.py",
+          "line": 360,
+          "function": "__mul__",
+          "snippet": "isinstance(other, int)",
+          "sha256": "bd9bae64458f06807617d776c21fdf583f31ca421e633ebc266447a60d25da44",
+          "possible_test_references": []
+        },
+        {
+          "file": "src/pendulum/duration.py",
+          "line": 394,
+          "function": "__floordiv__",
+          "snippet": "isinstance(other, int)",
+          "sha256": "bd9bae64458f06807617d776c21fdf583f31ca421e633ebc266447a60d25da44",
+          "possible_test_references": []
+        },
+        {
+          "file": "src/pendulum/duration.py",
+          "line": 420,
+          "function": "__truediv__",
+          "snippet": "isinstance(other, int)",
+          "sha256": "bd9bae64458f06807617d776c21fdf583f31ca421e633ebc266447a60d25da44",
+          "possible_test_references": []
+        },
+        {
+          "file": "src/pendulum/duration.py",
+          "line": 384,
+          "function": "__floordiv__",
+          "snippet": "isinstance(other, (int, timedelta))",
+          "sha256": "bd9bae64458f06807617d776c21fdf583f31ca421e633ebc266447a60d25da44",
+          "possible_test_references": []
+        },
+        {
+          "file": "src/pendulum/duration.py",
+          "line": 410,
+          "function": "__truediv__",
+          "snippet": "isinstance(other, (int, float, timedelta))",
+          "sha256": "bd9bae64458f06807617d776c21fdf583f31ca421e633ebc266447a60d25da44",
+          "possible_test_references": []
+        },
+        {
+          "file": "src/pendulum/duration.py",
+          "line": 83,
+          "function": "__new__",
+          "snippet": "isinstance(years, int)",
+          "sha256": "bd9bae64458f06807617d776c21fdf583f31ca421e633ebc266447a60d25da44",
+          "possible_test_references": []
+        },
+        {
+          "file": "src/pendulum/duration.py",
+          "line": 83,
+          "function": "__new__",
+          "snippet": "isinstance(months, int)",
+          "sha256": "bd9bae64458f06807617d776c21fdf583f31ca421e633ebc266447a60d25da44",
+          "possible_test_references": []
+        },
+        {
+          "file": "src/pendulum/duration.py",
+          "line": 498,
+          "function": "__new__",
+          "snippet": "isinstance(years, int)",
+          "sha256": "bd9bae64458f06807617d776c21fdf583f31ca421e633ebc266447a60d25da44",
+          "possible_test_references": []
+        },
+        {
+          "file": "src/pendulum/duration.py",
+          "line": 498,
+          "function": "__new__",
+          "snippet": "isinstance(months, int)",
+          "sha256": "bd9bae64458f06807617d776c21fdf583f31ca421e633ebc266447a60d25da44",
+          "possible_test_references": []
+        }
+      ],
+      "matcher_errors": []
+    },
+    "none_identity": {
+      "n_sites": 0,
+      "n_sites_with_possible_test_reference": 0,
+      "sites": [],
+      "matcher_errors": []
+    }
+  },
+  "parse_errors": []
+}

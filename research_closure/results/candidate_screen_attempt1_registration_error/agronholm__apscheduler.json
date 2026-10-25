@@ -1,0 +1,43 @@
+{
+  "repository": "agronholm/apscheduler",
+  "default_branch": "master",
+  "archived": false,
+  "license_metadata": "MIT",
+  "language": "Python",
+  "url": "https://github.com/agronholm/apscheduler",
+  "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+  "revision": "bdaceb12792f104f25798dee2850d45f9e7d83f8",
+  "source_ref_url": "https://api.github.com/repos/agronholm/apscheduler/git/ref/heads/master",
+  "status": "SCREEN_ERROR",
+  "treatment_runs": 0,
+  "test_runs": 0,
+  "license_files": {
+    "LICENSE.txt": "35ed0eb40a2f7c262156ccab94b731a697808fcdc1c69f9491c991af204c2eb6"
+  },
+  "skills": {
+    "bool_guard": {
+      "n_sites": 2,
+      "n_sites_with_possible_test_reference": 0,
+      "sites": [
+        {
+          "file": "src/apscheduler/_converters.py",
+          "line": 62,
+          "function": "as_timedelta",
+          "snippet": "isinstance(value, (float, int))",
+          "sha256": "1e1da0614a0414668abb9faf8f28783e91c58c6b17d5a9f85b7bc354f15646b9",
+          "possible_test_references": []
+        },
+        {
+          "file": "src/apscheduler/_validators.py",
+          "line": 48,
+          "function": "check_value",
+          "snippet": "isinstance(val, (str, int, float, bool))",
+          "sha256": "56b42aa3cce8a66e3dcb66b68a735fd8e40ee6a12ae9b28edd62b2e272360a25",
+          "possible_test_references": []
+        }
+      ],
+      "matcher_errors": []
+    }
+  },
+  "error": "KeyError: \"unknown transform 'none_identity'\""
+}

@@ -1,0 +1,47 @@
+[
+  {
+    "command": [
+      "git",
+      "init",
+      "-q"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "-c",
+      "gc.auto=0",
+      "fetch",
+      "--depth=1",
+      "https://github.com/arrow-py/arrow.git",
+      "2224255c4acc594d734cef0bbc83360452a67983"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "From https://github.com/arrow-py/arrow\n * branch            2224255c4acc594d734cef0bbc83360452a67983 -> FETCH_HEAD\n"
+  },
+  {
+    "command": [
+      "git",
+      "checkout",
+      "--detach",
+      "FETCH_HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "HEAD is now at 2224255 Revert \"Fix humanize reporting \"a month\" for 16-day differences (#1240) (#1242)\" (#1264)\n"
+  },
+  {
+    "command": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "2224255c4acc594d734cef0bbc83360452a67983\n",
+    "stderr": ""
+  }
+]

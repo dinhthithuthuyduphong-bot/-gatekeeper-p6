@@ -1,0 +1,48 @@
+{
+  "repository": "arrow-py/arrow",
+  "default_branch": "master",
+  "archived": false,
+  "license_metadata": "Apache-2.0",
+  "language": "Python",
+  "url": "https://github.com/arrow-py/arrow",
+  "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+  "revision": "2224255c4acc594d734cef0bbc83360452a67983",
+  "source_ref_url": "https://api.github.com/repos/arrow-py/arrow/git/ref/heads/master",
+  "status": "STATIC_ONLY_NOT_ELIGIBLE",
+  "treatment_runs": 0,
+  "test_runs": 0,
+  "license_files": {
+    "LICENSE": "b481f87296cb0abdb13fd8cbb94b14c328be880ec9e68547a61b84dacffd067a"
+  },
+  "skills": {
+    "bool_guard": {
+      "n_sites": 1,
+      "n_sites_with_possible_test_reference": 1,
+      "sites": [
+        {
+          "file": "arrow/util.py",
+          "line": 49,
+          "function": "is_timestamp",
+          "snippet": "isinstance(value, (int, float, str))",
+          "sha256": "c6d71f313c62469c87227333d9fe7a6bfd62be6353c699c816810e28551ddb0b",
+          "possible_test_references": [
+            {
+              "file": "tests/test_util.py",
+              "test": "test_is_timestamp",
+              "line": 39,
+              "sha256": "e2b297090f38400b17faddeaff93e6a2f3e079cd5620b9548f45739b27184979"
+            }
+          ]
+        }
+      ],
+      "matcher_errors": []
+    },
+    "none_identity": {
+      "n_sites": 0,
+      "n_sites_with_possible_test_reference": 0,
+      "sites": [],
+      "matcher_errors": []
+    }
+  },
+  "parse_errors": []
+}

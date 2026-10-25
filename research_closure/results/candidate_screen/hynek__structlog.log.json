@@ -1,0 +1,47 @@
+[
+  {
+    "command": [
+      "git",
+      "init",
+      "-q"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "-c",
+      "gc.auto=0",
+      "fetch",
+      "--depth=1",
+      "https://github.com/hynek/structlog.git",
+      "19c4f21059e853114efa7a93b6e675d93bf7934e"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "From https://github.com/hynek/structlog\n * branch            19c4f21059e853114efa7a93b6e675d93bf7934e -> FETCH_HEAD\n"
+  },
+  {
+    "command": [
+      "git",
+      "checkout",
+      "--detach",
+      "FETCH_HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "HEAD is now at 19c4f21 Make imports lazy on Python 3.15 (#849)\n"
+  },
+  {
+    "command": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "19c4f21059e853114efa7a93b6e675d93bf7934e\n",
+    "stderr": ""
+  }
+]

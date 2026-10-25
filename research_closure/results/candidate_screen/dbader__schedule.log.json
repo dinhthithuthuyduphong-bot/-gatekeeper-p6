@@ -1,0 +1,47 @@
+[
+  {
+    "command": [
+      "git",
+      "init",
+      "-q"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "-c",
+      "gc.auto=0",
+      "fetch",
+      "--depth=1",
+      "https://github.com/dbader/schedule.git",
+      "82a43db1b938d8fdf60103bd41f329e06c8d3651"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "From https://github.com/dbader/schedule\n * branch            82a43db1b938d8fdf60103bd41f329e06c8d3651 -> FETCH_HEAD\n"
+  },
+  {
+    "command": [
+      "git",
+      "checkout",
+      "--detach",
+      "FETCH_HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "HEAD is now at 82a43db Release 1.2.2 (#625)\n"
+  },
+  {
+    "command": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "82a43db1b938d8fdf60103bd41f329e06c8d3651\n",
+    "stderr": ""
+  }
+]

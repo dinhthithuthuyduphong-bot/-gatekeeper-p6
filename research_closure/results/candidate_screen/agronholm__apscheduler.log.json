@@ -1,0 +1,47 @@
+[
+  {
+    "command": [
+      "git",
+      "init",
+      "-q"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "-c",
+      "gc.auto=0",
+      "fetch",
+      "--depth=1",
+      "https://github.com/agronholm/apscheduler.git",
+      "bdaceb12792f104f25798dee2850d45f9e7d83f8"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "From https://github.com/agronholm/apscheduler\n * branch            bdaceb12792f104f25798dee2850d45f9e7d83f8 -> FETCH_HEAD\n"
+  },
+  {
+    "command": [
+      "git",
+      "checkout",
+      "--detach",
+      "FETCH_HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "HEAD is now at bdaceb1 Return only active schedules from MemoryDataStore.get_next_schedule_run_time() (#1158)\n"
+  },
+  {
+    "command": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "bdaceb12792f104f25798dee2850d45f9e7d83f8\n",
+    "stderr": ""
+  }
+]

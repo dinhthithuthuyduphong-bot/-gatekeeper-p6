@@ -1,0 +1,57 @@
+{
+  "repository": "pydantic/pydantic-settings",
+  "default_branch": "main",
+  "archived": false,
+  "license_metadata": "MIT",
+  "language": "Python",
+  "url": "https://github.com/pydantic/pydantic-settings",
+  "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+  "revision": "7e2dacb6db07b41abb0c80d0608e46e197265554",
+  "source_ref_url": "https://api.github.com/repos/pydantic/pydantic-settings/git/ref/heads/main",
+  "status": "STATIC_ONLY_NOT_ELIGIBLE",
+  "treatment_runs": 0,
+  "test_runs": 0,
+  "license_files": {
+    "LICENSE": "eb355a753e020346d33d83bf9769135b89fc610568ac531a01c295bcee7fd998"
+  },
+  "skills": {
+    "bool_guard": {
+      "n_sites": 3,
+      "n_sites_with_possible_test_reference": 0,
+      "sites": [
+        {
+          "file": "pydantic_settings/sources/providers/cli.py",
+          "line": 108,
+          "function": "_count_option_values",
+          "snippet": "isinstance(action.nargs, int)",
+          "sha256": "3355ec996ca275091750586cc528ec892f412d45a9b1bed8bf044ec51bf4a0a9",
+          "possible_test_references": []
+        },
+        {
+          "file": "pydantic_settings/sources/utils.py",
+          "line": 385,
+          "function": "_literal_has_numeric_enum",
+          "snippet": "isinstance(arg, (int, float))",
+          "sha256": "212e13b3c59c93f2199b7b538db1f49bbc9dbcc2fd60ae3ad91b69459b621be6",
+          "possible_test_references": []
+        },
+        {
+          "file": "pydantic_settings/sources/utils.py",
+          "line": 449,
+          "function": "_get_alias_names",
+          "snippet": "isinstance(alias_path.path[1], int)",
+          "sha256": "212e13b3c59c93f2199b7b538db1f49bbc9dbcc2fd60ae3ad91b69459b621be6",
+          "possible_test_references": []
+        }
+      ],
+      "matcher_errors": []
+    },
+    "none_identity": {
+      "n_sites": 0,
+      "n_sites_with_possible_test_reference": 0,
+      "sites": [],
+      "matcher_errors": []
+    }
+  },
+  "parse_errors": []
+}

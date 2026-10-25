@@ -1,0 +1,47 @@
+[
+  {
+    "command": [
+      "git",
+      "init",
+      "-q"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "-c",
+      "gc.auto=0",
+      "fetch",
+      "--depth=1",
+      "https://github.com/pallets/itsdangerous.git",
+      "672971d66a2ef9f85151e53283113f33d642dabd"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "From https://github.com/pallets/itsdangerous\n * branch            672971d66a2ef9f85151e53283113f33d642dabd -> FETCH_HEAD\n"
+  },
+  {
+    "command": [
+      "git",
+      "checkout",
+      "--detach",
+      "FETCH_HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "HEAD is now at 672971d Merge branch 'stable'\n"
+  },
+  {
+    "command": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "672971d66a2ef9f85151e53283113f33d642dabd\n",
+    "stderr": ""
+  }
+]

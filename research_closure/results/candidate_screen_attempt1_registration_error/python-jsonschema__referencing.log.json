@@ -1,0 +1,47 @@
+[
+  {
+    "command": [
+      "git",
+      "init",
+      "-q"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "-c",
+      "gc.auto=0",
+      "fetch",
+      "--depth=1",
+      "https://github.com/python-jsonschema/referencing.git",
+      "19ad61722eaec82086c37cd47ba4a801a5bd8c91"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "From https://github.com/python-jsonschema/referencing\n * branch            19ad61722eaec82086c37cd47ba4a801a5bd8c91 -> FETCH_HEAD\n"
+  },
+  {
+    "command": [
+      "git",
+      "checkout",
+      "--detach",
+      "FETCH_HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "HEAD is now at 19ad617 Merge pull request #428 from python-jsonschema/pre-commit-ci-update-config\n"
+  },
+  {
+    "command": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "19ad61722eaec82086c37cd47ba4a801a5bd8c91\n",
+    "stderr": ""
+  }
+]

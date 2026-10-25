@@ -1,0 +1,43 @@
+{
+  "repository": "encode/httpx",
+  "default_branch": "master",
+  "archived": false,
+  "license_metadata": "BSD-3-Clause",
+  "language": "Python",
+  "url": "https://github.com/encode/httpx",
+  "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+  "revision": "b5addb64f0161ff6bfe94c124ef76f6a1fba5254",
+  "source_ref_url": "https://api.github.com/repos/encode/httpx/git/ref/heads/master",
+  "status": "SCREEN_ERROR",
+  "treatment_runs": 0,
+  "test_runs": 0,
+  "license_files": {
+    "LICENSE.md": "4ec59d544f12b5f539a3a716fd321ac58ccd8030b465221f2c880200cdf28d8d"
+  },
+  "skills": {
+    "bool_guard": {
+      "n_sites": 2,
+      "n_sites_with_possible_test_reference": 0,
+      "sites": [
+        {
+          "file": "httpx/_multipart.py",
+          "line": 80,
+          "function": "__init__",
+          "snippet": "isinstance(value, (str, bytes, int, float))",
+          "sha256": "28e1c465997aa28860f663da2b2caedf8e6aab5ac92e0df94d41b7600cd70776",
+          "possible_test_references": []
+        },
+        {
+          "file": "httpx/_urlparse.py",
+          "line": 237,
+          "function": "urlparse",
+          "snippet": "isinstance(port, int)",
+          "sha256": "640987e3b38d7e4c6bae3f8f3d88467a21e36fa0232824be00d58837838bfca6",
+          "possible_test_references": []
+        }
+      ],
+      "matcher_errors": []
+    }
+  },
+  "error": "KeyError: \"unknown transform 'none_identity'\""
+}

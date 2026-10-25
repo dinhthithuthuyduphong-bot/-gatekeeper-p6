@@ -1,0 +1,47 @@
+[
+  {
+    "command": [
+      "git",
+      "init",
+      "-q"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "-c",
+      "gc.auto=0",
+      "fetch",
+      "--depth=1",
+      "https://github.com/Kludex/starlette.git",
+      "8aa828ceaff764a2e57932fb42fdf105a47c4c83"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "From https://github.com/Kludex/starlette\n * branch            8aa828ceaff764a2e57932fb42fdf105a47c4c83 -> FETCH_HEAD\n"
+  },
+  {
+    "command": [
+      "git",
+      "checkout",
+      "--detach",
+      "FETCH_HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "HEAD is now at 8aa828c Version 1.10.0 (#3728)\n"
+  },
+  {
+    "command": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "8aa828ceaff764a2e57932fb42fdf105a47c4c83\n",
+    "stderr": ""
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "command": [
+      "git",
+      "init",
+      "-q"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "-c",
+      "gc.auto=0",
+      "fetch",
+      "--depth=1",
+      "https://github.com/python-pendulum/pendulum.git",
+      "e06dacedc4cdea90fa1286b3965d180ab94cf251"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "From https://github.com/python-pendulum/pendulum\n * branch            e06dacedc4cdea90fa1286b3965d180ab94cf251 -> FETCH_HEAD\n"
+  },
+  {
+    "command": [
+      "git",
+      "checkout",
+      "--detach",
+      "FETCH_HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "HEAD is now at e06dace Bump version and update changelog for release (#1050)\n"
+  },
+  {
+    "command": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "e06dacedc4cdea90fa1286b3965d180ab94cf251\n",
+    "stderr": ""
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "command": [
+      "git",
+      "init",
+      "-q"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "-c",
+      "gc.auto=0",
+      "fetch",
+      "--depth=1",
+      "https://github.com/marshmallow-code/marshmallow.git",
+      "b762ea2d59ca52fe5df76b90de14bed7e5ec5607"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "From https://github.com/marshmallow-code/marshmallow\n * branch            b762ea2d59ca52fe5df76b90de14bed7e5ec5607 -> FETCH_HEAD\n"
+  },
+  {
+    "command": [
+      "git",
+      "checkout",
+      "--detach",
+      "FETCH_HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "HEAD is now at b762ea2 Update CHANGELOG\n"
+  },
+  {
+    "command": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "b762ea2d59ca52fe5df76b90de14bed7e5ec5607\n",
+    "stderr": ""
+  }
+]

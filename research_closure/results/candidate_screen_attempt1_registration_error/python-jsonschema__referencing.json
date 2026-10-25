@@ -1,0 +1,26 @@
+{
+  "repository": "python-jsonschema/referencing",
+  "default_branch": "main",
+  "archived": false,
+  "license_metadata": "MIT",
+  "language": "Python",
+  "url": "https://github.com/python-jsonschema/referencing",
+  "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+  "revision": "19ad61722eaec82086c37cd47ba4a801a5bd8c91",
+  "source_ref_url": "https://api.github.com/repos/python-jsonschema/referencing/git/ref/heads/main",
+  "status": "SCREEN_ERROR",
+  "treatment_runs": 0,
+  "test_runs": 0,
+  "license_files": {
+    "COPYING": "42dcd63495f87b4eb7c7757afa379bb55a53f94afd7a5f657d9adf57236e515c"
+  },
+  "skills": {
+    "bool_guard": {
+      "n_sites": 0,
+      "n_sites_with_possible_test_reference": 0,
+      "sites": [],
+      "matcher_errors": []
+    }
+  },
+  "error": "KeyError: \"unknown transform 'none_identity'\""
+}

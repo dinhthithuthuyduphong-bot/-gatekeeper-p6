@@ -1,0 +1,130 @@
+{
+  "model_calls": 0,
+  "checks": [
+    {
+      "check": "unit_tests",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "returncode": 0,
+      "seconds": 35.183135076000326
+    },
+    {
+      "check": "freeze_study_d",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "tools/freeze_study.py",
+        "verify",
+        "study_d"
+      ],
+      "returncode": 0,
+      "seconds": 0.05052444100010689
+    },
+    {
+      "check": "freeze_study_e",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "tools/freeze_study.py",
+        "verify",
+        "study_e"
+      ],
+      "returncode": 0,
+      "seconds": 0.04860354099992037
+    },
+    {
+      "check": "freeze_study_f",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "tools/freeze_study.py",
+        "verify",
+        "study_f"
+      ],
+      "returncode": 0,
+      "seconds": 0.049524266999924293
+    },
+    {
+      "check": "freeze_study_g",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "tools/freeze_study.py",
+        "verify",
+        "study_g"
+      ],
+      "returncode": 0,
+      "seconds": 0.04754540200019619
+    },
+    {
+      "check": "freeze_study_h",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "tools/freeze_study.py",
+        "verify",
+        "study_h"
+      ],
+      "returncode": 0,
+      "seconds": 0.046297563999814884
+    },
+    {
+      "check": "results_check",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "tools/results_check.py"
+      ],
+      "returncode": 0,
+      "seconds": 0.07113335100029872
+    },
+    {
+      "check": "study_i_ci_raw_audit",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "study_i/verify.py",
+        "--results",
+        "study_i/results/ci-40084717332/inputs",
+        "--output",
+        "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/final_validation_v2/study_i_verified"
+      ],
+      "returncode": 0,
+      "seconds": 0.20983351999984734
+    },
+    {
+      "check": "statistics_replay",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "tools/closure_statistics.py",
+        "--out",
+        "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/final_validation_v2/statistics"
+      ],
+      "returncode": 0,
+      "seconds": 4.129781529999946
+    },
+    {
+      "check": "cost_raw_audit",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "tools/verify_cost_evidence.py",
+        "--out",
+        "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/final_validation_v2/COST_VERIFIED.json"
+      ],
+      "returncode": 0,
+      "seconds": 0.2892874789999951
+    },
+    {
+      "check": "prospective_status",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "tools/prospective_preflight.py",
+        "--report-only",
+        "--out",
+        "/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/final_validation_v2/PROSPECTIVE_STATUS.json"
+      ],
+      "returncode": 0,
+      "seconds": 0.048900326000421046
+    }
+  ]
+}

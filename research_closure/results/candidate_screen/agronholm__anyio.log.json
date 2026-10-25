@@ -1,0 +1,47 @@
+[
+  {
+    "command": [
+      "git",
+      "init",
+      "-q"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "-c",
+      "gc.auto=0",
+      "fetch",
+      "--depth=1",
+      "https://github.com/agronholm/anyio.git",
+      "4d5115466d923e7eb3de4ca0ff59ad683556c248"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "From https://github.com/agronholm/anyio\n * branch            4d5115466d923e7eb3de4ca0ff59ad683556c248 -> FETCH_HEAD\n"
+  },
+  {
+    "command": [
+      "git",
+      "checkout",
+      "--detach",
+      "FETCH_HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "HEAD is now at 4d51154 Modernized the memory object stream tests\n"
+  },
+  {
+    "command": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "4d5115466d923e7eb3de4ca0ff59ad683556c248\n",
+    "stderr": ""
+  }
+]

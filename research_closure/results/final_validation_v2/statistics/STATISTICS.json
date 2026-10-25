@@ -1,0 +1,117 @@
+{
+  "evidence": "POST_HOC_REPLAY_NOT_NEW_TARGETS",
+  "model_calls": 0,
+  "replications": 50,
+  "config_sha256": "bb728e8348a9c638bef05e476935c80402d14ee4c5a857e5a30fc7ad8c945b67",
+  "source_sha256": "713a0c2d0c9f138e9ecda491f08a2b4cbdc0eaf1251269a7253fe0094e94c2ad",
+  "methods": {
+    "GK original": {
+      "false_families": 0,
+      "draws": 65025,
+      "admitted": {
+        "rho_0": 50,
+        "rho_100": 45,
+        "rho_200": 17,
+        "rho_300": 11,
+        "rho_500": 0,
+        "rho_1000": 0
+      }
+    },
+    "GK adaptive (post hoc)": {
+      "false_families": 0,
+      "draws": 67117,
+      "admitted": {
+        "rho_0": 50,
+        "rho_100": 41,
+        "rho_200": 14,
+        "rho_300": 8,
+        "rho_500": 0,
+        "rho_1000": 0
+      }
+    },
+    "GK balanced mixture (post hoc)": {
+      "false_families": 0,
+      "draws": 68127,
+      "admitted": {
+        "rho_0": 50,
+        "rho_100": 44,
+        "rho_200": 21,
+        "rho_300": 11,
+        "rho_500": 0,
+        "rho_1000": 0
+      }
+    },
+    "Fixed 100, IUT Bonferroni": {
+      "false_families": 0,
+      "draws": 30000,
+      "admitted": {
+        "rho_0": 34,
+        "rho_100": 13,
+        "rho_200": 2,
+        "rho_300": 2,
+        "rho_500": 0,
+        "rho_1000": 0
+      }
+    },
+    "Fixed 100, IUT Holm": {
+      "false_families": 0,
+      "draws": 30000,
+      "admitted": {
+        "rho_0": 34,
+        "rho_100": 15,
+        "rho_200": 3,
+        "rho_300": 2,
+        "rho_500": 0,
+        "rho_1000": 0
+      }
+    },
+    "Fixed 200, IUT Bonferroni": {
+      "false_families": 0,
+      "draws": 60000,
+      "admitted": {
+        "rho_0": 50,
+        "rho_100": 42,
+        "rho_200": 16,
+        "rho_300": 12,
+        "rho_500": 0,
+        "rho_1000": 0
+      }
+    },
+    "Fixed 200, IUT Holm": {
+      "false_families": 0,
+      "draws": 60000,
+      "admitted": {
+        "rho_0": 50,
+        "rho_100": 42,
+        "rho_200": 19,
+        "rho_300": 15,
+        "rho_500": 0,
+        "rho_1000": 0
+      }
+    },
+    "Fixed 300, IUT Bonferroni": {
+      "false_families": 0,
+      "draws": 90000,
+      "admitted": {
+        "rho_0": 50,
+        "rho_100": 50,
+        "rho_200": 35,
+        "rho_300": 16,
+        "rho_500": 0,
+        "rho_1000": 0
+      }
+    },
+    "Fixed 300, IUT Holm": {
+      "false_families": 0,
+      "draws": 90000,
+      "admitted": {
+        "rho_0": 50,
+        "rho_100": 50,
+        "rho_200": 35,
+        "rho_300": 16,
+        "rho_500": 0,
+        "rho_1000": 0
+      }
+    }
+  }
+}

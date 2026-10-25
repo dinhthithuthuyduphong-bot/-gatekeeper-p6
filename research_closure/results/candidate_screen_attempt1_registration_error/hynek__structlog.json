@@ -1,0 +1,27 @@
+{
+  "repository": "hynek/structlog",
+  "default_branch": "main",
+  "archived": false,
+  "license_metadata": "NOASSERTION",
+  "language": "Python",
+  "url": "https://github.com/hynek/structlog",
+  "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+  "revision": "19c4f21059e853114efa7a93b6e675d93bf7934e",
+  "source_ref_url": "https://api.github.com/repos/hynek/structlog/git/ref/heads/main",
+  "status": "SCREEN_ERROR",
+  "treatment_runs": 0,
+  "test_runs": 0,
+  "license_files": {
+    "LICENSE-APACHE": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+    "LICENSE-MIT": "2bc12bb94eec2ccea211daebb763235bec3169276197a7be1f858963db31c5dd"
+  },
+  "skills": {
+    "bool_guard": {
+      "n_sites": 0,
+      "n_sites_with_possible_test_reference": 0,
+      "sites": [],
+      "matcher_errors": []
+    }
+  },
+  "error": "KeyError: \"unknown transform 'none_identity'\""
+}

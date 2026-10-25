@@ -1,0 +1,47 @@
+[
+  {
+    "command": [
+      "git",
+      "init",
+      "-q"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "-c",
+      "gc.auto=0",
+      "fetch",
+      "--depth=1",
+      "https://github.com/encode/httpx.git",
+      "b5addb64f0161ff6bfe94c124ef76f6a1fba5254"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "From https://github.com/encode/httpx\n * branch            b5addb64f0161ff6bfe94c124ef76f6a1fba5254 -> FETCH_HEAD\n"
+  },
+  {
+    "command": [
+      "git",
+      "checkout",
+      "--detach",
+      "FETCH_HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "HEAD is now at b5addb6 Adapt test_response_decode_text_using_autodetect for chardet 6.0 (#3773)\n"
+  },
+  {
+    "command": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "b5addb64f0161ff6bfe94c124ef76f6a1fba5254\n",
+    "stderr": ""
+  }
+]

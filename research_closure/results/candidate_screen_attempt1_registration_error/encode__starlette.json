@@ -1,0 +1,37 @@
+{
+  "repository": "encode/starlette",
+  "license_metadata": "BSD-3-Clause",
+  "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+  "canonical_repository": "Kludex/starlette",
+  "default_branch": "main",
+  "archived": false,
+  "language": "Python",
+  "url": "https://github.com/Kludex/starlette",
+  "revision": "8aa828ceaff764a2e57932fb42fdf105a47c4c83",
+  "source_ref_url": "https://api.github.com/repos/Kludex/starlette/git/ref/heads/main",
+  "metadata_note": "Original repository redirected; retained original selected name and resolved the same GitHub repository ID 138597372.",
+  "status": "SCREEN_ERROR",
+  "treatment_runs": 0,
+  "test_runs": 0,
+  "license_files": {
+    "LICENSE.md": "dcb95677a02240243187e964f941847d19b17821cf99e5afae684fab328c19bf"
+  },
+  "skills": {
+    "bool_guard": {
+      "n_sites": 1,
+      "n_sites_with_possible_test_reference": 0,
+      "sites": [
+        {
+          "file": "starlette/middleware/exceptions.py",
+          "line": 41,
+          "function": "add_exception_handler",
+          "snippet": "isinstance(exc_class_or_status_code, int)",
+          "sha256": "ece812522060c074b854c9a9696970db5b8328d0e638cccb559ad60cb0d4a96a",
+          "possible_test_references": []
+        }
+      ],
+      "matcher_errors": []
+    }
+  },
+  "error": "KeyError: \"unknown transform 'none_identity'\""
+}

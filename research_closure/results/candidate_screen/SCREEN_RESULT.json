@@ -1,0 +1,861 @@
+{
+  "evidence": "STATIC_SCREEN_NOT_PROSPECTIVE_OUTCOMES",
+  "model_calls": 0,
+  "treatment_runs": 0,
+  "test_runs": 0,
+  "roster_sha256": "aad513c6d09aabe35ca56f00b654765e96a04ab3a599567b200e62e3f08b6aaa",
+  "code_sha256": "d1bccd7e6b65ee0b1a89953078dcfa82cfb412f7fd8881338c2d8aefff0f6ee3",
+  "skill_sha256": {
+    "study_d/skills/bool-excluded-from-int.json": "01e469cc1f0a830374cc4200d7eedc8c97171337e0b6e8e0137c6b638d4f1aa1",
+    "study_g/skills/none-identity.json": "89351f56b7ae95df18ed47d4e7d18562a7d43dc0d8f5e540eb4266d8072f7995"
+  },
+  "candidates": [
+    {
+      "repository": "agronholm/anyio",
+      "default_branch": "master",
+      "archived": false,
+      "license_metadata": "MIT",
+      "language": "Python",
+      "url": "https://github.com/agronholm/anyio",
+      "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+      "revision": "4d5115466d923e7eb3de4ca0ff59ad683556c248",
+      "source_ref_url": "https://api.github.com/repos/agronholm/anyio/git/ref/heads/master",
+      "status": "STATIC_ONLY_NOT_ELIGIBLE",
+      "treatment_runs": 0,
+      "test_runs": 0,
+      "license_files": {
+        "LICENSE": "5361ac9dc58f2ef5fd2e9b09c68297c17f04950909bbc8023bdb82eacf22c2b0"
+      },
+      "skills": {
+        "bool_guard": {
+          "n_sites": 17,
+          "n_sites_with_possible_test_reference": 11,
+          "sites": [
+            {
+              "file": "src/anyio/_backends/_asyncio.py",
+              "line": 1644,
+              "function": "send_fds",
+              "snippet": "isinstance(fd, int)",
+              "sha256": "8502570afae1bffed2918135b9057ec59255033832ed97ce3846120efd846d05",
+              "possible_test_references": [
+                {
+                  "file": "tests/test_sockets.py",
+                  "test": "test_send_fds",
+                  "line": 1592,
+                  "sha256": "c005ff715721c87fa4541ed9d3822126b8ae7b8ea34af16ccd3478662a02ca89"
+                },
+                {
+                  "file": "tests/test_sockets.py",
+                  "test": "test_send_fds_large_message",
+                  "line": 1628,
+                  "sha256": "c005ff715721c87fa4541ed9d3822126b8ae7b8ea34af16ccd3478662a02ca89"
+                }
+              ]
+            },
+            {
+              "file": "src/anyio/_backends/_asyncio.py",
+              "line": 3045,
+              "function": "wait_readable",
+              "snippet": "isinstance(obj, int)",
+              "sha256": "8502570afae1bffed2918135b9057ec59255033832ed97ce3846120efd846d05",
+              "possible_test_references": [
+                {
+                  "file": "tests/test_sockets.py",
+                  "test": "test_interrupted_by_close",
+                  "line": 3462,
+                  "sha256": "c005ff715721c87fa4541ed9d3822126b8ae7b8ea34af16ccd3478662a02ca89"
+                },
+                {
+                  "file": "tests/test_sockets.py",
+                  "test": "test_cancelled_send_does_not_send_the_next_one",
+                  "line": 277,
+                  "sha256": "c005ff715721c87fa4541ed9d3822126b8ae7b8ea34af16ccd3478662a02ca89"
+                }
+              ]
+            },
+            {
+              "file": "src/anyio/_backends/_asyncio.py",
+              "line": 3098,
+              "function": "wait_writable",
+              "snippet": "isinstance(obj, int)",
+              "sha256": "8502570afae1bffed2918135b9057ec59255033832ed97ce3846120efd846d05",
+              "possible_test_references": [
+                {
+                  "file": "tests/test_sockets.py",
+                  "test": "test_interrupted_by_close",
+                  "line": 3462,
+                  "sha256": "c005ff715721c87fa4541ed9d3822126b8ae7b8ea34af16ccd3478662a02ca89"
+                }
+              ]
+            },
+            {
+              "file": "src/anyio/_backends/_asyncio.py",
+              "line": 3145,
+              "function": "notify_closing",
+              "snippet": "isinstance(obj, int)",
+              "sha256": "8502570afae1bffed2918135b9057ec59255033832ed97ce3846120efd846d05",
+              "possible_test_references": [
+                {
+                  "file": "tests/test_sockets.py",
+                  "test": "test_interrupted_by_close",
+                  "line": 3462,
+                  "sha256": "c005ff715721c87fa4541ed9d3822126b8ae7b8ea34af16ccd3478662a02ca89"
+                }
+              ]
+            },
+            {
+              "file": "src/anyio/_backends/_asyncio.py",
+              "line": 1597,
+              "function": "receive_fds",
+              "snippet": "isinstance(msglen, int)",
+              "sha256": "8502570afae1bffed2918135b9057ec59255033832ed97ce3846120efd846d05",
+              "possible_test_references": [
+                {
+                  "file": "tests/test_sockets.py",
+                  "test": "test_receive_fds",
+                  "line": 1547,
+                  "sha256": "c005ff715721c87fa4541ed9d3822126b8ae7b8ea34af16ccd3478662a02ca89"
+                },
+                {
+                  "file": "tests/test_sockets.py",
+                  "test": "test_send_fds_large_message",
+                  "line": 1628,
+                  "sha256": "c005ff715721c87fa4541ed9d3822126b8ae7b8ea34af16ccd3478662a02ca89"
+                }
+              ]
+            },
+            {
+              "file": "src/anyio/_backends/_asyncio.py",
+              "line": 1599,
+              "function": "receive_fds",
+              "snippet": "isinstance(maxfds, int)",
+              "sha256": "8502570afae1bffed2918135b9057ec59255033832ed97ce3846120efd846d05",
+              "possible_test_references": [
+                {
+                  "file": "tests/test_sockets.py",
+                  "test": "test_receive_fds",
+                  "line": 1547,
+                  "sha256": "c005ff715721c87fa4541ed9d3822126b8ae7b8ea34af16ccd3478662a02ca89"
+                },
+                {
+                  "file": "tests/test_sockets.py",
+                  "test": "test_send_fds_large_message",
+                  "line": 1628,
+                  "sha256": "c005ff715721c87fa4541ed9d3822126b8ae7b8ea34af16ccd3478662a02ca89"
+                }
+              ]
+            },
+            {
+              "file": "src/anyio/_backends/_asyncio.py",
+              "line": 2216,
+              "function": "total_tokens",
+              "snippet": "isinstance(value, int)",
+              "sha256": "8502570afae1bffed2918135b9057ec59255033832ed97ce3846120efd846d05",
+              "possible_test_references": []
+            },
+            {
+              "file": "src/anyio/_backends/_trio.py",
+              "line": 559,
+              "function": "send_fds",
+              "snippet": "isinstance(fd, int)",
+              "sha256": "653a8de2ba2ce0165edaf298119ca49a9d3327f8636c4e25fbbe5aee6d21eaae",
+              "possible_test_references": [
+                {
+                  "file": "tests/test_sockets.py",
+                  "test": "test_send_fds",
+                  "line": 1592,
+                  "sha256": "c005ff715721c87fa4541ed9d3822126b8ae7b8ea34af16ccd3478662a02ca89"
+                },
+                {
+                  "file": "tests/test_sockets.py",
+                  "test": "test_send_fds_large_message",
+                  "line": 1628,
+                  "sha256": "c005ff715721c87fa4541ed9d3822126b8ae7b8ea34af16ccd3478662a02ca89"
+                }
+              ]
+            },
+            {
+              "file": "src/anyio/_backends/_trio.py",
+              "line": 519,
+              "function": "receive_fds",
+              "snippet": "isinstance(msglen, int)",
+              "sha256": "653a8de2ba2ce0165edaf298119ca49a9d3327f8636c4e25fbbe5aee6d21eaae",
+              "possible_test_references": [
+                {
+                  "file": "tests/test_sockets.py",
+                  "test": "test_receive_fds",
+                  "line": 1547,
+                  "sha256": "c005ff715721c87fa4541ed9d3822126b8ae7b8ea34af16ccd3478662a02ca89"
+                },
+                {
+                  "file": "tests/test_sockets.py",
+                  "test": "test_send_fds_large_message",
+                  "line": 1628,
+                  "sha256": "c005ff715721c87fa4541ed9d3822126b8ae7b8ea34af16ccd3478662a02ca89"
+                }
+              ]
+            },
+            {
+              "file": "src/anyio/_backends/_trio.py",
+              "line": 521,
+              "function": "receive_fds",
+              "snippet": "isinstance(maxfds, int)",
+              "sha256": "653a8de2ba2ce0165edaf298119ca49a9d3327f8636c4e25fbbe5aee6d21eaae",
+              "possible_test_references": [
+                {
+                  "file": "tests/test_sockets.py",
+                  "test": "test_receive_fds",
+                  "line": 1547,
+                  "sha256": "c005ff715721c87fa4541ed9d3822126b8ae7b8ea34af16ccd3478662a02ca89"
+                },
+                {
+                  "file": "tests/test_sockets.py",
+                  "test": "test_send_fds_large_message",
+                  "line": 1628,
+                  "sha256": "c005ff715721c87fa4541ed9d3822126b8ae7b8ea34af16ccd3478662a02ca89"
+                }
+              ]
+            },
+            {
+              "file": "src/anyio/_core/_streams.py",
+              "line": 39,
+              "function": "__new__",
+              "snippet": "isinstance(max_buffer_size, int)",
+              "sha256": "15ccc5c08803a6790ad1b3835895cca6c50961dbc00f4e24694686cc953c0cad",
+              "possible_test_references": []
+            },
+            {
+              "file": "src/anyio/_core/_synchronization.py",
+              "line": 412,
+              "function": "__init__",
+              "snippet": "isinstance(initial_value, int)",
+              "sha256": "814b478ed64c7ff4c13f23767e5f3b3977e676b31f6b1f0ae31ab36b06c9fb4e",
+              "possible_test_references": [
+                {
+                  "file": "tests/test_contextmanagers.py",
+                  "test": "test_call_superclass_method",
+                  "line": 124,
+                  "sha256": "f7b30ad5c1b4bf8c5db09ca5d34f914274af4054dc459a66c90a2b9e01949c80"
+                },
+                {
+                  "file": "tests/test_contextmanagers.py",
+                  "test": "test_call_superclass_method",
+                  "line": 228,
+                  "sha256": "f7b30ad5c1b4bf8c5db09ca5d34f914274af4054dc459a66c90a2b9e01949c80"
+                }
+              ]
+            },
+            {
+              "file": "src/anyio/_core/_synchronization.py",
+              "line": 417,
+              "function": "__init__",
+              "snippet": "isinstance(max_value, int)",
+              "sha256": "814b478ed64c7ff4c13f23767e5f3b3977e676b31f6b1f0ae31ab36b06c9fb4e",
+              "possible_test_references": [
+                {
+                  "file": "tests/test_contextmanagers.py",
+                  "test": "test_call_superclass_method",
+                  "line": 124,
+                  "sha256": "f7b30ad5c1b4bf8c5db09ca5d34f914274af4054dc459a66c90a2b9e01949c80"
+                },
+                {
+                  "file": "tests/test_contextmanagers.py",
+                  "test": "test_call_superclass_method",
+                  "line": 228,
+                  "sha256": "f7b30ad5c1b4bf8c5db09ca5d34f914274af4054dc459a66c90a2b9e01949c80"
+                }
+              ]
+            },
+            {
+              "file": "src/anyio/_core/_synchronization.py",
+              "line": 693,
+              "function": "total_tokens",
+              "snippet": "isinstance(value, int)",
+              "sha256": "814b478ed64c7ff4c13f23767e5f3b3977e676b31f6b1f0ae31ab36b06c9fb4e",
+              "possible_test_references": []
+            },
+            {
+              "file": "src/anyio/abc/_sockets.py",
+              "line": 40,
+              "function": "_validate_socket",
+              "snippet": "isinstance(sock_or_fd, int)",
+              "sha256": "8d05a73d7ee20c80f2bf2bd591bb858637b3c38a08d96820cdb5ba565dbe7aab",
+              "possible_test_references": []
+            },
+            {
+              "file": "src/anyio/abc/_sockets.py",
+              "line": 92,
+              "function": "_validate_socket",
+              "snippet": "isinstance(sock_or_fd, int)",
+              "sha256": "8d05a73d7ee20c80f2bf2bd591bb858637b3c38a08d96820cdb5ba565dbe7aab",
+              "possible_test_references": []
+            },
+            {
+              "file": "src/anyio/itertools.py",
+              "line": 497,
+              "function": "permutations",
+              "snippet": "isinstance(r, int)",
+              "sha256": "902bde51444e81ed472d45f9aedddbe4193ccc60014a53802ddb5027357deec7",
+              "possible_test_references": []
+            }
+          ],
+          "matcher_errors": []
+        },
+        "none_identity": {
+          "n_sites": 0,
+          "n_sites_with_possible_test_reference": 0,
+          "sites": [],
+          "matcher_errors": []
+        }
+      },
+      "parse_errors": []
+    },
+    {
+      "repository": "agronholm/apscheduler",
+      "default_branch": "master",
+      "archived": false,
+      "license_metadata": "MIT",
+      "language": "Python",
+      "url": "https://github.com/agronholm/apscheduler",
+      "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+      "revision": "bdaceb12792f104f25798dee2850d45f9e7d83f8",
+      "source_ref_url": "https://api.github.com/repos/agronholm/apscheduler/git/ref/heads/master",
+      "status": "STATIC_ONLY_NOT_ELIGIBLE",
+      "treatment_runs": 0,
+      "test_runs": 0,
+      "license_files": {
+        "LICENSE.txt": "35ed0eb40a2f7c262156ccab94b731a697808fcdc1c69f9491c991af204c2eb6"
+      },
+      "skills": {
+        "bool_guard": {
+          "n_sites": 2,
+          "n_sites_with_possible_test_reference": 0,
+          "sites": [
+            {
+              "file": "src/apscheduler/_converters.py",
+              "line": 62,
+              "function": "as_timedelta",
+              "snippet": "isinstance(value, (float, int))",
+              "sha256": "1e1da0614a0414668abb9faf8f28783e91c58c6b17d5a9f85b7bc354f15646b9",
+              "possible_test_references": []
+            },
+            {
+              "file": "src/apscheduler/_validators.py",
+              "line": 48,
+              "function": "check_value",
+              "snippet": "isinstance(val, (str, int, float, bool))",
+              "sha256": "56b42aa3cce8a66e3dcb66b68a735fd8e40ee6a12ae9b28edd62b2e272360a25",
+              "possible_test_references": []
+            }
+          ],
+          "matcher_errors": []
+        },
+        "none_identity": {
+          "n_sites": 0,
+          "n_sites_with_possible_test_reference": 0,
+          "sites": [],
+          "matcher_errors": []
+        }
+      },
+      "parse_errors": []
+    },
+    {
+      "repository": "dbader/schedule",
+      "default_branch": "master",
+      "archived": false,
+      "license_metadata": "MIT",
+      "language": "Python",
+      "url": "https://github.com/dbader/schedule",
+      "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+      "revision": "82a43db1b938d8fdf60103bd41f329e06c8d3651",
+      "source_ref_url": "https://api.github.com/repos/dbader/schedule/git/ref/heads/master",
+      "status": "STATIC_ONLY_NOT_ELIGIBLE",
+      "treatment_runs": 0,
+      "test_runs": 0,
+      "license_files": {
+        "LICENSE.txt": "30a8352c318ce1b645acde0299697342d4380ed2637d7ca18a8ad25661e3b41b"
+      },
+      "skills": {
+        "bool_guard": {
+          "n_sites": 0,
+          "n_sites_with_possible_test_reference": 0,
+          "sites": [],
+          "matcher_errors": []
+        },
+        "none_identity": {
+          "n_sites": 0,
+          "n_sites_with_possible_test_reference": 0,
+          "sites": [],
+          "matcher_errors": []
+        }
+      },
+      "parse_errors": []
+    },
+    {
+      "repository": "arrow-py/arrow",
+      "default_branch": "master",
+      "archived": false,
+      "license_metadata": "Apache-2.0",
+      "language": "Python",
+      "url": "https://github.com/arrow-py/arrow",
+      "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+      "revision": "2224255c4acc594d734cef0bbc83360452a67983",
+      "source_ref_url": "https://api.github.com/repos/arrow-py/arrow/git/ref/heads/master",
+      "status": "STATIC_ONLY_NOT_ELIGIBLE",
+      "treatment_runs": 0,
+      "test_runs": 0,
+      "license_files": {
+        "LICENSE": "b481f87296cb0abdb13fd8cbb94b14c328be880ec9e68547a61b84dacffd067a"
+      },
+      "skills": {
+        "bool_guard": {
+          "n_sites": 1,
+          "n_sites_with_possible_test_reference": 1,
+          "sites": [
+            {
+              "file": "arrow/util.py",
+              "line": 49,
+              "function": "is_timestamp",
+              "snippet": "isinstance(value, (int, float, str))",
+              "sha256": "c6d71f313c62469c87227333d9fe7a6bfd62be6353c699c816810e28551ddb0b",
+              "possible_test_references": [
+                {
+                  "file": "tests/test_util.py",
+                  "test": "test_is_timestamp",
+                  "line": 39,
+                  "sha256": "e2b297090f38400b17faddeaff93e6a2f3e079cd5620b9548f45739b27184979"
+                }
+              ]
+            }
+          ],
+          "matcher_errors": []
+        },
+        "none_identity": {
+          "n_sites": 0,
+          "n_sites_with_possible_test_reference": 0,
+          "sites": [],
+          "matcher_errors": []
+        }
+      },
+      "parse_errors": []
+    },
+    {
+      "repository": "python-pendulum/pendulum",
+      "default_branch": "master",
+      "archived": false,
+      "license_metadata": "MIT",
+      "language": "Python",
+      "url": "https://github.com/python-pendulum/pendulum",
+      "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+      "revision": "e06dacedc4cdea90fa1286b3965d180ab94cf251",
+      "source_ref_url": "https://api.github.com/repos/python-pendulum/pendulum/git/ref/heads/master",
+      "status": "STATIC_ONLY_NOT_ELIGIBLE",
+      "treatment_runs": 0,
+      "test_runs": 0,
+      "license_files": {
+        "LICENSE": "79d76bbec3899d16482163a365c7f65e87a729993a1d65f960f4181e2ecb81a0"
+      },
+      "skills": {
+        "bool_guard": {
+          "n_sites": 11,
+          "n_sites_with_possible_test_reference": 1,
+          "sites": [
+            {
+              "file": "src/pendulum/__init__.py",
+              "line": 77,
+              "function": "timezone",
+              "snippet": "isinstance(name, int)",
+              "sha256": "6affdc6da84d0ac31a259941649c4eaa3049b6afe079113c8ba65896ed9236c4",
+              "possible_test_references": [
+                {
+                  "file": "tests/datetime/test_diff.py",
+                  "test": "test_diff_for_humans_now_and_second_with_timezone",
+                  "line": 206,
+                  "sha256": "08e7a5e9a82e5e29c960021025830ecedb749be246ffc502d758ad511395dd3a"
+                },
+                {
+                  "file": "tests/tz/test_timezone.py",
+                  "test": "test_skipped_time_with_error",
+                  "line": 91,
+                  "sha256": "6857e66b0f9accc10f4e849c65cfa76c5dbeb4af66f1676143d54405a3633a4b"
+                },
+                {
+                  "file": "tests/tz/test_timezone.py",
+                  "test": "test_repeated_time_with_error",
+                  "line": 132,
+                  "sha256": "6857e66b0f9accc10f4e849c65cfa76c5dbeb4af66f1676143d54405a3633a4b"
+                }
+              ]
+            },
+            {
+              "file": "src/pendulum/__init__.py",
+              "line": 100,
+              "function": "_safe_timezone",
+              "snippet": "isinstance(obj, (int, float))",
+              "sha256": "6affdc6da84d0ac31a259941649c4eaa3049b6afe079113c8ba65896ed9236c4",
+              "possible_test_references": []
+            },
+            {
+              "file": "src/pendulum/duration.py",
+              "line": 360,
+              "function": "__mul__",
+              "snippet": "isinstance(other, int)",
+              "sha256": "bd9bae64458f06807617d776c21fdf583f31ca421e633ebc266447a60d25da44",
+              "possible_test_references": []
+            },
+            {
+              "file": "src/pendulum/duration.py",
+              "line": 394,
+              "function": "__floordiv__",
+              "snippet": "isinstance(other, int)",
+              "sha256": "bd9bae64458f06807617d776c21fdf583f31ca421e633ebc266447a60d25da44",
+              "possible_test_references": []
+            },
+            {
+              "file": "src/pendulum/duration.py",
+              "line": 420,
+              "function": "__truediv__",
+              "snippet": "isinstance(other, int)",
+              "sha256": "bd9bae64458f06807617d776c21fdf583f31ca421e633ebc266447a60d25da44",
+              "possible_test_references": []
+            },
+            {
+              "file": "src/pendulum/duration.py",
+              "line": 384,
+              "function": "__floordiv__",
+              "snippet": "isinstance(other, (int, timedelta))",
+              "sha256": "bd9bae64458f06807617d776c21fdf583f31ca421e633ebc266447a60d25da44",
+              "possible_test_references": []
+            },
+            {
+              "file": "src/pendulum/duration.py",
+              "line": 410,
+              "function": "__truediv__",
+              "snippet": "isinstance(other, (int, float, timedelta))",
+              "sha256": "bd9bae64458f06807617d776c21fdf583f31ca421e633ebc266447a60d25da44",
+              "possible_test_references": []
+            },
+            {
+              "file": "src/pendulum/duration.py",
+              "line": 83,
+              "function": "__new__",
+              "snippet": "isinstance(years, int)",
+              "sha256": "bd9bae64458f06807617d776c21fdf583f31ca421e633ebc266447a60d25da44",
+              "possible_test_references": []
+            },
+            {
+              "file": "src/pendulum/duration.py",
+              "line": 83,
+              "function": "__new__",
+              "snippet": "isinstance(months, int)",
+              "sha256": "bd9bae64458f06807617d776c21fdf583f31ca421e633ebc266447a60d25da44",
+              "possible_test_references": []
+            },
+            {
+              "file": "src/pendulum/duration.py",
+              "line": 498,
+              "function": "__new__",
+              "snippet": "isinstance(years, int)",
+              "sha256": "bd9bae64458f06807617d776c21fdf583f31ca421e633ebc266447a60d25da44",
+              "possible_test_references": []
+            },
+            {
+              "file": "src/pendulum/duration.py",
+              "line": 498,
+              "function": "__new__",
+              "snippet": "isinstance(months, int)",
+              "sha256": "bd9bae64458f06807617d776c21fdf583f31ca421e633ebc266447a60d25da44",
+              "possible_test_references": []
+            }
+          ],
+          "matcher_errors": []
+        },
+        "none_identity": {
+          "n_sites": 0,
+          "n_sites_with_possible_test_reference": 0,
+          "sites": [],
+          "matcher_errors": []
+        }
+      },
+      "parse_errors": []
+    },
+    {
+      "repository": "encode/httpx",
+      "default_branch": "master",
+      "archived": false,
+      "license_metadata": "BSD-3-Clause",
+      "language": "Python",
+      "url": "https://github.com/encode/httpx",
+      "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+      "revision": "b5addb64f0161ff6bfe94c124ef76f6a1fba5254",
+      "source_ref_url": "https://api.github.com/repos/encode/httpx/git/ref/heads/master",
+      "status": "STATIC_ONLY_NOT_ELIGIBLE",
+      "treatment_runs": 0,
+      "test_runs": 0,
+      "license_files": {
+        "LICENSE.md": "4ec59d544f12b5f539a3a716fd321ac58ccd8030b465221f2c880200cdf28d8d"
+      },
+      "skills": {
+        "bool_guard": {
+          "n_sites": 2,
+          "n_sites_with_possible_test_reference": 0,
+          "sites": [
+            {
+              "file": "httpx/_multipart.py",
+              "line": 80,
+              "function": "__init__",
+              "snippet": "isinstance(value, (str, bytes, int, float))",
+              "sha256": "28e1c465997aa28860f663da2b2caedf8e6aab5ac92e0df94d41b7600cd70776",
+              "possible_test_references": []
+            },
+            {
+              "file": "httpx/_urlparse.py",
+              "line": 237,
+              "function": "urlparse",
+              "snippet": "isinstance(port, int)",
+              "sha256": "640987e3b38d7e4c6bae3f8f3d88467a21e36fa0232824be00d58837838bfca6",
+              "possible_test_references": []
+            }
+          ],
+          "matcher_errors": []
+        },
+        "none_identity": {
+          "n_sites": 0,
+          "n_sites_with_possible_test_reference": 0,
+          "sites": [],
+          "matcher_errors": []
+        }
+      },
+      "parse_errors": []
+    },
+    {
+      "repository": "encode/starlette",
+      "license_metadata": "BSD-3-Clause",
+      "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+      "canonical_repository": "Kludex/starlette",
+      "default_branch": "main",
+      "archived": false,
+      "language": "Python",
+      "url": "https://github.com/Kludex/starlette",
+      "revision": "8aa828ceaff764a2e57932fb42fdf105a47c4c83",
+      "source_ref_url": "https://api.github.com/repos/Kludex/starlette/git/ref/heads/main",
+      "metadata_note": "Original repository redirected; retained original selected name and resolved the same GitHub repository ID 138597372.",
+      "status": "STATIC_ONLY_NOT_ELIGIBLE",
+      "treatment_runs": 0,
+      "test_runs": 0,
+      "license_files": {
+        "LICENSE.md": "dcb95677a02240243187e964f941847d19b17821cf99e5afae684fab328c19bf"
+      },
+      "skills": {
+        "bool_guard": {
+          "n_sites": 1,
+          "n_sites_with_possible_test_reference": 0,
+          "sites": [
+            {
+              "file": "starlette/middleware/exceptions.py",
+              "line": 41,
+              "function": "add_exception_handler",
+              "snippet": "isinstance(exc_class_or_status_code, int)",
+              "sha256": "ece812522060c074b854c9a9696970db5b8328d0e638cccb559ad60cb0d4a96a",
+              "possible_test_references": []
+            }
+          ],
+          "matcher_errors": []
+        },
+        "none_identity": {
+          "n_sites": 0,
+          "n_sites_with_possible_test_reference": 0,
+          "sites": [],
+          "matcher_errors": []
+        }
+      },
+      "parse_errors": []
+    },
+    {
+      "repository": "hynek/structlog",
+      "default_branch": "main",
+      "archived": false,
+      "license_metadata": "NOASSERTION",
+      "language": "Python",
+      "url": "https://github.com/hynek/structlog",
+      "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+      "revision": "19c4f21059e853114efa7a93b6e675d93bf7934e",
+      "source_ref_url": "https://api.github.com/repos/hynek/structlog/git/ref/heads/main",
+      "status": "STATIC_ONLY_NOT_ELIGIBLE",
+      "treatment_runs": 0,
+      "test_runs": 0,
+      "license_files": {
+        "LICENSE-APACHE": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+        "LICENSE-MIT": "2bc12bb94eec2ccea211daebb763235bec3169276197a7be1f858963db31c5dd"
+      },
+      "skills": {
+        "bool_guard": {
+          "n_sites": 0,
+          "n_sites_with_possible_test_reference": 0,
+          "sites": [],
+          "matcher_errors": []
+        },
+        "none_identity": {
+          "n_sites": 0,
+          "n_sites_with_possible_test_reference": 0,
+          "sites": [],
+          "matcher_errors": []
+        }
+      },
+      "parse_errors": []
+    },
+    {
+      "repository": "python-jsonschema/referencing",
+      "default_branch": "main",
+      "archived": false,
+      "license_metadata": "MIT",
+      "language": "Python",
+      "url": "https://github.com/python-jsonschema/referencing",
+      "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+      "revision": "19ad61722eaec82086c37cd47ba4a801a5bd8c91",
+      "source_ref_url": "https://api.github.com/repos/python-jsonschema/referencing/git/ref/heads/main",
+      "status": "STATIC_ONLY_NOT_ELIGIBLE",
+      "treatment_runs": 0,
+      "test_runs": 0,
+      "license_files": {
+        "COPYING": "42dcd63495f87b4eb7c7757afa379bb55a53f94afd7a5f657d9adf57236e515c"
+      },
+      "skills": {
+        "bool_guard": {
+          "n_sites": 0,
+          "n_sites_with_possible_test_reference": 0,
+          "sites": [],
+          "matcher_errors": []
+        },
+        "none_identity": {
+          "n_sites": 0,
+          "n_sites_with_possible_test_reference": 0,
+          "sites": [],
+          "matcher_errors": []
+        }
+      },
+      "parse_errors": []
+    },
+    {
+      "repository": "marshmallow-code/marshmallow",
+      "default_branch": "dev",
+      "archived": false,
+      "license_metadata": "MIT",
+      "language": "Python",
+      "url": "https://github.com/marshmallow-code/marshmallow",
+      "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+      "revision": "b762ea2d59ca52fe5df76b90de14bed7e5ec5607",
+      "source_ref_url": "https://api.github.com/repos/marshmallow-code/marshmallow/git/ref/heads/dev",
+      "status": "STATIC_ONLY_NOT_ELIGIBLE",
+      "treatment_runs": 0,
+      "test_runs": 0,
+      "license_files": {
+        "LICENSE": "906b5d9051e426144cb173ad911667b8ebd05a9c584c2c26c135b32a3ed12001"
+      },
+      "skills": {
+        "bool_guard": {
+          "n_sites": 0,
+          "n_sites_with_possible_test_reference": 0,
+          "sites": [],
+          "matcher_errors": []
+        },
+        "none_identity": {
+          "n_sites": 0,
+          "n_sites_with_possible_test_reference": 0,
+          "sites": [],
+          "matcher_errors": []
+        }
+      },
+      "parse_errors": []
+    },
+    {
+      "repository": "pallets/itsdangerous",
+      "default_branch": "main",
+      "archived": false,
+      "license_metadata": "BSD-3-Clause",
+      "language": "Python",
+      "url": "https://github.com/pallets/itsdangerous",
+      "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+      "revision": "672971d66a2ef9f85151e53283113f33d642dabd",
+      "source_ref_url": "https://api.github.com/repos/pallets/itsdangerous/git/ref/heads/main",
+      "status": "STATIC_ONLY_NOT_ELIGIBLE",
+      "treatment_runs": 0,
+      "test_runs": 0,
+      "license_files": {
+        "LICENSE.txt": "63af09891b6be8ad1a4252ed43af0f4efba7fc948e228367bed7f3c5ae0b09d7"
+      },
+      "skills": {
+        "bool_guard": {
+          "n_sites": 0,
+          "n_sites_with_possible_test_reference": 0,
+          "sites": [],
+          "matcher_errors": []
+        },
+        "none_identity": {
+          "n_sites": 0,
+          "n_sites_with_possible_test_reference": 0,
+          "sites": [],
+          "matcher_errors": []
+        }
+      },
+      "parse_errors": []
+    },
+    {
+      "repository": "pydantic/pydantic-settings",
+      "default_branch": "main",
+      "archived": false,
+      "license_metadata": "MIT",
+      "language": "Python",
+      "url": "https://github.com/pydantic/pydantic-settings",
+      "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+      "revision": "7e2dacb6db07b41abb0c80d0608e46e197265554",
+      "source_ref_url": "https://api.github.com/repos/pydantic/pydantic-settings/git/ref/heads/main",
+      "status": "STATIC_ONLY_NOT_ELIGIBLE",
+      "treatment_runs": 0,
+      "test_runs": 0,
+      "license_files": {
+        "LICENSE": "eb355a753e020346d33d83bf9769135b89fc610568ac531a01c295bcee7fd998"
+      },
+      "skills": {
+        "bool_guard": {
+          "n_sites": 3,
+          "n_sites_with_possible_test_reference": 0,
+          "sites": [
+            {
+              "file": "pydantic_settings/sources/providers/cli.py",
+              "line": 108,
+              "function": "_count_option_values",
+              "snippet": "isinstance(action.nargs, int)",
+              "sha256": "3355ec996ca275091750586cc528ec892f412d45a9b1bed8bf044ec51bf4a0a9",
+              "possible_test_references": []
+            },
+            {
+              "file": "pydantic_settings/sources/utils.py",
+              "line": 385,
+              "function": "_literal_has_numeric_enum",
+              "snippet": "isinstance(arg, (int, float))",
+              "sha256": "212e13b3c59c93f2199b7b538db1f49bbc9dbcc2fd60ae3ad91b69459b621be6",
+              "possible_test_references": []
+            },
+            {
+              "file": "pydantic_settings/sources/utils.py",
+              "line": 449,
+              "function": "_get_alias_names",
+              "snippet": "isinstance(alias_path.path[1], int)",
+              "sha256": "212e13b3c59c93f2199b7b538db1f49bbc9dbcc2fd60ae3ad91b69459b621be6",
+              "possible_test_references": []
+            }
+          ],
+          "matcher_errors": []
+        },
+        "none_identity": {
+          "n_sites": 0,
+          "n_sites_with_possible_test_reference": 0,
+          "sites": [],
+          "matcher_errors": []
+        }
+      },
+      "parse_errors": []
+    }
+  ]
+}

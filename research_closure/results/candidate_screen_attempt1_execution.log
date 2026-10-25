@@ -1,0 +1,12 @@
+{"repo": "dbader/schedule", "status": "SCREEN_ERROR", "matches": {"bool_guard": 0}}
+{"repo": "agronholm/apscheduler", "status": "SCREEN_ERROR", "matches": {"bool_guard": 2}}
+{"repo": "arrow-py/arrow", "status": "SCREEN_ERROR", "matches": {"bool_guard": 1}}
+{"repo": "agronholm/anyio", "status": "SCREEN_ERROR", "matches": {"bool_guard": 17}}
+{"repo": "hynek/structlog", "status": "SCREEN_ERROR", "matches": {"bool_guard": 0}}
+{"repo": "Kludex/starlette", "status": "SCREEN_ERROR", "matches": {"bool_guard": 1}}
+{"repo": "encode/httpx", "status": "SCREEN_ERROR", "matches": {"bool_guard": 2}}
+{"repo": "python-pendulum/pendulum", "status": "SCREEN_ERROR", "matches": {"bool_guard": 11}}
+{"repo": "pallets/itsdangerous", "status": "SCREEN_ERROR", "matches": {"bool_guard": 0}}
+{"repo": "python-jsonschema/referencing", "status": "SCREEN_ERROR", "matches": {"bool_guard": 0}}
+{"repo": "marshmallow-code/marshmallow", "status": "SCREEN_ERROR", "matches": {"bool_guard": 0}}
+{"repo": "pydantic/pydantic-settings", "status": "SCREEN_ERROR", "matches": {"bool_guard": 3}}

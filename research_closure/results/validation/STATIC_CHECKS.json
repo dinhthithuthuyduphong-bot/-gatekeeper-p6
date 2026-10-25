@@ -1,0 +1,33 @@
+{
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "workflows": [
+    {
+      "path": ".github/workflows/study-i-zero-cost.yml",
+      "bytes": 5803,
+      "shell_blocks": 8,
+      "syntax": "PASS"
+    },
+    {
+      "path": ".github/workflows/research-closure-zero-cost.yml",
+      "bytes": 4371,
+      "shell_blocks": 6,
+      "syntax": "PASS"
+    }
+  ],
+  "python_files": [
+    "tests/test_ext.py",
+    "tools/aggregate_study_f.py",
+    "tools/score_heldout.py",
+    "gatekeeper_ext/robust_cert.py",
+    "gatekeeper_ext/study_f_validation.py",
+    "research_closure/results/candidate_screen_attempt1_registration_error/SCANNER_AT_ATTEMPT.py",
+    "tests/test_closure_statistics.py",
+    "tests/test_study_f_integrity.py",
+    "tools/benchmark_admission_cost.py",
+    "tools/closure_statistics.py",
+    "tools/closure_verify.py",
+    "tools/prospective_preflight.py",
+    "tools/screen_study_j.py",
+    "tools/verify_cost_evidence.py"
+  ]
+}
