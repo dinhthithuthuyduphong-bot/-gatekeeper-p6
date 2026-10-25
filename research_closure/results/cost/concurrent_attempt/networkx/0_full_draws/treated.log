@@ -1,0 +1,6 @@
+/workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/networkx/0_full_draws/work/treated/networkx/convert_matrix.py:500: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if python_type is 'void':
+----------------------------------------------------------------------
+Ran 54 tests in 0.137s
+
+OK

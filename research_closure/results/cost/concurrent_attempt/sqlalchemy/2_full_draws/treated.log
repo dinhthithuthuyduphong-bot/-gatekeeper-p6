@@ -1,0 +1,542 @@
+=========================== sqlalchemy installation ============================
+SQLAlchemy 2.1.7 (user site loaded)
+Path: /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/sqlalchemy/2_full_draws/work/treated/lib/sqlalchemy/__init__.py
+compiled extension not enabled; Modules sqlalchemy.util._collections_cy, sqlalchemy.util._immutabledict_cy, sqlalchemy.engine._processors_cy, sqlalchemy.engine._result_cy, sqlalchemy.engine._row_cy, sqlalchemy.engine._util_cy, sqlalchemy.sql._cache_key_cy, sqlalchemy.sql._util_cy are not compiled
+......................F.......F.........F...F........................... [  4%]
+........................................................................ [  9%]
+........................................................................ [ 13%]
+........................................................................ [ 18%]
+........................................................................ [ 23%]
+........................................................................ [ 27%]
+........................................................................ [ 32%]
+........................................................................ [ 37%]
+........................................................................ [ 41%]
+........................................................................ [ 46%]
+........................................................................ [ 50%]
+........................................................................ [ 55%]
+........................................................................ [ 60%]
+........................................................................ [ 64%]
+........................................................................ [ 69%]
+........................................................................ [ 74%]
+........................................................................ [ 78%]
+.....................FFF...........F.................................... [ 83%]
+........................................................................ [ 88%]
+......................................s................................. [ 92%]
+.............F.......................................................... [ 97%]
+.........................................                                [100%]
+=================================== FAILURES ===================================
+________________ ComparatorTest.test_filter_column_eq_None_nul _________________
+
+self = <test.ext.test_associationproxy.ComparatorTest object at 0x7feeef0e7ef0>
+
+    def test_filter_column_eq_None_nul(self):
+        User = self.classes.User
+        Singular = self.classes.Singular
+    
+>       self._query_equivalent(
+            self.session.query(User).filter(
+                User.singular_value == None
+            ),  # noqa
+            self.session.query(User).filter(
+                or_(
+                    User.singular.has(Singular.value == None),
+                    User.singular == None,
+                )
+            ),
+        )
+
+test/ext/test_associationproxy.py:2061: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test/ext/test_associationproxy.py:1830: in _query_equivalent
+    self._equivalent(q_proxy.statement, q_direct.statement)
+test/ext/test_associationproxy.py:1836: in _equivalent
+    eq_(str(proxy_sql), str(direct_sql))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+a = 'SELECT users.id, users.name, users.singular_id \nFROM users \nWHERE EXISTS (SELECT 1 \nFROM singular \nWHERE singular.id = users.singular_id AND singular.value IS NULL)'
+b = 'SELECT users.id, users.name, users.singular_id \nFROM users \nWHERE (EXISTS (SELECT 1 \nFROM singular \nWHERE singular.id = users.singular_id AND singular.value IS NULL)) OR users.singular_id IS NULL'
+msg = None
+
+    def eq_(a, b, msg=None):
+        """Assert a == b, with repr messaging on failure."""
+>       assert a == b, msg or "%r != %r" % (a, b)
+E       AssertionError: 'SELECT users.id, users.name, users.singular_id \nFROM users \nWHERE EXISTS (SELECT 1 \nFROM singular \nWHERE singular.id = users.singular_id AND singular.value IS NULL)' != 'SELECT users.id, users.name, users.singular_id \nFROM users \nWHERE (EXISTS (SELECT 1 \nFROM singular \nWHERE singular.id = users.singular_id AND singular.value IS NULL)) OR users.singular_id IS NULL'
+E       assert 'SELECT users...alue IS NULL)' == 'SELECT users...ar_id IS NULL'
+E         
+E         Skipping 56 identical leading characters in diff, use -v to show
+E           rs 
+E         - WHERE (EXISTS (SELECT 1 
+E         ?       -
+E         + WHERE EXISTS (SELECT 1 
+E           FROM singular ...
+E         
+E         ...Full output truncated (3 lines hidden), use '-vv' to show
+
+lib/sqlalchemy/testing/assertions.py:292: AssertionError
+__________________ ComparatorTest.test_filter_eq_null_nul_nul __________________
+
+self = <test.ext.test_associationproxy.ComparatorTest object at 0x7feeef0e36e0>
+
+    def test_filter_eq_null_nul_nul(self):
+        UserKeyword, Keyword = self.classes.UserKeyword, self.classes.Keyword
+    
+>       self._query_equivalent(
+            self.session.query(Keyword).filter(Keyword.user == None),  # noqa
+            self.session.query(Keyword).filter(
+                or_(
+                    Keyword.user_keyword.has(UserKeyword.user == None),
+                    Keyword.user_keyword == None,
+                )
+            ),
+        )
+
+test/ext/test_associationproxy.py:2021: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test/ext/test_associationproxy.py:1830: in _query_equivalent
+    self._equivalent(q_proxy.statement, q_direct.statement)
+test/ext/test_associationproxy.py:1836: in _equivalent
+    eq_(str(proxy_sql), str(direct_sql))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+a = 'SELECT keywords.id, keywords.keyword, keywords.singular_id \nFROM keywords \nWHERE EXISTS (SELECT 1 \nFROM userkeywords \nWHERE keywords.id = userkeywords.keyword_id AND userkeywords.user_id IS NULL)'
+b = 'SELECT keywords.id, keywords.keyword, keywords.singular_id \nFROM keywords \nWHERE (EXISTS (SELECT 1 \nFROM userkeywo...eywords.user_id IS NULL)) OR NOT (EXISTS (SELECT 1 \nFROM userkeywords \nWHERE keywords.id = userkeywords.keyword_id))'
+msg = None
+
+    def eq_(a, b, msg=None):
+        """Assert a == b, with repr messaging on failure."""
+>       assert a == b, msg or "%r != %r" % (a, b)
+E       AssertionError: 'SELECT keywords.id, keywords.keyword, keywords.singular_id \nFROM keywords \nWHERE EXISTS (SELECT 1 \nFROM userkeywords \nWHERE keywords.id = userkeywords.keyword_id AND userkeywords.user_id IS NULL)' != 'SELECT keywords.id, keywords.keyword, keywords.singular_id \nFROM keywords \nWHERE (EXISTS (SELECT 1 \nFROM userkeywords \nWHERE keywords.id = userkeywords.keyword_id AND userkeywords.user_id IS NULL)) OR NOT (EXISTS (SELECT 1 \nFROM userkeywords \nWHERE keywords.id = userkeywords.keyword_id))'
+E       assert 'SELECT keywo...r_id IS NULL)' == 'SELECT keywo....keyword_id))'
+E         
+E         Skipping 71 identical leading characters in diff, use -v to show
+E           ds 
+E         - WHERE (EXISTS (SELECT 1 
+E         ?       -
+E         + WHERE EXISTS (SELECT 1 
+E           FROM userkeywords ...
+E         
+E         ...Full output truncated (5 lines hidden), use '-vv' to show
+
+lib/sqlalchemy/testing/assertions.py:292: AssertionError
+________________ ComparatorTest.test_filter_object_eq_None_nul _________________
+
+self = <test.ext.test_associationproxy.ComparatorTest object at 0x7feeef0e1a90>
+
+    def test_filter_object_eq_None_nul(self):
+        UserKeyword = self.classes.UserKeyword
+        User = self.classes.User
+    
+>       self._query_equivalent(
+            self.session.query(UserKeyword).filter(
+                UserKeyword.singular == None
+            ),  # noqa
+            self.session.query(UserKeyword).filter(
+                or_(
+                    UserKeyword.user.has(User.singular == None),
+                    UserKeyword.user_id == None,
+                )
+            ),
+        )
+
+test/ext/test_associationproxy.py:2045: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test/ext/test_associationproxy.py:1830: in _query_equivalent
+    self._equivalent(q_proxy.statement, q_direct.statement)
+test/ext/test_associationproxy.py:1836: in _equivalent
+    eq_(str(proxy_sql), str(direct_sql))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+a = 'SELECT userkeywords.keyword_id, userkeywords.user_id, userkeywords.value \nFROM userkeywords \nWHERE EXISTS (SELECT 1 \nFROM users \nWHERE users.id = userkeywords.user_id AND users.singular_id IS NULL)'
+b = 'SELECT userkeywords.keyword_id, userkeywords.user_id, userkeywords.value \nFROM userkeywords \nWHERE (EXISTS (SELECT 1 \nFROM users \nWHERE users.id = userkeywords.user_id AND users.singular_id IS NULL)) OR userkeywords.user_id IS NULL'
+msg = None
+
+    def eq_(a, b, msg=None):
+        """Assert a == b, with repr messaging on failure."""
+>       assert a == b, msg or "%r != %r" % (a, b)
+E       AssertionError: 'SELECT userkeywords.keyword_id, userkeywords.user_id, userkeywords.value \nFROM userkeywords \nWHERE EXISTS (SELECT 1 \nFROM users \nWHERE users.id = userkeywords.user_id AND users.singular_id IS NULL)' != 'SELECT userkeywords.keyword_id, userkeywords.user_id, userkeywords.value \nFROM userkeywords \nWHERE (EXISTS (SELECT 1 \nFROM users \nWHERE users.id = userkeywords.user_id AND users.singular_id IS NULL)) OR userkeywords.user_id IS NULL'
+E       assert 'SELECT userk...r_id IS NULL)' == 'SELECT userk...er_id IS NULL'
+E         
+E         Skipping 89 identical leading characters in diff, use -v to show
+E           ds 
+E         - WHERE (EXISTS (SELECT 1 
+E         ?       -
+E         + WHERE EXISTS (SELECT 1 
+E           FROM users ...
+E         
+E         ...Full output truncated (3 lines hidden), use '-vv' to show
+
+lib/sqlalchemy/testing/assertions.py:292: AssertionError
+_______________ ComparatorTest.test_filter_scalar_column_eq_nul ________________
+
+self = <test.ext.test_associationproxy.ComparatorTest object at 0x7feeef0e4a10>
+
+    def test_filter_scalar_column_eq_nul(self):
+        User = self.classes.User
+        Singular = self.classes.Singular
+    
+>       self._query_equivalent(
+            self.session.query(User).filter(User.singular_value == None),
+            self.session.query(User).filter(
+                or_(
+                    User.singular.has(Singular.value == None),
+                    User.singular == None,
+                )
+            ),
+        )
+
+test/ext/test_associationproxy.py:2403: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test/ext/test_associationproxy.py:1830: in _query_equivalent
+    self._equivalent(q_proxy.statement, q_direct.statement)
+test/ext/test_associationproxy.py:1836: in _equivalent
+    eq_(str(proxy_sql), str(direct_sql))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+a = 'SELECT users.id, users.name, users.singular_id \nFROM users \nWHERE EXISTS (SELECT 1 \nFROM singular \nWHERE singular.id = users.singular_id AND singular.value IS NULL)'
+b = 'SELECT users.id, users.name, users.singular_id \nFROM users \nWHERE (EXISTS (SELECT 1 \nFROM singular \nWHERE singular.id = users.singular_id AND singular.value IS NULL)) OR users.singular_id IS NULL'
+msg = None
+
+    def eq_(a, b, msg=None):
+        """Assert a == b, with repr messaging on failure."""
+>       assert a == b, msg or "%r != %r" % (a, b)
+E       AssertionError: 'SELECT users.id, users.name, users.singular_id \nFROM users \nWHERE EXISTS (SELECT 1 \nFROM singular \nWHERE singular.id = users.singular_id AND singular.value IS NULL)' != 'SELECT users.id, users.name, users.singular_id \nFROM users \nWHERE (EXISTS (SELECT 1 \nFROM singular \nWHERE singular.id = users.singular_id AND singular.value IS NULL)) OR users.singular_id IS NULL'
+E       assert 'SELECT users...alue IS NULL)' == 'SELECT users...ar_id IS NULL'
+E         
+E         Skipping 56 identical leading characters in diff, use -v to show
+E           rs 
+E         - WHERE (EXISTS (SELECT 1 
+E         ?       -
+E         + WHERE EXISTS (SELECT 1 
+E           FROM singular ...
+E         
+E         ...Full output truncated (3 lines hidden), use '-vv' to show
+
+lib/sqlalchemy/testing/assertions.py:292: AssertionError
+________________ OperatorTest.test_m2o_compare_instance_aliased ________________
+
+self = <test.orm.test_query.OperatorTest object at 0x7feeeea5f560>
+
+    def test_m2o_compare_instance_aliased(self):
+        User, Address = self.classes.User, self.classes.Address
+        u7 = User(id=5)
+        attributes.instance_state(u7)._commit_all(attributes.instance_dict(u7))
+        u7.id = 7
+    
+        u7_transient = User(id=7)
+    
+        a1 = aliased(Address)
+        self._test(
+            a1.user == u7,
+            ":param_1 = addresses_1.user_id",
+            checkparams={"param_1": 7},
+        )
+    
+>       self._test(
+            a1.user != u7,
+            "addresses_1.user_id != :user_id_1 OR addresses_1.user_id IS NULL",
+            checkparams={"user_id_1": 7},
+        )
+
+test/orm/test_query.py:1799: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test/orm/test_query.py:1580: in _test
+    self.assert_compile(clause, expected, checkparams=checkparams)
+lib/sqlalchemy/testing/assertions.py:683: in assert_compile
+    eq_(cc, result, "%r != %r on dialect %r" % (cc, result, dialect))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+a = 'addresses_1.user_id != :user_id_1'
+b = 'addresses_1.user_id != :user_id_1 OR addresses_1.user_id IS NULL'
+msg = "'addresses_1.user_id != :user_id_1' != 'addresses_1.user_id != :user_id_1 OR addresses_1.user_id IS NULL' on dialect <sqlalchemy.engine.default.DefaultDialect object at 0x7feeece19310>"
+
+    def eq_(a, b, msg=None):
+        """Assert a == b, with repr messaging on failure."""
+>       assert a == b, msg or "%r != %r" % (a, b)
+E       AssertionError: 'addresses_1.user_id != :user_id_1' != 'addresses_1.user_id != :user_id_1 OR addresses_1.user_id IS NULL' on dialect <sqlalchemy.engine.default.DefaultDialect object at 0x7feeece19310>
+E       assert 'addresses_1....!= :user_id_1' == 'addresses_1....er_id IS NULL'
+E         
+E         - addresses_1.user_id != :user_id_1 OR addresses_1.user_id IS NULL
+E         + addresses_1.user_id != :user_id_1
+
+lib/sqlalchemy/testing/assertions.py:292: AssertionError
+----------------------------- Captured stdout call -----------------------------
+b"\nSQL String:\n:param_1 = addresses_1.user_id{'param_1': 7}"
+b"\nSQL String:\naddresses_1.user_id != :user_id_1{'user_id_1': 7}"
+________________ OperatorTest.test_m2o_compare_instance_negated ________________
+
+self = <test.orm.test_query.OperatorTest object at 0x7feeeea5f020>
+
+    def test_m2o_compare_instance_negated(self):
+        User, Address = self.classes.User, self.classes.Address
+        u7 = User(id=5)
+        attributes.instance_state(u7)._commit_all(attributes.instance_dict(u7))
+        u7.id = 7
+    
+>       self._test(
+            Address.user != u7,
+            "addresses.user_id != :user_id_1 OR addresses.user_id IS NULL",
+            checkparams={"user_id_1": 7},
+        )
+
+test/orm/test_query.py:1765: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test/orm/test_query.py:1580: in _test
+    self.assert_compile(clause, expected, checkparams=checkparams)
+lib/sqlalchemy/testing/assertions.py:683: in assert_compile
+    eq_(cc, result, "%r != %r on dialect %r" % (cc, result, dialect))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+a = 'addresses.user_id != :user_id_1'
+b = 'addresses.user_id != :user_id_1 OR addresses.user_id IS NULL'
+msg = "'addresses.user_id != :user_id_1' != 'addresses.user_id != :user_id_1 OR addresses.user_id IS NULL' on dialect <sqlalchemy.engine.default.DefaultDialect object at 0x7feeece1a270>"
+
+    def eq_(a, b, msg=None):
+        """Assert a == b, with repr messaging on failure."""
+>       assert a == b, msg or "%r != %r" % (a, b)
+E       AssertionError: 'addresses.user_id != :user_id_1' != 'addresses.user_id != :user_id_1 OR addresses.user_id IS NULL' on dialect <sqlalchemy.engine.default.DefaultDialect object at 0x7feeece1a270>
+E       assert 'addresses.us...!= :user_id_1' == 'addresses.us...er_id IS NULL'
+E         
+E         - addresses.user_id != :user_id_1 OR addresses.user_id IS NULL
+E         + addresses.user_id != :user_id_1
+
+lib/sqlalchemy/testing/assertions.py:292: AssertionError
+----------------------------- Captured stdout call -----------------------------
+b"\nSQL String:\naddresses.user_id != :user_id_1{'user_id_1': 7}"
+_________ OperatorTest.test_m2o_compare_instance_negated_warn_on_none __________
+
+self = <test.orm.test_query.OperatorTest object at 0x7feeeea5f2c0>
+
+    def test_m2o_compare_instance_negated_warn_on_none(self):
+        User, Address = self.classes.User, self.classes.Address
+    
+        u7_transient = User(id=None)
+    
+        with expect_warnings("Got None for value of column users.id; "):
+>           self._test(
+                Address.user != u7_transient,
+                "addresses.user_id != :user_id_1 "
+                "OR addresses.user_id IS NULL",
+                checkparams={"user_id_1": None},
+            )
+
+test/orm/test_query.py:1777: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test/orm/test_query.py:1580: in _test
+    self.assert_compile(clause, expected, checkparams=checkparams)
+lib/sqlalchemy/testing/assertions.py:683: in assert_compile
+    eq_(cc, result, "%r != %r on dialect %r" % (cc, result, dialect))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+a = 'addresses.user_id != :user_id_1'
+b = 'addresses.user_id != :user_id_1 OR addresses.user_id IS NULL'
+msg = "'addresses.user_id != :user_id_1' != 'addresses.user_id != :user_id_1 OR addresses.user_id IS NULL' on dialect <sqlalchemy.engine.default.DefaultDialect object at 0x7feeecc5cfb0>"
+
+    def eq_(a, b, msg=None):
+        """Assert a == b, with repr messaging on failure."""
+>       assert a == b, msg or "%r != %r" % (a, b)
+E       AssertionError: 'addresses.user_id != :user_id_1' != 'addresses.user_id != :user_id_1 OR addresses.user_id IS NULL' on dialect <sqlalchemy.engine.default.DefaultDialect object at 0x7feeecc5cfb0>
+E       assert 'addresses.us...!= :user_id_1' == 'addresses.us...er_id IS NULL'
+E         
+E         - addresses.user_id != :user_id_1 OR addresses.user_id IS NULL
+E         + addresses.user_id != :user_id_1
+
+lib/sqlalchemy/testing/assertions.py:292: AssertionError
+----------------------------- Captured stdout call -----------------------------
+b"\nSQL String:\naddresses.user_id != :user_id_1{'user_id_1': None}"
+____________________ OperatorTest.test_selfref_relationship ____________________
+
+self = <test.orm.test_query.OperatorTest object at 0x7feeeea5f800>
+
+    def test_selfref_relationship(self):
+        Node = self.classes.Node
+    
+        nalias = aliased(Node)
+    
+        # auto self-referential aliasing
+        self._test(
+            Node.children.any(Node.data == "n1"),
+            "EXISTS (SELECT 1 FROM nodes AS nodes_1 WHERE "
+            "nodes.id = nodes_1.parent_id AND nodes_1.data = :data_1)",
+            entity=Node,
+            checkparams={"data_1": "n1"},
+        )
+    
+        # needs autoaliasing
+        self._test(
+            Node.children == None,  # noqa
+            "NOT (EXISTS (SELECT 1 FROM nodes AS nodes_1 "
+            "WHERE nodes.id = nodes_1.parent_id))",
+            entity=Node,
+            checkparams={},
+        )
+    
+        self._test(
+            Node.parent == None,  # noqa
+            "nodes.parent_id IS NULL",
+            checkparams={},
+        )
+    
+        self._test(
+            nalias.parent == None,  # noqa
+            "nodes_1.parent_id IS NULL",
+            checkparams={},
+        )
+    
+        self._test(
+            nalias.parent != None,  # noqa
+            "nodes_1.parent_id IS NOT NULL",
+            checkparams={},
+        )
+    
+        self._test(
+            nalias.children == None,  # noqa
+            "NOT (EXISTS ("
+            "SELECT 1 FROM nodes WHERE nodes_1.id = nodes.parent_id))",
+            entity=nalias,
+            checkparams={},
+        )
+    
+        self._test(
+            nalias.children.any(Node.data == "some data"),
+            "EXISTS (SELECT 1 FROM nodes WHERE "
+            "nodes_1.id = nodes.parent_id AND nodes.data = :data_1)",
+            entity=nalias,
+            checkparams={"data_1": "some data"},
+        )
+    
+        # this fails because self-referential any() is auto-aliasing;
+        # the fact that we use "nalias" here means we get two aliases.
+        # self._test(
+        #        Node.children.any(nalias.data == 'some data'),
+        #        "EXISTS (SELECT 1 FROM nodes AS nodes_1 WHERE "
+        #        "nodes.id = nodes_1.parent_id AND nodes_1.data = :data_1)",
+        #        entity=Node
+        #        )
+    
+        self._test(
+            nalias.parent.has(Node.data == "some data"),
+            "EXISTS (SELECT 1 FROM nodes WHERE nodes.id = nodes_1.parent_id "
+            "AND nodes.data = :data_1)",
+            entity=nalias,
+            checkparams={"data_1": "some data"},
+        )
+    
+        self._test(
+            Node.parent.has(Node.data == "some data"),
+            "EXISTS (SELECT 1 FROM nodes AS nodes_1 WHERE "
+            "nodes_1.id = nodes.parent_id AND nodes_1.data = :data_1)",
+            entity=Node,
+            checkparams={"data_1": "some data"},
+        )
+    
+        self._test(
+            Node.parent == Node(id=7),
+            ":param_1 = nodes.parent_id",
+            checkparams={"param_1": 7},
+        )
+    
+        self._test(
+            nalias.parent == Node(id=7),
+            ":param_1 = nodes_1.parent_id",
+            checkparams={"param_1": 7},
+        )
+    
+>       self._test(
+            nalias.parent != Node(id=7),
+            "nodes_1.parent_id != :parent_id_1 "
+            "OR nodes_1.parent_id IS NULL",
+            checkparams={"parent_id_1": 7},
+        )
+
+test/orm/test_query.py:1912: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test/orm/test_query.py:1580: in _test
+    self.assert_compile(clause, expected, checkparams=checkparams)
+lib/sqlalchemy/testing/assertions.py:683: in assert_compile
+    eq_(cc, result, "%r != %r on dialect %r" % (cc, result, dialect))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+a = 'nodes_1.parent_id != :parent_id_1'
+b = 'nodes_1.parent_id != :parent_id_1 OR nodes_1.parent_id IS NULL'
+msg = "'nodes_1.parent_id != :parent_id_1' != 'nodes_1.parent_id != :parent_id_1 OR nodes_1.parent_id IS NULL' on dialect <sqlalchemy.engine.default.DefaultDialect object at 0x7feeecd07b90>"
+
+    def eq_(a, b, msg=None):
+        """Assert a == b, with repr messaging on failure."""
+>       assert a == b, msg or "%r != %r" % (a, b)
+E       AssertionError: 'nodes_1.parent_id != :parent_id_1' != 'nodes_1.parent_id != :parent_id_1 OR nodes_1.parent_id IS NULL' on dialect <sqlalchemy.engine.default.DefaultDialect object at 0x7feeecd07b90>
+E       assert 'nodes_1.pare... :parent_id_1' == 'nodes_1.pare...nt_id IS NULL'
+E         
+E         - nodes_1.parent_id != :parent_id_1 OR nodes_1.parent_id IS NULL
+E         + nodes_1.parent_id != :parent_id_1
+
+lib/sqlalchemy/testing/assertions.py:292: AssertionError
+----------------------------- Captured stdout call -----------------------------
+b"\nSQL String:\nSELECT nodes.id AS nodes_id, nodes.parent_id AS nodes_parent_id, nodes.data AS nodes_data \nFROM nodes \nWHERE EXISTS (SELECT 1 \nFROM nodes AS nodes_1 \nWHERE nodes.id = nodes_1.parent_id AND nodes_1.data = :data_1){'data_1': 'n1'}"
+b'\nSQL String:\nSELECT nodes.id AS nodes_id, nodes.parent_id AS nodes_parent_id, nodes.data AS nodes_data \nFROM nodes \nWHERE NOT (EXISTS (SELECT 1 \nFROM nodes AS nodes_1 \nWHERE nodes.id = nodes_1.parent_id)){}'
+b'\nSQL String:\nnodes.parent_id IS NULL{}'
+b'\nSQL String:\nnodes_1.parent_id IS NULL{}'
+b'\nSQL String:\nnodes_1.parent_id IS NOT NULL{}'
+b'\nSQL String:\nSELECT nodes_1.id AS nodes_1_id, nodes_1.parent_id AS nodes_1_parent_id, nodes_1.data AS nodes_1_data \nFROM nodes AS nodes_1 \nWHERE NOT (EXISTS (SELECT 1 \nFROM nodes \nWHERE nodes_1.id = nodes.parent_id)){}'
+b"\nSQL String:\nSELECT nodes_1.id AS nodes_1_id, nodes_1.parent_id AS nodes_1_parent_id, nodes_1.data AS nodes_1_data \nFROM nodes AS nodes_1 \nWHERE EXISTS (SELECT 1 \nFROM nodes \nWHERE nodes_1.id = nodes.parent_id AND nodes.data = :data_1){'data_1': 'some data'}"
+b"\nSQL String:\nSELECT nodes_1.id AS nodes_1_id, nodes_1.parent_id AS nodes_1_parent_id, nodes_1.data AS nodes_1_data \nFROM nodes AS nodes_1 \nWHERE EXISTS (SELECT 1 \nFROM nodes \nWHERE nodes.id = nodes_1.parent_id AND nodes.data = :data_1){'data_1': 'some data'}"
+b"\nSQL String:\nSELECT nodes.id AS nodes_id, nodes.parent_id AS nodes_parent_id, nodes.data AS nodes_data \nFROM nodes \nWHERE EXISTS (SELECT 1 \nFROM nodes AS nodes_1 \nWHERE nodes_1.id = nodes.parent_id AND nodes_1.data = :data_1){'data_1': 'some data'}"
+b"\nSQL String:\n:param_1 = nodes.parent_id{'param_1': 7}"
+b"\nSQL String:\n:param_1 = nodes_1.parent_id{'param_1': 7}"
+b"\nSQL String:\nnodes_1.parent_id != :parent_id_1{'parent_id_1': 7}"
+________ WithTransientOnNone.test_negated_contains_or_equals_plain_m2o _________
+
+self = <test.orm.test_query.WithTransientOnNone object at 0x7feeeeef4c20>
+
+    def test_negated_contains_or_equals_plain_m2o(self):
+        self._fixture1()
+        User, Address = self.classes.User, self.classes.Address
+    
+        s = fixture_session()
+        q = s.query(Address).filter(Address.user != User(id=None))
+        with expect_warnings("Got None for value of column"):
+>           self.assert_compile(
+                q,
+                "SELECT addresses.id AS addresses_id, "
+                "addresses.user_id AS addresses_user_id, "
+                "addresses.email_address AS addresses_email_address "
+                "FROM addresses "
+                "WHERE addresses.user_id != :user_id_1 "
+                "OR addresses.user_id IS NULL",
+                checkparams={"user_id_1": None},
+            )
+
+test/orm/test_query.py:6474: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+lib/sqlalchemy/testing/assertions.py:683: in assert_compile
+    eq_(cc, result, "%r != %r on dialect %r" % (cc, result, dialect))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+a = 'SELECT addresses.id AS addresses_id, addresses.user_id AS addresses_user_id, addresses.email_address AS addresses_email_address FROM addresses WHERE addresses.user_id != :user_id_1'
+b = 'SELECT addresses.id AS addresses_id, addresses.user_id AS addresses_user_id, addresses.email_address AS addresses_email_address FROM addresses WHERE addresses.user_id != :user_id_1 OR addresses.user_id IS NULL'
+msg = "'SELECT addresses.id AS addresses_id, addresses.user_id AS addresses_user_id, addresses.email_address AS addresses_em...user_id_1 OR addresses.user_id IS NULL' on dialect <sqlalchemy.engine.default.DefaultDialect object at 0x7feeeca1ba40>"
+
+    def eq_(a, b, msg=None):
+        """Assert a == b, with repr messaging on failure."""
+>       assert a == b, msg or "%r != %r" % (a, b)
+E       AssertionError: 'SELECT addresses.id AS addresses_id, addresses.user_id AS addresses_user_id, addresses.email_address AS addresses_email_address FROM addresses WHERE addresses.user_id != :user_id_1' != 'SELECT addresses.id AS addresses_id, addresses.user_id AS addresses_user_id, addresses.email_address AS addresses_email_address FROM addresses WHERE addresses.user_id != :user_id_1 OR addresses.user_id IS NULL' on dialect <sqlalchemy.engine.default.DefaultDialect object at 0x7feeeca1ba40>
+E       assert 'SELECT addre...!= :user_id_1' == 'SELECT addre...er_id IS NULL'
+E         
+E         Skipping 169 identical leading characters in diff, use -v to show
+E         -  :user_id_1 OR addresses.user_id IS NULL
+E         +  :user_id_1
+
+lib/sqlalchemy/testing/assertions.py:292: AssertionError
+----------------------------- Captured stdout call -----------------------------
+b"\nSQL String:\nSELECT addresses.id AS addresses_id, addresses.user_id AS addresses_user_id, addresses.email_address AS addresses_email_address \nFROM addresses \nWHERE addresses.user_id != :user_id_1{'user_id_1': None}"
+- generated xml file: /workspace/scratch/cde4f976cfa9/research_closure_20261024/repo/research_closure/results/cost/sqlalchemy/2_full_draws/treated.xml -
+=========================== short test summary info ============================
+FAILED test/ext/test_associationproxy.py::ComparatorTest::test_filter_column_eq_None_nul
+FAILED test/ext/test_associationproxy.py::ComparatorTest::test_filter_eq_null_nul_nul
+FAILED test/ext/test_associationproxy.py::ComparatorTest::test_filter_object_eq_None_nul
+FAILED test/ext/test_associationproxy.py::ComparatorTest::test_filter_scalar_column_eq_nul
+FAILED test/orm/test_query.py::OperatorTest::test_m2o_compare_instance_aliased
+FAILED test/orm/test_query.py::OperatorTest::test_m2o_compare_instance_negated
+FAILED test/orm/test_query.py::OperatorTest::test_m2o_compare_instance_negated_warn_on_none
+FAILED test/orm/test_query.py::OperatorTest::test_selfref_relationship - Asse...
+FAILED test/orm/test_query.py::WithTransientOnNone::test_negated_contains_or_equals_plain_m2o
+9 failed, 1543 passed, 1 skipped in 14.51s

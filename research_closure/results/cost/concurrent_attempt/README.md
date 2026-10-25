@@ -1,0 +1,1 @@
+These initial measurements overlapped in wall-clock time on one host. They are preserved, but excluded from the final serial benchmark. Selection of the serial rerun was determined by resource isolation, not measured speedup.
