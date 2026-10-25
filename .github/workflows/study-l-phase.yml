@@ -1,0 +1,23 @@
+# Gate phase diagram (0 cost): recompute study_l/PHASE_DIAGRAM.md and compare with the committed file.
+name: Gatekeeper gate phase diagram
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  phase:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install -q numpy
+          python tools/gate_phase_diagram.py --out PHASE_DIAGRAM_CI.md
+          cat PHASE_DIAGRAM_CI.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: PHASE_DIAGRAM
+          path: PHASE_DIAGRAM_CI.md
