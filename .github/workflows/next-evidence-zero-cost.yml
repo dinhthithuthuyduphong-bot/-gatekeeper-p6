@@ -3,6 +3,10 @@ name: Gatekeeper next evidence - zero-cost
 "on":
   workflow_dispatch:
     inputs:
+      run_scout:
+        description: "Repeat the source-only scans (turn off when reviewing the same frozen source)"
+        type: boolean
+        default: true
       run_cost:
         description: "Also measure census-only / census-first Gatekeeper / census-first full draws"
         type: boolean
@@ -47,6 +51,7 @@ jobs:
 
   source_scout:
     needs: audit
+    if: inputs.run_scout
     strategy:
       fail-fast: false
       max-parallel: 2
@@ -213,16 +218,31 @@ jobs:
         run: |
           mkdir -p "$RUNNER_TEMP/next-return"
           printf '%s\n' "$JOB_RESULTS" > "$RUNNER_TEMP/next-return/JOB_STATUS.json"
-          printf 'commit=%s\nrun_id=%s\nattempt=%s\ncost_requested=%s\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" '${{ inputs.run_cost }}' > "$RUNNER_TEMP/next-return/RUN_CONTEXT.txt"
-          printf 'Send this complete artifact together with the workflow run URL. A successful collect job does not mean the experiments passed; inspect JOB_STATUS.json and each raw result. B9 remains HOLD.\n' > "$RUNNER_TEMP/next-return/README.txt"
+          printf 'commit=%s\nrun_id=%s\nattempt=%s\ncost_requested=%s\nscout_requested=%s\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" '${{ inputs.run_cost }}' '${{ inputs.run_scout }}' > "$RUNNER_TEMP/next-return/RUN_CONTEXT.txt"
+          printf 'Send this compact review artifact and the run URL. Coverage databases remain in the individual next-raw-* artifacts; REVIEW_SCOPE.json lists hashes and omissions. A successful collect job does not mean the experiments passed; inspect JOB_STATUS.json. B9 remains HOLD.\n' > "$RUNNER_TEMP/next-return/README.txt"
+      - uses: actions/checkout@v6
       - uses: actions/download-artifact@v8
         with:
           pattern: next-raw-*
           path: ${{ runner.temp }}/next-return/artifacts
+      - name: Build compact review bundle with raw-file hashes
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 next_evidence/review_bundle.py --input "$RUNNER_TEMP/next-return" --out "$RUNNER_TEMP/next-review"
+      - name: Preserve collection status even if compacting fails
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/next-review"
+          printf 'collect_state_before_upload=%s\nCheck step failures and REVIEW_SCOPE.json; a partial bundle is not success.\n' '${{ job.status }}' > "$RUNNER_TEMP/next-review/COLLECT_STATUS.txt"
+          cp "$RUNNER_TEMP/next-return/JOB_STATUS.json" "$RUNNER_TEMP/next-review/"
+          cp "$RUNNER_TEMP/next-return/RUN_CONTEXT.txt" "$RUNNER_TEMP/next-review/"
       - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: next-evidence-return-a${{ github.run_attempt }}
-          path: ${{ runner.temp }}/next-return/
+          path: ${{ runner.temp }}/next-review/
           if-no-files-found: error
           retention-days: 30
