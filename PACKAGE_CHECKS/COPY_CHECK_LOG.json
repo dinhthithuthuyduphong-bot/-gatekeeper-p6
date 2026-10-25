@@ -1,0 +1,121 @@
+[
+  {
+    "step": 1,
+    "program": "git",
+    "returncode": 0,
+    "expected": 0,
+    "output": "Cloning into '/workspace/scratch/cde4f976cfa9/next_delta_20261025/copy_check_repo'...\n"
+  },
+  {
+    "step": 2,
+    "program": "git",
+    "returncode": 0,
+    "expected": 0,
+    "output": ""
+  },
+  {
+    "step": 3,
+    "program": "git",
+    "returncode": 0,
+    "expected": 0,
+    "output": ""
+  },
+  {
+    "step": 4,
+    "program": "python",
+    "returncode": 0,
+    "expected": 0,
+    "output": "{\"status\": \"PRECHECK_OK\", \"files_to_copy\": 21, \"B9\": \"HOLD\"}\n"
+  },
+  {
+    "step": 5,
+    "program": "python",
+    "returncode": 0,
+    "expected": 0,
+    "output": "{\"status\": \"COPIED_REVIEW_BEFORE_COMMIT\", \"files_copied\": 21, \"tests_run\": 0, \"remote_push\": false, \"B9\": \"HOLD\"}\n"
+  },
+  {
+    "step": 6,
+    "program": "git",
+    "returncode": 0,
+    "expected": 0,
+    "output": ""
+  },
+  {
+    "step": 7,
+    "program": "git",
+    "returncode": 0,
+    "expected": 0,
+    "output": ""
+  },
+  {
+    "step": 8,
+    "program": "python",
+    "returncode": 0,
+    "expected": 0,
+    "output": "{\"status\": \"COPIED_REVIEW_BEFORE_COMMIT\", \"files_copied\": 0, \"tests_run\": 0, \"remote_push\": false, \"B9\": \"HOLD\"}\n"
+  },
+  {
+    "step": 9,
+    "program": "git",
+    "returncode": 0,
+    "expected": 0,
+    "output": ""
+  },
+  {
+    "step": 10,
+    "program": "git",
+    "returncode": 0,
+    "expected": 0,
+    "output": ""
+  },
+  {
+    "step": 11,
+    "program": "python",
+    "returncode": 1,
+    "expected": 1,
+    "output": "STOP: FINAL prerequisite missing or changed: tools/closure_verify.py\n"
+  },
+  {
+    "step": 12,
+    "program": "git",
+    "returncode": 0,
+    "expected": 0,
+    "output": ""
+  },
+  {
+    "step": 13,
+    "program": "git",
+    "returncode": 0,
+    "expected": 0,
+    "output": ""
+  },
+  {
+    "step": 14,
+    "program": "git",
+    "returncode": 0,
+    "expected": 0,
+    "output": ""
+  },
+  {
+    "step": 15,
+    "program": "git",
+    "returncode": 0,
+    "expected": 0,
+    "output": ""
+  },
+  {
+    "step": 16,
+    "program": "git",
+    "returncode": 0,
+    "expected": 0,
+    "output": ""
+  },
+  {
+    "step": 17,
+    "program": "python",
+    "returncode": 1,
+    "expected": 1,
+    "output": "STOP: FINAL prerequisite missing or changed: .github/workflows/research-closure-zero-cost.yml\n"
+  }
+]
