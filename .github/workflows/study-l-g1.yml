@@ -1,0 +1,53 @@
+# Study L gate G1 (0 cost): gold-differential harness with the automatic generator on the six B9 instances.
+# Refuses to run unless study_l is FROZEN and its hashes verify.
+name: Gatekeeper Study L gate G1
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  g1:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: D1_py_ecc
+            python: "3.12"
+            os: ubuntu-24.04
+          - target: D2_cerberus
+            python: "3.8"
+            os: ubuntu-22.04
+          - target: D3_speckit
+            python: "3.12"
+            os: ubuntu-24.04
+          - target: D4_openfeature
+            python: "3.12"
+            os: ubuntu-24.04
+          - target: D5_pycubrid
+            python: "3.12"
+            os: ubuntu-24.04
+          - target: A1_speckit_catalog
+            python: "3.12"
+            os: ubuntu-24.04
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Freeze check
+        run: |
+          python -c "import json,sys;c=json.load(open('study_l/config_study_l.json'));sys.exit(0 if c.get('status')=='FROZEN' else 'not FROZEN')"
+          python tools/freeze_study.py verify study_l
+      - name: Run G1
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install -q "pytest==8.3.5"
+          mkdir -p out_g1
+          python tools/g1_check.py ${{ matrix.target }} out_g1 2>&1 | tee out_g1/log_${{ matrix.target }}.txt
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: G1_${{ matrix.target }}
+          path: out_g1
