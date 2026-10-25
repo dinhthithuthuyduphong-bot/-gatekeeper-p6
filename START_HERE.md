@@ -1,37 +1,74 @@
-# Start here — zero-cost closure update, 24 October 2026
+# Sửa run 40173786064 — khôi phục file thiếu, không bỏ test
 
-**Latest prepared package, 25/10/2026:** use [next GitHub run instructions](next_evidence/RUN_ON_GITHUB_VI.md)
-and [current source findings/status](next_evidence/STATUS_AND_SCAN_VI.md).
-Run **Gatekeeper next evidence - zero-cost**, optionally enabling `run_cost`.
-The new scripts/tests are prepared but **not executed locally**. Earlier PASS
-counts below refer to earlier packages, not validation of this follow-up.
-Return the `next-evidence-return-a1` artifact (latest attempt suffix). Paid B9 remains HOLD.
+Run dừng ở audit: **135 tests, 132 pass, 3 ERROR** vì thiếu
+`study_k/results/local-20261025-clean/RESULT.json`. Quét source, baseline
+Pydantic và cost đều SKIPPED; chưa có kết quả nghiên cứu mới.
 
-**25/10/2026 — zero-cost follow-up:** [python-control result](study_k/RESULT_VI.md), [reproduce / raw audit](study_k/README.md). A retrospective beneficial transfer was reproduced; B9 remains HOLD. See [cumulative update instructions](research_closure/UPDATE_MAIN.md).
+Main `a8026c9ffce247f2d253b4188a50156f506cb3af` có 442 file khớp gói đã gửi
+và thiếu 23 file Study K. Danh sách đầy đủ: `MISSING_FILES.txt`. Bản chẩn đoán:
+`main_update/next_evidence/CI_FIX_40173786064.md`.
 
+## Trong ZIP này có gì?
 
-Current result and open research questions: [research_closure/RESULT.md](research_closure/RESULT.md).
-Upload/run instructions: [research_closure/UPDATE_MAIN.md](research_closure/UPDATE_MAIN.md).
-Run **Gatekeeper zero-cost closure audit** on main after uploading this update.
-The local audit passes 125 tests; this statement is not a new GitHub run receipt.
-B9 remains HOLD. Study J remains BLOCKED. No paid provider call is part of this update.
+- Chỉ **4 file repository mới/sửa** trong `main_update/`: inventory, checker,
+  một lệnh preflight thêm vào closure audit, và báo cáo lỗi.
+- Helper và hướng dẫn khôi phục 23 file **từ ZIP FINAL của bạn**. Không nén lại
+  các raw log/kết quả cũ theo yêu cầu. Không tự tạo RESULT hoặc sửa expected test.
+- `CI_FIX_MANIFEST.json` có checksum nguồn và đích; `PACKAGE_CHECKS/` chỉ là
+  kiểm tra việc đọc/hash/sao chép file, không phải kết quả chạy lại CI.
 
-## Historical instructions for the earlier Study I evidence-only upload
+**Chỉ upload 4 file mới là chưa đủ:** phải khôi phục 23 file cũ cùng lúc.
 
-Run: 40084717332; commit: 5292b6a16ab4e68a62c24032e44c2d99b327498e.
-Copy CONTENTS of main_update/ into the existing repository root if you want
-to archive this run on main. Only study_i/results/ci-40084717332/ is added.
-No code, workflow, frozen study, original ZIP or old result is changed.
+## Cách khuyến nghị: dùng bản clone main
 
-Read Study_I_CI_Result_40084717332.md inside that new result directory.
-All 70 raw target result files and the original verified artifact are retained
-byte-for-byte. Old bootstrap/local logs inherited from root evidence/ are
-excluded; no test or draw from this CI run is discarded.
+Giải nén gói sửa ra ngoài thư mục repo. Giữ file
+`Gatekeeper_Final_ZeroCost_20261025.zip` gốc làm nguồn; không chạy lại helper
+APPLY_UPDATE của FINAL và không ghi đè toàn bộ FINAL lên NEXT.
 
-From the repository root, recheck without rerunning targets or models:
+Thay đường dẫn bên dưới bằng đường dẫn thật:
 
 ```bash
-python3.12 study_i/verify.py --results study_i/results/ci-40084717332/inputs --output out-study-i-ci-recheck
+git switch main
+git pull --ff-only
+python /duong-dan/goi-sua/APPLY_CI_FIX.py --repo . --final-zip /duong-dan/Gatekeeper_Final_ZeroCost_20261025.zip --check-only
+python /duong-dan/goi-sua/APPLY_CI_FIX.py --repo . --final-zip /duong-dan/Gatekeeper_Final_ZeroCost_20261025.zip
+git diff --stat
+git status --short
+git add --pathspec-from-file=/duong-dan/goi-sua/UPDATE_PATHS.txt
+git commit -m "Restore missing Study K evidence and check inventory before tests"
+git push origin main
 ```
 
-B9: HOLD. No paid model calls. Evidence remains retrospective/exploratory.
+Bọc đường dẫn trong dấu ngoặc kép nếu có dấu cách. Nếu đã giải nén FINAL,
+thay `--final-zip ...` bằng `--final-dir /duong-dan/thu-muc-FINAL`; thư mục này
+phải chứa `main_update/`.
+
+Helper chỉ sao chép file đúng hash, yêu cầu main sạch, từ chối ghi đè nội dung
+khác, không compile/test, không commit/push hoặc gọi API. Trên đúng snapshot
+đã kiểm tra sẽ có **27 đường dẫn cập nhật: 23 khôi phục + 4 mới/sửa**.
+`RESTORATION_RECEIPT.json` được lưu cạnh helper sau khi chép.
+
+## Nếu cập nhật bằng giao diện GitHub
+
+1. Giải nén FINAL. Lấy đúng 23 file trong `MISSING_FILES.txt` từ `main_update/`
+   của FINAL, giữ nguyên đường dẫn khi upload vào root repo.
+2. Thêm/thay 4 file trong `main_update/` của gói sửa này, cũng giữ nguyên đường dẫn.
+3. Commit vào main. Đừng upload ZIP thành một file thay cho các file thành phần.
+
+23 file chia thành 11 file ở `study_k/results/local-20261025-clean/` và 12 file
+ở `study_k/results/pilot_attempts/`. Có thể đối chiếu trực tiếp checksum trong
+manifest. Không sửa nội dung log/JSON hoặc đổi tên RESULT thành chữ thường.
+
+## Chạy lại đúng commit mới
+
+GitHub → Actions → **Gatekeeper next evidence - zero-cost** → **Run workflow**
+→ branch **main** → bật **run_cost = true**.
+
+**Không dùng Re-run jobs của run 40173786064:** thao tác đó dùng commit cũ.
+Preflight mới sẽ tạo `EVIDENCE_INVENTORY.json`; khi đủ nguyên vẹn phải có
+`EVIDENCE_INVENTORY_OK`, 38/38 file khớp. Unit suite và các raw audit vẫn chạy
+đầy đủ sau đó. Chỉ khi audit thành công mới đến scout, Pydantic và cost.
+
+Gửi lại URL run mới và artifact **next-evidence-return-a1** (hoặc attempt mới
+nhất), kể cả khi lỗi. Gói này không có kết quả CI mới để khẳng định toàn bộ
+workflow đã xanh. B9 tiếp tục HOLD; không cần API key/GCP secret.

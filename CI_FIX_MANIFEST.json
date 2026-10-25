@@ -1,0 +1,176 @@
+{
+  "kind": "RESTORE_ORIGINAL_EVIDENCE_AND_CI_PREFLIGHT",
+  "observed_commit": "a8026c9ffce247f2d253b4188a50156f506cb3af",
+  "failed_run_id": 40173786064,
+  "final_archive": "Gatekeeper_Final_ZeroCost_20261025.zip",
+  "final_archive_sha256": "494a4b029dde48a774402858ab024b4a837656862e452cdc639c5bafd8a2f493",
+  "update_files": [
+    {
+      "path": "study_k/EVIDENCE_MANIFEST.json",
+      "bytes": 7380,
+      "sha256": "e41f8b41dbe23aa10f9be2531cf89572645abc6669d9908ed378f59c2665266e",
+      "previous_sha256": null
+    },
+    {
+      "path": "study_k/check_evidence_inventory.py",
+      "bytes": 3300,
+      "sha256": "b321af3decac39172317755422c30711f7b4583f4595f48db7a024b577a1a79a",
+      "previous_sha256": null
+    },
+    {
+      "path": "tools/closure_verify.py",
+      "bytes": 4438,
+      "sha256": "da1cd3e412d4175f6b31985bba66af7630be2040981729340d4db7eded976810",
+      "previous_sha256": "f5adb304fdbe0b3683ecf21a4aace3e994351f3cdfab659009ec0f2e0b3bac7e"
+    },
+    {
+      "path": "next_evidence/CI_FIX_40173786064.md",
+      "bytes": 3575,
+      "sha256": "4812e3327a3789fccf290924540de339894461c9a77e4761b1a84c71dd88b589",
+      "previous_sha256": null
+    }
+  ],
+  "restore_files": [
+    {
+      "path": "study_k/results/local-20261025-clean/RESULT.json",
+      "bytes": 60126,
+      "sha256": "d72e33b851ac6a1e447959e8e7ef63a511e22389c04aa8ca7ae7a89122bf34c1",
+      "previous_sha256": null
+    },
+    {
+      "path": "study_k/results/local-20261025-clean/RESULT.md",
+      "bytes": 1348,
+      "sha256": "ab559bde999bfdb8b7ca6913619747e34b4c30b42684339fac8b752b984b1230",
+      "previous_sha256": null
+    },
+    {
+      "path": "study_k/results/local-20261025-clean/VERIFIED.json",
+      "bytes": 1635,
+      "sha256": "94bfe9862ab4a1d446100d5b96c11785b88cfd38dd4351f1cdd76f15d217c0f2",
+      "previous_sha256": null
+    },
+    {
+      "path": "study_k/results/local-20261025-clean/skill.patch",
+      "bytes": 971,
+      "sha256": "c2b2569d11b3322d03bd6af8d7ed1ceeb2e995fcc457501e291826c4d65f6e52",
+      "previous_sha256": null
+    },
+    {
+      "path": "study_k/results/local-20261025-clean/statelessness.jsonl",
+      "bytes": 837534,
+      "sha256": "c01c36a6c80f9f49833f71786423b377f11f4cd2da2c8331eb50994e0dbd343f",
+      "previous_sha256": null
+    },
+    {
+      "path": "study_k/results/local-20261025-clean/treated_1.log",
+      "bytes": 8960,
+      "sha256": "409ee8b7cef8ebeb0994380682fc932a6537a2c901e337e5c3bac1a3235d42fa",
+      "previous_sha256": null
+    },
+    {
+      "path": "study_k/results/local-20261025-clean/treated_1.xml",
+      "bytes": 1515,
+      "sha256": "d2ff5253af5c04450e3e9e5d2063b6accf7065fbef505ab943fc19f38f697b1a",
+      "previous_sha256": null
+    },
+    {
+      "path": "study_k/results/local-20261025-clean/treated_2.log",
+      "bytes": 8960,
+      "sha256": "fc072e10e36aa68e9bdcee326e4d0197927be7b6fe1f1faab67e67809f7c679f",
+      "previous_sha256": null
+    },
+    {
+      "path": "study_k/results/local-20261025-clean/treated_2.xml",
+      "bytes": 1515,
+      "sha256": "c18d19c512fcc9cc2a112c0deac445f992b20294033d42e568afba13c9a55582",
+      "previous_sha256": null
+    },
+    {
+      "path": "study_k/results/local-20261025-clean/treated_3.log",
+      "bytes": 8960,
+      "sha256": "f1174e7ef574771af3710d9d62e8beacad7856b3817b6715b0ca07db4e9c194e",
+      "previous_sha256": null
+    },
+    {
+      "path": "study_k/results/local-20261025-clean/treated_3.xml",
+      "bytes": 1515,
+      "sha256": "6d0f237ba5e1a44d2ee3f45a0a4dce101613f2a8fbad16bb1ef7e709859443f3",
+      "previous_sha256": null
+    },
+    {
+      "path": "study_k/results/pilot_attempts/SELECTION.json",
+      "bytes": 597,
+      "sha256": "48a86e58e05001685f3d350b0e13f374e354858f85debcaa873b609c3710f13d",
+      "previous_sha256": null
+    },
+    {
+      "path": "study_k/results/pilot_attempts/baseline.log",
+      "bytes": 2112,
+      "sha256": "7a8bb46c690f9f6d1f9cff7230a434a39da3d2c2f9676047595c924b0179662e",
+      "previous_sha256": null
+    },
+    {
+      "path": "study_k/results/pilot_attempts/baseline.xml",
+      "bytes": 1099,
+      "sha256": "c3ed60ff60fffe0d3d6a44e32c1e516000b726417258c5af91df8e03fea71b36",
+      "previous_sha256": null
+    },
+    {
+      "path": "study_k/results/pilot_attempts/baseline_complete_env.log",
+      "bytes": 7696,
+      "sha256": "f070d2303201861f4cdf0501df6ea11ab5033b1aa5e68233f714dcde693c8817",
+      "previous_sha256": null
+    },
+    {
+      "path": "study_k/results/pilot_attempts/baseline_complete_env.xml",
+      "bytes": 1925,
+      "sha256": "3aa70dbbca72e6214776a1bb98804b2a8c84e8de0ba99f28abf78171e10a0679",
+      "previous_sha256": null
+    },
+    {
+      "path": "study_k/results/pilot_attempts/baseline_mpl225.log",
+      "bytes": 9766,
+      "sha256": "5e55c9ddfe954ad14290fcc32868f68d71411df28e99bb402451c2609fc8fd93",
+      "previous_sha256": null
+    },
+    {
+      "path": "study_k/results/pilot_attempts/baseline_mpl225.xml",
+      "bytes": 3772,
+      "sha256": "bcc091ac6b9924d407bb3f39f1d0ed2579e30d9fed71397b55137cd5ab754fdf",
+      "previous_sha256": null
+    },
+    {
+      "path": "study_k/results/pilot_attempts/binding.json",
+      "bytes": 272,
+      "sha256": "7f5450ade43db6732b27ca07d240df49c1853015de4e1bae79da97998584065b",
+      "previous_sha256": null
+    },
+    {
+      "path": "study_k/results/pilot_attempts/treated_complete_env.log",
+      "bytes": 8573,
+      "sha256": "4ca8b3097c20c0616f92b44ec82faa6699daf33d52e7523076969bb6c5596d6c",
+      "previous_sha256": null
+    },
+    {
+      "path": "study_k/results/pilot_attempts/treated_complete_env.xml",
+      "bytes": 1515,
+      "sha256": "6ed3cc0cfa42e6ffac82278f297d9c7f5043210944dcd2370672bd04eafe77a3",
+      "previous_sha256": null
+    },
+    {
+      "path": "study_k/results/pilot_attempts/treated_mpl225.log",
+      "bytes": 10817,
+      "sha256": "e4d6a9575878eefe9282e3d0b5c1c983a207a625831732803b49bf7afd5162cb",
+      "previous_sha256": null
+    },
+    {
+      "path": "study_k/results/pilot_attempts/treated_mpl225.xml",
+      "bytes": 3362,
+      "sha256": "35ed51688a3eade93b7fc38cc6cf159e281247941e57bb7cf862a485b5f3d491",
+      "previous_sha256": null
+    }
+  ],
+  "old_evidence_payloads_bundled": 0,
+  "B9": "HOLD",
+  "paid_api_calls": 0
+}

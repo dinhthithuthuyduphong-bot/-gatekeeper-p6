@@ -1,0 +1,28 @@
+{
+  "status": "FILE_RESTORATION_AND_PACKAGE_CHECKS_PASS",
+  "observed_remote_commit": "a8026c9ffce247f2d253b4188a50156f506cb3af",
+  "observed_ci": {
+    "run_id": 40173786064,
+    "tests": 135,
+    "passed": 132,
+    "errors": 3
+  },
+  "main_matching_package_files_before": 442,
+  "missing_original_files_before": 23,
+  "repository_updates_bundled": 4,
+  "old_evidence_payloads_bundled": 0,
+  "files_restored_from_original_zip": 23,
+  "post_copy_evidence_hash_matches": 38,
+  "check_only_did_not_write": true,
+  "unrelated_files_unchanged": true,
+  "repeat_copied_zero_files": true,
+  "committed_conflict_rejected_without_writes": true,
+  "artifact_copies_consistent": true,
+  "new_project_unit_tests": "NOT_RUN",
+  "new_target_experiments": "NOT_RUN",
+  "compiler": "NOT_RUN",
+  "remote_push": false,
+  "workflow_dispatch": false,
+  "B9": "HOLD",
+  "scope": "Only parsing, hashes and local file-copy fixture checks; no new CI success is claimed."
+}
