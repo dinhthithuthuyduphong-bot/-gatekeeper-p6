@@ -1,0 +1,228 @@
+name: Gatekeeper next evidence - zero-cost
+
+"on":
+  workflow_dispatch:
+    inputs:
+      run_cost:
+        description: "Also measure census-only / census-first Gatekeeper / census-first full draws"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    if: github.ref == 'refs/heads/main' && github.event.repository.private == false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Initialize evidence before checkout and runtime setup
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/next-audit"
+          printf 'commit=%s\nrun_id=%s\nattempt=%s\nB9=HOLD\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" > "$RUNNER_TEMP/next-audit/context.txt"
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.14"
+      - name: Install audit parser
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --only-binary=:all: PyYAML==6.0.2 2>&1 | tee "$RUNNER_TEMP/next-audit/install.log"
+      - name: Run regression and evidence audits on GitHub
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -u tools/closure_verify.py --out "$RUNNER_TEMP/next-audit/checks" 2>&1 | tee "$RUNNER_TEMP/next-audit/execution.log"
+          cat "$RUNNER_TEMP/next-audit/checks/RESULT.md" >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: next-raw-audit-a${{ github.run_attempt }}
+          path: ${{ runner.temp }}/next-audit/
+          if-no-files-found: error
+          retention-days: 30
+
+  source_scout:
+    needs: audit
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        target: [pydantic, airflow, pandas, numpy, sqlalchemy_utils, peewee, pony]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Initialize source-only evidence
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/next-scan"
+          printf 'commit=%s\nrun_id=%s\nattempt=%s\ntarget=%s\ntests=NOT_RUN\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" '${{ matrix.target }}' > "$RUNNER_TEMP/next-scan/context.txt"
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.14"
+      - name: Inspect pinned source and possible upstream assertions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -u next_evidence/source.py scout --target '${{ matrix.target }}' --out "$RUNNER_TEMP/next-scan/run" 2>&1 | tee "$RUNNER_TEMP/next-scan/execution.log"
+          cat "$RUNNER_TEMP/next-scan/run/SCAN_RESULT.md" >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: next-raw-scan-${{ matrix.target }}-a${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/next-scan/
+            !${{ runner.temp }}/next-scan/run/work/**
+          if-no-files-found: error
+          retention-days: 30
+
+  pydantic_baseline:
+    needs: audit
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    steps:
+      - name: Initialize baseline evidence
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/next-pydantic"
+          printf 'commit=%s\nrun_id=%s\nattempt=%s\ntreatment=DISABLED\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" > "$RUNNER_TEMP/next-pydantic/context.txt"
+          uname -a > "$RUNNER_TEMP/next-pydantic/runner.txt"
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.14"
+      - name: Fetch and verify the unchanged pinned source and tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -u next_evidence/source.py fetch-pydantic --out "$RUNNER_TEMP/next-pydantic/source" 2>&1 | tee "$RUNNER_TEMP/next-pydantic/fetch.log"
+      - name: Install the lock-derived baseline environment using wheels only
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --only-binary=:all: -r next_evidence/requirements-pydantic.txt 2>&1 | tee "$RUNNER_TEMP/next-pydantic/install.log"
+          python -m pip freeze > "$RUNNER_TEMP/next-pydantic/environment.txt"
+      - name: Run three fresh baseline processes and record per-test reach
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -u next_evidence/baseline.py --checkout "$RUNNER_TEMP/next-pydantic/source/work/source" --out "$RUNNER_TEMP/next-pydantic/run" 2>&1 | tee "$RUNNER_TEMP/next-pydantic/execution.log"
+          cat "$RUNNER_TEMP/next-pydantic/run/BASELINE_RESULT.md" >> "$GITHUB_STEP_SUMMARY"
+      - name: Record final job state
+        if: always()
+        shell: bash
+        run: printf 'status=%s\n' '${{ job.status }}' > "$RUNNER_TEMP/next-pydantic/job-status.txt"
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: next-raw-pydantic-baseline-a${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/next-pydantic/
+            !${{ runner.temp }}/next-pydantic/source/work/**
+          if-no-files-found: error
+          retention-days: 30
+
+  cost:
+    needs: audit
+    if: inputs.run_cost
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        include:
+          - target: sqlalchemy
+            python: "3.12.14"
+            os: ubuntu-24.04
+          - target: networkx
+            python: "3.8.20"
+            os: ubuntu-22.04
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    steps:
+      - name: Initialize cost evidence before setup
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/next-cost"
+          printf 'commit=%s\nrun_id=%s\nattempt=%s\ntarget=%s\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" '${{ matrix.target }}' > "$RUNNER_TEMP/next-cost/context.txt"
+          uname -a > "$RUNNER_TEMP/next-cost/runner.txt"
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        if: matrix.target == 'sqlalchemy'
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+        if: matrix.target == 'networkx'
+        with:
+          version: "0.13.4"
+          enable-cache: "false"
+      - name: Restore historical NetworkX runtime without compiling Python
+        if: matrix.target == 'networkx'
+        shell: bash
+        run: |
+          set -euo pipefail
+          uv python install '${{ matrix.python }}' 2>&1 | tee "$RUNNER_TEMP/next-cost/python-install.log"
+          uv venv --no-project --managed-python --python '${{ matrix.python }}' "$RUNNER_TEMP/next-cost-venv" 2>&1 | tee "$RUNNER_TEMP/next-cost/venv.log"
+          printf '%s\n' "$RUNNER_TEMP/next-cost-venv/bin" >> "$GITHUB_PATH"
+      - name: Install pinned census dependencies
+        shell: bash
+        env:
+          EXPECTED_PYTHON: ${{ matrix.python }}
+        run: |
+          set -euo pipefail
+          python -c 'import os,sys; print(sys.version); assert sys.version.split()[0] == os.environ["EXPECTED_PYTHON"]' 2>&1 | tee "$RUNNER_TEMP/next-cost/python.txt"
+          if [ '${{ matrix.target }}' = 'networkx' ]; then
+            uv pip install --only-binary=:all: --python "$RUNNER_TEMP/next-cost-venv/bin/python" -r study_i/requirements-networkx.txt 2>&1 | tee "$RUNNER_TEMP/next-cost/install.log"
+          else
+            python -m pip install --only-binary=:all: -r study_i/requirements-sqlalchemy.txt 2>&1 | tee "$RUNNER_TEMP/next-cost/install.log"
+          fi
+      - name: Measure all three policies serially and audit the raw observations
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -u next_evidence/cost.py '${{ matrix.target }}' --out "$RUNNER_TEMP/next-cost/run" 2>&1 | tee "$RUNNER_TEMP/next-cost/execution.log"
+          python -u next_evidence/verify_cost.py --root "$RUNNER_TEMP/next-cost/run" 2>&1 | tee "$RUNNER_TEMP/next-cost/audit.log"
+          cat "$RUNNER_TEMP/next-cost/run/COST_RESULT.md" >> "$GITHUB_STEP_SUMMARY"
+      - name: Record final job state
+        if: always()
+        shell: bash
+        run: printf 'status=%s\n' '${{ job.status }}' > "$RUNNER_TEMP/next-cost/job-status.txt"
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: next-raw-cost-${{ matrix.target }}-a${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/next-cost/
+            !${{ runner.temp }}/next-cost/**/work/**
+          if-no-files-found: error
+          retention-days: 30
+
+  collect:
+    needs: [audit, source_scout, pydantic_baseline, cost]
+    if: always() && github.ref == 'refs/heads/main' && github.event.repository.private == false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Preserve job statuses even after failures
+        shell: bash
+        env:
+          JOB_RESULTS: ${{ toJSON(needs) }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/next-return"
+          printf '%s\n' "$JOB_RESULTS" > "$RUNNER_TEMP/next-return/JOB_STATUS.json"
+          printf 'commit=%s\nrun_id=%s\nattempt=%s\ncost_requested=%s\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" '${{ inputs.run_cost }}' > "$RUNNER_TEMP/next-return/RUN_CONTEXT.txt"
+          printf 'Send this complete artifact together with the workflow run URL. A successful collect job does not mean the experiments passed; inspect JOB_STATUS.json and each raw result. B9 remains HOLD.\n' > "$RUNNER_TEMP/next-return/README.txt"
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: next-raw-*
+          path: ${{ runner.temp }}/next-return/artifacts
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: next-evidence-return-a${{ github.run_attempt }}
+          path: ${{ runner.temp }}/next-return/
+          if-no-files-found: error
+          retention-days: 30
