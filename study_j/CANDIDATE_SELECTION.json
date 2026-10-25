@@ -1,0 +1,40 @@
+{
+  "selection": "first twelve in stated order after excluding the known manifest-exposure list; before any new treatment run",
+  "ordered_pool": [
+    "agronholm/anyio",
+    "agronholm/apscheduler",
+    "dbader/schedule",
+    "arrow-py/arrow",
+    "python-pendulum/pendulum",
+    "encode/httpx",
+    "encode/starlette",
+    "hynek/structlog",
+    "python-jsonschema/referencing",
+    "marshmallow-code/marshmallow",
+    "pallets/itsdangerous",
+    "pydantic/pydantic-settings",
+    "python-attrs/attrs",
+    "sqlalchemy/alembic",
+    "python-hyper/hpack",
+    "python-hyper/hyperframe",
+    "urwid/urwid",
+    "python-pillow/Pillow",
+    "aio-libs/aiosignal",
+    "elastic/elasticsearch-py"
+  ],
+  "selected": [
+    "agronholm/anyio",
+    "agronholm/apscheduler",
+    "dbader/schedule",
+    "arrow-py/arrow",
+    "python-pendulum/pendulum",
+    "encode/httpx",
+    "encode/starlette",
+    "hynek/structlog",
+    "python-jsonschema/referencing",
+    "marshmallow-code/marshmallow",
+    "pallets/itsdangerous",
+    "pydantic/pydantic-settings"
+  ],
+  "scope": "repository metadata only; no behavioral eligibility or outcome assertion"
+}

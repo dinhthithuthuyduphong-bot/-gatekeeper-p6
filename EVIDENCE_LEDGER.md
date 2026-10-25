@@ -1,5 +1,25 @@
 # Sổ bằng chứng (evidence ledger)
 
+## Cập nhật 24/10/2026
+
+- Study I đã tái lập CI tại run `40084717332`, code `5292b6a16ab4e68a62c24032e44c2d99b327498e`.
+  Bằng chứng đã lưu trong `study_i/results/ci-40084717332/`, được thêm vào main `fcdd1b8b`.
+  SQLAlchemy: 9 upstream regressions; NetworkX: witness repaired, 54 selected census tests giữ pass.
+  Retrospective/exploratory; không cộng thành target prospective mới.
+- Gói closure: `research_closure/RESULT.md` và `research_closure/results/`. Đây là
+  kiểm tra **local**, phân tích hậu kiểm và benchmark thời gian có log, không phải
+  một workflow GitHub mới đã chạy hay một kết quả B9 trả phí.
+- Khi dẫn baseline Study H, dùng bảng IUT/ Holm bổ sung; bảng fixed-size alpha/(2K)
+  cũ được giữ như lịch sử nhưng không dùng để khẳng định GK vượt baseline công bằng.
+- Study F F-A3 sửa scoring trước paid B9, seed giữ nguyên; B9 HOLD. Study J chưa có outcome.
+- Kiểm tra cuối: `research_closure/results/final_validation_v2/VALIDATION.json`;
+  125 tests PASS, freeze D/E/F/G/H PASS, 5.649 paired cost draws khớp raw log.
+  Quét tĩnh 12 repo cho Study J không tìm thấy site none-identity; không gọi đây là
+  target dương/âm hoặc oracle cấp 1 mới.
+
+Các mục bên dưới là nhật ký lịch sử; các trạng thái BLOCKED/bản nháp ở mốc cũ
+không thay thế bảng cập nhật trên và `REVIEW_RESPONSE_PLAN.md`.
+
 Mỗi dòng là một lần chạy trên GitHub Actions. "Phạm vi" ghi rõ điều được và **không** được kết luận. Digest có dấu `…` là bản rút gọn (12 ký tự đầu, tính từ file artifact đã tải về); cần bổ sung đầy đủ từ trang Actions.
 
 | Mốc | Run ID | Commit | Artifact (sha256) | Phạm vi |
@@ -166,3 +186,8 @@ Sau Study B, `gatekeeper_lite/` có thêm admission theo scope (`scoped.py`), n�
 - *(Đã xử lý: mã P7.x đã được giải nén ra dạng đọc được qua workflow `p7-extract-sources.yml`; binder v3 nằm trong `p7/p7_3/` kèm `BINDER_FREEZE.json`.)* Ghi chú gốc: mã P7.x từng được **nhúng trong file workflow** dưới dạng base64 nén xz (ví dụ `p7-3-anchored-binder.yml`, bước "Unpack frozen binder revision and exposed target"). Mã chạy được và đóng băng, nhưng người đọc không xem hay diff được. Cần giải nén ra dạng đọc được bằng `python tools/extract_embedded_payload.py .github/workflows/p7-3-anchored-binder.yml p7/p7_3` và commit thư mục `p7/` kèm `MANIFEST.json` (sha256 của payload và từng file).
 - Gắn tag cho các commit bằng chứng, ví dụ `p7.3-evidence` → `e5e4422`, `gk-lite-demo-v1` → `6908381`.
 - Prospective pairs (trên target độc lập, protocol đóng băng trước): **0 tại thời điểm viết mục này (trước Study D/E)**. Cập nhật: Study D có 16 ô và Study E có 10 ô prospective, xem các mục Study D v1 và Study E v1 bên dưới.
+
+
+## 25/10/2026 — Study K, retrospective follow-up
+
+Python-control: unchanged 16-test upstream module, baseline 15 pass/1 fail, skill and upstream gold 16 pass, three repetitions per arm. 600 paired diagnostic draws and 200 state/order rechecks are preserved. The witness is an upstream smoke oracle; the numerical draw oracle is researcher-authored. Selected-module coverage only, 2/3 edited sites reached. See `study_k/RESULT_VI.md`. Additional static search found no applicable production edit in 11 repositories at 14 snapshots. Airflow revert is a documented lead, not a reproduced tier-1 harmful target. B9 HOLD; no prospective/generalization claim.

@@ -69,24 +69,47 @@ class StudyFAggregationTests(unittest.TestCase):
         agg = importlib.import_module("aggregate_study_f")
         with tempfile.TemporaryDirectory() as tmp:
             tmp = Path(tmp)
-            cfg = {"k_patches": k, "alpha": 0.1, "repetitions": 1, "cells": list(rows_by_target),
+            cfg = {"k_patches": k, "alpha": 0.1, "n_max": 300, "theta": .2, "eta": .05, "repetitions": 1, "cells": list(rows_by_target),
                    "b9_configs": {"m1": "x", "m2": "y"}}
+            cfg["scopes_by_target"] = {t:["bool"] for t in cfg["cells"]}
             (tmp / "c.json").write_text(json.dumps(cfg))
+            from gatekeeper_ext.study_f_validation import digest
             for t, rows in rows_by_target.items():
-                (tmp / f"HELDOUT_{t}.json").write_text(json.dumps({"target": t, "rows": rows}))
+                rows = [{"approach": "skill+" + name, "verdict": "NO_PATCH", "state": {"status": "NO_PATCH"}}
+                        for name in ("Gatekeeper", "B6R", "B8")] + rows
+                (tmp / f"HELDOUT_{t}.json").write_text(json.dumps({
+                    "schema_version": 2, "evidence": "RECORDED_PROVIDER_REPLAY", "config_sha256": digest(tmp / "c.json"),
+                    "target": t, "commit": "a"*40, "heldout_seed": {"seed": 2}, "admission_seed": 1,
+                    "source_artifacts": {m: {"result_sha256": "b"*64, "cassette_sha256": "c"*64} for m in cfg["b9_configs"]},
+                    "rows": rows}))
             agg.main(str(tmp / "c.json"), str(tmp), str(tmp / "o.md"))
             return (tmp / "o.md").read_text()
 
     def test_patch_level_family(self):
-        rows = lambda m, e, v: [{"approach": "B9 raw", "model": m, "repetition": 0, "verdict": v},
-                                {"approach": "B9+Gatekeeper (candidate)", "model": m, "repetition": 0, "e_patch": e}]
+        def rows(m, e, v):
+            submitted = v != "NO_PATCH"
+            state = {"status": "NO_PATCH"}
+            if submitted:
+                help_, hurt = int(v == "SUCCESS"), int(v == "HARMFUL")
+                state = {"status": "SUBMITTED", "census": {"status": "VALID", "new_failures": []},
+                         "hidden_oracle": {"bool": {"help": help_, "hurt": hurt, "tie": 300-help_-hurt, "harness_error": 0}}}
+            from gatekeeper_ext.patch_rule import patch_evalue
+            gate = {"submitted": submitted, "e_patch": 0.0, "census_ok": submitted}
+            if submitted:
+                state["hidden_traces"] = {"bool": [[-1,False]]*help_ + [[1,True]]*hurt + [[0,False]]*(300-help_-hurt)}
+                tr = {"bool": ([[-1,False]] if v == "SUCCESS" else [[1,True]] if v == "HARMFUL" else [[0,False]])*300}
+                e = patch_evalue(tr,.2,.05,300)
+                gate.update(e_patch=e,scope_traces=tr,scope_counts={"bool": {"help":300*help_,"hurt":300*hurt,"tie":300*(1-help_-hurt),"harness_error":0}})
+            return [{"approach": "B9 raw", "model": m, "repetition": 0, "verdict": v, "state": state, "cost_usd": 0},
+                    {"approach": "B9+Gatekeeper (candidate)", "model": m, "repetition": 0, "e_patch": e,
+                     "raw_verdict": v, "cost_usd": 0, "gate": gate}]
         out = self._run({"T1": rows("m1", 0.0, "HARMFUL") + rows("m2", 1e9, "SUCCESS"),
                          "T2": rows("m1", 0.5, "NO_EFFECT") + rows("m2", 0.0, "NO_PATCH")})
         self.assertIn("| m1 | B9 + Gatekeeper | 0 | 0 | 0 | 2 |", out)     # harmful patch never deployed
         self.assertIn("| m2 | B9 + Gatekeeper | 1 | 0 | 0 | 1 |", out)
 
     def test_family_size_must_match_registration(self):
-        with self.assertRaises(SystemExit):
+        with self.assertRaisesRegex(ValueError, "family size"):
             self._run({"T1": []}, k=99)
 
 

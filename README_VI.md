@@ -1,5 +1,13 @@
 # Gatekeeper-Lite — bản demo end-to-end
 
+**25/10/2026 — zero-cost follow-up:** [python-control result](study_k/RESULT_VI.md), [reproduce / raw audit](study_k/README.md). A retrospective beneficial transfer was reproduced; B9 remains HOLD. See [cumulative update instructions](research_closure/UPDATE_MAIN.md).
+
+
+> Tài liệu dưới đây mô tả demo và các mốc lịch sử. Trạng thái nghiên cứu ngày
+> 24/10/2026: [RESULT.md](research_closure/RESULT.md); cách kiểm tra bản hiện tại:
+> [UPDATE_MAIN.md](research_closure/UPDATE_MAIN.md). Suite hiện tại có 125 tests;
+> B9 vẫn HOLD. Các bảng demo không phải kết quả trên cohort repo mới.
+
 Bộ code này chạy trọn chuỗi quyết định của Gatekeeper trên một bộ target dựng sẵn:
 
 ```
@@ -19,7 +27,7 @@ Chỉ dùng thư viện chuẩn của Python (≥ 3.9; đã chạy với 3.12.3)
 
 ```bash
 # ở thư mục gốc của repo (hoặc thư mục chứa gatekeeper_lite/)
-python -m unittest discover -s tests -v                              # 38 test
+python -m unittest discover -s tests -v                              # toàn bộ suite hiện tại
 python -m gatekeeper_lite run --config demo/config.json --out out_demo
 python -m gatekeeper_lite show out_demo/RESULT.json T2_help_lazy     # giải thích 1 cặp
 ```

@@ -1,0 +1,22 @@
+{
+  "experiment_id": "study-j-independent-validation-design",
+  "status": "DRAFT_NO_NEW_OUTCOMES",
+  "model_calls_allowed": false,
+  "cash_api_budget_usd": 0,
+  "theta": 0.2,
+  "eta": 0.05,
+  "alpha": 0.1,
+  "n_max": 300,
+  "minimum_repositories": 12,
+  "minimum_repositories_per_skill": 6,
+  "required_skills": ["bool-int", "none-identity"],
+  "primary_gate": "frozen F-A2 patch e-value; full 300 draws per scope; e-Holm over the registered patch family",
+  "comparators": ["source-replay-and-package-fingerprint", "fingerprint-plus-five-visible-smoke-draws", "selected-census-only", "fixed-IUT-Holm-200", "fixed-IUT-Holm-300"],
+  "selection_policy": "inventory locked before treatment outcomes; all eligible entries retained including neutral, harmful, invalid, and unbound cases",
+  "exclusion_manifest": "study_j/EXCLUDED_PRIOR_REPOS.json",
+  "public_freeze_commit": null,
+  "public_freeze_time_utc": null,
+  "seed_beacon_receipt": null,
+  "targets": [],
+  "claims": "No new prospective outcome exists. Re-running Study I or using new seeds on known targets does not close the external-validity gap."
+}

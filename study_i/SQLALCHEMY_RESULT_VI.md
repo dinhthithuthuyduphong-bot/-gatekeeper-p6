@@ -3,6 +3,8 @@
 Ngày: **24/10/2026**. Trạng thái: **ĐÃ TÁI LẬP LOCAL — EXPLORATORY**.
 API model: **0 lượt gọi, 0 USD**. B9: **HOLD**.
 
+**Cập nhật CI:** run [40084717332](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40084717332) đã tái lập thành công. Raw evidence và audit ở `results/ci-40084717332/`; chênh nhãn phiên bản SQLite đã được ghi rõ. Thời gian gốc dưới đây là số đo local ban đầu. Benchmark dừng thật bổ sung ở `../research_closure/results/cost/sqlalchemy/`.
+
 ## Kết luận được bằng chứng hỗ trợ
 
 Áp nguyên skill `none-identity` đã đóng băng làm **9 test hành vi upstream của

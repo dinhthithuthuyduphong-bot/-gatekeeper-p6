@@ -1,0 +1,64 @@
+{
+  "experiment_id": "study-f-v1",
+  "status": "FROZEN",
+  "requires_freeze": true,
+  "purpose": "Does Gatekeeper change outcomes for EACH code model, and by how much? Within-model contrast: B9 raw vs B9 + Gatekeeper; held-out scoring for every end state.",
+  "theta": 0.2,
+  "eta": 0.05,
+  "alpha": 0.1,
+  "alpha_alarm": 0.05,
+  "n_max": 300,
+  "k_cells": 144,
+  "k_cells_note": "4 models x 3 repetitions x 6 targets x 2 scopes; provisional per-cell bar K/alpha = 1440",
+  "seed_time_utc": "2026-10-21T17:06:53Z",
+  "b9_configs": {
+    "deepseek-flash": "study_d/b9_config.json",
+    "gemini-3.1-flash-lite": "study_d/b9_config.json",
+    "vertex-gemini-flash": "study_f/b9_config_f.json",
+    "vertex-gemini-pro": "study_f/b9_config_f.json"
+  },
+  "cells": [
+    "D1_py_ecc",
+    "D2_cerberus",
+    "D3_speckit",
+    "D4_openfeature",
+    "D5_pycubrid",
+    "A1_speckit_catalog"
+  ],
+  "frozen_on": "2026-10-21T16:06:53Z",
+  "seed_freeze_sha256": "c1e57be377bb282baba53d4b646138f97ec1843effb634d89f9bc59d8b6ed021",
+  "repetitions": 3,
+  "extra_tracked": [
+    "tools/score_heldout.py",
+    "tools/aggregate_study_f.py",
+    "gatekeeper_ext/patch_rule.py",
+    "gatekeeper_ext/__init__.py"
+  ],
+  "amendments_applied": [
+    "F-A1",
+    "F-A2"
+  ],
+  "amendment_log": [
+    {
+      "id": "F-A1",
+      "edits": [
+        "config_study_f.json:k_cells=144",
+        "config_study_f.json:k_cells_note=\"4 models x 3 repetitions x 6 targets x 2 scopes; provisional per-cell bar K/alpha = 1440\"",
+        "config_study_f.json:repetitions=3",
+        "config_study_f.json:extra_tracked=[\"tools/score_heldout.py\",\"tools/aggregate_study_f.py\"]"
+      ],
+      "applied_utc": "2026-10-22T08:59:05+00:00"
+    },
+    {
+      "id": "F-A2",
+      "edits": [
+        "config_study_f.json:k_patches=72",
+        "config_study_f.json:family_unit=\"patch (model x repetition x target); amendment F-A2\"",
+        "config_study_f.json:extra_tracked=[\"tools/score_heldout.py\",\"tools/aggregate_study_f.py\",\"gatekeeper_ext/patch_rule.py\",\"gatekeeper_ext/__init__.py\"]"
+      ],
+      "applied_utc": "2026-10-23T11:04:49+00:00"
+    }
+  ],
+  "k_patches": 72,
+  "family_unit": "patch (model x repetition x target); amendment F-A2"
+}

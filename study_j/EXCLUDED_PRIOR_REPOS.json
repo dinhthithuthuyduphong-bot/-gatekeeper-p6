@@ -1,0 +1,353 @@
+{
+  "status": "MINIMUM_KNOWN_EXPOSURE_LIST_NOT_EXHAUSTIVE",
+  "repositories": {
+    "Amsterdam-Music-Lab/MUSCLE": [
+      "study_g/targets/muscle_pr703.json"
+    ],
+    "EIGSEP/eigsep_terrain": [
+      "study_g/targets/eigsep_terrain_9f7ea22.json"
+    ],
+    "GalSim-developers/GalSim": [
+      "study_g/targets/galsim_pr605.json"
+    ],
+    "GrammaTech/ddisasm": [
+      "study_g/candidates_harm_scan.json"
+    ],
+    "GrowthPath/zoho_analytics_connector": [
+      "study_g/targets/zoho_analytics_connector_c7df0f1.json"
+    ],
+    "HERA-Team/hera_pspec": [
+      "study_g/candidates_control_scan.json",
+      "study_g/eval_targets/K1_hera_pspec/gk_target.json",
+      "study_g/targets/hera_pspec_pr485.json"
+    ],
+    "HazyResearch/meerkat": [
+      "study_g/candidates_harm_scan.json"
+    ],
+    "INET-Complexity/INET-consumption": [
+      "study_g/targets/inet_consumption_d677c54.json"
+    ],
+    "JDASoftwareGroup/kartothek": [
+      "study_i/search_evidence/upstream_pr_sources.json"
+    ],
+    "Janzert/AEI": [
+      "study_g/targets/aei_eb85a89.json"
+    ],
+    "Lightning-AI/lightning-thunder": [
+      "study_g/targets/lightning_thunder_pr2469.json"
+    ],
+    "PrincetonUniversity/PsyNeuLink": [
+      "study_g/targets/psyneulink_pr1472.json"
+    ],
+    "PyMySQL/PyMySQL": [
+      "study_e/candidates.json"
+    ],
+    "QuantAMMProtocol/quantammsim": [
+      "study_g/targets/quantammsim_379bc0d.json"
+    ],
+    "SCons/scons": [
+      "study_g/candidates_harm_scan.json"
+    ],
+    "SheffieldML/GPyOpt": [
+      "study_i/search_evidence/upstream_pr_sources.json"
+    ],
+    "Textualize/trogon": [
+      "study_b/candidates_round3.json"
+    ],
+    "TillQuandel/atomic-notes": [
+      "study_g/candidates_control_scan.json",
+      "study_g/targets/atomic_notes_2d7162d.json"
+    ],
+    "WSE-research/Qanary-quality-assurance": [
+      "study_g/targets/qanary_quality_assurance_b2800ba.json"
+    ],
+    "abseil/abseil-py": [
+      "study_e/candidates.json"
+    ],
+    "agronholm/cbor2": [
+      "study_e/candidates.json"
+    ],
+    "ahmetcagriakca/pdip": [
+      "study_g/targets/pdip_a519a26.json",
+      "study_g/targets/pdip_f340c77.json",
+      "study_g/targets/pdip_pr58.json"
+    ],
+    "alecthomas/voluptuous": [
+      "study_d/eval_targets/C2_voluptuous/gk_target.json"
+    ],
+    "alephdata/aleph": [
+      "study_g/candidates_harm_scan.json"
+    ],
+    "ansys/pymechanical": [
+      "study_g/targets/pymechanical_pr1016.json"
+    ],
+    "apache/airflow": [
+      "study_k/search_evidence/primary_source_0.json (published harmful outcome inspected; no local tier-1 test reproduction)"
+    ],
+    "b45ch1/algopy": [
+      "study_g/targets/algopy_pr43.json"
+    ],
+    "benenzhu/aiter_P": [
+      "study_g/targets/aiter_p_f08b73c.json"
+    ],
+    "cantools/cantools": [
+      "study_e/candidates.json",
+      "study_e/candidates_round2.json"
+    ],
+    "centergy/flex": [
+      "study_g/candidates_harm_scan.json"
+    ],
+    "click-contrib/click-default-group": [
+      "study_b/candidates_round3.json"
+    ],
+    "click-contrib/click-help-colors": [
+      "study_b/candidates_round3.json"
+    ],
+    "click-contrib/click-man": [
+      "study_b/candidates_round3.json"
+    ],
+    "click-contrib/click-option-group": [
+      "study_b/candidates_round3.json"
+    ],
+    "click-contrib/sphinx-click": [
+      "study_b/candidates_round3.json"
+    ],
+    "coleifer/peewee": [
+      "study_i/search_evidence/selection.json"
+    ],
+    "cubrid-lab/pycubrid": [
+      "study_d/eval_targets/D5_pycubrid/gk_target.json",
+      "study_d/targets/pycubrid_479.json"
+    ],
+    "databricks/databricks-sql-python": [
+      "study_e/candidates.json",
+      "study_e/candidates_round2.json",
+      "study_e/eval_targets/E3_databricks/gk_target.json"
+    ],
+    "dropbox/PyHive": [
+      "study_e/candidates.json",
+      "study_e/candidates_round2.json"
+    ],
+    "dvanmoorselaar/open_dvm": [
+      "study_g/targets/open_dvm_0908b45.json"
+    ],
+    "edwinlim0919/aiter": [
+      "study_g/targets/aiter_5661110.json"
+    ],
+    "eliben/pyelftools": [
+      "study_g/candidates_control_scan.json",
+      "study_g/targets/pyelftools_f0e6cd6.json"
+    ],
+    "emfcamp/Website": [
+      "study_g/candidates_harm_scan.json",
+      "study_g/harm_candidates.json"
+    ],
+    "emmett-framework/emmett": [
+      "study_g/candidates_harm_scan.json",
+      "study_g/eval_targets/G2_emmett/gk_target.json",
+      "study_g/harm_candidates.json",
+      "study_g/harm_dump_emmett.json"
+    ],
+    "ethereum/py_ecc": [
+      "study_d/eval_targets/D1_py_ecc/gk_target.json",
+      "study_d/targets/py_ecc_161.json"
+    ],
+    "ewels/rich-click": [
+      "study_b/candidates.json",
+      "study_b/candidates_round2.json",
+      "study_b/targets/B1_rich_click/gk_target.json"
+    ],
+    "fastapi/typer": [
+      "study_b/candidates.json",
+      "study_b/candidates_round3.json"
+    ],
+    "fim-ai/fim-one": [
+      "study_g/candidates_harm_scan.json"
+    ],
+    "fivetran/great_expectations": [
+      "study_g/candidates_harm_scan.json"
+    ],
+    "fuzeman/bencode.py": [
+      "study_e/candidates.json"
+    ],
+    "github/spec-kit": [
+      "study_d/eval_targets/A1_speckit_catalog/gk_target.json",
+      "study_d/eval_targets/D3_speckit/gk_target.json",
+      "study_d/targets/speckit_2589.json",
+      "study_d/targets/speckit_3268.json"
+    ],
+    "googleapis/proto-plus-python": [
+      "study_i/search_evidence/upstream_pr_sources.json"
+    ],
+    "hikka-io/hikka": [
+      "study_g/candidates_harm_scan.json"
+    ],
+    "icesat2py/icepyx": [
+      "study_g/targets/icepyx_pr542.json"
+    ],
+    "ivre/ivre": [
+      "study_g/candidates_harm_scan.json"
+    ],
+    "janluke/cloup": [
+      "study_b/candidates.json"
+    ],
+    "karlicoss/promnesia": [
+      "study_g/candidates_harm_scan.json",
+      "study_g/harm_candidates.json",
+      "study_g/harm_candidates_retry.json"
+    ],
+    "kdeldycke/click-extra": [
+      "study_b/candidates.json"
+    ],
+    "kvesteri/sqlalchemy-utils": [
+      "study_i/search_evidence/selection_extension.json"
+    ],
+    "linsomniac/python-memcached": [
+      "study_e/candidates.json"
+    ],
+    "magfest/ubersystem": [
+      "study_g/candidates_harm_scan.json"
+    ],
+    "matplotlib/matplotlib": [
+      "study_i/search_evidence/upstream_pr_sources.json"
+    ],
+    "meawoppl/ndsolver": [
+      "study_g/candidates_control_scan.json",
+      "study_g/targets/ndsolver_1810bba.json"
+    ],
+    "microsoft/onnxruntime": [
+      "study_i/search_evidence/upstream_pr_sources.json"
+    ],
+    "mkdocs/mkdocs-click": [
+      "study_b/candidates_round3.json"
+    ],
+    "msgpack/msgpack-python": [
+      "study_e/candidates.json"
+    ],
+    "nditech/apollo": [
+      "study_g/candidates_harm_scan.json"
+    ],
+    "networkx/networkx": [
+      "study_i/targets.json"
+    ],
+    "onnx/onnx": [
+      "study_i/search_evidence/upstream_pr_sources.json"
+    ],
+    "open-feature/python-sdk": [
+      "study_d/eval_targets/D4_openfeature/gk_target.json",
+      "study_d/targets/openfeature_621.json"
+    ],
+    "pallets/click": [
+      "study_b/candidates.json",
+      "study_c/targets/C_click_8_1_8/gk_target.json",
+      "study_c/targets/C_click_8_2_0/gk_target.json",
+      "study_c/targets/C_click_8_2_2/gk_target.json",
+      "study_c/targets/C_click_8_3_0/gk_target.json",
+      "study_c/targets/C_click_8_3_1/gk_target.json",
+      "study_c/targets/C_click_8_3_2/gk_target.json"
+    ],
+    "pinterest/pymemcache": [
+      "study_e/candidates.json"
+    ],
+    "pisa-hut/simulation-core": [
+      "study_g/targets/simulation_core_8ddaa75.json"
+    ],
+    "ponyorm/pony": [
+      "study_i/search_evidence/selection.json"
+    ],
+    "pyeve/cerberus": [
+      "study_d/eval_targets/D2_cerberus/gk_target.json",
+      "study_d/targets/cerberus_144.json"
+    ],
+    "pypa/packaging": [
+      "study_e/candidates.json",
+      "study_e/candidates_round2.json",
+      "study_e/eval_targets/E2_packaging/gk_target.json"
+    ],
+    "python-attrs/attrs": [
+      "study_i/search_evidence/upstream_pr_sources.json"
+    ],
+    "python-control/python-control": [
+      "study_k/results/local-20261025-clean/RESULT.json"
+    ],
+    "python-jsonschema/jsonschema": [
+      "study_d/eval_targets/C1_jsonschema/gk_target.json"
+    ],
+    "python-poetry/tomlkit": [
+      "study_e/candidates.json",
+      "study_e/candidates_round2.json",
+      "study_e/eval_targets/K2_tomlkit/gk_target.json"
+    ],
+    "python-trio/asyncclick": [
+      "study_b/candidates.json",
+      "study_b/candidates_round2.json",
+      "study_b/targets/B2_asyncclick/gk_target.json"
+    ],
+    "rachelos/we-mp-rss": [
+      "study_g/candidates_harm_scan.json"
+    ],
+    "randomgitsrc/peekview": [
+      "study_g/targets/peekview_165997b.json"
+    ],
+    "redis/redis-py": [
+      "study_e/candidates.json",
+      "study_e/candidates_round2.json"
+    ],
+    "rohanlumia/proov-km-waechter-fix": [
+      "study_g/targets/proov_km_waechter_fix_aac633b.json"
+    ],
+    "scikit-image/scikit-image": [
+      "study_i/search_evidence/upstream_pr_sources.json"
+    ],
+    "sgl-project/sglang": [
+      "study_g/targets/sglang_pr19745.json"
+    ],
+    "simonepietraroia/proov-km-waechter-fix": [
+      "study_g/targets/proov_km_waechter_fix_575e4ff.json"
+    ],
+    "simple-login/app": [
+      "study_g/candidates_harm_scan.json"
+    ],
+    "skyportal/skyportal": [
+      "study_g/candidates_harm_scan.json"
+    ],
+    "sqlalchemy/sqlalchemy": [
+      "study_i/search_evidence/selection.json",
+      "study_i/targets.json"
+    ],
+    "sqlobject/sqlobject": [
+      "study_g/targets/sqlobject_pr70.json",
+      "study_i/search_evidence/selection_extension.json"
+    ],
+    "trinodb/trino-python-client": [
+      "study_e/candidates.json",
+      "study_e/candidates_round2.json",
+      "study_e/eval_targets/K1_trino/gk_target.json"
+    ],
+    "tryton/tryton": [
+      "study_g/candidates_harm_scan.json"
+    ],
+    "universityofprofessorex/pytorch-lab": [
+      "study_g/targets/pytorch_lab_9573f97.json"
+    ],
+    "wandb/weave": [
+      "study_g/targets/weave_pr5121.json"
+    ],
+    "web2py/pydal": [
+      "study_g/candidates_harm_scan.json",
+      "study_g/eval_targets/G1_pydal/gk_target.json",
+      "study_g/harm_candidates.json"
+    ],
+    "yaml/pyyaml": [
+      "study_e/candidates.json",
+      "study_e/candidates_round2.json",
+      "study_e/eval_targets/E1_pyyaml/gk_target.json"
+    ],
+    "zalando/python-clickclick": [
+      "study_b/candidates_round3.json"
+    ],
+    "zc-zhangchen/any-auto-register": [
+      "study_g/candidates_harm_scan.json"
+    ]
+  }
+}

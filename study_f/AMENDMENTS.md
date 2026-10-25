@@ -30,3 +30,31 @@
 **Kiểm tra trên dữ liệu đã có (post hoc):** áp quy tắc mức patch cho Study D/E/G cho cùng quyết định triển khai (chỉ D1 và D3).
 
 **Không đổi:** model, giá, ngân sách, target, oracle, θ, η, α, n_max, seed held-out.
+
+## F-A3 (24/10/2026, B9 HOLD) — hoàn thiện chấm điểm và kiểm tra bằng chứng
+
+Phát hiện trước paid B9: candidate thiếu `verdict` làm bước in lỗi; aggregator
+chấp nhận đủ tên file nhưng thiếu patch rows; scorer chưa kiểm tra raw provider
+usage và chưa replay cùng spend guard; fixed-skill comparator còn dùng any-scope.
+
+Thay đổi:
+- Candidate in `PENDING_FAMILY` và raw verdict, không tự nhận đã admit.
+- Bắt buộc đủ 72 raw patches và 72 candidate rows, không trùng/ngoài họ; đủ scope,
+  đủ 300 observations, trace/count/verdict nhất quán, seed admission khác held-out,
+  cùng config hash. Missing evidence khác với một NO_PATCH có bằng chứng thực thi.
+- Cassette chỉ replay; mọi reply đã dùng phải có raw usage và served model. Kiểm
+  tra patch-selection attempts, token counts và chi phí khớp recorded result.
+  Replay cùng spend guard để tái lập BUDGET_CAP; không gọi lại provider.
+- Lưu trace admission/held-out, source hashes; aggregator tính lại patch e-value.
+- Fixed skill + Gatekeeper dùng cùng quy tắc safety mọi scope, e-Holm trong họ
+  riêng sáu fixed patches trên trace D. Đối chiếu dữ liệu cũ vẫn chỉ D1 và D3.
+  Không thay bảng quyết định chính Study D.
+- Báo cáo theo target và model: harmful patches bị chặn, successful patches được
+  giữ/bị loại, Δ điểm %. Không gọi filter là cách làm model sinh patch tốt hơn.
+- F-A3 schema version 2; dữ liệu format cũ cần chấm lại từ cassette. Không có dữ
+  liệu paid mới trong lần amendment này. Lưu freeze/config F-A2 trong archive.
+
+Không đổi model, giá, quota, target/oracle, theta, eta, alpha, n_max hay seed gốc.
+Không xác nhận giá/model ID hiện hành chỉ bằng việc freeze. RELEASE_GATE vẫn HOLD.
+Amendment này không cấp quyền chạy paid pilot. Config và freeze mới được kiểm
+tra local; công bố công khai khi người dùng upload gói cập nhật lên main.

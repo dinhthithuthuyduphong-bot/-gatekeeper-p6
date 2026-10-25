@@ -1,0 +1,143 @@
+{
+  "status": "SOURCE_METADATA_PINS_ONLY_NOT_ELIGIBLE_TARGETS",
+  "selection_file": "study_j/CANDIDATE_SELECTION.json",
+  "model_calls": 0,
+  "treatment_runs": 0,
+  "requires_manual_prior_exposure_disclosure": true,
+  "candidates": [
+    {
+      "repository": "agronholm/anyio",
+      "default_branch": "master",
+      "archived": false,
+      "license_metadata": "MIT",
+      "language": "Python",
+      "url": "https://github.com/agronholm/anyio",
+      "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+      "revision": "4d5115466d923e7eb3de4ca0ff59ad683556c248",
+      "source_ref_url": "https://api.github.com/repos/agronholm/anyio/git/ref/heads/master"
+    },
+    {
+      "repository": "agronholm/apscheduler",
+      "default_branch": "master",
+      "archived": false,
+      "license_metadata": "MIT",
+      "language": "Python",
+      "url": "https://github.com/agronholm/apscheduler",
+      "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+      "revision": "bdaceb12792f104f25798dee2850d45f9e7d83f8",
+      "source_ref_url": "https://api.github.com/repos/agronholm/apscheduler/git/ref/heads/master"
+    },
+    {
+      "repository": "dbader/schedule",
+      "default_branch": "master",
+      "archived": false,
+      "license_metadata": "MIT",
+      "language": "Python",
+      "url": "https://github.com/dbader/schedule",
+      "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+      "revision": "82a43db1b938d8fdf60103bd41f329e06c8d3651",
+      "source_ref_url": "https://api.github.com/repos/dbader/schedule/git/ref/heads/master"
+    },
+    {
+      "repository": "arrow-py/arrow",
+      "default_branch": "master",
+      "archived": false,
+      "license_metadata": "Apache-2.0",
+      "language": "Python",
+      "url": "https://github.com/arrow-py/arrow",
+      "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+      "revision": "2224255c4acc594d734cef0bbc83360452a67983",
+      "source_ref_url": "https://api.github.com/repos/arrow-py/arrow/git/ref/heads/master"
+    },
+    {
+      "repository": "python-pendulum/pendulum",
+      "default_branch": "master",
+      "archived": false,
+      "license_metadata": "MIT",
+      "language": "Python",
+      "url": "https://github.com/python-pendulum/pendulum",
+      "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+      "revision": "e06dacedc4cdea90fa1286b3965d180ab94cf251",
+      "source_ref_url": "https://api.github.com/repos/python-pendulum/pendulum/git/ref/heads/master"
+    },
+    {
+      "repository": "encode/httpx",
+      "default_branch": "master",
+      "archived": false,
+      "license_metadata": "BSD-3-Clause",
+      "language": "Python",
+      "url": "https://github.com/encode/httpx",
+      "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+      "revision": "b5addb64f0161ff6bfe94c124ef76f6a1fba5254",
+      "source_ref_url": "https://api.github.com/repos/encode/httpx/git/ref/heads/master"
+    },
+    {
+      "repository": "encode/starlette",
+      "license_metadata": "BSD-3-Clause",
+      "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+      "canonical_repository": "Kludex/starlette",
+      "default_branch": "main",
+      "archived": false,
+      "language": "Python",
+      "url": "https://github.com/Kludex/starlette",
+      "revision": "8aa828ceaff764a2e57932fb42fdf105a47c4c83",
+      "source_ref_url": "https://api.github.com/repos/Kludex/starlette/git/ref/heads/main",
+      "metadata_note": "Original repository redirected; retained original selected name and resolved the same GitHub repository ID 138597372."
+    },
+    {
+      "repository": "hynek/structlog",
+      "default_branch": "main",
+      "archived": false,
+      "license_metadata": "NOASSERTION",
+      "language": "Python",
+      "url": "https://github.com/hynek/structlog",
+      "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+      "revision": "19c4f21059e853114efa7a93b6e675d93bf7934e",
+      "source_ref_url": "https://api.github.com/repos/hynek/structlog/git/ref/heads/main"
+    },
+    {
+      "repository": "python-jsonschema/referencing",
+      "default_branch": "main",
+      "archived": false,
+      "license_metadata": "MIT",
+      "language": "Python",
+      "url": "https://github.com/python-jsonschema/referencing",
+      "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+      "revision": "19ad61722eaec82086c37cd47ba4a801a5bd8c91",
+      "source_ref_url": "https://api.github.com/repos/python-jsonschema/referencing/git/ref/heads/main"
+    },
+    {
+      "repository": "marshmallow-code/marshmallow",
+      "default_branch": "dev",
+      "archived": false,
+      "license_metadata": "MIT",
+      "language": "Python",
+      "url": "https://github.com/marshmallow-code/marshmallow",
+      "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+      "revision": "b762ea2d59ca52fe5df76b90de14bed7e5ec5607",
+      "source_ref_url": "https://api.github.com/repos/marshmallow-code/marshmallow/git/ref/heads/dev"
+    },
+    {
+      "repository": "pallets/itsdangerous",
+      "default_branch": "main",
+      "archived": false,
+      "license_metadata": "BSD-3-Clause",
+      "language": "Python",
+      "url": "https://github.com/pallets/itsdangerous",
+      "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+      "revision": "672971d66a2ef9f85151e53283113f33d642dabd",
+      "source_ref_url": "https://api.github.com/repos/pallets/itsdangerous/git/ref/heads/main"
+    },
+    {
+      "repository": "pydantic/pydantic-settings",
+      "default_branch": "main",
+      "archived": false,
+      "license_metadata": "MIT",
+      "language": "Python",
+      "url": "https://github.com/pydantic/pydantic-settings",
+      "selection_status": "METADATA_ONLY_NOT_OUTCOME_VETTED",
+      "revision": "7e2dacb6db07b41abb0c80d0608e46e197265554",
+      "source_ref_url": "https://api.github.com/repos/pydantic/pydantic-settings/git/ref/heads/main"
+    }
+  ]
+}

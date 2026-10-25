@@ -1,6 +1,15 @@
 # Gatekeeper-Lite — kiểm soát rủi ro khi tái sử dụng kỹ năng sửa code
 
+**25/10/2026 — zero-cost follow-up:** [python-control result](study_k/RESULT_VI.md), [reproduce / raw audit](study_k/README.md). A retrospective beneficial transfer was reproduced; B9 remains HOLD. See [cumulative update instructions](research_closure/UPDATE_MAIN.md).
+
+
 Repo nghiên cứu cho luận văn tái hiện thu gọn (Lite) bài *Scope before Reuse: Risk-Controlled Admission of Learned Coding Skills* (FSE-2027-13). Repo **công khai**; không chứa mã của tổ chức, PDF bản thảo, khoá API hay dữ liệu benchmark riêng.
+
+**Cập nhật 24/10/2026:** [kết quả kiểm toán và giới hạn còn mở](research_closure/RESULT.md),
+[hướng dẫn chạy audit 0 API](research_closure/UPDATE_MAIN.md). Study I có raw CI đã lưu;
+phần closure mới kiểm tra local (125 tests), có benchmark dừng thật và baseline IUT
+công bằng hơn. Đây không phải bằng chứng Gatekeeper thắng mọi baseline. Study F có
+F-A3 trước paid B9; **B9 HOLD, Study J BLOCKED**. Log và cả kết quả âm được giữ.
 
 ## Nội dung
 
@@ -23,4 +32,5 @@ Hướng dẫn chạy, ánh xạ với paper và giới hạn: xem [`README_VI.m
 - **Implemented:** có mã chạy được.
 - **Verified:** có run trên GitHub Actions, artifact và digest ghi trong `EVIDENCE_LEDGER.md`.
 
-Mọi lần chạy đều thủ công (`workflow_dispatch`) và không gọi model trả phí.
+Workflow audit 0 API chạy thủ công (`workflow_dispatch`) và không gọi model.
+Các workflow B9 trả phí là luồng riêng, hiện bị khóa bởi `pre_b9/RELEASE_GATE.json`.

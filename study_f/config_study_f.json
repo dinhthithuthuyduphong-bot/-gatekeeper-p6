@@ -29,14 +29,47 @@
   "seed_freeze_sha256": "c1e57be377bb282baba53d4b646138f97ec1843effb634d89f9bc59d8b6ed021",
   "repetitions": 3,
   "extra_tracked": [
-    "tools/score_heldout.py",
-    "tools/aggregate_study_f.py",
+    "gatekeeper_ext/__init__.py",
     "gatekeeper_ext/patch_rule.py",
-    "gatekeeper_ext/__init__.py"
+    "gatekeeper_ext/study_f_validation.py",
+    "study_d/FREEZE.json",
+    "study_d/b9_config.json",
+    "study_d/b9_instances/A1_speckit_catalog.json",
+    "study_d/b9_instances/D1_py_ecc.json",
+    "study_d/b9_instances/D2_cerberus.json",
+    "study_d/b9_instances/D3_speckit.json",
+    "study_d/b9_instances/D4_openfeature.json",
+    "study_d/b9_instances/D5_pycubrid.json",
+    "study_d/config_study_d.json",
+    "study_d/eval_targets/A1_speckit_catalog/gk_target.json",
+    "study_d/eval_targets/D1_py_ecc/gk_target.json",
+    "study_d/eval_targets/D2_cerberus/gk_target.json",
+    "study_d/eval_targets/D3_speckit/gk_target.json",
+    "study_d/eval_targets/D4_openfeature/gk_target.json",
+    "study_d/eval_targets/D5_pycubrid/gk_target.json",
+    "study_d/oracles/cerberus_bool.py",
+    "study_d/oracles/jsonschema_bool.py",
+    "study_d/oracles/openfeature_bool.py",
+    "study_d/oracles/py_ecc_bool.py",
+    "study_d/oracles/pycubrid_bool.py",
+    "study_d/oracles/speckit_catalog_bool.py",
+    "study_d/oracles/speckit_priority_bool.py",
+    "study_d/oracles/voluptuous_bool.py",
+    "study_d/results/AGGREGATE.json",
+    "study_d/results/RESULT_A1_speckit_catalog.json",
+    "study_d/results/RESULT_D1_py_ecc.json",
+    "study_d/results/RESULT_D2_cerberus.json",
+    "study_d/results/RESULT_D3_speckit.json",
+    "study_d/results/RESULT_D4_openfeature.json",
+    "study_d/results/RESULT_D5_pycubrid.json",
+    "study_d/skills/bool-excluded-from-int.json",
+    "tools/aggregate_study_f.py",
+    "tools/score_heldout.py"
   ],
   "amendments_applied": [
     "F-A1",
-    "F-A2"
+    "F-A2",
+    "F-A3"
   ],
   "amendment_log": [
     {
@@ -57,8 +90,44 @@
         "config_study_f.json:extra_tracked=[\"tools/score_heldout.py\",\"tools/aggregate_study_f.py\",\"gatekeeper_ext/patch_rule.py\",\"gatekeeper_ext/__init__.py\"]"
       ],
       "applied_utc": "2026-10-23T11:04:49+00:00"
+    },
+    {
+      "id": "F-A3",
+      "edits": [
+        "config_study_f.json:extra_tracked=[\"gatekeeper_ext/__init__.py\",\"gatekeeper_ext/patch_rule.py\",\"gatekeeper_ext/study_f_validation.py\",\"study_d/FREEZE.json\",\"study_d/b9_config.json\",\"study_d/b9_instances/A1_speckit_catalog.json\",\"study_d/b9_instances/D1_py_ecc.json\",\"study_d/b9_instances/D2_cerberus.json\",\"study_d/b9_instances/D3_speckit.json\",\"study_d/b9_instances/D4_openfeature.json\",\"study_d/b9_instances/D5_pycubrid.json\",\"study_d/config_study_d.json\",\"study_d/eval_targets/A1_speckit_catalog/gk_target.json\",\"study_d/eval_targets/D1_py_ecc/gk_target.json\",\"study_d/eval_targets/D2_cerberus/gk_target.json\",\"study_d/eval_targets/D3_speckit/gk_target.json\",\"study_d/eval_targets/D4_openfeature/gk_target.json\",\"study_d/eval_targets/D5_pycubrid/gk_target.json\",\"study_d/oracles/cerberus_bool.py\",\"study_d/oracles/jsonschema_bool.py\",\"study_d/oracles/openfeature_bool.py\",\"study_d/oracles/py_ecc_bool.py\",\"study_d/oracles/pycubrid_bool.py\",\"study_d/oracles/speckit_catalog_bool.py\",\"study_d/oracles/speckit_priority_bool.py\",\"study_d/oracles/voluptuous_bool.py\",\"study_d/results/AGGREGATE.json\",\"study_d/results/RESULT_A1_speckit_catalog.json\",\"study_d/results/RESULT_D1_py_ecc.json\",\"study_d/results/RESULT_D2_cerberus.json\",\"study_d/results/RESULT_D3_speckit.json\",\"study_d/results/RESULT_D4_openfeature.json\",\"study_d/results/RESULT_D5_pycubrid.json\",\"study_d/skills/bool-excluded-from-int.json\",\"tools/aggregate_study_f.py\",\"tools/score_heldout.py\"]",
+        "config_study_f.json:scopes_by_target={\"D1_py_ecc\":[\"bool\",\"int\"],\"D2_cerberus\":[\"bool\",\"number\"],\"D3_speckit\":[\"bool\",\"int\"],\"D4_openfeature\":[\"bool\",\"int\"],\"D5_pycubrid\":[\"bool\",\"int\"],\"A1_speckit_catalog\":[\"bool\",\"int\"]}",
+        "config_study_f.json:heldout_schema_version=2"
+      ],
+      "applied_utc": "2026-10-24T15:56:34+00:00"
     }
   ],
   "k_patches": 72,
-  "family_unit": "patch (model x repetition x target); amendment F-A2"
+  "family_unit": "patch (model x repetition x target); amendment F-A2",
+  "scopes_by_target": {
+    "D1_py_ecc": [
+      "bool",
+      "int"
+    ],
+    "D2_cerberus": [
+      "bool",
+      "number"
+    ],
+    "D3_speckit": [
+      "bool",
+      "int"
+    ],
+    "D4_openfeature": [
+      "bool",
+      "int"
+    ],
+    "D5_pycubrid": [
+      "bool",
+      "int"
+    ],
+    "A1_speckit_catalog": [
+      "bool",
+      "int"
+    ]
+  },
+  "heldout_schema_version": 2
 }

@@ -3,6 +3,8 @@
 Ngày: **24/10/2026**. Trạng thái: **ĐÃ TÁI LẬP LOCAL — RETROSPECTIVE**.
 API model: **0 lượt gọi, 0 USD**. B9: **HOLD**.
 
+**Cập nhật CI:** run [40084717332](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40084717332) đã tái lập thành công. Raw evidence và audit ở `results/ci-40084717332/`. Các thời gian trong báo cáo gốc dưới đây là số đo local ban đầu, không đổi thành số CI. Benchmark dừng thật bổ sung ở `../research_closure/results/cost/networkx/`.
+
 ## Kết luận được bằng chứng hỗ trợ
 
 Frozen skill `none-identity` sửa được một lỗi hành vi của NetworkX khi truyền
