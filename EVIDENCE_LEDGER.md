@@ -1,16 +1,5 @@
 # Sổ bằng chứng (evidence ledger)
 
-## Follow-up chuẩn bị 25/10/2026 — chưa có outcome mới
-
-- Đã đọc source Pydantic-settings và Airflow tại revision cố định; receipt fetch
-  trong `research_closure/results/next_evidence_source_review/`.
-- Pydantic có 3 bool-guard match, 0 none-identity theo scan cũ; baseline động mới
-  chưa chạy. Airflow có call-path tiềm năng, chưa có regression được tái lập.
-- `next_evidence/` và workflow mới chỉ được kiểm tra cấu trúc, **NOT_RUN** cho
-  unit tests, baseline, mở rộng scout và benchmark. Không thêm outcome giả.
-- [Báo cáo và giới hạn](next_evidence/STATUS_AND_SCAN_VI.md);
-  [cách chạy rồi gửi raw artifact](next_evidence/RUN_ON_GITHUB_VI.md).
-
 ## Cập nhật 24/10/2026
 
 - Study I đã tái lập CI tại run `40084717332`, code `5292b6a16ab4e68a62c24032e44c2d99b327498e`.
