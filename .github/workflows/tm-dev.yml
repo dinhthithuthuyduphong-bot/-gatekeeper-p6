@@ -1,33 +1,81 @@
-# Study L2 DEVELOPMENT run (0 cost): test-level differential on the six exposed instances.
-# Not a frozen study and not evidence; it only measures whether the mechanism is feasible.
+# Development diagnostics only. Does not change Study L's frozen gate or call any model.
 name: Gatekeeper test-mutation development check
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'Choose one target first; all is a more expensive CI run'
+        type: choice
+        default: D5_pycubrid
+        options:
+          - D5_pycubrid
+          - D2_cerberus
+          - D4_openfeature
+          - D3_speckit
+          - A1_speckit_catalog
+          - D1_py_ecc
+          - all
+          - unit-only
 permissions:
   contents: read
 jobs:
+  contracts:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    outputs:
+      matrix: ${{ steps.select.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - id: select
+        env:
+          SELECTED_TARGET: ${{ inputs.target }}
+        run: |
+          python - <<'PY'
+          import json, os
+          targets = ['D1_py_ecc','D2_cerberus','D3_speckit','D4_openfeature','D5_pycubrid','A1_speckit_catalog']
+          selected = os.environ['SELECTED_TARGET']
+          if selected not in targets + ['all', 'unit-only']:
+              raise SystemExit('Unknown target')
+          chosen = targets if selected == 'all' else ([selected] if selected != 'unit-only' else ['D5_pycubrid'])
+          rows = [{'target': t, 'python': '3.8' if t == 'D2_cerberus' else '3.12',
+                   'os': 'ubuntu-22.04' if t == 'D2_cerberus' else 'ubuntu-24.04'} for t in chosen]
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              f.write('matrix=' + json.dumps({'include': rows}) + '\n')
+          PY
+      - name: Evidence contract tests
+        id: checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out_contracts
+          python -m unittest discover -s tests -p 'test_testmut*.py' -v > out_contracts/tests.log 2>&1
+      - name: Write contract result
+        if: always()
+        env:
+          CHECK_OUTCOME: ${{ steps.checks.outcome }}
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          p=Path('out_contracts'); p.mkdir(exist_ok=True)
+          p.joinpath('RESULT.md').write_text('# Test-mutation evidence contracts\n\n'
+              + 'Unit-test step outcome: **' + os.environ['CHECK_OUTCOME'] + '**.\n\n'
+              + 'See tests.log for observed results. This is not a target experiment or an admission result.\n', encoding='utf-8')
+          PY
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: TM_contracts
+          path: out_contracts/
   tm:
+    needs: contracts
+    if: inputs.target != 'unit-only'
     strategy:
       fail-fast: false
-      matrix:
-        include:
-          - target: D1_py_ecc
-            python: "3.12"
-            os: ubuntu-24.04
-          - target: D2_cerberus
-            python: "3.8"
-            os: ubuntu-22.04
-          - target: D3_speckit
-            python: "3.12"
-            os: ubuntu-24.04
-          - target: D4_openfeature
-            python: "3.12"
-            os: ubuntu-24.04
-          - target: D5_pycubrid
-            python: "3.12"
-            os: ubuntu-24.04
-          - target: A1_speckit_catalog
-            python: "3.12"
-            os: ubuntu-24.04
+      matrix: ${{ fromJSON(needs.contracts.outputs.matrix) }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 150
     steps:
@@ -35,14 +83,23 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python }}
-      - shell: bash
+      - name: Development diagnostic
+        shell: bash
+        env:
+          TARGET_ID: ${{ matrix.target }}
         run: |
           set -euo pipefail
-          python -m pip install -q "pytest==8.3.5"
+          python -m pip install -q 'pytest==8.3.5'
           mkdir -p out_tm
-          python tools/tm_check.py ${{ matrix.target }} out_tm 2>&1 | tee out_tm/log_${{ matrix.target }}.txt
+          python tools/tm_check.py "$TARGET_ID" out_tm > "out_tm/log_${TARGET_ID}.txt" 2>&1
+      - name: Always write development summary
+        if: always()
+        run: |
+          mkdir -p out_tm
+          python tools/tm_summary.py out_tm out_tm/RESULT_SUMMARY.md
       - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: TM_${{ matrix.target }}
-          path: out_tm
+          path: out_tm/
+          if-no-files-found: error
