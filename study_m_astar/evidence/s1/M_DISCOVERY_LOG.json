@@ -1,0 +1,38 @@
+{
+ "version": 2,
+ "queries": [
+  "fix in:title is:pr is:merged language:Python created:{lo}..{hi}",
+  "bug in:title is:pr is:merged language:Python created:{lo}..{hi}"
+ ],
+ "windows": 42,
+ "pages": 2,
+ "seed": "722277585642093255",
+ "target": 500,
+ "max_examined": 3500,
+ "start": 0,
+ "run_utc": "2026-10-26T07:09:13Z",
+ "search_hits": 16800,
+ "unique_prs": 16430,
+ "rejected_cheap": {
+  "title looks like maintenance, not a bug fix": 1617,
+  "repository already used or exposed": 54,
+  "not merged": 9
+ },
+ "rejected_files": {
+  "no test file changed (no upstream oracle)": 1323,
+  "no non-test python source file changed": 942,
+  "source diff larger than 60 lines": 143,
+  "number of changed files outside 1..8": 364,
+  "source file removed or renamed": 5,
+  "api error": 8
+ },
+ "examined": 3285,
+ "kept": 500,
+ "errors": [],
+ "stopped_because": "target reached",
+ "after_cheap_filters": 14750,
+ "next_position": 3285,
+ "api_calls": 3453,
+ "seconds_waiting": 1,
+ "seconds_total": 2367
+}

@@ -1,0 +1,20 @@
+{
+  "seed": "722277585642093255",
+  "candidates": 500,
+  "pull_requests": {
+    "ASTAR": 269,
+    "RR": 231
+  },
+  "repositories": {
+    "ASTAR": 162,
+    "RR": 148
+  },
+  "shared_repositories": 0,
+  "input_sha256": "1f7565709d746df47f2b3d1872fa447ad7ab82ad462c3203482134019c01c735",
+  "candidate_sha256": "60f9e8ed97d2e11ad483ace36db99af6492e362984995c8abe7c2ad6ae4c86c8",
+  "source_zip_sha256": "f8ade6a1cd40cb1d9c11d4fc1ef06d67d2d13cdb906bbac0ab58e9aa4ed557dc",
+  "order": "preserved S1 discovery artifact order; no reorder",
+  "target_execution": false,
+  "source_run": 40284015631,
+  "repair_base_commit": "036f9eeff76523d4034e04aa6c1e251914251601"
+}
