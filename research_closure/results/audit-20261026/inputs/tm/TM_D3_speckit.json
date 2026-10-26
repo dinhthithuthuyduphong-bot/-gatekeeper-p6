@@ -1,0 +1,83 @@
+{
+  "seed": 2455251445,
+  "n_draws_requested": 200,
+  "test_files": 1,
+  "baseline_cases": 342,
+  "baseline_passed": 342,
+  "eligible_test_functions": 298,
+  "mutants_generated": 200,
+  "mutants_compiled": 195,
+  "deterministic": false,
+  "patches": {
+    "skill": {
+      "help": 0,
+      "hurt": 0,
+      "tie": 195,
+      "bug_trigger": 4,
+      "missing": 0
+    }
+  },
+  "mutants": [
+    {
+      "desc": "cmp_flip at extension_set_priority:1546:7 -> '<='",
+      "help": 2,
+      "hurt": 0,
+      "tie": 193,
+      "bug_trigger": 4,
+      "missing": 0
+    },
+    {
+      "desc": "if_negate at extension_set_priority:1546:7 -> 'not (priority < 1)'",
+      "help": 2,
+      "hurt": 0,
+      "tie": 193,
+      "bug_trigger": 4,
+      "missing": 0
+    },
+    {
+      "desc": "cmp_flip at extension_set_priority:1558:7 -> 'is not'",
+      "help": 2,
+      "hurt": 0,
+      "tie": 193,
+      "bug_trigger": 4,
+      "missing": 0
+    },
+    {
+      "desc": "if_negate at extension_set_priority:1558:7 -> 'not (metadata is None or not isinstance(metadata, dict))'",
+      "help": 2,
+      "hurt": 0,
+      "tie": 193,
+      "bug_trigger": 4,
+      "missing": 0
+    },
+    {
+      "desc": "and_or at extension_set_priority:1558:7 -> 'and'",
+      "help": 2,
+      "hurt": 0,
+      "tie": 193,
+      "bug_trigger": 4,
+      "missing": 0
+    }
+  ],
+  "bug_trigger_rate": 0.020512820512820513,
+  "draws_run": 195,
+  "eligible": true,
+  "checks": {
+    "a_detects_bug_with_known_good_patch": false,
+    "b_no_regression_for_known_good_patch": true,
+    "c_deterministic": false,
+    "d_catches_a_mutant": false,
+    "no_missing_outcomes": true,
+    "all_four": false
+  },
+  "seconds": 266.2,
+  "target": "D3_speckit",
+  "orig_sha": "f6f3540409badcbe570a9d5cccca35beee932845",
+  "gold_sha": "d20b4529284ffdd37e60eba6ab3a91ecf4fc2d3c",
+  "known_good_patch": [
+    "skill"
+  ],
+  "note": null,
+  "python": "3.12.15",
+  "stage": "DEVELOPMENT_NOT_EVIDENCE"
+}

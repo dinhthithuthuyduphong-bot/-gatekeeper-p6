@@ -1,0 +1,29 @@
+
+[notice] A new release of pip is available: 26.2.1 -> 26.2.2
+[notice] To update, run: pip install --upgrade pip
+
+[notice] A new release of pip is available: 26.2.1 -> 26.2.2
+[notice] To update, run: pip install --upgrade pip
+<mutant>:5: SyntaxWarning: "is not" with 'int' literal. Did you mean "!="?
+<mutant>:5: SyntaxWarning: "is not" with 'int' literal. Did you mean "!="?
+<mutant>:54: SyntaxWarning: "is not" with 'int' literal. Did you mean "!="?
+<mutant>:25: SyntaxWarning: "is" with 'int' literal. Did you mean "=="?
+<mutant>:54: SyntaxWarning: "is not" with 'int' literal. Did you mean "!="?
+<mutant>:23: SyntaxWarning: "is not" with 'int' literal. Did you mean "!="?
+<mutant>:54: SyntaxWarning: "is not" with 'float' literal. Did you mean "!="?
+tests/test_client.py:152: SyntaxWarning: "is not" with 'float' literal. Did you mean "!="?
+tests/test_client.py:208: SyntaxWarning: "is not" with 'int' literal. Did you mean "!="?
+tests/test_client.py:322: SyntaxWarning: "is not" with 'int' literal. Did you mean "!="?
+tests/test_client.py:705: SyntaxWarning: "is not" with 'int' literal. Did you mean "!="?
+tests/test_client.py:711: SyntaxWarning: "is not" with 'int' literal. Did you mean "!="?
+tests/test_client.py:841: SyntaxWarning: "is not" with 'int' literal. Did you mean "!="?
+tests/test_client.py:1861: SyntaxWarning: "is" with 'int' literal. Did you mean "=="?
+<mutant>:8: SyntaxWarning: "is not" with 'int' literal. Did you mean "!="?
+<mutant>:6: SyntaxWarning: "is not" with 'int' literal. Did you mean "!="?
+<mutant>:6: SyntaxWarning: "is not" with 'int' literal. Did you mean "!="?
+tests/provider/test_no_op_provider.py:19: SyntaxWarning: "is not" with 'int' literal. Did you mean "!="?
+tests/provider/test_no_op_provider.py:91: SyntaxWarning: "is not" with 'int' literal. Did you mean "!="?
+tests/provider/test_no_op_provider.py:121: SyntaxWarning: "is not" with 'int' literal. Did you mean "!="?
+<mutant>:24: SyntaxWarning: "is" with 'float' literal. Did you mean "=="?
+tests/telemetry/test_evaluation_event.py:61: SyntaxWarning: "is" with 'float' literal. Did you mean "=="?
+D4_openfeature eligible | trigger 0.005 | checks False

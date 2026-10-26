@@ -1,4 +1,4 @@
-"""Development summary of the test-level differential.  python tools/tm_summary.py DIR OUT.md"""
+"""Summarize development records without promoting missing/duplicate data into a pass."""
 import json
 import sys
 from pathlib import Path
@@ -7,31 +7,45 @@ ORDER = ["D1_py_ecc", "D2_cerberus", "D3_speckit", "D4_openfeature", "D5_pycubri
 
 
 def main(d, out):
-    res = {}
-    for f in Path(d).rglob("TM_*.json"):
-        r = json.loads(f.read_text())
-        res[r["target"]] = r
-    L = ["# Test-level differential: development feasibility (NOT evidence; exposed instances)", "",
-         "| Instance | Eligible | Eligible tests | Draws run | Bug-trigger rate | Known-good patch (help/hurt) | Gold mutants caught | Deterministic | Seconds |",
-         "|---|---|---|---|---|---|---|---|---|"]
-    for t in ORDER:
-        r = res.get(t)
+    results, duplicates = {}, set()
+    for f in sorted(Path(d).rglob("TM_*.json")):
+        r = json.loads(f.read_text(encoding="utf-8"))
+        target = r.get("target")
+        if target not in ORDER:
+            continue
+        if target in results:
+            duplicates.add(target)
+        results[target] = r
+    lines = ["# Test-mutation development summary", "",
+             "Exposed instances; not a confirmatory cohort. Missing jobs remain pending, not scientific failures.", "",
+             "| Target | Status | Compiled IDs | Complete IDs per patch | Deterministic | All checks + completeness |",
+             "|---|---|---:|---|---|---|"]
+    passed = 0
+    for target in ORDER:
+        r = results.get(target)
         if r is None:
-            L.append(f"| {t} | MISSING | | | | | | | |")
+            lines.append("| %s | MISSING / not selected | | | | |" % target)
             continue
+        checks = r.get("checks", {})
+        clean = checks.get("no_missing_outcomes") is True
+        ok = bool(r.get("eligible") and checks.get("all_four") and clean and target not in duplicates)
+        passed += ok
+        counts = r.get("complete_draws_by_patch")
+        if counts is None and "draws_run" in r:
+            counts = {k: r["draws_run"] - v["missing"] for k, v in r.get("patches", {}).items() if "missing" in v}
+        status = "DUPLICATE: manual reconciliation required" if target in duplicates else r.get("status", "legacy record")
         if not r.get("eligible"):
-            L.append(f"| {t} | no: {r.get('reason')} | {r.get('eligible_test_functions', '')} | | | | | | |")
-            continue
-        p = next(iter(r["patches"].values()))
-        caught = sum(1 for m in r["mutants"] if m["hurt"] > 0)
-        L.append(f"| {t} | yes | {r['eligible_test_functions']} | {r['draws_run']} | {r['bug_trigger_rate']:.1%} | "
-                 f"{p['help']}/{p['hurt']} | {caught}/{len(r['mutants'])} | {r['deterministic']} | {r.get('seconds')} |")
-    ok = sum(1 for r in res.values() if r.get("eligible") and r["checks"]["all_four"])
-    L += ["", f"Instances for which all four feasibility checks (a)-(d) hold: **{ok} of {len(ORDER)}**.",
-          "Development stage: the thresholds of Study L2 are set only after this table is seen, and these instances are never used as evidence."]
-    Path(out).write_text("\n".join(L) + "\n", encoding="utf-8")
-    print("\n".join(L))
-    return 0
+            status += "; ineligible: " + str(r.get("reason", "unknown"))
+        lines.append("| %s | %s | %s | %s | %s | %s |" % (
+            target, status.replace("|", "/").replace("\n", " "), r.get("draws_compiled", r.get("draws_run", "N/A")),
+            counts or "N/A", r.get("deterministic", "N/A"), ok))
+    lines += ["", "Completed records: **%d/6**; complete feasibility passes: **%d**." % (len(results), passed),
+              "This count is descriptive, not a new G1/G2 decision. Review per-target RESULT files and evidence inventories.",
+              "Do not pool legacy and corrected-harness runs. Study L G1 remains 2/6 (failed); B9 remains HOLD."]
+    Path(out).parent.mkdir(parents=True, exist_ok=True)
+    Path(out).write_text("\n".join(lines) + "\n", encoding="utf-8")
+    print("Development summary written; records=%d, duplicates=%d" % (len(results), len(duplicates)))
+    return 2 if duplicates else 0
 
 
 if __name__ == "__main__":

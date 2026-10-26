@@ -24,6 +24,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 from gatekeeper_ext import golddiff_oracle as O  # noqa: E402
+from gatekeeper_ext.testmut_evidence import execute_logged, feasibility_checks, write_json
 from gatekeeper_ext.golddiff import edited_functions  # noqa: E402
 from gatekeeper_ext.mutants import _offsets, mutants as ast_mutants  # noqa: E402
 
@@ -37,7 +38,7 @@ def expand_files(root, entries):
         p = Path(root) / e
         if p.is_dir():
             files += [str(q.relative_to(root)).replace("\\", "/") for q in sorted(p.rglob("*.py"))
-                      if (q.name.startswith("test_") or q.name.endswith("_test.py"))]
+                      if (q.name.startswith("test_") or q.name.endswith("_test.py") or q.name == "tests.py")]
         elif p.exists():
             files.append(e)
     return sorted(set(files))
@@ -82,16 +83,32 @@ def run_tests(root, runner, files, pythonpath, select, work, tag, timeout=1800):
                "--junitxml", str(xml), "-o", "junit_family=xunit2"]
         if select:
             cmd += ["-k", select]
-        proc = subprocess.run(cmd + list(files), cwd=str(root), env=env, capture_output=True, text=True, timeout=timeout)
+        receipt = execute_logged(cmd + list(files), root, env, work / tag, timeout)
+        if receipt["status"] != "COMPLETED" or receipt["returncode"] not in (0, 1):
+            return None, "runner did not finish normally; see " + tag + ".command.json"
         if not xml.exists():
-            return None, (proc.stdout + proc.stderr)[-800:]
-        return parse_junit(xml.read_text(encoding="utf-8")), None
+            return None, "runner produced no XML; see " + tag + ".stdout.txt"
+        try:
+            records = parse_junit(xml.read_text(encoding="utf-8"))
+        except (ET.ParseError, ValueError, OSError) as exc:
+            return None, "invalid XML: " + type(exc).__name__
+        if not records:
+            return None, "runner produced no test records"
+        return records, None
     out = work / (tag + ".json")
-    proc = subprocess.run([sys.executable, "-m", "gatekeeper_ext.testmut_unittest", str(out), select or ""] + list(files),
-                          cwd=str(root), env=env, capture_output=True, text=True, timeout=timeout)
+    receipt = execute_logged([sys.executable, "-m", "gatekeeper_ext.testmut_unittest", str(out), select or ""] + list(files),
+                             root, env, work / tag, timeout)
+    if receipt["status"] != "COMPLETED" or receipt["returncode"] != 0:
+        return None, "unittest runner did not finish normally; see " + tag + ".command.json"
     if not out.exists():
-        return None, (proc.stdout + proc.stderr)[-800:]
-    return json.loads(out.read_text()), None
+        return None, "unittest runner produced no result"
+    try:
+        records = json.loads(out.read_text(encoding="utf-8"))
+    except (ValueError, OSError) as exc:
+        return None, "invalid unittest result: " + type(exc).__name__
+    if not records:
+        return None, "unittest runner produced no test records"
+    return records, None
 
 
 def _sites(src, node, at):
@@ -229,6 +246,8 @@ def signatures(results, roots):
 def run_arm(base_root, name, test_texts, source_overrides, runner, pythonpath, work, repeats):
     d = Path(work) / ("arm_" + re.sub(r"\W", "_", name))
     shutil.copytree(base_root, d, ignore=shutil.ignore_patterns(".git"))
+    if source_overrides:
+        write_json(Path(work) / ("source_override_" + re.sub(r"\W", "_", name) + ".json"), source_overrides)
     for rel, text in list(source_overrides.items()) + list(test_texts.items()):
         (d / rel).write_text(text, encoding="utf-8")
     sigs = []
@@ -236,7 +255,10 @@ def run_arm(base_root, name, test_texts, source_overrides, runner, pythonpath, w
         res, err = run_tests(d, runner, sorted(test_texts), pythonpath, "__gkm", work, "%s_%d" % (re.sub(r"\W", "_", name), i))
         if res is None:
             return None, err
-        sigs.append(signatures(res, [d, base_root]))
+        sig = signatures(res, [d, base_root])
+        write_json(Path(work) / ("%s_%d.records.json" % (re.sub(r"\W", "_", name), i)), res)
+        write_json(Path(work) / ("%s_%d.signatures.json" % (re.sub(r"\W", "_", name), i)), sig)
+        sigs.append(sig)
     return sigs, None
 
 
@@ -266,6 +288,9 @@ def analyze(orig_root, gold_root, modules, pythonpath, runner, test_entries, pat
     res = {"seed": seed, "n_draws_requested": n_draws}
     files = expand_files(orig_root, test_entries)
     res["test_files"] = len(files)
+    write_json(work / "test_inventory.json", {"requested": list(test_entries), "expanded": files})
+    if not files:
+        return dict(res, eligible=False, reason="configured test entries resolved to zero files")
     baseline, err = run_tests(orig_root, runner, files, pythonpath, None, work, "baseline")
     if baseline is None:
         return dict(res, eligible=False, reason="baseline test run produced no result", tail=err)
@@ -278,6 +303,11 @@ def analyze(orig_root, gold_root, modules, pythonpath, runner, test_entries, pat
     mut = make_mutants(funcs, n_draws, seed)
     texts, ok = build_mutated_sources(orig_root, mut)
     ids = sorted(ok)
+    write_json(work / "mutation_catalog.json", {"seed": seed, "mutants": mut, "compiled_ids": ids})
+    for rel, text in texts.items():
+        saved = work / "mutated_tests" / rel
+        saved.parent.mkdir(parents=True, exist_ok=True)
+        saved.write_text(text, encoding="utf-8")
     res["mutants_generated"], res["mutants_compiled"] = len(mut), len(ids)
     if not ids:
         return dict(res, eligible=False, reason="no mutated test compiled")
@@ -298,8 +328,11 @@ def analyze(orig_root, gold_root, modules, pythonpath, runner, test_entries, pat
         s, e = run_arm(root, name, texts, over, runner, pythonpath, work, repeats)
         if s is None:
             errors[name] = e
+            break  # retain partial evidence; do not spend further trials after an invalid arm
         else:
             sigs[name] = s
+    write_json(work / "arm_signatures.json", sigs)
+    write_json(work / "arm_errors.json", errors)
     if errors:
         return dict(res, eligible=False, reason="arm run failed: " + ", ".join(sorted(errors)), arm_errors=errors)
     res["deterministic"] = all(len(s) < 2 or s[0] == s[1] for s in sigs.values())
@@ -309,12 +342,15 @@ def analyze(orig_root, gold_root, modules, pythonpath, runner, test_entries, pat
     res["bug_trigger_rate"] = paired(first["orig"], first["gold"], first["gold"], ids)["bug_trigger"] / float(len(ids))
     res["draws_run"] = len(ids)
     res["eligible"] = True
-    a = bool(res["patches"]) and all(v["help"] > 0 for v in res["patches"].values())
-    b = bool(res["patches"]) and all(v["hurt"] == 0 for v in res["patches"].values())
-    d = any(m["hurt"] > 0 for m in res["mutants"])
-    missing = sum(v["missing"] for v in list(res["patches"].values()) + res["mutants"])
-    res["checks"] = {"a_detects_bug_with_known_good_patch": a, "b_no_regression_for_known_good_patch": b,
-                     "c_deterministic": res["deterministic"], "d_catches_a_mutant": d, "no_missing_outcomes": missing == 0,
-                     "all_four": bool(a and b and res["deterministic"] and d)}
+    res["checks"] = feasibility_checks(res["patches"], res["mutants"], res["deterministic"])
+    res["draws_compiled"] = len(ids)
+    res["complete_draws_by_patch"] = {k: len(ids) - v["missing"] for k, v in res["patches"].items()}
+    res["draws_run_definition"] = "legacy count of compiled mutant IDs, not guaranteed complete paired outcomes"
+    res["method_limits"] = [
+        "Unique test mutants are sampled without replacement; this is not the primary iid generator.",
+        "Test literals may be in assertions as well as inputs; outcomes measure test signatures, not functional truth.",
+        "Normalized failure text can retain nondeterministic differences; inspect raw records before interpreting effects.",
+        "No prospective admission or population generalization claim is made."]
     res["seconds"] = round(time.time() - t0, 1)
     return res
+

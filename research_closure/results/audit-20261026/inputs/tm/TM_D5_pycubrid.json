@@ -1,0 +1,83 @@
+{
+  "seed": 821864775,
+  "n_draws_requested": 200,
+  "test_files": 1,
+  "baseline_cases": 49,
+  "baseline_passed": 49,
+  "eligible_test_functions": 23,
+  "mutants_generated": 200,
+  "mutants_compiled": 200,
+  "deterministic": true,
+  "patches": {
+    "skill": {
+      "help": 0,
+      "hurt": 0,
+      "tie": 25,
+      "bug_trigger": 0,
+      "missing": 175
+    }
+  },
+  "mutants": [
+    {
+      "desc": "if_negate at DBAPIType.__eq__:35:11 -> 'not (isinstance(other, int) and not isinstance(other, bool))'",
+      "help": 0,
+      "hurt": 0,
+      "tie": 25,
+      "bug_trigger": 0,
+      "missing": 175
+    },
+    {
+      "desc": "and_or at DBAPIType.__eq__:35:11 -> 'or'",
+      "help": 0,
+      "hurt": 0,
+      "tie": 25,
+      "bug_trigger": 0,
+      "missing": 175
+    },
+    {
+      "desc": "cmp_flip at DBAPIType.__eq__:36:19 -> 'not in'",
+      "help": 0,
+      "hurt": 0,
+      "tie": 25,
+      "bug_trigger": 0,
+      "missing": 175
+    },
+    {
+      "desc": "if_negate at DBAPIType.__eq__:37:11 -> 'not (isinstance(other, DBAPIType))'",
+      "help": 0,
+      "hurt": 0,
+      "tie": 25,
+      "bug_trigger": 0,
+      "missing": 175
+    },
+    {
+      "desc": "cmp_flip at DBAPIType.__eq__:38:19 -> '!='",
+      "help": 0,
+      "hurt": 0,
+      "tie": 25,
+      "bug_trigger": 0,
+      "missing": 175
+    }
+  ],
+  "bug_trigger_rate": 0.0,
+  "draws_run": 200,
+  "eligible": true,
+  "checks": {
+    "a_detects_bug_with_known_good_patch": false,
+    "b_no_regression_for_known_good_patch": true,
+    "c_deterministic": true,
+    "d_catches_a_mutant": false,
+    "no_missing_outcomes": false,
+    "all_four": false
+  },
+  "seconds": 14.7,
+  "target": "D5_pycubrid",
+  "orig_sha": "068325e75abb068a6b9d4f9bc841038cb7743a1e",
+  "gold_sha": "9d779739a092590f27bd2e5661e49fce89a07eb2",
+  "known_good_patch": [
+    "skill"
+  ],
+  "note": null,
+  "python": "3.12.15",
+  "stage": "DEVELOPMENT_NOT_EVIDENCE"
+}

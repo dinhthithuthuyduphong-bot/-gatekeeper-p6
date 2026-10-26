@@ -1,0 +1,83 @@
+{
+  "seed": 3578743401,
+  "n_draws_requested": 200,
+  "test_files": 16,
+  "baseline_cases": 176,
+  "baseline_passed": 176,
+  "eligible_test_functions": 133,
+  "mutants_generated": 200,
+  "mutants_compiled": 200,
+  "deterministic": false,
+  "patches": {
+    "gold_itself": {
+      "help": 0,
+      "hurt": 0,
+      "tie": 200,
+      "bug_trigger": 1,
+      "missing": 0
+    }
+  },
+  "mutants": [
+    {
+      "desc": "if_negate at OpenFeatureClient._create_provider_evaluation_async:872:11 -> 'not (not get_details_callable)'",
+      "help": 0,
+      "hurt": 2,
+      "tie": 198,
+      "bug_trigger": 1,
+      "missing": 0
+    },
+    {
+      "desc": "if_negate at OpenFeatureClient._create_provider_evaluation_async:886:11 -> 'not (resolution.error_code)'",
+      "help": 0,
+      "hurt": 0,
+      "tie": 200,
+      "bug_trigger": 1,
+      "missing": 0
+    },
+    {
+      "desc": "if_negate at OpenFeatureClient._create_provider_evaluation_async:890:11 -> 'not (err := _typecheck_flag_value(value=resolution.value, flag_type=flag_type))'",
+      "help": 0,
+      "hurt": 2,
+      "tie": 198,
+      "bug_trigger": 1,
+      "missing": 0
+    },
+    {
+      "desc": "if_negate at _typecheck_flag_value:1002:7 -> 'not (not py_type)'",
+      "help": 0,
+      "hurt": 3,
+      "tie": 197,
+      "bug_trigger": 1,
+      "missing": 0
+    },
+    {
+      "desc": "if_negate at _typecheck_flag_value:1005:7 -> 'not (not isinstance(value, py_type) or (\\n        flag_type == FlagType.INTEGER and isinstance(value, bool)\\n    ))'",
+      "help": 0,
+      "hurt": 3,
+      "tie": 197,
+      "bug_trigger": 1,
+      "missing": 0
+    }
+  ],
+  "bug_trigger_rate": 0.005,
+  "draws_run": 200,
+  "eligible": true,
+  "checks": {
+    "a_detects_bug_with_known_good_patch": false,
+    "b_no_regression_for_known_good_patch": true,
+    "c_deterministic": false,
+    "d_catches_a_mutant": true,
+    "no_missing_outcomes": true,
+    "all_four": false
+  },
+  "seconds": 73.8,
+  "target": "D4_openfeature",
+  "orig_sha": "93296c6e7788d74699746c553993352ece693816",
+  "gold_sha": "6c851d2ef3441f1f3fd16aca2be9b463596cdc00",
+  "known_good_patch": [
+    "gold_itself"
+  ],
+  "note": "skill does not bind; the gold fix is the known-good patch (criterion (b) is then vacuous)",
+  "python": "3.12.15",
+  "stage": "DEVELOPMENT_NOT_EVIDENCE"
+}

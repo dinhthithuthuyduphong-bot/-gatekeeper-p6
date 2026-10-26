@@ -1,0 +1,45 @@
+
+[notice] A new release of pip is available: 26.2.1 -> 26.2.2
+[notice] To update, run: pip install --upgrade pip
+<mutant>:19: SyntaxWarning: "is" with 'int' literal. Did you mean "=="?
+<mutant>:44: SyntaxWarning: "is" with 'int' literal. Did you mean "=="?
+<mutant>:44: SyntaxWarning: "is" with 'int' literal. Did you mean "=="?
+<mutant>:19: SyntaxWarning: "is" with 'float' literal. Did you mean "=="?
+<mutant>:44: SyntaxWarning: "is" with 'int' literal. Did you mean "=="?
+<mutant>:19: SyntaxWarning: "is" with 'int' literal. Did you mean "=="?
+tests/bls/test_point_compression.py:289: SyntaxWarning: "is" with 'int' literal. Did you mean "=="?
+tests/bls/test_point_compression.py:312: SyntaxWarning: "is" with 'float' literal. Did you mean "=="?
+tests/bls/test_point_compression.py:335: SyntaxWarning: "is" with 'int' literal. Did you mean "=="?
+tests/bls/test_point_compression.py:904: SyntaxWarning: "is" with 'int' literal. Did you mean "=="?
+tests/bls/test_point_compression.py:952: SyntaxWarning: "is" with 'int' literal. Did you mean "=="?
+tests/bls/test_point_compression.py:1000: SyntaxWarning: "is" with 'int' literal. Did you mean "=="?
+Traceback (most recent call last):
+  File "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/tools/tm_check.py", line 79, in <module>
+    sys.exit(main(*sys.argv[1:3]))
+             ^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/tools/tm_check.py", line 75, in main
+    return run(manifest, spec["gold"], base / "skills" / "bool-excluded-from-int.json", out_dir)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/tools/tm_check.py", line 59, in run
+    res = testmut.analyze(orig, gold, manifest["modules"], manifest.get("pythonpath", []), runner,
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/gatekeeper_ext/testmut.py", line 298, in analyze
+    s, e = run_arm(root, name, texts, over, runner, pythonpath, work, repeats)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/gatekeeper_ext/testmut.py", line 236, in run_arm
+    res, err = run_tests(d, runner, sorted(test_texts), pythonpath, "__gkm", work, "%s_%d" % (re.sub(r"\W", "_", name), i))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/gatekeeper_ext/testmut.py", line 85, in run_tests
+    proc = subprocess.run(cmd + list(files), cwd=str(root), env=env, capture_output=True, text=True, timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/subprocess.py", line 550, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/subprocess.py", line 1209, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/subprocess.py", line 2116, in _communicate
+    self._check_timeout(endtime, orig_timeout, stdout, stderr)
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/subprocess.py", line 1253, in _check_timeout
+    raise TimeoutExpired(
+subprocess.TimeoutExpired: Command '['/opt/hostedtoolcache/Python/3.12.15/x64/bin/python', '-m', 'pytest', '-q', '-p', 'no:cacheprovider', '-p', 'no:randomly', '--junitxml', '/tmp/tmpp5r7rh95/run/orig_0.xml', '-o', 'junit_family=xunit2', '-k', '__gkm', 'tests/bls/ciphersuites/test_g2_message_augmentation.py', 'tests/bls/test_g2_core.py', 'tests/bls/test_g2_primatives.py', 'tests/bls/test_hash_to_curve.py', 'tests/bls/test_point_compression.py', 'tests/core/test_backward_compatibility.py', 'tests/core/test_bn128_and_bls12_381.py', 'tests/core/test_secp256k1.py']' timed out after 1800 seconds

@@ -1,0 +1,18 @@
+
+[notice] A new release of pip is available: 26.2.1 -> 26.2.2
+[notice] To update, run: pip install --upgrade pip
+<mutant>:9: SyntaxWarning: "is not" with 'int' literal. Did you mean "!="?
+<mutant>:5: SyntaxWarning: "is" with 'str' literal. Did you mean "=="?
+<mutant>:5: SyntaxWarning: "is" with 'int' literal. Did you mean "=="?
+<mutant>:24: SyntaxWarning: "is" with 'int' literal. Did you mean "=="?
+<mutant>:16: SyntaxWarning: "is not" with 'int' literal. Did you mean "!="?
+<mutant>:5: SyntaxWarning: "is" with 'int' literal. Did you mean "=="?
+<mutant>:17: SyntaxWarning: "is not" with 'int' literal. Did you mean "!="?
+tests/test_presets.py:1311: SyntaxWarning: "is not" with 'int' literal. Did you mean "!="?
+tests/test_presets.py:1383: SyntaxWarning: "is not" with 'int' literal. Did you mean "!="?
+tests/test_presets.py:1580: SyntaxWarning: "is" with 'int' literal. Did you mean "=="?
+tests/test_presets.py:1585: SyntaxWarning: "is" with 'str' literal. Did you mean "=="?
+tests/test_presets.py:3289: SyntaxWarning: "is not" with 'int' literal. Did you mean "!="?
+tests/test_presets.py:5281: SyntaxWarning: "is" with 'int' literal. Did you mean "=="?
+tests/test_presets.py:7226: SyntaxWarning: "is" with 'int' literal. Did you mean "=="?
+A1_speckit_catalog eligible | trigger 0.005 | checks False

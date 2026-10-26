@@ -1,0 +1,173 @@
+{
+  "commit": "616a67f2bd024b96b24d5de958cfaa69e1fe9926",
+  "files": [
+    {
+      "path": ".github/workflows/study-l-g1.yml",
+      "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/blob/616a67f2bd024b96b24d5de958cfaa69e1fe9926/.github/workflows/study-l-g1.yml",
+      "sha256": "178237bc191f7b04c3ec621b8683827e0f4bfbedb91a8773d5d43c41d1729bc0"
+    },
+    {
+      "path": ".github/workflows/tm-dev.yml",
+      "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/blob/616a67f2bd024b96b24d5de958cfaa69e1fe9926/.github/workflows/tm-dev.yml",
+      "sha256": "8dd9a81e107890baaa0428d8c432506f41d8aef9969e2415629aaef83b99f370"
+    },
+    {
+      "path": "README.md",
+      "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/blob/616a67f2bd024b96b24d5de958cfaa69e1fe9926/README.md",
+      "sha256": "3c5214d3de090f9b6d06efc40eeb7ad6e106dd6c72569019b617c18c313ce154"
+    },
+    {
+      "path": "START_HERE_VI.md",
+      "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/blob/616a67f2bd024b96b24d5de958cfaa69e1fe9926/START_HERE_VI.md",
+      "sha256": "117180512339a72dc2451aa64d320c4ab8f5324f834a9c98296a012fbbd335a8"
+    },
+    {
+      "path": "gatekeeper_ext/golddiff.py",
+      "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/blob/616a67f2bd024b96b24d5de958cfaa69e1fe9926/gatekeeper_ext/golddiff.py",
+      "sha256": "4e3f5dbbaf7a937e9d8d2aa1fca170c7a738abaa3a9dec425e428dd5f69b9401"
+    },
+    {
+      "path": "gatekeeper_ext/golddiff_oracle.py",
+      "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/blob/616a67f2bd024b96b24d5de958cfaa69e1fe9926/gatekeeper_ext/golddiff_oracle.py",
+      "sha256": "80786d39287e788ad0ef1c4e30a673cece580696d916db16fcfff9a63b918130"
+    },
+    {
+      "path": "gatekeeper_ext/record_run.py",
+      "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/blob/616a67f2bd024b96b24d5de958cfaa69e1fe9926/gatekeeper_ext/record_run.py",
+      "sha256": "63823a309e8f95e59546e322363479324f343a66d34fa80f92d6f95fb7609cb8"
+    },
+    {
+      "path": "gatekeeper_ext/testmut.py",
+      "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/blob/616a67f2bd024b96b24d5de958cfaa69e1fe9926/gatekeeper_ext/testmut.py",
+      "sha256": "b964370f44ef1c6c7b28df4521e5e2707a4ef947bd72d7d45ae5739ebd989be2"
+    },
+    {
+      "path": "gatekeeper_ext/testmut_unittest.py",
+      "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/blob/616a67f2bd024b96b24d5de958cfaa69e1fe9926/gatekeeper_ext/testmut_unittest.py",
+      "sha256": "a4bab28c432d26b90e0f1a2c159c5ed77c957f2817bdbcef01970bd426d9e4ae"
+    },
+    {
+      "path": "gatekeeper_lite/eprocess.py",
+      "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/blob/616a67f2bd024b96b24d5de958cfaa69e1fe9926/gatekeeper_lite/eprocess.py",
+      "sha256": "94645d74352f63c7a221451556be726f59c4480117da569b7c048982bdcdbdd4"
+    },
+    {
+      "path": "paper_snippets/G1_NEGATIVE_AND_ISSTA.md",
+      "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/blob/616a67f2bd024b96b24d5de958cfaa69e1fe9926/paper_snippets/G1_NEGATIVE_AND_ISSTA.md",
+      "sha256": "ac5e2f81f11f6e1453e0c14ac14c38e8cf95443caf370b41ba111f30399bd86b"
+    },
+    {
+      "path": "paper_snippets/P0_AND_PHASE_DIAGRAM.md",
+      "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/blob/616a67f2bd024b96b24d5de958cfaa69e1fe9926/paper_snippets/P0_AND_PHASE_DIAGRAM.md",
+      "sha256": "868fc6d72ee03f57129ef2657a870783d91983ea162b5e8005329c56e4924d97"
+    },
+    {
+      "path": "pre_b9/RELEASE_GATE.json",
+      "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/blob/616a67f2bd024b96b24d5de958cfaa69e1fe9926/pre_b9/RELEASE_GATE.json",
+      "sha256": "822160e02630a5dfd2ac876b93dcac700cb8ad00c744733b53fb96b221fe53ff"
+    },
+    {
+      "path": "research_closure/PAPER_EXPECTATION_AUDIT.md",
+      "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/blob/616a67f2bd024b96b24d5de958cfaa69e1fe9926/research_closure/PAPER_EXPECTATION_AUDIT.md",
+      "sha256": "1b792e6945431c859b94745b50de3496ea0aa474acb35da00fd7ada8de3a8f14"
+    },
+    {
+      "path": "study_l/AMENDMENTS.md",
+      "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/blob/616a67f2bd024b96b24d5de958cfaa69e1fe9926/study_l/AMENDMENTS.md",
+      "sha256": "d654284ad5bf5aac478a784bedc90c7ecebc078116188a3e29a1500f69b37619"
+    },
+    {
+      "path": "study_l/FREEZE.json",
+      "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/blob/616a67f2bd024b96b24d5de958cfaa69e1fe9926/study_l/FREEZE.json",
+      "sha256": "99ef519f8ec2772a227d7ef6568ee0103b477eb88794627ebcd473f84f715e5d"
+    },
+    {
+      "path": "study_l/GATES.md",
+      "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/blob/616a67f2bd024b96b24d5de958cfaa69e1fe9926/study_l/GATES.md",
+      "sha256": "9d751ea161cd1c945b78c467cd3f0b56396ca9f024f153549094d472aebd8b1e"
+    },
+    {
+      "path": "study_l/PHASE_DIAGRAM.md",
+      "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/blob/616a67f2bd024b96b24d5de958cfaa69e1fe9926/study_l/PHASE_DIAGRAM.md",
+      "sha256": "c5e81e0bad9316f037eaedb1056304cae3785d3a180f01d6ac627a514edcc9f7"
+    },
+    {
+      "path": "study_l/config_study_l.json",
+      "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/blob/616a67f2bd024b96b24d5de958cfaa69e1fe9926/study_l/config_study_l.json",
+      "sha256": "1a5640bf15d38ea3139a0f5099cf272c4b4c109da796ebe5340bf695a7a3635c"
+    },
+    {
+      "path": "study_l/results/G1/G1_A1_speckit_catalog.json",
+      "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/blob/616a67f2bd024b96b24d5de958cfaa69e1fe9926/study_l/results/G1/G1_A1_speckit_catalog.json",
+      "sha256": "99dee2bd38285664225705d173b244291374be3b3d39201bffe81a9130850d51"
+    },
+    {
+      "path": "study_l/results/G1/G1_D1_py_ecc.json",
+      "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/blob/616a67f2bd024b96b24d5de958cfaa69e1fe9926/study_l/results/G1/G1_D1_py_ecc.json",
+      "sha256": "3139054ededa01626b68c5f42f3069435074c8dae21b5ba9ce1b8c5134b8cb49"
+    },
+    {
+      "path": "study_l/results/G1/G1_D2_cerberus.json",
+      "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/blob/616a67f2bd024b96b24d5de958cfaa69e1fe9926/study_l/results/G1/G1_D2_cerberus.json",
+      "sha256": "4e95019b51bb6c68e0bd92e4fb00320ecf0d4e9d4aa78a0f29492eaeb768d988"
+    },
+    {
+      "path": "study_l/results/G1/G1_D3_speckit.json",
+      "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/blob/616a67f2bd024b96b24d5de958cfaa69e1fe9926/study_l/results/G1/G1_D3_speckit.json",
+      "sha256": "15734902f5981965dbe39ea417fa72458c943b392d3db8dd2b1c2b3273cc9ed1"
+    },
+    {
+      "path": "study_l/results/G1/G1_D4_openfeature.json",
+      "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/blob/616a67f2bd024b96b24d5de958cfaa69e1fe9926/study_l/results/G1/G1_D4_openfeature.json",
+      "sha256": "62f8395282a72bc9f4f8e3919b3d7aa8a19c5e67965355a8dd555f8ca13cb4bb"
+    },
+    {
+      "path": "study_l/results/G1/G1_D5_pycubrid.json",
+      "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/blob/616a67f2bd024b96b24d5de958cfaa69e1fe9926/study_l/results/G1/G1_D5_pycubrid.json",
+      "sha256": "827e4a17910b6a69b12ede9f53a5048c5281032f4b3e9b625baef0bc769c6f03"
+    },
+    {
+      "path": "study_l/results/G1_RESULT.md",
+      "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/blob/616a67f2bd024b96b24d5de958cfaa69e1fe9926/study_l/results/G1_RESULT.md",
+      "sha256": "dae79d320e84d80aab1167cd50d8d876ae88dc12342fe75a5b5a0a44c22ac3ea"
+    },
+    {
+      "path": "tests/test_golddiff.py",
+      "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/blob/616a67f2bd024b96b24d5de958cfaa69e1fe9926/tests/test_golddiff.py",
+      "sha256": "63d63360ab405c1eff004cef83aa64639d9e6ec6149af8da7b58fbb228a6bfd8"
+    },
+    {
+      "path": "tests/test_testmut.py",
+      "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/blob/616a67f2bd024b96b24d5de958cfaa69e1fe9926/tests/test_testmut.py",
+      "sha256": "390be7ffdf3d259a39dd26b31e99ea432fe27451d9b84d8eeb39be2cbd6a37f8"
+    },
+    {
+      "path": "tools/g1_summary.py",
+      "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/blob/616a67f2bd024b96b24d5de958cfaa69e1fe9926/tools/g1_summary.py",
+      "sha256": "bbe344b1866981836aa8adb6e9d99ade34abbe7622b2480228735f978fa605cf"
+    },
+    {
+      "path": "tools/gate_phase_diagram.py",
+      "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/blob/616a67f2bd024b96b24d5de958cfaa69e1fe9926/tools/gate_phase_diagram.py",
+      "sha256": "6497ba5f6e9f1bb25ed52ec457cf402d1e8eb1920f1a59c4f470931c0a2293f6"
+    },
+    {
+      "path": "tools/tm_check.py",
+      "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/blob/616a67f2bd024b96b24d5de958cfaa69e1fe9926/tools/tm_check.py",
+      "sha256": "84a781477a5507ea21b793576de07bca65154f744bb43c52271ed5a8c66d2bf1"
+    },
+    {
+      "path": "tools/tm_summary.py",
+      "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/blob/616a67f2bd024b96b24d5de958cfaa69e1fe9926/tools/tm_summary.py",
+      "sha256": "d7a55ff0b024a7032bffd39ed91eb6c7e9d6d7c785381849b073b69ee0f72d4f"
+    }
+  ],
+  "workflow_runs": [
+    "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40221836594",
+    "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40223310552",
+    "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40220323082",
+    "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40194839050"
+  ],
+  "external_primary_source": "https://conf.researchr.org/track/fse-2027/fse-2027-papers",
+  "private_reference": "FSE-2027-13-paper.pdf read locally; not redistributed; numbers explicitly projected on page 1"
+}

@@ -1,11 +1,10 @@
-# Báo cáo xác nhận bản sửa — run 40194839050
+# Bắt đầu tại checkpoint nghiên cứu 26/10/2026
 
-Mở `main_update/next_evidence/results/ci-40194839050/RESULT_VI.md` để đọc kết quả.
+- [Kết quả kiểm toán main và paper alignment](research_closure/results/audit-20261026/RESULT.md)
+- [File cập nhật và hướng dẫn workflow](research_closure/results/audit-20261026/UPDATE_MAIN.md)
+- [Correction công thức, giới hạn và hướng A*](research_closure/results/audit-20261026/PAPER_ALIGNMENT.md)
+- [Kết quả CI trước đó](next_evidence/results/ci-40194839050/RESULT_VI.md)
 
-**Không cần cập nhật code hoặc chạy lại workflow hiện tại cho gói này.** Run đã PASS: 140 tests, 13 nhóm audit, inventory K 38/38; báo cáo coverage đúng và artifact đã nhỏ lại. Gói chỉ có báo cáo mới, không có file code cũ để ghi đè.
+Study L G1 đạt 2/6, dưới ngưỡng 5/6: giữ kết quả âm. Hướng test-mutation mới chỉ dùng để phát triển trên sáu target đã lộ. B9 vẫn HOLD. Chạy unit-only trước, sau đó D5 và D2 riêng để kiểm tra evidence; không chạy tiếp G2/G3 của Study L.
 
-Nếu muốn lưu kết quả vào GitHub, copy riêng thư mục `main_update/next_evidence/results/ci-40194839050/` vào đường dẫn tương ứng trên main. Không upload cả ZIP hoặc tạo thư mục `main_update` trong repo. Không cần branch/PR mới hoặc workflow dispatch cho việc thêm báo cáo này.
-
-Bước nghiên cứu kế tiếp: baseline và treatment có kiểm soát trên test upstream scheduler của Airflow; tìm beneficial target độc lập cho skill thứ hai. Chưa có harness Airflow runtime trong gói này; workflow NEXT hiện tại chỉ quét source Airflow. Không đổi cờ scan thành bằng chứng đã chạy test.
-
-Study J vẫn BLOCKED, B9 vẫn HOLD. Không phát sinh lời gọi model. Báo cáo phân biệt rõ kiểm toán dữ liệu đã lưu với thực nghiệm mới.
+Trong repo, các link trỏ thẳng tới `research_closure/` và `next_evidence/`; `main_update/` chỉ là thư mục bao gói khi tải ZIP, không phải một phần của cấu trúc repo.

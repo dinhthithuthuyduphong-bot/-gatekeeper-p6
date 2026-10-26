@@ -1,0 +1,19 @@
+{
+  "seed": 3324838781,
+  "n_draws_requested": 200,
+  "test_files": 0,
+  "baseline_cases": 1,
+  "baseline_passed": 0,
+  "eligible_test_functions": 0,
+  "eligible": false,
+  "reason": "no passing fast test function with a literal to mutate",
+  "target": "D2_cerberus",
+  "orig_sha": "2b63c1b9ccaf112c56413c4c1788a5da275032fc",
+  "gold_sha": "d25ae8f69c785addc1af3bdb283104263fcfdba9",
+  "known_good_patch": [
+    "skill"
+  ],
+  "note": null,
+  "python": "3.8.18",
+  "stage": "DEVELOPMENT_NOT_EVIDENCE"
+}

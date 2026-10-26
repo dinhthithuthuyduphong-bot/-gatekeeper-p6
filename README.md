@@ -1,5 +1,7 @@
 # Gatekeeper-Lite — kiểm soát rủi ro khi tái sử dụng kỹ năng sửa code
 
+**26/10/2026 — checkpoint mới:** [audit main và hướng A*](research_closure/results/audit-20261026/RESULT.md), [cách chạy development có raw evidence](research_closure/results/audit-20261026/UPDATE_MAIN.md). Study L G1 **FAIL 2/6**; test-mutation mới vẫn DEVELOPMENT, không phải bằng chứng tiến cứu. B9 **HOLD**.
+
 **25/10/2026 — zero-cost follow-up:** [python-control result](study_k/RESULT_VI.md), [reproduce / raw audit](study_k/README.md). A retrospective beneficial transfer was reproduced; B9 remains HOLD. See [cumulative update instructions](research_closure/UPDATE_MAIN.md).
 
 

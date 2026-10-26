@@ -1,0 +1,105 @@
+{
+  "review_date_local": "2026-10-26",
+  "timezone": "Asia/Bangkok",
+  "audited_commit": "616a67f2bd024b96b24d5de958cfaa69e1fe9926",
+  "ahead_of_prior_checkpoint_by": 12,
+  "g1": {
+    "run": 40221836594,
+    "records": 6,
+    "passed": 2,
+    "threshold": 5,
+    "decision": "FAIL"
+  },
+  "tm": {
+    "run": 40223310552,
+    "status_at_snapshot": "completed",
+    "completed_artifacts_verified": 6,
+    "pending_target": null,
+    "passes_among_five_available": 0,
+    "artifacts": [
+      {
+        "id": 12610377264,
+        "name": "TM_D4_openfeature",
+        "archive_sha256": "sha256:09898c04e99cb39b1aab8e2ce7197d22a8f7f224ea8efe8839018569003da58c",
+        "hash_verified": true,
+        "bytes": 1461,
+        "json_path": "research_closure/results/audit-20261026/inputs/tm/TM_D4_openfeature.json",
+        "raw_per_arm_trace_available": false
+      },
+      {
+        "id": 12609988105,
+        "name": "TM_D5_pycubrid",
+        "archive_sha256": "sha256:f9a249ed7905819207bd53e364b1ddbf962b7d93a08b7b1a0da570fb4db91e67",
+        "hash_verified": true,
+        "bytes": 1053,
+        "json_path": "research_closure/results/audit-20261026/inputs/tm/TM_D5_pycubrid.json",
+        "raw_per_arm_trace_available": false
+      },
+      {
+        "id": 12609908386,
+        "name": "TM_D2_cerberus",
+        "archive_sha256": "sha256:fea96040845b81339d6f6d2c4914d1079169a986f5097cf0a9a08e329e4b0358",
+        "hash_verified": true,
+        "bytes": 700,
+        "json_path": "research_closure/results/audit-20261026/inputs/tm/TM_D2_cerberus.json",
+        "raw_per_arm_trace_available": false
+      },
+      {
+        "id": 12609883926,
+        "name": "TM_A1_speckit_catalog",
+        "archive_sha256": "sha256:9cbe6042b1166b44bbd9622d0b77e0670f3fe78b98729de28e6ec39555ae111f",
+        "hash_verified": true,
+        "bytes": 1338,
+        "json_path": "research_closure/results/audit-20261026/inputs/tm/TM_A1_speckit_catalog.json",
+        "raw_per_arm_trace_available": false
+      },
+      {
+        "id": 12609704445,
+        "name": "TM_D3_speckit",
+        "archive_sha256": "sha256:6a766b9eaeb7afd906d40f3f327d99d983806242d0473552d1a5cdb69ddf2f03",
+        "hash_verified": true,
+        "bytes": 1170,
+        "json_path": "research_closure/results/audit-20261026/inputs/tm/TM_D3_speckit.json",
+        "raw_per_arm_trace_available": false
+      },
+      {
+        "id": 12610957918,
+        "name": "TM_D1_py_ecc",
+        "archive_sha256": "sha256:1d5302b8f61c27ac3d0bd692fe3c4ffad360ca4afb60e9e9ba413f2e1cf064fc",
+        "hash_verified": true,
+        "bytes": 1241,
+        "json_path": null,
+        "log_path": "inputs/tm/log_D1_py_ecc.txt",
+        "raw_per_arm_trace_available": false
+      }
+    ],
+    "conclusion": "failure",
+    "result_json_count": 5,
+    "complete_feasibility_passes": 0,
+    "d1_status": "TIMEOUT_1800_SECONDS_ORIGINAL_ARM_NO_RESULT_JSON"
+  },
+  "formula_recalculation": [
+    {
+      "n": 110,
+      "threshold": 160,
+      "stake_fraction": 0.9,
+      "certificate_inversion": 0.049849998130575834,
+      "fixed_n_zero_harm_bound": 0.04508977081660992
+    },
+    {
+      "n": 300,
+      "threshold": 160,
+      "stake_fraction": 0.9,
+      "certificate_inversion": 0.01860416064894232,
+      "fixed_n_zero_harm_bound": 0.01677495297605247
+    }
+  ],
+  "paid_b9": "HOLD",
+  "model_calls_this_review": 0,
+  "validation": {
+    "static_parse": "PASS",
+    "project_or_target_tests_run_locally": false,
+    "new_patch_CI_status": "NOT_RUN"
+  },
+  "scope": "source review, existing artifact audit and elementary formula recalculation; no new target outcomes"
+}

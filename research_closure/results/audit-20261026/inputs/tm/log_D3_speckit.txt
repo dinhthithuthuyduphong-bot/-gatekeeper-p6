@@ -1,0 +1,8 @@
+
+[notice] A new release of pip is available: 26.2.1 -> 26.2.2
+[notice] To update, run: pip install --upgrade pip
+<mutant>:35: SyntaxWarning: "is" with 'int' literal. Did you mean "=="?
+<mutant>:7: SyntaxWarning: "is" with 'float' literal. Did you mean "=="?
+tests/test_extensions.py:5462: SyntaxWarning: "is" with 'int' literal. Did you mean "=="?
+tests/test_extensions.py:6390: SyntaxWarning: "is" with 'float' literal. Did you mean "=="?
+D3_speckit eligible | trigger 0.020512820512820513 | checks False

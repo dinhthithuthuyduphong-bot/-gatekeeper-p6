@@ -1,0 +1,15 @@
+{
+  "static_checks": "PASS",
+  "python_files": [
+    "gatekeeper_ext/testmut.py",
+    "gatekeeper_ext/testmut_evidence.py",
+    "tests/test_testmut_evidence.py",
+    "tools/tm_check.py",
+    "tools/tm_summary.py"
+  ],
+  "yaml": "PASS",
+  "no_study_l_frozen_path_modified": true,
+  "no_paid_gate_modified": true,
+  "runtime_tests": "NOT_RUN",
+  "base_commit": "616a67f2bd024b96b24d5de958cfaa69e1fe9926"
+}
