@@ -26,6 +26,7 @@ jobs:
         run: |
           python -c "import json,sys;c=json.load(open('study_m_astar/config_study_m_astar.json'));sys.exit(0 if c.get('status')=='FROZEN' else 'not FROZEN')"
           python tools/freeze_study.py verify study_m_astar
+          python tools/check_track.py study_m_astar/candidates.json ASTAR
       - id: m
         env:
           SHARDS: ${{ inputs.shards }}
