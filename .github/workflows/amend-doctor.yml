@@ -1,0 +1,38 @@
+# Read-only preflight for an amendment: runs the unit tests the amend workflow runs, then checks every precondition.
+# Changes nothing; always finishes so that the report can be read.  Use the same inputs as `Gatekeeper study amend`.
+name: Gatekeeper amend preflight
+on:
+  workflow_dispatch:
+    inputs:
+      study: {description: "study directory, e.g. study_m_astar", required: true}
+      amendment: {description: "amendment id, e.g. MASTAR-A1", required: true}
+      edits_file: {description: "edits file inside the study", required: false, default: ""}
+permissions:
+  contents: read
+jobs:
+  doctor:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Unit tests (same command as the amend workflow)
+        shell: bash
+        run: |
+          mkdir -p out_doctor
+          python -m unittest discover -s tests > out_doctor/unit_tests.log 2>&1 || true
+          tail -n 15 out_doctor/unit_tests.log
+      - name: Preflight
+        shell: bash
+        run: |
+          git fetch --tags --quiet || true
+          python tools/amend_doctor.py "${{ inputs.study }}" "${{ inputs.amendment }}" "${{ inputs.edits_file }}" --out out_doctor | tee out_doctor/log.txt
+          cat out_doctor/AMEND_DOCTOR.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: AMEND_DOCTOR
+          path: out_doctor
