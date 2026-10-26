@@ -18,11 +18,16 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from gatekeeper_ext.usage import output_tokens, reasoning_tokens  # noqa: E402
+
 PROMPT = [{"role": "user", "content": "Reply with the single word: ok"}]
+TASK = [{"role": "system", "content": "You repair Python code. Reply with ONE unified diff (git format, a/ and b/ prefixes) that edits only the files you were given. No explanations, no code fences."},
+        {"role": "user", "content": "Issue:\nis_none returns True for 0 because it compares with ==.\n\nYou may edit only these files:\n### File: m.py\ndef is_none(x):\n    return x == None\n\nReturn one unified diff."}]
 
 
-def call(model, base_url, key, extra, opener=urllib.request.urlopen):
-    payload = {"model": model["model_id"], "messages": PROMPT, "max_tokens": 16, "temperature": 0, "seed": 1, **extra}
+def call(model, base_url, key, extra, opener=urllib.request.urlopen, messages=None, max_tokens=16):
+    payload = {"model": model["model_id"], "messages": messages or PROMPT, "max_tokens": max_tokens, "temperature": 0, "seed": 1, **extra}
     req = urllib.request.Request(base_url.rstrip("/") + "/chat/completions", data=json.dumps(payload).encode(),
                                  headers={"Content-Type": "application/json", "Authorization": "Bearer " + key})
     t0 = time.time()
@@ -33,7 +38,7 @@ def call(model, base_url, key, extra, opener=urllib.request.urlopen):
             row["status"] = getattr(r, "status", 200)
             choice = (data.get("choices") or [{}])[0]
             row.update(served_model=data.get("model"), finish_reason=choice.get("finish_reason"), usage=data.get("usage"),
-                       text=((choice.get("message") or {}).get("content") or "")[:40])
+                       text=((choice.get("message") or {}).get("content") or "")[:400])
     except urllib.error.HTTPError as e:
         row["status"] = e.code
         row["error"] = e.read().decode("utf-8", "replace")[:500]
@@ -44,12 +49,13 @@ def call(model, base_url, key, extra, opener=urllib.request.urlopen):
 
 
 def cost_usd(usage, prices):
-    if not usage or not prices:
+    out = output_tokens(usage)
+    if not usage or not prices or out is None:
         return None
-    return (usage.get("prompt_tokens", 0) * prices["input"] + usage.get("completion_tokens", 0) * prices["output"]) / 1e6
+    return (usage.get("prompt_tokens", 0) * prices["input"] + out * prices["output"]) / 1e6
 
 
-def main(config, out_dir, burst=5, opener=urllib.request.urlopen, env=os.environ):
+def main(config, out_dir, burst=5, opener=urllib.request.urlopen, env=os.environ, probe_n=3):
     cfg = json.loads(Path(config).read_text())
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
@@ -61,9 +67,13 @@ def main(config, out_dir, burst=5, opener=urllib.request.urlopen, env=os.environ
             continue
         base = m["base_url"].replace("{GCP_PROJECT}", env.get("GCP_PROJECT", ""))
         rows = [call(m, base, key, m.get("extra", {}), opener) for _ in range(burst)]
-        total = sum(c for c in (cost_usd(r.get("usage"), m.get("prices_usd_per_mtok")) for r in rows) if c)
-        result["models"][m["name"]] = {"model_id": m["model_id"], "calls": rows, "ok": sum(r["status"] == 200 for r in rows),
-                                       "rate_limited": sum(r["status"] == 429 for r in rows), "implied_cost_usd": round(total, 6)}
+        probe = [call(m, base, key, m.get("extra", {}), opener, TASK, 1000) for _ in range(probe_n)]
+        for r in rows + probe:
+            r["output_tokens"] = output_tokens(r.get("usage"))
+            r["reasoning_tokens"] = reasoning_tokens(r.get("usage"))
+        total = sum(c for c in (cost_usd(r.get("usage"), m.get("prices_usd_per_mtok")) for r in rows + probe) if c)
+        result["models"][m["name"]] = {"model_id": m["model_id"], "calls": rows, "probe": probe, "ok": sum(r["status"] == 200 for r in rows),
+                                       "rate_limited": sum(r["status"] == 429 for r in rows + probe), "implied_cost_usd": round(total, 6)}
     (out / "VERTEX_SMOKE.json").write_text(json.dumps(result, indent=1))
     lines = ["# Smoke test of the paid-model endpoints (not study data)", "", "| Model | OK | HTTP 429 | Served model | Implied cost (USD) | First error |", "|---|---|---|---|---|---|"]
     for name, r in result["models"].items():
@@ -73,6 +83,19 @@ def main(config, out_dir, burst=5, opener=urllib.request.urlopen, env=os.environ
         err = next((x.get("error", "") for x in r["calls"] if x.get("error")), "")
         served = next((x.get("served_model") for x in r["calls"] if x.get("served_model")), "")
         lines.append("| %s | %d/%d | %d | %s | %.6f | %s |" % (name, r["ok"], burst, r["rate_limited"], served, r["implied_cost_usd"], err[:120].replace("\n", " ")))
+    lines += ["", "## Task probe (a small repair, max_tokens 1000): how much of the output budget thinking uses", "",
+              "| Model | Finished with `stop` | Median output tokens (visible + thinking) | Median thinking tokens | Reply contains a diff |", "|---|---|---|---|---|"]
+    import statistics
+    for name, r in result["models"].items():
+        pr = r.get("probe") or []
+        if not pr:
+            continue
+        ok = [x for x in pr if x.get("status") == 200]
+        lines.append("| %s | %d/%d | %s | %s | %d/%d |" % (
+            name, sum(x.get("finish_reason") == "stop" for x in pr), len(pr),
+            statistics.median([x["output_tokens"] for x in ok if x["output_tokens"] is not None] or [0]),
+            statistics.median([x["reasoning_tokens"] for x in ok] or [0]),
+            sum("@@" in (x.get("text") or "") or "---" in (x.get("text") or "") for x in ok), len(pr)))
     (out / "VERTEX_SMOKE.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     print("\n".join(lines))
     return 0
