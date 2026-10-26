@@ -1,14 +1,12 @@
 {
   "experiment_id": "study-m-astar-v1",
-  "status": "FROZEN",
+  "status": "DRAFT",
   "requires_freeze": true,
-  "seed_time_utc": "2026-10-26T09:56:54Z",
+  "seed_time_utc": "SET_AT_FREEZE",
   "track": "A* (ASE 2027 or ICSE 2028); RR half of the cohort is never touched here",
   "extra_tracked": [
     "tools/vet_slice.py",
     "tools/vet_target.py",
-    "tools/split_candidates.py",
-    "tools/check_track.py"
-  ],
-  "frozen_on": "2026-10-26T08:56:54Z"
+    "tools/split_candidates.py"
+  ]
 }

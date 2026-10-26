@@ -6,11 +6,7 @@
 
 ## Giai đoạn và "giai đoạn tốn tiền"
 
-S2 (kiểm định) và S3 (đủ điều kiện harness) **không tốn tiền**.
-
-**"Tiền" ở đây là tiền mặt hoặc khoản credit không hết hạn sớm** (credit Developer Program, hết hạn 21/10/2027). Credit **Free Trial** (₫7.791.151, tương đương khoảng 289 USD, hết hạn **20/1/2027**) là khoản **dùng-hay-mất** và không thể dùng cho nhánh RR (nhánh RR chỉ được sinh patch sau 4/2/2027). Vì vậy chi bằng khoản này **không tính là chi tiền**, với điều kiện Vertex Gemini nằm trong phạm vi sử dụng của khoản đó (kiểm chứng bằng `tools/vertex_smoke.py` và báo cáo Credits trong Cloud Billing).
-
-M3 và lượt sinh patch chính của **nửa A\*** được phép chạy trước ngày quyết định, **nếu và chỉ nếu** chỉ dùng credit Free Trial. Kết quả của chúng **không** là đầu vào của `DECISION_RULE.md` (luật chỉ dùng F1–F5), để việc chọn nhánh không thể phụ thuộc vào việc kết quả nào trông đẹp hơn.
+S2 (kiểm định) và S3 (đủ điều kiện harness) **không tốn tiền**. Giai đoạn tốn tiền đầu tiên là M3 (lượt gọi mô hình trả phí đầu tiên). Toàn bộ so sánh giữa hai nhánh được thực hiện **trước** M3.
 
 ## Cổng
 
@@ -18,7 +14,7 @@ M3 và lượt sinh patch chính của **nửa A\*** được phép chạy trư�
 |---|---|---|
 | **M1** (S2, kiểm định) | Trong `min(250, số ứng viên)` ứng viên đầu của nhánh theo thứ tự đã đóng băng, **≥ 40** instance có test fail trước và pass sau (kết quả `ELIGIBLE` của `vet_target.py`). Nếu nhánh có **ít hơn 80** ứng viên thì cổng **không đạt** (khung mẫu không đủ) | Dừng nhánh. Không thay thế hay bổ sung ứng viên |
 | **M2** (S3, harness) | **≥ 40** instance đủ điều kiện: test nền qua; có test chạy tới code bị sửa; ≥ **200** draw đủ cặp; tất định; bản gốc khác bản fix ở ít nhất 1 draw | Dừng nhánh |
-| **M3** (dùng credit Free Trial, dưới 5 USD) | Trên 10 instance đủ điều kiện đầu tiên, một model rẻ, 2 lần lặp: ≥ **10** patch plausible (qua test fail-to-pass và pass-to-pass) | Sửa pipeline; không chi credit chính |
+| **M3** (tốn tiền, dưới 5 USD) | Trên 10 instance đủ điều kiện đầu tiên, một model rẻ, 2 lần lặp: ≥ **10** patch plausible (qua test fail-to-pass và pass-to-pass) | Sửa pipeline; không chi credit chính |
 | **M4** (sau lượt sinh patch chính) | ≥ **15** patch plausible có ĥ trong **[1%, 10%]**, và ≥ **8** patch mà quyết định của Gatekeeper hoặc kiểm định cỡ mẫu cố định khác quyết định của cổng đơn giản (B8+ hoặc smoke 20) | Không có câu chuyện "cổng thống kê có giá trị"; chuyển thành bài đo đạc |
 
 ## Định nghĩa
@@ -35,4 +31,4 @@ M3 và lượt sinh patch chính của **nửa A\*** được phép chạy trư�
 
 ## Mốc thời gian
 
-M1, M2: trước 30/11/2026. M3: trong tháng 12/2026 nếu pipeline sinh patch cho cohort mới đã sẵn sàng. Lượt sinh patch chính của nửa A\*: khoảng 5/1 đến 18/1/2027, **trước khi Free Trial hết hạn ngày 20/1/2027**.
+M1, M2: trước 30/11/2026. M3 không chạy trước ngày quyết định giữa hai nhánh (10/1/2027).
