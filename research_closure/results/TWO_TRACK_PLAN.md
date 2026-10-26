@@ -55,3 +55,29 @@ Các xác suất đã nêu (RR khoảng 25–40% cho chuỗi đến EMSE, A\* kh
 1. Khai báo F3 và F5 trước 13/11/2026.
 2. Gửi artifact `STUDY_M_DISCOVERY` để chia cohort.
 3. Kiểm tra xem project AI Studio không bật thanh toán có dùng được free tier cho Gemini Flash không (xem mục "đo tiềm năng miễn phí" trong câu trả lời).
+
+## 9. Credit và việc có thể làm song song trong lúc chờ Study M
+
+**Credit hiện có (từ bảng bạn gửi):** Free Trial ₫7.791.151 (khoảng 289 USD), **hết hạn 20/1/2027**, phạm vi "certain usage"; Developer Program ₫259.706 (khoảng 9,6 USD), hết hạn 21/10/2027, phạm vi toàn Google Cloud. Hệ quả: Free Trial là khoản **dùng-hay-mất** và **không dùng được cho nhánh RR**; vì vậy được phép dùng cho nửa A\* trước ngày quyết định (xem `GATES.md`).
+
+| Việc | Phụ thuộc kết quả của Study M? | Ghi chú |
+|---|---|---|
+| **Pipeline sinh patch cho cohort mới** (dựng instance từ PR: nội dung issue, các module được sửa, kiểm tra hiển thị; chấm bằng vi sai test-level) | Không | **Đường găng** vì Free Trial hết hạn 20/1; kiểm chứng trên sáu instance phát triển |
+| Harness test-level ở quy mô lớn (giới hạn thời gian từng test, sửa D1, chia mảnh) | Không | Cần cho S3 |
+| Quy trình phân tích so sánh các cổng (census, B8+, smoke, cỡ mẫu cố định, Gatekeeper) | Không | Thử trên sáu instance phát triển với đột biến làm patch thay thế; cũng là kế hoạch phân tích của báo cáo RR |
+| Văn bản báo cáo Stage 1 (trừ bảng hao hụt S1) | Chỉ phần số hao hụt | Hạn 13/11 và 20/11 |
+| **Kiểm tra credit và hạn mức** (`vertex_smoke`, free tier AI Studio) | Không | Rất rẻ; trả lời credit nào trả cho lời gọi nào |
+| Các đoạn dán vào bài, chương luận văn | Không | |
+| Chia cohort, `candidates.json`, S2, S3, cổng M1, M2, số hao hụt cho báo cáo RR | **Có** | Chờ `M_ORDERED.json` |
+
+**Ràng buộc khi làm song song:** không chạm nửa RR; chỉ dùng các instance phát triển đã lộ; không sửa file đã đóng băng của `study_m` (công cụ khám phá, chia, kiểm tra, danh sách loại trừ); công việc mới đặt trong file mới.
+
+## 10. Lịch tính theo hạn Free Trial
+
+| Thời gian | Việc |
+|---|---|
+| Tuần này | `vertex_smoke`; pipeline sinh patch cho cohort mới (bắt đầu) |
+| Đến 30/11 | S2, S3, M1, M2 |
+| 12/2026 | M3 (dưới 5 USD, credit Free Trial) và củng cố pipeline |
+| 5/1 – 18/1/2027 | Sinh patch chính cho nửa A\* bằng Free Trial |
+| **20/1/2027** | **Free Trial hết hạn** |
