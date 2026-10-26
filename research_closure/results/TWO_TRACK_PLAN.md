@@ -1,58 +1,57 @@
-# Kế hoạch hai nhánh: RR và A\*, đánh giá song song tới giai đoạn tốn tiền (26/10/2026)
+# Kế hoạch hai nhánh chạy song song: A\* và RR (một nhánh git `main`, hai thư mục study), 26/10/2026
 
-## 1. Cấu trúc
+## 1. Cấu trúc đã chọn và lý do
 
 ```
-study_m/            thân chung, đã đóng băng: S1 (khám phá + thứ tự theo seed) và amendment M-A1 (quy tắc chia)
-study_m_astar/      nhánh A*: S2 (kiểm định), S3 (harness), GATES.md, DECISION_RULE.md, candidates.json
-study_m_rr/         nhánh RR: STAGE1_DRAFT.md; nửa cohort RR không được xem tới khi có IPA
+study_m/          thân chung, đóng băng: S1 (khám phá + thứ tự theo seed) và amendment M-A1 (quy tắc chia)
+study_m_astar/    nhánh A*: GATES.md, DECISION_RULE.md, candidates.json; S2 (kiểm định), S3 (harness)
+study_m_rr/       nhánh RR: STAGE1_DRAFT.md; nửa cohort RR không được xem tới khi có IPA
 ```
 
-Chia thành **hai thư mục study**, không phải hai nhánh git: cơ chế đóng băng, hash và workflow hiện có đều gắn với từng thư mục; hai nhánh git sẽ làm công cụ dùng chung lệch nhau.
+Một nhánh git `main` chứ không phải hai: mọi workflow hiện trong tab Actions và chạy từ một nơi; không có ô chọn nhánh để bấm nhầm; không lệch công cụ dùng chung; tag không trùng. Sự tách biệt nằm ở **hash đóng băng của từng thư mục**, ở **chốt chặn `check_track.py`** (workflow kiểm định dừng nếu bất kỳ ứng viên nào không thuộc nhánh A\*), và ở việc **không có workflow nào cho nửa RR** cho tới khi có IPA.
 
 ## 2. Chia cohort
 
-Sau khi S1 cho danh sách có thứ tự, mỗi repo được gán vào RR hoặc A\* theo tính chẵn lẻ của SHA-256 của `seed:track:repo`. Chia **theo repo** để hai cohort độc lập. Nửa A\* được kiểm định ngay; nửa RR **không** được kiểm định, chạy hay xem tới khi có IPA. Điều này giữ tư cách "chưa thu dữ liệu" của RR.
+Mỗi repo được gán vào RR hoặc A\* theo tính chẵn lẻ của SHA-256 của `seed:track:repo` (amendment M-A1), nên hai nửa rời nhau theo repo. Nửa A\* được kiểm định ngay; nửa RR **không** được kiểm định, chạy hay xem kết quả tới khi có IPA.
 
-## 3. Mỗi nhánh làm gì tới ngày quyết định (10/1/2027)
+## 3. Việc chạy song song và mỗi việc cho biết điều gì về tiềm năng (trước khi tốn tiền)
 
-| Thời gian | Nhánh RR | Nhánh A\* |
-|---|---|---|
-| 27/10 – 12/11 | Hoàn thiện khung S1; viết giả thuyết, biến, kế hoạch phân tích | Chia cohort; đóng băng `GATES.md`; chạy S2 |
-| 13/11 | Nộp tóm tắt | |
-| 20/11 | **Nộp báo cáo Stage 1** (6 trang) | |
-| 20/11 – 30/11 | Chờ | S3: kiểm tra harness; cổng M1, M2 |
-| 23/12 | Nhận phản biện (4 phản biện viên) | |
-| **10/1/2027** | **Quyết định theo `DECISION_RULE.md`, trước mọi lượt gọi mô hình trả phí** | |
-| 15/1 | Nộp bản sửa (nếu chọn RR) | |
-| 4/2 | Thông báo Stage 1 | |
+| Khi nào | Nhánh | Việc | Cho biết gì |
+|---|---|---|---|
+| 27/10 – 12/11 | RR | Hoàn thiện giả thuyết, biến, kế hoạch phân tích, báo cáo 6 trang | Thiết kế có đứng vững không |
+| 27/10 – 12/11 | A\* | Chia cohort, đóng băng `GATES.md` và `DECISION_RULE.md`, chạy S2 | **M1**: có đủ instance có test fail trước, pass sau không |
+| 13/11, 20/11 | RR | Nộp tóm tắt, rồi báo cáo Stage 1 | |
+| 20/11 – 30/11 | A\* | S3 (harness) | **M2**: có đủ instance đủ điều kiện cho phép đo không |
+| 23/12 | RR | Nhận phản biện (4 người) | **F2**: có thuộc phạm vi MSR không, có phản đối căn bản không |
+| **10/1/2027** | cả hai | **Chọn theo `DECISION_RULE.md`, trước mọi lượt gọi mô hình trả phí** | |
+| 15/1, 4/2 | RR | Bản sửa; thông báo Stage 1 | |
 
-## 4. Tiêu chí "khả thi hơn", đã đăng ký trước
+**Điều không đo được trước khi tốn tiền:** cổng M4, tức patch thật có nằm trong vùng tác hại một phần không. Vì vậy chọn nhánh dựa trên **tính khả thi**, không dựa trên xác suất của kết quả.
 
-Năm điều kiện F1–F5 và bốn luật trong `study_m_astar/DECISION_RULE.md`, đóng băng trước S2. Tóm tắt: nếu cohort không đủ khả thi thì **không nhánh nào chạy**; nếu luận văn cần kết quả trước 4/2/2027 hoặc RR bị loại về phạm vi hoặc không đi được Dublin thì **A\***; còn lại thì **RR**.
+## 4. Quy tắc chọn (đã đăng ký trước, đóng băng cùng nhánh A\*)
 
-## 5. Xung đột đã được xử lý
+F1 cohort khả thi (M1 và M2 đạt); F2 báo cáo RR không bị loại về phạm vi và không bị phản đối căn bản; F3 luận văn cần kết quả trước 4/2/2027; F4 credit còn hiệu lực; F5 đi được Dublin. Luật theo thứ tự: F1 không đạt thì **cả hai dừng**; F3 = có thì **A\***; F2 không đạt hoặc F5 = không thì **A\***; còn lại thì **RR**.
+
+## 5. Sau ngày quyết định
+
+- **Chọn RR:** `study_m_rr` là nhánh làm việc; nửa RR bắt đầu được kiểm định sau IPA. Dữ liệu của nhánh A\* chỉ là dữ liệu thử nghiệm, khai báo rõ; không công bố riêng.
+- **Chọn A\*:** gắn tag lưu trữ cho `study_m_rr` và dừng; nửa RR không bao giờ được mở và không dùng để chọn tham số nào; rút báo cáo RR (hỏi chair sớm về quy định rút bài).
+
+## 6. Xung đột đã xử lý
 
 | Xung đột | Cách xử lý |
 |---|---|
 | RR cấm thu dữ liệu trước IPA, A\* cần dữ liệu sớm | Hai nửa cohort rời nhau theo repo; nửa RR không bị chạm |
 | RR cấm nộp đồng thời nơi khác | Nhánh A\* không nộp gì trước ngày quyết định |
-| Trùng lặp xuất bản nếu cả hai nhánh cho kết quả | Chỉ một nhánh được công bố; nửa còn lại chỉ là dữ liệu thử nghiệm, khai báo rõ |
-| Rút báo cáo RR nếu chọn A\* | Quy định rút chưa rõ: hỏi chair của track sớm |
+| Trùng lặp xuất bản | Chỉ một nhánh được công bố; nửa còn lại là dữ liệu thử nghiệm, khai báo rõ |
+| Danh sách nửa RR nằm trong kho | Danh sách ứng viên không phải dữ liệu thu được; việc không chạm được bảo đảm bằng hash, guard và việc không có workflow cho nửa RR |
 
-## 6. "Giai đoạn tốn tiền"
+## 7. Giới hạn
 
-Lượt gọi mô hình trả phí đầu tiên (cổng M3, dưới 5 USD). Mọi thứ trước đó, gồm S1, S2, S3 và việc viết báo cáo RR, đều 0 đồng.
+Các xác suất đã nêu (RR khoảng 25–40% cho chuỗi đến EMSE, A\* khoảng 5–10%) là phán đoán độ tin cậy thấp. Phần thống kê tuần tự mỏng ở quy mô test-level (vài trăm draw duy nhất, không đo được tác hại dưới khoảng 1%).
 
-## 7. Giới hạn của chính cách so sánh này
+## 8. Việc của bạn
 
-- **Không đo được điều quyết định nhất trước khi tốn tiền:** cổng M4 (có đủ patch thật trong vùng tác hại một phần không). Vì vậy việc chọn nhánh dựa trên **tính khả thi**, không dựa trên xác suất của kết quả.
-- Các xác suất nêu trước đây (RR khoảng 25–40% cho chuỗi đến EMSE, A\* khoảng 5–10%) vẫn là phán đoán độ tin cậy thấp.
-- Tập đột biến test-level nhỏ làm phần thống kê tuần tự mỏng ở quy mô này; kết quả so sánh cổng mang tính mô tả.
-
-## 8. Việc của bạn, theo thứ tự
-
-1. Khai báo F3 (luận văn có cần kết quả trước 4/2/2027 không) và F5 (có đi Dublin được không) **trước 13/11**.
-2. Gửi tôi artifact `STUDY_M_DISCOVERY` để tôi chia cohort.
-3. Đóng băng nhánh A\*, chạy S2.
-4. Cùng Thầy duyệt bản nháp báo cáo Stage 1.
+1. Khai báo F3 và F5 trước 13/11/2026.
+2. Gửi artifact `STUDY_M_DISCOVERY` để chia cohort.
+3. Kiểm tra xem project AI Studio không bật thanh toán có dùng được free tier cho Gemini Flash không (xem mục "đo tiềm năng miễn phí" trong câu trả lời).

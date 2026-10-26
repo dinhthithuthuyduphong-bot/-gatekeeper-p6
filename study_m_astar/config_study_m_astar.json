@@ -7,6 +7,7 @@
   "extra_tracked": [
     "tools/vet_slice.py",
     "tools/vet_target.py",
-    "tools/split_candidates.py"
+    "tools/split_candidates.py",
+    "tools/check_track.py"
   ]
 }

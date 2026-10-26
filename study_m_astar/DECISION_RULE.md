@@ -21,8 +21,8 @@
 
 ## Hệ quả của lựa chọn
 
-- Chọn **RR**: nửa A\* chỉ còn là dữ liệu thử nghiệm, khai báo rõ trong bản sửa và bài đầy đủ; **không** công bố riêng kết quả của nửa A\* (tránh trùng lặp xuất bản). Nửa RR bắt đầu được kiểm định sau IPA.
-- Chọn **A\***: **rút** báo cáo RR trước khi có quyết định của chair (quy định rút bài chưa rõ, hỏi chair sớm); nửa RR **không bao giờ** được xem, và không dùng để chọn bất kỳ tham số nào.
+- Chọn **RR**: nửa A\* chỉ còn là dữ liệu thử nghiệm, khai báo rõ trong bản sửa và bài đầy đủ; **không** công bố riêng kết quả của nửa A\* (tránh trùng lặp xuất bản). Nhánh RR (`study_m_rr`) trở thành nhánh làm việc; nửa RR bắt đầu được kiểm định sau IPA.
+- Chọn **A\***: **rút** báo cáo RR trước khi có quyết định của chair (quy định rút bài chưa rõ, hỏi chair sớm); thư mục `study_m_rr` được lưu trữ bằng tag và dừng; nửa RR **không bao giờ** được xem, và không dùng để chọn bất kỳ tham số nào.
 - Cả hai trường hợp: ngưỡng trong `GATES.md` giữ nguyên.
 
 ## Giới hạn, ghi thẳng
