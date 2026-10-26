@@ -1,0 +1,37 @@
+# Restore a file of a frozen study from its freeze tag (e.g. a config overwritten by a development package).
+# Refuses unless the restored bytes match the hash recorded in FREEZE.json, and unless FREEZE.json itself is unchanged.
+name: Gatekeeper restore frozen file
+on:
+  workflow_dispatch:
+    inputs:
+      study: {description: "study directory, e.g. study_m_astar", required: true}
+      tag: {description: "freeze tag, e.g. study-m-astar-freeze", required: true}
+      path: {description: "file to restore (empty = the study's config)", required: false, default: ""}
+permissions:
+  contents: write
+jobs:
+  restore:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --tags --quiet
+          if [ -n "${{ inputs.path }}" ]; then
+            python tools/restore_frozen_file.py "${{ inputs.study }}" "${{ inputs.tag }}" "${{ inputs.path }}" | tee restore.log
+          else
+            python tools/restore_frozen_file.py "${{ inputs.study }}" "${{ inputs.tag }}" | tee restore.log
+          fi
+          python tools/freeze_study.py verify "${{ inputs.study }}" || true
+          if git diff --quiet; then echo "nothing to commit"; exit 0; fi
+          git config user.name "gatekeeper-freeze-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A "${{ inputs.study }}"
+          git commit -m "restore frozen file of ${{ inputs.study }} from tag ${{ inputs.tag }}"
+          git push origin HEAD
