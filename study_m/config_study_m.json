@@ -5,10 +5,25 @@
   "seed_time_utc": "2026-10-26T03:19:51Z",
   "stage": "S1 discovery only; no outcome, skill or patch is examined",
   "extra_tracked": [
-    "study_m/INCLUSION_RULES.md",
     "study_m/EXCLUDED_REPOS.json",
+    "study_m/INCLUSION_RULES.md",
+    "tools/check_track.py",
     "tools/discover_m_candidates.py",
-    "tools/order_candidates.py"
+    "tools/order_candidates.py",
+    "tools/split_candidates.py"
   ],
-  "frozen_on": "2026-10-26T02:19:51Z"
+  "frozen_on": "2026-10-26T02:19:51Z",
+  "seed_freeze_sha256": "cf3310668eed432558f6adbe9ff515e6ad40233ffd39748d3ac501bfcab841fe",
+  "amendments_applied": [
+    "M-A1"
+  ],
+  "amendment_log": [
+    {
+      "id": "M-A1",
+      "edits": [
+        "config_study_m.json:extra_tracked=[\"study_m/EXCLUDED_REPOS.json\",\"study_m/INCLUSION_RULES.md\",\"tools/check_track.py\",\"tools/discover_m_candidates.py\",\"tools/order_candidates.py\",\"tools/split_candidates.py\"]"
+      ],
+      "applied_utc": "2026-10-26T07:06:18+00:00"
+    }
+  ]
 }
