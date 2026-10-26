@@ -42,6 +42,8 @@ def check(study, amendment, edits_file="", root=ROOT, tags=None):
         return [("BLOCKER", "no config_*.json in %s" % study)]
     cfg = json.loads(cfgs[0].read_text())
     add("OK" if cfg.get("status") == "FROZEN" else "BLOCKER", "study status is %r (an amendment applies only to FROZEN)" % cfg.get("status"))
+    if cfg.get("status") != "FROZEN" and (d / "FREEZE.json").exists():
+        add("INFO", "FREEZE.json exists although the config says %r: the frozen config was most likely overwritten by a package that contained the DRAFT config. Do NOT freeze again; run `Gatekeeper restore frozen file` with the freeze tag of this study." % cfg.get("status"))
     am = d / "AMENDMENTS.md"
     text = am.read_text(encoding="utf-8") if am.exists() else ""
     add("OK" if amendment in text else "BLOCKER", "amendment id %r %s in %s/AMENDMENTS.md" % (amendment, "is documented" if amendment in text else "is NOT documented", study))

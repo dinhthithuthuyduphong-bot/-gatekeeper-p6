@@ -35,3 +35,12 @@ The two protocol documents become hash-bound at this amendment, not retroactivel
 
 No subsequent S2 outcomes should have been observed. If S2 has since run, stop and document that fact before applying this pre-outcome amendment. If main has further changes to the tracked study inputs, review those changes instead of re-freezing them blindly.
 
+### Addendum A (written before this amendment is applied; no S2 outcome exists)
+
+**A1. Restored configuration.** A preflight run (run 40319363876) found `study_m_astar/config_study_m_astar.json` with status DRAFT, whereas the vet run 40296709754 had verified the study as FROZEN. The most likely cause is that a development package containing the DRAFT configuration was extracted over the frozen file after the freeze: several packages delivered earlier contained that file. The frozen bytes were restored from tag `study-m-astar-freeze` with the `Gatekeeper restore frozen file` workflow, which refuses unless the restored bytes match the hash recorded in FREEZE.json and FREEZE.json is unchanged since the tag. The original freeze time and hashes are therefore preserved; no second freeze was made.
+
+**A2. Text of the two protocol documents.** `GATES.md` and `DECISION_RULE.md` were not hash-bound at the freeze (the freeze tool hashes only fixed patterns and `extra_tracked`). The text bound by this amendment is the text in the repository when it is applied; its sha256 is then recorded in FREEZE.json. It may differ from the text present at the freeze. The differences known to the author, all made before any S2 outcome existed, are:
+1. `GATES.md`: "money" is defined as cash or a credit that does not expire soon; the Free Trial credit (expires 2027-01-20, unusable by the RR track) is not counted as money. M3 and the main patch generation for the A* half may run before the decision date, using only that credit. Previously M3 was not allowed before the decision date.
+2. `DECISION_RULE.md`: F4 is made concrete (A*: Free Trial still valid and sufficient; RR: at least 28 USD from the Developer credit plus cash, because the Free Trial cannot be used after in-principle acceptance); rule 3 also selects A* when F4 fails for RR; the results of M3 and of the main generation are stated not to be inputs of the rule; the decision date is a last date and may be earlier.
+
+The numerical thresholds of M1 to M4 and the band [1%, 10%] of M4 are unchanged.

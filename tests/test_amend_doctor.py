@@ -47,6 +47,10 @@ class Doctor(unittest.TestCase):
         self.assertTrue(any("not valid JSON" in m for m in blockers(self.run_check(edits="'config_s.json:extra_tracked=[oops'\n"))))
         self.assertTrue(any("cannot be parsed" in m for m in blockers(self.run_check(edits="'unterminated\n"))))
 
+    def test_a_draft_config_next_to_a_freeze_record_points_to_the_restore_tool(self):
+        items = self.run_check(status="DRAFT")
+        self.assertTrue(any(lvl == "INFO" and "overwritten" in m and "restore" in m for lvl, m in items))
+
     def test_folder_extracted_into_a_subfolder_is_recognised(self):
         with tempfile.TemporaryDirectory() as tmp:
             (Path(tmp) / "wrapper" / "s").mkdir(parents=True)
