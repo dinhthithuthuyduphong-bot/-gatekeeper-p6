@@ -1,7 +1,7 @@
 {
   "files": {
-    "study_m_astar/config_study_m_astar.json": "a50bbd1cb35fbce8b3942ae871f4a20f8479474d53acc875818d8a4ceb5bf057",
-    "study_m_astar/AMENDMENTS.md": "d9f2d3ba962e2ff70c6ef2e32787dfd18d37b7688eb5a68ae32973a02047e989",
+    "study_m_astar/config_study_m_astar.json": "748ae14264b42df904e21f1d207b265d13dd6b76f1a9cb9afe4fdb44f2472661",
+    "study_m_astar/AMENDMENTS.md": "6be2500c7d69bc2b897bf73bbb5526f2da593580f30877d931c91c2a7ec8f96c",
     "gatekeeper_lite/__init__.py": "be8ddeba61bbc4885994020bcb9b4f19573f4a22b8a759b079e00e45c3f334e7",
     "gatekeeper_lite/__main__.py": "7aa7d5b275d60de01de9074e0bd8a864c99527435885098a2243986a48699e90",
     "gatekeeper_lite/b9.py": "80e274eb9e30f3f51870e2e7939e68fc199029e627d8cf20635ffc6f4b09128e",
@@ -39,6 +39,14 @@
     "tools/vet_slice.py": "515a11107aacd5892e8af77a2c263d3dfc852dc992b47d97e173a2a5deec3dbf",
     "tools/vet_target.py": "b033ccea738d9befab2f8fa9d24d4e77e91628c7706d47e6e06b8e85f2ff49ed",
     "tools/split_candidates.py": "4061cc70ca043da0689b4930c4bea526c597d5abf0a9d6456ff22e96edf94f87",
-    "tools/check_track.py": "ac167d4cf48f3a414ca1b2cb457cf9d8b853434f01c9cd79968d905f91f0269c"
+    "tools/check_track.py": "ac167d4cf48f3a414ca1b2cb457cf9d8b853434f01c9cd79968d905f91f0269c",
+    "study_m_astar/candidates.json": "60f9e8ed97d2e11ad483ace36db99af6492e362984995c8abe7c2ad6ae4c86c8",
+    "study_m_astar/SPLIT_SUMMARY.json": "d59bdbf27751b2e6fcf94e12de7a32ba9df26c6d26c5f54bbcac6e31275ff381",
+    "study_m_astar/GATES.md": "f6b00ef6be6515f630aa94e121225de3f671abf384e54e1a0a96765e405238c2",
+    "study_m_astar/DECISION_RULE.md": "004f4abd6f416325ec6443259c481add38fbb2444a712562b1c0c20cd0ed7141",
+    "study_m_astar/MASTAR_A1_EDITS.txt": "4df7f0d88835ea6eabe55b84c4f1f5b55096c9520f851d4c6a91a8ce52014db6",
+    "study_m_astar/evidence/s1/M_ORDERED.json": "1f7565709d746df47f2b3d1872fa447ad7ab82ad462c3203482134019c01c735",
+    "study_m_astar/evidence/s1/SEED.json": "71b88653216fa8737fd3aca103fe679c09836aa0a5cecc8285c565d72986b9f4",
+    "study_m_astar/evidence/s1/M_DISCOVERY_LOG.json": "39e34464a934366ca18907d86a40a8f6c2ae1f5503f8bbc6b4e473c58cd4fb21"
   }
 }

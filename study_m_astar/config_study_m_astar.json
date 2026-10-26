@@ -8,7 +8,28 @@
     "tools/vet_slice.py",
     "tools/vet_target.py",
     "tools/split_candidates.py",
-    "tools/check_track.py"
+    "tools/check_track.py",
+    "study_m_astar/candidates.json",
+    "study_m_astar/SPLIT_SUMMARY.json",
+    "study_m_astar/GATES.md",
+    "study_m_astar/DECISION_RULE.md",
+    "study_m_astar/MASTAR_A1_EDITS.txt",
+    "study_m_astar/evidence/s1/M_ORDERED.json",
+    "study_m_astar/evidence/s1/SEED.json",
+    "study_m_astar/evidence/s1/M_DISCOVERY_LOG.json"
   ],
-  "frozen_on": "2026-10-26T08:56:54Z"
+  "frozen_on": "2026-10-26T08:56:54Z",
+  "seed_freeze_sha256": "d1c6c82233a6dbc897e7411955cb8c062ddb1cde3b58757d042515f009c5bf66",
+  "amendments_applied": [
+    "MASTAR-A1"
+  ],
+  "amendment_log": [
+    {
+      "id": "MASTAR-A1",
+      "edits": [
+        "config_study_m_astar.json:extra_tracked=[\"tools/vet_slice.py\",\"tools/vet_target.py\",\"tools/split_candidates.py\",\"tools/check_track.py\",\"study_m_astar/candidates.json\",\"study_m_astar/SPLIT_SUMMARY.json\",\"study_m_astar/GATES.md\",\"study_m_astar/DECISION_RULE.md\",\"study_m_astar/MASTAR_A1_EDITS.txt\",\"study_m_astar/evidence/s1/M_ORDERED.json\",\"study_m_astar/evidence/s1/SEED.json\",\"study_m_astar/evidence/s1/M_DISCOVERY_LOG.json\"]"
+      ],
+      "applied_utc": "2026-10-26T12:12:05+00:00"
+    }
+  ]
 }
