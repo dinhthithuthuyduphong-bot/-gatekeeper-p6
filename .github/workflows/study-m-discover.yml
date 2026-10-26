@@ -1,0 +1,42 @@
+# Study M stage S1: outcome-blind discovery of bug-fix pull requests (read-only, 0 cost).
+# Refuses to run unless study_m is FROZEN and its hashes verify.
+name: Gatekeeper Study M discover
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  discover:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Freeze check
+        run: |
+          python -c "import json,sys;c=json.load(open('study_m/config_study_m.json'));sys.exit(0 if c.get('status')=='FROZEN' else 'not FROZEN')"
+          python tools/freeze_study.py verify study_m
+      - name: Discover
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p out_m
+          python tools/discover_m_candidates.py out_m 2>&1 | tee out_m/log.txt
+          python - <<'PY'
+          import hashlib, json, subprocess, sys
+          sys.path.insert(0, 'tools')
+          from run_study_d import drand_seed
+          cfg = json.load(open('study_m/config_study_m.json'))
+          h = hashlib.sha256(open('study_m/FREEZE.json', 'rb').read()).hexdigest()
+          s = drand_seed(cfg.get('seed_freeze_sha256') or h, cfg['seed_time_utc'])
+          json.dump(s, open('out_m/SEED.json', 'w'), indent=1)
+          subprocess.run([sys.executable, 'tools/order_candidates.py', 'out_m/M_CANDIDATES.json', str(s['seed']), 'out_m/M_ORDERED.json'], check=True)
+          PY
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: STUDY_M_DISCOVERY
+          path: out_m
