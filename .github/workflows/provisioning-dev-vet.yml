@@ -20,6 +20,18 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
+      - name: Required files present
+        shell: bash
+        run: |
+          missing=0
+          for f in tools/vet_target2.py tools/vet_dev.py tools/vet_slice.py tools/vet_target.py tools/check_track.py tools/split_candidates.py study_m_astar/candidates.json; do
+            if [ ! -f "$f" ]; then
+              missing=1
+              echo "::error::MISSING $f (found instead at: $(git ls-files | grep -E "(^|/)$(basename "$f")$" | tr '\n' ' ' || true))"
+            fi
+          done
+          if [ "$missing" = 1 ]; then echo "Copy the package so that the paths above exist at the repository root, then run again."; exit 1; fi
+          echo "all required files present"
       - name: Guard (A* half only)
         run: python tools/check_track.py study_m_astar/candidates.json ASTAR
       - id: m
