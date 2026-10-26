@@ -1,13 +1,14 @@
 {
   "experiment_id": "study-m-s1-v1",
-  "status": "DRAFT",
+  "status": "FROZEN",
   "requires_freeze": true,
-  "seed_time_utc": "SET_AT_FREEZE",
+  "seed_time_utc": "2026-10-26T03:19:51Z",
   "stage": "S1 discovery only; no outcome, skill or patch is examined",
   "extra_tracked": [
     "study_m/INCLUSION_RULES.md",
     "study_m/EXCLUDED_REPOS.json",
     "tools/discover_m_candidates.py",
     "tools/order_candidates.py"
-  ]
+  ],
+  "frozen_on": "2026-10-26T02:19:51Z"
 }
