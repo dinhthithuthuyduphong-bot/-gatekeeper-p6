@@ -1,0 +1,11 @@
+{
+  "experiment_id": "study-m-rr-v1",
+  "status": "DRAFT",
+  "requires_freeze": true,
+  "seed_time_utc": "SET_AT_FREEZE",
+  "track": "Registered Report (MSR 2027 RR, Stage 1 due 2026-11-20); no vetting, execution or examination of this half before IPA",
+  "extra_tracked": [
+    "tools/split_candidates.py",
+    "tools/check_track.py"
+  ]
+}
