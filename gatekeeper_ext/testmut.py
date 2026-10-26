@@ -28,6 +28,7 @@ from gatekeeper_ext.testmut_evidence import execute_logged, feasibility_checks, 
 from gatekeeper_ext.golddiff import edited_functions  # noqa: E402
 from gatekeeper_ext.mutants import _offsets, mutants as ast_mutants  # noqa: E402
 
+HARNESS_VERSION = "tm-dev-v3"     # v3: fixes measurement defects only (maxfail truncation, id noise); the mutation distribution is unchanged
 MAXT = 1.0                       # a test is eligible if every case passed at the original in at most this many seconds
 MARK = re.compile(r"__gkm(\d+)")
 
@@ -65,11 +66,29 @@ def norm(msg, roots):
     for r in sorted((str(x) for x in roots), key=len, reverse=True):
         s = s.replace(r, "<ROOT>")
     s = re.sub(r"0x[0-9a-fA-F]+", "0x", s)
+    s = re.sub(r"\bid='\d+'", "id='N'", s)            # unittest.mock reprs, e.g. <Mock id='140485139372160'>
+    s = re.sub(r"\bid=\d{6,}\b", "id=N", s)
     s = re.sub(r"/tmp/[^\s'\"]+", "<TMP>", s)
     s = re.sub(r"\.py:\d+", ".py:N", s)
     s = re.sub(r"\bline \d+\b", "line N", s)
     s = re.sub(r"\d+\.\d+s\b", "Ns", s)
     return s[:300]
+
+
+TRUNCATION = re.compile(r"stopping after \d+ failures?|Interrupted: ")
+
+
+def pytest_command(xml, select, files):
+    # --maxfail=0 comes after the repository's addopts and overrides any maxfail or -x it sets
+    cmd = [sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider", "-p", "no:randomly", "--maxfail=0",
+           "--junitxml", str(xml), "-o", "junit_family=xunit2"]
+    if select:
+        cmd += ["-k", select]
+    return cmd + list(files)
+
+
+def was_truncated(stdout_text):
+    return bool(TRUNCATION.search(stdout_text or ""))
 
 
 def run_tests(root, runner, files, pythonpath, select, work, tag, timeout=1800):
@@ -79,13 +98,12 @@ def run_tests(root, runner, files, pythonpath, select, work, tag, timeout=1800):
                PYTHONPATH=os.pathsep.join([str(root / p) for p in pythonpath] + [str(root), str(ROOT)]))
     if runner == "pytest":
         xml = work / (tag + ".xml")
-        cmd = [sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider", "-p", "no:randomly",
-               "--junitxml", str(xml), "-o", "junit_family=xunit2"]
-        if select:
-            cmd += ["-k", select]
-        receipt = execute_logged(cmd + list(files), root, env, work / tag, timeout)
+        receipt = execute_logged(pytest_command(xml, select, files), root, env, work / tag, timeout)
         if receipt["status"] != "COMPLETED" or receipt["returncode"] not in (0, 1):
             return None, "runner did not finish normally; see " + tag + ".command.json"
+        out_file = Path(str(work / tag) + ".stdout.txt")
+        if out_file.exists() and was_truncated(out_file.read_text(encoding="utf-8", errors="replace")):
+            return None, "pytest stopped early (maxfail, exitfirst or interruption); outcomes would be missing; see " + tag + ".stdout.txt"
         if not xml.exists():
             return None, "runner produced no XML; see " + tag + ".stdout.txt"
         try:
@@ -262,6 +280,21 @@ def run_arm(base_root, name, test_texts, source_overrides, runner, pythonpath, w
     return sigs, None
 
 
+def common_failure_fraction(sigs_by_arm, ids):
+    """Fraction of draws on which every compared arm only fails/errors: the draw cannot tell the arms apart."""
+    def all_fail(sig):
+        lines = [l.split("|", 3)[2] for l in sig.splitlines() if l.count("|") >= 3]
+        return bool(lines) and all(x in ("failed", "error") for x in lines)
+    n = hit = 0
+    for k in ids:
+        row = [a.get(k) for a in sigs_by_arm.values()]
+        if any(r is None for r in row):
+            continue
+        n += 1
+        hit += all(all_fail(r) for r in row)
+    return hit / float(n) if n else None
+
+
 def paired(orig, gold, patch, ids):
     s = {"help": 0, "hurt": 0, "tie": 0, "bug_trigger": 0, "missing": 0}
     for k in ids:
@@ -344,6 +377,8 @@ def analyze(orig_root, gold_root, modules, pythonpath, runner, test_entries, pat
     res["eligible"] = True
     res["checks"] = feasibility_checks(res["patches"], res["mutants"], res["deterministic"])
     res["draws_compiled"] = len(ids)
+    res["harness_version"] = HARNESS_VERSION
+    res["common_failure_fraction"] = common_failure_fraction({n: sg[0] for n, sg in sigs.items() if n in ("orig", "gold") or n.startswith("patch:")}, ids)
     res["complete_draws_by_patch"] = {k: len(ids) - v["missing"] for k, v in res["patches"].items()}
     res["draws_run_definition"] = "legacy count of compiled mutant IDs, not guaranteed complete paired outcomes"
     res["method_limits"] = [
