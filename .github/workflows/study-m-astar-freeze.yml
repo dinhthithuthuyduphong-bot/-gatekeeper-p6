@@ -1,0 +1,23 @@
+# One-click freeze of Study M (A*) (FROZEN, seed time = now + 60 min, hashes, tag study-m-astar-freeze).
+name: Gatekeeper Study M (A*) freeze
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  freeze:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: python -m unittest discover -s tests
+      - run: |
+          python tools/freeze_named_study.py study_m_astar --delay-minutes 60
+          python tools/freeze_study.py verify study_m_astar
+          git config user.name "gatekeeper-freeze-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add study_m_astar
+          git commit -m "Freeze Study M (A*)"
+          git tag study-m-astar-freeze
+          git push origin HEAD --tags

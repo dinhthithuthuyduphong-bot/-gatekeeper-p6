@@ -1,0 +1,67 @@
+# Study M, A* track, stage S2 (0 cost): vet the frozen ASTAR candidates in shards with tools/vet_target.py.
+# Refuses to run unless study_m_astar is FROZEN and its hashes verify.
+name: Gatekeeper Study M A-star vet
+on:
+  workflow_dispatch:
+    inputs:
+      shards:
+        description: 'number of parallel shards'
+        default: '25'
+      limit:
+        description: 'first N candidates in the frozen order'
+        default: '250'
+permissions:
+  contents: read
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.m.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Freeze check
+        run: |
+          python -c "import json,sys;c=json.load(open('study_m_astar/config_study_m_astar.json'));sys.exit(0 if c.get('status')=='FROZEN' else 'not FROZEN')"
+          python tools/freeze_study.py verify study_m_astar
+          python tools/check_track.py study_m_astar/candidates.json ASTAR
+      - id: m
+        env:
+          SHARDS: ${{ inputs.shards }}
+        run: |
+          python - <<'PY'
+          import json, os
+          k = int(os.environ['SHARDS'])
+          assert 1 <= k <= 100
+          open(os.environ['GITHUB_OUTPUT'], 'a').write('matrix=' + json.dumps({'shard': list(range(k))}) + '\n')
+          PY
+  vet:
+    needs: plan
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Vet shard
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SHARD: ${{ matrix.shard }}
+          SHARDS: ${{ inputs.shards }}
+          LIMIT: ${{ inputs.limit }}
+        run: |
+          set -euo pipefail
+          mkdir -p out_v
+          python tools/vet_slice.py study_m_astar/candidates.json out_v "$SHARD" "$SHARDS" "$LIMIT" 1200 2>&1 | tee out_v/log_shard.txt
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: M_VET_${{ matrix.shard }}
+          path: out_v
