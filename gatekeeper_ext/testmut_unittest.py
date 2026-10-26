@@ -1,6 +1,7 @@
 """unittest collector with the same record schema as the parsed pytest junit file (used for offline tests).
 python -m gatekeeper_ext.testmut_unittest OUT.json SELECT_SUBSTRING FILE.py [FILE.py ...]"""
 import json
+import os
 import sys
 import time
 import unittest
@@ -18,6 +19,10 @@ def main(argv):
         for t in s:
             flatten(t) if isinstance(t, unittest.TestSuite) else tests.append(t)
     flatten(suite)
+    tracker = None
+    if os.environ.get("GK_REACH_TARGETS"):
+        from gatekeeper_ext.reach import ReachTracker, load_targets
+        tracker = ReachTracker(load_targets(os.environ["GK_REACH_TARGETS"]))
     records = []
     for t in tests:
         name = getattr(t, "_testMethodName", str(t))
@@ -25,7 +30,13 @@ def main(argv):
             continue
         res = unittest.TestResult()
         t0 = time.perf_counter()
-        t.run(res)
+        if tracker:
+            tracker.start(("%s.%s" % (type(t).__module__, type(t).__name__), name))
+        try:
+            t.run(res)
+        finally:
+            if tracker:
+                tracker.stop()
         status, msg = "passed", ""
         if res.failures:
             status, msg = "failed", str(res.failures[0][1]).strip().splitlines()[-1][:300]
@@ -37,6 +48,8 @@ def main(argv):
                         "time": time.perf_counter() - t0, "msg": msg})
     with open(out, "w") as fh:
         json.dump(records, fh)
+    if tracker:
+        tracker.dump(os.environ["GK_REACH_OUT"])
     return 0
 
 

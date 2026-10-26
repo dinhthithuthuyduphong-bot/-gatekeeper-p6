@@ -28,7 +28,7 @@ from gatekeeper_ext.testmut_evidence import execute_logged, feasibility_checks, 
 from gatekeeper_ext.golddiff import edited_functions  # noqa: E402
 from gatekeeper_ext.mutants import _offsets, mutants as ast_mutants  # noqa: E402
 
-HARNESS_VERSION = "tm-dev-v3"     # v3: fixes measurement defects only (maxfail truncation, id noise); the mutation distribution is unchanged
+HARNESS_VERSION = "tm-dev-v4-reach"   # v4: sampling restricted to tests that execute the edited code; v3 fixed measurement defects only
 MAXT = 1.0                       # a test is eligible if every case passed at the original in at most this many seconds
 MARK = re.compile(r"__gkm(\d+)")
 
@@ -91,6 +91,40 @@ def was_truncated(stdout_text):
     return bool(TRUNCATION.search(stdout_text or ""))
 
 
+def edited_with_lines(orig_root, gold_root, modules):
+    """golddiff.edited_functions (frozen file) plus the `def` line, which differs from first_line for decorated functions."""
+    from gatekeeper_ext.mutants import functions
+    out = []
+    for e in edited_functions(orig_root, gold_root, modules):
+        tree = ast.parse((Path(orig_root) / e["file"]).read_text(encoding="utf-8"))
+        node = functions(tree)[e["qualname"]][0]
+        out.append(dict(e, def_line=node.lineno))
+    return out
+
+
+def run_reach(root, runner, files, pythonpath, edited, work, tag, timeout=1800):
+    """Run the unchanged tests once with the reach tracker; returns the set of (classname, test name) that entered
+    an edited function."""
+    root, work = Path(root), Path(work)
+    targets = sorted({(str((root / e["file"]).resolve()), n) for e in edited for n in (e["first_line"], e["def_line"])})
+    tpath, opath = work / (tag + ".targets.json"), work / (tag + ".reach.json")
+    write_json(tpath, [list(t) for t in targets])
+    env = dict(os.environ, PYTHONDONTWRITEBYTECODE="1", PYTHONHASHSEED="0", GK_REACH_TARGETS=str(tpath), GK_REACH_OUT=str(opath),
+               PYTHONPATH=os.pathsep.join([str(root / p) for p in pythonpath] + [str(root), str(ROOT)]))
+    xml = work / (tag + ".xml")
+    if runner == "pytest":
+        cmd = [sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider", "-p", "no:randomly", "-p", "gatekeeper_ext.reach_plugin",
+               "--maxfail=0", "--junitxml", str(xml), "-o", "junit_family=xunit2"] + list(files)
+    else:
+        cmd = [sys.executable, "-m", "gatekeeper_ext.testmut_unittest", str(work / (tag + ".json")), ""] + list(files)
+    receipt = execute_logged(cmd, root, env, work / tag, timeout)
+    if receipt["status"] != "COMPLETED" or receipt["returncode"] not in (0, 1):
+        return None, "reach run did not finish normally; see " + tag + ".command.json"
+    if not opath.exists():
+        return None, "reach run wrote no result; see " + tag + ".stdout.txt"
+    return {tuple(k) for k in json.loads(opath.read_text())}, None
+
+
 def run_tests(root, runner, files, pythonpath, select, work, tag, timeout=1800):
     root, work = Path(root), Path(work)
     work.mkdir(parents=True, exist_ok=True)
@@ -150,7 +184,7 @@ def _sites(src, node, at):
     return sorted((s, e, v) for (s, e), v in found.items())
 
 
-def eligible_functions(root, files, baseline):
+def eligible_functions(root, files, baseline, reached=None):
     funcs = []
     for rel in files:
         src = (Path(root) / rel).read_text(encoding="utf-8")
@@ -166,6 +200,8 @@ def eligible_functions(root, files, baseline):
                 if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef)) and n.name.startswith("test"):
                     cls = ".".join([modname] + classes)
                     cases = [r for r in baseline if r["classname"] == cls and (r["name"] == n.name or r["name"].startswith(n.name + "["))]
+                    if reached is not None and (cls, n.name) not in reached:
+                        continue
                     if cases and all(c["status"] == "passed" and c["time"] <= MAXT for c in cases):
                         sites = _sites(src, n, at)
                         if sites:
@@ -329,10 +365,20 @@ def analyze(orig_root, gold_root, modules, pythonpath, runner, test_entries, pat
         return dict(res, eligible=False, reason="baseline test run produced no result", tail=err)
     res["baseline_cases"] = len(baseline)
     res["baseline_passed"] = sum(1 for r in baseline if r["status"] == "passed")
-    funcs = eligible_functions(orig_root, files, baseline)
+    edited = edited_with_lines(orig_root, gold_root, modules)
+    res["edited_functions"] = [e["qualname"] for e in edited]
+    if not edited:
+        return dict(res, eligible=False, reason="no edited function present in both versions")
+    all_funcs = eligible_functions(orig_root, files, baseline)
+    res["eligible_test_functions_unfiltered"] = len(all_funcs)
+    reached, rerr = run_reach(orig_root, runner, files, pythonpath, edited, work, "reach")
+    if reached is None:
+        return dict(res, eligible=False, reason="reach pass failed", tail=rerr)
+    funcs = eligible_functions(orig_root, files, baseline, reached)
     res["eligible_test_functions"] = len(funcs)
+    res["reach_filter"] = "tests that enter an edited function when run unchanged at the original commit"
     if not funcs:
-        return dict(res, eligible=False, reason="no passing fast test function with a literal to mutate")
+        return dict(res, eligible=False, reason="no passing fast test reaches the edited code")
     mut = make_mutants(funcs, n_draws, seed)
     texts, ok = build_mutated_sources(orig_root, mut)
     ids = sorted(ok)
@@ -348,8 +394,8 @@ def analyze(orig_root, gold_root, modules, pythonpath, runner, test_entries, pat
     for k, v in patches.items():
         arms["patch:" + k] = (v, {})
     n_ast = 0
-    for rel in sorted({e["file"] for e in edited_functions(orig_root, gold_root, modules)}):
-        names = [e["qualname"] for e in edited_functions(orig_root, gold_root, modules) if e["file"] == rel]
+    for rel in sorted({e["file"] for e in edited}):
+        names = [e["qualname"] for e in edited if e["file"] == rel]
         for desc, new in ast_mutants((gold_root / rel).read_text(encoding="utf-8"), names, n_mutants):
             if n_ast >= n_mutants:
                 break

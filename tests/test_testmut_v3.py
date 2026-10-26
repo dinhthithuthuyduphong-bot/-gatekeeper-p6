@@ -39,7 +39,7 @@ class V3MeasurementFixes(unittest.TestCase):
         self.assertIsNone(testmut.common_failure_fraction({"orig": {}}, [0]))
 
     def test_harness_version_is_declared(self):
-        self.assertEqual(testmut.HARNESS_VERSION, "tm-dev-v3")
+        self.assertEqual(testmut.HARNESS_VERSION, "tm-dev-v4-reach")
 
 
 if __name__ == "__main__":
