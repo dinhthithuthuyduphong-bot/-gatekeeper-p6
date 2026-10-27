@@ -1,0 +1,58 @@
+{
+  "experiment_id": "study-n-v1",
+  "status": "DRAFT",
+  "requires_freeze": true,
+  "seed_time_utc": "SET_AT_FREEZE",
+  "note": "Frame and candidate lists are produced by the Study N discover workflow BEFORE this study is frozen; tools/freeze_doctor.py must report 0 blockers before freezing.",
+  "gates": {
+    "N1": {
+      "eligible_at_least": 60,
+      "among_first": 400,
+      "min_candidates": 200
+    },
+    "N2": {
+      "harness_eligible_at_least": 40,
+      "min_draws": 100
+    },
+    "N3": {
+      "plausible_at_least": 30
+    },
+    "N4": {
+      "in_band_at_least": 15,
+      "discordant_at_least": 8
+    }
+  },
+  "budget_usd_cap": 200,
+  "extra_tracked": [
+    "gatekeeper_ext/b9_cohort.py",
+    "gatekeeper_ext/golddiff.py",
+    "gatekeeper_ext/golddiff_oracle.py",
+    "gatekeeper_ext/mutants.py",
+    "gatekeeper_ext/reach.py",
+    "gatekeeper_ext/reach_plugin.py",
+    "gatekeeper_ext/testmut.py",
+    "gatekeeper_ext/testmut_evidence.py",
+    "gatekeeper_ext/testmut_unittest.py",
+    "gatekeeper_ext/usage.py",
+    "study_n/DECISION_RULE.md",
+    "study_n/GATES.md",
+    "study_n/STUDY_N_PROTOCOL.md",
+    "study_n/candidates_astar.json",
+    "study_n/evidence/N_CANDIDATES.json",
+    "study_n/evidence/N_DISCOVERY_LOG.json",
+    "study_n/evidence/SEED_S1.json",
+    "study_n/evidence/SPLIT_N.json",
+    "study_n/frame_rr.json",
+    "tools/check_track.py",
+    "tools/discover_m_candidates.py",
+    "tools/discover_n_continue.py",
+    "tools/freeze_doctor.py",
+    "tools/n_assemble.py",
+    "tools/s2_summary.py",
+    "tools/split_candidates.py",
+    "tools/vet_dev.py",
+    "tools/vet_slice.py",
+    "tools/vet_target.py",
+    "tools/vet_target2.py"
+  ]
+}
