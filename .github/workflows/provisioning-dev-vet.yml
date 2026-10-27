@@ -5,9 +5,10 @@ name: Gatekeeper provisioning dev vet (A-star half)
 on:
   workflow_dispatch:
     inputs:
-      shards: {description: "number of parallel shards", default: "25"}
+      shards: {description: "number of parallel shards", default: "40"}
+      only_shards: {description: "optional comma-separated shard numbers to run (empty = all)", default: ""}
       limit: {description: "first N candidates in the frozen order", default: "250"}
-      timeout: {description: "seconds per candidate", default: "1800"}
+      timeout: {description: "seconds per candidate", default: "1500"}
 permissions:
   contents: read
 jobs:
@@ -37,12 +38,15 @@ jobs:
       - id: m
         env:
           SHARDS: ${{ inputs.shards }}
+          ONLY: ${{ inputs.only_shards }}
         run: |
           python - <<'PY'
           import json, os
           k = int(os.environ['SHARDS'])
           assert 1 <= k <= 100
-          open(os.environ['GITHUB_OUTPUT'], 'a').write('matrix=' + json.dumps({'shard': list(range(k))}) + '\n')
+          only = [int(x) for x in os.environ.get('ONLY', '').replace(' ', '').split(',') if x]
+          assert all(0 <= x < k for x in only)
+          open(os.environ['GITHUB_OUTPUT'], 'a').write('matrix=' + json.dumps({'shard': only or list(range(k))}) + '\n')
           PY
   vet:
     needs: plan
