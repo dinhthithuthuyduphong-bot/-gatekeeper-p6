@@ -1,0 +1,15 @@
+STRAY PROVISIONING_V2_DEV.md (also at research_closure/results/PROVISIONING_V2_DEV.md)
+STRAY provisioning-dev-vet.yml (also at .github/workflows/provisioning-dev-vet.yml)
+STRAY study-d-amend.yml (also at .github/workflows/study-d-amend.yml)
+STRAY study-d-run.yml (also at .github/workflows/study-d-run.yml)
+STRAY test_vet_target2.py (also at tests/test_vet_target2.py)
+STRAY vet_dev.py (also at tools/vet_dev.py)
+STRAY vet_target2.py (also at tools/vet_target2.py)
+removed PROVISIONING_V2_DEV.md
+removed provisioning-dev-vet.yml
+removed study-d-amend.yml
+removed study-d-run.yml
+removed test_vet_target2.py
+removed vet_dev.py
+removed vet_target2.py
+7 stray duplicate(s), 0 lone root test file(s)
