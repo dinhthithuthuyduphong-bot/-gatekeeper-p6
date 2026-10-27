@@ -1,8 +1,8 @@
 {
   "experiment_id": "study-n-v1",
-  "status": "DRAFT",
+  "status": "FROZEN",
   "requires_freeze": true,
-  "seed_time_utc": "SET_AT_FREEZE",
+  "seed_time_utc": "2026-10-27T10:19:49Z",
   "note": "Frame and candidate lists are produced by the Study N discover workflow BEFORE this study is frozen; tools/freeze_doctor.py must report 0 blockers before freezing.",
   "gates": {
     "N1": {
@@ -54,5 +54,6 @@
     "tools/vet_slice.py",
     "tools/vet_target.py",
     "tools/vet_target2.py"
-  ]
+  ],
+  "frozen_on": "2026-10-27T09:19:49Z"
 }
