@@ -1,0 +1,80 @@
+{
+ "candidates_considered": 250,
+ "vetting_results": 240,
+ "categories": {
+  "tests ran, no fail-to-pass test": 36,
+  "eligible (fail-before, pass-after test)": 57,
+  "tests not runnable: other": 38,
+  "tests not runnable: missing python module": 84,
+  "tests not runnable: conftest or fixture error": 25,
+  "no vetting result": 10
+ },
+ "eligible": 57,
+ "runnable": 93,
+ "eligible_share_of_runnable": 0.613,
+ "gate_M1": "PASS",
+ "threshold": ">= 40 eligible among the first 250",
+ "eligible_repositories": 37,
+ "most_missing_modules": [
+  [
+   "pkg_resources",
+   7
+  ],
+  [
+   "pandas",
+   6
+  ],
+  [
+   "pydantic",
+   6
+  ],
+  [
+   "charms",
+   5
+  ],
+  [
+   "airbyte_protocol",
+   4
+  ],
+  [
+   "sentry_sdk",
+   3
+  ],
+  [
+   "google",
+   3
+  ],
+  [
+   "ruamel",
+   2
+  ],
+  [
+   "ert",
+   2
+  ],
+  [
+   "airbyte_cdk",
+   2
+  ],
+  [
+   "concrete",
+   2
+  ],
+  [
+   "yt",
+   2
+  ],
+  [
+   "rest_framework",
+   2
+  ],
+  [
+   "proper",
+   2
+  ],
+  [
+   "gdb",
+   1
+  ]
+ ]
+}

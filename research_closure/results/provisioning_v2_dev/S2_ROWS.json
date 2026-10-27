@@ -1,0 +1,2002 @@
+[
+ {
+  "position": 0,
+  "name": "pytest_nb_as_test_pr13",
+  "repo": "https://github.com/brycehenson/pytest-nb-as-test.git",
+  "pr": 13,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 1,
+  "name": "prowler_pr4500",
+  "repo": "https://github.com/prowler-cloud/prowler.git",
+  "pr": 4500,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 2,
+  "name": "prowler_pr4610",
+  "repo": "https://github.com/prowler-cloud/prowler.git",
+  "pr": 4610,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 3,
+  "name": "litellm_pr17426",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pr": 17426,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 4
+ },
+ {
+  "position": 4,
+  "name": "prowler_pr6113",
+  "repo": "https://github.com/prowler-cloud/prowler.git",
+  "pr": 6113,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 5,
+  "name": "posthog_pr16817",
+  "repo": "https://github.com/PostHog/posthog.git",
+  "pr": 16817,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 6,
+  "name": "sympy_pr26036",
+  "repo": "https://github.com/sympy/sympy.git",
+  "pr": 26036,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 3
+ },
+ {
+  "position": 7,
+  "name": "airbyte_pr27350",
+  "repo": "https://github.com/airbytehq/airbyte.git",
+  "pr": 27350,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 8,
+  "name": "geopandas_pr2858",
+  "repo": "https://github.com/geopandas/geopandas.git",
+  "pr": 2858,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 9,
+  "name": "pandas_pr65396",
+  "repo": "https://github.com/pandas-dev/pandas.git",
+  "pr": 65396,
+  "category": "tests not runnable: conftest or fixture error",
+  "f2p": 0
+ },
+ {
+  "position": 10,
+  "name": "pwndbg_pr1774",
+  "repo": "https://github.com/pwndbg/pwndbg.git",
+  "pr": 1774,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 11,
+  "name": "tencentcloud_cli_intl_en_pr34",
+  "repo": "https://github.com/TencentCloud/tencentcloud-cli-intl-en.git",
+  "pr": 34,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 12,
+  "name": "prowler_pr5930",
+  "repo": "https://github.com/prowler-cloud/prowler.git",
+  "pr": 5930,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 13,
+  "name": "nautobot_pr6777",
+  "repo": "https://github.com/nautobot/nautobot.git",
+  "pr": 6777,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 14,
+  "name": "pandas_pr63413",
+  "repo": "https://github.com/pandas-dev/pandas.git",
+  "pr": 63413,
+  "category": "tests not runnable: conftest or fixture error",
+  "f2p": 0
+ },
+ {
+  "position": 15,
+  "name": "basket_pr15",
+  "repo": "https://github.com/silverorange/basket.git",
+  "pr": 15,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 16,
+  "name": "wazuh_server_operator_pr15",
+  "repo": "https://github.com/canonical/wazuh-server-operator.git",
+  "pr": 15,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 17,
+  "name": "discourse_gatekeeper_pr66",
+  "repo": "https://github.com/canonical/discourse-gatekeeper.git",
+  "pr": 66,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 2
+ },
+ {
+  "position": 18,
+  "name": "pypdf_pr2878",
+  "repo": "https://github.com/py-pdf/pypdf.git",
+  "pr": 2878,
+  "category": "no vetting result",
+  "f2p": 0
+ },
+ {
+  "position": 19,
+  "name": "pyjanitor_pr1510",
+  "repo": "https://github.com/pyjanitor-devs/pyjanitor.git",
+  "pr": 1510,
+  "category": "tests not runnable: conftest or fixture error",
+  "f2p": 0
+ },
+ {
+  "position": 20,
+  "name": "pot_pr446",
+  "repo": "https://github.com/PythonOT/POT.git",
+  "pr": 446,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 21,
+  "name": "spack_pr42706",
+  "repo": "https://github.com/spack/spack.git",
+  "pr": 42706,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 22,
+  "name": "praisonai_pr2021",
+  "repo": "https://github.com/MervinPraison/PraisonAI.git",
+  "pr": 2021,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 23,
+  "name": "pandas_pr63908",
+  "repo": "https://github.com/pandas-dev/pandas.git",
+  "pr": 63908,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 24,
+  "name": "viadot_pr658",
+  "repo": "https://github.com/dyvenia/viadot.git",
+  "pr": 658,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 25,
+  "name": "litellm_pr13654",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pr": 13654,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 26,
+  "name": "montreal_forced_aligner_pr930",
+  "repo": "https://github.com/MontrealCorpusTools/Montreal-Forced-Aligner.git",
+  "pr": 930,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 27,
+  "name": "celery_pr8486",
+  "repo": "https://github.com/celery/celery.git",
+  "pr": 8486,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 3
+ },
+ {
+  "position": 28,
+  "name": "pyautocti_pr78",
+  "repo": "https://github.com/PyAutoLabs/PyAutoCTI.git",
+  "pr": 78,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 29,
+  "name": "litellm_pr10542",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pr": 10542,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 30,
+  "name": "litellm_pr16471",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pr": 16471,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 2
+ },
+ {
+  "position": 31,
+  "name": "imagesize_py_pr67",
+  "repo": "https://github.com/shibukawa/imagesize_py.git",
+  "pr": 67,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 32,
+  "name": "numpy_pr24711",
+  "repo": "https://github.com/numpy/numpy.git",
+  "pr": 24711,
+  "category": "tests not runnable: conftest or fixture error",
+  "f2p": 0
+ },
+ {
+  "position": 33,
+  "name": "litellm_pr8734",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pr": 8734,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 34,
+  "name": "lightcurvelynx_pr778",
+  "repo": "https://github.com/lincc-frameworks/lightcurvelynx.git",
+  "pr": 778,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 2
+ },
+ {
+  "position": 35,
+  "name": "ufs_srweather_app_pr600",
+  "repo": "https://github.com/ufs-community/ufs-srweather-app.git",
+  "pr": 600,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 36,
+  "name": "panther_analysis_tool_pr251",
+  "repo": "https://github.com/panther-labs/panther_analysis_tool.git",
+  "pr": 251,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 37,
+  "name": "actinia_tiling_plugin_pr24",
+  "repo": "https://github.com/actinia-org/actinia-tiling-plugin.git",
+  "pr": 24,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 38,
+  "name": "pypdf_pr2845",
+  "repo": "https://github.com/py-pdf/pypdf.git",
+  "pr": 2845,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 39,
+  "name": "pypdf_pr3448",
+  "repo": "https://github.com/py-pdf/pypdf.git",
+  "pr": 3448,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 40,
+  "name": "scipy_pr20194",
+  "repo": "https://github.com/scipy/scipy.git",
+  "pr": 20194,
+  "category": "tests not runnable: conftest or fixture error",
+  "f2p": 0
+ },
+ {
+  "position": 41,
+  "name": "bigframes_pr150",
+  "repo": "https://github.com/google/bigframes.git",
+  "pr": 150,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 42,
+  "name": "data_juicer_pr517",
+  "repo": "https://github.com/datajuicer/data-juicer.git",
+  "pr": 517,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 43,
+  "name": "prowler_pr5143",
+  "repo": "https://github.com/prowler-cloud/prowler.git",
+  "pr": 5143,
+  "category": "no vetting result",
+  "f2p": 0
+ },
+ {
+  "position": 44,
+  "name": "posthog_pr38301",
+  "repo": "https://github.com/PostHog/posthog.git",
+  "pr": 38301,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 45,
+  "name": "raster_loader_pr77",
+  "repo": "https://github.com/CartoDB/raster-loader.git",
+  "pr": 77,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 46,
+  "name": "comfy_kitchen_pr8",
+  "repo": "https://github.com/Comfy-Org/comfy-kitchen.git",
+  "pr": 8,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 47,
+  "name": "giskard_oss_pr1966",
+  "repo": "https://github.com/Giskard-AI/giskard-oss.git",
+  "pr": 1966,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 48,
+  "name": "galaxy_pr16109",
+  "repo": "https://github.com/galaxyproject/galaxy.git",
+  "pr": 16109,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 49,
+  "name": "graphrag_pr405",
+  "repo": "https://github.com/microsoft/graphrag.git",
+  "pr": 405,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 50,
+  "name": "litellm_pr11561",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pr": 11561,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 2
+ },
+ {
+  "position": 51,
+  "name": "posthog_pr29035",
+  "repo": "https://github.com/PostHog/posthog.git",
+  "pr": 29035,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 52,
+  "name": "parfive_pr153",
+  "repo": "https://github.com/Cadair/parfive.git",
+  "pr": 153,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 53,
+  "name": "django_push_notification_pr794",
+  "repo": "https://github.com/jazzband/django-push-notifications.git",
+  "pr": 794,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 54,
+  "name": "festim_pr810",
+  "repo": "https://github.com/festim-dev/FESTIM.git",
+  "pr": 810,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 55,
+  "name": "pie_modules_pr191",
+  "repo": "https://github.com/ArneBinder/pie-modules.git",
+  "pr": 191,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 56,
+  "name": "posthog_pr26120",
+  "repo": "https://github.com/PostHog/posthog.git",
+  "pr": 26120,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 57,
+  "name": "numpy_pr25553",
+  "repo": "https://github.com/numpy/numpy.git",
+  "pr": 25553,
+  "category": "tests not runnable: conftest or fixture error",
+  "f2p": 0
+ },
+ {
+  "position": 58,
+  "name": "agentic_project_kit_pr136",
+  "repo": "https://github.com/vfi64/agentic-project-kit.git",
+  "pr": 136,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 59,
+  "name": "gt4py_pr1866",
+  "repo": "https://github.com/GridTools/gt4py.git",
+  "pr": 1866,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 60,
+  "name": "pcobra_pr688",
+  "repo": "https://github.com/Alphonsus411/pCobra.git",
+  "pr": 688,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 2
+ },
+ {
+  "position": 61,
+  "name": "pygeofilter_pr154",
+  "repo": "https://github.com/geopython/pygeofilter.git",
+  "pr": 154,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 16
+ },
+ {
+  "position": 62,
+  "name": "discourse_k8s_operator_pr83",
+  "repo": "https://github.com/canonical/discourse-k8s-operator.git",
+  "pr": 83,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 63,
+  "name": "logprep_pr888",
+  "repo": "https://github.com/fkie-cad/Logprep.git",
+  "pr": 888,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 2
+ },
+ {
+  "position": 64,
+  "name": "athe_web_pr50",
+  "repo": "https://github.com/vEnhance/athe-web.git",
+  "pr": 50,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 65,
+  "name": "tablib_pr614",
+  "repo": "https://github.com/jazzband/tablib.git",
+  "pr": 614,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 66,
+  "name": "poetry_core_pr880",
+  "repo": "https://github.com/python-poetry/poetry-core.git",
+  "pr": 880,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 4
+ },
+ {
+  "position": 67,
+  "name": "nipoppy_pr838",
+  "repo": "https://github.com/nipoppy/nipoppy.git",
+  "pr": 838,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 68,
+  "name": "numpy_pr25963",
+  "repo": "https://github.com/numpy/numpy.git",
+  "pr": 25963,
+  "category": "no vetting result",
+  "f2p": 0
+ },
+ {
+  "position": 69,
+  "name": "scipy_pr21358",
+  "repo": "https://github.com/scipy/scipy.git",
+  "pr": 21358,
+  "category": "tests not runnable: conftest or fixture error",
+  "f2p": 0
+ },
+ {
+  "position": 70,
+  "name": "avd_pr5027",
+  "repo": "https://github.com/aristanetworks/avd.git",
+  "pr": 5027,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 71,
+  "name": "prowler_pr6192",
+  "repo": "https://github.com/prowler-cloud/prowler.git",
+  "pr": 6192,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 72,
+  "name": "composer_pr1948",
+  "repo": "https://github.com/mosaicml/composer.git",
+  "pr": 1948,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 73,
+  "name": "diff2typo_pr652",
+  "repo": "https://github.com/RainRat/diff2typo.git",
+  "pr": 652,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 74,
+  "name": "prowler_pr7359",
+  "repo": "https://github.com/prowler-cloud/prowler.git",
+  "pr": 7359,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 75,
+  "name": "scipy_pr18956",
+  "repo": "https://github.com/scipy/scipy.git",
+  "pr": 18956,
+  "category": "tests not runnable: conftest or fixture error",
+  "f2p": 0
+ },
+ {
+  "position": 76,
+  "name": "litellm_pr12733",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pr": 12733,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 77,
+  "name": "openstack_ironic_pr26",
+  "repo": "https://github.com/openshift/openstack-ironic.git",
+  "pr": 26,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 78,
+  "name": "sphinx_immaterial_pr371",
+  "repo": "https://github.com/jbms/sphinx-immaterial.git",
+  "pr": 371,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 79,
+  "name": "litellm_pr12596",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pr": 12596,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 80,
+  "name": "loki_pr192",
+  "repo": "https://github.com/ecmwf-ifs/loki.git",
+  "pr": 192,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 81,
+  "name": "earthaccess_pr923",
+  "repo": "https://github.com/earthaccess-dev/earthaccess.git",
+  "pr": 923,
+  "category": "tests not runnable: conftest or fixture error",
+  "f2p": 0
+ },
+ {
+  "position": 82,
+  "name": "galaxy_pr17632",
+  "repo": "https://github.com/galaxyproject/galaxy.git",
+  "pr": 17632,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 83,
+  "name": "db_sync_pr143",
+  "repo": "https://github.com/MerginMaps/db-sync.git",
+  "pr": 143,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 84,
+  "name": "snuba_pr4137",
+  "repo": "https://github.com/getsentry/snuba.git",
+  "pr": 4137,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 85,
+  "name": "mdio_python_pr665",
+  "repo": "https://github.com/TGSAI/mdio-python.git",
+  "pr": 665,
+  "category": "tests not runnable: conftest or fixture error",
+  "f2p": 0
+ },
+ {
+  "position": 86,
+  "name": "galaxy_pr22286",
+  "repo": "https://github.com/galaxyproject/galaxy.git",
+  "pr": 22286,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 87,
+  "name": "local_deep_research_pr2341",
+  "repo": "https://github.com/LearningCircuit/local-deep-research.git",
+  "pr": 2341,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 88,
+  "name": "pandas_pr60941",
+  "repo": "https://github.com/pandas-dev/pandas.git",
+  "pr": 60941,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 89,
+  "name": "linedify_pr10",
+  "repo": "https://github.com/uezo/linedify.git",
+  "pr": 10,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 90,
+  "name": "django_upgrade_pr338",
+  "repo": "https://github.com/adamchainz/django-upgrade.git",
+  "pr": 338,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 3
+ },
+ {
+  "position": 91,
+  "name": "pylint_pr8542",
+  "repo": "https://github.com/pylint-dev/pylint.git",
+  "pr": 8542,
+  "category": "tests not runnable: conftest or fixture error",
+  "f2p": 0
+ },
+ {
+  "position": 92,
+  "name": "rucio_pr6807",
+  "repo": "https://github.com/rucio/rucio.git",
+  "pr": 6807,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 93,
+  "name": "galaxy_pr15583",
+  "repo": "https://github.com/galaxyproject/galaxy.git",
+  "pr": 15583,
+  "category": "no vetting result",
+  "f2p": 0
+ },
+ {
+  "position": 94,
+  "name": "ert_pr10130",
+  "repo": "https://github.com/equinor/ert.git",
+  "pr": 10130,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 95,
+  "name": "nipoppy_pr442",
+  "repo": "https://github.com/nipoppy/nipoppy.git",
+  "pr": 442,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 96,
+  "name": "bigframes_pr209",
+  "repo": "https://github.com/google/bigframes.git",
+  "pr": 209,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 97,
+  "name": "hail_pr12819",
+  "repo": "https://github.com/hail-is/hail.git",
+  "pr": 12819,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 98,
+  "name": "galaxy_pr21508",
+  "repo": "https://github.com/galaxyproject/galaxy.git",
+  "pr": 21508,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 99,
+  "name": "scipy_pr20528",
+  "repo": "https://github.com/scipy/scipy.git",
+  "pr": 20528,
+  "category": "tests not runnable: conftest or fixture error",
+  "f2p": 0
+ },
+ {
+  "position": 100,
+  "name": "pandas_pr52087",
+  "repo": "https://github.com/pandas-dev/pandas.git",
+  "pr": 52087,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 101,
+  "name": "litellm_pr14289",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pr": 14289,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 2
+ },
+ {
+  "position": 102,
+  "name": "airbyte_pr37450",
+  "repo": "https://github.com/airbytehq/airbyte.git",
+  "pr": 37450,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 103,
+  "name": "allium_pr193",
+  "repo": "https://github.com/1aeo/allium.git",
+  "pr": 193,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 104,
+  "name": "pyuvsim_pr519",
+  "repo": "https://github.com/RadioAstronomySoftwareGroup/pyuvsim.git",
+  "pr": 519,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 105,
+  "name": "concrete_ml_pr352",
+  "repo": "https://github.com/zama-ai/concrete-ml.git",
+  "pr": 352,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 106,
+  "name": "indico_operator_pr424",
+  "repo": "https://github.com/canonical/indico-operator.git",
+  "pr": 424,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 107,
+  "name": "prowler_pr4772",
+  "repo": "https://github.com/prowler-cloud/prowler.git",
+  "pr": 4772,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 108,
+  "name": "concrete_ml_pr946",
+  "repo": "https://github.com/zama-ai/concrete-ml.git",
+  "pr": 946,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 109,
+  "name": "stumpy_pr823",
+  "repo": "https://github.com/stumpy-dev/stumpy.git",
+  "pr": 823,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 110,
+  "name": "pypdf_pr1544",
+  "repo": "https://github.com/py-pdf/pypdf.git",
+  "pr": 1544,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 111,
+  "name": "qibo_pr950",
+  "repo": "https://github.com/qiboteam/qibo.git",
+  "pr": 950,
+  "category": "tests not runnable: conftest or fixture error",
+  "f2p": 0
+ },
+ {
+  "position": 112,
+  "name": "litellm_pr3569",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pr": 3569,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 113,
+  "name": "subscript_pr770",
+  "repo": "https://github.com/equinor/subscript.git",
+  "pr": 770,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 114,
+  "name": "pyamg_pr413",
+  "repo": "https://github.com/pyamg/pyamg.git",
+  "pr": 413,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 115,
+  "name": "litellm_pr8384",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pr": 8384,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 116,
+  "name": "aiida_core_pr6820",
+  "repo": "https://github.com/aiidateam/aiida-core.git",
+  "pr": 6820,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 5
+ },
+ {
+  "position": 117,
+  "name": "rpi_pr5",
+  "repo": "https://github.com/milhy545/RPi.git",
+  "pr": 5,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 118,
+  "name": "ol_django_pr117",
+  "repo": "https://github.com/mitodl/ol-django.git",
+  "pr": 117,
+  "category": "no vetting result",
+  "f2p": 0
+ },
+ {
+  "position": 119,
+  "name": "orng_pr7",
+  "repo": "https://github.com/sequince-dev/orng.git",
+  "pr": 7,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 120,
+  "name": "scipy_pr23609",
+  "repo": "https://github.com/scipy/scipy.git",
+  "pr": 23609,
+  "category": "tests not runnable: conftest or fixture error",
+  "f2p": 0
+ },
+ {
+  "position": 121,
+  "name": "sympy_pr24474",
+  "repo": "https://github.com/sympy/sympy.git",
+  "pr": 24474,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 122,
+  "name": "bods_pr2199",
+  "repo": "https://github.com/department-for-transport-BODS/bods.git",
+  "pr": 2199,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 123,
+  "name": "geofileops_pr694",
+  "repo": "https://github.com/geofileops/geofileops.git",
+  "pr": 694,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 124,
+  "name": "metpy_pr2904",
+  "repo": "https://github.com/Unidata/MetPy.git",
+  "pr": 2904,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 125,
+  "name": "galaxy_pr18746",
+  "repo": "https://github.com/galaxyproject/galaxy.git",
+  "pr": 18746,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 126,
+  "name": "fantasy_basketball_optim_pr297",
+  "repo": "https://github.com/zer2/fantasy-basketball-optimizer.git",
+  "pr": 297,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 127,
+  "name": "rich_pr2820",
+  "repo": "https://github.com/Textualize/rich.git",
+  "pr": 2820,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 128,
+  "name": "ams_pr173",
+  "repo": "https://github.com/CURENT/ams.git",
+  "pr": 173,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 129,
+  "name": "airbyte_pr31547",
+  "repo": "https://github.com/airbytehq/airbyte.git",
+  "pr": 31547,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 130,
+  "name": "fluctuationanalysistools_pr107",
+  "repo": "https://github.com/Digiratory/FluctuationAnalysisTools.git",
+  "pr": 107,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 131,
+  "name": "airbyte_pr33623",
+  "repo": "https://github.com/airbytehq/airbyte.git",
+  "pr": 33623,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 132,
+  "name": "prowler_pr6112",
+  "repo": "https://github.com/prowler-cloud/prowler.git",
+  "pr": 6112,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 133,
+  "name": "21cmfast_pr442",
+  "repo": "https://github.com/21cmfast/21cmFAST.git",
+  "pr": 442,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 134,
+  "name": "litellm_pr10140",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pr": 10140,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 135,
+  "name": "litellm_pr12015",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pr": 12015,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 2
+ },
+ {
+  "position": 136,
+  "name": "transformerengine_pr771",
+  "repo": "https://github.com/NVIDIA/TransformerEngine.git",
+  "pr": 771,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 137,
+  "name": "pypdf_pr1564",
+  "repo": "https://github.com/py-pdf/pypdf.git",
+  "pr": 1564,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 138,
+  "name": "pyriodicity_pr27",
+  "repo": "https://github.com/iskandergaba/pyriodicity.git",
+  "pr": 27,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 139,
+  "name": "inventree_pr11103",
+  "repo": "https://github.com/inventree/InvenTree.git",
+  "pr": 11103,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 140,
+  "name": "connectors_pr1986",
+  "repo": "https://github.com/elastic/connectors.git",
+  "pr": 1986,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 141,
+  "name": "yt_pr5469",
+  "repo": "https://github.com/yt-project/yt.git",
+  "pr": 5469,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 142,
+  "name": "prowler_pr4859",
+  "repo": "https://github.com/prowler-cloud/prowler.git",
+  "pr": 4859,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 143,
+  "name": "galaxy_pr18446",
+  "repo": "https://github.com/galaxyproject/galaxy.git",
+  "pr": 18446,
+  "category": "no vetting result",
+  "f2p": 0
+ },
+ {
+  "position": 144,
+  "name": "holoviews_pr6933",
+  "repo": "https://github.com/holoviz/holoviews.git",
+  "pr": 6933,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 145,
+  "name": "grbtoolkit_pr1",
+  "repo": "https://github.com/WhatsYourWhy/GRBToolkit.git",
+  "pr": 1,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 146,
+  "name": "spack_pr45017",
+  "repo": "https://github.com/spack/spack.git",
+  "pr": 45017,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 147,
+  "name": "pytensor_pr2224",
+  "repo": "https://github.com/pymc-devs/pytensor.git",
+  "pr": 2224,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 3
+ },
+ {
+  "position": 148,
+  "name": "nipoppy_pr762",
+  "repo": "https://github.com/nipoppy/nipoppy.git",
+  "pr": 762,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 149,
+  "name": "client_py_pr543",
+  "repo": "https://github.com/DeebotUniverse/client.py.git",
+  "pr": 543,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 150,
+  "name": "socorro_pr6637",
+  "repo": "https://github.com/mozilla-services/socorro.git",
+  "pr": 6637,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 151,
+  "name": "darts_pr2445",
+  "repo": "https://github.com/unit8co/darts.git",
+  "pr": 2445,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 152,
+  "name": "caskade_pr84",
+  "repo": "https://github.com/ConnorStoneAstro/caskade.git",
+  "pr": 84,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 153,
+  "name": "improver_pr2026",
+  "repo": "https://github.com/metoppv/improver.git",
+  "pr": 2026,
+  "category": "tests not runnable: conftest or fixture error",
+  "f2p": 0
+ },
+ {
+  "position": 154,
+  "name": "scipy_pr21471",
+  "repo": "https://github.com/scipy/scipy.git",
+  "pr": 21471,
+  "category": "tests not runnable: conftest or fixture error",
+  "f2p": 0
+ },
+ {
+  "position": 155,
+  "name": "next_train_telegram_bot_pr16",
+  "repo": "https://github.com/Whitenz/next_train_telegram_bot.git",
+  "pr": 16,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 156,
+  "name": "qlib_pr1803",
+  "repo": "https://github.com/microsoft/qlib.git",
+  "pr": 1803,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 157,
+  "name": "prowler_pr4969",
+  "repo": "https://github.com/prowler-cloud/prowler.git",
+  "pr": 4969,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 158,
+  "name": "pypdf_pr3619",
+  "repo": "https://github.com/py-pdf/pypdf.git",
+  "pr": 3619,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 159,
+  "name": "jenkins_k8s_operator_pr30",
+  "repo": "https://github.com/canonical/jenkins-k8s-operator.git",
+  "pr": 30,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 160,
+  "name": "pytorch_forecasting_pr1667",
+  "repo": "https://github.com/sktime/pytorch-forecasting.git",
+  "pr": 1667,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 161,
+  "name": "bods_pr208",
+  "repo": "https://github.com/department-for-transport-BODS/bods.git",
+  "pr": 208,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 162,
+  "name": "disnake_pr1058",
+  "repo": "https://github.com/DisnakeDev/disnake.git",
+  "pr": 1058,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 3
+ },
+ {
+  "position": 163,
+  "name": "brightwind_pr518",
+  "repo": "https://github.com/brightwind-dev/brightwind.git",
+  "pr": 518,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 164,
+  "name": "httprequest_lego_provide_pr37",
+  "repo": "https://github.com/canonical/httprequest-lego-provider.git",
+  "pr": 37,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 165,
+  "name": "yt_pr5378",
+  "repo": "https://github.com/yt-project/yt.git",
+  "pr": 5378,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 166,
+  "name": "vllm_pr10180",
+  "repo": "https://github.com/vllm-project/vllm.git",
+  "pr": 10180,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 167,
+  "name": "pymc_marketing_pr1594",
+  "repo": "https://github.com/pymc-labs/pymc-marketing.git",
+  "pr": 1594,
+  "category": "tests not runnable: conftest or fixture error",
+  "f2p": 0
+ },
+ {
+  "position": 168,
+  "name": "cyclecloud_symphony_pr71",
+  "repo": "https://github.com/Azure/cyclecloud-symphony.git",
+  "pr": 71,
+  "category": "no vetting result",
+  "f2p": 0
+ },
+ {
+  "position": 169,
+  "name": "panorai_pr125",
+  "repo": "https://github.com/rlsgarcia-code/PanorAi.git",
+  "pr": 125,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 170,
+  "name": "rero_ils_pr3239",
+  "repo": "https://github.com/rero/rero-ils.git",
+  "pr": 3239,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 171,
+  "name": "posthog_pr16936",
+  "repo": "https://github.com/PostHog/posthog.git",
+  "pr": 16936,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 172,
+  "name": "bods_pr1812",
+  "repo": "https://github.com/department-for-transport-BODS/bods.git",
+  "pr": 1812,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 173,
+  "name": "algotrade_pr11",
+  "repo": "https://github.com/varun-sharma-2006/AlgoTrade.git",
+  "pr": 11,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 174,
+  "name": "tinbox_pr5",
+  "repo": "https://github.com/strickvl/tinbox.git",
+  "pr": 5,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 3
+ },
+ {
+  "position": 175,
+  "name": "core_pr822",
+  "repo": "https://github.com/openWB/core.git",
+  "pr": 822,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 176,
+  "name": "airbyte_pr38327",
+  "repo": "https://github.com/airbytehq/airbyte.git",
+  "pr": 38327,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 177,
+  "name": "psutil_pr2253",
+  "repo": "https://github.com/giampaolo/psutil.git",
+  "pr": 2253,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 178,
+  "name": "safe_eth_py_pr458",
+  "repo": "https://github.com/safe-global/safe-eth-py.git",
+  "pr": 458,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 179,
+  "name": "flexget_pr4306",
+  "repo": "https://github.com/Flexget/Flexget.git",
+  "pr": 4306,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 2
+ },
+ {
+  "position": 180,
+  "name": "pyomo_pr3980",
+  "repo": "https://github.com/Pyomo/pyomo.git",
+  "pr": 3980,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 181,
+  "name": "ontobio_pr635",
+  "repo": "https://github.com/biolink/ontobio.git",
+  "pr": 635,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 182,
+  "name": "poetry_core_pr838",
+  "repo": "https://github.com/python-poetry/poetry-core.git",
+  "pr": 838,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 183,
+  "name": "ert_pr6363",
+  "repo": "https://github.com/equinor/ert.git",
+  "pr": 6363,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 184,
+  "name": "qgis_plugin_tools_pr94",
+  "repo": "https://github.com/osgeosuomi/qgis_plugin_tools.git",
+  "pr": 94,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 185,
+  "name": "snuba_pr3878",
+  "repo": "https://github.com/getsentry/snuba.git",
+  "pr": 3878,
+  "category": "tests not runnable: conftest or fixture error",
+  "f2p": 0
+ },
+ {
+  "position": 186,
+  "name": "festim_pr1090",
+  "repo": "https://github.com/festim-dev/FESTIM.git",
+  "pr": 1090,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 187,
+  "name": "simplecrud_pr21",
+  "repo": "https://github.com/hexfrost/simplecrud.git",
+  "pr": 21,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 188,
+  "name": "ultralytics_pr4406",
+  "repo": "https://github.com/ultralytics/ultralytics.git",
+  "pr": 4406,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 189,
+  "name": "prowler_pr6838",
+  "repo": "https://github.com/prowler-cloud/prowler.git",
+  "pr": 6838,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 190,
+  "name": "prowler_pr5403",
+  "repo": "https://github.com/prowler-cloud/prowler.git",
+  "pr": 5403,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 191,
+  "name": "jenkins_k8s_operator_pr87",
+  "repo": "https://github.com/canonical/jenkins-k8s-operator.git",
+  "pr": 87,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 192,
+  "name": "gffutils_pr208",
+  "repo": "https://github.com/daler/gffutils.git",
+  "pr": 208,
+  "category": "tests not runnable: conftest or fixture error",
+  "f2p": 0
+ },
+ {
+  "position": 193,
+  "name": "pyuvsim_pr522",
+  "repo": "https://github.com/RadioAstronomySoftwareGroup/pyuvsim.git",
+  "pr": 522,
+  "category": "no vetting result",
+  "f2p": 0
+ },
+ {
+  "position": 194,
+  "name": "litellm_pr13831",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pr": 13831,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 2
+ },
+ {
+  "position": 195,
+  "name": "open_archiefbeheer_pr421",
+  "repo": "https://github.com/maykinmedia/open-archiefbeheer.git",
+  "pr": 421,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 196,
+  "name": "avd_pr3498",
+  "repo": "https://github.com/aristanetworks/avd.git",
+  "pr": 3498,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 197,
+  "name": "imap_processing_pr2477",
+  "repo": "https://github.com/IMAP-Science-Operations-Center/imap_processing.git",
+  "pr": 2477,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 198,
+  "name": "oauthlib_pr938",
+  "repo": "https://github.com/oauthlib/oauthlib.git",
+  "pr": 938,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 199,
+  "name": "galaxy_pr22154",
+  "repo": "https://github.com/galaxyproject/galaxy.git",
+  "pr": 22154,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 200,
+  "name": "mlem_pr569",
+  "repo": "https://github.com/iterative/mlem.git",
+  "pr": 569,
+  "category": "tests not runnable: conftest or fixture error",
+  "f2p": 0
+ },
+ {
+  "position": 201,
+  "name": "litellm_pr6095",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pr": 6095,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 202,
+  "name": "litellm_pr7684",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pr": 7684,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 203,
+  "name": "prowler_pr6097",
+  "repo": "https://github.com/prowler-cloud/prowler.git",
+  "pr": 6097,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 204,
+  "name": "loki_pr39",
+  "repo": "https://github.com/ecmwf-ifs/loki.git",
+  "pr": 39,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 205,
+  "name": "jenkins_k8s_operator_pr82",
+  "repo": "https://github.com/canonical/jenkins-k8s-operator.git",
+  "pr": 82,
+  "category": "tests not runnable: conftest or fixture error",
+  "f2p": 0
+ },
+ {
+  "position": 206,
+  "name": "galaxy_pr15914",
+  "repo": "https://github.com/galaxyproject/galaxy.git",
+  "pr": 15914,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 207,
+  "name": "scipy_pr18852",
+  "repo": "https://github.com/scipy/scipy.git",
+  "pr": 18852,
+  "category": "tests not runnable: conftest or fixture error",
+  "f2p": 0
+ },
+ {
+  "position": 208,
+  "name": "litellm_pr13258",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pr": 13258,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 209,
+  "name": "vultron_pr774",
+  "repo": "https://github.com/CERTCC/Vultron.git",
+  "pr": 774,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 210,
+  "name": "litellm_pr14149",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pr": 14149,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 2
+ },
+ {
+  "position": 211,
+  "name": "litellm_pr10580",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pr": 10580,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 212,
+  "name": "superscreen_pr108",
+  "repo": "https://github.com/loganbvh/superscreen.git",
+  "pr": 108,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 213,
+  "name": "airbyte_pr38608",
+  "repo": "https://github.com/airbytehq/airbyte.git",
+  "pr": 38608,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 214,
+  "name": "deer_flow_pr247",
+  "repo": "https://github.com/bytedance/deer-flow.git",
+  "pr": 247,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 215,
+  "name": "angr_pr6109",
+  "repo": "https://github.com/angr/angr.git",
+  "pr": 6109,
+  "category": "tests not runnable: conftest or fixture error",
+  "f2p": 0
+ },
+ {
+  "position": 216,
+  "name": "quri_sdk_pr503",
+  "repo": "https://github.com/QunaSys/quri-sdk.git",
+  "pr": 503,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 217,
+  "name": "galaxy_pr21857",
+  "repo": "https://github.com/galaxyproject/galaxy.git",
+  "pr": 21857,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 218,
+  "name": "fastkde_pr32",
+  "repo": "https://github.com/LBL-EESA/fastkde.git",
+  "pr": 32,
+  "category": "no vetting result",
+  "f2p": 0
+ },
+ {
+  "position": 219,
+  "name": "prowler_pr5147",
+  "repo": "https://github.com/prowler-cloud/prowler.git",
+  "pr": 5147,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 220,
+  "name": "open_archiefbeheer_pr512",
+  "repo": "https://github.com/maykinmedia/open-archiefbeheer.git",
+  "pr": 512,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 221,
+  "name": "mem0_pr1331",
+  "repo": "https://github.com/mem0ai/mem0.git",
+  "pr": 1331,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 222,
+  "name": "corgisim_pr51",
+  "repo": "https://github.com/roman-corgi/corgisim.git",
+  "pr": 51,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 223,
+  "name": "inventree_pr9971",
+  "repo": "https://github.com/inventree/InvenTree.git",
+  "pr": 9971,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 224,
+  "name": "monopolysimulator_pr9",
+  "repo": "https://github.com/arvindkrovvidi/MonopolySimulator.git",
+  "pr": 9,
+  "category": "tests not runnable: conftest or fixture error",
+  "f2p": 0
+ },
+ {
+  "position": 225,
+  "name": "pandas_pr63452",
+  "repo": "https://github.com/pandas-dev/pandas.git",
+  "pr": 63452,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 226,
+  "name": "pterasoftware_pr202",
+  "repo": "https://github.com/camUrban/PteraSoftware.git",
+  "pr": 202,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 227,
+  "name": "corgisim_pr225",
+  "repo": "https://github.com/roman-corgi/corgisim.git",
+  "pr": 225,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 228,
+  "name": "pyomo_pr2995",
+  "repo": "https://github.com/Pyomo/pyomo.git",
+  "pr": 2995,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 229,
+  "name": "tqec_pr734",
+  "repo": "https://github.com/tqec/tqec.git",
+  "pr": 734,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 230,
+  "name": "igvfd_pr298",
+  "repo": "https://github.com/IGVF-DACC/igvfd.git",
+  "pr": 298,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 231,
+  "name": "pandas_pr53311",
+  "repo": "https://github.com/pandas-dev/pandas.git",
+  "pr": 53311,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 232,
+  "name": "ai_dispro_app_pr63",
+  "repo": "https://github.com/CPS-Innovation/ai-dispro-app.git",
+  "pr": 63,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 233,
+  "name": "python_libraries_pr30",
+  "repo": "https://github.com/Macrostrat/python-libraries.git",
+  "pr": 30,
+  "category": "tests not runnable: conftest or fixture error",
+  "f2p": 0
+ },
+ {
+  "position": 234,
+  "name": "airbyte_pr36717",
+  "repo": "https://github.com/airbytehq/airbyte.git",
+  "pr": 36717,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 235,
+  "name": "discourse_k8s_operator_pr47",
+  "repo": "https://github.com/canonical/discourse-k8s-operator.git",
+  "pr": 47,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 236,
+  "name": "pythondotorg_pr2593",
+  "repo": "https://github.com/python/pythondotorg.git",
+  "pr": 2593,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 237,
+  "name": "pterasoftware_pr188",
+  "repo": "https://github.com/camUrban/PteraSoftware.git",
+  "pr": 188,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 4
+ },
+ {
+  "position": 238,
+  "name": "airbyte_pr34212",
+  "repo": "https://github.com/airbytehq/airbyte.git",
+  "pr": 34212,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 239,
+  "name": "pandas_pr50835",
+  "repo": "https://github.com/pandas-dev/pandas.git",
+  "pr": 50835,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 240,
+  "name": "archipelago_pr1654",
+  "repo": "https://github.com/ArchipelagoMW/Archipelago.git",
+  "pr": 1654,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 241,
+  "name": "spikeinterface_pr2720",
+  "repo": "https://github.com/SpikeInterface/spikeinterface.git",
+  "pr": 2720,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 242,
+  "name": "jenkins_k8s_operator_pr57",
+  "repo": "https://github.com/canonical/jenkins-k8s-operator.git",
+  "pr": 57,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 243,
+  "name": "pypdf_pr2801",
+  "repo": "https://github.com/py-pdf/pypdf.git",
+  "pr": 2801,
+  "category": "no vetting result",
+  "f2p": 0
+ },
+ {
+  "position": 244,
+  "name": "github_runner_image_buil_pr47",
+  "repo": "https://github.com/canonical/github-runner-image-builder-operator.git",
+  "pr": 47,
+  "category": "tests not runnable: missing python module",
+  "f2p": 0
+ },
+ {
+  "position": 245,
+  "name": "jenkins_agent_k8s_operat_pr39",
+  "repo": "https://github.com/canonical/jenkins-agent-k8s-operator.git",
+  "pr": 39,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 1
+ },
+ {
+  "position": 246,
+  "name": "pipecat_pr1420",
+  "repo": "https://github.com/pipecat-ai/pipecat.git",
+  "pr": 1420,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ },
+ {
+  "position": 247,
+  "name": "litellm_pr11494",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pr": 11494,
+  "category": "eligible (fail-before, pass-after test)",
+  "f2p": 5
+ },
+ {
+  "position": 248,
+  "name": "arches_pr9174",
+  "repo": "https://github.com/archesproject/arches.git",
+  "pr": 9174,
+  "category": "tests not runnable: other",
+  "f2p": 0
+ },
+ {
+  "position": 249,
+  "name": "test_creator_pr30",
+  "repo": "https://github.com/fullsend-ai/test-creator.git",
+  "pr": 30,
+  "category": "tests ran, no fail-to-pass test",
+  "f2p": 0
+ }
+]

@@ -1,10 +1,17 @@
-"""Development run of the version-2 vetting on one shard (A* half only; NOT a registered study stage).
+"""Run the version-2 vetting on one shard (reuses the frozen shard logic of tools/vet_slice.py).
 
 python tools/vet_dev.py CANDIDATES.json OUT_DIR SHARD K [LIMIT] [TIMEOUT_SECONDS]
-Reuses the frozen shard logic of tools/vet_slice.py, with tools/vet_target2.py as the vetting tool.
+
+The vetting tool starts pip and pytest as grandchildren.  subprocess.run(timeout=...) kills only the direct child, and
+the grandchildren keep running (verified 26/10/2026), competing for CPU and memory with the next candidates of the shard.
+This runner starts the tool in its own process group, sends its output to a file instead of a pipe, and kills the
+WHOLE group on timeout; vet_slice records the candidate as TIMEOUT.
 """
+import os
+import signal
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -12,9 +19,24 @@ sys.path.insert(0, str(ROOT / "tools"))
 import vet_slice  # noqa: E402
 
 
+def run_group(cmd, timeout, cwd=None):
+    with tempfile.TemporaryFile("w+") as log:
+        p = subprocess.Popen(cmd, stdout=log, stderr=subprocess.STDOUT, cwd=cwd, start_new_session=True, text=True)
+        try:
+            p.wait(timeout=timeout)
+        except subprocess.TimeoutExpired:
+            try:
+                os.killpg(p.pid, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+            p.wait()
+            raise
+        log.seek(0)
+        return subprocess.CompletedProcess(cmd, p.returncode, log.read(), "")
+
+
 def runner(spec_path, out_dir, timeout):
-    return subprocess.run([sys.executable, str(ROOT / "tools" / "vet_target2.py"), str(spec_path), str(out_dir)],
-                          capture_output=True, text=True, timeout=timeout, cwd=str(ROOT))
+    return run_group([sys.executable, str(ROOT / "tools" / "vet_target2.py"), str(spec_path), str(out_dir)], timeout, cwd=str(ROOT))
 
 
 if __name__ == "__main__":

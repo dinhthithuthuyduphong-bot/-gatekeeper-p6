@@ -164,6 +164,10 @@ def provision(py, src, extras_fallback, log):
     if tox:
         pip(py, tox, log)
     pip(py, ["pytest"], log)
+    # pkg_resources is deprecated in setuptools and may be absent from recent releases (version not verified here);
+    # only if the import fails, install an older setuptools that still ships it.
+    if V.sh([str(py), "-c", "import pkg_resources"], check=False, timeout=120).returncode != 0:
+        pip(py, ["setuptools<70"], log)
 
 
 def collect(py, src, tests):
@@ -209,7 +213,7 @@ def main(spec_path, out_dir):
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
     work = Path(tempfile.mkdtemp(prefix="vet2_"))
-    report = {"name": spec["name"], "repo": spec["repo"], "python": sys.version.split()[0], "tool": "vet_target2"}
+    report = {"name": spec["name"], "repo": spec["repo"], "python": sys.version.split()[0], "tool": "vet_target2", "provisioning_version": "2.1"}
     try:
         repo = work / "repo"
         repo.mkdir()

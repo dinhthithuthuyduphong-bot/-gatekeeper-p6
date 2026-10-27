@@ -96,8 +96,23 @@ class Provisioning(unittest.TestCase):
         self.assertTrue(args[2][0].endswith("[test]"))            # then the fallback chain
         self.assertIn(["-r", "requirements.txt"], args)
         self.assertIn(["mock"], args)
-        self.assertEqual(args[-1], ["pytest"])
-        self.assertEqual(len(log), len(fake.calls))
+        self.assertEqual(args[-2], ["pytest"])
+        self.assertEqual(fake.calls[-1][0][-1], "import pkg_resources")   # the check runs last; it succeeds, so no extra install
+        self.assertEqual(len(log), len(fake.calls) - 1)            # the import check is not a pip step
+
+    def test_old_setuptools_only_when_pkg_resources_is_missing(self):
+        d = tree({"setup.py": ""})
+
+        def sh(cmd, check=True, cwd=None, timeout=None, **kw):
+            sh.calls.append(list(cmd))
+            return types.SimpleNamespace(returncode=1 if cmd[-1] == "import pkg_resources" else 0, stdout="", stderr="")
+        sh.calls = []
+        old, T.V.sh = T.V.sh, sh
+        try:
+            T.provision("/py", d, ["test"], [])
+        finally:
+            T.V.sh = old
+        self.assertEqual(sh.calls[-1][-1], "setuptools<70")
 
     def test_missing_modules_are_installed_in_both_arms(self):
         outputs = {"pre": ["No module named 'yaml'\nNo module named 'mypkg'", ""], "gold": ["No module named 'requests'", ""]}
