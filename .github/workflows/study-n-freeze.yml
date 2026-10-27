@@ -1,0 +1,28 @@
+# One-click freeze of Study N.  Refuses unless the freeze preflight reports 0 blockers (every file hash-bound).
+name: Gatekeeper Study N freeze
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  freeze:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: python -m unittest discover -s tests
+      - name: Freeze preflight must be clean
+        shell: bash
+        run: |
+          python tools/freeze_doctor.py study_n --out out_doctor
+          grep -q "BLOCKERS: 0" out_doctor/FREEZE_DOCTOR.md || { echo "::error::freeze preflight has blockers"; exit 1; }
+      - run: |
+          python tools/freeze_named_study.py study_n --delay-minutes 60
+          python tools/freeze_study.py verify study_n
+          git config user.name "gatekeeper-freeze-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add study_n
+          git commit -m "Freeze Study N"
+          git tag study-n-freeze
+          git push origin HEAD --tags

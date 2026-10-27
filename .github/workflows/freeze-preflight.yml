@@ -1,0 +1,24 @@
+# Read-only check before freezing a study: every file of the study directory must be hash-bound.
+name: Gatekeeper freeze preflight
+on:
+  workflow_dispatch:
+    inputs:
+      study: {description: "study directory, e.g. study_n", required: true}
+permissions:
+  contents: read
+jobs:
+  doctor:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: |
+          python tools/freeze_doctor.py "${{ inputs.study }}" --out out_doctor | tee out_doctor_log.txt
+          cat out_doctor/FREEZE_DOCTOR.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: FREEZE_DOCTOR
+          path: out_doctor

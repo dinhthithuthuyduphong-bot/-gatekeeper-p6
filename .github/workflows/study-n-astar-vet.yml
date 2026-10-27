@@ -1,0 +1,82 @@
+# Study N stage N-S2 (registered): vet the first candidates of study_n/candidates_astar.json with vet_target2 v2.1.
+# Refuses unless study_n is FROZEN and verifies, all required files exist, and every candidate is in the A* track.
+name: Gatekeeper Study N A-star vet (N-S2)
+on:
+  workflow_dispatch:
+    inputs:
+      shards: {description: "number of parallel shards", default: "40"}
+      only_shards: {description: "optional comma-separated shard numbers to run (empty = all)", default: ""}
+      limit: {description: "first N candidates in the frozen order", default: "400"}
+      timeout: {description: "seconds per candidate", default: "1500"}
+permissions:
+  contents: read
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.m.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Freeze check
+        run: |
+          python -c "import json,sys;c=json.load(open('study_n/config_study_n.json'));sys.exit(0 if c.get('status')=='FROZEN' else 'study_n not FROZEN')"
+          python tools/freeze_study.py verify study_n
+      - name: Required files present
+        shell: bash
+        run: |
+          missing=0
+          for f in tools/vet_target2.py tools/vet_dev.py tools/vet_slice.py tools/vet_target.py tools/check_track.py tools/split_candidates.py study_n/candidates_astar.json; do
+            if [ ! -f "$f" ]; then
+              missing=1
+              echo "::error::MISSING $f (found instead at: $(git ls-files | grep -E "(^|/)$(basename "$f")$" | tr '\n' ' ' || true))"
+            fi
+          done
+          if [ "$missing" = 1 ]; then echo "Copy the package so that the paths above exist at the repository root, then run again."; exit 1; fi
+          echo "all required files present"
+      - name: Guard (A* half only)
+        run: python tools/check_track.py study_n/candidates_astar.json ASTAR
+      - id: m
+        env:
+          SHARDS: ${{ inputs.shards }}
+          ONLY: ${{ inputs.only_shards }}
+        run: |
+          python - <<'PY'
+          import json, os
+          k = int(os.environ['SHARDS'])
+          assert 1 <= k <= 100
+          only = [int(x) for x in os.environ.get('ONLY', '').replace(' ', '').split(',') if x]
+          assert all(0 <= x < k for x in only)
+          open(os.environ['GITHUB_OUTPUT'], 'a').write('matrix=' + json.dumps({'shard': only or list(range(k))}) + '\n')
+          PY
+  vet:
+    needs: plan
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Vet shard (version 2 provisioning)
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SHARD: ${{ matrix.shard }}
+          SHARDS: ${{ inputs.shards }}
+          LIMIT: ${{ inputs.limit }}
+          TIMEOUT: ${{ inputs.timeout }}
+        run: |
+          set -euo pipefail
+          mkdir -p out_v
+          python tools/vet_dev.py study_n/candidates_astar.json out_v "$SHARD" "$SHARDS" "$LIMIT" "$TIMEOUT" 2>&1 | tee out_v/log_shard.txt
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: N_VET_${{ matrix.shard }}
+          path: out_v

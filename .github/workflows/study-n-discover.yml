@@ -1,0 +1,69 @@
+# Study N frame (0 cost, read-only GitHub search): continue the Study M S1 discovery in the same seed order after the
+# first 500 candidates, split into the A* and RR tracks with the rule of amendment M-A1, and COMMIT the frames into
+# study_n while it is still DRAFT.  Refuses if study_n is already FROZEN.
+name: Gatekeeper Study N discover (frame)
+on:
+  workflow_dispatch:
+    inputs:
+      target: {description: "continuation candidates to keep", default: "800"}
+      max_examined: {description: "maximum pull requests whose files are fetched", default: "7000"}
+permissions:
+  contents: write
+jobs:
+  discover:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 355
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Guards
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -c "import json,sys;c=json.load(open('study_n/config_study_n.json'));sys.exit(0 if c.get('status')=='DRAFT' else 'study_n is not DRAFT: the frame must be built before the freeze')"
+          python tools/freeze_study.py verify study_m
+          for f in tools/discover_n_continue.py tools/n_assemble.py tools/split_candidates.py study_m_astar/evidence/s1/M_ORDERED.json; do
+            [ -f "$f" ] || { echo "::error::MISSING $f"; exit 1; }
+          done
+      - name: Seed of Study M stage S1
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out_n
+          python - <<'PY'
+          import hashlib, json, sys
+          sys.path.insert(0, 'tools')
+          from run_study_d import drand_seed
+          cfg = json.load(open('study_m/config_study_m.json'))
+          h = hashlib.sha256(open('study_m/FREEZE.json', 'rb').read()).hexdigest()
+          s = drand_seed(cfg.get('seed_freeze_sha256') or h, cfg['seed_time_utc'])
+          json.dump(s, open('out_n/SEED_S1.json', 'w'), indent=1)
+          open('out_n/seed.txt', 'w').write(str(s['seed']))
+          PY
+      - name: Discover the continuation
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_SEARCH_TOKEN || github.token }}
+          TARGET: ${{ inputs.target }}
+          MAX_EXAMINED: ${{ inputs.max_examined }}
+        run: |
+          set -euo pipefail
+          python -u tools/discover_n_continue.py out_n --seed "$(cat out_n/seed.txt)" --exclude study_m_astar/evidence/s1/M_ORDERED.json --target "$TARGET" --max-examined "$MAX_EXAMINED" 2>&1 | tee out_n/log.txt
+      - name: Build the two frames and commit them
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/n_assemble.py study_m_astar/evidence/s1/M_ORDERED.json out_n/N_CANDIDATES.json "$(cat out_n/seed.txt)" study_n
+          cp out_n/N_CANDIDATES.json out_n/N_DISCOVERY_LOG.json out_n/SEED_S1.json study_n/evidence/
+          git config user.name "gatekeeper-freeze-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add study_n
+          git commit -m "Study N frame: continuation of the S1 order, split into A* and RR tracks"
+          git push origin HEAD
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: STUDY_N_DISCOVERY
+          path: out_n
