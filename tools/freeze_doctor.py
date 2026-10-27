@@ -29,6 +29,10 @@ def check(study, root=ROOT):
     in_dir = sorted(p.relative_to(Path(root)).as_posix() for p in d.rglob("*") if p.is_file() and p.name != "FREEZE.json")
     unhashed = [p for p in in_dir if p not in hashed]
     out.append(("BLOCKER" if unhashed else "OK", "files in %s that the freeze would NOT hash: %s" % (study, unhashed) if unhashed else "every file in %s would be hashed (%d)" % (study, len(in_dir))))
+    from repo_hygiene import strays
+    dup, lone = strays(Path(root))
+    bad = [n for n, _ in dup] + lone
+    out.append(("BLOCKER" if bad else "OK", "files at the repository root that break the unit tests (run `Gatekeeper repo hygiene`): %s" % bad if bad else "no stray files at the repository root"))
     return out
 
 
