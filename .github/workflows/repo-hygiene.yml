@@ -1,0 +1,36 @@
+# Find (mode=report) or delete (mode=remove) files left at the repository root by a package extracted to the wrong
+# place.  Only root-level files that ALSO exist in tools/, tests/, gatekeeper_ext/, gatekeeper_lite/,
+# .github/workflows/ or research_closure/results/ are removed.
+name: Gatekeeper repo hygiene
+on:
+  workflow_dispatch:
+    inputs:
+      mode: {description: "report or remove", default: "report"}
+permissions:
+  contents: write
+jobs:
+  hygiene:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${{ inputs.mode }}" = "remove" ]; then
+            python tools/repo_hygiene.py --remove | tee hygiene.log
+            if git status --porcelain | grep -q .; then
+              git config user.name "gatekeeper-freeze-bot"
+              git config user.email "actions@users.noreply.github.com"
+              git add -A .
+              git commit -m "remove stray root-level duplicates left by a misplaced package"
+              git push origin HEAD
+            else
+              echo "nothing to remove"
+            fi
+          else
+            python tools/repo_hygiene.py | tee hygiene.log
+          fi
+          { echo '```'; cat hygiene.log; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
