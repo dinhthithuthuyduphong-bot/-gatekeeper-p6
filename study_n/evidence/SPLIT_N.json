@@ -1,0 +1,16 @@
+{
+ "seed": "722277585642093255",
+ "first_500": {
+  "RR": 231,
+  "ASTAR": 269
+ },
+ "continuation": {
+  "RR": 381,
+  "ASTAR": 419
+ },
+ "candidates_astar": 419,
+ "frame_rr": 612,
+ "shared_repositories": 0,
+ "m_ordered_sha256": "1f7565709d746df47f2b3d1872fa447ad7ab82ad462c3203482134019c01c735",
+ "n_candidates_sha256": "874e2f47b1676f49b0c60e38a4488b8b51a8bd481fc8028db8ec6c0359c500fd"
+}
