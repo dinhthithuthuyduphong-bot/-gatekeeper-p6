@@ -1,0 +1,75 @@
+# Study P frame (0 cost, read-only GitHub search): continue the Study M S1 discovery in the same seed order after the
+# first 500 candidates AND the 800 of Study N, split into the A* and RR tracks with the rule of amendment M-A1, and COMMIT the frames into
+# study_p while it is still DRAFT.  Refuses if study_p is already FROZEN, and refuses to commit if any frozen study
+# directory changed.
+name: Gatekeeper Study P discover (frame)
+on:
+  workflow_dispatch:
+    inputs:
+      target: {description: "continuation candidates to keep", default: "1000"}
+      max_examined: {description: "maximum pull requests whose files are fetched", default: "9000"}
+permissions:
+  contents: write
+jobs:
+  discover:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 355
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Guards
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -c "import json,sys;c=json.load(open('study_p/config_study_p.json'));sys.exit(0 if c.get('status')=='DRAFT' else 'study_p is not DRAFT: the frame must be built before the freeze')"
+          python tools/freeze_study.py verify study_m
+          for f in tools/discover_n_continue.py tools/n_assemble.py tools/split_candidates.py study_m_astar/evidence/s1/M_ORDERED.json study_n/evidence/N_CANDIDATES.json; do
+            [ -f "$f" ] || { echo "::error::MISSING $f"; exit 1; }
+          done
+      - name: Seed of Study M stage S1
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out_p
+          python - <<'PY'
+          import hashlib, json, sys
+          sys.path.insert(0, 'tools')
+          from run_study_d import drand_seed
+          cfg = json.load(open('study_m/config_study_m.json'))
+          h = hashlib.sha256(open('study_m/FREEZE.json', 'rb').read()).hexdigest()
+          s = drand_seed(cfg.get('seed_freeze_sha256') or h, cfg['seed_time_utc'])
+          json.dump(s, open('out_p/SEED_S1.json', 'w'), indent=1)
+          open('out_p/seed.txt', 'w').write(str(s['seed']))
+          PY
+      - name: Everything already exposed (first 500 of Study M + 800 of Study N)
+        run: python -c "import json;a=json.load(open('study_m_astar/evidence/s1/M_ORDERED.json'));b=json.load(open('study_n/evidence/N_CANDIDATES.json'));json.dump(a+b,open('out_p/EXPOSED_1300.json','w'))"
+      - name: Discover the continuation
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_SEARCH_TOKEN || github.token }}
+          TARGET: ${{ inputs.target }}
+          MAX_EXAMINED: ${{ inputs.max_examined }}
+        run: |
+          set -euo pipefail
+          python -u tools/discover_n_continue.py out_p --seed "$(cat out_p/seed.txt)" --exclude out_p/EXPOSED_1300.json --target "$TARGET" --max-examined "$MAX_EXAMINED" 2>&1 | tee out_p/log.txt
+      - name: Build the two frames and commit them
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/n_assemble.py out_p/EXPOSED_1300.json out_p/N_CANDIDATES.json "$(cat out_p/seed.txt)" study_p
+          cp out_p/N_CANDIDATES.json out_p/N_DISCOVERY_LOG.json out_p/SEED_S1.json study_p/evidence/
+          if ! git diff --quiet -- study_m study_m_astar study_m_rr study_n; then
+            echo "::error::a frozen study directory changed; nothing is committed"; git status --short; exit 1
+          fi
+          git config user.name "gatekeeper-freeze-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add study_p
+          git commit -m "Study P frame: continuation of the S1 order, split into A* and RR tracks"
+          git push origin HEAD
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: STUDY_P_DISCOVERY
+          path: out_p
