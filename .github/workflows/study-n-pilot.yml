@@ -1,0 +1,98 @@
+# Study N pilots on the DEVELOPMENT instances (the exposed A* half of Study M); never on the cohort.
+#   P0: light model only (<= 2 USD): does the whole chain run, and is there at least one plausible patch?
+#   P1: the strong model (<= 3 USD), only after a P0 that passed has been committed as research_closure/pilot/P0_RESULT.json.
+# Money: Free Trial credit (expires 2027-01-20).  Each job has its own spend cap = total cap / instances.
+name: Gatekeeper Study N pilot (development instances)
+on:
+  workflow_dispatch:
+    inputs:
+      stage: {description: "P0 or P1", default: "P0"}
+      instances: {description: "number of instances (P0: 10, P1: 6)", default: "10"}
+      reps: {description: "repetitions per instance and model (P0: 2, P1: 1)", default: "2"}
+      cap_usd: {description: "total spend cap in USD (P0: 2, P1: 3)", default: "2"}
+permissions:
+  contents: read
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.m.outputs.matrix }}
+      models: ${{ steps.m.outputs.models }}
+      per_job_cap: ${{ steps.m.outputs.per_job_cap }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Required files and guards
+        shell: bash
+        run: |
+          set -euo pipefail
+          for f in tools/cohort_instance.py tools/cohort_inner.py tools/pilot_select.py tools/pilot_summary.py tools/vet_target2.py tools/vet_dev.py gatekeeper_ext/gates.py gatekeeper_ext/draws.py gatekeeper_ext/issue_fetch.py gatekeeper_ext/b9_cohort.py gatekeeper_ext/testmut.py research_closure/pilot/DEV_VET.json research_closure/pilot/models.json; do
+            [ -f "$f" ] || { echo "::error::MISSING $f"; exit 1; }
+          done
+          python tools/repo_hygiene.py
+          python tools/check_track.py research_closure/pilot/DEV_VET.json ASTAR
+      - id: m
+        shell: bash
+        env:
+          STAGE: ${{ inputs.stage }}
+          N: ${{ inputs.instances }}
+          REPS: ${{ inputs.reps }}
+          CAP: ${{ inputs.cap_usd }}
+        run: |
+          python - <<'PY'
+          import json, os, sys
+          sys.path.insert(0, 'tools')
+          import pilot_select
+          stage, n, reps, cap = os.environ['STAGE'], int(os.environ['N']), int(os.environ['REPS']), float(os.environ['CAP'])
+          if stage == 'P0':
+              assert n <= 10 and reps <= 2 and cap <= 2.0, 'P0 is limited to 10 instances, 2 repetitions, 2 USD'
+              models = 'vertex-gemini-flash'
+          elif stage == 'P1':
+              assert n <= 6 and reps <= 1 and cap <= 3.0, 'P1 is limited to 6 instances, 1 repetition, 3 USD'
+              r = json.load(open('research_closure/pilot/P0_RESULT.json'))
+              assert r.get('pilot_pass') is True, 'P1 needs a committed P0_RESULT.json with pilot_pass true'
+              models = 'vertex-gemini-argon'
+          else:
+              raise SystemExit('stage must be P0 or P1')
+          names = pilot_select.select(json.load(open('research_closure/pilot/DEV_VET.json')), n)
+          out = os.environ['GITHUB_OUTPUT']
+          open(out, 'a').write('matrix=' + json.dumps({'name': names}) + '\n')
+          open(out, 'a').write('models=' + models + '\n')
+          open(out, 'a').write('per_job_cap=%.4f\n' % (cap / len(names)))
+          PY
+  run:
+    needs: plan
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 170
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Google Cloud auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+      - name: Vertex access token
+        run: |
+          echo "GOOGLE_OAUTH_TOKEN=$(gcloud auth print-access-token)" >> "$GITHUB_ENV"
+          echo "GCP_PROJECT=${{ secrets.GCP_PROJECT }}" >> "$GITHUB_ENV"
+          echo "GK_TOKEN_CMD=gcloud auth print-access-token" >> "$GITHUB_ENV"
+      - name: One instance
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p out_pilot
+          python -u tools/cohort_instance.py research_closure/pilot/DEV_VET.json "${{ matrix.name }}" out_pilot research_closure/pilot/models.json "${{ needs.plan.outputs.models }}" "${{ inputs.reps }}" "${{ needs.plan.outputs.per_job_cap }}" "study-n-pilot:" 200 2>&1 | tee out_pilot/log_${{ matrix.name }}.txt
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: PILOT_${{ inputs.stage }}_${{ matrix.name }}
+          path: out_pilot
