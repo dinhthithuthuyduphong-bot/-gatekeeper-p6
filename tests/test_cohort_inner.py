@@ -77,5 +77,38 @@ class Inner(unittest.TestCase):
         self.assertEqual(a["calls"], 0)
 
 
+class Fixes(unittest.TestCase):
+    def test_api_seed_always_fits_a_signed_32_bit_integer_with_room_for_retries(self):
+        for s in (0, 2197221932, 4217795844, 2 ** 32 - 1):          # the two seeds that got HTTP 400 in P0, and the maximum
+            self.assertLessEqual(CI.api_seed(s) + 100 + 5, 2 ** 31 - 1)
+
+    def test_test_ids_reported_relative_to_a_sub_directory_are_mapped(self):
+        vet = dict(VET, changed_files=["src/pk/m.py", "src/pk/tests/unit/test_a.py"], gold_test_files=["src/pk/tests/unit/test_a.py", "tests/test_b.py"],
+                   eligible_oracle=["tests.unit.test_a.T::test_x"], eligible_sources={"tests.unit.test_a.T::test_x": "def test_x(): ..."},
+                   classification={"tests.unit.test_a.T::test_x": "F->P", "tests.unit.test_a.T::test_y": "P->P"})
+        manifest, inst, remap = CI.build_instance_robust(vet, None, "t")
+        self.assertEqual(inst["visible"]["tests"], ["src/pk/tests/unit/test_a.py::T::test_x"])
+        self.assertEqual(inst["hidden_p2p"], ["src/pk/tests/unit/test_a.py::T::test_y"])
+        self.assertEqual(remap["tests.unit.test_a.T::test_x"], "src.pk.tests.unit.test_a.T::test_x")
+
+    def test_http_errors_keep_the_provider_message(self):
+        import io
+        import os
+        import urllib.error
+        import urllib.request
+        os.environ["TOK_Y"] = "k"
+        old = urllib.request.urlopen
+
+        def boom(req, timeout=0):
+            raise urllib.error.HTTPError(req.full_url, 400, "Bad Request", {}, io.BytesIO(b'{"error":{"message":"Invalid value at seed (TYPE_INT32)"}}'))
+        urllib.request.urlopen = boom
+        try:
+            with self.assertRaises(RuntimeError) as cm:
+                CI.RefreshingClient("https://h", "TOK_Y").complete("m", [{"role": "user", "content": "x"}], 16, 0, 1)
+        finally:
+            urllib.request.urlopen = old
+        self.assertIn("TYPE_INT32", str(cm.exception))
+
+
 if __name__ == "__main__":
     unittest.main()

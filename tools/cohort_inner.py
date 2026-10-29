@@ -13,6 +13,7 @@ import shutil
 import subprocess
 import sys
 import time
+import urllib.error
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -35,7 +36,51 @@ class RefreshingClient(b9_cohort.CohortClient):
             if out.returncode == 0 and out.stdout.strip():
                 os.environ[self.key_env] = out.stdout.strip()
                 RefreshingClient._last = time.time()
-        return super().complete(model, messages, max_tokens, temperature, seed)
+        try:
+            return super().complete(model, messages, max_tokens, temperature, seed)
+        except urllib.error.HTTPError as e:              # keep the provider's explanation (a bare "400" cannot be diagnosed)
+            body = e.read().decode("utf-8", "replace")[:500] if hasattr(e, "read") else ""
+            raise RuntimeError("HTTP %d: %s" % (e.code, body)) from None
+
+
+API_SEED_MODULUS = 2_000_000_000     # the Gemini API takes a signed 32-bit seed; draw seeds may be larger
+
+
+def api_seed(seed):
+    return int(seed) % API_SEED_MODULUS
+
+
+def build_instance_robust(vet, issue, pr_title):
+    """b9_cohort.build_instance (frozen) maps test ids by PREFIX of the file's dotted path.  When pytest reports ids
+    relative to a sub-directory rootdir (e.g. 'tests.unit.x' for 'src/pkg/tests/unit/x.py'), map by the longest SUFFIX
+    instead, and give the frozen builder ids with the missing prefix.  Returns (manifest, instance, remap)."""
+    try:
+        m, i = b9_cohort.build_instance(vet, issue, pr_title)
+        return m, i, {}
+    except ValueError as exc:
+        if "cannot map test" not in str(exc):
+            raise
+    files = list(vet.get("gold_test_files") or [])
+
+    def prefix_for(cls):
+        for f in files:
+            parts = f[:-3].replace("/", ".").split(".")
+            for k in range(1, len(parts)):                       # k = 1 is the longest suffix
+                suf = ".".join(parts[k:])
+                if cls == suf or cls.startswith(suf + "."):
+                    return ".".join(parts[:k]) + "."
+        return None
+    ids = set(vet.get("eligible_oracle") or []) | set((vet.get("classification") or {}).keys())
+    remap = {}
+    for t in ids:
+        p = prefix_for(t.rpartition("::")[0])
+        if p:
+            remap[t] = p + t
+    v2 = dict(vet, eligible_oracle=[remap.get(t, t) for t in vet.get("eligible_oracle") or []],
+              eligible_sources={remap.get(k, k): v for k, v in (vet.get("eligible_sources") or {}).items()},
+              classification={remap.get(k, k): v for k, v in (vet.get("classification") or {}).items()})
+    m, i = b9_cohort.build_instance(v2, issue, pr_title)
+    return m, i, remap
 
 
 def hidden_labels(orig_root, treated, test_files, classification, pythonpath, runner, work, tag):
@@ -72,7 +117,8 @@ def run(a):
     runner = a.get("runner", "pytest")
     res = {"name": a["vet"]["name"], "repo": a["vet"]["repo"], "status": "started", "models": [m["name"] for m in a["models"]], "attempts": []}
     try:
-        manifest, instance = b9_cohort.build_instance(a["vet"], a.get("issue"), a.get("pr_title", ""))
+        manifest, instance, remap = build_instance_robust(a["vet"], a.get("issue"), a.get("pr_title", ""))
+        res["test_id_remap"] = len(remap)
         if a.get("visible_override"):
             instance["visible"] = a["visible_override"]
         (orig / "gk_target.json").write_text(json.dumps(manifest))
@@ -95,7 +141,7 @@ def run(a):
                 budget = b9.Budget(5, cfg.get("max_output_tokens", 8000), 5)
                 att = {"model": cfg["name"], "rep": rep, "tag": tag}
                 try:
-                    r, finish = b9_cohort.generate(target, instance, client, cfg["model_id"], budget, prices, a["seed"] + 100 * rep, guard)
+                    r, finish = b9_cohort.generate(target, instance, client, cfg["model_id"], budget, prices, api_seed(a["seed"]) + 100 * rep, guard)
                 except Exception as exc:                          # a model or network error is a result, never a retry
                     att.update(status="GENERATION_ERROR", error=("%s: %s" % (type(exc).__name__, exc))[:300])
                     res["attempts"].append(att)

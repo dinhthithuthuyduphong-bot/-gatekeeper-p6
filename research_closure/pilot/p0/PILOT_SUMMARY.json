@@ -1,0 +1,36 @@
+{
+ "stage": "P0",
+ "instances_run": 10,
+ "planned": 10,
+ "instances_status": {
+  "HARNESS_NOT_ELIGIBLE": 6,
+  "FINISHED": 3,
+  "ERROR": 1
+ },
+ "instances_with_full_chain": 1,
+ "criterion_a_full_chain": false,
+ "criterion_b_some_plausible_patch": false,
+ "min_instances": 8,
+ "pilot_pass": false,
+ "spent_usd": 0.0427,
+ "models": {
+  "vertex-gemini-flash": {
+   "attempts": 6,
+   "submitted": 0,
+   "first_call_visible_pass": 0,
+   "stopped_by_spend_guard": 0,
+   "cost_usd": 0.0427,
+   "finish_reasons": {
+    "stop": 10
+   },
+   "median_output_tokens_per_call": 0.0,
+   "mean_calls_per_attempt": 1.67,
+   "plausible_rate": 0.0,
+   "truncated_calls_share": 0.0
+  }
+ },
+ "plausible_patches": [],
+ "plausible_in_band": 0,
+ "plausible_with_discordant_gates": 0,
+ "note": "Development instances (exposed). Not evidence for any gate of Study N."
+}

@@ -1,0 +1,18 @@
+{
+ "instances": 107,
+ "pass": 8,
+ "gate_N2": "FAIL",
+ "threshold": 40,
+ "reasons": {
+  "the original never differs from the fix": 22,
+  "not deterministic": 17,
+  "harness not eligible: no edited function present in both versions": 4,
+  "harness not eligible: analyzer produced no output": 1,
+  "harness not eligible: baseline test run produced no result": 35,
+  "pass": 8,
+  "harness not eligible: no passing fast test reaches the edited code": 17,
+  "harness not eligible: arm run failed: orig": 2,
+  "only 50 complete draws": 1
+ },
+ "passing_repositories": 8
+}

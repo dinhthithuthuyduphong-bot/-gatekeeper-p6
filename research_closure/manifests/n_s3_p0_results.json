@@ -1,0 +1,14 @@
+{
+ "name": "n_s3_p0_results (patch_n_s3_p0_results.zip)",
+ "files": {
+  "research_closure/pilot/p0/P0_RESULT.json": "ddda28235ae9e399ff24c9287b177c34dfee5a4077c1c7a50d7a04f399e415ee",
+  "research_closure/pilot/p0/PILOT_SUMMARY.json": "fa737396d24b199789019ad753945ff8f0e466d1d7951a27ea8db00d848e9197",
+  "research_closure/pilot/p0/PILOT_SUMMARY.md": "358290497eb311d2477265dffa5ac0da22de20d0123e9267c18061e318a6dabd",
+  "research_closure/results/NEXT_DIRECTIONS.md": "cbd3cc3161700a4ba49e57b9e27e1b650856862100c884f5fb46eb8293077791",
+  "research_closure/results/study_n_s3/S3_RESULT.md": "6eea0554eb9a6c1632e62576fe13751fbfb5284153c76c59cd2daf3fb5b79a55",
+  "research_closure/results/study_n_s3/S3_ROWS.json": "c3a2f5f1b347fb421c504a96fa450dfedd3fdc6af039536c370958a85bf4e41a",
+  "research_closure/results/study_n_s3/S3_SUMMARY.json": "d08809535da58648010341d9154885b0b69880294d6e7fc039fa0e63b0ac38ca",
+  "tests/test_cohort_inner.py": "2e37275ad99a98d122b98ee1d345c094ea2fd3287aaca1b8822d29fb5830f117",
+  "tools/cohort_inner.py": "e1f96a9640cf52fb8eb1c075a6f48087a238510afa3b7c678540c10d06d85f02"
+ }
+}
