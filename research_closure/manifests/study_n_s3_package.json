@@ -1,0 +1,17 @@
+{
+ "name": "study_n_s3_package (patch_study_n_s3.zip)",
+ "files": {
+  ".github/workflows/study-n-s3.yml": "78471cc1d3848c929d8e770955f6acc15e575bac844f137b04bd033d431aa078",
+  "research_closure/results/study_n_s2/ELIGIBLE.json": "ed9b245edbb49119bd23d178edec218f1f3e9a767f68b915d686fc268f556633",
+  "research_closure/results/study_n_s2/S2_RESULT.md": "9b63f85a0defd6a1a1464037c2128d9b0451cf9078361c2aded8e264c20bb5f4",
+  "research_closure/results/study_n_s2/S2_ROWS.json": "4e911c28e073d6cf1a8549595e60c8317694238b382ab266a39f197f348cce22",
+  "research_closure/results/study_n_s2/S2_SUMMARY.json": "c507955022a12a25dd10b9e47f9e277a6ca22b163b98fd982895808640728387",
+  "study_n/AMENDMENTS.md": "58f773122eec6094d7d5226645c7e78543d309519cb324b2274ad4a8f03af46d",
+  "study_n/N_T1_EDITS.txt": "40dd0722562d71e22cbaf1e29adc79e125501bbaae4986942483f49eaa74a429",
+  "tests/test_n_s3.py": "133b98151c1f40c34486aa6c665d754079b1ba77f8d40ed7d75bf0a93ccb01de",
+  "tools/n_s3_analyze.py": "2acf53db97b71ae5b7906a96003e8f406c9a02aa1b610508dd60b9ae8f6fea8f",
+  "tools/n_s3_check.py": "dbe11a3d3f9ea4079425f3bb7cf971f7644fd2902b6b32edeb4983c8e468edb2",
+  "tools/n_s3_shard.py": "f3927ed75b92f12cc0dbdac36174ff2d3075992e68ad1ee4193f588b4b982359",
+  "tools/n_s3_summary.py": "ca03c23a0d5d93c053fd749fcb8d622b2ca79f28be792bd945d4f1b0a049f7a1"
+ }
+}

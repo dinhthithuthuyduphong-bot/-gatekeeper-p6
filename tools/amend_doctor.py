@@ -55,7 +55,8 @@ def check(study, amendment, edits_file="", root=ROOT, tags=None):
     if edits_file:
         ep = d / edits_file
         if not ep.exists():
-            add("BLOCKER", "edits file %s/%s does not exist" % (study, edits_file))
+            found = sorted(str(q.relative_to(root)).replace("\\", "/") for q in Path(root).rglob(edits_file) if ".git" not in q.parts)[:3]
+            add("BLOCKER", "edits file %s/%s does not exist%s" % (study, edits_file, "; a file of that name is at: %s (move it into %s/)" % (found, study) if found else " and no file of that name exists anywhere in the repository (the package was not fully uploaded: run `Gatekeeper package check`)"))
         else:
             try:
                 specs = shlex.split(ep.read_text(encoding="utf-8"))      # the workflow uses eval, which splits like the shell

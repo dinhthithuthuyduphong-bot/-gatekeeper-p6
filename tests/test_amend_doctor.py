@@ -47,6 +47,16 @@ class Doctor(unittest.TestCase):
         self.assertTrue(any("not valid JSON" in m for m in blockers(self.run_check(edits="'config_s.json:extra_tracked=[oops'\n"))))
         self.assertTrue(any("cannot be parsed" in m for m in blockers(self.run_check(edits="'unterminated\n"))))
 
+    def test_missing_edits_file_says_where_it_is_or_that_it_is_nowhere(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = tree(tmp)
+            (root / "s" / "S_A1_EDITS.txt").unlink()
+            nowhere = [m for lvl, m in A.check("s", "S-A1", "S_A1_EDITS.txt", root=root, tags=[]) if lvl == "BLOCKER"]
+            self.assertTrue(any("not fully uploaded" in m for m in nowhere))
+            (root / "S_A1_EDITS.txt").write_text(EDITS)                      # extracted at the repository root
+            misplaced = [m for lvl, m in A.check("s", "S-A1", "S_A1_EDITS.txt", root=root, tags=[]) if lvl == "BLOCKER"]
+            self.assertTrue(any("S_A1_EDITS.txt" in m and "move it into s/" in m for m in misplaced))
+
     def test_a_draft_config_next_to_a_freeze_record_points_to_the_restore_tool(self):
         items = self.run_check(status="DRAFT")
         self.assertTrue(any(lvl == "INFO" and "overwritten" in m and "restore" in m for lvl, m in items))
