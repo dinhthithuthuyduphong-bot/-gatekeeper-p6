@@ -1,0 +1,74 @@
+# Study N stage N-S3 (registered, 0 cost): run the frozen test-level harness on the N-S2 eligible instances.
+# Refuses unless study_n is FROZEN and verifies (amendment N-T1 applied), required files exist, and every instance is in the A* track.
+name: Gatekeeper Study N S3 harness
+on:
+  workflow_dispatch:
+    inputs:
+      shards: {description: "number of parallel shards", default: "27"}
+      only_shards: {description: "optional comma-separated shard numbers (empty = all)", default: ""}
+      timeout: {description: "seconds per instance", default: "3600"}
+permissions:
+  contents: read
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.m.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Freeze check (amendment N-T1 must be applied)
+        run: |
+          python -c "import json,sys;c=json.load(open('study_n/config_study_n.json'));sys.exit(0 if c.get('status')=='FROZEN' and 'N-T1' in c.get('amendments_applied',[]) else 'study_n not FROZEN or N-T1 not applied')"
+          python tools/freeze_study.py verify study_n
+      - name: Required files present
+        shell: bash
+        run: |
+          for f in tools/n_s3_check.py tools/n_s3_analyze.py tools/n_s3_shard.py tools/n_s3_summary.py tools/vet_target2.py tools/vet_dev.py gatekeeper_ext/testmut.py research_closure/results/study_n_s2/ELIGIBLE.json; do
+            [ -f "$f" ] || { echo "::error::MISSING $f"; exit 1; }
+          done
+      - name: Guard (A* track only)
+        run: python tools/check_track.py research_closure/results/study_n_s2/ELIGIBLE.json ASTAR
+      - id: m
+        env:
+          SHARDS: ${{ inputs.shards }}
+          ONLY: ${{ inputs.only_shards }}
+        run: |
+          python - <<'PY'
+          import json, os
+          k = int(os.environ['SHARDS'])
+          assert 1 <= k <= 100
+          only = [int(x) for x in os.environ.get('ONLY', '').replace(' ', '').split(',') if x]
+          assert all(0 <= x < k for x in only)
+          open(os.environ['GITHUB_OUTPUT'], 'a').write('matrix=' + json.dumps({'shard': only or list(range(k))}) + '\n')
+          PY
+  s3:
+    needs: plan
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Harness on shard
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SHARD: ${{ matrix.shard }}
+          SHARDS: ${{ inputs.shards }}
+          TIMEOUT: ${{ inputs.timeout }}
+        run: |
+          set -euo pipefail
+          mkdir -p out_s3
+          python tools/n_s3_shard.py research_closure/results/study_n_s2/ELIGIBLE.json out_s3 "$SHARD" "$SHARDS" "$TIMEOUT" 2>&1 | tee out_s3/log_shard.txt
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: N_S3_${{ matrix.shard }}
+          path: out_s3
