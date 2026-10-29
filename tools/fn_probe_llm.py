@@ -26,9 +26,11 @@ def run_gen(py, root, pythonpath, rel, qualname, code_path, out, n, env, seed=0)
     args = {"root": str(root), "pythonpath": pythonpath, "file": rel, "qualname": qualname, "mode": "run_gen", "n": n, "seed": seed,
             "gen_code": str(code_path), "out": str(out), "timeout": 2}
     ap = Path(str(out) + ".args.json")
-    ap.write_text(json.dumps(args))
     try:
-        p = subprocess.run([str(py), str(ROOT / "tools" / "fn_probe_inner.py"), str(ap)], env=env, capture_output=True, text=True, timeout=120 + n * 2)
+        with FP.at_common_path(root) as common:
+            args["root"] = str(common)
+            ap.write_text(json.dumps(args))
+            p = subprocess.run([str(py), str(ROOT / "tools" / "fn_probe_inner.py"), str(ap)], env=env, capture_output=True, text=True, timeout=120 + n * 2)
     except subprocess.TimeoutExpired:
         return {"status": "PROCESS_TIMEOUT"}
     if not Path(out).exists():

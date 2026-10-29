@@ -1,0 +1,14 @@
+{
+ "name": "study_p_go (patch_study_p_go.zip)",
+ "files": {
+  ".github/workflows/study-p-discover.yml": "04a47f26be24cc0bcd73994149fc3b19f96b58d91b15ac36445f4b4e760f59bc",
+  "research_closure/results/STUDY_P_PLAN.md": "695d818e90fa1287a4f455388842271c8e7c9d00800f94135f6a64e2cf428b8d",
+  "research_closure/results/study_p_feas/FNPROBE_SUMMARY_STEP2.json": "eeff36a0be2c1518a4e03787c4f496eca9abb83fac528346fa89ded931dcbfd1",
+  "study_p/STUDY_P_PROTOCOL.md": "e1b7a7fa910f9f317f05c07ff62e7de0946684143bdd9ed15b03ac2a94b38e60",
+  "study_p/config_study_p.json": "2331540d07d08513df62b3a2c78c335c502dbf434cf57d2ac89e95f753597f0c",
+  "tests/test_fn_probe.py": "eb03e247049895b9c63ddc736e854aab9b718bf696ce2cb98f8f93dc6b561846",
+  "tools/fn_probe.py": "05219f446351033d6b8d6a17569942b57bf36bc099b11d6861cb98b477f07928",
+  "tools/fn_probe_inner.py": "007f69746ed51b1955b4ea4859304457b559272900a54c0bf8dba5373862f415",
+  "tools/fn_probe_llm.py": "0b98760629a83729356d846b62b0986d6f34437e6a74d1c9dbb43afc7e2f268c"
+ }
+}

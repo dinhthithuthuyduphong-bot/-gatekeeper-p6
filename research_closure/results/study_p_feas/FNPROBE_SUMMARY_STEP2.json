@@ -1,0 +1,38 @@
+{
+ "instances": 107,
+ "funnel": {
+  "snapshots or environment failed": 0,
+  "no edited function present in both versions": 7,
+  "no edited function could be imported or called": 9,
+  "unstable outcomes": 2,
+  "the original never differs from the fix on generated inputs": 30,
+  "usable": 59
+ },
+ "usable": 59,
+ "usable_share": 0.551,
+ "trigger_rate_of_usable_functions": {
+  "median": 0.42,
+  "min": 0.02,
+  "max": 1.0
+ },
+ "test_level_vs_function_level": {
+  "both usable": 6,
+  "only test-level": 2,
+  "only function-level": 53,
+  "neither": 46
+ },
+ "function_failure_reasons": {
+  "the original never differs from the fix on generated inputs": 50,
+  "did not run: no working generator (GENERATOR_FAILED,GENERATOR_FAILED)": 9,
+  "did not run: UNCALLABLE import failed: ModuleNotFoundError / ModuleNot": 6,
+  "only 0 stable inputs": 2,
+  "did not run: UNCALLABLE import failed: AttributeError / AttributeError": 2,
+  "only 36 stable inputs": 2,
+  "did not run: UNCALLABLE import failed: KeyError / KeyError": 2,
+  "only 99 stable inputs": 1,
+  "only 31 stable inputs": 1
+ },
+ "model_spent_usd": 0.7843,
+ "model_calls": 177,
+ "note": "Development measurement on the Study N A* instances (exposed at N-S2 and N-S3, not to the function-level oracle)."
+}

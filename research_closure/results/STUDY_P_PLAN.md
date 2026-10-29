@@ -50,3 +50,21 @@ Cùng 107 instance, cùng tối đa 3 hàm mỗi instance, cùng định nghĩa 
 - **Lý do được xem bản fix:** bản fix là oracle, giống cách RGT sinh test trên bản vá chuẩn. **Giới hạn đã biết:** đầu vào tập trung quanh vùng sửa có thể bỏ sót chênh lệch ở chỗ khác; Study P (nếu mở) sẽ phải dùng phân phối trộn với bộ sinh theo chữ ký.
 - **Ngân sách:** trần cứng 16 USD (0,15 USD mỗi instance, tính theo trường hợp xấu nhất), dự kiến khoảng 3 USD; chỉ credit Free Trial.
 - **Kết luận:** ≥ 27 dùng được với bộ sinh bước 2 thì đăng ký Study P; nếu không, hướng 4 thành bài chính. Không có bước 3.
+
+## Kết quả bước 2 và quyết định (30/10/2026)
+
+**59 trên 107 instance dùng được (55,1%)** với bộ sinh do model viết; ngưỡng 27. Chi phí model: 0,78 USD cho 177 lời gọi.
+
+| Phễu | Bước 1 | Bước 2 |
+|---|---|---|
+| Không có hàm bị sửa ở cả hai phiên bản | 7 | 7 |
+| Không hàm nào import hay gọi được | 28 | 9 |
+| Kết quả không ổn định | 1 | 2 |
+| Bản gốc không bao giờ khác bản fix | 57 | 30 |
+| **Dùng được** | **14** | **59** |
+
+**Kiểm tra tính hợp lệ (làm sau khi xem kết quả):** bản gốc và bản fix chạy ở hai thư mục khác nhau, nên đường dẫn có thể lọt vào thông báo và tạo chênh lệch giả. Trong 59 instance, chỉ **1** (`litellm_pr12113`) có mọi ví dụ chênh lệch biến mất khi che đường dẫn và số dòng. **Con số thận trọng: 58.** Kiểm tra chỉ xem tối đa 3 ví dụ được lưu mỗi hàm, nên tỉ lệ chênh lệch của vài hàm có thể bị thổi phồng. Đã sửa tận gốc: mọi snapshot giờ chạy ở cùng một đường dẫn, và số dòng trong thông báo được che.
+
+**So với mức test, trên cùng 107 instance:** cả hai dùng được 6; chỉ mức hàm 53; chỉ mức test 2; không cái nào 46.
+
+**Quyết định theo ngưỡng đã ghi trước: ĐI TIẾP, đăng ký Study P.** Giao thức nháp: `study_p/STUDY_P_PROTOCOL.md`.

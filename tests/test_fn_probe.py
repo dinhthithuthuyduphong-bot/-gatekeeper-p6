@@ -99,5 +99,22 @@ class Probe(unittest.TestCase):
         self.assertTrue(f["divergent"] > 0)
 
 
+class CommonPath(unittest.TestCase):
+    def test_a_difference_that_is_only_the_snapshot_path_is_not_a_divergence(self):
+        code = "import os\n\n\ndef where(x: int):\n    raise ValueError('in %s at %d' % (os.path.dirname(os.path.abspath(__file__)), x))\n"
+        gold = code + "\n\n# the fix touched this file\n"
+        gold = gold.replace("def where(x: int):", "def where(x: int):\n    y = x")
+        with tempfile.TemporaryDirectory() as tmp:
+            o, g = make(tmp, "orig", {"k.py": code}), make(tmp, "gold", {"k.py": gold})
+            r = P.probe_roots(sys.executable, o, g, ["k.py"], [], Path(tmp), n=120, env=ENV)
+            self.assertTrue(o.exists() and g.exists())                             # both snapshots are back in place
+        self.assertEqual(r["verdict"], "the original never differs from the fix on generated inputs", r)
+
+    def test_line_numbers_in_messages_are_masked(self):
+        sys.path.insert(0, str(ROOT / "tools"))
+        import fn_probe_inner as FI_
+        self.assertEqual(FI_.mask("error at line 12, object 0x7f00"), "error at line N, object 0x?")
+
+
 if __name__ == "__main__":
     unittest.main()

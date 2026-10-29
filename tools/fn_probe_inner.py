@@ -22,6 +22,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 ADDR = re.compile(r"0x[0-9a-fA-F]+")
+LINE = re.compile(r"line \d+")
+
+
+def mask(text):
+    """Mask what differs between snapshots without being behaviour: memory addresses and line numbers (a fix shifts
+    lines).  Paths are made identical by running every snapshot at the same location (see fn_probe.at_common_path)."""
+    return LINE.sub("line N", ADDR.sub("0x?", text))
 
 
 class CallTimeout(Exception):
@@ -39,7 +46,7 @@ def canonical(value):
         text = repr(value)
     except Exception as exc:                                     # a repr that raises is itself an outcome
         text = "<repr raised %s>" % type(exc).__name__
-    return ["ok", type(value).__name__, ADDR.sub("0x?", text)[:300]]
+    return ["ok", type(value).__name__, mask(text)[:300]]
 
 
 def load_target(root, pythonpath, rel, qualname):
@@ -110,7 +117,7 @@ def run_calls(items, resolve, timeout):
         except CallTimeout:
             outcomes.append(["timeout"])
         except BaseException as exc:                             # including SystemExit raised by the function
-            outcomes.append(["exc", type(exc).__name__, ADDR.sub("0x?", str(exc))[:120]])
+            outcomes.append(["exc", type(exc).__name__, mask(str(exc))[:120]])
         finally:
             signal.alarm(0)
     return outcomes

@@ -22,14 +22,35 @@ sys.path.insert(0, str(ROOT / "tools"))
 MIN_STABLE = 100
 
 
+class at_common_path:
+    """Run a snapshot from ONE fixed location, so that file paths in outputs and messages are identical across the
+    original, the fix and a patch (in step 2, 1 of 59 'usable' instances differed only by such paths)."""
+
+    def __init__(self, root):
+        self.root = Path(root)
+        self.common = self.root.parent / "_snapshot"
+
+    def __enter__(self):
+        if self.common.exists():
+            raise RuntimeError("common snapshot path already in use: %s" % self.common)
+        self.root.rename(self.common)
+        return self.common
+
+    def __exit__(self, *exc):
+        self.common.rename(self.root)
+        return False
+
+
 def inner(py, root, pythonpath, rel, qualname, mode, calls, out, n=200, seed=0, per_call=2, env=None):
     args = {"root": str(root), "pythonpath": pythonpath, "file": rel, "qualname": qualname, "mode": mode, "n": n, "seed": seed,
             "calls": str(calls), "out": str(out), "timeout": per_call}
     ap = Path(str(out) + ".args.json")
-    ap.write_text(json.dumps(args))
     try:
-        p = subprocess.run([str(py), str(ROOT / "tools" / "fn_probe_inner.py"), str(ap)], env=env, capture_output=True, text=True,
-                           timeout=60 + n * per_call)
+        with at_common_path(root) as common:
+            args["root"] = str(common)
+            ap.write_text(json.dumps(args))
+            p = subprocess.run([str(py), str(ROOT / "tools" / "fn_probe_inner.py"), str(ap)], env=env, capture_output=True, text=True,
+                               timeout=60 + n * per_call)
     except subprocess.TimeoutExpired:
         return {"status": "PROCESS_TIMEOUT"}
     if not Path(out).exists():
