@@ -36,9 +36,10 @@ def select_models(cfg, names):
     return [by[n] for n in names]
 
 
-def main(records_path, name, out_dir, models_path, model_names, reps, cap_usd, seed_prefix, n_draws=200):
+def main(records_path, name, out_dir, models_path, model_names, reps, cap_usd, seed_prefix, n_draws=200, oracle="test"):
     rec = next(r for r in json.loads(Path(records_path).read_text()) if r["name"] == name)
-    models = select_models(json.loads(Path(models_path).read_text()), [m for m in model_names.split(",") if m])
+    cfg_all = json.loads(Path(models_path).read_text())
+    models = select_models(cfg_all, [m for m in model_names.split(",") if m])
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
     work = Path(tempfile.mkdtemp(prefix="coh_"))
@@ -70,6 +71,11 @@ def main(records_path, name, out_dir, models_path, model_names, reps, cap_usd, s
         args = {"orig": str(orig), "gold": str(gold), "work": str(work / "run"), "out": str(work / "inner.json"), "vet": rec,
                 "issue": issue, "pr_title": pr_title, "models": models, "reps": int(reps), "seed": seed_for(seed_prefix, name),
                 "cap_usd": float(cap_usd), "runner": "pytest", "n_draws": int(n_draws)}
+        if oracle == "function":                                  # Study P: draws are direct calls of the edited function
+            rel = rec["fn_target"]["file"]
+            args.update(oracle="function", fn_target=rec["fn_target"], generator_model=select_models(cfg_all, ["vertex-gemini-flash"])[0],
+                        issue_text=("%s\n\n%s" % (issue["title"], issue["body"])) if issue else pr_title,
+                        fn_diff=(V.sh([*V.GIT, "diff", rec["pre"], rec["gold"], "--", rel], cwd=repo, check=False).stdout or "")[:4000])
         (work / "args.json").write_text(json.dumps(args, default=str))
         env = dict(os.environ, PYTHONPATH=str(ROOT), GK_TOKEN_CMD=os.environ.get("GK_TOKEN_CMD", ""))
         p = subprocess.run([str(py), str(ROOT / "tools" / "cohort_inner.py"), str(work / "args.json")], env=env,
@@ -89,4 +95,4 @@ def main(records_path, name, out_dir, models_path, model_names, reps, cap_usd, s
 
 
 if __name__ == "__main__":
-    sys.exit(main(*sys.argv[1:10]))
+    sys.exit(main(*sys.argv[1:11]))

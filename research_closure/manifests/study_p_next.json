@@ -1,0 +1,23 @@
+{
+ "name": "study_p_next (patch_study_p_next.zip)",
+ "files": {
+  ".github/workflows/study-p-extend.yml": "1d19bed88a2537490655badd7462046153f576e9ba86a8a676c3fa7fa59ce160",
+  ".github/workflows/study-p-pilot.yml": "bd31d4b014d77624c3a675d3f78eec0eb2a6bcbcf64bcdce670401fbc559bb4a",
+  "gatekeeper_ext/fn_draws.py": "4dc6dd9e3de57947d8c1d8f6d533e1f343f18edee59c928a0599f9037c44e034",
+  "research_closure/pilot/DEV_FN.json": "ea8e853616928e7084755a893c1f5c6eb140eb41fbbf2b55fcc876299d8eebb4",
+  "study_p/STUDY_P_PROTOCOL.md": "497ed64609d9a7b12f4d3df63ea64324c742dc6aa8bf79c26d2203dd68219ce8",
+  "study_p/config_study_p.json": "98f24076f14d24be96b5a218dda4c4d7e34dc3754459db824a159f32bb8ea219",
+  "tests/test_cohort_inner.py": "d17046e82dfca6e0c18e7651bb79fe9b7e82f2abcd95a49750857f259b74de85",
+  "tests/test_fn_draws.py": "dd1171472e0397dec08febf07a55a4d68913c62aa31bf93337e77e184a8592d8",
+  "tests/test_p_extend.py": "cbd0ab6093af4e385150363d0eee8ddd3dc7e00f1fe094de2e8cd35fd072844a",
+  "tests/test_pilot_tools.py": "db0474f5b3fcb4125596938fa632de3f3a0baa865e63bb1d6c2dcc05bcdbada9",
+  "tools/cohort_inner.py": "58e302a1a6a516bcdec0a7ead73550ecfc3d27f0c90a2805ed686967d5d128b9",
+  "tools/cohort_instance.py": "9493d00b40f7ea4f2c9c21fdcaf624f83d9c240d3c964df5703ef3ed62933a76",
+  "tools/discover_p_extend.py": "8914ed4e4e8ea65f0c7bf797830f8a6118c72c06f937fe43332b6efc8b42bd30",
+  "tools/fn_probe.py": "fdd1b529db51538da8f0f6dd20e7fadc1aceb46c562d72c0b65adf95dcf8a18f",
+  "tools/fn_probe_llm.py": "2a8214acfa1478bf022f35baffd7ae8ed6dc5c15424df9971efdc978021bb781",
+  "tools/p_assemble_ext.py": "34e3cdee6b572592e3e88c87108f2fbfdcc2c93b39469344c63c5adf6d34f6e2",
+  "tools/p_thresholds.py": "4c87f08bfb22088d0f3105343ad54e5b40dc6c7036a5d94dc89996c65e0a9768",
+  "tools/pilot_summary.py": "f6ff1bcc081a21cfcc3dc4370450f80a44377ea7a4e50a2ea056840c3c3de33a"
+ }
+}

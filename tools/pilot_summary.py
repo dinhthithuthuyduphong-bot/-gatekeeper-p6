@@ -26,6 +26,29 @@ def chain_ok(r):
     return bool(inner.get("attempts"))
 
 
+def wilson_low(k, n, z=1.96):
+    if not n:
+        return None
+    p = k / n
+    den = 1 + z * z / n
+    return (p + z * z / (2 * n)) / den - z * ((p * (1 - p) / n + z * z / (4 * n * n)) ** 0.5) / den
+
+
+def icc_binary(groups):
+    """ANOVA estimator of the intra-class correlation of a binary outcome; groups = list of lists of 0/1."""
+    groups = [g for g in groups if g]
+    k = len(groups)
+    N = sum(len(g) for g in groups)
+    if k < 2 or N <= k:
+        return None
+    mean = sum(map(sum, groups)) / N
+    msb = sum(len(g) * (sum(g) / len(g) - mean) ** 2 for g in groups) / (k - 1)
+    msw = sum(sum((x - sum(g) / len(g)) ** 2 for x in g) for g in groups) / (N - k)
+    m0 = (N - sum(len(g) ** 2 for g in groups) / N) / (k - 1)
+    den = msb + (m0 - 1) * msw
+    return (msb - msw) / den if den > 0 else None
+
+
 def summarise(records, stage="P0", min_instances=8, planned=None):
     per_model = collections.defaultdict(lambda: collections.Counter())
     finish, tokens, cost, calls = collections.defaultdict(collections.Counter), collections.defaultdict(list), collections.Counter(), collections.defaultdict(list)
@@ -56,15 +79,26 @@ def summarise(records, stage="P0", min_instances=8, planned=None):
     discord = sum(1 for p in plaus if len({p["gates"].get("fixed_sample"), p["gates"].get("gatekeeper")} ^ {p["gates"].get("b8_plus"), p["gates"].get("smoke20")}) > 0
                   and (p["gates"].get("fixed_sample") != p["gates"].get("b8_plus") or p["gates"].get("gatekeeper") != p["gates"].get("b8_plus")
                        or p["gates"].get("fixed_sample") != p["gates"].get("smoke20")))
+    for m in per_model:
+        groups = [[1 if (a.get("labels") or {}).get("plausible") else 0 for a in (r.get("inner") or {}).get("attempts", []) if a["model"] == m] for r in records]
+        c = per_model[m]
+        per_model[m]["_pi_low"] = wilson_low(c["plausible"], c["attempts"])
+        per_model[m]["_icc"] = icc_binary(groups)
+    hh = [p["h_hat"] for p in plaus if p["h_hat"] is not None]
     out = {"stage": stage, "instances_run": len(records), "planned": planned, "instances_status": dict(status), "instances_with_full_chain": len(chain),
            "criterion_a_full_chain": a_ok, "criterion_b_some_plausible_patch": b_ok, "min_instances": int(min_instances),
            "pilot_pass": bool(a_ok and b_ok), "spent_usd": round(sum(cost.values()), 4),
-           "models": {m: {**dict(c), "cost_usd": round(cost[m], 4), "finish_reasons": dict(finish[m]),
+           "models": {m: {**{k: v for k, v in dict(c).items() if not str(k).startswith("_")}, "cost_usd": round(cost[m], 4), "finish_reasons": dict(finish[m]),
                           "median_output_tokens_per_call": statistics.median(tokens[m]) if tokens[m] else None,
                           "mean_calls_per_attempt": round(statistics.mean(calls[m]), 2) if calls[m] else None,
                           "plausible_rate": round(c["plausible"] / c["attempts"], 3) if c["attempts"] else None,
+                          "plausible_rate_wilson_low": round(c["_pi_low"], 3) if c.get("_pi_low") is not None else None,
+                          "icc_of_plausibility": round(c["_icc"], 3) if c.get("_icc") is not None else None,
                           "truncated_calls_share": round(finish[m].get("length", 0) / max(sum(finish[m].values()), 1), 3)}
                       for m, c in per_model.items()},
+           "h_hat_of_plausible": {"n": len(hh), "median": statistics.median(hh) if hh else None,
+                                  "share_in_band": round(sum(1 for p in plaus if p["in_band"]) / len(plaus), 3) if plaus else None,
+                                  "share_above_5pct": round(sum(1 for x in hh if x > 0.05) / len(hh), 3) if hh else None},
            "plausible_patches": plaus, "plausible_in_band": sum(1 for p in plaus if p["in_band"]), "plausible_with_discordant_gates": discord,
            "note": "Development instances (exposed). Not evidence for any gate of Study N."}
     return out

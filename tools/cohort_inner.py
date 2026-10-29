@@ -125,11 +125,35 @@ def run(a):
         res["instance"] = {"modules": manifest["modules"], "census": manifest["census_tests"], "pythonpath": manifest["pythonpath"],
                            "issue_provenance": instance["issue_provenance"], "visible": instance["visible"]["tests"] if "tests" in instance["visible"] else "custom",
                            "hidden_f2p": len(instance["hidden_f2p"]), "hidden_p2p": len(instance["hidden_p2p"])}
-        base, why = draws.prepare_base(orig, gold, manifest["modules"], manifest["pythonpath"], runner, manifest["census_tests"], work / "base", a["seed"], a.get("n_draws", 200))
-        if base is None:
-            res.update(status="HARNESS_NOT_ELIGIBLE", harness=why)
-            return res
-        res["harness"] = dict(base["info"], deterministic=base["deterministic"])
+        oracle = a.get("oracle", "test")
+        fenv = dict(os.environ, PYTHONPATH=str(ROOT), PYTHONHASHSEED="0", PYTHONDONTWRITEBYTECODE="1")
+        if oracle == "function":
+            from gatekeeper_ext import fn_draws
+            fn = dict(a["fn_target"], pythonpath=manifest["pythonpath"])
+            if not fn.get("generator_code"):                      # development pilots only: the cohort stores it beforehand
+                sys.path.insert(0, str(ROOT / "tools"))
+                import fn_probe_llm as FL
+                gcfg = a["generator_model"]
+                gclient = make_client(gcfg, (a.get("scripted") or {}).get("generator") if a.get("scripted") is not None else None)
+                gguard = b9.SpendGuard(a.get("generator_cap_usd", 0.15))
+                (work / "gen").mkdir(parents=True, exist_ok=True)
+                grec = FL.one_function(gclient, gcfg["model_id"], gcfg["prices_usd_per_mtok"], gguard, sys.executable, orig, gold,
+                                       manifest["pythonpath"], fn["file"], fn["qualname"], a.get("issue_text", a.get("pr_title", "")),
+                                       a.get("fn_diff", ""), work / "gen", a.get("n_draws", 200), fenv, api_seed(a["seed"]))
+                res["generator"] = {k: grec.get(k) for k in ("usable", "why", "calls", "divergent", "stable")}
+                res["generator_spent_usd"] = round(gguard.spent_usd, 6)
+                fn["generator_code"] = grec.get("generator_code")
+            base, why = fn_draws.prepare_fn_base(sys.executable, orig, gold, manifest["pythonpath"], fn, work / "fnbase", a.get("n_draws", 200), a["seed"], fenv)
+            if base is None:
+                res.update(status="HARNESS_NOT_ELIGIBLE", harness=why)
+                return res
+            res["harness"] = dict(base["info"], oracle="function", function=fn["qualname"])
+        else:
+            base, why = draws.prepare_base(orig, gold, manifest["modules"], manifest["pythonpath"], runner, manifest["census_tests"], work / "base", a["seed"], a.get("n_draws", 200))
+            if base is None:
+                res.update(status="HARNESS_NOT_ELIGIBLE", harness=why)
+                return res
+            res["harness"] = dict(base["info"], deterministic=base["deterministic"])
         test_files = list(a["vet"].get("gold_test_files") or [])      # the fix's test files, present in the original snapshot
         guard = b9.SpendGuard(a["cap_usd"])
         target = Target.load(orig)
@@ -152,13 +176,17 @@ def run(a):
                     att["files"] = sorted(r.treated)
                     lab = hidden_labels(orig, r.treated, test_files, a["vet"].get("classification") or {}, manifest["pythonpath"], runner, work, tag)
                     att["labels"] = lab
-                    sc, err = draws.score_patch(base, orig, r.treated, manifest["pythonpath"], runner, work / "base", tag)
+                    if oracle == "function":
+                        sc, err = fn_draws.score_fn_patch(sys.executable, base, orig, r.treated, manifest["pythonpath"], work / "fnbase", tag, fenv)
+                    else:
+                        sc, err = draws.score_patch(base, orig, r.treated, manifest["pythonpath"], runner, work / "base", tag)
                     if sc is None:
                         att["scoring_error"] = err
                     else:
                         flags = sc["harm"]
                         att["draws"] = {"complete": sc["complete"], "missing": sc["missing"], "deterministic": sc["deterministic"], "harm": sum(flags),
-                                        "help": sc["help"], "still_wrong": sc["still_wrong"], "h_hat": gates.h_hat(flags), "in_band": gates.band(flags),
+                                        "help": sc["help"], "still_wrong": sc.get("still_wrong"), "divergent": sc.get("divergent"),
+                                        "h_hat": gates.h_hat(flags), "in_band": gates.band(flags),
                                         "acceptable": gates.acceptable(flags)}
                         att["gates"] = gates.decisions(flags, bool(lab.get("plausible")), sc["help"])
                 res["attempts"].append(att)

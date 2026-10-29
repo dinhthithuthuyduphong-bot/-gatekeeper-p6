@@ -77,6 +77,33 @@ class Inner(unittest.TestCase):
         self.assertEqual(a["calls"], 0)
 
 
+GEN_CODE = "```python\ndef make_inputs(rng, n):\n    return [(None, [rng.choice([True, False, 0, 1, -3, 2])], {}) for _ in range(n)]\n```"
+
+
+class FunctionOracle(unittest.TestCase):
+    def run_fn(self, tmp, replies):
+        o, g = G.make(tmp, "o", G.ORIG), G.make(tmp, "g", G.GOLD)
+        args = {"orig": str(o), "gold": str(g), "work": str(Path(tmp) / "w"), "out": str(Path(tmp) / "r.json"), "vet": VET, "issue": None,
+                "pr_title": "is_int accepts bool", "models": [CFG], "reps": 1, "seed": 3, "cap_usd": 5.0, "runner": "unittest", "n_draws": 120,
+                "scripted": {"fake": replies, "generator": [GEN_CODE]}, "oracle": "function",
+                "fn_target": {"file": "m.py", "qualname": "is_int"}, "generator_model": dict(CFG, name="generator"),
+                "visible_override": {"kind": "python", "code": "import m,sys; sys.exit(0 if m.is_int(True) is False else 1)"}}
+        return CI.run(args)
+
+    def test_the_function_oracle_scores_a_good_and_a_bad_patch(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            good = self.run_fn(tmp, [DIFF_GOOD])
+        a = good["attempts"][0]
+        self.assertEqual(good["harness"]["oracle"], "function", good)
+        self.assertTrue(good["generator"]["usable"], good["generator"])
+        self.assertEqual((a["draws"]["harm"], a["draws"]["divergent"]), (0, 0))
+        self.assertGreater(a["draws"]["help"], 0)
+        with tempfile.TemporaryDirectory() as tmp:
+            bad = self.run_fn(tmp, [DIFF_BAD])
+        b = bad["attempts"][0]
+        self.assertGreater(b["draws"]["harm"], 0)                                 # is_int(1) == False is a regression
+
+
 class Fixes(unittest.TestCase):
     def test_api_seed_always_fits_a_signed_32_bit_integer_with_room_for_retries(self):
         for s in (0, 2197221932, 4217795844, 2 ** 32 - 1):          # the two seeds that got HTTP 400 in P0, and the maximum

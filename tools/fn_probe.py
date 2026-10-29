@@ -28,16 +28,17 @@ class at_common_path:
 
     def __init__(self, root):
         self.root = Path(root)
-        self.common = self.root.parent / "_snapshot"
+        # ONE location for every snapshot of the run (original, fix and every patch), wherever they are stored
+        self.common = Path(os.environ.get("GK_COMMON_PATH", "/tmp/gk_common_snapshot"))
 
     def __enter__(self):
         if self.common.exists():
             raise RuntimeError("common snapshot path already in use: %s" % self.common)
-        self.root.rename(self.common)
+        shutil.move(str(self.root), str(self.common))          # a rename on the same file system
         return self.common
 
     def __exit__(self, *exc):
-        self.common.rename(self.root)
+        shutil.move(str(self.common), str(self.root))
         return False
 
 

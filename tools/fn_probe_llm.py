@@ -76,6 +76,7 @@ def one_function(client, model_id, prices, guard, py, orig, gold, pythonpath, re
             o1 = None
             continue
         rec["generator_attempt"] = attempt
+        rec["generator_code"] = code                              # kept: Study P hashes the generator before any patch exists
         o2 = run_gen(py, orig, pythonpath, rel, qualname, cp, Path(work) / ("%s.o2.json" % tag), n, env)
         g = run_gen(py, gold, pythonpath, rel, qualname, cp, Path(work) / ("%s.g.json" % tag), n, env)
         rec.update(FP.compare(o1, o2, g))

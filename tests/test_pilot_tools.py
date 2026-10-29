@@ -66,6 +66,13 @@ class Summary(unittest.TestCase):
         s = S.summarise([rec("i", [stopped, att()])], "P0", 1)["models"]["m"]
         self.assertEqual((s["stopped_by_spend_guard"], s["attempts"]), (1, 2))
 
+    def test_rate_bound_and_clustering_are_reported(self):
+        recs = [rec("i%d" % i, [att(plausible=(i % 2 == 0)) for _ in range(3)]) for i in range(10)]   # all-or-nothing per instance
+        m = S.summarise(recs, "PP0", 1)["models"]["m"]
+        self.assertEqual(m["plausible_rate"], 0.5)
+        self.assertLess(m["plausible_rate_wilson_low"], 0.5)
+        self.assertGreater(m["icc_of_plausibility"], 0.9)                       # perfectly clustered
+
     def test_files_are_written(self):
         with tempfile.TemporaryDirectory() as tmp:
             d = Path(tmp) / "in"
