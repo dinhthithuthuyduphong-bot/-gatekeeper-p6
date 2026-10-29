@@ -1,0 +1,100 @@
+# Study P pilots on the DEVELOPMENT instances (58 Study N A* instances with a usable function); never on the cohort.
+# The draws are direct calls of the edited function (function-level oracle).  Purpose: measure the plausible rate pi and its
+# clustering (ICC), which enter the threshold formulas of tools/p_thresholds.py, and decide on the strong model.
+#   PP0: light model (<= 6 USD), 20 instances (one per repository) x 3 repetitions.
+#   PP1: strong model (<= 6 USD), 10 instances x 1 repetition, only after research_closure/pilot/PP0_RESULT.json passed.
+# Money: Free Trial credit (expires 2027-01-20).  Each job has its own spend cap = total cap / instances.
+name: Gatekeeper Study P pilot (development instances, function-level oracle)
+on:
+  workflow_dispatch:
+    inputs:
+      stage: {description: "PP0 or PP1", default: "PP0"}
+      instances: {description: "number of instances (PP0: 20, PP1: 10)", default: "20"}
+      reps: {description: "repetitions per instance and model (PP0: 3, PP1: 1)", default: "3"}
+      cap_usd: {description: "total spend cap in USD (PP0: 6, PP1: 6)", default: "6"}
+permissions:
+  contents: read
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.m.outputs.matrix }}
+      models: ${{ steps.m.outputs.models }}
+      per_job_cap: ${{ steps.m.outputs.per_job_cap }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Required files and guards
+        shell: bash
+        run: |
+          set -euo pipefail
+          for f in gatekeeper_ext/fn_draws.py tools/fn_probe.py tools/fn_probe_inner.py tools/fn_probe_llm.py gatekeeper_ext/fn_llm_gen.py gatekeeper_ext/fn_inputs.py tools/cohort_instance.py tools/cohort_inner.py tools/pilot_select.py tools/pilot_summary.py tools/vet_target2.py tools/vet_dev.py gatekeeper_ext/gates.py gatekeeper_ext/draws.py gatekeeper_ext/issue_fetch.py gatekeeper_ext/b9_cohort.py gatekeeper_ext/testmut.py research_closure/pilot/DEV_FN.json research_closure/pilot/models.json; do
+            [ -f "$f" ] || { echo "::error::MISSING $f"; exit 1; }
+          done
+          python tools/repo_hygiene.py
+          python tools/check_track.py research_closure/pilot/DEV_FN.json ASTAR
+      - id: m
+        shell: bash
+        env:
+          STAGE: ${{ inputs.stage }}
+          N: ${{ inputs.instances }}
+          REPS: ${{ inputs.reps }}
+          CAP: ${{ inputs.cap_usd }}
+        run: |
+          python - <<'PY'
+          import json, os, sys
+          sys.path.insert(0, 'tools')
+          import pilot_select
+          stage, n, reps, cap = os.environ['STAGE'], int(os.environ['N']), int(os.environ['REPS']), float(os.environ['CAP'])
+          if stage == 'PP0':
+              assert n <= 20 and reps <= 3 and cap <= 6.0, 'PP0 is limited to 20 instances, 3 repetitions, 6 USD'
+              models = 'vertex-gemini-flash'
+          elif stage == 'PP1':
+              assert n <= 10 and reps <= 1 and cap <= 6.0, 'PP1 is limited to 10 instances, 1 repetition, 6 USD'
+              r = json.load(open('research_closure/pilot/PP0_RESULT.json'))
+              assert r.get('pilot_pass') is True, 'PP1 needs a committed PP0_RESULT.json with pilot_pass true'
+              models = 'vertex-gemini-argon'
+          else:
+              raise SystemExit('stage must be PP0 or PP1')
+          names = pilot_select.select(json.load(open('research_closure/pilot/DEV_FN.json')), n)
+          out = os.environ['GITHUB_OUTPUT']
+          open(out, 'a').write('matrix=' + json.dumps({'name': names}) + '\n')
+          open(out, 'a').write('models=' + models + '\n')
+          open(out, 'a').write('per_job_cap=%.4f\n' % (cap / len(names)))
+          PY
+  run:
+    needs: plan
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 170
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Google Cloud auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+      - name: Vertex access token
+        run: |
+          echo "GOOGLE_OAUTH_TOKEN=$(gcloud auth print-access-token)" >> "$GITHUB_ENV"
+          echo "GCP_PROJECT=${{ secrets.GCP_PROJECT }}" >> "$GITHUB_ENV"
+          echo "GK_TOKEN_CMD=gcloud auth print-access-token" >> "$GITHUB_ENV"
+      - name: One instance
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p out_pilot
+          python -u tools/cohort_instance.py research_closure/pilot/DEV_FN.json "${{ matrix.name }}" out_pilot research_closure/pilot/models.json "${{ needs.plan.outputs.models }}" "${{ inputs.reps }}" "${{ needs.plan.outputs.per_job_cap }}" "study-p-pilot:" 200 function 2>&1 | tee out_pilot/log_${{ matrix.name }}.txt
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: PPILOT_${{ inputs.stage }}_${{ matrix.name }}
+          path: out_pilot
