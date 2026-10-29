@@ -1,0 +1,1846 @@
+[
+ {
+  "position": 0,
+  "name": "awscurl_pr225",
+  "repo": "https://github.com/okigan/awscurl.git",
+  "pre": "5a5ae284660d0760894bccc34f206f841b403b63",
+  "gold": "5439415c96398fc683ea662a3a1061e7a588d34e",
+  "changed_files": [
+   "awscurl/awscurl.py",
+   "tests/stages_test.py",
+   "tests/unit_test.py"
+  ],
+  "gold_test_files": [
+   "tests/stages_test.py",
+   "tests/unit_test.py"
+  ],
+  "f2p": 4,
+  "vetting_sha256": "5a563cc280a86e27ab025a43ba1a29cc44d95063b60f9bd977850dde8739801b"
+ },
+ {
+  "position": 2,
+  "name": "dotwiz_pr38",
+  "repo": "https://github.com/rnag/dotwiz.git",
+  "pre": "e719cfa240d2bd8d509bf7acf94a3359d48ab8e0",
+  "gold": "7f283732a8e51d1b6b5975bcd2b1b5d650dfa025",
+  "changed_files": [
+   "dotwiz/main.py",
+   "tests/unit/test_dotwiz.py"
+  ],
+  "gold_test_files": [
+   "tests/unit/test_dotwiz.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "652ece927237bdf6ae538a0c928a944b9f32f6d73e73b568a3a289604531eda5"
+ },
+ {
+  "position": 3,
+  "name": "sympy_pr24589",
+  "repo": "https://github.com/sympy/sympy.git",
+  "pre": "fcf3dd948f2db2599a4a2cba8773c3e1f44f12ef",
+  "gold": "1d2de06782fe1f46f1fb9b211b406431f666d221",
+  "changed_files": [
+   "sympy/physics/mechanics/functions.py",
+   "sympy/physics/mechanics/tests/test_functions.py"
+  ],
+  "gold_test_files": [
+   "sympy/physics/mechanics/tests/test_functions.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "78787f33fff2db74277185de3028854d99a9e7c1010691a946b1e715e8a0f905"
+ },
+ {
+  "position": 4,
+  "name": "corgidrp_pr290",
+  "repo": "https://github.com/roman-corgi/corgidrp.git",
+  "pre": "aad3489c8262e57673a1a6942e8d6bd04b47a44b",
+  "gold": "a52916fbdd779a34b7ac6631784c667d00535b04",
+  "changed_files": [
+   "corgidrp/l3_to_l4.py",
+   "tests/test_crop.py"
+  ],
+  "gold_test_files": [
+   "tests/test_crop.py"
+  ],
+  "f2p": 11,
+  "vetting_sha256": "f3544a119cf27785a5c5678413a1120821a5f7d63c1250726aedca41e2b75d1c"
+ },
+ {
+  "position": 6,
+  "name": "pytrilogy_pr266",
+  "repo": "https://github.com/trilogy-data/pytrilogy.git",
+  "pre": "fcbd505611151ab55bb814bb5b154e528aa9a257",
+  "gold": "c77e7d083d0ad41c7b4affcff740656391478bfe",
+  "changed_files": [
+   "tests/engine/test_duckdb.py",
+   "trilogy/__init__.py",
+   "trilogy/core/enums.py",
+   "trilogy/parsing/parse_engine.py",
+   "trilogy/std/display.preql"
+  ],
+  "gold_test_files": [
+   "tests/engine/test_duckdb.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "b2051ff08d122c59fb4eb5384d286a40989ae649627ecadb6e973ef44f6462ed"
+ },
+ {
+  "position": 9,
+  "name": "agileforecasting_pr12",
+  "repo": "https://github.com/XeonNAS/agileforecasting.git",
+  "pre": "b1b5054d789910015a0121984badbbcbd07506e8",
+  "gold": "6d22f6a1a4d46eed991e1fafec994f1ea1280369",
+  "changed_files": [
+   "CHANGELOG.md",
+   "README.md",
+   "pyproject.toml",
+   "src/agile_mc/__init__.py",
+   "src/agile_mc/ado_sync.py",
+   "streamlit_app/app.py",
+   "tests/test_ado_sync_parallel.py"
+  ],
+  "gold_test_files": [
+   "tests/test_ado_sync_parallel.py"
+  ],
+  "f2p": 2,
+  "vetting_sha256": "66a0ab4c8ee7b45f3d0823bc63976e920e827d2cdde246089cc0de649d6dabf2"
+ },
+ {
+  "position": 11,
+  "name": "inference_pr1306",
+  "repo": "https://github.com/roboflow/inference.git",
+  "pre": "cd256f443fbae11050e5d7be0d79860beef9f763",
+  "gold": "6e535b735767ae31f71e04da4b125ba9ba9141e4",
+  "changed_files": [
+   "inference/core/workflows/core_steps/formatters/json_parser/v1.py",
+   "tests/workflows/integration_tests/execution/test_workflow_json_parser_config.py",
+   "tests/workflows/unit_tests/core_steps/formatters/test_json_parser.py"
+  ],
+  "gold_test_files": [
+   "tests/workflows/integration_tests/execution/test_workflow_json_parser_config.py",
+   "tests/workflows/unit_tests/core_steps/formatters/test_json_parser.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "a29f343d3a088c79f738135a5170ef4df22fc33737b8a530a2d04b4e6a8165c4"
+ },
+ {
+  "position": 14,
+  "name": "aioresponses_pr232",
+  "repo": "https://github.com/pnuckowski/aioresponses.git",
+  "pre": "c32a6b26dd2acde4628179c1b780fb03bbfc588a",
+  "gold": "f95f26bdf226b0c8329e7d4e96b623a3dc33ab22",
+  "changed_files": [
+   "aioresponses/compat.py",
+   "tests/test_compat.py"
+  ],
+  "gold_test_files": [
+   "tests/test_compat.py"
+  ],
+  "f2p": 8,
+  "vetting_sha256": "cc215c89d2cc175cce23720e6aded571a00d9ca023662cc187e9508c4d104ce4"
+ },
+ {
+  "position": 19,
+  "name": "gapic_generator_python_pr1657",
+  "repo": "https://github.com/googleapis/gapic-generator-python.git",
+  "pre": "6bebe75bc41bd6f16fbf325418fb0b1ef510693d",
+  "gold": "e51109da85bbd53e5b2af90fbce031b0dd7e2be5",
+  "changed_files": [
+   "gapic/schema/wrappers.py",
+   "tests/unit/schema/wrappers/test_method.py"
+  ],
+  "gold_test_files": [
+   "tests/unit/schema/wrappers/test_method.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "b32b6fb04c36f49f32cb6245f35ad8ba20aee2822a4de3162d28eadaeb012a53"
+ },
+ {
+  "position": 21,
+  "name": "agenticseek_pr2",
+  "repo": "https://github.com/vardars/agenticSeek.git",
+  "pre": "071b0af002373f69476117778f1536f34fbafb10",
+  "gold": "09d71b4fe24419c7ba26dad4c12424af66a41186",
+  "changed_files": [
+   "requirements.txt",
+   "sources/tools/searxSearch.py",
+   "tests/test_searx_search.py"
+  ],
+  "gold_test_files": [
+   "tests/test_searx_search.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "65292ba3df90e74263858c0266053e790da0b92f7aacc77c57c4e93144f037b4"
+ },
+ {
+  "position": 29,
+  "name": "skeletoken_pr74",
+  "repo": "https://github.com/stephantul/skeletoken.git",
+  "pre": "79668c101bae91fe72ffde154357cefcb8a5a478",
+  "gold": "5dc292c73e186b75ce97ea7a4b962e77c722aa65",
+  "changed_files": [
+   "skeletoken/base.py",
+   "skeletoken/version.py",
+   "tests/test_base.py"
+  ],
+  "gold_test_files": [
+   "tests/test_base.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "7d5c27349b30e89868469c08c050d6da02e837b057eb64706af80a42edc2bdff"
+ },
+ {
+  "position": 30,
+  "name": "autoprotocol_python_pr383",
+  "repo": "https://github.com/autoprotocol/autoprotocol-python.git",
+  "pre": "8bce7b4cd78260baf26a7f588cb58724c8fbc3cd",
+  "gold": "9a5e3b14d6c6c156d3037fb0ff2cf85ecd43bad0",
+  "changed_files": [
+   "autoprotocol/container.py",
+   "autoprotocol/protocol.py",
+   "docs/changelog.rst",
+   "test/protocol_test.py"
+  ],
+  "gold_test_files": [
+   "test/protocol_test.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "9aae136be21a16ad3306acc16e33c3e3351640cf28ba5b2e181b71d8960c372d"
+ },
+ {
+  "position": 37,
+  "name": "dicom_validator_pr35",
+  "repo": "https://github.com/pydicom/dicom-validator.git",
+  "pre": "549cfb7bf48180562e9a80e76f2abd8312a33098",
+  "gold": "0c0f0c4de45b849361176094878e1af96c6ba2c4",
+  "changed_files": [
+   "CHANGES.md",
+   "dicom_validator/spec_reader/condition_parser.py",
+   "dicom_validator/tests/spec_reader/test_condition_parser.py"
+  ],
+  "gold_test_files": [
+   "dicom_validator/tests/spec_reader/test_condition_parser.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "cfdbbbc03ff5fd84cbc9461795ddeb58c5abb12258dccf894bfc75b88132efc4"
+ },
+ {
+  "position": 42,
+  "name": "litellm_pr14155",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pre": "7656cb3d6e3a6830aac0884b7606171e3e1c7432",
+  "gold": "4c7b3e10ed5b6566bbe6edd6d23d7f9a6f82ee88",
+  "changed_files": [
+   "litellm/llms/vertex_ai/common_utils.py",
+   "tests/code_coverage_tests/recursive_detector.py",
+   "tests/llm_translation/base_llm_unit_tests.py",
+   "tests/test_litellm/llms/vertex_ai/test_vertex_ai_common_utils.py"
+  ],
+  "gold_test_files": [
+   "tests/llm_translation/base_llm_unit_tests.py",
+   "tests/test_litellm/llms/vertex_ai/test_vertex_ai_common_utils.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "849cf037ad00c0ccc5a9f84ce74f6d29e6c8147591e1404e1f75f9fffbf1c5c7"
+ },
+ {
+  "position": 48,
+  "name": "seedcase_sprout_pr1179",
+  "repo": "https://github.com/seedcase-project/seedcase-sprout.git",
+  "pre": "126d7e4dc8473418982d5802044a0b769b881379",
+  "gold": "3c3ccf7ed5a6c763a748528f331747da5025b011",
+  "changed_files": [
+   "src/seedcase_sprout/core/sprout_checks/check_properties.py",
+   "src/seedcase_sprout/core/sprout_checks/check_resource_properties.py",
+   "tests/core/sprout_checks/test_check_properties_sprout.py",
+   "tests/core/sprout_checks/test_check_resource_properties_sprout.py"
+  ],
+  "gold_test_files": [
+   "tests/core/sprout_checks/test_check_properties_sprout.py",
+   "tests/core/sprout_checks/test_check_resource_properties_sprout.py"
+  ],
+  "f2p": 3,
+  "vetting_sha256": "45e2645fb3890f1cbff57244d13530bd6178ffe01b588077e528b565541c8a02"
+ },
+ {
+  "position": 59,
+  "name": "pyaptamer_pr542",
+  "repo": "https://github.com/gc-os-ai/pyaptamer.git",
+  "pre": "db3120cab6c6a8657425abd83355d3a0146d4108",
+  "gold": "95dd7f17b8ebc5cbb2efb7c2a06bb5d3d09fdee0",
+  "changed_files": [
+   "pyaptamer/aptanet/_feature_classifier.py",
+   "pyaptamer/aptanet/tests/test_aptanet.py"
+  ],
+  "gold_test_files": [
+   "pyaptamer/aptanet/tests/test_aptanet.py"
+  ],
+  "f2p": 2,
+  "vetting_sha256": "3e65aeff725023611c1997b4de33749e9677e4375852f6059dd024838456743c"
+ },
+ {
+  "position": 63,
+  "name": "litellm_pr12113",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pre": "b57cfb8bffad663e2e7ef4cb8112725de7f563f1",
+  "gold": "f04808e293669bb353158f69d6e75eda27a23db4",
+  "changed_files": [
+   "litellm/litellm_core_utils/exception_mapping_utils.py",
+   "tests/test_litellm/litellm_core_utils/test_exception_mapping_utils.py"
+  ],
+  "gold_test_files": [
+   "tests/test_litellm/litellm_core_utils/test_exception_mapping_utils.py"
+  ],
+  "f2p": 11,
+  "vetting_sha256": "70804bb9f4796f581a1322ed9ea78dc3ff37fd3a0ad420bb842c817894cb15e0"
+ },
+ {
+  "position": 65,
+  "name": "proxbox_api_pr212",
+  "repo": "https://github.com/emersonfelipesp/proxbox-api.git",
+  "pre": "c3f9ceed1180becd2bc22e9eefd710f9836fe51a",
+  "gold": "17eac5dc682d23e03141c0c04f2b2f444c585ff8",
+  "changed_files": [
+   "proxbox_api/routes/virtualization/virtual_machines/sync_vm.py",
+   "proxbox_api/services/sync/individual/vm_sync.py",
+   "tests/test_qemu_guest_agent_sync.py",
+   "tests/test_sse_stream_output.py",
+   "tests/test_vm_sync_reconciliation_queue.py"
+  ],
+  "gold_test_files": [
+   "tests/test_qemu_guest_agent_sync.py",
+   "tests/test_sse_stream_output.py",
+   "tests/test_vm_sync_reconciliation_queue.py"
+  ],
+  "f2p": 5,
+  "vetting_sha256": "9f8a05b9e0a146d072592451e818606f00593626071f3e019626ec082a16f8e6"
+ },
+ {
+  "position": 78,
+  "name": "pypdf_pr1926",
+  "repo": "https://github.com/py-pdf/pypdf.git",
+  "pre": "115fbfc80aa3dfe61b07da7e1b251360febee56b",
+  "gold": "d4ff6fc1e715bd551ee6824da478710eb9a5cefe",
+  "changed_files": [
+   "pypdf/_writer.py",
+   "tests/test_writer.py"
+  ],
+  "gold_test_files": [
+   "tests/test_writer.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "f4eb86be6c0c7217a09e96b76bb837b18aa492f9f19649dc6bb105f9b3782eca"
+ },
+ {
+  "position": 79,
+  "name": "pytorch_forecasting_pr1834",
+  "repo": "https://github.com/sktime/pytorch-forecasting.git",
+  "pre": "5685c59f13aaa6aaba7181430272819c11fe7725",
+  "gold": "bfbe6b2d8f4a708d1cf8a47183f5e1b268923ff9",
+  "changed_files": [
+   "pytorch_forecasting/data/data_module.py",
+   "tests/test_data/test_data_module.py"
+  ],
+  "gold_test_files": [
+   "tests/test_data/test_data_module.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "e96d3e313bed2d5a17bf677f39daf283f0135357fe9b0731450334e9c6cc4034"
+ },
+ {
+  "position": 83,
+  "name": "aiida_core_pr6735",
+  "repo": "https://github.com/aiidateam/aiida-core.git",
+  "pre": "8c5c709bece13c56af1d91384957e7ccb8dd320b",
+  "gold": "f56fcc31c70e3bd6a1422eb6cfee3f5fab5eaac4",
+  "changed_files": [
+   "src/aiida/transports/plugins/local.py",
+   "src/aiida/transports/plugins/ssh.py",
+   "tests/transports/test_all_plugins.py"
+  ],
+  "gold_test_files": [
+   "tests/transports/test_all_plugins.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "d7cadaa77963f9062ada55353bc586678e4943146acca606a0386bc54bd594da"
+ },
+ {
+  "position": 84,
+  "name": "connectors_pr1829",
+  "repo": "https://github.com/elastic/connectors.git",
+  "pre": "f7d2a2e59213d747293b36662c0834fd04e577d7",
+  "gold": "50fa40156bf48fdd399a9ba23030fd5f8f64a7a0",
+  "changed_files": [
+   "connectors/sources/sharepoint_online.py",
+   "tests/sources/test_sharepoint_online.py"
+  ],
+  "gold_test_files": [
+   "tests/sources/test_sharepoint_online.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "48b02c13da7351d6e10da7bf185d52fbe0989648d64beda346ec32367394a6df"
+ },
+ {
+  "position": 92,
+  "name": "pypdf_pr2967",
+  "repo": "https://github.com/py-pdf/pypdf.git",
+  "pre": "db460c02fbe3c4ab5e2b19819b8cfac91517ab18",
+  "gold": "13832342639bf32a380137555d761e0deb723c14",
+  "changed_files": [
+   "pypdf/_cmap.py",
+   "pypdf/_page.py",
+   "tests/test_cmap.py"
+  ],
+  "gold_test_files": [
+   "tests/test_cmap.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "f0b813f6f10a179215b919c3e14f4ae9d276dccbe5e4f28f576d1586c399b8d6"
+ },
+ {
+  "position": 107,
+  "name": "pypdf_pr1613",
+  "repo": "https://github.com/py-pdf/pypdf.git",
+  "pre": "5412dd331a7d6469c855a2aaf1005bd37591d07f",
+  "gold": "a2a1275587df39883e576f2d8331b88fdcdaa492",
+  "changed_files": [
+   "pypdf/_writer.py",
+   "tests/test_writer.py"
+  ],
+  "gold_test_files": [
+   "tests/test_writer.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "48c70805c78c9adad7c484ceb182354f411d61017088b5820152c5039ffc3b8b"
+ },
+ {
+  "position": 111,
+  "name": "arkos_pr236",
+  "repo": "https://github.com/SGIARK/arkos.git",
+  "pre": "de083a463b26b46daa6e5b9a0b0cb2f39ae86c74",
+  "gold": "d6ac75f550ae9d263569fb1721ac1bdde162ef8f",
+  "changed_files": [
+   "agent_module/agent.py",
+   "state_module/agent_executor/graph.yaml",
+   "state_module/agent_executor/routers.py",
+   "state_module/agent_executor/state_tool.py",
+   "tests/test_agent.py",
+   "tests/test_state_module.py"
+  ],
+  "gold_test_files": [
+   "tests/test_agent.py",
+   "tests/test_state_module.py"
+  ],
+  "f2p": 4,
+  "vetting_sha256": "b1e6e16c56384cd6d7d31e4fe6c62fcaf193aac2cf2ea863177b030770580d2a"
+ },
+ {
+  "position": 113,
+  "name": "python_storage_pr1186",
+  "repo": "https://github.com/googleapis/python-storage.git",
+  "pre": "9e4d1d8b44e55a1a10032b844932a8f5140c68fe",
+  "gold": "22f36da1ce5b04408653ddbdbf35f25ed1072af8",
+  "changed_files": [
+   "google/cloud/storage/fileio.py",
+   "tests/unit/test_fileio.py"
+  ],
+  "gold_test_files": [
+   "tests/unit/test_fileio.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "46bc4d750f7e414e222d5f700dd0f012eeb2ba1519ece4cf7c8fb4768d6fd00c"
+ },
+ {
+  "position": 116,
+  "name": "agentic_project_kit_pr1499",
+  "repo": "https://github.com/vfi64/agentic-project-kit.git",
+  "pre": "d2c9dfd7d92b8d26ec47be725b6cea795b75c600",
+  "gold": "536a05c97c37363eab4157e509c59d6eadfd4f16",
+  "changed_files": [
+   "src/agentic_project_kit/handoff_freshness.py",
+   "src/agentic_project_kit/transfer_repo_actions.py",
+   "tests/test_handoff_freshness.py",
+   "tests/test_transfer_repo_actions.py"
+  ],
+  "gold_test_files": [
+   "tests/test_handoff_freshness.py",
+   "tests/test_transfer_repo_actions.py"
+  ],
+  "f2p": 2,
+  "vetting_sha256": "5740a2671626eefd0dca516842f1af5f574781672642c9a8092b5412804ae19e"
+ },
+ {
+  "position": 125,
+  "name": "litellm_pr12482",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pre": "01c76229f2bd93d86e93a458c45798bdd63d0e8c",
+  "gold": "a0d6900223d9d4acc6af92d9531f11966d8a96aa",
+  "changed_files": [
+   "litellm/model_prices_and_context_window_backup.json",
+   "litellm/proxy/proxy_server.py",
+   "tests/test_litellm/proxy/test_proxy_server.py"
+  ],
+  "gold_test_files": [
+   "tests/test_litellm/proxy/test_proxy_server.py"
+  ],
+  "f2p": 2,
+  "vetting_sha256": "049c1c4c2be0e652743fe67148369d18506c8007d60d9bfc94a8d39361610843"
+ },
+ {
+  "position": 133,
+  "name": "galaxy_pr19384",
+  "repo": "https://github.com/galaxyproject/galaxy.git",
+  "pre": "fe1bf1e3a6b466b1200726cc8aa78d8b1142edbb",
+  "gold": "e251c0770be3c4278ad016618f824e5785ec214e",
+  "changed_files": [
+   "lib/galaxy/tool_util/verify/interactor.py",
+   "test/unit/tool_util/test_test_definition_parsing.py"
+  ],
+  "gold_test_files": [
+   "test/unit/tool_util/test_test_definition_parsing.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "3bd51b082897dc368b0886ced1506200120cddf468e877b88695af2d923f7a2a"
+ },
+ {
+  "position": 138,
+  "name": "geopandas_pr3337",
+  "repo": "https://github.com/geopandas/geopandas.git",
+  "pre": "3bd8790b24dc7a7b7163bb4907cbc122921a0e03",
+  "gold": "ff6d68fc47e58f0ca5f1f77954ace656941cdb17",
+  "changed_files": [
+   "CHANGELOG.md",
+   "geopandas/geodataframe.py",
+   "geopandas/tests/test_geodataframe.py"
+  ],
+  "gold_test_files": [
+   "geopandas/tests/test_geodataframe.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "f5e4caf1f431b35e5f00acf64fdf079c5b0aa26fda8743b17a4d2af7b896b68a"
+ },
+ {
+  "position": 140,
+  "name": "svglib_pr387",
+  "repo": "https://github.com/deeplook/svglib.git",
+  "pre": "473627a9cf7855431fd4a7a787933c646c3d96f0",
+  "gold": "f2078761fc0b1cb9b77e91211dea9b94d1b5ec08",
+  "changed_files": [
+   "svglib/svglib.py",
+   "tests/test_basic.py",
+   "tests/test_samples.py"
+  ],
+  "gold_test_files": [
+   "tests/test_basic.py",
+   "tests/test_samples.py"
+  ],
+  "f2p": 2,
+  "vetting_sha256": "efb5a2a2845abcabb4d151923ed0defb46d7bf8a8be82ccc0acb8a55ff29f55b"
+ },
+ {
+  "position": 142,
+  "name": "litellm_pr15265",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pre": "421d38c94ab2220fbce150f03da92abc5cafabc3",
+  "gold": "73f96712f5850b555dfb07a0a3a9babe8802a0c3",
+  "changed_files": [
+   "litellm/llms/azure/responses/transformation.py",
+   "litellm/llms/openai/responses/transformation.py",
+   "litellm/responses/litellm_completion_transformation/streaming_iterator.py",
+   "litellm/responses/litellm_completion_transformation/transformation.py",
+   "tests/test_litellm/responses/litellm_completion_transformation/test_litellm_completion_responses.py"
+  ],
+  "gold_test_files": [
+   "tests/test_litellm/responses/litellm_completion_transformation/test_litellm_completion_responses.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "895f565184a445b7b0398e1cd4b1009d006f1dafb8c317bc12d5cfc210bfb705"
+ },
+ {
+  "position": 145,
+  "name": "homeassistant_octopusene_pr241",
+  "repo": "https://github.com/BottlecapDave/HomeAssistant-OctopusEnergy.git",
+  "pre": "821c1c468590ad809c9052785d706a479263fbc0",
+  "gold": "e744f2aeff3cefe06f20da5c5b9cb0b86f7392fc",
+  "changed_files": [
+   "custom_components/octopus_energy/electricity/__init__.py",
+   "tests/unit/electricity/test_calculate_electricity_consumption_and_cost.py",
+   "tests/unit/utils/test_get_off_peak_cost.py"
+  ],
+  "gold_test_files": [
+   "tests/unit/electricity/test_calculate_electricity_consumption_and_cost.py",
+   "tests/unit/utils/test_get_off_peak_cost.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "c397f852dfa5793ae089672e8651586956a8256ed2b7fc5ff691130a396029a3"
+ },
+ {
+  "position": 148,
+  "name": "slackblocks_pr69",
+  "repo": "https://github.com/nicklambourne/slackblocks.git",
+  "pre": "cab8f975df52e17728366805c7e8cdde837043d5",
+  "gold": "8e5f26d5b5a82da0d919e68542c2e5abd0c71a5e",
+  "changed_files": [
+   "pyproject.toml",
+   "slackblocks/blocks.py",
+   "slackblocks/elements.py",
+   "slackblocks/objects.py",
+   "test/unit/test_elements.py"
+  ],
+  "gold_test_files": [
+   "test/unit/test_elements.py"
+  ],
+  "f2p": 2,
+  "vetting_sha256": "ceaf870ed6eefc41ce9fde98273c25382cac4c3e2fb4e06cc40662c00245737d"
+ },
+ {
+  "position": 150,
+  "name": "pcobra_pr103",
+  "repo": "https://github.com/Alphonsus411/pCobra.git",
+  "pre": "c4b95dac3095fd582a8e0887eaad04341a78ada3",
+  "gold": "6d55a397096b365604fbdd4bb912d8d7d4012dcb",
+  "changed_files": [
+   "backend/src/cobra/transpilers/transpiler/python_nodes/llamada_metodo.py",
+   "backend/src/tests/test_to_python.py",
+   "backend/src/tests/test_to_python2.py",
+   "backend/src/tests/test_to_python3.py",
+   "backend/src/tests/test_to_python4.py",
+   "backend/src/tests/test_to_python_objects.py"
+  ],
+  "gold_test_files": [
+   "backend/src/tests/test_to_python.py",
+   "backend/src/tests/test_to_python2.py",
+   "backend/src/tests/test_to_python3.py",
+   "backend/src/tests/test_to_python4.py",
+   "backend/src/tests/test_to_python_objects.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "f06a6bf958a5e255911e011697f2bdb9f58995a38736a5117c4017f6867240e1"
+ },
+ {
+  "position": 157,
+  "name": "litellm_pr14046",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pre": "e638c5490deda186c1ced44137f61a0a475666f6",
+  "gold": "37a599932d5f3153dc8125fc83c64b2150d6b197",
+  "changed_files": [
+   "litellm/model_prices_and_context_window_backup.json",
+   "litellm/proxy/_types.py",
+   "litellm/proxy/auth/route_checks.py",
+   "tests/test_litellm/proxy/auth/test_route_checks.py"
+  ],
+  "gold_test_files": [
+   "tests/test_litellm/proxy/auth/test_route_checks.py"
+  ],
+  "f2p": 4,
+  "vetting_sha256": "1cd00cb5a5a0c8b5518642cb0d77a7d198534c9b83ecd856591f9257a58295f1"
+ },
+ {
+  "position": 164,
+  "name": "pypdf_pr1815",
+  "repo": "https://github.com/py-pdf/pypdf.git",
+  "pre": "dc9fb51a5a31c09b9eeb9d6f7a6c628b2649fdcc",
+  "gold": "8e343c1b39bb2bd41ac2eac311dbb5a4f2a6694f",
+  "changed_files": [
+   "pypdf/filters.py",
+   "tests/test_filters.py"
+  ],
+  "gold_test_files": [
+   "tests/test_filters.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "af49d28ecdec0573c079313a5232f75b7649a53cf41c421aac83a5d80c8ae6c9"
+ },
+ {
+  "position": 172,
+  "name": "pymc_pr7408",
+  "repo": "https://github.com/pymc-devs/pymc.git",
+  "pre": "8fe38338f3c54d6677203c486bea3919a167bddf",
+  "gold": "a4ea9fc4e0ac2a0444db3dbf7b2697c97eb75e6f",
+  "changed_files": [
+   "pymc/pytensorf.py",
+   "tests/test_pytensorf.py",
+   "tests/variational/test_inference.py"
+  ],
+  "gold_test_files": [
+   "tests/test_pytensorf.py",
+   "tests/variational/test_inference.py"
+  ],
+  "f2p": 2,
+  "vetting_sha256": "750bd99aca1370ba2e70cade16ef2c22a075d1757146efbda596e49a73d2fd23"
+ },
+ {
+  "position": 173,
+  "name": "pcobra_pr351",
+  "repo": "https://github.com/Alphonsus411/pCobra.git",
+  "pre": "019e5fc702c6371e637c7b535a384cf102033c16",
+  "gold": "3ed9841d64ba3d40cddac4c283728115659b6518",
+  "changed_files": [
+   "backend/src/core/sandbox.py",
+   "tests/unit/test_sandbox_js.py"
+  ],
+  "gold_test_files": [
+   "tests/unit/test_sandbox_js.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "4ad107a4bf68f1e53485f3782e46be075a83a240572604349d20684cd5f3c41b"
+ },
+ {
+  "position": 175,
+  "name": "client_py_pr505",
+  "repo": "https://github.com/DeebotUniverse/client.py.git",
+  "pre": "8979e53ffa908d0882f94ad35afa7166cf66f584",
+  "gold": "94601ad114f8cbfdfd48df787db2f1d257c09e78",
+  "changed_files": [
+   "deebot_client/commands/json/error.py",
+   "tests/commands/json/test_error.py"
+  ],
+  "gold_test_files": [
+   "tests/commands/json/test_error.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "e1f3c5cbfeeba8e6dc73b4ed91952b090ca29d463312ffeb9d23112a87bbf70c"
+ },
+ {
+  "position": 178,
+  "name": "pyomo_pr2879",
+  "repo": "https://github.com/Pyomo/pyomo.git",
+  "pre": "d7e7df54a221d34303997b07004b9e3ea166619c",
+  "gold": "0ad8c66117d4f31eb039f128ed10ce041d8093b6",
+  "changed_files": [
+   "pyomo/contrib/cp/tests/test_logical_to_disjunctive.py",
+   "pyomo/contrib/cp/transform/logical_to_disjunctive_walker.py",
+   "pyomo/gdp/tests/test_hull.py"
+  ],
+  "gold_test_files": [
+   "pyomo/contrib/cp/tests/test_logical_to_disjunctive.py",
+   "pyomo/gdp/tests/test_hull.py"
+  ],
+  "f2p": 11,
+  "vetting_sha256": "28528a4674a8127f76b43273b1c340f1827c14a7b0ed3eed68a08eb9af2b1d77"
+ },
+ {
+  "position": 182,
+  "name": "litellm_pr8669",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pre": "045cf3f9e23607e9d4d44cedc98a9c3e2b67955a",
+  "gold": "0d2b0ee1b70929a8920f52bc69abeb826fa98d13",
+  "changed_files": [
+   "litellm/integrations/prometheus.py",
+   "tests/logging_callback_tests/test_prometheus_unit_tests.py"
+  ],
+  "gold_test_files": [
+   "tests/logging_callback_tests/test_prometheus_unit_tests.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "f366044d8b9cf6590f414791636215e817eb46caa8a5bbedd3bfa4fc30a2cf30"
+ },
+ {
+  "position": 187,
+  "name": "pcobra_pr679",
+  "repo": "https://github.com/Alphonsus411/pCobra.git",
+  "pre": "379a419949127ff88f11d0901b2d9880df728545",
+  "gold": "30fe9b14f54dd326aad22534addc233fce2625ba",
+  "changed_files": [
+   "src/corelibs/sistema.py",
+   "src/tests/unit/test_corelibs_sistema.py"
+  ],
+  "gold_test_files": [
+   "src/tests/unit/test_corelibs_sistema.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "b47d37753091797e93c7d6f24688b75214b72721b90f44d7ec0d9357c5688960"
+ },
+ {
+  "position": 191,
+  "name": "prowler_pr8507",
+  "repo": "https://github.com/prowler-cloud/prowler.git",
+  "pre": "72b06261dfda20eb360034c3b01e060df849259c",
+  "gold": "b0c386fc60582973c3e4ba1883fc05c91b2ad526",
+  "changed_files": [
+   "prowler/CHANGELOG.md",
+   "prowler/providers/azure/services/app/app_http_logs_enabled/app_http_logs_enabled.py",
+   "tests/providers/azure/services/app/app_http_logs_enabled/app_http_logs_enabled_test.py"
+  ],
+  "gold_test_files": [
+   "tests/providers/azure/services/app/app_http_logs_enabled/app_http_logs_enabled_test.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "8e45c489a418c9e11e658b429e6a59a6e843d4582bba53a8dc84232b07460878"
+ },
+ {
+  "position": 193,
+  "name": "earthaccess_pr1015",
+  "repo": "https://github.com/earthaccess-dev/earthaccess.git",
+  "pre": "8d3ede6396338e010a095cb8f20e9bd1c765d371",
+  "gold": "211417049b19d4a753e1e338fa1f7ea8f11c810b",
+  "changed_files": [
+   "CHANGELOG.md",
+   "earthaccess/store.py",
+   "pyproject.toml",
+   "tests/integration/test_distributed.py",
+   "tests/integration/test_xarray.py",
+   "tests/unit/test_store.py",
+   "uv.lock"
+  ],
+  "gold_test_files": [
+   "tests/integration/test_distributed.py",
+   "tests/integration/test_xarray.py",
+   "tests/unit/test_store.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "7ae0cf2f8d7af23fccac39af9818c7c6ab638817a3921beb754a638de3c39dbb"
+ },
+ {
+  "position": 195,
+  "name": "litellm_pr13638",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pre": "17db9edd850ed488f6105e37d5c3c7ee7b8c8d12",
+  "gold": "48c89812c474b52b55139e5b8a827c99194aafe7",
+  "changed_files": [
+   "litellm/llms/anthropic/experimental_pass_through/adapters/transformation.py",
+   "litellm/proxy/proxy_config.yaml",
+   "tests/test_litellm/llms/anthropic/experimental_pass_through/adapters/test_anthropic_experimental_pass_through_adapters_transformation.py"
+  ],
+  "gold_test_files": [
+   "tests/test_litellm/llms/anthropic/experimental_pass_through/adapters/test_anthropic_experimental_pass_through_adapters_transformation.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "552a1d51bd0ffe8a1190802587fbb37c3c46b179958d6c72ae48a38d9260ee82"
+ },
+ {
+  "position": 196,
+  "name": "connectors_pr1828",
+  "repo": "https://github.com/elastic/connectors.git",
+  "pre": "4a4ca109922c53212eaff8f632255b3bc82afb08",
+  "gold": "bb2fdfd6b12ab47fb1a058e1f2b87a8a9fdfbb27",
+  "changed_files": [
+   ".backportrc.json",
+   ".buildkite/pull-requests.json",
+   ".buildkite/run_nigthly.sh",
+   "catalog-info.yaml",
+   "connectors/sources/sharepoint_online.py",
+   "tests/sources/test_sharepoint_online.py"
+  ],
+  "gold_test_files": [
+   "tests/sources/test_sharepoint_online.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "6e061c4c1122f6238a96ac533754d868e664cd7dc6bc708a5e44c918d4eeba8f"
+ },
+ {
+  "position": 198,
+  "name": "monocle_pr32",
+  "repo": "https://github.com/monocle2ai/monocle.git",
+  "pre": "253396b8c836a90b8108760156217ace2ef105f8",
+  "gold": "8556cc6456a3fa51cad815be6d35caeedf38583d",
+  "changed_files": [
+   "src/monocle_apptrace/instrumentor.py",
+   "src/monocle_apptrace/wrap_common.py",
+   "tests/helpers.py",
+   "tests/llama_index_test.py"
+  ],
+  "gold_test_files": [
+   "tests/llama_index_test.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "3deb869b90e06d73e32a476e4930e00960acc844c0e083e1205e2f9f366b0123"
+ },
+ {
+  "position": 199,
+  "name": "elastalert2_pr1643",
+  "repo": "https://github.com/jertel/elastalert2.git",
+  "pre": "55ccb06631019d6961f8fe8dfba17349bde37273",
+  "gold": "2617386d09ec52ace309a1f3c2fe615d174f464f",
+  "changed_files": [
+   "CHANGELOG.md",
+   "elastalert/alerters/iris.py",
+   "tests/alerters/iris_test.py"
+  ],
+  "gold_test_files": [
+   "tests/alerters/iris_test.py"
+  ],
+  "f2p": 2,
+  "vetting_sha256": "46ea660c123e12d71d595bb4030f1343d0fdc7b54e37e6c2131dcb9de709e2be"
+ },
+ {
+  "position": 203,
+  "name": "pyaptamer_pr608",
+  "repo": "https://github.com/gc-os-ai/pyaptamer.git",
+  "pre": "3e1a033438a45c029ebefcc35b3b9b272d3b82f5",
+  "gold": "4cd1359fe10db4777fd96e92cb23bd73cf6c8773",
+  "changed_files": [
+   "pyaptamer/utils/_rna.py",
+   "pyaptamer/utils/tests/test_rna.py"
+  ],
+  "gold_test_files": [
+   "pyaptamer/utils/tests/test_rna.py"
+  ],
+  "f2p": 2,
+  "vetting_sha256": "1e44887d32c9819c74ee02e191877428a86121077f2cd07ca33743955c0779ad"
+ },
+ {
+  "position": 206,
+  "name": "litellm_pr10167",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pre": "0717369ae6969882d149933da48eeb8ab0e691bd",
+  "gold": "b0024bb2299cd4a74094ae59c50133328bf7e583",
+  "changed_files": [
+   "litellm/router.py",
+   "tests/litellm/test_router.py"
+  ],
+  "gold_test_files": [
+   "tests/litellm/test_router.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "c6fe82ca9a40e863512365615526c13393798b4444f9dd1eddca1e3c22b5520e"
+ },
+ {
+  "position": 212,
+  "name": "python_pubsub_pr911",
+  "repo": "https://github.com/googleapis/python-pubsub.git",
+  "pre": "9ffb8d60375b30900a6204f02007fd8b75883823",
+  "gold": "4b3157ccb83771a2e613fc3475035f24d358ccf6",
+  "changed_files": [
+   "google/cloud/pubsub_v1/subscriber/_protocol/messages_on_hold.py",
+   "tests/unit/pubsub_v1/subscriber/test_messages_on_hold.py"
+  ],
+  "gold_test_files": [
+   "tests/unit/pubsub_v1/subscriber/test_messages_on_hold.py"
+  ],
+  "f2p": 3,
+  "vetting_sha256": "ce28724c210216cefc9341e37d2685ea2a3d2fe7cd327c87e0a5bc6212bc44c1"
+ },
+ {
+  "position": 213,
+  "name": "litellm_pr11983",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pre": "962fd672279fa2c0220309cc1296bd7951724c23",
+  "gold": "ef7f8cce9340a596d4fdae3496c6c84dcc4100c4",
+  "changed_files": [
+   "litellm/llms/perplexity/chat/transformation.py",
+   "tests/test_litellm/llms/perplexity/test_perplexity.py"
+  ],
+  "gold_test_files": [
+   "tests/test_litellm/llms/perplexity/test_perplexity.py"
+  ],
+  "f2p": 2,
+  "vetting_sha256": "5c41b8e0f28aeded1b16af60caf0bda38aefb3546539294b74a343f527be818c"
+ },
+ {
+  "position": 217,
+  "name": "litellm_pr15231",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pre": "27c64c90dcb38138a7d712acfbba32a454c1b71e",
+  "gold": "cd257823593d0abbf65fce07af3a5e117ed646ba",
+  "changed_files": [
+   "litellm/main.py",
+   "tests/test_litellm/llms/vertex_ai/test_gemini_header_forwarding.py"
+  ],
+  "gold_test_files": [
+   "tests/test_litellm/llms/vertex_ai/test_gemini_header_forwarding.py"
+  ],
+  "f2p": 4,
+  "vetting_sha256": "389bb3425fc5a5cd3086d376274c1ddacd37fe3f12a50673829553652f3e2cc4"
+ },
+ {
+  "position": 219,
+  "name": "pypdf_pr2873",
+  "repo": "https://github.com/py-pdf/pypdf.git",
+  "pre": "dcd15aaf50faa16a0b361d834e10ebe7c56dfc97",
+  "gold": "3b890621267fb45d771c869ff56d151bb7a40cd5",
+  "changed_files": [
+   "pypdf/_cmap.py",
+   "tests/test_cmap.py"
+  ],
+  "gold_test_files": [
+   "tests/test_cmap.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "48ac5446e083d6e9f41c6e58514bd0965e01cd4ad3dd55293dc21de9867dec26"
+ },
+ {
+  "position": 221,
+  "name": "pcobra_pr1190",
+  "repo": "https://github.com/Alphonsus411/pCobra.git",
+  "pre": "c815de67e45479e882efee2019ca3b11fb968879",
+  "gold": "21735a604405e4e2b57d9341eecacfed9b51fd55",
+  "changed_files": [
+   "src/pcobra/cobra/cli/commands/compile_cmd.py",
+   "tests/unit/test_cli_compilar_tipos.py",
+   "tests/unit/test_run_transpiler_pool.py"
+  ],
+  "gold_test_files": [
+   "tests/unit/test_cli_compilar_tipos.py",
+   "tests/unit/test_run_transpiler_pool.py"
+  ],
+  "f2p": 2,
+  "vetting_sha256": "3794049733882f7b166488784573e34425820ff1e5e14bb4e0619678d8db1564"
+ },
+ {
+  "position": 222,
+  "name": "mobility_pr327",
+  "repo": "https://github.com/mobility-team/mobility.git",
+  "pre": "0b2084e3689e4d16442878f37d4101e715e9b890",
+  "gold": "8cf49b9e74476f5470271da38cdf94aeffce047a",
+  "changed_files": [
+   "mobility/trips/group_day_trips/core/metrics.py",
+   "tests/back/unit/domain/group_day_trips/test_009_diagnostics_and_metrics.py"
+  ],
+  "gold_test_files": [
+   "tests/back/unit/domain/group_day_trips/test_009_diagnostics_and_metrics.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "f14911099c011a03cabc7fd87eef0cbab10aeb90124bcf26a346966262842fe9"
+ },
+ {
+  "position": 223,
+  "name": "seedcase_sprout_pr1493",
+  "repo": "https://github.com/seedcase-project/seedcase-sprout.git",
+  "pre": "180212c1f8223487a61058866701623be0938b3b",
+  "gold": "84bee735a859a39d37802b56a361082150606b04",
+  "changed_files": [
+   "src/seedcase_sprout/write_resource_batch.py",
+   "tests/test_write_resource_batch.py"
+  ],
+  "gold_test_files": [
+   "tests/test_write_resource_batch.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "02468887ac5073789d5161b21b01c4359293b89e08005a2466a6f1b0eaf2963d"
+ },
+ {
+  "position": 226,
+  "name": "galaxy_pr19542",
+  "repo": "https://github.com/galaxyproject/galaxy.git",
+  "pre": "658f18e4ea10cdec60e1e9743aea01b474e08bbb",
+  "gold": "01d2f27d8441e4445735f86844f062f7551f7553",
+  "changed_files": [
+   "lib/galaxy/files/sources/__init__.py",
+   "lib/galaxy/model/store/__init__.py",
+   "lib/galaxy/tools/imp_exp/export_history.py",
+   "test/unit/app/test_export_uri.py",
+   "test/unit/files/_util.py"
+  ],
+  "gold_test_files": [
+   "test/unit/app/test_export_uri.py"
+  ],
+  "f2p": 7,
+  "vetting_sha256": "252ba27a08f2f493becf5c838f173b43fbce968095ee10f9a594d78b3a61a40c"
+ },
+ {
+  "position": 227,
+  "name": "litellm_pr12225",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pre": "a6527e501044df1732bd9bce8a03654ae49b73b7",
+  "gold": "4e7115bc34818b991c38a0f9301ba8faf3785b5d",
+  "changed_files": [
+   "litellm/proxy/proxy_config.yaml",
+   "litellm/responses/litellm_completion_transformation/handler.py",
+   "tests/llm_responses_api_testing/test_anthropic_responses_api.py",
+   "tests/openai_endpoints_tests/test_e2e_openai_responses_api.py"
+  ],
+  "gold_test_files": [
+   "tests/llm_responses_api_testing/test_anthropic_responses_api.py",
+   "tests/openai_endpoints_tests/test_e2e_openai_responses_api.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "576aa78ab307d11d18c61cc28f2165cc0615d5874cd771ae3d4c4b3a0afbf9f1"
+ },
+ {
+  "position": 230,
+  "name": "mem0_pr3510",
+  "repo": "https://github.com/mem0ai/mem0.git",
+  "pre": "346d89d2445e1f3c5d82237e95704ef07a20def9",
+  "gold": "51ce6f13477ad08b59701c21f963b7009f5b5a2a",
+  "changed_files": [
+   "mem0/memory/main.py",
+   "mem0/memory/utils.py",
+   "tests/llms/test_vllm.py"
+  ],
+  "gold_test_files": [
+   "tests/llms/test_vllm.py"
+  ],
+  "f2p": 2,
+  "vetting_sha256": "e6fbd15386f9daba3e5caa1885ca05ad632a57b17aaf951d3405f4f489d8421b"
+ },
+ {
+  "position": 232,
+  "name": "pypdf_pr1884",
+  "repo": "https://github.com/py-pdf/pypdf.git",
+  "pre": "8963a5705af0cb70cc267b933d2ee74a862c65bb",
+  "gold": "29c79fc636ea16cddf0712ce41234d73626fd8de",
+  "changed_files": [
+   "pypdf/generic/_utils.py",
+   "tests/test_generic.py"
+  ],
+  "gold_test_files": [
+   "tests/test_generic.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "90cc96c3d1676da486bc8c6c78bcf7d9a8a05c2a7a72ccfa2d251437a5a65ee2"
+ },
+ {
+  "position": 235,
+  "name": "pymc_pr7690",
+  "repo": "https://github.com/pymc-devs/pymc.git",
+  "pre": "710c38b0438f2fe22f3981110c1cfb4ca6124f21",
+  "gold": "53e0774685a054fed7760c6bc4c2bbee009508e4",
+  "changed_files": [
+   "pymc/distributions/distribution.py",
+   "tests/distributions/test_custom.py"
+  ],
+  "gold_test_files": [
+   "tests/distributions/test_custom.py"
+  ],
+  "f2p": 2,
+  "vetting_sha256": "e461d5291cd36a65063ff4ba9efcc2742dcb0a18c7d56e59b6a8ba4f1def67d5"
+ },
+ {
+  "position": 241,
+  "name": "webvtt_py_pr70",
+  "repo": "https://github.com/glut23/webvtt-py.git",
+  "pre": "6c90fc264737e9f951d792e5c93b3ba29749e9fe",
+  "gold": "676ea464af474fdcd69f19100c9a573d5561746e",
+  "changed_files": [
+   "tests/test_segmenter.py",
+   "webvtt/segmenter.py"
+  ],
+  "gold_test_files": [
+   "tests/test_segmenter.py"
+  ],
+  "f2p": 2,
+  "vetting_sha256": "f5fa1bd80ca943b08adda45648f311ab057c9eb16e6ef7d75243d64a452bc18d"
+ },
+ {
+  "position": 243,
+  "name": "seedcase_sprout_pr1308",
+  "repo": "https://github.com/seedcase-project/seedcase-sprout.git",
+  "pre": "cabda38ad6e4d48e1266056cc835037db244fcd2",
+  "gold": "0f93d3f9c976bb561a92b4173eb33219f1d4b651",
+  "changed_files": [
+   "src/seedcase_sprout/core/join_resource_batches.py",
+   "tests/core/test_join_resource_batches.py"
+  ],
+  "gold_test_files": [
+   "tests/core/test_join_resource_batches.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "495d3fc0fcf128253c8206b8b83bffad370ebc78057089b14a916b56e4a5cb61"
+ },
+ {
+  "position": 245,
+  "name": "poetry_core_pr824",
+  "repo": "https://github.com/python-poetry/poetry-core.git",
+  "pre": "20b72ebf372c8cd5dd0d7f88ac92f5cfebde9b25",
+  "gold": "4e7c3847dc79968c22a24a3f42ee6cdbac59fd58",
+  "changed_files": [
+   "src/poetry/core/version/markers.py",
+   "tests/version/test_markers.py"
+  ],
+  "gold_test_files": [
+   "tests/version/test_markers.py"
+  ],
+  "f2p": 6,
+  "vetting_sha256": "42eab307337566dfc1648e4756a1a3788d0fc280bbccf56b3a70fd9884468643"
+ },
+ {
+  "position": 247,
+  "name": "litellm_pr12436",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pre": "f7d5958dca283e9b6829fa235f1a8f16075d769d",
+  "gold": "d720b3d369eca916c87cd044acc6d2b192b8519f",
+  "changed_files": [
+   "litellm/proxy/_experimental/out/onboarding.html",
+   "litellm/proxy/management_endpoints/key_management_endpoints.py",
+   "litellm/proxy/proxy_server.py",
+   "tests/test_litellm/proxy/test_proxy_server.py"
+  ],
+  "gold_test_files": [
+   "tests/test_litellm/proxy/test_proxy_server.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "7117b4786130c24ae1d44e81d86b4c8f17c3122a6f01713698a8e580346e6b56"
+ },
+ {
+  "position": 251,
+  "name": "python_json_patch_pr173",
+  "repo": "https://github.com/stefankoegl/python-json-patch.git",
+  "pre": "97f3a1f73de2bb1ae67f52d6f7c395bcc6fd83d8",
+  "gold": "5dc8ef64a496fb7c049827a891b4655bcf2a5892",
+  "changed_files": [
+   "jsonpatch.py",
+   "tests.py"
+  ],
+  "gold_test_files": [
+   "tests.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "17867a5c2a1b8fd09af58b509e735bebb6b0c1a5ff7237f6f89c44290c610600"
+ },
+ {
+  "position": 252,
+  "name": "dorsal_pr37",
+  "repo": "https://github.com/dorsalhub/dorsal.git",
+  "pre": "6fc30c24fd935285ff79aa86ef0efc999f45f3df",
+  "gold": "d1910a5a9f5050a86ae6573f80fd0726822d79f3",
+  "changed_files": [
+   "src/dorsal/file/annotation_models/mediainfo/model.py",
+   "tests/cli/adapter_app/test_adapter_export_cmd.py",
+   "tests/cli/adapter_app/test_parse_cmd.py",
+   "tests/cli/model_app/test_init_model.py",
+   "tests/cli/model_app/test_run_model.py",
+   "tests/file/annotation_models/test_mediainfo.py",
+   "uv.lock"
+  ],
+  "gold_test_files": [
+   "tests/cli/adapter_app/test_adapter_export_cmd.py",
+   "tests/cli/adapter_app/test_parse_cmd.py",
+   "tests/cli/model_app/test_init_model.py",
+   "tests/cli/model_app/test_run_model.py",
+   "tests/file/annotation_models/test_mediainfo.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "84fa7683baa316bcfa6f35f7a24d2e3f5ad444c83308bef21f1b9c085bd8300b"
+ },
+ {
+  "position": 253,
+  "name": "wazuh_server_operator_pr19",
+  "repo": "https://github.com/canonical/wazuh-server-operator.git",
+  "pre": "a28dc2b96db8e46aa7e81ccb67c59f2bc225f6d5",
+  "gold": "04fc4356e4f7a6f0a62647c4ab4f2b0dbf51108e",
+  "changed_files": [
+   "src/wazuh.py",
+   "tests/unit/resources/filebeat.yml",
+   "tests/unit/test_wazuh.py"
+  ],
+  "gold_test_files": [
+   "tests/unit/test_wazuh.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "288818bd5b8d6713c04cc4db59dbf53628dd6737c41c9695589ad3bcfb4d5271"
+ },
+ {
+  "position": 259,
+  "name": "pytorch_forecasting_pr2256",
+  "repo": "https://github.com/sktime/pytorch-forecasting.git",
+  "pre": "4d8d97cd3e85a15a9b90a38dfb0afc819d8e8aa4",
+  "gold": "c4f5aac341082c56951bed2f352dc3bf6087ce35",
+  "changed_files": [
+   "pytorch_forecasting/metrics/quantile.py",
+   "tests/test_metrics.py"
+  ],
+  "gold_test_files": [
+   "tests/test_metrics.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "14c054df392aabe95abe158401a3a237a115e1752ff7196935425456403dd7a1"
+ },
+ {
+  "position": 260,
+  "name": "gunicorn_pr3495",
+  "repo": "https://github.com/benoitc/gunicorn.git",
+  "pre": "75b5673f128c71d619d0b0e775ac4f185875d50b",
+  "gold": "a08d5ee2fee1ab520681736ba67cd1194af5c655",
+  "changed_files": [
+   "gunicorn/debug.py",
+   "tests/test_debug.py"
+  ],
+  "gold_test_files": [
+   "tests/test_debug.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "cac607e6971493c5875bd31d330ff595b28aec654fbfa7cb43ac48573b7980c1"
+ },
+ {
+  "position": 268,
+  "name": "pytrilogy_pr219",
+  "repo": "https://github.com/trilogy-data/pytrilogy.git",
+  "pre": "c5178744a7b39475471b19828fa6f27573b9c228",
+  "gold": "efab65c316b686c3d604484f480658ecba2886fe",
+  "changed_files": [
+   "tests/rendering/test_rendering.py",
+   "trilogy/__init__.py",
+   "trilogy/parsing/render.py"
+  ],
+  "gold_test_files": [
+   "tests/rendering/test_rendering.py"
+  ],
+  "f2p": 2,
+  "vetting_sha256": "7a0f60f90d91367d825eab15d4a7ae6ef4d303c1056fbe72fa613065458e46af"
+ },
+ {
+  "position": 274,
+  "name": "seedcase_sprout_pr1392",
+  "repo": "https://github.com/seedcase-project/seedcase-sprout.git",
+  "pre": "5e76569e73420a1bfb1fa0eba8d261ab297abd66",
+  "gold": "cebf1f1c3c908f8a9e7d7b7fccae0f3d5ae94571",
+  "changed_files": [
+   "src/seedcase_sprout/extract_resource_properties.py",
+   "tests/test_extract_resource_properties.py"
+  ],
+  "gold_test_files": [
+   "tests/test_extract_resource_properties.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "b3c48726ef4e2992f20d3f621f9accb625de5777e902b45edf491625d78c0c4e"
+ },
+ {
+  "position": 279,
+  "name": "sympy_pr27651",
+  "repo": "https://github.com/sympy/sympy.git",
+  "pre": "80375847400f5265f985c7e8c398e94b899be62a",
+  "gold": "6a968f7201e5d9187b50dbdc2cc66b17594a59ac",
+  "changed_files": [
+   ".mailmap",
+   "sympy/physics/control/lti.py",
+   "sympy/physics/control/tests/test_lti.py"
+  ],
+  "gold_test_files": [
+   "sympy/physics/control/tests/test_lti.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "a0019ca792a3f7ff3b8f6b1ca49172acf2ad61d2d3ec42569056cb3e950c7da1"
+ },
+ {
+  "position": 288,
+  "name": "claude_agent_sdk_python_pr642",
+  "repo": "https://github.com/anthropics/claude-agent-sdk-python.git",
+  "pre": "7e9b5025d51e2af15ee5450513e8913efc3b9fb7",
+  "gold": "40cc6f578f6c317ebf9c740ec2acaf001f8d7d56",
+  "changed_files": [
+   "src/claude_agent_sdk/_internal/transport/subprocess_cli.py",
+   "tests/test_transport.py"
+  ],
+  "gold_test_files": [
+   "tests/test_transport.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "6c9898435b78039932e918b23b4a6d9bbccf7b9530eedef449cbffc01ad2e4c1"
+ },
+ {
+  "position": 289,
+  "name": "litellm_pr13553",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pre": "ebae03cf93af99d6b8c199cfa9a39fa8733b5622",
+  "gold": "74ddd21067b27e27db71ea5c9a240ebe44749e6d",
+  "changed_files": [
+   "litellm/proxy/management_endpoints/scim/scim_v2.py",
+   "tests/test_litellm/proxy/management_endpoints/scim/test_scim_v2_endpoints.py"
+  ],
+  "gold_test_files": [
+   "tests/test_litellm/proxy/management_endpoints/scim/test_scim_v2_endpoints.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "ae71f87c9f812d2a49934592473b4620c064fe3a0d70e1f5248cf1d8dbddac28"
+ },
+ {
+  "position": 290,
+  "name": "litellm_pr13267",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pre": "779579a604b102ff92b2ae957c7f283c69cb2a19",
+  "gold": "849f5e0ba01aabf26f583cf7a455e8c2f29a4a36",
+  "changed_files": [
+   "litellm/proxy/management_endpoints/ui_sso.py",
+   "tests/test_litellm/proxy/management_endpoints/test_ui_sso.py"
+  ],
+  "gold_test_files": [
+   "tests/test_litellm/proxy/management_endpoints/test_ui_sso.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "bcce2dc9caf41daa97760e90c1ac93e713259e97fd2ca48600f7f7436394b949"
+ },
+ {
+  "position": 291,
+  "name": "tubular_pr311",
+  "repo": "https://github.com/azukds/tubular.git",
+  "pre": "c3657f3361d7be7e592497a1d8076d3f9f4733d1",
+  "gold": "04c54e99a4afad41d438657b0570e6c1a52771ff",
+  "changed_files": [
+   "CHANGELOG.rst",
+   "tests/capping/test_CappingTransformer.py",
+   "tubular/capping.py"
+  ],
+  "gold_test_files": [
+   "tests/capping/test_CappingTransformer.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "f8738c7493f71d5b6d41143ed71fd0f0a638f7fed357b05e0050d61421ce5ab3"
+ },
+ {
+  "position": 292,
+  "name": "pypdf_pr2868",
+  "repo": "https://github.com/py-pdf/pypdf.git",
+  "pre": "d974d5c755a7b65f3b9c68c5742afdbc0c1693f6",
+  "gold": "635a7c16c829acab942c7ded0ea43fdfb451ad4c",
+  "changed_files": [
+   "pypdf/_page.py",
+   "tests/test_text_extraction.py"
+  ],
+  "gold_test_files": [
+   "tests/test_text_extraction.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "1d5e3254008fbb9ec94f8ac3a5243b7b7f6a7ba16f30961b425f8b0876b795c6"
+ },
+ {
+  "position": 293,
+  "name": "render_engine_pr806",
+  "repo": "https://github.com/render-engine/render-engine.git",
+  "pre": "615e3a3efd2e6359d7ad4b81e428f4cb6472c081",
+  "gold": "01450d88547333e07b425a4aaaae95373ae23160",
+  "changed_files": [
+   "requirements.txt",
+   "src/render_engine/cli/cli.py",
+   "tests/tests_cli/test_render_engine_init.py"
+  ],
+  "gold_test_files": [
+   "tests/tests_cli/test_render_engine_init.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "8498c22a6719eec535bf52f16e8518331dd2332bf16bb597ea04eaea3937e2aa"
+ },
+ {
+  "position": 297,
+  "name": "pypdf_pr2893",
+  "repo": "https://github.com/py-pdf/pypdf.git",
+  "pre": "96b46add0d61940f099f40a9676bb8fff300eaa6",
+  "gold": "8245fbc89eea919879094cfe12c57f6c6d5bd71d",
+  "changed_files": [
+   "pypdf/annotations/_markup_annotations.py",
+   "tests/test_annotations.py"
+  ],
+  "gold_test_files": [
+   "tests/test_annotations.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "ed4d1acb907bfd77e524399e0d1458c66f05eb01b37bf581bd88f5eb38a263fe"
+ },
+ {
+  "position": 301,
+  "name": "tiatoolbox_pr989",
+  "repo": "https://github.com/TissueImageAnalytics/tiatoolbox.git",
+  "pre": "f852b069453f36f41bda0fb21dad4912b42d492a",
+  "gold": "ecd61dc15a6fc195d3b538c7e036cf761d0b06d7",
+  "changed_files": [
+   "tests/engines/test_nucleus_detection_engine.py",
+   "tests/engines/test_semantic_segmentor.py",
+   "tiatoolbox/models/engine/semantic_segmentor.py",
+   "tiatoolbox/models/models_abc.py"
+  ],
+  "gold_test_files": [
+   "tests/engines/test_nucleus_detection_engine.py",
+   "tests/engines/test_semantic_segmentor.py"
+  ],
+  "f2p": 2,
+  "vetting_sha256": "5233177a1f7fbba9d6b02e88ba02cd5a5a6194046e85c6e69e7869b89a7739ca"
+ },
+ {
+  "position": 302,
+  "name": "grid_pr11",
+  "repo": "https://github.com/3pacs/GRID.git",
+  "pre": "765b2c61e7692162bfc56b92fe6f2765aa328277",
+  "gold": "24b1f4231e4ebbf6acb3d9359ae65cc428f84ad8",
+  "changed_files": [
+   "api/routers/vault.py",
+   "pwa/src/views/Vault.jsx",
+   "tests/test_vault_api.py"
+  ],
+  "gold_test_files": [
+   "tests/test_vault_api.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "588e2d6f8401d9329d581221896e0b05cb3e79da56ae7731b75e0f429867b2b7"
+ },
+ {
+  "position": 303,
+  "name": "polytope_mars_pr88",
+  "repo": "https://github.com/ecmwf/polytope-mars.git",
+  "pre": "98809744d53a3e73811c4d865ab5a166769240b2",
+  "gold": "e898843da1f52d23b340805a40a4ad96af479e48",
+  "changed_files": [
+   "polytope_mars/utils/areas.py",
+   "polytope_mars/version.py",
+   "tests/test_costing.py"
+  ],
+  "gold_test_files": [
+   "tests/test_costing.py"
+  ],
+  "f2p": 3,
+  "vetting_sha256": "72223150e673bc43d7274ab43b8632246ac0c7f4bc5ada3256ad87db1898095d"
+ },
+ {
+  "position": 306,
+  "name": "seedcase_sprout_pr887",
+  "repo": "https://github.com/seedcase-project/seedcase-sprout.git",
+  "pre": "46578d72200861fc42849a37c30df9a99d753a5b",
+  "gold": "bfcc039dca9d9d969a6105cc2dc43da360d54dc9",
+  "changed_files": [
+   "seedcase_sprout/core/properties.py",
+   "tests/core/test_properties.py"
+  ],
+  "gold_test_files": [
+   "tests/core/test_properties.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "5675ba97528f87425a7889222690015473c8fbf3ea31ef313712e48c59c649fb"
+ },
+ {
+  "position": 313,
+  "name": "pyview_pr64",
+  "repo": "https://github.com/ogrodnek/pyview.git",
+  "pre": "ffce01aee22cf8f431c9a865507c9b17a05590f3",
+  "gold": "26a29e9afc5265d2b6fe301bc5e898abf3a2cce8",
+  "changed_files": [
+   "pyproject.toml",
+   "pyview/template/render_diff.py",
+   "tests/template/test_diff.py"
+  ],
+  "gold_test_files": [
+   "tests/template/test_diff.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "0f808fe4ac62c09cbbe3fc9c1a813a12173f3f2c99a428c59d0f9ae47e44bbeb"
+ },
+ {
+  "position": 314,
+  "name": "litellm_pr8979",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pre": "f1a44d1fdc316d6c7deae1bf75c18280a0c4437d",
+  "gold": "42931638dfc7689a6d748510c05080cce967753c",
+  "changed_files": [
+   "litellm/types/caching.py",
+   "tests/litellm/proxy/test_caching_routes.py"
+  ],
+  "gold_test_files": [
+   "tests/litellm/proxy/test_caching_routes.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "41f6545027d388791b0dea72815a60ace4de625acc0e17c8d3aede48d5fd6a88"
+ },
+ {
+  "position": 316,
+  "name": "client_py_pr473",
+  "repo": "https://github.com/DeebotUniverse/client.py.git",
+  "pre": "a12aca3d13cb3398e58a2b0faddab2f91f7c08ff",
+  "gold": "c1bd5344bc140b3a66c3f045a2c6bf196c215b62",
+  "changed_files": [
+   "deebot_client/api_client.py",
+   "deebot_client/hardware/deebot/__init__.py",
+   "tests/conftest.py",
+   "tests/hardware/test_init.py"
+  ],
+  "gold_test_files": [
+   "tests/conftest.py",
+   "tests/hardware/test_init.py"
+  ],
+  "f2p": 7,
+  "vetting_sha256": "f79760da4e93d7becfebeff263840928f8aca7a48c340d52bc7625997378bca9"
+ },
+ {
+  "position": 319,
+  "name": "lightcurvelynx_pr696",
+  "repo": "https://github.com/lincc-frameworks/lightcurvelynx.git",
+  "pre": "d2a209d2cbd7a962de592aff727911616a21d80d",
+  "gold": "eb485aa721c456b90463d10e81241bc6da71d609",
+  "changed_files": [
+   "src/lightcurvelynx/math_nodes/given_sampler.py",
+   "tests/lightcurvelynx/math_nodes/test_given_sampler.py",
+   "tests/lightcurvelynx/math_nodes/test_ra_dec_sampler.py"
+  ],
+  "gold_test_files": [
+   "tests/lightcurvelynx/math_nodes/test_given_sampler.py",
+   "tests/lightcurvelynx/math_nodes/test_ra_dec_sampler.py"
+  ],
+  "f2p": 4,
+  "vetting_sha256": "fe104bb0134dabc26289da707b64226a8f9e5fdfdc02af3b2445306932d7b333"
+ },
+ {
+  "position": 336,
+  "name": "litellm_pr6219",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pre": "d0a30529374ac45923f0038f3556919cb50cb906",
+  "gold": "cda0a993e23c821c928cb393c13b872d28257239",
+  "changed_files": [
+   "litellm/caching/__init__.py",
+   "tests/local_testing/test_caching.py"
+  ],
+  "gold_test_files": [
+   "tests/local_testing/test_caching.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "1fbaf92b2bc7c317807edb9da79458cfa84ce61f794da13add9c53a439cded45"
+ },
+ {
+  "position": 338,
+  "name": "sympy_pr27030",
+  "repo": "https://github.com/sympy/sympy.git",
+  "pre": "fe7d761a740ea3685d58c618e3674cba1ed5255a",
+  "gold": "05e3ffc6ea7345db9081b4419daa12d3f63980c4",
+  "changed_files": [
+   "sympy/tensor/tensor.py",
+   "sympy/tensor/tests/test_tensor.py"
+  ],
+  "gold_test_files": [
+   "sympy/tensor/tests/test_tensor.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "b47cdcca098834346ac954157313903de5ac482fcd89c2724d6a16acee092935"
+ },
+ {
+  "position": 346,
+  "name": "galaxy_pr18802",
+  "repo": "https://github.com/galaxyproject/galaxy.git",
+  "pre": "7601d686502b0f6c661e88a9cabed95c6c51ab37",
+  "gold": "1029e7fd84d1be9c8695ab862409c6589c898c07",
+  "changed_files": [
+   "lib/galaxy/model/__init__.py",
+   "lib/galaxy_test/api/test_workflows.py"
+  ],
+  "gold_test_files": [
+   "lib/galaxy_test/api/test_workflows.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "80ba9fd084f677a1c4268c6f306036224d51b92446656ab993c699902f23d65e"
+ },
+ {
+  "position": 347,
+  "name": "litellm_pr9352",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pre": "24fbadf0725cdaab36e96f05491111eaffdde906",
+  "gold": "c101fe9b5d0b9ad4c3f3a315b5f0316122fa6121",
+  "changed_files": [
+   "litellm/integrations/arize/_utils.py",
+   "tests/local_testing/test_arize_ai.py",
+   "tests/logging_callback_tests/test_arize_logging.py"
+  ],
+  "gold_test_files": [
+   "tests/local_testing/test_arize_ai.py",
+   "tests/logging_callback_tests/test_arize_logging.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "fc2db7f28072bb383769e06429762f51f77c3edaee2c7bb1e5472c14bd4af596"
+ },
+ {
+  "position": 356,
+  "name": "aio_request_pr262",
+  "repo": "https://github.com/anna-money/aio-request.git",
+  "pre": "c93cf4005ba7cfb46509eb4fb647847cab66fada",
+  "gold": "3cb33b4a7f5a695421a6d8a53a5539b0f143b684",
+  "changed_files": [
+   "aio_request/deadline.py",
+   "tests/test_deadline.py"
+  ],
+  "gold_test_files": [
+   "tests/test_deadline.py"
+  ],
+  "f2p": 3,
+  "vetting_sha256": "b06d0b13d43ad4fcc9f2fd1b1b200dff5c4f761cefe46e63122f1cb2eda0966a"
+ },
+ {
+  "position": 357,
+  "name": "prowler_pr4845",
+  "repo": "https://github.com/prowler-cloud/prowler.git",
+  "pre": "61df2ce0c20010e9bdc8f2f46632187e6e4d3607",
+  "gold": "fb449cede866f1c6714ef65dad451be585439d28",
+  "changed_files": [
+   "prowler/lib/outputs/utils.py",
+   "tests/lib/outputs/outputs_test.py"
+  ],
+  "gold_test_files": [
+   "tests/lib/outputs/outputs_test.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "5fa8f9e4f3f68ba7238d7a16a6a94cd5b8dd9dcbcb7d284c68310e644a22150f"
+ },
+ {
+  "position": 358,
+  "name": "mesa_llm_pr76",
+  "repo": "https://github.com/mesa/mesa-llm.git",
+  "pre": "75592b78a2513a055be057df3374633c6198dd4f",
+  "gold": "cff16b0eb95e9ca9bf00c554bcdd11f0623e1fb8",
+  "changed_files": [
+   "mesa_llm/memory/st_memory.py",
+   "tests/test_memory/test_st_memory.py"
+  ],
+  "gold_test_files": [
+   "tests/test_memory/test_st_memory.py"
+  ],
+  "f2p": 5,
+  "vetting_sha256": "c6c24f66e3bfe8ee540b9dca51b3ad3ceb7ecf6092af5e7c381ddc47234050dc"
+ },
+ {
+  "position": 360,
+  "name": "litellm_pr11635",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pre": "52ef96261fb131ea67b799771348cc79520dfdaa",
+  "gold": "91010cda8f0f05cb845918219bb1aefc8b084d1c",
+  "changed_files": [
+   "litellm/litellm_core_utils/prompt_templates/common_utils.py",
+   "tests/local_testing/test_amazing_vertex_completion.py",
+   "tests/test_litellm/llms/vertex_ai/test_vertex.py"
+  ],
+  "gold_test_files": [
+   "tests/local_testing/test_amazing_vertex_completion.py",
+   "tests/test_litellm/llms/vertex_ai/test_vertex.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "506c913f1af6a2965b759a8393c733fa43665f27947ad37ab3da8d7480d41d9d"
+ },
+ {
+  "position": 361,
+  "name": "pytorch_forecasting_pr2294",
+  "repo": "https://github.com/sktime/pytorch-forecasting.git",
+  "pre": "82ef7a1dd592bd79b1d2f415f623c6694416e4b0",
+  "gold": "859b9eef6fe4f0a3129716361278406159fd9b58",
+  "changed_files": [
+   "pytorch_forecasting/data/timeseries/_timeseries_v2.py",
+   "tests/test_data/test_d1.py"
+  ],
+  "gold_test_files": [
+   "tests/test_data/test_d1.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "e78925f2382e19afe943a53133b3f12496abac6b8e813a2f2ae1b0df18353654"
+ },
+ {
+  "position": 362,
+  "name": "prowler_pr5399",
+  "repo": "https://github.com/prowler-cloud/prowler.git",
+  "pre": "434460b978fd9ae8cd3613d0d61c7bbd60ca1751",
+  "gold": "54280ee2dc3c9c3b082bc127bffd6f1f2edc127b",
+  "changed_files": [
+   "prowler/providers/aws/services/iam/iam_service.py",
+   "prowler/providers/aws/services/iam/iam_support_role_created/iam_support_role_created.py",
+   "tests/providers/aws/services/iam/iam_service_test.py",
+   "tests/providers/aws/services/iam/iam_support_role_created/iam_support_role_created_test.py"
+  ],
+  "gold_test_files": [
+   "tests/providers/aws/services/iam/iam_service_test.py",
+   "tests/providers/aws/services/iam/iam_support_role_created/iam_support_role_created_test.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "e8784b4f8d9d350ee8cf62c020fe10ae94909d7bb53f4f68a9b7ebfb61014869"
+ },
+ {
+  "position": 364,
+  "name": "array_api_strict_pr157",
+  "repo": "https://github.com/data-apis/array-api-strict.git",
+  "pre": "8d2d207b8159b74fd72b857da35edb9021d4974e",
+  "gold": "51c2924e63403afc284028122d4892e4c3a46f5a",
+  "changed_files": [
+   "array_api_strict/_array_object.py",
+   "array_api_strict/tests/test_array_object.py"
+  ],
+  "gold_test_files": [
+   "array_api_strict/tests/test_array_object.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "c214dc47c6fc5ad924f44c9b067d5defcfcc2e3cbbe4f766f5b66461e03d7fde"
+ },
+ {
+  "position": 366,
+  "name": "nltk_pr3180",
+  "repo": "https://github.com/nltk/nltk.git",
+  "pre": "4b72976a6ff3d180ed4012f11843e611a8f89516",
+  "gold": "67a2736f89b286b028db08bd247134f17a11fc6b",
+  "changed_files": [
+   "nltk/metrics/distance.py",
+   "nltk/test/unit/test_distance.py"
+  ],
+  "gold_test_files": [
+   "nltk/test/unit/test_distance.py"
+  ],
+  "f2p": 5,
+  "vetting_sha256": "890651c46e1cccb61c48026aa16d6c9ee01e2cacd30a33db2083bfa458a4890d"
+ },
+ {
+  "position": 368,
+  "name": "pytrilogy_pr411",
+  "repo": "https://github.com/trilogy-data/pytrilogy.git",
+  "pre": "69b0277d1b3647ef06772ba2a3d7aaf67eaf3680",
+  "gold": "64e821d6dbe8b72f37c1a859037ab90cceb86a43",
+  "changed_files": [
+   "tests/scripts/test_config.py",
+   "trilogy/__init__.py",
+   "trilogy/execution/config.py",
+   "trilogy/scripts/common.py",
+   "trilogy/scripts/parallel_execution.py"
+  ],
+  "gold_test_files": [
+   "tests/scripts/test_config.py"
+  ],
+  "f2p": 2,
+  "vetting_sha256": "a168b9da389dfb340de91be16c93981f2be21b6a64359b0194c56036d1306642"
+ },
+ {
+  "position": 373,
+  "name": "celery_pr9904",
+  "repo": "https://github.com/celery/celery.git",
+  "pre": "9bea091e4804b792d1ec305871d119132146f0aa",
+  "gold": "c276fed72cc18b5e88077004124eaad0327ac666",
+  "changed_files": [
+   "celery/backends/database/models.py",
+   "t/unit/backends/test_database.py"
+  ],
+  "gold_test_files": [
+   "t/unit/backends/test_database.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "5fbdc1a2eda59b18f277035eeef9d6f53fb4e67d5ec961d9609742f36d8e600b"
+ },
+ {
+  "position": 384,
+  "name": "superset_pr26467",
+  "repo": "https://github.com/apache/superset.git",
+  "pre": "55aa36fef8477c69d1bf28c7c7922dcc6ac54e99",
+  "gold": "53b1d1097cf689db358fa03faf4036d4ec4d61b5",
+  "changed_files": [
+   "superset/db_engine_specs/presto.py",
+   "tests/unit_tests/db_engine_specs/test_presto.py"
+  ],
+  "gold_test_files": [
+   "tests/unit_tests/db_engine_specs/test_presto.py"
+  ],
+  "f2p": 3,
+  "vetting_sha256": "07f598a59c6914642b3972f87ea414a36426b4f3a04076c4338a9358d5d1c13c"
+ },
+ {
+  "position": 389,
+  "name": "darts_pr1938",
+  "repo": "https://github.com/unit8co/darts.git",
+  "pre": "60f2ec13daff0a244c2ae6a142bdb4bce554eeaf",
+  "gold": "dbed6be8e2366b1f98f9315b11b8d7cb235882b5",
+  "changed_files": [
+   "CHANGELOG.md",
+   "darts/tests/test_timeseries.py",
+   "darts/timeseries.py"
+  ],
+  "gold_test_files": [
+   "darts/tests/test_timeseries.py"
+  ],
+  "f2p": 1,
+  "vetting_sha256": "84a7cdbf578e5ddd1c2017917fb9f868ec3f042e1bcc33591cf3131a002767f2"
+ },
+ {
+  "position": 398,
+  "name": "litellm_pr8815",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "pre": "ef22209a15646ea537e0bea2a37c2d0d3eaf1ddb",
+  "gold": "f9cee4c46b2ae2fb37fa23403fafc24007fa981d",
+  "changed_files": [
+   "docs/my-website/docs/providers/litellm_proxy.md",
+   "litellm/llms/openai/transcriptions/handler.py",
+   "litellm/main.py",
+   "litellm/rerank_api/main.py",
+   "tests/llm_translation/test_litellm_proxy_provider.py",
+   "tests/local_testing/test_completion.py"
+  ],
+  "gold_test_files": [
+   "tests/llm_translation/test_litellm_proxy_provider.py",
+   "tests/local_testing/test_completion.py"
+  ],
+  "f2p": 8,
+  "vetting_sha256": "5ef9279c751b4b666439fa626d274dacdb0435fdfcec1e192e30947547a56751"
+ }
+]

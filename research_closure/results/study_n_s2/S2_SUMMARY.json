@@ -1,0 +1,81 @@
+{
+ "candidates_considered": 400,
+ "vetting_results": 400,
+ "categories": {
+  "eligible (fail-before, pass-after test)": 107,
+  "tests not runnable: missing python module": 119,
+  "tests not runnable: other": 67,
+  "tests ran, no fail-to-pass test": 55,
+  "tests not runnable: conftest or fixture error": 50,
+  "vetting tool error": 2
+ },
+ "eligible": 107,
+ "runnable": 162,
+ "eligible_share_of_runnable": 0.66,
+ "gate": "PASS",
+ "gate_M1": "PASS",
+ "threshold": ">= 60 eligible among the first 400 (at least 200 candidates)",
+ "eligible_repositories": 61,
+ "most_missing_modules": [
+  [
+   "pandas",
+   10
+  ],
+  [
+   "pydantic",
+   5
+  ],
+  [
+   "concrete",
+   5
+  ],
+  [
+   "testing_support",
+   4
+  ],
+  [
+   "ruamel",
+   4
+  ],
+  [
+   "shapely",
+   4
+  ],
+  [
+   "rest_framework",
+   4
+  ],
+  [
+   "posthoganalytics",
+   3
+  ],
+  [
+   "sentry_sdk",
+   3
+  ],
+  [
+   "charms",
+   3
+  ],
+  [
+   "paho",
+   3
+  ],
+  [
+   "deadline",
+   3
+  ],
+  [
+   "infi",
+   3
+  ],
+  [
+   "yt",
+   2
+  ],
+  [
+   "xmltodict",
+   2
+  ]
+ ]
+}
