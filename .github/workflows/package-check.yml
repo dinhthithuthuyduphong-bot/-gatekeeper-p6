@@ -1,0 +1,24 @@
+# Read-only: is a delivered package complete and unchanged in the repository?  (partial uploads, wrong folders)
+name: Gatekeeper package check
+on:
+  workflow_dispatch:
+    inputs:
+      manifest: {description: "manifest file", required: true, default: "research_closure/manifests/study_n_s3_package.json"}
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: |
+          python tools/package_check.py "${{ inputs.manifest }}" --out out_pkg
+          cat out_pkg/PACKAGE_CHECK.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: PACKAGE_CHECK
+          path: out_pkg
