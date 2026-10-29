@@ -92,33 +92,39 @@ def probe_roots(py, orig, gold, modules, pythonpath, work, n=200, max_funcs=3, e
     return {"edited_functions": len(edited), "functions": funcs, "verdict": instance_verdict(funcs, None, len(edited))}
 
 
-def main(eligible_path, name, out_dir, n=200, max_funcs=3):
-    import n_s3_check as N                                       # frozen helpers: plan and seed rules
+def prepare(rec, work):
+    """Rebuild the two snapshots from the recorded SHAs and provision one environment (version-2.1 rules)."""
+    import n_s3_check as N                                       # frozen helpers: plan rules
     import vet_target as V
     import vet_target2 as T2
+    modules, census, pythonpath, tests = N.instance_plan(rec)
+    repo = work / "repo"
+    repo.mkdir()
+    V.sh([*V.GIT, "init", "-q"], cwd=repo)
+    V.sh([*V.GIT, "remote", "add", "origin", rec["repo"]], cwd=repo)
+    V.sh([*V.GIT, "fetch", "-q", "--filter=blob:none", "origin", rec["pre"], rec["gold"]], cwd=repo, timeout=900)
+    orig, gold = work / "orig", work / "gold"
+    V.checkout_to(repo, rec["pre"], orig)
+    V.checkout_to(repo, rec["gold"], gold)
+    venv.EnvBuilder(with_pip=True).create(work / "venv")
+    py = work / "venv" / "bin" / "python"
+    log, repairs = [], []
+    T2.provision(py, orig, ["test", "dev"], log)
+    T2.repair({"pre": (py, orig), "gold": (py, gold)}, tests, repairs)
+    env = dict(os.environ, PYTHONPATH=str(ROOT), PYTHONHASHSEED="0", PYTHONDONTWRITEBYTECODE="1")
+    return {"py": py, "orig": orig, "gold": gold, "repo": repo, "modules": modules, "pythonpath": pythonpath, "env": env}
+
+
+def main(eligible_path, name, out_dir, n=200, max_funcs=3):
     rec = next(r for r in json.loads(Path(eligible_path).read_text()) if r["name"] == name)
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
     work = Path(tempfile.mkdtemp(prefix="fnp_"))
     report = {"name": name, "repo": rec["repo"], "status": "started"}
     try:
-        modules, census, pythonpath, tests = N.instance_plan(rec)
-        repo = work / "repo"
-        repo.mkdir()
-        V.sh([*V.GIT, "init", "-q"], cwd=repo)
-        V.sh([*V.GIT, "remote", "add", "origin", rec["repo"]], cwd=repo)
-        V.sh([*V.GIT, "fetch", "-q", "--filter=blob:none", "origin", rec["pre"], rec["gold"]], cwd=repo, timeout=900)
-        orig, gold = work / "orig", work / "gold"
-        V.checkout_to(repo, rec["pre"], orig)
-        V.checkout_to(repo, rec["gold"], gold)
-        venv.EnvBuilder(with_pip=True).create(work / "venv")
-        py = work / "venv" / "bin" / "python"
-        log, repairs = [], []
-        T2.provision(py, orig, ["test", "dev"], log)
-        T2.repair({"pre": (py, orig), "gold": (py, gold)}, tests, repairs)
-        env = dict(os.environ, PYTHONPATH=str(ROOT), PYTHONHASHSEED="0", PYTHONDONTWRITEBYTECODE="1")
+        p = prepare(rec, work)
         (work / "probe").mkdir()
-        report.update(probe_roots(py, orig, gold, modules, pythonpath, work / "probe", int(n), int(max_funcs), env), status="FINISHED")
+        report.update(probe_roots(p["py"], p["orig"], p["gold"], p["modules"], p["pythonpath"], work / "probe", int(n), int(max_funcs), p["env"]), status="FINISHED")
     except Exception as exc:
         report.update(status="ERROR", error=("%s: %s" % (type(exc).__name__, exc))[:400], verdict="snapshots or environment failed")
     finally:

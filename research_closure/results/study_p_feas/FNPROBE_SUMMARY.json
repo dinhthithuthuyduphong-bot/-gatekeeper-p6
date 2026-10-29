@@ -1,0 +1,36 @@
+{
+ "instances": 107,
+ "funnel": {
+  "snapshots or environment failed": 0,
+  "no edited function present in both versions": 7,
+  "no edited function could be imported or called": 28,
+  "unstable outcomes": 1,
+  "the original never differs from the fix on generated inputs": 57,
+  "usable": 14
+ },
+ "usable": 14,
+ "usable_share": 0.131,
+ "trigger_rate_of_usable_functions": {
+  "median": 0.7225,
+  "min": 0.005,
+  "max": 1.0
+ },
+ "test_level_vs_function_level": {
+  "both usable": 1,
+  "only test-level": 7,
+  "only function-level": 13,
+  "neither": 86
+ },
+ "function_failure_reasons": {
+  "the original never differs from the fix on generated inputs": 74,
+  "did not run: UNCALLABLE instance method of a class that cannot be buil": 45,
+  "did not run: UNCALLABLE import failed: ModuleNotFoundError / ModuleNot": 6,
+  "did not run: UNCALLABLE import failed: AttributeError / AttributeError": 2,
+  "did not run: UNCALLABLE import failed: KeyError / KeyError": 2,
+  "did not run: CRASHED t(\"pythonpath\", []), a[\"file\"], a[\"qualname\"])\n  ": 1,
+  "only 60 stable inputs": 1,
+  "only 14 stable inputs": 1,
+  "did not run: UNCALLABLE no signature": 1
+ },
+ "note": "Development measurement on the Study N A* instances (exposed at N-S2 and N-S3, not to the function-level oracle)."
+}

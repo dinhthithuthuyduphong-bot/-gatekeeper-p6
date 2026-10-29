@@ -23,3 +23,30 @@ Ngưỡng 25% được chọn để một cohort mới có kích thước thực
 ## Ghi chú về giới hạn của bộ sinh bước 1
 
 Bộ sinh chỉ dùng kiểu khai báo, giá trị mặc định và một tập giá trị vô hướng; phương thức của lớp chỉ được gọi khi lớp dựng được không cần tham số. Vì vậy bước 1 là **cận dưới** của khả năng gọi được. Hàm cần đối tượng phức tạp, tệp hay mạng sẽ không gọi được ở bước này.
+
+## Kết quả bước 1 (bộ sinh theo chữ ký, 29/10/2026)
+
+**14 trên 107 instance dùng được (13,1%)**, nằm trong vùng 11 đến 26: chưa đủ ngưỡng 27, nên áp hành động "thử bộ sinh mạnh hơn" đã ghi ở trên.
+
+| Phễu | Số |
+|---|---|
+| Không có hàm bị sửa ở cả hai phiên bản | 7 |
+| Không hàm nào import hay gọi được | 28 |
+| Kết quả không ổn định | 1 |
+| Bản gốc không bao giờ khác bản fix trên đầu vào sinh ra | 57 |
+| **Dùng được** | **14** |
+
+Theo hàm: 74 hàm có bản gốc trùng bản fix trên mọi đầu vào; 45 là phương thức của lớp không dựng được nếu thiếu tham số; 10 không import được. Ở các hàm dùng được, tỉ lệ bản gốc khác bản fix có trung vị 72% (0,5% đến 100%).
+
+**Quan sát sau khi xem kết quả (không dùng để vượt ngưỡng):** oracle mức hàm và mức test gần như không trùng nhau: cả hai dùng được ở 1 instance, chỉ mức hàm ở 13, chỉ mức test ở 7, không oracle nào ở 86.
+
+## Bước 2: bộ sinh do model nhẹ viết (thiết kế cố định TRƯỚC khi chạy)
+
+Cùng 107 instance, cùng tối đa 3 hàm mỗi instance, cùng định nghĩa "dùng được", **ngưỡng 27 không đổi**.
+
+- **Model:** `google/gemini-3.8-flash`, `reasoning_effort` low, trần đầu ra 4.000 token. Tối đa **2 lời gọi** mỗi hàm: lời gọi đầu nhiệt độ 0; nếu bộ sinh lỗi khi chạy trên bản gốc, lời gọi thứ hai nhận thông báo lỗi.
+- **Model được xem:** mã nguồn của hàm trong **bản gốc** (và `__init__` của lớp nếu là phương thức), đầu module, văn bản issue (issue liên kết hoặc tiêu đề PR), và **diff của bản fix cho file đó**. Model viết một hàm `make_inputs(rng, n)` trả về `n` bộ (đối tượng nhận, tham số vị trí, tham số tên). Bộ sinh chạy **trong từng snapshot** với cùng seed, nên mọi phiên bản nhận cùng một chương trình sinh.
+- **Lời dặn model:** khoảng một nửa đầu vào là cách dùng thông thường, một nửa nhắm vào vùng mà issue và bản fix liên quan.
+- **Lý do được xem bản fix:** bản fix là oracle, giống cách RGT sinh test trên bản vá chuẩn. **Giới hạn đã biết:** đầu vào tập trung quanh vùng sửa có thể bỏ sót chênh lệch ở chỗ khác; Study P (nếu mở) sẽ phải dùng phân phối trộn với bộ sinh theo chữ ký.
+- **Ngân sách:** trần cứng 16 USD (0,15 USD mỗi instance, tính theo trường hợp xấu nhất), dự kiến khoảng 3 USD; chỉ credit Free Trial.
+- **Kết luận:** ≥ 27 dùng được với bộ sinh bước 2 thì đăng ký Study P; nếu không, hướng 4 thành bài chính. Không có bước 3.

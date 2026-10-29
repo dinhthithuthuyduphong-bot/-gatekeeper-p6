@@ -24,6 +24,8 @@ def main(d, s3_rows, out):
                "test_level_vs_function_level": {"both usable": both[(True, True)], "only test-level": both[(True, False)],
                                                 "only function-level": both[(False, True)], "neither": both[(False, False)]},
                "function_failure_reasons": dict(why.most_common(12)),
+               "model_spent_usd": round(sum(r.get("spent_usd") or 0 for r in recs.values()), 4),
+               "model_calls": sum(r.get("model_calls") or 0 for r in recs.values()),
                "note": "Development measurement on the Study N A* instances (exposed at N-S2 and N-S3, not to the function-level oracle)."}
     o = Path(out)
     o.mkdir(parents=True, exist_ok=True)

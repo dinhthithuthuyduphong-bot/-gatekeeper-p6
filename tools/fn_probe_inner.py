@@ -42,8 +42,8 @@ def canonical(value):
     return ["ok", type(value).__name__, ADDR.sub("0x?", text)[:300]]
 
 
-def load_function(root, pythonpath, rel, qualname):
-    """Import the module that holds `qualname` from this snapshot.  Returns (callable, skip_first, reason)."""
+def load_target(root, pythonpath, rel, qualname):
+    """Import the module that holds `qualname` from this snapshot.  Returns (module, parent, name, reason)."""
     for p in reversed([str(Path(root) / q) for q in pythonpath] + [str(root)]):
         sys.path.insert(0, p)
     modname = rel[:-3].replace("/", ".")
@@ -60,33 +60,97 @@ def load_function(root, pythonpath, rel, qualname):
             mod = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(mod)
         except BaseException as exc2:
-            return None, False, "import failed: %s / %s" % (type(exc).__name__, type(exc2).__name__)
+            return None, None, None, "import failed: %s / %s" % (type(exc).__name__, type(exc2).__name__)
     if "<locals>" in qualname:
-        return None, False, "nested function"
+        return None, None, None, "nested function"
     parts = qualname.split(".")
-    obj = mod
-    for i, part in enumerate(parts):
-        if not hasattr(obj, part):
-            return None, False, "attribute %s not found" % ".".join(parts[: i + 1])
-        parent, obj = obj, getattr(obj, part)
-    if len(parts) == 1:
-        return obj, False, None
-    raw = inspect.getattr_static(parent, parts[-1], None)
-    if isinstance(raw, (staticmethod, classmethod)):
-        return obj, False, None
-    if inspect.isclass(parent):
+    parent = mod
+    for i, part in enumerate(parts[:-1]):
         try:
-            inst = parent()
+            parent = getattr(parent, part)
+        except BaseException:
+            return None, None, None, "attribute %s not found" % ".".join(parts[: i + 1])
+    if inspect.getattr_static(parent, parts[-1], None) is None:
+        return None, None, None, "attribute %s not found" % qualname
+    return mod, parent, parts[-1], None
+
+
+def load_function(root, pythonpath, rel, qualname):
+    """Callable for the signature-driven generator.  Returns (callable, skip_first, reason)."""
+    mod, parent, name, why = load_target(root, pythonpath, rel, qualname)
+    if why:
+        return None, False, why
+    raw = inspect.getattr_static(parent, name, None)
+    if parent is mod or isinstance(raw, (staticmethod, classmethod)) or not inspect.isclass(parent):
+        try:
+            return getattr(parent, name), False, None
         except BaseException as exc:
-            return None, False, "instance method of a class that cannot be built without arguments (%s)" % type(exc).__name__
-        return getattr(inst, parts[-1]), False, None
-    return obj, False, None
+            return None, False, "attribute access raised %s" % type(exc).__name__
+    try:
+        inst = parent()
+    except BaseException as exc:
+        return None, False, "instance method of a class that cannot be built without arguments (%s)" % type(exc).__name__
+    try:
+        return getattr(inst, name), False, None
+    except BaseException as exc:                                 # a property or descriptor that raises
+        return None, False, "attribute access raised %s" % type(exc).__name__
+
+
+def run_calls(items, resolve, timeout):
+    """items: [(receiver, args, kwargs)]; resolve(receiver) -> the callable.  One canonical outcome per item."""
+    outcomes = []
+    for receiver, args, kwargs in items:
+        signal.alarm(int(timeout))
+        try:
+            fn = resolve(receiver)
+            r = fn(*args, **kwargs)
+            if inspect.iscoroutine(r):
+                r = asyncio.run(r)
+            outcomes.append(canonical(r))
+        except CallTimeout:
+            outcomes.append(["timeout"])
+        except BaseException as exc:                             # including SystemExit raised by the function
+            outcomes.append(["exc", type(exc).__name__, ADDR.sub("0x?", str(exc))[:120]])
+        finally:
+            signal.alarm(0)
+    return outcomes
+
+
+def run_generator(a):
+    """Mode run_gen: execute a model-written `make_inputs(rng, n)` INSIDE this snapshot and call the function."""
+    import random
+    import traceback
+    mod, parent, name, why = load_target(a["root"], a.get("pythonpath", []), a["file"], a["qualname"])
+    if why:
+        return {"status": "UNCALLABLE", "reason": why}
+    ns = {"module": mod, "target_class": parent if inspect.isclass(parent) else None, "target_name": name, "random": random}
+    signal.signal(signal.SIGALRM, _alarm)
+    signal.alarm(60)
+    try:
+        exec(compile(Path(a["gen_code"]).read_text(), "make_inputs.py", "exec"), ns)
+        items = list(ns["make_inputs"](random.Random(a.get("seed", 0)), int(a.get("n", 200))))[: int(a.get("n", 200))]
+        items = [(it[0], list(it[1]), dict(it[2])) for it in items]
+    except CallTimeout:
+        return {"status": "GEN_FAILED", "error": "the generator did not finish within 60 seconds"}
+    except BaseException as exc:
+        return {"status": "GEN_FAILED", "error": "".join(traceback.format_exception_only(type(exc), exc))[-600:]}
+    finally:
+        signal.alarm(0)
+    if not items:
+        return {"status": "GEN_FAILED", "error": "make_inputs returned no input"}
+
+    def resolve(receiver):
+        return getattr(receiver, name) if receiver is not None else getattr(parent, name)
+    return {"status": "RAN", "outcomes": run_calls(items, resolve, a.get("timeout", 2))}
 
 
 def main(path):
     a = json.loads(Path(path).read_text())
     from gatekeeper_ext import fn_inputs as FI
     os.chdir(tempfile.mkdtemp(prefix="gk_probe_cwd_"))           # side effects of the function land in a scratch directory
+    if a["mode"] == "run_gen":
+        Path(a["out"]).write_text(json.dumps(run_generator(a)))
+        return 0
     fn, skip_first, why = load_function(a["root"], a.get("pythonpath", []), a["file"], a["qualname"])
     if fn is None:
         Path(a["out"]).write_text(json.dumps({"status": "UNCALLABLE", "reason": why}))
@@ -98,21 +162,7 @@ def main(path):
         return 0
     calls = FI.loads_calls(Path(a["calls"]).read_text())
     signal.signal(signal.SIGALRM, _alarm)
-    outcomes = []
-    is_coro = inspect.iscoroutinefunction(fn)
-    for args, kwargs in calls:
-        signal.alarm(int(a.get("timeout", 5)))
-        try:
-            r = fn(*args, **kwargs)
-            if is_coro:
-                r = asyncio.run(r)
-            outcomes.append(canonical(r))
-        except CallTimeout:
-            outcomes.append(["timeout"])
-        except BaseException as exc:                             # including SystemExit raised by the function
-            outcomes.append(["exc", type(exc).__name__, ADDR.sub("0x?", str(exc))[:120]])
-        finally:
-            signal.alarm(0)
+    outcomes = run_calls([(None, args, kwargs) for args, kwargs in calls], lambda _r: fn, a.get("timeout", 5))
     Path(a["out"]).write_text(json.dumps({"status": "RAN", "outcomes": outcomes}))
     return 0
 

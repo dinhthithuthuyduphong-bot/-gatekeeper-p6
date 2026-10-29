@@ -1,0 +1,15 @@
+{
+ "name": "study_p_step2 (patch_study_p_step2.zip)",
+ "files": {
+  ".github/workflows/study-p-feasibility-llm.yml": "f04bb4b551974a3a59546e89804dcd273a2f7c9d3fa01efcd2e8b80a926f912c",
+  "gatekeeper_ext/fn_llm_gen.py": "137135f43fbe03ce8913b9b31f26996b997af85411df176fba8b1d7afd093621",
+  "research_closure/results/STUDY_P_PLAN.md": "a45cba2f7a66adce1f323cb1e043ebb06aba70ef759e1a2b368da52be5ad7db9",
+  "research_closure/results/study_p_feas/FNPROBE_SUMMARY.json": "6d827287440b0974ab8ccada72a904a037b193437600da3102f41e0e4ce9d0ad",
+  "tests/test_fn_probe_llm.py": "b105f68ac582ebdb6c1d54e73e90f7e4911c1d4a69aa51c98f3209bd2497dee7",
+  "tools/fn_probe.py": "488c354d5da64500afa3495fabd7ea9ac6114b7ca7028d3ff0e17db664ba2f01",
+  "tools/fn_probe_inner.py": "eab4de0f0a03f342c1c905172d0281c26889d0dad9a2395c63eb66680591eb95",
+  "tools/fn_probe_llm.py": "4ce825abdd13d21bbcf1999d134e8c7b0bcb939bf8949f961858fc23a24638b8",
+  "tools/fn_probe_shard.py": "a7511c3d3b8dd279af45bda9581b9ceb0963275823be8d37da5776a50d8254bb",
+  "tools/fn_probe_summary.py": "e3aae32b27946d12c24f462816987ad7344368b1a74afc698f22f93a68013f52"
+ }
+}
