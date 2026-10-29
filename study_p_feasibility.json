@@ -1,0 +1,13 @@
+{
+ "name": "study_p_feasibility (patch_study_p_feasibility.zip)",
+ "files": {
+  ".github/workflows/study-p-feasibility.yml": "790b4f97114d7a213eec534007fcaca0dc5fe90c952dbffa91fee8a147c3e71c",
+  "gatekeeper_ext/fn_inputs.py": "6a9913bc66d99dc36fbc684d51c2f4c3e1e758f00635f0d9f3968d7fc4f1084e",
+  "research_closure/results/STUDY_P_PLAN.md": "a4dba265324c567774b77d2affce57e7aecd8bcd3f9030fcd0cf10e2ca070aa7",
+  "tests/test_fn_probe.py": "1c04caaec3699ee1af794738f731066294157ba406431c110535bc64e3916ff7",
+  "tools/fn_probe.py": "45ebc8e4b90e282facd7f2b49bae301b4deb582105edd8af1705beab70c1e141",
+  "tools/fn_probe_inner.py": "1f53a8243b3e5bb35c13ce928c805005ce47466d65c696a853f8948c02c9b8dc",
+  "tools/fn_probe_shard.py": "5da1f0ae6e012deda40f8d3d6b397e5d4d1d5f823a8ed02a4f99fb6e7375cfbf",
+  "tools/fn_probe_summary.py": "5ac92847b8684f5af98d5b8aee4d6971ae49ce3fa691d1cc00134def36c50502"
+ }
+}
