@@ -1,0 +1,20 @@
+{
+ "name": "pilot_package (patch_pilot_pipeline.zip)",
+ "files": {
+  ".github/workflows/study-n-pilot.yml": "446e29e3dfe4ee130d6b5d84ef54762e57fdd178ec582c8c7fb2b9689629cafb",
+  "gatekeeper_ext/draws.py": "318ec58123a0c5556ca110bdee3d684a0b7dc2547c069cfd26aead1945645650",
+  "gatekeeper_ext/gates.py": "3c1ad8559025c4d4dd8c63c2825134b827879a54813ad1a41ff0c07070928e4c",
+  "gatekeeper_ext/issue_fetch.py": "8e02ab89ea6cd991b850dbef065aed64ee9f587d36aa4aefec436c2f954e87b8",
+  "research_closure/pilot/DEV_VET.json": "44bc0b894b710a5f44be37a8faf98afa6051186cd5c6f00fe83d49758d9acba1",
+  "research_closure/pilot/README_P0.md": "911a40194d567a7d240ce9fee2b4637f1fdaa3b0eb88f518ad161bd4716f13ed",
+  "research_closure/pilot/models.json": "6ee28983366e43ca1af947657979328d1b562dfad6f24cadad438207853aeb3c",
+  "tests/test_cohort_inner.py": "30b6181921639a4cf46dcf6e9d767e5e4eb61c46106d4ad99a9ed9644e380b67",
+  "tests/test_draws_and_issue.py": "c8dc855fc90fcdf71ea7758ff47bb43b13b05276bedab619cdf47dad1ff9f04c",
+  "tests/test_gates.py": "7ef9bd888b7341767e6e5805d2da8c050ef2a65d91f19f1a63bb308bb57da520",
+  "tests/test_pilot_tools.py": "a26db355b01703355bff5458959e0ca134e477bdd2002468b346a5012965bc67",
+  "tools/cohort_inner.py": "f73509114611b4b2a9662980a9d4d94cfc45aa6d915110d5fa911e24f0189535",
+  "tools/cohort_instance.py": "2b8b66bf31dc5e23fca61c4940f69c33bb8872f851c938656c1ff1e3d71a842c",
+  "tools/pilot_select.py": "9f68eb1c67ed2dbada604c0784669b5650394b97e2bdacbd87f740c92f829e1b",
+  "tools/pilot_summary.py": "c21386192bbfbb61d551e3e4683342657bd5cabaf3c5c22744a259c656a20b3c"
+ }
+}
