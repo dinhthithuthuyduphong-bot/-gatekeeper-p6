@@ -1,0 +1,31 @@
+{
+ "version": 1,
+ "seed": "722277585642093255",
+ "after_key": "883730407ead40080b7864b866e88cc106791f6000989453c43ee3ec29b89b11",
+ "excluded_first": 1300,
+ "target": 1000,
+ "search_hits": 16800,
+ "unique_prs": 16418,
+ "rejected_cheap": {
+  "title looks like maintenance, not a bug fix": 1598,
+  "repository already used or exposed": 55,
+  "not merged": 15
+ },
+ "rejected_files": {
+  "no test file changed (no upstream oracle)": 2439,
+  "no non-test python source file changed": 1595,
+  "source diff larger than 60 lines": 284,
+  "number of changed files outside 1..8": 669,
+  "source file removed or renamed": 3,
+  "api error": 17
+ },
+ "examined": 6007,
+ "kept": 1000,
+ "errors": [],
+ "stopped_because": "target reached",
+ "run_utc": "2026-10-29T18:41:28Z",
+ "after_cheap_filters": 14750,
+ "after_the_first_500": 6802,
+ "api_calls": 6175,
+ "seconds_total": 3655
+}
