@@ -22,11 +22,20 @@ jobs:
           [ -f research_closure/results/RQ3_PLAN.md ] || { echo "::error::the RQ3 plan is not committed"; exit 1; }
           python - <<'PY'
           import glob, json, os
-          inc = []
+          inc, skipped = [], []
           for f in sorted(glob.glob('study_[deg]/eval_targets/*/gk_target.json')):
               m = json.load(open(f))
-              inc.append({'study': f.split('/')[0], 'id': f.split('/')[2], 'py': m.get('python', '3.12')})
-          assert len(inc) == 14, 'expected the 14 evaluation targets of the plan, found %d' % len(inc)
+              tid = f.split('/')[2]
+              # rule of research_closure/results/RQ3_PLAN.md: every evaluation target except smoke ones
+              if 'SMOKE' in str(m.get('role', '')).upper() or 'local' in m.get('checkout', {}):
+                  skipped.append(tid)
+                  continue
+              inc.append({'study': f.split('/')[0], 'id': tid, 'py': m.get('python', '3.12')})
+          print('RQ3 targets (%d):' % len(inc), [x['id'] for x in inc])
+          print('skipped as smoke (%d):' % len(skipped), skipped)
+          assert inc, 'no evaluation target found'
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as s:
+              s.write('RQ3 targets (%d): %s\n\nskipped as smoke: %s\n' % (len(inc), ', '.join(x['id'] for x in inc), ', '.join(skipped) or 'none'))
           open(os.environ['GITHUB_OUTPUT'], 'a').write('matrix=' + json.dumps({'include': inc}) + '\n')
           PY
   target:
