@@ -24,7 +24,7 @@ jobs:
           set -euo pipefail
           python -c "import json,sys;c=json.load(open('study_p/config_study_p.json'));sys.exit(0 if c.get('status')=='DRAFT' else 'study_p is not DRAFT')"
           python tools/freeze_study.py verify study_m
-          for f in tools/discover_p_extend.py tools/p_assemble_ext.py study_p/candidates_astar.json study_p/frame_rr.json study_p/evidence/N_CANDIDATES.json study_m_astar/evidence/s1/M_ORDERED.json study_n/evidence/N_CANDIDATES.json; do
+          for f in tools/discover_p_extend.py tools/p_assemble_ext.py tools/p_frames.py study_p/candidates_astar.json study_p/frame_rr.json study_p/evidence/N_CANDIDATES.json study_m_astar/evidence/s1/M_ORDERED.json study_n/evidence/N_CANDIDATES.json; do
             [ -f "$f" ] || { echo "::error::MISSING $f"; exit 1; }
           done
       - name: Seed of Study M stage S1
@@ -54,11 +54,12 @@ jobs:
           python -u tools/discover_p_extend.py out_x --seed "$(cat out_x/seed.txt)" \
             --exclude study_m_astar/evidence/s1/M_ORDERED.json --exclude study_n/evidence/N_CANDIDATES.json --exclude study_p/evidence/N_CANDIDATES.json \
             $AFTER --target "$TARGET" --max-examined "$MAX_EXAMINED" 2>&1 | tee out_x/log.txt
-      - name: Append part B to the frames and commit
+      - name: Append the batch to the evidence, rebuild the frames from the evidence, commit
+        if: always()
         shell: bash
         run: |
           set -euo pipefail
-          python tools/p_assemble_ext.py study_p out_x/P_EXT_CANDIDATES.json "$(cat out_x/seed.txt)"
+          [ -f out_x/P_EXT_CANDIDATES.json ] || { echo "no checkpoint written; nothing to commit"; exit 0; }
           python - <<'PY'
           import json, os
           prev = json.load(open('study_p/evidence/P_EXT_CANDIDATES.json')) if os.path.exists('study_p/evidence/P_EXT_CANDIDATES.json') else []
@@ -67,13 +68,15 @@ jobs:
           logs = json.load(open('study_p/evidence/P_EXT_LOGS.json')) if os.path.exists('study_p/evidence/P_EXT_LOGS.json') else []
           json.dump(logs + [json.load(open('out_x/P_EXT_LOG.json'))], open('study_p/evidence/P_EXT_LOGS.json', 'w'), indent=1)
           PY
+          python tools/p_frames.py "$(cat out_x/seed.txt)"
+          python tools/p_frames.py "$(cat out_x/seed.txt)" --check
           if ! git diff --quiet -- study_m study_m_astar study_m_rr study_n; then
             echo "::error::a frozen study directory changed; nothing is committed"; exit 1
           fi
           git config user.name "gatekeeper-freeze-bot"
           git config user.email "actions@users.noreply.github.com"
           git add study_p
-          git commit -m "Study P frame: part B (extended search space)"
+          git commit -m "Study P frame: part B batch (checkpointed), frames rebuilt from the evidence"
           git push origin HEAD
       - uses: actions/upload-artifact@v7
         if: always()

@@ -1,0 +1,35 @@
+# Rebuild the two Study P frames from the committed evidence (study_p must be DRAFT); idempotent.
+name: Gatekeeper Study P rebuild frames
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  rebuild:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - shell: bash
+        run: |
+          set -euo pipefail
+          python -c "import json,sys;c=json.load(open('study_p/config_study_p.json'));sys.exit(0 if c.get('status')=='DRAFT' else 'study_p is not DRAFT')"
+          python - <<'PY'
+          import hashlib, json, sys
+          sys.path.insert(0, 'tools')
+          from run_study_d import drand_seed
+          cfg = json.load(open('study_m/config_study_m.json'))
+          h = hashlib.sha256(open('study_m/FREEZE.json', 'rb').read()).hexdigest()
+          open('seed.txt', 'w').write(str(drand_seed(cfg.get('seed_freeze_sha256') or h, cfg['seed_time_utc'])['seed']))
+          PY
+          python tools/p_frames.py "$(cat seed.txt)"
+          python tools/p_frames.py "$(cat seed.txt)" --check
+          rm -f seed.txt
+          if ! git diff --quiet -- study_m study_m_astar study_m_rr study_n; then echo "::error::a frozen study directory changed"; exit 1; fi
+          if git diff --quiet -- study_p; then echo "frames already match the evidence"; exit 0; fi
+          git config user.name "gatekeeper-freeze-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add study_p
+          git commit -m "Study P frames rebuilt from the evidence"
+          git push origin HEAD
