@@ -67033,5 +67033,5719 @@
     "deletions": 0
    }
   ]
+ },
+ {
+  "name": "ecm2434_pr51",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/jkmschoultz/ecm2434.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 51,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "bug fix (https://github.com/jkmschoultz/ecm2434/pull/51)",
+  "changed": [
+   {
+    "file": "API/shop/views.py",
+    "additions": 8,
+    "deletions": 4
+   },
+   {
+    "file": "API/tests/test_shop.py",
+    "additions": 7,
+    "deletions": 7
+   }
+  ]
+ },
+ {
+  "name": "pypdf_pr1967",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/py-pdf/pypdf.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 1967,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "BUG: Process 2bits and 4bits images (https://github.com/py-pdf/pypdf/pull/1967)",
+  "changed": [
+   {
+    "file": "pypdf/filters.py",
+    "additions": 36,
+    "deletions": 12
+   },
+   {
+    "file": "tests/test_filters.py",
+    "additions": 19,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "galaxy_pr13195",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/galaxyproject/galaxy.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 13195,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix a bug in username minimum length transformation and set minimum length to 1 (https://github.com/galaxyproject/galaxy/pull/13195)",
+  "changed": [
+   {
+    "file": "lib/galaxy/security/validate_user_input.py",
+    "additions": 7,
+    "deletions": 7
+   },
+   {
+    "file": "lib/galaxy_test/api/test_users.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "test/unit/app/managers/test_UserManager.py",
+    "additions": 2,
+    "deletions": 2
+   }
+  ]
+ },
+ {
+  "name": "scipy_pr16521",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/scipy/scipy.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 16521,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "BUG: Fix error in error message for incorrect sample dimension in interpn (https://github.com/scipy/scipy/pull/16521)",
+  "changed": [
+   {
+    "file": "scipy/interpolate/_rgi.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "scipy/interpolate/tests/test_rgi.py",
+    "additions": 10,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "socorro_pr5870",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/mozilla-services/socorro.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 5870,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "bug 1732414: extract distributionId (https://github.com/mozilla-services/socorro/pull/5870)",
+  "changed": [
+   {
+    "file": "socorro/external/es/super_search_fields.py",
+    "additions": 14,
+    "deletions": 0
+   },
+   {
+    "file": "socorro/processor/processor_pipeline.py",
+    "additions": 2,
+    "deletions": 0
+   },
+   {
+    "file": "socorro/processor/rules/mozilla.py",
+    "additions": 28,
+    "deletions": 0
+   },
+   {
+    "file": "socorro/unittest/processor/rules/test_mozilla.py",
+    "additions": 44,
+    "deletions": 4
+   }
+  ]
+ },
+ {
+  "name": "pylint_pr10678",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/pylint-dev/pylint.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 10678,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix FP for `invalid-name` for partially invalid module-level name (https://github.com/pylint-dev/pylint/pull/10678)",
+  "changed": [
+   {
+    "file": "doc/whatsnew/fragments/10652.false_positive",
+    "additions": 3,
+    "deletions": 0
+   },
+   {
+    "file": "pylint/checkers/base/name_checker/checker.py",
+    "additions": 7,
+    "deletions": 2
+   },
+   {
+    "file": "tests/functional/i/invalid/invalid_name/invalid_name_module_level.py",
+    "additions": 10,
+    "deletions": 1
+   }
+  ]
+ },
+ {
+  "name": "prowler_pr7292",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/prowler-cloud/prowler.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 7292,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix(route53): solve false positive in `route53_public_hosted_zones_cloudwatch_logging_enabled` (https://github.com/prowler-cloud/prowler/pull/7292)",
+  "changed": [
+   {
+    "file": "prowler/providers/aws/services/route53/route53_service.py",
+    "additions": 7,
+    "deletions": 6
+   },
+   {
+    "file": "tests/providers/aws/services/route53/route53_public_hosted_zones_cloudwatch_logging_enabled/route53_public_hosted_zones_cloudwatch_logging_enabled_test.py",
+    "additions": 59,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "bigframes_pr574",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/google/bigframes.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 574,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix: Inverting int now does bitwise inversion rather than sign flip (https://github.com/google/bigframes/pull/574)",
+  "changed": [
+   {
+    "file": "bigframes/core/compile/scalar_op_compiler.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "tests/system/small/test_series.py",
+    "additions": 15,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "cs340_s26_repo_pr68",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/kevinaangstadt/CS340-S26-Repo.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 68,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix rectangle geometry bug (https://github.com/kevinaangstadt/CS340-S26-Repo/pull/68)",
+  "changed": [
+   {
+    "file": "rectangle_geometry.py",
+    "additions": 2,
+    "deletions": 1
+   },
+   {
+    "file": "test_rectangle_geometry.py",
+    "additions": 4,
+    "deletions": 1
+   }
+  ]
+ },
+ {
+  "name": "festim_pr796",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/festim-dev/FESTIM.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 796,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix bug with XDMF export in mode last  (https://github.com/festim-dev/FESTIM/pull/796)",
+  "changed": [
+   {
+    "file": "festim/exports/xdmf_export.py",
+    "additions": 2,
+    "deletions": 1
+   },
+   {
+    "file": "test/system/test_misc.py",
+    "additions": 53,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "watsor_pr30",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/asmirnou/watsor.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 30,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Bug fixes (https://github.com/asmirnou/watsor/pull/30)",
+  "changed": [
+   {
+    "file": "watsor/filter/mask.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "watsor/output/draw.py",
+    "additions": 6,
+    "deletions": 0
+   },
+   {
+    "file": "watsor/test/test_output.py",
+    "additions": 27,
+    "deletions": 6
+   }
+  ]
+ },
+ {
+  "name": "scipy_pr14882",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/scipy/scipy.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 14882,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "BUG: Convert TNC C module to cython (https://github.com/scipy/scipy/pull/14882)",
+  "changed": [
+   {
+    "file": "scipy/optimize/_tnc.py",
+    "additions": 10,
+    "deletions": 6
+   },
+   {
+    "file": "scipy/optimize/setup.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "scipy/optimize/tests/test_tnc.py",
+    "additions": 44,
+    "deletions": 1
+   },
+   {
+    "file": "scipy/optimize/tnc/HISTORY",
+    "additions": 4,
+    "deletions": 0
+   },
+   {
+    "file": "scipy/optimize/tnc/moduleTNC.c.old",
+    "additions": 0,
+    "deletions": 0
+   },
+   {
+    "file": "scipy/optimize/tnc/moduleTNC.pyx",
+    "additions": 209,
+    "deletions": 0
+   },
+   {
+    "file": "scipy/optimize/tnc/tnc.c",
+    "additions": 3,
+    "deletions": 3
+   }
+  ]
+ },
+ {
+  "name": "bigframes_pr925",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/google/bigframes.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 925,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix: unordered mode errors in ml train_test_split (https://github.com/google/bigframes/pull/925)",
+  "changed": [
+   {
+    "file": "bigframes/ml/model_selection.py",
+    "additions": 12,
+    "deletions": 19
+   },
+   {
+    "file": "tests/system/conftest.py",
+    "additions": 8,
+    "deletions": 0
+   },
+   {
+    "file": "tests/system/small/ml/test_model_selection.py",
+    "additions": 21,
+    "deletions": 15
+   }
+  ]
+ },
+ {
+  "name": "pandas_pr44715",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/pandas-dev/pandas.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 44715,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "BUG: FloatingArray(float16data) (https://github.com/pandas-dev/pandas/pull/44715)",
+  "changed": [
+   {
+    "file": "doc/source/whatsnew/v1.4.0.rst",
+    "additions": 2,
+    "deletions": 0
+   },
+   {
+    "file": "pandas/core/arrays/floating.py",
+    "additions": 4,
+    "deletions": 0
+   },
+   {
+    "file": "pandas/core/arrays/masked.py",
+    "additions": 4,
+    "deletions": 0
+   },
+   {
+    "file": "pandas/core/construction.py",
+    "additions": 6,
+    "deletions": 1
+   },
+   {
+    "file": "pandas/tests/arrays/boolean/test_function.py",
+    "additions": 11,
+    "deletions": 0
+   },
+   {
+    "file": "pandas/tests/arrays/floating/test_construction.py",
+    "additions": 34,
+    "deletions": 0
+   },
+   {
+    "file": "pandas/tests/arrays/test_array.py",
+    "additions": 6,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "content_pr13860",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/demisto/content.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 13860,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Create indicator relationship bug (https://github.com/demisto/content/pull/13860)",
+  "changed": [
+   {
+    "file": "Packs/Base/ReleaseNotes/1_13_10.md",
+    "additions": 6,
+    "deletions": 0
+   },
+   {
+    "file": "Packs/Base/Scripts/CreateIndicatorRelationship/CreateIndicatorRelationship.py",
+    "additions": 3,
+    "deletions": 0
+   },
+   {
+    "file": "Packs/Base/Scripts/CreateIndicatorRelationship/CreateIndicatorRelationship.yml",
+    "additions": 10,
+    "deletions": 6
+   },
+   {
+    "file": "Packs/Base/Scripts/CreateIndicatorRelationship/CreateIndicatorRelationship_test.py",
+    "additions": 27,
+    "deletions": 1
+   },
+   {
+    "file": "Packs/Base/pack_metadata.json",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "Tests/conf.json",
+    "additions": 0,
+    "deletions": 5
+   }
+  ]
+ },
+ {
+  "name": "pandas_market_calendars_pr199",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/rsheftel/pandas_market_calendars.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 199,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "is_different bug (https://github.com/rsheftel/pandas_market_calendars/pull/199)",
+  "changed": [
+   {
+    "file": "pandas_market_calendars/market_calendar.py",
+    "additions": 2,
+    "deletions": 10
+   },
+   {
+    "file": "tests/test_exchange_calendar_cme_globex_equities.py",
+    "additions": 26,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "galaxy_pr13325",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/galaxyproject/galaxy.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 13325,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "[21.09] Fix resuming job when job has optional data parameters (https://github.com/galaxyproject/galaxy/pull/13325)",
+  "changed": [
+   {
+    "file": "lib/galaxy/tools/actions/__init__.py",
+    "additions": 3,
+    "deletions": 2
+   },
+   {
+    "file": "lib/galaxy_test/api/test_workflows.py",
+    "additions": 1,
+    "deletions": 0
+   },
+   {
+    "file": "test/functional/tools/identifier_multiple_in_conditional.xml",
+    "additions": 1,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "opentaxii_pr240",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/eclecticiq/OpenTAXII.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 240,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix: spec_version & version from modified/created (https://github.com/eclecticiq/OpenTAXII/pull/240)",
+  "changed": [
+   {
+    "file": "opentaxii/persistence/sqldb/api.py",
+    "additions": 2,
+    "deletions": 4
+   },
+   {
+    "file": "opentaxii/taxii2/utils.py",
+    "additions": 30,
+    "deletions": 0
+   },
+   {
+    "file": "tests/taxii2/test_taxii2_sqldb.py",
+    "additions": 36,
+    "deletions": 15
+   },
+   {
+    "file": "tests/taxii2/test_taxii2_utils.py",
+    "additions": 16,
+    "deletions": 1
+   }
+  ]
+ },
+ {
+  "name": "spalgo_pr33",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/Amir-Shamsi/SpAlgo.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 33,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "bugs fixed (https://github.com/Amir-Shamsi/SpAlgo/pull/33)",
+  "changed": [
+   {
+    "file": "SpAlgo/_knapsack/_knapsack.py",
+    "additions": 30,
+    "deletions": 14
+   },
+   {
+    "file": "SpAlgo/_knapsack/_knapsack.pyi",
+    "additions": 20,
+    "deletions": 1
+   },
+   {
+    "file": "SpAlgo/_knapsack/_qsort.pyi",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "tests/test_Kenapsack.py",
+    "additions": 61,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "prowler_pr8529",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/prowler-cloud/prowler.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 8529,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix(github): solve Github APP auth method (https://github.com/prowler-cloud/prowler/pull/8529)",
+  "changed": [
+   {
+    "file": "prowler/CHANGELOG.md",
+    "additions": 8,
+    "deletions": 1
+   },
+   {
+    "file": "prowler/providers/github/github_provider.py",
+    "additions": 9,
+    "deletions": 1
+   },
+   {
+    "file": "prowler/providers/github/models.py",
+    "additions": 1,
+    "deletions": 0
+   },
+   {
+    "file": "prowler/providers/github/services/repository/repository_service.py",
+    "additions": 31,
+    "deletions": 1
+   },
+   {
+    "file": "tests/lib/outputs/finding_test.py",
+    "additions": 3,
+    "deletions": 1
+   },
+   {
+    "file": "tests/lib/outputs/html/html_test.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "tests/providers/github/github_provider_test.py",
+    "additions": 7,
+    "deletions": 2
+   }
+  ]
+ },
+ {
+  "name": "posthog_pr31132",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/PostHog/posthog.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 31132,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix(crm): Ensure UI reflects the currently selected tab (https://github.com/PostHog/posthog/pull/31132)",
+  "changed": [
+   {
+    "file": "frontend/src/scenes/persons-management/personsManagementSceneLogic.tsx",
+    "additions": 3,
+    "deletions": 0
+   },
+   {
+    "file": "posthog/api/team.py",
+    "additions": 3,
+    "deletions": 1
+   },
+   {
+    "file": "posthog/api/test/__snapshots__/test_decide.ambr",
+    "additions": 2,
+    "deletions": 0
+   },
+   {
+    "file": "posthog/api/test/test_team.py",
+    "additions": 24,
+    "deletions": 3
+   }
+  ]
+ },
+ {
+  "name": "geofileops_pr193",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/geofileops/geofileops.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 193,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix deprecation warnings and linting errors for shapely 2 (https://github.com/geofileops/geofileops/pull/193)",
+  "changed": [
+   {
+    "file": "CHANGELOG.md",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "geofileops/util/_io_util.py",
+    "additions": 2,
+    "deletions": 1
+   },
+   {
+    "file": "geofileops/util/_ogr_util.py",
+    "additions": 1,
+    "deletions": 0
+   },
+   {
+    "file": "geofileops/util/geometry_util.py",
+    "additions": 30,
+    "deletions": 9
+   },
+   {
+    "file": "geofileops/util/geoseries_util.py",
+    "additions": 3,
+    "deletions": 3
+   },
+   {
+    "file": "tests/test_geometry_util.py",
+    "additions": 11,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "conda_pr15309",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/conda/conda.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 15309,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix `conda.models.environment.Environment` grouping of specs (https://github.com/conda/conda/pull/15309)",
+  "changed": [
+   {
+    "file": "conda/models/environment.py",
+    "additions": 2,
+    "deletions": 3
+   },
+   {
+    "file": "news/15306-fix-environment-spec-grouping",
+    "additions": 19,
+    "deletions": 0
+   },
+   {
+    "file": "tests/models/test_environment.py",
+    "additions": 24,
+    "deletions": 3
+   }
+  ]
+ },
+ {
+  "name": "moin2hugo_pr34",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/wataru-chocola/moin2hugo.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 34,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix bugs (https://github.com/wataru-chocola/moin2hugo/pull/34)",
+  "changed": [
+   {
+    "file": "moin2hugo/formatter/hugo.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "moin2hugo/moin2hugo.py",
+    "additions": 14,
+    "deletions": 11
+   },
+   {
+    "file": "moin2hugo/path_builder/hugo.py",
+    "additions": 4,
+    "deletions": 1
+   },
+   {
+    "file": "tests/test_hugo_formatter.py",
+    "additions": 3,
+    "deletions": 2
+   }
+  ]
+ },
+ {
+  "name": "pydmd_pr532",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/PyDMD/PyDMD.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 532,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fixed bug in building convolution windows for mrCOSTS (https://github.com/PyDMD/PyDMD/pull/532)",
+  "changed": [
+   {
+    "file": "pydmd/costs.py",
+    "additions": 3,
+    "deletions": 4
+   },
+   {
+    "file": "pydmd/meta.py",
+    "additions": 3,
+    "deletions": 1
+   },
+   {
+    "file": "pydmd/mrcosts.py",
+    "additions": 16,
+    "deletions": 16
+   },
+   {
+    "file": "tests/test_mrcosts.py",
+    "additions": 6,
+    "deletions": 12
+   }
+  ]
+ },
+ {
+  "name": "bigframes_pr563",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/google/bigframes.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 563,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix: plot.scatter s parameter cannot accept float-like column (https://github.com/google/bigframes/pull/563)",
+  "changed": [
+   {
+    "file": "bigframes/operations/_matplotlib/core.py",
+    "additions": 12,
+    "deletions": 7
+   },
+   {
+    "file": "tests/system/small/operations/test_plotting.py",
+    "additions": 26,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "statsmodels_pr7422",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/statsmodels/statsmodels.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 7422,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "BUG: Runs test numeric cutoff error (https://github.com/statsmodels/statsmodels/pull/7422)",
+  "changed": [
+   {
+    "file": "statsmodels/sandbox/stats/runs.py",
+    "additions": 4,
+    "deletions": 0
+   },
+   {
+    "file": "statsmodels/sandbox/stats/tests/test_runs.py",
+    "additions": 29,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "litellm_pr2540",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 2540,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "(fix) Proxy - fix error message raised on passing invalid tokens (https://github.com/BerriAI/litellm/pull/2540)",
+  "changed": [
+   {
+    "file": "litellm/proxy/proxy_server.py",
+    "additions": 3,
+    "deletions": 0
+   },
+   {
+    "file": "litellm/tests/test_key_generate_prisma.py",
+    "additions": 2,
+    "deletions": 2
+   }
+  ]
+ },
+ {
+  "name": "mpmath_pr688",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/mpmath/mpmath.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 688,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix nan handling in fp.mag() and hyper() (https://github.com/mpmath/mpmath/pull/688)",
+  "changed": [
+   {
+    "file": "mpmath/ctx_fp.py",
+    "additions": 4,
+    "deletions": 1
+   },
+   {
+    "file": "mpmath/functions/hypergeometric.py",
+    "additions": 2,
+    "deletions": 0
+   },
+   {
+    "file": "mpmath/tests/test_fp.py",
+    "additions": 2,
+    "deletions": 0
+   },
+   {
+    "file": "mpmath/tests/test_functions.py",
+    "additions": 26,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "releasetool_pr312",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/googleapis/releasetool.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 312,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix: add allowlist for autorelease.tag command (https://github.com/googleapis/releasetool/pull/312)",
+  "changed": [
+   {
+    "file": "autorelease/tag.py",
+    "additions": 17,
+    "deletions": 0
+   },
+   {
+    "file": "noxfile.py",
+    "additions": 1,
+    "deletions": 0
+   },
+   {
+    "file": "tests/test_autorelease_tag.py",
+    "additions": 50,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "pandas_pr49875",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/pandas-dev/pandas.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 49875,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "BUG: constructors (https://github.com/pandas-dev/pandas/pull/49875)",
+  "changed": [
+   {
+    "file": "doc/source/whatsnew/v2.0.0.rst",
+    "additions": 4,
+    "deletions": 0
+   },
+   {
+    "file": "pandas/core/arrays/datetimes.py",
+    "additions": 1,
+    "deletions": 0
+   },
+   {
+    "file": "pandas/core/dtypes/dtypes.py",
+    "additions": 4,
+    "deletions": 0
+   },
+   {
+    "file": "pandas/tests/arrays/categorical/test_constructors.py",
+    "additions": 7,
+    "deletions": 0
+   },
+   {
+    "file": "pandas/tests/frame/methods/test_transpose.py",
+    "additions": 13,
+    "deletions": 0
+   },
+   {
+    "file": "pandas/tests/indexes/datetimes/test_constructors.py",
+    "additions": 8,
+    "deletions": 0
+   },
+   {
+    "file": "pandas/tests/series/test_constructors.py",
+    "additions": 6,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "tap_salesforce_pr138",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/singer-io/tap-salesforce.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 138,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "TDL-16006: Fix interruptible full table bookmarking strategy for bulk API (https://github.com/singer-io/tap-salesforce/pull/138)",
+  "changed": [
+   {
+    "file": "tap_salesforce/sync.py",
+    "additions": 2,
+    "deletions": 2
+   },
+   {
+    "file": "tests/unittests/test_salesforce_null_bookmark.py",
+    "additions": 24,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "pylint_pr10724",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/pylint-dev/pylint.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 10724,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix a false positive for ``unbalanced-tuple-unpacking``. (https://github.com/pylint-dev/pylint/pull/10724)",
+  "changed": [
+   {
+    "file": "doc/whatsnew/fragments/10721.false_positive",
+    "additions": 3,
+    "deletions": 0
+   },
+   {
+    "file": "pylint/checkers/variables.py",
+    "additions": 3,
+    "deletions": 4
+   },
+   {
+    "file": "tests/functional/u/unbalanced/unbalanced_tuple_unpacking.py",
+    "additions": 11,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "hrms_pr688",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/frappe/hrms.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 688,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix: don't send interview feedback reminder for upcoming interviews (https://github.com/frappe/hrms/pull/688)",
+  "changed": [
+   {
+    "file": "hrms/hr/doctype/interview/interview.py",
+    "additions": 9,
+    "deletions": 2
+   },
+   {
+    "file": "hrms/hr/doctype/interview/test_interview.py",
+    "additions": 13,
+    "deletions": 2
+   }
+  ]
+ },
+ {
+  "name": "content_pr35590",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/demisto/content.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 35590,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "bug - pp threat response AttributeError (https://github.com/demisto/content/pull/35590)",
+  "changed": [
+   {
+    "file": "Packs/ProofpointThreatResponse/Integrations/ProofpointThreatResponse/ProofpointThreatResponse.py",
+    "additions": 23,
+    "deletions": 9
+   },
+   {
+    "file": "Packs/ProofpointThreatResponse/Integrations/ProofpointThreatResponse/ProofpointThreatResponse.yml",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "Packs/ProofpointThreatResponse/Integrations/ProofpointThreatResponse/ProofpointThreatResponse_test.py",
+    "additions": 32,
+    "deletions": 3
+   },
+   {
+    "file": "Packs/ProofpointThreatResponse/Integrations/ProofpointThreatResponse/test_data/incident_str_messageDeliveryTime.json",
+    "additions": 104,
+    "deletions": 0
+   },
+   {
+    "file": "Packs/ProofpointThreatResponse/ReleaseNotes/2_0_17.md",
+    "additions": 8,
+    "deletions": 0
+   },
+   {
+    "file": "Packs/ProofpointThreatResponse/pack_metadata.json",
+    "additions": 1,
+    "deletions": 1
+   }
+  ]
+ },
+ {
+  "name": "gwpy_pr1540",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/gwpy/gwpy.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 1540,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix bug in width-1 slices of Array2D (https://github.com/gwpy/gwpy/pull/1540)",
+  "changed": [
+   {
+    "file": "gwpy/types/array2d.py",
+    "additions": 4,
+    "deletions": 1
+   },
+   {
+    "file": "gwpy/types/series.py",
+    "additions": 24,
+    "deletions": 10
+   },
+   {
+    "file": "gwpy/types/tests/test_array2d.py",
+    "additions": 23,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "prowler_pr6464",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/prowler-cloud/prowler.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 6464,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix(vpc): add new principal wildcard verification (https://github.com/prowler-cloud/prowler/pull/6464)",
+  "changed": [
+   {
+    "file": "poetry.lock",
+    "additions": 9,
+    "deletions": 20
+   },
+   {
+    "file": "prowler/providers/aws/services/vpc/vpc_endpoint_services_allowed_principals_trust_boundaries/vpc_endpoint_services_allowed_principals_trust_boundaries.py",
+    "additions": 13,
+    "deletions": 15
+   },
+   {
+    "file": "tests/providers/aws/services/vpc/vpc_endpoint_services_allowed_principals_trust_boundaries/vpc_endpoint_services_allowed_principals_trust_boundaries_test.py",
+    "additions": 70,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "arista_eos_pr404",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/ansible-collections/arista.eos.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 404,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix ebgp-multihop config/facts-gathering (https://github.com/ansible-collections/arista.eos/pull/404)",
+  "changed": [
+   {
+    "file": "changelogs/fragments/fix_eos_bgp_global.yaml",
+    "additions": 3,
+    "deletions": 0
+   },
+   {
+    "file": "plugins/module_utils/network/eos/rm_templates/bgp_global.py",
+    "additions": 2,
+    "deletions": 3
+   },
+   {
+    "file": "tests/unit/modules/network/eos/test_eos_bgp_global.py",
+    "additions": 27,
+    "deletions": 2
+   }
+  ]
+ },
+ {
+  "name": "pandas_pr62076",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/pandas-dev/pandas.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 62076,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "BUG: Fix tz_localize(None) with Arrow timestamp (https://github.com/pandas-dev/pandas/pull/62076)",
+  "changed": [
+   {
+    "file": "doc/source/whatsnew/v3.0.0.rst",
+    "additions": 1,
+    "deletions": 0
+   },
+   {
+    "file": "pandas/core/arrays/arrow/array.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "pandas/tests/extension/test_arrow.py",
+    "additions": 3,
+    "deletions": 2
+   }
+  ]
+ },
+ {
+  "name": "bigframes_pr60",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/google/bigframes.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 60,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix: LabelEncoder params consistent with Sklearn (https://github.com/google/bigframes/pull/60)",
+  "changed": [
+   {
+    "file": "bigframes/ml/base.py",
+    "additions": 20,
+    "deletions": 0
+   },
+   {
+    "file": "bigframes/ml/preprocessing.py",
+    "additions": 8,
+    "deletions": 9
+   },
+   {
+    "file": "tests/system/small/ml/test_preprocessing.py",
+    "additions": 5,
+    "deletions": 25
+   },
+   {
+    "file": "third_party/bigframes_vendored/sklearn/preprocessing/_label.py",
+    "additions": 6,
+    "deletions": 6
+   }
+  ]
+ },
+ {
+  "name": "wagtail_qrcode_pr39",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/nm-packages/wagtail-qrcode.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 39,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Adds Tests For The Hooks And Fixes A Bug in Issues #37 & #38 (https://github.com/nm-packages/wagtail-qrcode/pull/39)",
+  "changed": [
+   {
+    "file": "tests/test_wagtail_hooks.py",
+    "additions": 80,
+    "deletions": 1
+   },
+   {
+    "file": "wagtail_qrcode/wagtail_hooks.py",
+    "additions": 15,
+    "deletions": 10
+   }
+  ]
+ },
+ {
+  "name": "prowler_pr6465",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/prowler-cloud/prowler.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 6465,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix(vpc): add new principal wildcard verification (https://github.com/prowler-cloud/prowler/pull/6465)",
+  "changed": [
+   {
+    "file": "prowler/providers/aws/services/vpc/vpc_endpoint_services_allowed_principals_trust_boundaries/vpc_endpoint_services_allowed_principals_trust_boundaries.py",
+    "additions": 13,
+    "deletions": 15
+   },
+   {
+    "file": "tests/providers/aws/services/vpc/vpc_endpoint_services_allowed_principals_trust_boundaries/vpc_endpoint_services_allowed_principals_trust_boundaries_test.py",
+    "additions": 64,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "deepchem_pr2568",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/deepchem/deepchem.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 2568,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix failing test cases (https://github.com/deepchem/deepchem/pull/2568)",
+  "changed": [
+   {
+    "file": ".github/workflows/jax_setup.yml",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "deepchem/models/fcnet.py",
+    "additions": 6,
+    "deletions": 4
+   },
+   {
+    "file": "deepchem/models/tests/test_gcn.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "deepchem/models/tests/test_layers.py",
+    "additions": 2,
+    "deletions": 2
+   },
+   {
+    "file": "deepchem/models/tests/test_mpnn.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "deepchem/models/tests/test_reload.py",
+    "additions": 4,
+    "deletions": 12
+   },
+   {
+    "file": "env.common.yml",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "env.test.yml",
+    "additions": 1,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "posthog_pr45217",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/PostHog/posthog.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 45217,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix: stricter validation in surveys (https://github.com/PostHog/posthog/pull/45217)",
+  "changed": [
+   {
+    "file": "posthog/api/survey.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "posthog/api/test/test_survey.py",
+    "additions": 58,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "wikibaseintegrator_pr926",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/LeMyst/WikibaseIntegrator.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 926,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix Claims.add() default to preserve existing claims instead of replacing them (https://github.com/LeMyst/WikibaseIntegrator/pull/926)",
+  "changed": [
+   {
+    "file": "README.md",
+    "additions": 9,
+    "deletions": 0
+   },
+   {
+    "file": "test/integration/test_wikibase_roundtrip.py",
+    "additions": 2,
+    "deletions": 4
+   },
+   {
+    "file": "test/test_entity_item.py",
+    "additions": 11,
+    "deletions": 0
+   },
+   {
+    "file": "test/test_models.py",
+    "additions": 46,
+    "deletions": 2
+   },
+   {
+    "file": "wikibaseintegrator/models/claims.py",
+    "additions": 12,
+    "deletions": 4
+   }
+  ]
+ },
+ {
+  "name": "storage_testbench_pr600",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/googleapis/storage-testbench.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 600,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "test: fix coverage for soft-delete (https://github.com/googleapis/storage-testbench/pull/600)",
+  "changed": [
+   {
+    "file": "gcs/bucket.py",
+    "additions": 5,
+    "deletions": 5
+   },
+   {
+    "file": "testbench/grpc_server.py",
+    "additions": 3,
+    "deletions": 0
+   },
+   {
+    "file": "tests/test_bucket.py",
+    "additions": 103,
+    "deletions": 0
+   },
+   {
+    "file": "tests/test_bucket_grpc.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "tests/test_grpc_server.py",
+    "additions": 61,
+    "deletions": 1
+   }
+  ]
+ },
+ {
+  "name": "python_ndb_pr636",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/googleapis/python-ndb.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 636,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix: properly handle error when clearing cache (https://github.com/googleapis/python-ndb/pull/636)",
+  "changed": [
+   {
+    "file": "google/cloud/ndb/_cache.py",
+    "additions": 11,
+    "deletions": 10
+   },
+   {
+    "file": "tests/unit/test__cache.py",
+    "additions": 30,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "codeframe_pr531",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/frankbria/codeframe.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 531,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix: address claude-review feedback on blocker origins (#487) (https://github.com/frankbria/codeframe/pull/531)",
+  "changed": [
+   {
+    "file": "codeframe/core/blockers.py",
+    "additions": 2,
+    "deletions": 2
+   },
+   {
+    "file": "codeframe/core/react_agent.py",
+    "additions": 9,
+    "deletions": 5
+   },
+   {
+    "file": "codeframe/ui/routers/blockers_v2.py",
+    "additions": 2,
+    "deletions": 2
+   },
+   {
+    "file": "tests/core/test_blocker_origin.py",
+    "additions": 46,
+    "deletions": 1
+   },
+   {
+    "file": "web-ui/__tests__/components/blockers/BlockerCard.test.tsx",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "web-ui/src/components/blockers/BlockerCard.tsx",
+    "additions": 1,
+    "deletions": 1
+   }
+  ]
+ },
+ {
+  "name": "hydrotools_pr134",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/NOAA-OWP/hydrotools.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 134,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix nwis_client bug causing KeyError when station does not return data (https://github.com/NOAA-OWP/hydrotools/pull/134)",
+  "changed": [
+   {
+    "file": "python/nwis_client/setup.cfg",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "python/nwis_client/src/hydrotools/nwis_client/iv.py",
+    "additions": 25,
+    "deletions": 3
+   },
+   {
+    "file": "python/nwis_client/tests/test_nwis.py",
+    "additions": 14,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "xopen_pr158",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/pycompression/xopen.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 158,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix stdin bug (https://github.com/pycompression/xopen/pull/158)",
+  "changed": [
+   {
+    "file": "README.rst",
+    "additions": 7,
+    "deletions": 0
+   },
+   {
+    "file": "src/xopen/__init__.py",
+    "additions": 23,
+    "deletions": 4
+   },
+   {
+    "file": "tests/test_xopen.py",
+    "additions": 74,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "pymc_marketing_pr1778",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/pymc-labs/pymc-marketing.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 1778,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Bug: Sample posterior predictive raise error if dates overlap (https://github.com/pymc-labs/pymc-marketing/pull/1778)",
+  "changed": [
+   {
+    "file": "pymc_marketing/mmm/multidimensional.py",
+    "additions": 45,
+    "deletions": 1
+   },
+   {
+    "file": "tests/mmm/test_multidimensional.py",
+    "additions": 126,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "superannotate_python_sdk_pr212",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/superannotateai/superannotate-python-sdk.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 212,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix bug (https://github.com/superannotateai/superannotate-python-sdk/pull/212)",
+  "changed": [
+   {
+    "file": "requirements.txt",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "src/superannotate/lib/app/interface/sdk_interface.py",
+    "additions": 3,
+    "deletions": 1
+   },
+   {
+    "file": "src/superannotate/lib/core/usecases.py",
+    "additions": 8,
+    "deletions": 10
+   },
+   {
+    "file": "tests/integration/test_attach_video_urls.py",
+    "additions": 8,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "bigframes_pr465",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/google/bigframes.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 465,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix!: exclude remote models for .register() (https://github.com/google/bigframes/pull/465)",
+  "changed": [
+   {
+    "file": "bigframes/ml/base.py",
+    "additions": 1,
+    "deletions": 0
+   },
+   {
+    "file": "bigframes/ml/llm.py",
+    "additions": 3,
+    "deletions": 3
+   },
+   {
+    "file": "tests/system/small/ml/test_register.py",
+    "additions": 4,
+    "deletions": 13
+   }
+  ]
+ },
+ {
+  "name": "kairon_pr201",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/digiteinfotech/kairon.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 201,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "bug fix (https://github.com/digiteinfotech/kairon/pull/201)",
+  "changed": [
+   {
+    "file": "kairon/data_processor/processor.py",
+    "additions": 21,
+    "deletions": 8
+   },
+   {
+    "file": "tests/unit_test/data_processor/data_processor_test.py",
+    "additions": 7,
+    "deletions": 1
+   }
+  ]
+ },
+ {
+  "name": "darts_pr1350",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/unit8co/darts.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 1350,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix/nan in resample (https://github.com/unit8co/darts/pull/1350)",
+  "changed": [
+   {
+    "file": "darts/tests/test_timeseries.py",
+    "additions": 11,
+    "deletions": 0
+   },
+   {
+    "file": "darts/timeseries.py",
+    "additions": 37,
+    "deletions": 2
+   }
+  ]
+ },
+ {
+  "name": "dsmr_parser_pr129",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/ndokter/dsmr_parser.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 129,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Bug/duplicate index BELGIUM_MAXIMUM_DEMAND_13_MONTHS (https://github.com/ndokter/dsmr_parser/pull/129)",
+  "changed": [
+   {
+    "file": "dsmr_parser/parsers.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "test/test_parse_fluvius.py",
+    "additions": 22,
+    "deletions": 1
+   }
+  ]
+ },
+ {
+  "name": "pandas_pr49706",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/pandas-dev/pandas.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 49706,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Bug: Fix Inconsistent Behavior for Series.searchsorted (https://github.com/pandas-dev/pandas/pull/49706)",
+  "changed": [
+   {
+    "file": "doc/source/whatsnew/v2.0.0.rst",
+    "additions": 2,
+    "deletions": 0
+   },
+   {
+    "file": "pandas/core/base.py",
+    "additions": 7,
+    "deletions": 0
+   },
+   {
+    "file": "pandas/tests/series/methods/test_searchsorted.py",
+    "additions": 10,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "optika_pr64",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/sun-data/optika.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 64,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fixed bug in `optika.materials.snells_law()` where an error was raised if `diffraction_order` was an array. (https://github.com/sun-data/optika/pull/64)",
+  "changed": [
+   {
+    "file": "optika/materials/_snells_law.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "optika/materials/_tests/test_snells_law.py",
+    "additions": 15,
+    "deletions": 2
+   }
+  ]
+ },
+ {
+  "name": "holoviews_pr4935",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/holoviz/holoviews.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 4935,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix dask TriMesh rasterization (https://github.com/holoviz/holoviews/pull/4935)",
+  "changed": [
+   {
+    "file": "holoviews/operation/datashader.py",
+    "additions": 32,
+    "deletions": 7
+   },
+   {
+    "file": "holoviews/tests/operation/testdatashader.py",
+    "additions": 111,
+    "deletions": 42
+   }
+  ]
+ },
+ {
+  "name": "holoviews_pr5320",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/holoviz/holoviews.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 5320,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fixes iterable in Overlay (https://github.com/holoviz/holoviews/pull/5320)",
+  "changed": [
+   {
+    "file": "holoviews/core/dimension.py",
+    "additions": 8,
+    "deletions": 1
+   },
+   {
+    "file": "holoviews/tests/plotting/bokeh/test_overlayplot.py",
+    "additions": 5,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "algotrade_pr13",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/varun-sharma-2006/AlgoTrade.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 13,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix AttributeError in Analytics Overview Endpoint (https://github.com/varun-sharma-2006/AlgoTrade/pull/13)",
+  "changed": [
+   {
+    "file": "backend/main.py",
+    "additions": 13,
+    "deletions": 1
+   },
+   {
+    "file": "backend/test_main.py",
+    "additions": 47,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "odemis_pr2976",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/delmic/odemis.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 2976,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "[fix] xt_client: shouldn't provide dwellTime when there is no detector (https://github.com/delmic/odemis/pull/2976)",
+  "changed": [
+   {
+    "file": "src/odemis/driver/test/xt_client_test.py",
+    "additions": 3,
+    "deletions": 0
+   },
+   {
+    "file": "src/odemis/driver/xt_client.py",
+    "additions": 16,
+    "deletions": 17
+   }
+  ]
+ },
+ {
+  "name": "pandas_pr43236",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/pandas-dev/pandas.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 43236,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "BUG: groupby.apply incorrectly dropping nan (https://github.com/pandas-dev/pandas/pull/43236)",
+  "changed": [
+   {
+    "file": "doc/source/whatsnew/v1.3.3.rst",
+    "additions": 1,
+    "deletions": 0
+   },
+   {
+    "file": "pandas/core/groupby/groupby.py",
+    "additions": 5,
+    "deletions": 1
+   },
+   {
+    "file": "pandas/tests/groupby/test_apply.py",
+    "additions": 5,
+    "deletions": 11
+   }
+  ]
+ },
+ {
+  "name": "prowler_pr7381",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/prowler-cloud/prowler.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 7381,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix(redshift): validation error for `Cluster.multi_az` (https://github.com/prowler-cloud/prowler/pull/7381)",
+  "changed": [
+   {
+    "file": "prowler/providers/aws/services/redshift/redshift_cluster_multi_az_enabled/redshift_cluster_multi_az_enabled.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "prowler/providers/aws/services/redshift/redshift_service.py",
+    "additions": 2,
+    "deletions": 2
+   },
+   {
+    "file": "tests/providers/aws/services/redshift/redshift_cluster_multi_az_enabled/redshift_cluster_multi_az_enabled_test.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "tests/providers/aws/services/redshift/redshift_service_test.py",
+    "additions": 2,
+    "deletions": 1
+   }
+  ]
+ },
+ {
+  "name": "plotly_resampler_pr116",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/predict-idlab/plotly-resampler.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 116,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": ":bug: parse object arrays for hf_x (https://github.com/predict-idlab/plotly-resampler/pull/116)",
+  "changed": [
+   {
+    "file": "plotly_resampler/aggregation/__init__.py",
+    "additions": 10,
+    "deletions": 0
+   },
+   {
+    "file": "plotly_resampler/figure_resampler/figure_resampler_interface.py",
+    "additions": 35,
+    "deletions": 13
+   },
+   {
+    "file": "tests/test_figure_resampler.py",
+    "additions": 149,
+    "deletions": 4
+   },
+   {
+    "file": "tests/test_figurewidget_resampler.py",
+    "additions": 144,
+    "deletions": 7
+   }
+  ]
+ },
+ {
+  "name": "sphinx_docfx_yaml_pr203",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/googleapis/sphinx-docfx-yaml.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 203,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix: add markdown header if it is missing (https://github.com/googleapis/sphinx-docfx-yaml/pull/203)",
+  "changed": [
+   {
+    "file": "docfx_yaml/extension.py",
+    "additions": 38,
+    "deletions": 8
+   },
+   {
+    "file": "tests/markdown_example_alternate_bad_want.md",
+    "additions": 8,
+    "deletions": 0
+   },
+   {
+    "file": "tests/markdown_example_bad_header_want.md",
+    "additions": 6,
+    "deletions": 0
+   },
+   {
+    "file": "tests/markdown_example_h2_want.md",
+    "additions": 6,
+    "deletions": 0
+   },
+   {
+    "file": "tests/test_helpers.py",
+    "additions": 36,
+    "deletions": 0
+   },
+   {
+    "file": "tests/test_unit.py",
+    "additions": 49,
+    "deletions": 52
+   }
+  ]
+ },
+ {
+  "name": "adversarial_robustness_t_pr1097",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/Trusted-AI/adversarial-robustness-toolbox.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 1097,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix failing download of Iris dataset in tests  (https://github.com/Trusted-AI/adversarial-robustness-toolbox/pull/1097)",
+  "changed": [
+   {
+    "file": "art/utils.py",
+    "additions": 8,
+    "deletions": 16
+   },
+   {
+    "file": "tests/attacks/inference/attribute_inference/test_black_box.py",
+    "additions": 7,
+    "deletions": 7
+   },
+   {
+    "file": "tests/attacks/test_elastic_net.py",
+    "additions": 11,
+    "deletions": 11
+   },
+   {
+    "file": "tests/estimators/classification/test_scikitlearn.py",
+    "additions": 40,
+    "deletions": 39
+   },
+   {
+    "file": "tests/test_utils.py",
+    "additions": 2,
+    "deletions": 2
+   }
+  ]
+ },
+ {
+  "name": "photo_share_pr64",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/peakodev/photo_share.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 64,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Bug  (https://github.com/peakodev/photo_share/pull/64)",
+  "changed": [
+   {
+    "file": "app/repository/tags.py",
+    "additions": 3,
+    "deletions": 1
+   },
+   {
+    "file": "app/routes/posts.py",
+    "additions": 0,
+    "deletions": 7
+   },
+   {
+    "file": "tests/repository/test_reposetory_tags.py",
+    "additions": 10,
+    "deletions": 0
+   },
+   {
+    "file": "tests/repository/test_repository_post.py",
+    "additions": 14,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "awx_pr12534",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/ansible/awx.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 12534,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "[task_manager_refactor] Fix unit / functional tests (https://github.com/ansible/awx/pull/12534)",
+  "changed": [
+   {
+    "file": "awx/main/scheduler/task_manager.py",
+    "additions": 0,
+    "deletions": 1
+   },
+   {
+    "file": "awx/main/tasks/system.py",
+    "additions": 0,
+    "deletions": 1
+   },
+   {
+    "file": "awx/main/tests/functional/models/test_unified_job.py",
+    "additions": 6,
+    "deletions": 0
+   },
+   {
+    "file": "awx/main/tests/functional/task_management/__init__.py",
+    "additions": 6,
+    "deletions": 0
+   },
+   {
+    "file": "awx/main/tests/functional/task_management/test_rampart_groups.py",
+    "additions": 60,
+    "deletions": 54
+   },
+   {
+    "file": "awx/main/tests/functional/task_management/test_scheduler.py",
+    "additions": 93,
+    "deletions": 129
+   },
+   {
+    "file": "awx/main/utils/common.py",
+    "additions": 7,
+    "deletions": 4
+   }
+  ]
+ },
+ {
+  "name": "orders_pr74",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/CSCI-GA-2820-SU23-001/orders.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 74,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Item bugs (https://github.com/CSCI-GA-2820-SU23-001/orders/pull/74)",
+  "changed": [
+   {
+    "file": "service/models.py",
+    "additions": 2,
+    "deletions": 3
+   },
+   {
+    "file": "service/routes.py",
+    "additions": 12,
+    "deletions": 3
+   },
+   {
+    "file": "tests/test_routes.py",
+    "additions": 71,
+    "deletions": 34
+   }
+  ]
+ },
+ {
+  "name": "scrapy_poet_pr100",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/scrapinghub/scrapy-poet.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 100,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix bug by passing spider instance to to_dict( ... ) method of scrapy Request (https://github.com/scrapinghub/scrapy-poet/pull/100)",
+  "changed": [
+   {
+    "file": "pyproject.toml",
+    "additions": 1,
+    "deletions": 0
+   },
+   {
+    "file": "scrapy_poet/page_input_providers.py",
+    "additions": 15,
+    "deletions": 3
+   },
+   {
+    "file": "tests/test_cache.py",
+    "additions": 41,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "cellfinder_pr609",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/brainglobe/cellfinder.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 609,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix kernel to be symetric and properly spheroid (https://github.com/brainglobe/cellfinder/pull/609)",
+  "changed": [
+   {
+    "file": "cellfinder/core/detect/filters/volume/ball_filter.py",
+    "additions": 5,
+    "deletions": 6
+   },
+   {
+    "file": "cellfinder/core/tools/geometry.py",
+    "additions": 15,
+    "deletions": 14
+   },
+   {
+    "file": "tests/core/test_unit/test_detect/test_filters/test_volume_filters/test_ball_filter.py",
+    "additions": 17,
+    "deletions": 1
+   },
+   {
+    "file": "tests/data/pooch_registry.txt",
+    "additions": 1,
+    "deletions": 1
+   }
+  ]
+ },
+ {
+  "name": "nessai_pr470",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/mj-will/nessai.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 470,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "BUG: fix dict_to_live_points for 0d and len 1 arrays (https://github.com/mj-will/nessai/pull/470)",
+  "changed": [
+   {
+    "file": "src/nessai/livepoint.py",
+    "additions": 13,
+    "deletions": 12
+   },
+   {
+    "file": "tests/test_livepoint.py",
+    "additions": 2,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "gammapy_pr3531",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/gammapy/gammapy.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 3531,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Small bug fixes in ImageProfileEstimator (https://github.com/gammapy/gammapy/pull/3531)",
+  "changed": [
+   {
+    "file": "gammapy/estimators/profile.py",
+    "additions": 3,
+    "deletions": 4
+   },
+   {
+    "file": "gammapy/estimators/tests/test_profile.py",
+    "additions": 3,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "python_databind_pr68",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/NiklasRosenstein/python-databind.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 68,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix #66: dataclass from Generic now serializes (https://github.com/NiklasRosenstein/python-databind/pull/68)",
+  "changed": [
+   {
+    "file": ".changelog/_unreleased.toml",
+    "additions": 5,
+    "deletions": 0
+   },
+   {
+    "file": "databind/src/databind/core/schema.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "databind/src/databind/core/tests/schema_test.py",
+    "additions": 24,
+    "deletions": 0
+   },
+   {
+    "file": "databind/src/databind/json/tests/converters_test.py",
+    "additions": 28,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "litellm_pr3019",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 3019,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix Anthropic system message handling (https://github.com/BerriAI/litellm/pull/3019)",
+  "changed": [
+   {
+    "file": "litellm/llms/prompt_templates/factory.py",
+    "additions": 2,
+    "deletions": 2
+   },
+   {
+    "file": "litellm/tests/test_prompt_factory.py",
+    "additions": 17,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "pandas_pr44123",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/pandas-dev/pandas.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 44123,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "BUG: DataFrame index name no longer resets after appending a list of series (https://github.com/pandas-dev/pandas/pull/44123)",
+  "changed": [
+   {
+    "file": "doc/source/whatsnew/v1.4.0.rst",
+    "additions": 1,
+    "deletions": 0
+   },
+   {
+    "file": "pandas/core/frame.py",
+    "additions": 2,
+    "deletions": 0
+   },
+   {
+    "file": "pandas/tests/frame/methods/test_append.py",
+    "additions": 20,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "jts_pr174",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/jaspercurry/JTS.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 174,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "voice-eval: fix two bugs hiding tool-calling on OpenAI Realtime (https://github.com/jaspercurry/JTS/pull/174)",
+  "changed": [
+   {
+    "file": "jasper/voice/trace.py",
+    "additions": 41,
+    "deletions": 12
+   },
+   {
+    "file": "tests/voice_eval/harness.py",
+    "additions": 82,
+    "deletions": 8
+   }
+  ]
+ },
+ {
+  "name": "posthog_pr12988",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/PostHog/posthog.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 12988,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix: don't load the same property definition multiple times when listing (https://github.com/PostHog/posthog/pull/12988)",
+  "changed": [
+   {
+    "file": "posthog/api/property_definition.py",
+    "additions": 21,
+    "deletions": 5
+   },
+   {
+    "file": "posthog/api/test/test_property_definition.py",
+    "additions": 17,
+    "deletions": 1
+   }
+  ]
+ },
+ {
+  "name": "xorbits_pr112",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/xorbitsai/xorbits.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 112,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "BUG: Remove imports from test module (https://github.com/xorbitsai/xorbits/pull/112)",
+  "changed": [
+   {
+    "file": "python/xorbits/core/adapter.py",
+    "additions": 0,
+    "deletions": 1
+   },
+   {
+    "file": "python/xorbits/tests/core.py",
+    "additions": 2,
+    "deletions": 2
+   }
+  ]
+ },
+ {
+  "name": "content_pr35060",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/demisto/content.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 35060,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Anomali bug (https://github.com/demisto/content/pull/35060)",
+  "changed": [
+   {
+    "file": "Packs/Anomali_ThreatStream/Integrations/AnomaliThreatStreamv3/AnomaliThreatStreamv3.py",
+    "additions": 3,
+    "deletions": 4
+   },
+   {
+    "file": "Packs/Anomali_ThreatStream/Integrations/AnomaliThreatStreamv3/AnomaliThreatStreamv3.yml",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "Packs/Anomali_ThreatStream/Integrations/AnomaliThreatStreamv3/AnomaliThreatStreamv3_test.py",
+    "additions": 5,
+    "deletions": 4
+   },
+   {
+    "file": "Packs/Anomali_ThreatStream/ReleaseNotes/2_2_21.md",
+    "additions": 7,
+    "deletions": 0
+   },
+   {
+    "file": "Packs/Anomali_ThreatStream/pack_metadata.json",
+    "additions": 1,
+    "deletions": 1
+   }
+  ]
+ },
+ {
+  "name": "backend_pr75",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/Moshaverito/backend.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 75,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Bug issue 70 (https://github.com/Moshaverito/backend/pull/75)",
+  "changed": [
+   {
+    "file": "communications/admin.py",
+    "additions": 7,
+    "deletions": 7
+   },
+   {
+    "file": "communications/models.py",
+    "additions": 3,
+    "deletions": 5
+   },
+   {
+    "file": "communications/services.py",
+    "additions": 9,
+    "deletions": 7
+   },
+   {
+    "file": "communications/tests.py",
+    "additions": 434,
+    "deletions": 1
+   },
+   {
+    "file": "communications/views.py",
+    "additions": 7,
+    "deletions": 6
+   }
+  ]
+ },
+ {
+  "name": "pypdf_pr2002",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/py-pdf/pypdf.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 2002,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "BUG: Search /DA in hierarchy fields (https://github.com/py-pdf/pypdf/pull/2002)",
+  "changed": [
+   {
+    "file": "pypdf/_writer.py",
+    "additions": 28,
+    "deletions": 4
+   },
+   {
+    "file": "tests/test_writer.py",
+    "additions": 52,
+    "deletions": 5
+   }
+  ]
+ },
+ {
+  "name": "doltcli_pr6",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/dolthub/doltcli.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 6,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Max/clone bug (https://github.com/dolthub/doltcli/pull/6)",
+  "changed": [
+   {
+    "file": "doltcli/dolt.py",
+    "additions": 10,
+    "deletions": 14
+   },
+   {
+    "file": "tests/test_dolt.py",
+    "additions": 32,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "scipy_pr16096",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/scipy/scipy.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 16096,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "BUG: use SOS filters in decimate for numerical stability (https://github.com/scipy/scipy/pull/16096)",
+  "changed": [
+   {
+    "file": "scipy/signal/_signaltools.py",
+    "additions": 17,
+    "deletions": 15
+   },
+   {
+    "file": "scipy/signal/tests/test_signaltools.py",
+    "additions": 11,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "home_assistant_mail_and__pr707",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/moralmunky/Home-Assistant-Mail-And-Packages.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 707,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix: use PIL to resize images (https://github.com/moralmunky/Home-Assistant-Mail-And-Packages/pull/707)",
+  "changed": [
+   {
+    "file": "custom_components/mail_and_packages/helpers.py",
+    "additions": 1,
+    "deletions": 2
+   },
+   {
+    "file": "custom_components/mail_and_packages/manifest.json",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "requirements.txt",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "tests/conftest.py",
+    "additions": 1,
+    "deletions": 1
+   }
+  ]
+ },
+ {
+  "name": "pipeline_runner_api_pr9",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/digital-land/pipeline-runner-api.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 9,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Bug fixes (https://github.com/digital-land/pipeline-runner-api/pull/9)",
+  "changed": [
+   {
+    "file": "application/core/workflow.py",
+    "additions": 2,
+    "deletions": 0
+   },
+   {
+    "file": "application/services/json_schema_svc.py",
+    "additions": 1,
+    "deletions": 3
+   },
+   {
+    "file": "mapping.yaml",
+    "additions": 10,
+    "deletions": 0
+   },
+   {
+    "file": "tests/data/json_schemas/api_run_pipeline_req.json",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "tests/data/json_schemas/api_run_pipeline_resp.json",
+    "additions": 3,
+    "deletions": 0
+   },
+   {
+    "file": "tests/integration/application/core/test_workflow.py",
+    "additions": 1,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "vllm_tgis_adapter_pr144",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/opendatahub-io/vllm-tgis-adapter.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 144,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix: add_special_tokens in tokenize (https://github.com/opendatahub-io/vllm-tgis-adapter/pull/144)",
+  "changed": [
+   {
+    "file": "src/vllm_tgis_adapter/grpc/grpc_server.py",
+    "additions": 3,
+    "deletions": 1
+   },
+   {
+    "file": "tests/test_grpc_server.py",
+    "additions": 8,
+    "deletions": 0
+   },
+   {
+    "file": "tests/utils.py",
+    "additions": 27,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "clinlp_pr41",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/umcu/clinlp.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 41,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix overlap bug (https://github.com/umcu/clinlp/pull/41)",
+  "changed": [
+   {
+    "file": "CHANGELOG.md",
+    "additions": 5,
+    "deletions": 0
+   },
+   {
+    "file": "clinlp/entity.py",
+    "additions": 30,
+    "deletions": 0
+   },
+   {
+    "file": "pyproject.toml",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "tests/unit/test_entity.py",
+    "additions": 7,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "ansible_runner_pr1306",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/ansible/ansible-runner.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 1306,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix container --tty detection in subprocess mode (https://github.com/ansible/ansible-runner/pull/1306)",
+  "changed": [
+   {
+    "file": "src/ansible_runner/config/_base.py",
+    "additions": 10,
+    "deletions": 1
+   },
+   {
+    "file": "src/ansible_runner/config/command.py",
+    "additions": 14,
+    "deletions": 0
+   },
+   {
+    "file": "test/integration/containerized/test_container_management.py",
+    "additions": 71,
+    "deletions": 1
+   },
+   {
+    "file": "test/unit/config/test_command.py",
+    "additions": 42,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "pymc_pr6674",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/pymc-devs/pymc.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 6674,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix `WhiteNoise` Covariance bug (https://github.com/pymc-devs/pymc/pull/6674)",
+  "changed": [
+   {
+    "file": "pymc/gp/cov.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "pymc/gp/gp.py",
+    "additions": 3,
+    "deletions": 3
+   },
+   {
+    "file": "tests/gp/test_cov.py",
+    "additions": 13,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "inventree_pr4244",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/inventree/InvenTree.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 4244,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "[BUG] Fix ownership (https://github.com/inventree/InvenTree/pull/4244)",
+  "changed": [
+   {
+    "file": "InvenTree/stock/models.py",
+    "additions": 2,
+    "deletions": 2
+   },
+   {
+    "file": "InvenTree/stock/test_views.py",
+    "additions": 75,
+    "deletions": 111
+   },
+   {
+    "file": "InvenTree/users/models.py",
+    "additions": 8,
+    "deletions": 2
+   }
+  ]
+ },
+ {
+  "name": "pypdf_pr3634",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/py-pdf/pypdf.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 3634,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "BUG: Fix UnboundLocalError when update_page_form_field_values with /Sig (https://github.com/py-pdf/pypdf/pull/3634)",
+  "changed": [
+   {
+    "file": "pypdf/_writer.py",
+    "additions": 2,
+    "deletions": 0
+   },
+   {
+    "file": "tests/example_files.yaml",
+    "additions": 2,
+    "deletions": 0
+   },
+   {
+    "file": "tests/test_writer.py",
+    "additions": 18,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "nessai_pr37",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/mj-will/nessai.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 37,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix likelihood timing bug (https://github.com/mj-will/nessai/pull/37)",
+  "changed": [
+   {
+    "file": "CHANGELOG.md",
+    "additions": 8,
+    "deletions": 0
+   },
+   {
+    "file": "nessai/flowsampler.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "tests/test_sampling.py",
+    "additions": 17,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "json_schema_for_humans_pr151",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/coveooss/json-schema-for-humans.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 151,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix Spurious ellipsis in YAML examples (https://github.com/coveooss/json-schema-for-humans/pull/151)",
+  "changed": [
+   {
+    "file": "json_schema_for_humans/jinja_filters.py",
+    "additions": 5,
+    "deletions": 2
+   },
+   {
+    "file": "tests/generate_test.py",
+    "additions": 32,
+    "deletions": 27
+   }
+  ]
+ },
+ {
+  "name": "datajudge_pr241",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/Quantco/datajudge.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 241,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix a bug with the current implementation of the `NumericPercentile` `Constraint` (https://github.com/Quantco/datajudge/pull/241)",
+  "changed": [
+   {
+    "file": "CHANGELOG.rst",
+    "additions": 9,
+    "deletions": 0
+   },
+   {
+    "file": "src/datajudge/db_access.py",
+    "additions": 32,
+    "deletions": 21
+   },
+   {
+    "file": "src/datajudge/requirements.py",
+    "additions": 2,
+    "deletions": 2
+   },
+   {
+    "file": "tests/integration/test_integration.py",
+    "additions": 39,
+    "deletions": 12
+   }
+  ]
+ },
+ {
+  "name": "jax_loop_utils_pr20",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/Astera-org/jax_loop_utils.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 20,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "video: fix bugs (https://github.com/Astera-org/jax_loop_utils/pull/20)",
+  "changed": [
+   {
+    "file": "src/jax_loop_utils/metric_writers/_audio_video/audio_video.py",
+    "additions": 29,
+    "deletions": 6
+   },
+   {
+    "file": "src/jax_loop_utils/metric_writers/_audio_video/audio_video_test.py",
+    "additions": 8,
+    "deletions": 6
+   },
+   {
+    "file": "src/jax_loop_utils/metric_writers/mlflow/metric_writer.py",
+    "additions": 2,
+    "deletions": 3
+   },
+   {
+    "file": "src/jax_loop_utils/metric_writers/mlflow/metric_writer_test.py",
+    "additions": 2,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "openbb_pr662",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/openbq-org/OpenBB.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 662,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Etf bug headers (https://github.com/openbq-org/OpenBB/pull/662)",
+  "changed": [
+   {
+    "file": "gamestonk_terminal/etf/stockanalysis_model.py",
+    "additions": 8,
+    "deletions": 3
+   },
+   {
+    "file": "tests/test_cryptocurrency/test_coingecko_crypto.py",
+    "additions": 1,
+    "deletions": 1
+   }
+  ]
+ },
+ {
+  "name": "pghoard_pr523",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/Aiven-Open/pghoard.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 523,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "walreceiver: fixes and tests (https://github.com/Aiven-Open/pghoard/pull/523)",
+  "changed": [
+   {
+    "file": "pghoard/walreceiver.py",
+    "additions": 12,
+    "deletions": 10
+   },
+   {
+    "file": "test/conftest.py",
+    "additions": 8,
+    "deletions": 0
+   },
+   {
+    "file": "test/test_walreceiver.py",
+    "additions": 17,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "python_pubsub_pr1134",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/googleapis/python-pubsub.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 1134,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix: Set timeout to infinite for publishing with ordering keys enabled (https://github.com/googleapis/python-pubsub/pull/1134)",
+  "changed": [
+   {
+    "file": "google/cloud/pubsub_v1/publisher/client.py",
+    "additions": 5,
+    "deletions": 0
+   },
+   {
+    "file": "tests/unit/pubsub_v1/publisher/test_publisher_client.py",
+    "additions": 4,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "prowler_pr7045",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/prowler-cloud/prowler.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 7045,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix(elasticache): improve logic in `elasticache_redis_cluster_backup_enabled` (https://github.com/prowler-cloud/prowler/pull/7045)",
+  "changed": [
+   {
+    "file": "docs/tutorials/configuration_file.md",
+    "additions": 1,
+    "deletions": 0
+   },
+   {
+    "file": "prowler/config/config.yaml",
+    "additions": 5,
+    "deletions": 0
+   },
+   {
+    "file": "prowler/providers/aws/services/elasticache/elasticache_redis_cluster_backup_enabled/elasticache_redis_cluster_backup_enabled.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "tests/config/config_test.py",
+    "additions": 1,
+    "deletions": 0
+   },
+   {
+    "file": "tests/config/fixtures/config.yaml",
+    "additions": 5,
+    "deletions": 0
+   },
+   {
+    "file": "tests/providers/aws/services/elasticache/elasticache_redis_cluster_backup_enabled/elasticache_redis_cluster_backup_enabled_test.py",
+    "additions": 48,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "synapse_pr16930",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/element-hq/synapse.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 16930,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "`/sync`: fix bug in calculating `state` response (https://github.com/element-hq/synapse/pull/16930)",
+  "changed": [
+   {
+    "file": "changelog.d/16930.bugfix",
+    "additions": 1,
+    "deletions": 0
+   },
+   {
+    "file": "synapse/handlers/sync.py",
+    "additions": 13,
+    "deletions": 41
+   },
+   {
+    "file": "tests/handlers/test_sync.py",
+    "additions": 80,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "bigframes_pr200",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/google/bigframes.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 200,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix: make to_pandas override enable_downsampling when sampling_method is manually set. (https://github.com/google/bigframes/pull/200)",
+  "changed": [
+   {
+    "file": "bigframes/core/blocks.py",
+    "additions": 23,
+    "deletions": 18
+   },
+   {
+    "file": "tests/system/small/test_dataframe.py",
+    "additions": 11,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "bodhi_pr4319",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/fedora-infra/bodhi.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 4319,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fetch bugs information and testcases upon update creation (https://github.com/fedora-infra/bodhi/pull/4319)",
+  "changed": [
+   {
+    "file": "bodhi/server/models.py",
+    "additions": 10,
+    "deletions": 12
+   },
+   {
+    "file": "bodhi/tests/server/test_models.py",
+    "additions": 28,
+    "deletions": 16
+   },
+   {
+    "file": "news/4317.bug",
+    "additions": 1,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "ibis_pr2712",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/ibis-project/ibis.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 2712,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "BUG: Fix time context trimming error for multi column udfs in pandas backend (https://github.com/ibis-project/ibis/pull/2712)",
+  "changed": [
+   {
+    "file": "docs/source/release/index.rst",
+    "additions": 1,
+    "deletions": 0
+   },
+   {
+    "file": "ibis/backends/dask/tests/execution/test_timecontext.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "ibis/backends/pandas/execution/window.py",
+    "additions": 31,
+    "deletions": 18
+   },
+   {
+    "file": "ibis/backends/pandas/tests/execution/test_timecontext.py",
+    "additions": 8,
+    "deletions": 8
+   },
+   {
+    "file": "ibis/backends/tests/test_timecontext.py",
+    "additions": 22,
+    "deletions": 7
+   },
+   {
+    "file": "ibis/expr/timecontext.py",
+    "additions": 1,
+    "deletions": 1
+   }
+  ]
+ },
+ {
+  "name": "hdx_ckan_pr5975",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/OCHA-DAP/hdx-ckan.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 5975,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "PR for PROD HDX-8728 fix for issue with multiple pii (qa) fields being updated at\u2026 (https://github.com/OCHA-DAP/hdx-ckan/pull/5975)",
+  "changed": [
+   {
+    "file": "ckanext-hdx_package/ckanext/hdx_package/actions/patch.py",
+    "additions": 4,
+    "deletions": 3
+   },
+   {
+    "file": "ckanext-hdx_package/ckanext/hdx_package/tests/test_dataset_special_fields/test_pii_sdc_metafields.py",
+    "additions": 26,
+    "deletions": 1
+   },
+   {
+    "file": "ckanext-hdx_theme/ckanext/hdx_theme/version.py",
+    "additions": 1,
+    "deletions": 1
+   }
+  ]
+ },
+ {
+  "name": "pydpf_composites_pr140",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/ansys/pydpf-composites.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 140,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Bug: sampling point plots (https://github.com/ansys/pydpf-composites/pull/140)",
+  "changed": [
+   {
+    "file": "examples/2_sampling_point_example.py",
+    "additions": 4,
+    "deletions": 0
+   },
+   {
+    "file": "src/ansys/dpf/composites/sampling_point.py",
+    "additions": 33,
+    "deletions": 13
+   },
+   {
+    "file": "tests/sampling_point_test.py",
+    "additions": 45,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "content_pr23268",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/demisto/content.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 23268,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Archer nested response bug (https://github.com/demisto/content/pull/23268)",
+  "changed": [
+   {
+    "file": "Packs/ArcherRSA/Integrations/ArcherV2/ArcherV2.py",
+    "additions": 32,
+    "deletions": 19
+   },
+   {
+    "file": "Packs/ArcherRSA/Integrations/ArcherV2/ArcherV2.yml",
+    "additions": 34,
+    "deletions": 39
+   },
+   {
+    "file": "Packs/ArcherRSA/Integrations/ArcherV2/ArcherV2_test.py",
+    "additions": 230,
+    "deletions": 16
+   },
+   {
+    "file": "Packs/ArcherRSA/ReleaseNotes/1_2_6.md",
+    "additions": 7,
+    "deletions": 0
+   },
+   {
+    "file": "Packs/ArcherRSA/pack_metadata.json",
+    "additions": 1,
+    "deletions": 1
+   }
+  ]
+ },
+ {
+  "name": "bigframes_pr844",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/google/bigframes.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 844,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix: Fix 'sql' property for null index (https://github.com/google/bigframes/pull/844)",
+  "changed": [
+   {
+    "file": "bigframes/dataframe.py",
+    "additions": 3,
+    "deletions": 1
+   },
+   {
+    "file": "bigframes/session/__init__.py",
+    "additions": 2,
+    "deletions": 0
+   },
+   {
+    "file": "bigframes/session/_io/bigquery/read_gbq_table.py",
+    "additions": 4,
+    "deletions": 0
+   },
+   {
+    "file": "tests/system/small/test_unordered.py",
+    "additions": 9,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "odemis_pr2956",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/delmic/odemis.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 2956,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "[NSRPARMA-117] [fix] SpectrumSettingsStream with light component didn't turn light on during acquisition (https://github.com/delmic/odemis/pull/2956)",
+  "changed": [
+   {
+    "file": "install/linux/usr/share/odemis/sim/sparc2-fplm-sim.odm.yaml",
+    "additions": 25,
+    "deletions": 0
+   },
+   {
+    "file": "src/odemis/acq/stream/_helper.py",
+    "additions": 25,
+    "deletions": 20
+   },
+   {
+    "file": "src/odemis/acq/test/stream_test.py",
+    "additions": 118,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "galaxy_pr18942",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/galaxyproject/galaxy.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 18942,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix backend role sharing bug (https://github.com/galaxyproject/galaxy/pull/18942)",
+  "changed": [
+   {
+    "file": "lib/galaxy/model/security.py",
+    "additions": 16,
+    "deletions": 9
+   },
+   {
+    "file": "test/unit/data/model/db/test_security.py",
+    "additions": 27,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "python_ndb_pr676",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/googleapis/python-ndb.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 676,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix: properly handle legacy structured properties in Expando instances (https://github.com/googleapis/python-ndb/pull/676)",
+  "changed": [
+   {
+    "file": "google/cloud/ndb/model.py",
+    "additions": 14,
+    "deletions": 2
+   },
+   {
+    "file": "tests/system/test_crud.py",
+    "additions": 54,
+    "deletions": 0
+   },
+   {
+    "file": "tests/unit/test_model.py",
+    "additions": 18,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "celts_pr503",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/BCStudentSoftwareDevTeam/celts.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 503,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix term bug (https://github.com/BCStudentSoftwareDevTeam/celts/pull/503)",
+  "changed": [
+   {
+    "file": "app/models/term.py",
+    "additions": 5,
+    "deletions": 1
+   },
+   {
+    "file": "tests/code/test_utils.py",
+    "additions": 28,
+    "deletions": 24
+   }
+  ]
+ },
+ {
+  "name": "prowler_pr7810",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/prowler-cloud/prowler.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 7810,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix(admincenter): `admincenter_users_admins_reduced_license_footprint` logic (https://github.com/prowler-cloud/prowler/pull/7810)",
+  "changed": [
+   {
+    "file": "prowler/CHANGELOG.md",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "prowler/providers/m365/services/admincenter/admincenter_users_admins_reduced_license_footprint/admincenter_users_admins_reduced_license_footprint.py",
+    "additions": 2,
+    "deletions": 2
+   },
+   {
+    "file": "tests/providers/m365/services/admincenter/admincenter_users_admins_reduced_license_footprint/admincenter_users_admins_reduced_license_footprint_test.py",
+    "additions": 1,
+    "deletions": 1
+   }
+  ]
+ },
+ {
+  "name": "darts_pr3087",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/unit8co/darts.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 3087,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "[BUG] Fix _ScaledDotProductAttention float16 overflow in masked_fill under mixed precision (https://github.com/unit8co/darts/pull/3087)",
+  "changed": [
+   {
+    "file": "CHANGELOG.md",
+    "additions": 4,
+    "deletions": 0
+   },
+   {
+    "file": "darts/models/forecasting/tft_submodels.py",
+    "additions": 4,
+    "deletions": 2
+   },
+   {
+    "file": "darts/tests/models/forecasting/test_TFT.py",
+    "additions": 31,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "quantum_decomp_pr9",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/fedimser/quantum_decomp.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 9,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix a bug with wrong decomposition (https://github.com/fedimser/quantum_decomp/pull/9)",
+  "changed": [
+   {
+    "file": "quantum_decomp/quantum_decomp_main.py",
+    "additions": 29,
+    "deletions": 16
+   },
+   {
+    "file": "quantum_decomp/quantum_decomp_test.py",
+    "additions": 22,
+    "deletions": 0
+   },
+   {
+    "file": "quantum_decomp/src/two_level_unitary.py",
+    "additions": 4,
+    "deletions": 1
+   },
+   {
+    "file": "setup.py",
+    "additions": 1,
+    "deletions": 1
+   }
+  ]
+ },
+ {
+  "name": "disaster_response_projec_pr97",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/ghgeist/disaster_response_project.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 97,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix: redirect home to dashboard (https://github.com/ghgeist/disaster_response_project/pull/97)",
+  "changed": [
+   {
+    "file": "app/routes/home.py",
+    "additions": 8,
+    "deletions": 39
+   },
+   {
+    "file": "tests/test_smoke.py",
+    "additions": 7,
+    "deletions": 5
+   }
+  ]
+ },
+ {
+  "name": "evalml_pr3256",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/alteryx/evalml.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 3256,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix bug in separate by gap for time series (https://github.com/alteryx/evalml/pull/3256)",
+  "changed": [
+   {
+    "file": "docs/source/release_notes.rst",
+    "additions": 1,
+    "deletions": 0
+   },
+   {
+    "file": "evalml/tests/utils_tests/test_gen_utils.py",
+    "additions": 15,
+    "deletions": 0
+   },
+   {
+    "file": "evalml/utils/gen_utils.py",
+    "additions": 2,
+    "deletions": 7
+   }
+  ]
+ },
+ {
+  "name": "pymc_pr6573",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/pymc-devs/pymc.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 6573,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix bug in transformed scan variables (https://github.com/pymc-devs/pymc/pull/6573)",
+  "changed": [
+   {
+    "file": "pymc/logprob/transforms.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "tests/logprob/test_transforms.py",
+    "additions": 6,
+    "deletions": 1
+   }
+  ]
+ },
+ {
+  "name": "ibis_pr2763",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/ibis-project/ibis.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 2763,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "BUG: Patch meta for DatetimeTZDtype (https://github.com/ibis-project/ibis/pull/2763)",
+  "changed": [
+   {
+    "file": "ibis/backends/dask/tests/test_udf.py",
+    "additions": 36,
+    "deletions": 2
+   },
+   {
+    "file": "ibis/backends/dask/udf.py",
+    "additions": 7,
+    "deletions": 3
+   }
+  ]
+ },
+ {
+  "name": "st2_cloud_pack_pr211",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/stfc/st2-cloud-pack.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 211,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "BUG: error triggered when query returns no results (https://github.com/stfc/st2-cloud-pack/pull/211)",
+  "changed": [
+   {
+    "file": "lib/openstack_query/query_blocks/results_container.py",
+    "additions": 2,
+    "deletions": 4
+   },
+   {
+    "file": "tests/lib/openstack_query/query_blocks/test_result_container.py",
+    "additions": 9,
+    "deletions": 10
+   }
+  ]
+ },
+ {
+  "name": "minos_microservice_commo_pr442",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/Clariteia/minos_microservice_common.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 442,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "#436 (Fix bug that did not allow to cast dictionaries to models) (https://github.com/Clariteia/minos_microservice_common/pull/442)",
+  "changed": [
+   {
+    "file": "minos/common/model/serializers/avro_data_decoder.py",
+    "additions": 5,
+    "deletions": 6
+   },
+   {
+    "file": "tests/test_common/test_model/test_serializers/test_avro_data_decoder.py",
+    "additions": 6,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "romancal_pr2246",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/spacetelescope/romancal.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 2246,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Bug fix: multiband asn now handles positive and negative declinations\u2026 (https://github.com/spacetelescope/romancal/pull/2246)",
+  "changed": [
+   {
+    "file": "romancal/associations/multiband_asn.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "romancal/associations/tests/test_multiband_asn.py",
+    "additions": 28,
+    "deletions": 11
+   }
+  ]
+ },
+ {
+  "name": "baseclasses_pr40",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/mdolab/baseclasses.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 40,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Various bug fixes (https://github.com/mdolab/baseclasses/pull/40)",
+  "changed": [
+   {
+    "file": "baseclasses/BaseSolver.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "baseclasses/utils.py",
+    "additions": 49,
+    "deletions": 9
+   },
+   {
+    "file": "tests/test_BaseSolver.py",
+    "additions": 14,
+    "deletions": 0
+   },
+   {
+    "file": "tests/test_CaseInsensitve.py",
+    "additions": 151,
+    "deletions": 45
+   }
+  ]
+ },
+ {
+  "name": "pyribs_pr119",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/icaros-usc/pyribs.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 119,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix bug with optimizer metadata (https://github.com/icaros-usc/pyribs/pull/119)",
+  "changed": [
+   {
+    "file": "ribs/optimizers/_optimizer.py",
+    "additions": 3,
+    "deletions": 3
+   },
+   {
+    "file": "tests/core/emitters/emitter_base_test.py",
+    "additions": 3,
+    "deletions": 3
+   },
+   {
+    "file": "tests/core/optimizers/optimizer_test.py",
+    "additions": 37,
+    "deletions": 8
+   }
+  ]
+ },
+ {
+  "name": "cla_backend_pr687",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/ministryofjustice/cla_backend.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 687,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "LGA-1560 - Fix Celery on UAT multideploy environments (https://github.com/ministryofjustice/cla_backend/pull/687)",
+  "changed": [
+   {
+    "file": "cla_backend/apps/reports/tasks.py",
+    "additions": 9,
+    "deletions": 1
+   },
+   {
+    "file": "cla_backend/apps/reports/tests/test_utils.py",
+    "additions": 2,
+    "deletions": 2
+   },
+   {
+    "file": "cla_backend/apps/reports/utils.py",
+    "additions": 3,
+    "deletions": 8
+   },
+   {
+    "file": "cla_backend/settings/base.py",
+    "additions": 19,
+    "deletions": 4
+   },
+   {
+    "file": "helm_deploy/cla-backend/templates/deployment-worker.yaml",
+    "additions": 2,
+    "deletions": 0
+   },
+   {
+    "file": "helm_deploy/cla-backend/values-uat.yaml",
+    "additions": 7,
+    "deletions": 0
+   },
+   {
+    "file": "helm_deploy/cla-backend/values.yaml",
+    "additions": 3,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "fabrictestbed_extensions_pr507",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/fabric-testbed/fabrictestbed-extensions.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 507,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix multi-VLAN facility port interface index bug (https://github.com/fabric-testbed/fabrictestbed-extensions/pull/507)",
+  "changed": [
+   {
+    "file": "CHANGELOG.md",
+    "additions": 1,
+    "deletions": 0
+   },
+   {
+    "file": "fabrictestbed_extensions/fablib/facility_port.py",
+    "additions": 1,
+    "deletions": 0
+   },
+   {
+    "file": "tests/unit/test_facility_port.py",
+    "additions": 100,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "torchshow_pr5",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/xwying/torchshow.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 5,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix bugs when unnormalize with customize mean and std (https://github.com/xwying/torchshow/pull/5)",
+  "changed": [
+   {
+    "file": "tests/tests.py",
+    "additions": 19,
+    "deletions": 2
+   },
+   {
+    "file": "torchshow/config.py",
+    "additions": 3,
+    "deletions": 3
+   },
+   {
+    "file": "torchshow/visualization.py",
+    "additions": 3,
+    "deletions": 3
+   }
+  ]
+ },
+ {
+  "name": "mtgencode_pr34",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/RainRat/mtgencode.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 34,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix logic bug in set filtering where 'setCode' was missing from card objects (https://github.com/RainRat/mtgencode/pull/34)",
+  "changed": [
+   {
+    "file": "lib/jdecode.py",
+    "additions": 1,
+    "deletions": 0
+   },
+   {
+    "file": "tests/test_filtering.py",
+    "additions": 78,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "flask_security_pr615",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/pallets-eco/flask-security.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 615,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Webauthn fixes for Safari and Firefox (https://github.com/pallets-eco/flask-security/pull/615)",
+  "changed": [
+   {
+    "file": "flask_security/models/fsqla_v3.py",
+    "additions": 4,
+    "deletions": 2
+   },
+   {
+    "file": "flask_security/static/js/webauthn.js",
+    "additions": 7,
+    "deletions": 1
+   },
+   {
+    "file": "flask_security/templates/security/wan_register.html",
+    "additions": 4,
+    "deletions": 4
+   },
+   {
+    "file": "flask_security/templates/security/wan_signin.html",
+    "additions": 8,
+    "deletions": 4
+   },
+   {
+    "file": "flask_security/views.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "flask_security/webauthn.py",
+    "additions": 34,
+    "deletions": 10
+   },
+   {
+    "file": "flask_security/webauthn_util.py",
+    "additions": 5,
+    "deletions": 0
+   },
+   {
+    "file": "tests/test_webauthn.py",
+    "additions": 56,
+    "deletions": 4
+   }
+  ]
+ },
+ {
+  "name": "pypdf_pr1977",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/py-pdf/pypdf.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 1977,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "BUG: Process CMYK in deflate images (https://github.com/py-pdf/pypdf/pull/1977)",
+  "changed": [
+   {
+    "file": "pypdf/filters.py",
+    "additions": 13,
+    "deletions": 5
+   },
+   {
+    "file": "tests/test_filters.py",
+    "additions": 20,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "dd_trace_py_pr2760",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/DataDog/dd-trace-py.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 2760,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix issue with tagging non-string Flask view args (https://github.com/DataDog/dd-trace-py/pull/2760)",
+  "changed": [
+   {
+    "file": "ddtrace/contrib/flask/patch.py",
+    "additions": 3,
+    "deletions": 1
+   },
+   {
+    "file": "releasenotes/notes/fix-flask-non-string-view-args-ed0283ddb1541e27.yaml",
+    "additions": 4,
+    "deletions": 0
+   },
+   {
+    "file": "tests/contrib/flask/test_request.py",
+    "additions": 47,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "tensorlake_pr81",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/tensorlakeai/tensorlake.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 81,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix bug (https://github.com/tensorlakeai/tensorlake/pull/81)",
+  "changed": [
+   {
+    "file": "src/tensorlake/function_executor/handlers/run_function/handler.py",
+    "additions": 2,
+    "deletions": 2
+   },
+   {
+    "file": "tests/tensorlake/test_graph_behaviours.py",
+    "additions": 1,
+    "deletions": 1
+   }
+  ]
+ },
+ {
+  "name": "prowler_pr6229",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/prowler-cloud/prowler.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 6229,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix(aws): disallow child-accounts to overwrite policy for `ai_services_opt_out` (https://github.com/prowler-cloud/prowler/pull/6229)",
+  "changed": [
+   {
+    "file": "prowler/providers/aws/services/organizations/organizations_opt_out_ai_services_policy/organizations_opt_out_ai_services_policy.metadata.json",
+    "additions": 4,
+    "deletions": 4
+   },
+   {
+    "file": "prowler/providers/aws/services/organizations/organizations_opt_out_ai_services_policy/organizations_opt_out_ai_services_policy.py",
+    "additions": 33,
+    "deletions": 12
+   },
+   {
+    "file": "tests/providers/aws/services/organizations/organizations_opt_out_ai_services_policy/organizations_opt_out_ai_services_policy_test.py",
+    "additions": 146,
+    "deletions": 10
+   }
+  ]
+ },
+ {
+  "name": "pandas_pr43706",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/pandas-dev/pandas.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 43706,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "BUG: Fix some index_col tests for pyarrow read_csv (https://github.com/pandas-dev/pandas/pull/43706)",
+  "changed": [
+   {
+    "file": "doc/source/whatsnew/v1.4.0.rst",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "pandas/io/parsers/arrow_parser_wrapper.py",
+    "additions": 15,
+    "deletions": 0
+   },
+   {
+    "file": "pandas/tests/io/parser/common/test_index.py",
+    "additions": 0,
+    "deletions": 1
+   },
+   {
+    "file": "pandas/tests/io/parser/test_index_col.py",
+    "additions": 0,
+    "deletions": 2
+   }
+  ]
+ },
+ {
+  "name": "pandas_pr40764",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/pandas-dev/pandas.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 40764,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Bug in loc not ordering rhs correctly for mixed indexer (https://github.com/pandas-dev/pandas/pull/40764)",
+  "changed": [
+   {
+    "file": "pandas/core/indexing.py",
+    "additions": 5,
+    "deletions": 1
+   },
+   {
+    "file": "pandas/tests/indexing/test_loc.py",
+    "additions": 12,
+    "deletions": 8
+   }
+  ]
+ },
+ {
+  "name": "trashclaw_pr108",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/Scottcjn/trashclaw.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 108,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "feat: Add pytest test suite (24 tests) + fix /pipe bug (https://github.com/Scottcjn/trashclaw/pull/108)",
+  "changed": [
+   {
+    "file": "tests/__init__.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "tests/test_tools.py",
+    "additions": 163,
+    "deletions": 361
+   },
+   {
+    "file": "trashclaw.py",
+    "additions": 4,
+    "deletions": 4
+   }
+  ]
+ },
+ {
+  "name": "open_archiefbeheer_pr571",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/maykinmedia/open-archiefbeheer.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 571,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": ":bug: #568 - fix: correct count (https://github.com/maykinmedia/open-archiefbeheer/pull/571)",
+  "changed": [
+   {
+    "file": "backend/src/openarchiefbeheer/destruction/api/serializers.py",
+    "additions": 12,
+    "deletions": 0
+   },
+   {
+    "file": "backend/src/openarchiefbeheer/destruction/tests/e2e/issues/test_568_correct_count.py",
+    "additions": 64,
+    "deletions": 0
+   },
+   {
+    "file": "frontend/src/fixtures/destructionList.ts",
+    "additions": 1,
+    "deletions": 0
+   },
+   {
+    "file": "frontend/src/lib/api/destructionLists.ts",
+    "additions": 2,
+    "deletions": 1
+   },
+   {
+    "file": "frontend/src/pages/destructionlist/detail/hooks/useSecondaryNavigation.tsx",
+    "additions": 1,
+    "deletions": 2
+   }
+  ]
+ },
+ {
+  "name": "zaakafhandelcomponent_pr759",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/GemeenteUtrecht/zaakafhandelcomponent.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 759,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": ":bug: Fix has_all_reading_rights flow ES search (https://github.com/GemeenteUtrecht/zaakafhandelcomponent/pull/759)",
+  "changed": [
+   {
+    "file": "backend/src/zac/core/services.py",
+    "additions": 4,
+    "deletions": 11
+   },
+   {
+    "file": "backend/src/zac/elasticsearch/searches.py",
+    "additions": 3,
+    "deletions": 0
+   },
+   {
+    "file": "backend/src/zac/elasticsearch/tests/test_api_zaken_search.py",
+    "additions": 28,
+    "deletions": 0
+   },
+   {
+    "file": "backend/src/zac/elasticsearch/tests/test_search_and_order_zaken.py",
+    "additions": 2,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "sbpy_pr422",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/NASA-Planetary-Science/sbpy.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 422,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix incorrect asteroid-comet classification bug (https://github.com/NASA-Planetary-Science/sbpy/pull/422)",
+  "changed": [
+   {
+    "file": "CHANGES.rst",
+    "additions": 11,
+    "deletions": 0
+   },
+   {
+    "file": "sbpy/data/names.py",
+    "additions": 4,
+    "deletions": 1
+   },
+   {
+    "file": "sbpy/data/tests/test_names.py",
+    "additions": 6,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "genesis_world_pr2481",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/Genesis-Embodied-AI/genesis-world.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 2481,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "[BUG FIX] Fix sqrt rounding metal bug that can causes nan crash. (https://github.com/Genesis-Embodied-AI/genesis-world/pull/2481)",
+  "changed": [
+   {
+    "file": "genesis/engine/solvers/rigid/constraint/solver.py",
+    "additions": 21,
+    "deletions": 6
+   },
+   {
+    "file": "pyproject.toml",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "tests/test_quadrants.py",
+    "additions": 41,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "prowler_pr7498",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/prowler-cloud/prowler.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 7498,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix(findings): increase uid max length to 600 (https://github.com/prowler-cloud/prowler/pull/7498)",
+  "changed": [
+   {
+    "file": "api/CHANGELOG.md",
+    "additions": 5,
+    "deletions": 0
+   },
+   {
+    "file": "api/pyproject.toml",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "api/src/backend/api/migrations/0017_alter_finding_uid.py",
+    "additions": 17,
+    "deletions": 0
+   },
+   {
+    "file": "api/src/backend/api/models.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "api/src/backend/api/specs/v1.yaml",
+    "additions": 2,
+    "deletions": 2
+   },
+   {
+    "file": "api/src/backend/api/tests/test_models.py",
+    "additions": 29,
+    "deletions": 1
+   },
+   {
+    "file": "api/src/backend/api/v1/views.py",
+    "additions": 1,
+    "deletions": 1
+   }
+  ]
+ },
+ {
+  "name": "cognite_sdk_python_pr985",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/cognitedata/cognite-sdk-python.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 985,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix transfomations str method (https://github.com/cognitedata/cognite-sdk-python/pull/985)",
+  "changed": [
+   {
+    "file": "CHANGELOG.md",
+    "additions": 4,
+    "deletions": 0
+   },
+   {
+    "file": "cognite/client/_version.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "cognite/client/data_classes/transformations/__init__.py",
+    "additions": 4,
+    "deletions": 4
+   },
+   {
+    "file": "pyproject.toml",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "tests/tests_integration/test_api/test_transformations/test_transformations.py",
+    "additions": 14,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "pysm_pr114",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/galsci/pysm.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 114,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix units in CO (https://github.com/galsci/pysm/pull/114)",
+  "changed": [
+   {
+    "file": "pysm3/models/co_lines.py",
+    "additions": 2,
+    "deletions": 2
+   },
+   {
+    "file": "pysm3/tests/test_co.py",
+    "additions": 9,
+    "deletions": 11
+   }
+  ]
+ },
+ {
+  "name": "openbb_pr2359",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/openbq-org/OpenBB.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 2359,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Small change + small bug fix (https://github.com/openbq-org/OpenBB/pull/2359)",
+  "changed": [
+   {
+    "file": "openbb_terminal/stocks/dark_pool_shorts/dps_controller.py",
+    "additions": 2,
+    "deletions": 2
+   },
+   {
+    "file": "openbb_terminal/stocks/stocks_helper.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "tests/openbb_terminal/stocks/dark_pool_shorts/test_dps_controller.py",
+    "additions": 6,
+    "deletions": 2
+   }
+  ]
+ },
+ {
+  "name": "scruffy_pr4",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/jeajar/scruffy.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 4,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Age bug (https://github.com/jeajar/scruffy/pull/4)",
+  "changed": [
+   {
+    "file": ".github/workflows/deploy.yml",
+    "additions": 0,
+    "deletions": 12
+   },
+   {
+    "file": "scruffy/app/app.py",
+    "additions": 11,
+    "deletions": 0
+   },
+   {
+    "file": "scruffy/app/cli.py",
+    "additions": 3,
+    "deletions": 2
+   },
+   {
+    "file": "scruffy/infra/data_transfer_objects.py",
+    "additions": 1,
+    "deletions": 0
+   },
+   {
+    "file": "scruffy/infra/sonarr_repository.py",
+    "additions": 38,
+    "deletions": 2
+   },
+   {
+    "file": "tests/app/test_cli.py",
+    "additions": 0,
+    "deletions": 0
+   },
+   {
+    "file": "tests/infra/test_sonarr_repository.py",
+    "additions": 105,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "freqtrade_pr8245",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/freqtrade/freqtrade.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 8245,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix last_process related bug in RPC.health (BUG-#8231) (https://github.com/freqtrade/freqtrade/pull/8245)",
+  "changed": [
+   {
+    "file": "freqtrade/freqtradebot.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "freqtrade/rpc/api_server/api_schemas.py",
+    "additions": 2,
+    "deletions": 2
+   },
+   {
+    "file": "freqtrade/rpc/api_server/api_v1.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "freqtrade/rpc/rpc.py",
+    "additions": 11,
+    "deletions": 4
+   },
+   {
+    "file": "freqtrade/rpc/telegram.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "tests/rpc/test_rpc.py",
+    "additions": 3,
+    "deletions": 3
+   },
+   {
+    "file": "tests/rpc/test_rpc_apiserver.py",
+    "additions": 2,
+    "deletions": 2
+   }
+  ]
+ },
+ {
+  "name": "homework_12_2_unittest_pr1",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/sharp2310/HomeWork-12.2-unittest.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 1,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Bug/issue1 (https://github.com/sharp2310/HomeWork-12.2-unittest/pull/1)",
+  "changed": [
+   {
+    "file": "tests/__init__.py",
+    "additions": 0,
+    "deletions": 0
+   },
+   {
+    "file": "tests/test_arrs.py",
+    "additions": 13,
+    "deletions": 0
+   },
+   {
+    "file": "utils/arrs.py",
+    "additions": 14,
+    "deletions": 13
+   }
+  ]
+ },
+ {
+  "name": "scikit_fem_pr656",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/kinnala/scikit-fem.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 656,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix mirrored bug (https://github.com/kinnala/scikit-fem/pull/656)",
+  "changed": [
+   {
+    "file": "README.md",
+    "additions": 1,
+    "deletions": 0
+   },
+   {
+    "file": "skfem/mesh/mesh.py",
+    "additions": 9,
+    "deletions": 5
+   },
+   {
+    "file": "tests/test_mesh.py",
+    "additions": 9,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "noaa_hrrr_pr8",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/stactools-packages/noaa-hrrr.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 8,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "[fix] analysis -> point in time (https://github.com/stactools-packages/noaa-hrrr/pull/8)",
+  "changed": [
+   {
+    "file": "examples/collection.json",
+    "additions": 0,
+    "deletions": 1375
+   },
+   {
+    "file": "examples/hrrr-conus-sfc-2024-05-10T12-FH0/hrrr-conus-sfc-2024-05-10T12-FH0.json",
+    "additions": 483,
+    "deletions": 340
+   },
+   {
+    "file": "src/stactools/noaa_hrrr/metadata.py",
+    "additions": 6,
+    "deletions": 2
+   },
+   {
+    "file": "src/stactools/noaa_hrrr/stac.py",
+    "additions": 0,
+    "deletions": 26
+   },
+   {
+    "file": "tests/test_stac.py",
+    "additions": 1,
+    "deletions": 1
+   }
+  ]
+ },
+ {
+  "name": "litellm_pr18942",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/BerriAI/litellm.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 18942,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "[Bug]: Add Custom CA certificates to boto3 clients (https://github.com/BerriAI/litellm/pull/18942)",
+  "changed": [
+   {
+    "file": "litellm/llms/bedrock/base_aws_llm.py",
+    "additions": 41,
+    "deletions": 3
+   },
+   {
+    "file": "litellm/llms/bedrock/common_utils.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "litellm/llms/bedrock/files/handler.py",
+    "additions": 1,
+    "deletions": 0
+   },
+   {
+    "file": "tests/test_litellm/llms/bedrock/test_base_aws_llm.py",
+    "additions": 6,
+    "deletions": 2
+   },
+   {
+    "file": "tests/test_litellm/llms/bedrock/test_bedrock_ssl_verify.py",
+    "additions": 349,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "holoviews_pr5393",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/holoviz/holoviews.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 5393,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix period range (https://github.com/holoviz/holoviews/pull/5393)",
+  "changed": [
+   {
+    "file": "holoviews/core/data/pandas.py",
+    "additions": 0,
+    "deletions": 5
+   },
+   {
+    "file": "holoviews/core/util.py",
+    "additions": 4,
+    "deletions": 1
+   },
+   {
+    "file": "holoviews/tests/core/test_utils.py",
+    "additions": 4,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "ragged_pr146",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/scikit-hep/ragged.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 146,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix: dtype handling in elementwise functions (https://github.com/scikit-hep/ragged/pull/146)",
+  "changed": [
+   {
+    "file": "src/ragged/_helper_functions.py",
+    "additions": 3,
+    "deletions": 1
+   },
+   {
+    "file": "src/ragged/_spec_elementwise_functions.py",
+    "additions": 22,
+    "deletions": 15
+   },
+   {
+    "file": "tests/test_spec_elementwise_functions.py",
+    "additions": 73,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "bulk_downloader_for_redd_pr204",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/Serene-Arc/bulk-downloader-for-reddit.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 204,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Bug fixes (https://github.com/Serene-Arc/bulk-downloader-for-reddit/pull/204)",
+  "changed": [
+   {
+    "file": "README.md",
+    "additions": 31,
+    "deletions": 18
+   },
+   {
+    "file": "bulkredditdownloader/downloader.py",
+    "additions": 5,
+    "deletions": 1
+   },
+   {
+    "file": "bulkredditdownloader/file_name_formatter.py",
+    "additions": 14,
+    "deletions": 1
+   },
+   {
+    "file": "bulkredditdownloader/tests/downloaders/test_direct.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "bulkredditdownloader/tests/test_file_name_formatter.py",
+    "additions": 13,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "tiledb_soma_pr4433",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/single-cell-data/TileDB-SOMA.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 4433,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "[python] Fix old `pyarrow` bug triggers (https://github.com/single-cell-data/TileDB-SOMA/pull/4433)",
+  "changed": [
+   {
+    "file": "apis/python/src/tiledbsoma/_dataframe.py",
+    "additions": 11,
+    "deletions": 0
+   },
+   {
+    "file": "apis/python/tests/test_io.py",
+    "additions": 4,
+    "deletions": 1
+   }
+  ]
+ },
+ {
+  "name": "ray_pr15762",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/ray-project/ray.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 15762,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "[RLlib] APEX-DQN: Bug fix for torch and add learning test. (https://github.com/ray-project/ray/pull/15762)",
+  "changed": [
+   {
+    "file": "rllib/BUILD",
+    "additions": 28,
+    "deletions": 2
+   },
+   {
+    "file": "rllib/agents/dqn/learner_thread.py",
+    "additions": 5,
+    "deletions": 0
+   },
+   {
+    "file": "rllib/agents/dqn/tests/test_apex_dqn.py",
+    "additions": 2,
+    "deletions": 4
+   },
+   {
+    "file": "rllib/execution/replay_buffer.py",
+    "additions": 4,
+    "deletions": 0
+   },
+   {
+    "file": "rllib/execution/segment_tree.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "rllib/tuned_examples/dqn/atari-apex.yaml",
+    "additions": 0,
+    "deletions": 3
+   },
+   {
+    "file": "rllib/tuned_examples/dqn/cartpole-apex.yaml",
+    "additions": 34,
+    "deletions": 0
+   },
+   {
+    "file": "rllib/utils/exploration/per_worker_epsilon_greedy.py",
+    "additions": 2,
+    "deletions": 2
+   }
+  ]
+ },
+ {
+  "name": "scipy_pr13792",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/scipy/scipy.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 13792,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "BUG: stats: Fix broadcasting in wrapcauchy.cdf (https://github.com/scipy/scipy/pull/13792)",
+  "changed": [
+   {
+    "file": "scipy/stats/_continuous_distns.py",
+    "additions": 13,
+    "deletions": 18
+   },
+   {
+    "file": "scipy/stats/tests/test_distributions.py",
+    "additions": 28,
+    "deletions": 0
+   }
+  ]
+ },
+ {
+  "name": "pybuilder_anybadge_pr12",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/soda480/pybuilder-anybadge.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 12,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fix exclude bug (https://github.com/soda480/pybuilder-anybadge/pull/12)",
+  "changed": [
+   {
+    "file": "README.md",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "build.py",
+    "additions": 2,
+    "deletions": 2
+   },
+   {
+    "file": "docs/images/python.svg",
+    "additions": 2,
+    "deletions": 2
+   },
+   {
+    "file": "src/main/python/pybuilder_anybadge/task.py",
+    "additions": 3,
+    "deletions": 2
+   },
+   {
+    "file": "src/unittest/python/test_task.py",
+    "additions": 2,
+    "deletions": 2
+   }
+  ]
+ },
+ {
+  "name": "mlflow_pr4604",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/mlflow/mlflow.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 4604,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Bug Fix Issue #4603 Access problem (https://github.com/mlflow/mlflow/pull/4604)",
+  "changed": [
+   {
+    "file": "mlflow/projects/docker.py",
+    "additions": 2,
+    "deletions": 1
+   },
+   {
+    "file": "mlflow/utils/file_utils.py",
+    "additions": 24,
+    "deletions": 0
+   },
+   {
+    "file": "tests/projects/test_docker_projects.py",
+    "additions": 0,
+    "deletions": 1
+   },
+   {
+    "file": "tests/utils/test_file_utils.py",
+    "additions": 27,
+    "deletions": 1
+   }
+  ]
+ },
+ {
+  "name": "lumispy_pr114",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/LumiSpy/lumispy.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 114,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "Fixing deprecation warning (https://github.com/LumiSpy/lumispy/pull/114)",
+  "changed": [
+   {
+    "file": "lumispy/signals/luminescence_spectrum.py",
+    "additions": 7,
+    "deletions": 5
+   },
+   {
+    "file": "lumispy/tests/signals/test_luminescence_spectrum.py",
+    "additions": 7,
+    "deletions": 3
+   }
+  ]
+ },
+ {
+  "name": "pandas_pr47082",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/pandas-dev/pandas.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 47082,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "BUG: Fix `set_sticky` background (https://github.com/pandas-dev/pandas/pull/47082)",
+  "changed": [
+   {
+    "file": "doc/source/whatsnew/v1.5.0.rst",
+    "additions": 1,
+    "deletions": 0
+   },
+   {
+    "file": "pandas/io/formats/style.py",
+    "additions": 1,
+    "deletions": 1
+   },
+   {
+    "file": "pandas/tests/io/formats/style/test_html.py",
+    "additions": 6,
+    "deletions": 6
+   }
+  ]
+ },
+ {
+  "name": "geopandas_pr2243",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/geopandas/geopandas.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 2243,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "BUG: support null properties in GeoJSON (https://github.com/geopandas/geopandas/pull/2243)",
+  "changed": [
+   {
+    "file": "geopandas/geodataframe.py",
+    "additions": 4,
+    "deletions": 1
+   },
+   {
+    "file": "geopandas/tests/test_geodataframe.py",
+    "additions": 95,
+    "deletions": 2
+   }
+  ]
+ },
+ {
+  "name": "zookeeper_k8s_operator_pr22",
+  "family": "general bug fix",
+  "role": "cohort candidate (vetting decides)",
+  "repo": "https://github.com/canonical/zookeeper-k8s-operator.git",
+  "default_branch": "HEAD",
+  "python": "3.12",
+  "extras": [
+   "test",
+   "dev"
+  ],
+  "pr": 22,
+  "gold": "PR_MERGE",
+  "pre": "merge-base",
+  "evidence": "fix: add defer to certs available to avoid container bugs (https://github.com/canonical/zookeeper-k8s-operator/pull/22)",
+  "changed": [
+   {
+    "file": "src/tls.py",
+    "additions": 4,
+    "deletions": 0
+   },
+   {
+    "file": "tests/unit/test_tls.py",
+    "additions": 2,
+    "deletions": 1
+   }
+  ]
  }
 ]
