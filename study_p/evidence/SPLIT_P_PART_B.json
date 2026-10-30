@@ -1,0 +1,21 @@
+{
+ "part_b": {
+  "RR": 1615,
+  "ASTAR": 1385
+ },
+ "candidates_astar": 1940,
+ "frame_rr": 2672,
+ "renamed": {
+  "pytest_proj_pr1": [
+   "pytest_proj_pr1_83ebdf",
+   "pytest_proj_pr1_37eac8",
+   "pytest_proj_pr1_325ec0",
+   "pytest_proj_pr1_363629"
+  ],
+  "unittest_proj_pr1": [
+   "unittest_proj_pr1_55ce30",
+   "unittest_proj_pr1_905fd4"
+  ]
+ },
+ "part_b_sha256": "914c414e9de72c3c5b0a6f5258b892f0fa61c5966692ba8feaa3da583c60e6f3"
+}
