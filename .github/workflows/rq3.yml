@@ -1,0 +1,67 @@
+# RQ3 (plan: research_closure/results/RQ3_PLAN.md): hand-written vs automatic generators on the evaluation targets of
+# Studies D, E, G.  One job per target, with the target's own Python.  Independent of study_p: runs in parallel with it.
+name: Gatekeeper RQ3 (generator agreement)
+on:
+  workflow_dispatch:
+    inputs:
+      n: {description: "inputs per scope or function", default: "200"}
+permissions:
+  contents: read
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.m.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - id: m
+        run: |
+          [ -f research_closure/results/RQ3_PLAN.md ] || { echo "::error::the RQ3 plan is not committed"; exit 1; }
+          python - <<'PY'
+          import glob, json, os
+          inc = []
+          for f in sorted(glob.glob('study_[deg]/eval_targets/*/gk_target.json')):
+              m = json.load(open(f))
+              inc.append({'study': f.split('/')[0], 'id': f.split('/')[2], 'py': m.get('python', '3.12')})
+          assert len(inc) == 14, 'expected the 14 evaluation targets of the plan, found %d' % len(inc)
+          open(os.environ['GITHUB_OUTPUT'], 'a').write('matrix=' + json.dumps({'include': inc}) + '\n')
+          PY
+  target:
+    needs: plan
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: |
+            ${{ matrix.py }}
+            3.12
+      - name: Google Cloud auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+      - name: Vertex access token
+        run: |
+          echo "GOOGLE_OAUTH_TOKEN=$(gcloud auth print-access-token)" >> "$GITHUB_ENV"
+          echo "GCP_PROJECT=${{ secrets.GCP_PROJECT }}" >> "$GITHUB_ENV"
+          echo "GK_TOKEN_CMD=gcloud auth print-access-token" >> "$GITHUB_ENV"
+      - name: RQ3 on one target
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out_rq3
+          PYT="$(command -v python${{ matrix.py }})"
+          "$PYT" -m pip install -q pytest
+          python -u tools/rq3_target.py "${{ matrix.study }}" "${{ matrix.id }}" out_rq3 --target-python "$PYT" --models research_closure/pilot/models.json --cap 0.5 --n "${{ inputs.n }}" 2>&1 | tee out_rq3/log.txt
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: RQ3_${{ matrix.id }}
+          path: out_rq3

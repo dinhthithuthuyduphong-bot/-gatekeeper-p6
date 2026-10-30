@@ -1,0 +1,85 @@
+# Study P confirmatory cohort, STREAMING (study_p/STUDY_P_PROTOCOL.md): each candidate goes straight through vetting,
+# the function-level oracle (generator written once and hashed) and patch generation with scoring, in parallel shards.
+# Refuses unless study_p is FROZEN and verifies, every candidate is in the A* track, and the required files exist.
+# Money: Free Trial credit (Vertex), expected about 16 USD for the whole cohort; HTTP 429 is retried with backoff.
+name: Gatekeeper Study P stream (confirmatory cohort)
+on:
+  workflow_dispatch:
+    inputs:
+      shards: {description: "number of parallel shards (at most 256)", default: "200"}
+      only_shards: {description: "optional comma-separated shard numbers to (re)run (empty = all)", default: ""}
+permissions:
+  contents: read
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.m.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Freeze check
+        run: |
+          python -c "import json,sys;c=json.load(open('study_p/config_study_p.json'));sys.exit(0 if c.get('status')=='FROZEN' else 'study_p is not FROZEN')"
+          python tools/freeze_study.py verify study_p
+      - name: Required files and guards
+        shell: bash
+        run: |
+          set -euo pipefail
+          for f in tools/p_stream.py tools/vet_target2.py tools/fn_probe_llm.py tools/fn_probe.py tools/fn_probe_inner.py tools/cohort_instance.py tools/cohort_inner.py gatekeeper_ext/fn_draws.py gatekeeper_ext/gates.py gatekeeper_ext/fn_llm_gen.py gatekeeper_ext/fn_inputs.py research_closure/pilot/models.json study_p/candidates_astar.json; do
+            [ -f "$f" ] || { echo "::error::MISSING $f"; exit 1; }
+          done
+          python tools/repo_hygiene.py
+          python tools/check_track.py study_p/candidates_astar.json ASTAR
+      - id: m
+        env:
+          SHARDS: ${{ inputs.shards }}
+          ONLY: ${{ inputs.only_shards }}
+        run: |
+          python - <<'PY'
+          import json, os
+          k = int(os.environ['SHARDS'])
+          assert 1 <= k <= 256
+          only = [int(x) for x in os.environ.get('ONLY', '').replace(' ', '').split(',') if x]
+          assert all(0 <= x < k for x in only)
+          open(os.environ['GITHUB_OUTPUT'], 'a').write('matrix=' + json.dumps({'shard': only or list(range(k))}) + '\n')
+          PY
+  stream:
+    needs: plan
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Google Cloud auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+      - name: Vertex access token
+        run: |
+          echo "GOOGLE_OAUTH_TOKEN=$(gcloud auth print-access-token)" >> "$GITHUB_ENV"
+          echo "GCP_PROJECT=${{ secrets.GCP_PROJECT }}" >> "$GITHUB_ENV"
+          echo "GK_TOKEN_CMD=gcloud auth print-access-token" >> "$GITHUB_ENV"
+      - name: Stream one shard
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ github.token }}
+          SHARD: ${{ matrix.shard }}
+          SHARDS: ${{ inputs.shards }}
+        run: |
+          set -euo pipefail
+          mkdir -p out_s
+          python -u tools/p_stream.py study_p/candidates_astar.json out_s "$SHARD" "$SHARDS" research_closure/pilot/models.json 2>&1 | tee out_s/log_shard.txt
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: P_STREAM_${{ matrix.shard }}
+          path: out_s
