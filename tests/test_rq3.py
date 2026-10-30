@@ -28,6 +28,13 @@ class EndToEnd(unittest.TestCase):
         self.assertEqual(on_disk["target"], "S1_demo_port")
 
 
+class Extensions(unittest.TestCase):
+    def test_the_study_g_transform_is_available_after_registration(self):
+        from gatekeeper_lite import transforms
+        R.register_extensions()
+        self.assertEqual(type(transforms.make("none_identity")).__name__, "NoneIdentity")
+
+
 class Summary(unittest.TestCase):
     def test_agreement_interval_and_kappa(self):
         lo, hi = S.cp_interval(12, 14)

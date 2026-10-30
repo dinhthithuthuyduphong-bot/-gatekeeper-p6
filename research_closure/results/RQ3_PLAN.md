@@ -28,3 +28,7 @@ Bản gốc chạy hai lần, đầu vào không ổn định bị loại; mọi
 ## Giới hạn đã biết
 
 14 target, gần như cùng một họ kỹ năng (`bool-excluded-from-int`; G1 dùng `none-identity`), nên khả năng khái quát hẹp. G2 xem diff của kỹ năng, nên đầu vào dồn quanh vùng thay đổi, như ở Study P.
+
+## Chạy lại do lỗi công cụ (2/11/2026)
+
+Ở lượt chạy đầu, ba target dùng kỹ năng `none-identity` (G1_pydal, G2_emmett, K1_hera_pspec) dừng với lỗi `unknown transform 'none_identity'`: công cụ RQ3 không đăng ký phép biến đổi mở rộng như công cụ chạy Study G (`tools/run_study_g.py`). Lỗi xảy ra **trước** khi đo bất kỳ đầu vào nào của ba target này. Công cụ đã được sửa và **chỉ ba target này** được chạy lại; kết quả của 13 target còn lại giữ nguyên.

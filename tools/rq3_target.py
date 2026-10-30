@@ -66,7 +66,15 @@ def skill_text(skill_json):
     return "A learned code transformation '%s' (scope: %s; transform: %s) was applied to this function." % (d.get("skill_id"), d.get("scope"), d.get("pi"))
 
 
+def register_extensions():
+    """Studies G and H use the extension transform 'none_identity', registered at run time exactly as
+    tools/run_study_g.py does; without it their skill cannot be loaded."""
+    from gatekeeper_ext.none_identity import register
+    register()
+
+
 def run(study, tid, out_dir, py=sys.executable, models=None, cap=0.5, n=200, client=None, seed=7):
+    register_extensions()
     from gatekeeper_lite.gatekeeper import bind_modules
     from gatekeeper_lite.skill import Skill, Target
     import fn_probe as FP

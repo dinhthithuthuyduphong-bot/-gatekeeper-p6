@@ -1,0 +1,12 @@
+{
+ "name": "rq3_fix (patch_rq3_fix.zip)",
+ "files": {
+  ".github/workflows/rq3.yml": "5576532ebdafa1631585988cc27973376b0f5754d0e3bee8c6bc909927213b63",
+  "research_closure/results/RQ3_PLAN.md": "55fc78bfe1b739ed4cabe9d9524e6f2efa2f0d925e3deeed849765ecdfea4b62",
+  "research_closure/results/rq3/RQ3_RESULT_FIRST_RUN.md": "debc4d8a4868e7eecff182b3e8dae9cb275e009c4af9629fa25901cb108f576c",
+  "research_closure/results/rq3/RQ3_SUMMARY_FIRST_RUN.json": "6a468ef4218a166dffc03aa22d3b8d10c70bfb8381c466a4184c4db2b1e3ca2b",
+  "study_p/AMENDMENTS.md": "06540d25a7cddc021a538e172071a5b1b2a4cdbc397b7701ab33d4b92de0666a",
+  "tests/test_rq3.py": "56121d559aa526a5909604ae434d00a360dca31bf261fd719530d8ec41b74007",
+  "tools/rq3_target.py": "91dee50fa039dae3dfbb24c8ae8587dd41a2bf1cff36629d9704db1300a1755a"
+ }
+}
