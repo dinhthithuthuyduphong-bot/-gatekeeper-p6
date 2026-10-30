@@ -1,8 +1,8 @@
 {
   "files": {
-    "study_p/config_study_p.json": "a88e9373a96efe7ff5d9907be69976d55ddf414ca45b725af1700aede7f73030",
+    "study_p/config_study_p.json": "d9932e6e836dbfca2aa1d09a5f9dc8cec9a4b65cb12ff050a03c05bb4c51ce06",
     "study_p/STUDY_P_PROTOCOL.md": "072762dc661e5cc08c146a4608ffa271e6b843c77390a249a270eec79e028d64",
-    "study_p/AMENDMENTS.md": "717ce837c6941bf51ca502dc3bdf2d200940bee79ec4bcf790a3e11dbcf2a72c",
+    "study_p/AMENDMENTS.md": "06540d25a7cddc021a538e172071a5b1b2a4cdbc397b7701ab33d4b92de0666a",
     "gatekeeper_lite/__init__.py": "be8ddeba61bbc4885994020bcb9b4f19573f4a22b8a759b079e00e45c3f334e7",
     "gatekeeper_lite/__main__.py": "7aa7d5b275d60de01de9074e0bd8a864c99527435885098a2243986a48699e90",
     "gatekeeper_lite/b9.py": "80e274eb9e30f3f51870e2e7939e68fc199029e627d8cf20635ffc6f4b09128e",
@@ -51,7 +51,7 @@
     "research_closure/pilot/PP0_RESULT.json": "acd91e4422f0fdfd9b2cfd45d682411b86e0c4e7711270a5fc1304845101cba2",
     "research_closure/pilot/models.json": "6ee28983366e43ca1af947657979328d1b562dfad6f24cadad438207853aeb3c",
     "research_closure/results/ALIGNMENT_WITH_FSE.md": "b8d19b6fd943f55495be34fc8b488f941883f663529a0f178f3a7e183658aa16",
-    "research_closure/results/RQ3_PLAN.md": "a08c978df3691a2841c7741dced34e2fa5b8ac527f8c7811116b6bd14ca9c4ed",
+    "research_closure/results/RQ3_PLAN.md": "55fc78bfe1b739ed4cabe9d9524e6f2efa2f0d925e3deeed849765ecdfea4b62",
     "research_closure/results/STUDY_P_PLAN.md": "695d818e90fa1287a4f455388842271c8e7c9d00800f94135f6a64e2cf428b8d",
     "study_p/candidates_astar.json": "fe5b975e464810329c05279ca3703b3c11c5d36a18c990b22518bbb5b5dd65b9",
     "study_p/evidence/N_CANDIDATES.json": "b149528a53b08922f354bc341a09702b795bb915030eca0ba59bbb9429ea7c2f",
@@ -85,7 +85,7 @@
     "tools/repo_hygiene.py": "3eb6074571210ba438e10f18737485b1ddb156c8f922cd915c3c81d86a0be7a7",
     "tools/rq3_oracle_inner.py": "4ea4e200260664ff21cc6e18434091fca1b87889c6787661081b6f551cd806da",
     "tools/rq3_summary.py": "a6aec3adb5bd39c943b2692b2b9928ee0bd56ef4330fb03a9f12f37d4e422323",
-    "tools/rq3_target.py": "7808316ef52714bf177c2d6d868ca664347c558ae586cee2ed15e21f6af99246",
+    "tools/rq3_target.py": "91dee50fa039dae3dfbb24c8ae8587dd41a2bf1cff36629d9704db1300a1755a",
     "tools/split_candidates.py": "4061cc70ca043da0689b4930c4bea526c597d5abf0a9d6456ff22e96edf94f87",
     "tools/vet_dev.py": "964424762a78df72662f97a0b13eee53730ad4a0b5a848c37627684245b10c96",
     "tools/vet_slice.py": "515a11107aacd5892e8af77a2c263d3dfc852dc992b47d97e173a2a5deec3dbf",
