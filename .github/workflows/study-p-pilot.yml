@@ -8,10 +8,10 @@ name: Gatekeeper Study P pilot (development instances, function-level oracle)
 on:
   workflow_dispatch:
     inputs:
-      stage: {description: "PP0 or PP1", default: "PP0"}
+      stage: {description: "PP0, PP1 or PP2", default: "PP0"}
       instances: {description: "number of instances (PP0: 20, PP1: 10)", default: "20"}
       reps: {description: "repetitions per instance and model (PP0: 3, PP1: 1)", default: "3"}
-      cap_usd: {description: "total spend cap in USD (PP0: 6, PP1: 6)", default: "6"}
+      cap_usd: {description: "total spend ceiling in USD (PP0: 6, PP1: 6, PP2: 11.4 = 0.30 per instance as in PP0)", default: "6"}
 permissions:
   contents: read
 jobs:
@@ -56,9 +56,22 @@ jobs:
               r = json.load(open('research_closure/pilot/PP0_RESULT.json'))
               assert r.get('pilot_pass') is True, 'PP1 needs a committed PP0_RESULT.json with pilot_pass true'
               models = 'vertex-gemini-argon'
+          elif stage == 'PP2':
+              # early, EXPLORATORY read of H1: the development instances NOT used in PP0, one light-model patch each
+              # same per-instance ceiling as PP0 (0.30 USD), so the repair loop gets the same call budget; the ceiling counts
+              # the worst case of every call, the expected spend is about 0.023 USD per instance (PP0)
+              assert reps == 1 and cap <= 12.0, 'PP2 is limited to 1 repetition and a 12 USD ceiling'
+              r = json.load(open('research_closure/pilot/PP0_RESULT.json'))
+              assert r.get('pilot_pass') is True, 'PP2 needs a committed PP0_RESULT.json with pilot_pass true'
+              models = 'vertex-gemini-flash'
           else:
-              raise SystemExit('stage must be PP0 or PP1')
-          names = pilot_select.select(json.load(open('research_closure/pilot/DEV_FN.json')), n)
+              raise SystemExit('stage must be PP0, PP1 or PP2')
+          recs = json.load(open('research_closure/pilot/DEV_FN.json'))
+          if stage == 'PP2':
+              used = set(pilot_select.select(recs, 20))
+              names = [r['name'] for r in sorted(recs, key=lambda r: r['position']) if r['name'] not in used]
+          else:
+              names = pilot_select.select(recs, n)
           out = os.environ['GITHUB_OUTPUT']
           open(out, 'a').write('matrix=' + json.dumps({'name': names}) + '\n')
           open(out, 'a').write('models=' + models + '\n')
