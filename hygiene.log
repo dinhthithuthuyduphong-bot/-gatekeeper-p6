@@ -1,15 +1,17 @@
-STRAY PROVISIONING_V2_DEV.md (also at research_closure/results/PROVISIONING_V2_DEV.md)
-STRAY provisioning-dev-vet.yml (also at .github/workflows/provisioning-dev-vet.yml)
-STRAY study-d-amend.yml (also at .github/workflows/study-d-amend.yml)
-STRAY study-d-run.yml (also at .github/workflows/study-d-run.yml)
-STRAY test_vet_target2.py (also at tests/test_vet_target2.py)
-STRAY vet_dev.py (also at tools/vet_dev.py)
-STRAY vet_target2.py (also at tools/vet_target2.py)
-removed PROVISIONING_V2_DEV.md
-removed provisioning-dev-vet.yml
-removed study-d-amend.yml
-removed study-d-run.yml
-removed test_vet_target2.py
-removed vet_dev.py
-removed vet_target2.py
-7 stray duplicate(s), 0 lone root test file(s)
+STRAY STUDY_P_PLAN.md (also at research_closure/results/STUDY_P_PLAN.md)
+STRAY fn_inputs.py (also at gatekeeper_ext/fn_inputs.py)
+STRAY fn_probe.py (also at tools/fn_probe.py)
+STRAY fn_probe_inner.py (also at tools/fn_probe_inner.py)
+STRAY fn_probe_shard.py (also at tools/fn_probe_shard.py)
+STRAY fn_probe_summary.py (also at tools/fn_probe_summary.py)
+STRAY study-p-feasibility.yml (also at .github/workflows/study-p-feasibility.yml)
+STRAY test_fn_probe.py (also at tests/test_fn_probe.py)
+removed STUDY_P_PLAN.md
+removed fn_inputs.py
+removed fn_probe.py
+removed fn_probe_inner.py
+removed fn_probe_shard.py
+removed fn_probe_summary.py
+removed study-p-feasibility.yml
+removed test_fn_probe.py
+8 stray duplicate(s), 0 lone root test file(s)
