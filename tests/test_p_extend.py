@@ -87,3 +87,24 @@ class Extension(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class Robustness(unittest.TestCase):
+    def test_a_dropped_connection_is_retried_then_recorded_not_raised(self):
+        import http.client
+
+        class Flaky:
+            def __init__(self, fails):
+                self.fails, self.calls = fails, 0
+
+            def get(self, url, search=False):
+                self.calls += 1
+                if self.calls <= self.fails:
+                    raise http.client.RemoteDisconnected("Remote end closed connection without response")
+                return {"ok": True}
+        waits = []
+        self.assertEqual(X.safe_get(Flaky(2), "u", sleep=waits.append), {"ok": True})
+        self.assertEqual(waits, [5, 15])
+        waits = []
+        self.assertIn("RemoteDisconnected", X.safe_get(Flaky(99), "u", sleep=waits.append)["error"])
+        self.assertEqual(waits, [5, 15, 45, 120])

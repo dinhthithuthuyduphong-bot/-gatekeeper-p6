@@ -73,6 +73,18 @@ Khung A\* sau phần B có 1.940 ứng viên, nên phần B được **chạy ti
 
 Tỉ trọng trộn giữa bộ sinh theo chữ ký (G0) và bộ sinh do model viết (G2) là một lựa chọn, nên **không** được để quyết định kết quả: θ được ước lượng **riêng cho từng tầng** và cho phân phối trộn [ước lượng phân tầng, Cochran 1977], và H1 được báo cáo với ba tỉ trọng (0, 50, 100% G2) như phân tích độ nhạy; kết luận chính dựa vào tỉ trọng 50% đã đăng ký.
 
+### 4.6 Mục tiêu suy luận chính sau PP2 (thay đổi trước khi đóng băng)
+
+**Dữ liệu thử nghiệm dẫn tới thay đổi:** gộp PP0 (lần sinh đầu) và PP2 trên 58 instance phát triển, 4/34 patch plausible có θ̂ trong vùng: **11,8%** (Wilson 95%: 4,7% đến 26,6%). Nếu tỉ lệ thật quanh 12%, phép kiểm định H1 (H0: p ≤ 0,10) có công suất chỉ 0,11 với 89 patch, 0,17 với 170 và 0,28 với 310: **không có cỡ mẫu khả thi nào đủ công suất**. Hạ hiệu ứng nhỏ nhất đáng quan tâm cho vừa dữ liệu là không chấp nhận được, nên mục tiêu suy luận được đổi.
+
+**Phân tích chính: ước lượng với độ chính xác định trước** [Cumming 2014; Kelley & Rausch 2006]. Đại lượng: tỉ lệ patch plausible của model nhẹ có θ̂ trong vùng (mục 4.1), kèm khoảng Wilson 95% [Wilson 1927; Newcombe 1998] và khoảng bootstrap theo cụm **repo** [Field & Welsh 2007], vì các ca trong vùng gom theo repo (2/3 ca của PP2 cùng từ `litellm`).
+
+**Độ chính xác mục tiêu:** nửa độ rộng w = (p₁ − p₀)/2 = **0,05**, suy ra từ hai giá trị của H1, để khoảng tin cậy không thể chứa đồng thời 0,10 và 0,20.
+
+**Khung là toàn bộ không gian tìm kiếm** (khảo sát toàn bộ một khung hữu hạn), không dừng theo số lượng: mọi ứng viên A\* của không gian mở rộng đều được kiểm định (ước tính khoảng 3.578). Ước tính độ chính xác đạt được: 0,036 (theo ước lượng điểm của các tỉ lệ) đến 0,049 (theo cận dưới 95%) ở p = 0,12.
+
+**Thay cho P1 đến P3:** không còn ngưỡng đếm ở từng giai đoạn (khung đã cố định, phễu được báo cáo mô tả). **P3 mới = độ chính xác đạt được**: nửa độ rộng khoảng Wilson của đại lượng chính ≤ 0,05; nếu không đạt, kết quả vẫn báo cáo nhưng ghi rõ là không đủ chính xác. **P4** giữ nguyên (≥ 11 cặp bất đồng để kiểm định H3). **H1 giữ làm phân tích phụ đã đăng ký**, báo cáo cùng công suất thực tế.
+
 ## 5. Ngân sách và lịch
 
 Chỉ credit Free Trial (khoảng 288 USD, hết hạn 20/1/2027); trần cứng 200 USD cho toàn bộ P-GEN. Giá Flash tăng gấp đôi từ 1/1/2027, nên P-GEN nên chạy **trong tháng 12**.
@@ -97,6 +109,9 @@ Model nhẹ `gemini-3.8-flash` bắt buộc: giả thuyết xác nhận dùng pa
 
 ## 8. Tài liệu tham khảo cho các công thức và quyết định
 
+- Cumming, G. (2014). The new statistics: Why and how. *Psychological Science*, 25(1), 7–29.
+- Kelley, K., & Rausch, J. R. (2006). Sample size planning for the standardized mean difference: Accuracy in parameter estimation via narrow confidence intervals. *Psychological Methods*, 11(4), 363–385.
+- Newcombe, R. G. (1998). Two-sided confidence intervals for the single proportion: Comparison of seven methods. *Statistics in Medicine*, 17(8), 857–872.
 - Clopper, C. J., & Pearson, E. S. (1934). The use of confidence or fiducial limits illustrated in the case of the binomial. *Biometrika*, 26(4), 404–413.
 - Cochran, W. G. (1977). *Sampling Techniques* (3rd ed.). Wiley.
 - Cohen, J. (1988). *Statistical Power Analysis for the Behavioral Sciences* (2nd ed.). Erlbaum.

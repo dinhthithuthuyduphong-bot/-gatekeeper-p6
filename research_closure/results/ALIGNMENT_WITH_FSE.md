@@ -48,3 +48,12 @@
 | **Không bác bỏ** | Bài đo đạc và kết quả âm: tác hại một phần hiếm ở cả kỹ năng lẫn patch; cổng thống kê chỉ có ý nghĩa trong một vùng hẹp suy ra được; hướng 4 cộng phần lý thuyết |
 
 Ở cả hai nhánh, luận văn giữ tựa "Scope before Reuse" và báo cáo đầy đủ Study D đến P.
+
+## Cập nhật quy tắc chọn khẳng định sau PP2 (trước khi đóng băng)
+
+PP2 cho thấy tỉ lệ trong vùng khoảng 12% (4,7% đến 26,6%), tức nhiều khả năng **không** vượt rõ 10%, nên phép kiểm định H1 không còn là tiêu chí phù hợp (xem giao thức mục 4.6). Quy tắc mới dựa trên **ước lượng chính** và độ chính xác đã đạt:
+
+| Kết quả của Study P | Bài A\* |
+|---|---|
+| Cận dưới khoảng tin cậy của tỉ lệ trong vùng > 0, và độ chính xác đạt (nửa độ rộng ≤ 0,05) | "X% patch LLM plausible có hồi quy một phần mà test không thấy (khoảng tin cậy ...)" và hệ quả cho việc chọn cổng; H1 báo cáo kèm, mạnh hơn nếu bác bỏ được H0 |
+| Cận dưới bằng 0, hoặc không đạt độ chính xác | Bài đo đạc và kết quả âm như quy tắc cũ |

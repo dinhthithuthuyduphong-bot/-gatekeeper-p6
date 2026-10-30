@@ -25,6 +25,22 @@ sys.path.insert(0, str(ROOT / "tools"))
 import discover_m_candidates as D  # noqa: E402
 from discover_n_continue import key_of_candidate  # noqa: E402
 
+NET_ERRORS = (OSError, ConnectionError, TimeoutError)        # includes http.client.RemoteDisconnected and urllib URLError
+NET_BACKOFF = (5, 15, 45, 120)
+
+
+def safe_get(client, url, search=False, sleep=time.sleep):
+    """The frozen client of Study M retries only HTTP errors; a dropped connection (RemoteDisconnected) killed a 4-hour run.
+    Retry network errors with truncated exponential backoff; after the last try return an error record (not an exception)."""
+    for wait in NET_BACKOFF + (None,):
+        try:
+            return client.get(url, search=search)
+        except NET_ERRORS as exc:
+            if wait is None:
+                return {"error": "network: %s" % type(exc).__name__}
+            sleep(wait)
+
+
 OLD_WINDOWS = D.WINDOWS
 NEW_WINDOWS = [(y, m) for y in (2021, 2022) for m in range(1, 13)]
 SPACE = [(w, (3, 4, 5)) for w in OLD_WINDOWS] + [(w, (1, 2, 3, 4, 5)) for w in NEW_WINDOWS]
@@ -36,7 +52,7 @@ def collect(client, excluded_repos, log, space=SPACE, queries=D.QUERIES):
         lo, hi = "%04d-%02d-01" % (y, m), "%04d-%02d-28" % (y, m)
         for q in queries:
             for page in pages:
-                res = client.get("%s/search/issues?q=%s&per_page=100&page=%d" % (D.API, urllib.parse.quote(q.format(lo=lo, hi=hi)), page), search=True)
+                res = safe_get(client, "%s/search/issues?q=%s&per_page=100&page=%d" % (D.API, urllib.parse.quote(q.format(lo=lo, hi=hi)), page), search=True)
                 if "error" in res:
                     log["errors"].append({"window": lo, "page": page, "error": res["error"]})
                     break
@@ -90,7 +106,7 @@ def run(out_dir, client, seed, excluded_repos, excluded_cands, after_cands=(), t
         if (clock() - t0) / 60.0 > time_budget_min:
             log["stopped_because"] = "time budget"
             break
-        files = client.get(it["pull_request"]["url"] + "/files?per_page=100")
+        files = safe_get(client, it["pull_request"]["url"] + "/files?per_page=100")
         log["examined"] += 1
         if isinstance(files, dict):
             log["rejected_files"]["api error"] = log["rejected_files"].get("api error", 0) + 1

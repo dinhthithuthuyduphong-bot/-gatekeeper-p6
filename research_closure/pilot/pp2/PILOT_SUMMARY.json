@@ -1,0 +1,406 @@
+{
+ "stage": "PP2",
+ "instances_run": 38,
+ "planned": 38,
+ "instances_status": {
+  "FINISHED": 37,
+  "ERROR": 1
+ },
+ "instances_with_full_chain": 36,
+ "criterion_a_full_chain": true,
+ "criterion_b_some_plausible_patch": true,
+ "min_instances": 30,
+ "pilot_pass": true,
+ "spent_usd": 1.0064,
+ "models": {
+  "vertex-gemini-flash": {
+   "attempts": 37,
+   "submitted": 29,
+   "first_call_visible_pass": 21,
+   "stopped_by_spend_guard": 3,
+   "plausible": 24,
+   "cost_usd": 1.0064,
+   "finish_reasons": {
+    "stop": 63,
+    "length": 6
+   },
+   "median_output_tokens_per_call": 220.0,
+   "mean_calls_per_attempt": 1.86,
+   "plausible_rate": 0.649,
+   "plausible_rate_wilson_low": 0.488,
+   "icc_of_plausibility": null,
+   "truncated_calls_share": 0.087
+  }
+ },
+ "h_hat_of_plausible": {
+  "n": 24,
+  "median": 0.0,
+  "share_in_band": 0.125,
+  "share_above_5pct": 0.042
+ },
+ "plausible_patches": [
+  {
+   "name": "aio_request_pr262",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "claude_agent_sdk_python_pr642",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": false,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "darts_pr1938",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.005,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": false,
+    "b8_plus": false,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "dorsal_pr37",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": false,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "litellm_pr10167",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.005,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": false,
+    "b8_plus": false,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "litellm_pr11983",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.105,
+   "in_band": true,
+   "acceptable": false,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": false,
+    "b8_plus": false,
+    "smoke20": false,
+    "fixed_sample": false,
+    "gatekeeper": false
+   }
+  },
+  {
+   "name": "litellm_pr12225",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": false,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "litellm_pr13638",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0275,
+   "in_band": true,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": false,
+    "b8_plus": false,
+    "smoke20": false,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "litellm_pr14046",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": false,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "litellm_pr8669",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "mobility_pr327",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "nltk_pr3180",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "pcobra_pr1190",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "pcobra_pr679",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "prowler_pr4845",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "pyaptamer_pr608",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "pypdf_pr1884",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "pypdf_pr2868",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.025,
+   "in_band": true,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": false,
+    "b8_plus": false,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "pypdf_pr2873",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "pytorch_forecasting_pr2256",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "pytorch_forecasting_pr2294",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "pyview_pr64",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "render_engine_pr806",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "webvtt_py_pr70",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  }
+ ],
+ "plausible_in_band": 3,
+ "plausible_with_discordant_gates": 8,
+ "note": "Development instances (exposed). Not evidence for any gate of Study N."
+}
