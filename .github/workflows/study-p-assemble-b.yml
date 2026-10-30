@@ -1,0 +1,40 @@
+# Study P frame: append the committed part B (study_p/evidence/P_EXT_CANDIDATES.json, the artifact of the extend run whose
+# assembly was refused because forks share names) to the frames, with the identity-based, collision-safe assembler.
+# Refuses unless study_p is DRAFT and the part-B file is byte-identical to the artifact (sha256 below).
+name: Gatekeeper Study P assemble part B
+on:
+  workflow_dispatch:
+    inputs:
+      expected_sha256: {description: "sha256 of study_p/evidence/P_EXT_CANDIDATES.json", required: true}
+permissions:
+  contents: write
+jobs:
+  assemble:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - shell: bash
+        run: |
+          set -euo pipefail
+          python -c "import json,sys;c=json.load(open('study_p/config_study_p.json'));sys.exit(0 if c.get('status')=='DRAFT' else 'study_p is not DRAFT')"
+          got=$(sha256sum study_p/evidence/P_EXT_CANDIDATES.json | cut -d' ' -f1)
+          [ "$got" = "${{ inputs.expected_sha256 }}" ] || { echo "::error::part B file differs from the artifact ($got)"; exit 1; }
+          python - <<'PY'
+          import hashlib, json, sys
+          sys.path.insert(0, 'tools')
+          from run_study_d import drand_seed
+          cfg = json.load(open('study_m/config_study_m.json'))
+          h = hashlib.sha256(open('study_m/FREEZE.json', 'rb').read()).hexdigest()
+          open('seed.txt', 'w').write(str(drand_seed(cfg.get('seed_freeze_sha256') or h, cfg['seed_time_utc'])['seed']))
+          PY
+          python tools/p_assemble_ext.py study_p study_p/evidence/P_EXT_CANDIDATES.json "$(cat seed.txt)"
+          rm -f seed.txt
+          if ! git diff --quiet -- study_m study_m_astar study_m_rr study_n; then echo "::error::a frozen study directory changed"; exit 1; fi
+          git config user.name "gatekeeper-freeze-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add study_p
+          git commit -m "Study P frame: part B appended (identity-based, collision-safe names)"
+          git push origin HEAD
