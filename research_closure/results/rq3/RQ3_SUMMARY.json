@@ -1,0 +1,212 @@
+{
+ "targets": 16,
+ "measured": 14,
+ "G0": {
+  "targets": 14,
+  "agree": 8,
+  "agreement": 0.571,
+  "agreement_cp95": [
+   0.289,
+   0.823
+  ],
+  "kappa": 0.1923076923076923,
+  "hand_detects_auto_misses": 5,
+  "auto_detects_hand_misses": 1
+ },
+ "G2": {
+  "targets": 14,
+  "agree": 11,
+  "agreement": 0.786,
+  "agreement_cp95": [
+   0.492,
+   0.953
+  ],
+  "kappa": 0.5714285714285714,
+  "hand_detects_auto_misses": 2,
+  "auto_detects_hand_misses": 1
+ },
+ "G0_or_G2": {
+  "targets": 14,
+  "agree": 11,
+  "agreement": 0.786,
+  "agreement_cp95": [
+   0.492,
+   0.953
+  ],
+  "kappa": 0.5714285714285714,
+  "hand_detects_auto_misses": 2,
+  "auto_detects_hand_misses": 1
+ },
+ "rows": [
+  {
+   "target": "A1_speckit_catalog",
+   "status": "OUT_OF_SCOPE",
+   "hand": null,
+   "G0": null,
+   "G2": null,
+   "hand_scopes": {}
+  },
+  {
+   "target": "C1_jsonschema",
+   "status": "FINISHED",
+   "hand": false,
+   "G0": false,
+   "G2": false,
+   "hand_scopes": {
+    "bool": 0.0,
+    "int": 0.0
+   }
+  },
+  {
+   "target": "C2_voluptuous",
+   "status": "FINISHED",
+   "hand": false,
+   "G0": false,
+   "G2": false,
+   "hand_scopes": {
+    "bool": 0.0,
+    "int": 0.0
+   }
+  },
+  {
+   "target": "D1_py_ecc",
+   "status": "FINISHED",
+   "hand": true,
+   "G0": false,
+   "G2": true,
+   "hand_scopes": {
+    "bool": 0.82,
+    "int": 0.0
+   }
+  },
+  {
+   "target": "D2_cerberus",
+   "status": "FINISHED",
+   "hand": false,
+   "G0": true,
+   "G2": true,
+   "hand_scopes": {
+    "bool": 0.0,
+    "number": 0.0
+   }
+  },
+  {
+   "target": "D3_speckit",
+   "status": "FINISHED",
+   "hand": true,
+   "G0": false,
+   "G2": false,
+   "hand_scopes": {
+    "bool": 0.455,
+    "int": 0.0
+   }
+  },
+  {
+   "target": "D4_openfeature",
+   "status": "OUT_OF_SCOPE",
+   "hand": null,
+   "G0": null,
+   "G2": null,
+   "hand_scopes": {}
+  },
+  {
+   "target": "D5_pycubrid",
+   "status": "FINISHED",
+   "hand": true,
+   "G0": false,
+   "G2": true,
+   "hand_scopes": {
+    "bool": 0.09,
+    "int": 0.0
+   }
+  },
+  {
+   "target": "E1_pyyaml",
+   "status": "FINISHED",
+   "hand": true,
+   "G0": true,
+   "G2": true,
+   "hand_scopes": {
+    "bool": 0.885,
+    "int": 0.0
+   }
+  },
+  {
+   "target": "E2_packaging",
+   "status": "FINISHED",
+   "hand": true,
+   "G0": true,
+   "G2": true,
+   "hand_scopes": {
+    "bool": 0.88,
+    "int": 0.0
+   }
+  },
+  {
+   "target": "E3_databricks",
+   "status": "FINISHED",
+   "hand": true,
+   "G0": true,
+   "G2": true,
+   "hand_scopes": {
+    "bool": 1.0,
+    "int": 0.0
+   }
+  },
+  {
+   "target": "G1_pydal",
+   "status": "FINISHED",
+   "hand": true,
+   "G0": false,
+   "G2": true,
+   "hand_scopes": {
+    "null": 0.235,
+    "plain": 0.0
+   }
+  },
+  {
+   "target": "G2_emmett",
+   "status": "FINISHED",
+   "hand": true,
+   "G0": false,
+   "G2": false,
+   "hand_scopes": {
+    "null": 0.24,
+    "plain": 0.0
+   }
+  },
+  {
+   "target": "K1_hera_pspec",
+   "status": "FINISHED",
+   "hand": false,
+   "G0": false,
+   "G2": false,
+   "hand_scopes": {
+    "int": 0.0,
+    "none": 0.0
+   }
+  },
+  {
+   "target": "K1_trino",
+   "status": "FINISHED",
+   "hand": false,
+   "G0": false,
+   "G2": false,
+   "hand_scopes": {
+    "bool": 0.0,
+    "int": 0.0
+   }
+  },
+  {
+   "target": "K2_tomlkit",
+   "status": "FINISHED",
+   "hand": false,
+   "G0": false,
+   "G2": false,
+   "hand_scopes": {
+    "bool": 0.0,
+    "int": 0.0
+   }
+  }
+ ]
+}

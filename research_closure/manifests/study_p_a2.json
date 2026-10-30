@@ -1,0 +1,12 @@
+{
+ "name": "study_p_a2 (patch_study_p_a2.zip)",
+ "files": {
+  ".github/workflows/study-p-stream-resume.yml": "4c5af04553ac0899274950a74fc7a44bfafc6eac310b94d064af4b47f4988921",
+  "research_closure/results/p_stream/DONE.json": "9a23dc8e5e28bac57d1aefb6a3482efb911b4bcbf7a3d4acda1982c04a1ab99e",
+  "research_closure/results/rq3/RQ3_RESULT.md": "e937ce947e78b6ccc4bda84d44776bc640076ae370f08947e6c2fd946248d62f",
+  "research_closure/results/rq3/RQ3_SUMMARY.json": "f24a14c5a342152257308831c5c54817f2d13464204e4fd3196cc018cc364505",
+  "study_p/AMENDMENTS.md": "21307109b83b6f6e3290382854ce31333e964484f89854855a5de8edbdb63cbc",
+  "tests/test_p_stream_resume.py": "9cd2583f98666b8a37a2950423a376251d52795b7cb36ca682c40a5ce3ea123b",
+  "tools/p_stream_resume.py": "2133251ecf0ca601bfdb3a244fbf46d2ea4668794a962a9a50732ff2097e475f"
+ }
+}
