@@ -1,0 +1,20 @@
+{
+ "name": "study_p_frame_b (patch_study_p_frame_b.zip)",
+ "files": {
+  ".github/workflows/study-p-assemble-b.yml": "df6d6161210da8ee3abcae34118368cc904f444c36ab1edef2ffbf15139a143f",
+  "gatekeeper_ext/gates.py": "e6b8067da466764c1b45d9896914d85bb1ec66b172a5da73908b1e0473339960",
+  "research_closure/pilot/PP0_RESULT.json": "acd91e4422f0fdfd9b2cfd45d682411b86e0c4e7711270a5fc1304845101cba2",
+  "research_closure/pilot/pp0/PILOT_SUMMARY.json": "180a6e2a3a4261ccb5b3f7bb295d0d35104325bc35844f7915d7123dea0003b3",
+  "research_closure/pilot/pp0/PILOT_SUMMARY.md": "c4aada6d97141fbd4823e6ce1d7e9a6df21f9961e956dcee944c4ca364b8a46a",
+  "research_closure/results/ALIGNMENT_WITH_FSE.md": "916485614c9355ffd9c142fd3bb81501ab2b40540f5a83fc012283d13c0e8b27",
+  "study_p/STUDY_P_PROTOCOL.md": "ccbbe90fa8d7448e12cad1476c99a3ff93acf0a23765c8cd641608bcc1de98dd",
+  "study_p/config_study_p.json": "98f24076f14d24be96b5a218dda4c4d7e34dc3754459db824a159f32bb8ea219",
+  "study_p/evidence/P_EXT_CANDIDATES.json": "914c414e9de72c3c5b0a6f5258b892f0fa61c5966692ba8feaa3da583c60e6f3",
+  "study_p/evidence/P_EXT_LOGS.json": "7082ea04d9ed027a1cbc461a04626e3c91f8624153c64a7bd63988d6380e30e4",
+  "tests/test_gates.py": "dd425c22b457821e711caf39f8dc5b1678f37c563f04277e8e3576a34cf2b4e8",
+  "tests/test_p_extend.py": "75733568940f0bef778c779fc7fb743590982fb0eebd02b435d71c167706a538",
+  "tools/discover_p_extend.py": "18df2f81422d5b5b0881818293b17cc4ee4715665905c218e1b8f6f804fc0954",
+  "tools/p_assemble_ext.py": "9a9fce4a9c9ec62f84cff0ec16d78178c9c8c6cf1dcca8564310dd35f46d4b1d",
+  "tools/p_thresholds.py": "8033c5d489f012d7cde04fe42327ada7ae298435c2035d6a4e2d30bcfcade120"
+ }
+}

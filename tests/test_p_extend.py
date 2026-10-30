@@ -65,10 +65,18 @@ class Extension(unittest.TestCase):
             second = json.loads((Path(tmp) / "P_EXT_CANDIDATES.json").read_text())
         self.assertTrue({c["name"] for c in first}.isdisjoint({c["name"] for c in second}))
 
+    def test_forks_with_the_same_name_are_kept_and_renamed(self):
+        b = [{"name": "pytest_proj_pr1", "repo": "https://github.com/u%d/pytest_proj.git" % i, "pr": 1} for i in range(5)]
+        na, nr, s = PA.extend([], [], b, "S")
+        names = [c["name"] for c in na + nr]
+        self.assertEqual(len(names), len(set(names)))
+        self.assertEqual(len(names), 5)
+        self.assertEqual(len(s["renamed"]["pytest_proj_pr1"]), 4)                 # the first keeps its name
+
     def test_part_b_is_appended_by_track(self):
-        a = [{"name": "a1", "repo": "https://github.com/x/a.git"}]
-        r = [{"name": "r1", "repo": "https://github.com/x/r.git"}]
-        b = [{"name": "b%d" % i, "repo": "https://github.com/y/b%d.git" % i} for i in range(20)]
+        a = [{"name": "a1", "repo": "https://github.com/x/a.git", "pr": 1}]
+        r = [{"name": "r1", "repo": "https://github.com/x/r.git", "pr": 1}]
+        b = [{"name": "b%d" % i, "repo": "https://github.com/y/b%d.git" % i, "pr": 1} for i in range(20)]
         na, nr, s = PA.extend(a, r, b, "S")
         self.assertEqual((na[0]["name"], nr[0]["name"]), ("a1", "r1"))               # part A stays first
         self.assertTrue(all(track("S", c["repo"]) == "ASTAR" for c in na[1:]))

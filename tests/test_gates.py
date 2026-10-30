@@ -63,9 +63,12 @@ class Decisions(unittest.TestCase):
 
     def test_band_boundaries(self):
         self.assertFalse(G.band([False] * 200))                   # no harm
-        self.assertFalse(G.band([True] + [False] * 199))          # one event: below 2/n
-        self.assertTrue(G.band([True, True] + [False] * 198))
-        self.assertFalse(G.band([True] * 25 + [False] * 175))     # 12.5% above the band
+        self.assertFalse(G.band([True, True] + [False] * 198))    # 1% < 3/200: indistinguishable from 0 (rule of three)
+        self.assertTrue(G.band([True] * 3 + [False] * 197))       # 3/n
+        self.assertTrue(G.band([True] * 21 + [False] * 179))      # 10.5% <= 10.87%
+        self.assertFalse(G.band([True] * 22 + [False] * 178))     # 11% above: smoke-20 admits < 10% of the time
+        self.assertAlmostEqual(G.BAND_HIGH, 1 - 0.1 ** (1 / 20))
+        self.assertAlmostEqual((1 - G.BAND_HIGH) ** 20, 0.10)
         self.assertFalse(G.acceptable([True] * 10 + [False] * 190))
 
 

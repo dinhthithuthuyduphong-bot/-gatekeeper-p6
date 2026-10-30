@@ -63,7 +63,8 @@ def run(out_dir, client, seed, excluded_repos, excluded_cands, after_cands=(), t
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
     t0 = clock()
-    skip = {c["name"] for c in excluded_cands} | {c["name"] for c in after_cands}
+    ident = lambda c: (re.sub(r"\.git$", "", c["repo"].lower()), int(c["pr"]))
+    skip = {ident(c) for c in excluded_cands} | {ident(c) for c in after_cands}   # identity is repository + PR, not the name
     after = max((key_of_candidate(seed, c) for c in after_cands), default="")
     log = {"version": 1, "part": "B", "seed": str(seed), "after_key": after or None, "excluded": len(skip), "target": target,
            "space": {"old_windows_pages": "3-5", "new_windows": "2021-01..2022-12 pages 1-5"}, "search_hits": 0, "unique_prs": 0,
@@ -97,7 +98,7 @@ def run(out_dir, client, seed, excluded_repos, excluded_cands, after_cands=(), t
             ok, why = D.file_filter(files)
             if ok:
                 spec = D.spec_for(it, files)
-                if spec["name"] in skip:
+                if ident(spec) in skip:
                     log["rejected_files"]["already exposed or in part A"] = log["rejected_files"].get("already exposed or in part A", 0) + 1
                 else:
                     kept.append(spec)

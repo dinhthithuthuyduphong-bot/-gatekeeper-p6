@@ -33,45 +33,45 @@ Với mỗi đầu vào x và hàm bị sửa: **hồi quy** khi bản gốc cho
 
 ## 4. Giai đoạn, cổng và cơ sở của các ngưỡng
 
-Ngưỡng **không** do phán đoán: chúng được **suy ra** bằng `tools/p_thresholds.py` (tái tạo được) theo một chuỗi cố định.
+Mọi ngưỡng được **tính** bằng `tools/p_thresholds.py --pilot-dir` từ dữ liệu đã đo, theo công thức có trích dẫn ở mục 8. Không có ngưỡng nào do phán đoán.
 
-### 4.1 Từ công suất của giả thuyết tới số patch (P3, P4)
+### 4.1 Vùng tác hại một phần
 
-| Giả thuyết | Phép kiểm định | Giả định thay thế và lý do | Cỡ mẫu (công suất 0,8, α = 0,05) |
+Vùng = [3/n, 1 − 0,1^(1/20)], tức [0,75%; 10,9%] khi n = 400.
+- **Cận dưới 3/n:** quy tắc ba [Hanley & Lippman-Hand 1983]. Với 0 sự kiện trong n đầu vào, cận trên 95% của tỉ lệ xấp xỉ 3/n, nên tỉ lệ thấp hơn không phân biệt được với 0.
+- **Cận trên 1 − 0,1^(1/20):** smoke 20 admit một patch có tỉ lệ θ với xác suất (1 − θ)^20; phía trên cận này xác suất đó dưới 10%, nên cổng đơn giản đã đủ. (Study M và N dùng [1%, 10%] do phán đoán; Study P thay bằng hai cận suy ra.)
+
+### 4.2 Từ công suất tới số patch
+
+| Giả thuyết | Phép kiểm định | Giả định | Cỡ mẫu |
 |---|---|---|---|
-| **H1:** hơn 10% patch plausible có θ̂ trong [max(1%, 2/n), 10%] | Nhị thức chính xác một phía, H0: p ≤ 0,10 | p = 0,20: **hiệu ứng nhỏ nhất đáng quan tâm**, gấp đôi giả thuyết không | 89 patch độc lập |
-| **H3:** cỡ mẫu cố định admit ít nhất bằng Gatekeeper trên patch chấp nhận được | McNemar chính xác một phía trên cặp bất đồng | q = 0,90 = tỉ lệ cặp bất đồng mà cỡ mẫu cố định là bên admit, **mô phỏng** bằng chính các cổng ở n = 400, θ từ 1% đến 4% | 11 cặp bất đồng |
+| **H1:** hơn 10% patch plausible có θ̂ trong vùng | Nhị thức chính xác một phía [Clopper & Pearson 1934], α = 0,05, công suất 0,80 [Cohen 1988] | Thay thế p = 0,20 là **hiệu ứng nhỏ nhất đáng quan tâm** [Lakens et al. 2018]: gấp đôi giả thuyết không | **P3 = 89** patch plausible |
+| **H3:** cỡ mẫu cố định admit ít nhất bằng Gatekeeper trên patch chấp nhận được | McNemar chính xác [McNemar 1947] | q = 0,90 **mô phỏng** bằng chính các cổng ở n = 400 | **P4 = 11** cặp bất đồng |
+| H2 (smoke 20 admit sai) | Không kiểm định | (1 − θ)^20 là hàm đã biết; điều cần đo là số patch ở vùng đó, H1 đã đo | Ước lượng thứ cấp |
 
-**Hiệu chỉnh gom cụm:** mỗi instance cho m patch (m = số model × số lần lặp), không độc lập. Theo **hiệu ứng thiết kế Kish**, DE = 1 + (m − 1)ρ. Với m = 3 và ρ = 0,3, DE = 1,6, nên H1 cần **P3 = 143 patch plausible**. Mô phỏng cho thấy một patch trong vùng thấp làm hai cổng thống kê bất đồng với xác suất 0,27; **P4 = 11 cặp bất đồng**.
+### 4.3 Một patch mỗi instance: kết quả của PP0, không phải lựa chọn tuỳ ý
 
-**H2 được hạ thành ước lượng thứ cấp, có lý do lý thuyết:** xác suất smoke 20 admit một patch có tỉ lệ hồi quy θ là (1 − θ)^20, một hàm đã biết. Điều duy nhất cần đo là số patch thật có θ trong vùng đó, và H1 đã đo điều này. Ngoài ra, kiểm định H2 cần khoảng 88 patch không chấp nhận được, không khả thi.
+Ở PP0 (20 instance × 3 lần), hệ số tương quan trong cụm của biến "plausible" là **0,87** (ước lượng ANOVA [Donner & Klar 2000]); cận trên 95% bằng bootstrap theo cụm [Field & Welsh 2007] là **1,0**; 18/20 instance cho cùng kết quả ở cả 3 lần. Theo thiết kế cụm tối ưu [Raudenbush 1997], m\* = √((c₁/c₂)·(1 − ρ)/ρ) → 0 khi ρ → 1: lặp lại không thêm thông tin, nên **mỗi instance sinh đúng 1 patch** cho mỗi model. Khi đó hiệu ứng thiết kế [Kish 1965] bằng 1 và các instance độc lập.
 
-### 4.2 Từ số patch tới số instance (P2, P1)
+### 4.4 Từ số patch tới số instance
 
-U = ⌈P3 / (m · π_low)⌉ instance dùng được (**P2**); E = ⌈U / u_low⌉ instance ELIGIBLE (**P1**); C = ⌈E / e_low⌉ ứng viên cần kiểm định. Mọi tỉ lệ là **cận dưới Wilson 95%** của giá trị đã đo:
-- e_low = 0,226 (107/400 ELIGIBLE ở Study N);
-- u_low = 0,448 (58/107 dùng được ở bước khả thi 2, sau kiểm tra đường dẫn);
-- π_low = cận dưới của tỉ lệ patch plausible mỗi lần sinh, **đo ở lượt thử PP0**;
-- ρ = max(ICC ước lượng ở PP0, 0,3).
+U = ⌈P3/π_low⌉ (**P2**), E = ⌈U/u_low⌉ (**P1**), C = ⌈E/e_low⌉ ứng viên. Mọi tỉ lệ là cận dưới Wilson 95% [Wilson 1927] **trên đơn vị độc lập**:
+- π_low = 0,299 (PP0: 10/20 instance có patch plausible ở lần đầu);
+- u_low = 0,448 (bước khả thi 2: 58/107);
+- e_low = 0,226 (Study N: 107/400).
 
-| π_low | P2 (dùng được) | P1 (ELIGIBLE) | Ứng viên cần kiểm định |
-|---|---|---|---|
-| 0,20 | 239 | 534 | 2.358 |
-| 0,30 | 159 | 356 | 1.572 |
-| 0,40 | 120 | 268 | 1.184 |
-| 0,50 | 96 | 215 | 950 |
-
-**P1 và P2 sẽ được cố định bằng công thức trên với π_low và ρ đo ở PP0, trước khi đóng băng.** Nếu số ứng viên cần vượt khung hiện có, khung được mở rộng bằng cùng quy tắc khám phá (theo khoá thứ tự), trước khi đóng băng.
-
-### 4.3 Lượt thử trên instance phát triển (không phải giai đoạn đăng ký)
-
-| | PP0 | PP1 |
+| Cổng | Giai đoạn | Ngưỡng |
 |---|---|---|
-| Instance | 20 trong 58 instance phát triển dùng được (mỗi repo một, theo vị trí) | 10 đầu của PP0 |
-| Model, số lần | `gemini-3.8-flash`, 3 lần | `gemini-4-argon`, 1 lần |
-| Chi tối đa | 6 USD | 6 USD |
-| Đạt khi | ≥ 16 instance chạy trọn chuỗi **và** ≥ 1 patch plausible | Chỉ báo cáo; mở nhánh Argon theo quy tắc ở mục 6 |
-| Đầu ra cho ngưỡng | π_low, ICC | |
+| **P1** | P-S2 kiểm định | ≥ **666** ELIGIBLE (cần kiểm định khoảng **2.941** ứng viên A\*) |
+| **P2** | P-S3 oracle mức hàm | ≥ **298** instance dùng được |
+| **P3** | P-GEN | ≥ **89** patch plausible |
+| **P4** | P-SCORE | ≥ **11** cặp bất đồng giữa cỡ mẫu cố định và Gatekeeper |
+
+Khung A\* sau phần B có 1.940 ứng viên, nên phần B được **chạy tiếp** theo cùng quy tắc tới khi đủ 2.941, trước khi đóng băng.
+
+### 4.5 Phân phối đầu vào: lựa chọn được thay bằng báo cáo phân tầng
+
+Tỉ trọng trộn giữa bộ sinh theo chữ ký (G0) và bộ sinh do model viết (G2) là một lựa chọn, nên **không** được để quyết định kết quả: θ được ước lượng **riêng cho từng tầng** và cho phân phối trộn [ước lượng phân tầng, Cochran 1977], và H1 được báo cáo với ba tỉ trọng (0, 50, 100% G2) như phân tích độ nhạy; kết luận chính dựa vào tỉ trọng 50% đã đăng ký.
 
 ## 5. Ngân sách và lịch
 
@@ -79,7 +79,7 @@ Chỉ credit Free Trial (khoảng 288 USD, hết hạn 20/1/2027); trần cứng
 
 ## 6. Model
 
-Model nhẹ `gemini-3.8-flash` bắt buộc. Model mạnh `gemini-4-argon` chỉ được mở sau một lượt thử trên **instance phát triển** (59 instance dùng được ở bước 2), theo đúng quy tắc của Study N mục 6, nay dùng oracle mức hàm.
+Model nhẹ `gemini-3.8-flash` bắt buộc: giả thuyết xác nhận dùng patch của model này. Model mạnh `gemini-4-argon` chỉ là nhánh thăm dò (RQ4), mở sau PP1 theo quy tắc của Study N mục 6; với hai model trên cùng instance, các phân tích giữa model dùng cặp ghép theo instance.
 
 ## 7. Còn phải làm trước khi đóng băng
 
@@ -88,3 +88,25 @@ Model nhẹ `gemini-3.8-flash` bắt buộc. Model mạnh `gemini-4-argon` chỉ
 3. Kiểm định đồng thuận với bộ sinh viết tay (RQ3) trên 12 target cũ.
 4. Mở rộng khung nếu cần; giai đoạn P-S3 tạo và băm chương trình sinh cho từng instance trước khi sinh patch.
 5. Đưa mọi file vào danh sách băm; chạy kiểm tra trước khi đóng băng.
+
+## 8. Tài liệu tham khảo cho các công thức và quyết định
+
+- Clopper, C. J., & Pearson, E. S. (1934). The use of confidence or fiducial limits illustrated in the case of the binomial. *Biometrika*, 26(4), 404–413.
+- Cochran, W. G. (1977). *Sampling Techniques* (3rd ed.). Wiley.
+- Cohen, J. (1988). *Statistical Power Analysis for the Behavioral Sciences* (2nd ed.). Erlbaum.
+- Donner, A., & Klar, N. (2000). *Design and Analysis of Cluster Randomization Trials in Health Research*. Arnold.
+- Field, C. A., & Welsh, A. H. (2007). Bootstrapping clustered data. *Journal of the Royal Statistical Society: Series B*, 69(3), 369–390.
+- Hanley, J. A., & Lippman-Hand, A. (1983). If nothing goes wrong, is everything all right? Interpreting zero numerators. *JAMA*, 249(13), 1743–1745.
+- Howard, S. R., Ramdas, A., McAuliffe, J., & Sekhon, J. (2021). Time-uniform, nonparametric, nonasymptotic confidence sequences. *Annals of Statistics*, 49(2), 1055–1080.
+- Kelly, J. L. (1956). A new interpretation of information rate. *Bell System Technical Journal*, 35(4), 917–926.
+- Kish, L. (1965). *Survey Sampling*. Wiley.
+- Lakens, D., Scheel, A. M., & Isager, P. M. (2018). Equivalence testing for psychological research: A tutorial. *Advances in Methods and Practices in Psychological Science*, 1(2), 259–269.
+- McNemar, Q. (1947). Note on the sampling error of the difference between correlated proportions or percentages. *Psychometrika*, 12(2), 153–157.
+- Ramdas, A., Grünwald, P., Vovk, V., & Shafer, G. (2023). Game-theoretic statistics and safe anytime-valid inference. *Statistical Science*, 38(4), 576–601.
+- Raudenbush, S. W. (1997). Statistical analysis and optimal design for cluster randomized trials. *Psychological Methods*, 2(2), 173–185.
+- Vovk, V., & Wang, R. (2021). E-values: Calibration, combination and applications. *Annals of Statistics*, 49(3), 1736–1754.
+- Wang, Y., Pradel, M., & Liu, Z. (2026). Are "solved issues" in SWE-bench really solved correctly? An empirical study. *ICSE 2026*.
+- Wilson, E. B. (1927). Probable inference, the law of succession, and statistical inference. *Journal of the American Statistical Association*, 22(158), 209–212.
+- Ye, H., Martinez, M., & Monperrus, M. (2021). Automated patch assessment for program repair at scale. *Empirical Software Engineering*, 26, Article 20.
+
+Các mục trên được trích từ hiểu biết của người soạn; **số trang, tập và số bài phải được kiểm tra lại với bản gốc** trước khi đưa vào bài. Wang et al. và Ye et al. đã được kiểm chứng trong báo cáo nghiên cứu tiền lệ.

@@ -18,7 +18,13 @@ Gatekeeper-mixture needs about 1,000 draws and is not applicable at the draw cou
 import math
 
 ETA, ALPHA, C_STAKE, ALARM = 0.05, 0.1, 0.9, 20.0
-BAND_LOW_FLOOR, BAND_HIGH = 0.01, 0.10
+SMOKE_N, SMOKE_ADMIT = 20, 0.10
+# Band of partial harm, derived (Study P protocol section 4.1):
+#   lower edge 3/n   : rule of three (Hanley & Lippman-Hand 1983): with 0 events in n draws the one-sided 95% upper bound
+#                      of the rate is about 3/n, so a rate below 3/n cannot be told apart from 0 with n draws;
+#   upper edge 1 - 0.1**(1/20): above it a 20-draw smoke test admits with probability (1 - theta)**20 < 10%, so a simple
+#                      gate already rejects; only inside the band do simple gates misjudge.
+BAND_HIGH = 1 - SMOKE_ADMIT ** (1.0 / SMOKE_N)
 
 
 def binom_cdf(x, n, p):
@@ -71,11 +77,15 @@ def h_hat(flags):
     return (sum(flags) / float(len(flags))) if flags else None
 
 
+def band_edges(n):
+    return 3.0 / n, BAND_HIGH
+
+
 def band(flags):
-    """In the region where simple gates misjudge: harm rate between max(1%, 2/n) and 10%."""
+    """In the region where simple gates misjudge: 3/n <= theta-hat <= 1 - 0.1**(1/20) (about 10.9%)."""
     n = len(flags)
     h = h_hat(flags)
-    return bool(n and h is not None and max(BAND_LOW_FLOOR, 2.0 / n) <= h <= BAND_HIGH)
+    return bool(n and h is not None and 3.0 / n <= h <= BAND_HIGH)
 
 
 def acceptable(flags):

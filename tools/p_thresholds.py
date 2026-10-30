@@ -67,7 +67,39 @@ def from_pilot(path, model="vertex-gemini-flash"):
     return m["plausible_rate_wilson_low"], max(icc if icc is not None else RHO_FLOOR, RHO_FLOOR)
 
 
+def pilot_from_records(d, model="vertex-gemini-flash", boot=2000, seed=7):
+    """From the raw pilot records (COHORT_*.json): pi at the INSTANCE level (first repetition, the independent unit),
+    with its Wilson lower bound; the intra-class correlation of plausibility (ANOVA estimator) and its 95% upper bound by a
+    cluster bootstrap that resamples instances (Field & Welsh 2007)."""
+    import json
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from pilot_summary import icc_binary
+    groups, first = [], []
+    for f in sorted(Path(d).rglob("COHORT_*.json")):
+        att = [a for a in ((json.loads(f.read_text()).get("inner") or {}).get("attempts") or []) if a.get("model") == model]
+        if not att:
+            continue
+        g = [1 if (a.get("labels") or {}).get("plausible") else 0 for a in sorted(att, key=lambda a: a.get("rep", 0))]
+        groups.append(g)
+        first.append(g[0])
+    rng = random.Random(seed)
+    boots = sorted(x for x in (icc_binary([rng.choice(groups) for _ in groups]) for _ in range(boot)) if x is not None)
+    return {"instances": len(first), "pi_instance": sum(first) / len(first), "pi_low": wilson_low(sum(first), len(first)),
+            "icc": icc_binary(groups), "icc_upper95": boots[int(0.95 * len(boots))] if boots else None}
+
+
+def optimal_cluster_size(rho, cost_ratio):
+    """Raudenbush (1997): m* = sqrt(cost_ratio * (1 - rho) / rho), cost_ratio = cost of a new instance / cost of a new patch."""
+    return math.sqrt(cost_ratio * (1 - rho) / rho)
+
+
 def main(argv):
+    if "--pilot-dir" in argv:
+        p = pilot_from_records(argv[argv.index("--pilot-dir") + 1])
+        print("pilot: %(instances)d instances; pi (instance level) = %(pi_instance).3f, Wilson lower = %(pi_low).3f; ICC = %(icc).3f, cluster-bootstrap 95%% upper = %(icc_upper95).3f" % p)
+        for ratio in (1, 4, 16):
+            print("  optimal patches per instance, Raudenbush (1997), cost ratio %2d: m* = %.2f" % (ratio, optimal_cluster_size(p["icc_upper95"], ratio)))
+        argv = argv + ["--pi", str(p["pi_low"]), "--rho", str(p["icc_upper95"]), "--reps", "1"]
     opt = lambda k, d: float(argv[argv.index(k) + 1]) if k in argv else d
     pi, models, reps, rho = opt("--pi", None), int(opt("--models", 1)), int(opt("--reps", 3)), opt("--rho", RHO_FLOOR)
     if "--from-pilot" in argv:

@@ -10,15 +10,36 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from split_candidates import split  # noqa: E402
 
 
+def ident(c):
+    return (c["repo"].lower().removesuffix(".git"), int(c["pr"]))
+
+
+def unique_names(existing, part_b):
+    """Candidate names are '<repo name>_pr<N>', so forks with the same repository name collide (e.g. five student
+    repositories 'pytest_proj', PR 1).  A colliding name gets '_' + 6 hex digits of sha256(repository URL).  Order and
+    membership are unchanged; returns (renamed copy of part_b, {old: new})."""
+    import hashlib
+    taken, out, ren = set(existing), [], {}
+    for c in part_b:
+        name = c["name"]
+        if name in taken:
+            name = "%s_%s" % (c["name"], hashlib.sha256(c["repo"].lower().encode()).hexdigest()[:6])
+            ren.setdefault(c["name"], []).append(name)
+        taken.add(name)
+        out.append(dict(c, name=name))
+    return out, ren
+
+
 def extend(astar, rr, part_b, seed):
+    have = {ident(c) for c in astar + rr if "pr" in c}
+    if any(ident(c) in have for c in part_b) or len({ident(c) for c in part_b}) != len(part_b):
+        raise SystemExit("REFUSED: the same repository and pull request appears twice")
+    part_b, renamed = unique_names([c["name"] for c in astar + rr], part_b)
     s = split(part_b, seed)
-    names = [c["name"] for c in astar + rr + part_b]
-    if len(names) != len(set(names)):
-        raise SystemExit("REFUSED: a part-B candidate is already in the frames")
     new_a, new_r = astar + s["ASTAR"], rr + s["RR"]
     if {c["repo"].lower() for c in new_a} & {c["repo"].lower() for c in new_r}:
         raise SystemExit("REFUSED: a repository would be in both tracks")
-    return new_a, new_r, {"part_b": {k: len(v) for k, v in s.items()}, "candidates_astar": len(new_a), "frame_rr": len(new_r)}
+    return new_a, new_r, {"part_b": {k: len(v) for k, v in s.items()}, "candidates_astar": len(new_a), "frame_rr": len(new_r), "renamed": renamed}
 
 
 def main(study_dir, ext_path, seed):

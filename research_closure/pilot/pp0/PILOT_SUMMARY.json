@@ -1,0 +1,482 @@
+{
+ "stage": "PP0",
+ "instances_run": 20,
+ "planned": 20,
+ "instances_status": {
+  "FINISHED": 20
+ },
+ "instances_with_full_chain": 18,
+ "criterion_a_full_chain": true,
+ "criterion_b_some_plausible_patch": true,
+ "min_instances": 16,
+ "pilot_pass": true,
+ "spent_usd": 1.3756,
+ "models": {
+  "vertex-gemini-flash": {
+   "attempts": 60,
+   "submitted": 38,
+   "first_call_visible_pass": 33,
+   "stopped_by_spend_guard": 4,
+   "plausible": 29,
+   "cost_usd": 1.3756,
+   "finish_reasons": {
+    "stop": 133,
+    "tool_calls": 2,
+    "malformed_function_call": 4,
+    "length": 3
+   },
+   "median_output_tokens_per_call": 301.5,
+   "mean_calls_per_attempt": 2.37,
+   "plausible_rate": 0.483,
+   "plausible_rate_wilson_low": 0.362,
+   "icc_of_plausibility": 0.873,
+   "truncated_calls_share": 0.021
+  }
+ },
+ "h_hat_of_plausible": {
+  "n": 29,
+  "median": 0.0,
+  "share_in_band": 0.138,
+  "share_above_5pct": 0.0
+ },
+ "plausible_patches": [
+  {
+   "name": "agenticseek_pr2",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": false,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "agenticseek_pr2",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": false,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "agenticseek_pr2",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": false,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "aioresponses_pr232",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "aioresponses_pr232",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "aioresponses_pr232",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "client_py_pr505",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0475,
+   "in_band": true,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": false,
+    "b8_plus": false,
+    "smoke20": false,
+    "fixed_sample": false,
+    "gatekeeper": false
+   }
+  },
+  {
+   "name": "client_py_pr505",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.025,
+   "in_band": true,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": false,
+    "b8_plus": false,
+    "smoke20": false,
+    "fixed_sample": true,
+    "gatekeeper": false
+   }
+  },
+  {
+   "name": "client_py_pr505",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0475,
+   "in_band": true,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": false,
+    "b8_plus": false,
+    "smoke20": false,
+    "fixed_sample": false,
+    "gatekeeper": false
+   }
+  },
+  {
+   "name": "elastalert2_pr1643",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "elastalert2_pr1643",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "elastalert2_pr1643",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "gapic_generator_python_pr1657",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "gapic_generator_python_pr1657",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "gapic_generator_python_pr1657",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "litellm_pr14155",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "litellm_pr14155",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "litellm_pr14155",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "pyaptamer_pr542",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.002680965147453083,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": false,
+    "b8_plus": false,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "pyaptamer_pr542",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.013368983957219251,
+   "in_band": true,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": false,
+    "b8_plus": false,
+    "smoke20": false,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "pyaptamer_pr542",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0026954177897574125,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": false,
+    "b8_plus": false,
+    "smoke20": false,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "pypdf_pr2967",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": false,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "pypdf_pr2967",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": false,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "pypdf_pr2967",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": false,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "pytrilogy_pr266",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": false,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "skeletoken_pr74",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "sympy_pr24589",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "sympy_pr24589",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "sympy_pr24589",
+   "model": "vertex-gemini-flash",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  }
+ ],
+ "plausible_in_band": 4,
+ "plausible_with_discordant_gates": 11,
+ "note": "Development instances (exposed). Not evidence for any gate of Study N."
+}
