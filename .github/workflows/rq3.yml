@@ -5,6 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       n: {description: "inputs per scope or function", default: "200"}
+      only: {description: "optional comma-separated target ids to (re)run, e.g. G1_pydal (empty = all)", default: ""}
 permissions:
   contents: read
 jobs:
@@ -18,6 +19,8 @@ jobs:
         with:
           python-version: "3.12"
       - id: m
+        env:
+          ONLY: ${{ inputs.only }}
         run: |
           [ -f research_closure/results/RQ3_PLAN.md ] || { echo "::error::the RQ3 plan is not committed"; exit 1; }
           python - <<'PY'
@@ -31,6 +34,11 @@ jobs:
                   skipped.append(tid)
                   continue
               inc.append({'study': f.split('/')[0], 'id': tid, 'py': m.get('python', '3.12')})
+          only = [x for x in os.environ.get('ONLY', '').replace(' ', '').split(',') if x]
+          if only:
+              unknown = sorted(set(only) - {x['id'] for x in inc})
+              assert not unknown, 'unknown target ids: %s' % unknown
+              inc = [x for x in inc if x['id'] in only]
           print('RQ3 targets (%d):' % len(inc), [x['id'] for x in inc])
           print('skipped as smoke (%d):' % len(skipped), skipped)
           assert inc, 'no evaluation target found'
