@@ -68,5 +68,41 @@
   "after_cheap_filters": 44371,
   "api_calls": 2817,
   "seconds_total": 2528
+ },
+ {
+  "version": 1,
+  "part": "B",
+  "seed": "722277585642093255",
+  "after_key": "843a2091977c31afba416714181f1cbc188b6e9afd01d701ddb27d41cfe9502f",
+  "excluded": 5653,
+  "target": 4000,
+  "space": {
+   "old_windows_pages": "3-5",
+   "new_windows": "2021-01..2022-12 pages 1-5"
+  },
+  "search_hits": 49200,
+  "unique_prs": 48732,
+  "rejected_cheap": {
+   "title looks like maintenance, not a bug fix": 4160,
+   "repository already used or exposed": 183,
+   "not merged": 18
+  },
+  "rejected_files": {
+   "number of changed files outside 1..8": 2391,
+   "no test file changed (no upstream oracle)": 10268,
+   "source diff larger than 60 lines": 764,
+   "no non-test python source file changed": 4808,
+   "already exposed or in part A": 44,
+   "api error": 15,
+   "source file removed or renamed": 13
+  },
+  "examined": 21467,
+  "kept": 3164,
+  "errors": [],
+  "stopped_because": "list exhausted",
+  "run_utc": "2026-10-30T04:42:00Z",
+  "after_cheap_filters": 44371,
+  "api_calls": 21959,
+  "seconds_total": 16379
  }
 ]
