@@ -79,13 +79,16 @@ def score_fn_patch(py, base, orig, treated, pythonpath, work, tag, env=None):
     shutil.rmtree(patched, ignore_errors=True)
     stable = {s: _stable(p1[s], p2[s]) for s in p1}
     harm, helps, div, missing = [], 0, 0, 0
+    by_source = {s: {"complete": 0, "harm": 0} for s in p1}           # stratified reporting (protocol section 4.5)
     for s, i in base["order"]:
         if i not in stable.get(s, set()):
             missing += 1
             continue
         o, g, p = base["orig"][s][i], base["gold"][s][i], p1[s]["outcomes"][i]
         harm.append(o == g and p != g)
+        by_source[s]["complete"] += 1
+        by_source[s]["harm"] += o == g and p != g
         helps += o != g and p == g
         div += p != g
-    return {"complete": len(harm), "missing": missing, "harm": harm, "help": helps, "divergent": div,
+    return {"complete": len(harm), "missing": missing, "harm": harm, "help": helps, "divergent": div, "by_source": by_source,
             "deterministic": all(p1[s].get("status") == "RAN" for s in p1)}, None

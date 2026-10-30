@@ -197,6 +197,7 @@ def run(a):
                         flags = sc["harm"]
                         att["draws"] = {"complete": sc["complete"], "missing": sc["missing"], "deterministic": sc["deterministic"], "harm": sum(flags),
                                         "help": sc["help"], "still_wrong": sc.get("still_wrong"), "divergent": sc.get("divergent"),
+                                        "by_source": sc.get("by_source"),
                                         "h_hat": gates.h_hat(flags), "in_band": gates.band(flags),
                                         "acceptable": gates.acceptable(flags)}
                         att["gates"] = gates.decisions(flags, bool(lab.get("plausible")), sc["help"])

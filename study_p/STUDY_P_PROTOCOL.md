@@ -1,6 +1,6 @@
-# Study P: giao thức (BẢN NHÁP, chưa đóng băng)
+# Study P: giao thức (đóng băng bằng workflow `Gatekeeper Study P freeze`)
 
-> Bản nháp để người nghiên cứu và người hướng dẫn xem. Sẽ được đóng băng (cùng mọi file quyết định trong danh sách băm) **trước** khi kiểm định cohort. Khung mẫu được dựng trước khi đóng băng vì việc đó không nhìn kết quả nào.
+> Đóng băng cùng mọi file của `study_p`, mọi công cụ và tài liệu liên quan (`tools/p_prepare_freeze.py`), **trước** khi chạm vào bất kỳ ứng viên nào của cohort. Khung mẫu được dựng trước vì việc đó không nhìn kết quả nào.
 
 ## 1. Câu hỏi nghiên cứu
 
@@ -85,6 +85,10 @@ Tỉ trọng trộn giữa bộ sinh theo chữ ký (G0) và bộ sinh do model 
 
 **Thay cho P1 đến P3:** không còn ngưỡng đếm ở từng giai đoạn (khung đã cố định, phễu được báo cáo mô tả). **P3 mới = độ chính xác đạt được**: nửa độ rộng khoảng Wilson của đại lượng chính ≤ 0,05; nếu không đạt, kết quả vẫn báo cáo nhưng ghi rõ là không đủ chính xác. **P4** giữ nguyên (≥ 11 cặp bất đồng để kiểm định H3). **H1 giữ làm phân tích phụ đã đăng ký**, báo cáo cùng công suất thực tế.
 
+### 4.7 Chạy theo dòng
+
+Mỗi ứng viên của khung (theo thứ tự) đi liền qua P-S2, P-S3 và P-GEN mà không chờ ứng viên khác (`tools/p_stream.py`); mỗi giai đoạn có giới hạn thời gian, không thử lại, không thay thế (riêng HTTP 429 được thử lại, mục 7b). Các ngưỡng được đánh giá **trên tổng số cuối cùng**. Chương trình sinh của mỗi instance được tạo và băm ở P-S3, **trước** khi sinh patch của chính instance đó.
+
 ## 5. Ngân sách và lịch
 
 Chỉ credit Free Trial (khoảng 288 USD, hết hạn 20/1/2027); trần cứng 200 USD cho toàn bộ P-GEN. Giá Flash tăng gấp đôi từ 1/1/2027, nên P-GEN nên chạy **trong tháng 12**.
@@ -107,8 +111,22 @@ Model nhẹ `gemini-3.8-flash` bắt buộc: giả thuyết xác nhận dùng pa
 2. **Chương trình sinh được tạo đúng một lần** ở P-S3, lưu cùng hash, và **không bao giờ tạo lại**. Lý do: ở PP1, chương trình sinh của `skeletoken_pr74` hỏng ở cả hai lần dù ở PP0 tạo được: việc tạo không ổn định, nên tạo lại sẽ làm phễu khả thi phụ thuộc vào lần chạy. Tỉ lệ tạo thất bại được báo cáo trong RQ1.
 3. **Nhánh model mạnh (thăm dò, RQ4) được mở theo quy tắc ở mục 6.** Trên các instance mà cả hai model đều sinh được patch không vướng lỗi hạ tầng (7 instance), Argon cho 6 patch plausible, Flash 5: điều kiện "không thấp hơn" thoả. Chi phí PP1 khoảng 0,015 USD mỗi lần sinh ở giá khuyến mãi; ở giá đầy đủ (4 và 20 USD mỗi triệu token) khoảng 0,03 USD, tức khoảng 9 USD cho 298 instance, trong ngân sách. Cỡ mẫu so sánh nhỏ (7), nên nhánh này chỉ là thăm dò; giả thuyết xác nhận chỉ dùng patch của model nhẹ.
 
+## 9. Kế hoạch phân tích (cài đặt trong `tools/p_analyze.py`)
+
+1. **RQ1:** phễu từ khung tới ELIGIBLE, hàm dùng được, patch; số lần tạo chương trình sinh thất bại.
+2. **Chính (RQ2):** tỉ lệ patch plausible của model nhẹ (một mỗi instance) có θ̂ trong vùng [3/n; 1 − 0,1^(1/20)], kèm khoảng Wilson 95% và khoảng bootstrap 95% lấy mẫu lại theo **repo** (10.000 lần). **P3:** nửa độ rộng Wilson ≤ 0,05.
+3. **H1 (phụ):** nhị thức chính xác một phía, H0: tỉ lệ ≤ 0,10.
+4. **H3 (phụ, cần P4):** trong các patch plausible chấp nhận được (θ̂ < 5%), McNemar chính xác một phía trên các cặp mà kiểm định cỡ mẫu cố định và Gatekeeper quyết định khác nhau; chỉ kiểm định khi có ≥ 11 cặp.
+5. **RQ4:** với mỗi cổng (census, zero-tolerance, B8+, smoke 20, cỡ mẫu cố định, Gatekeeper): tỉ lệ admit; số patch có θ̂ > 5% bị admit; số patch có θ̂ = 0 bị từ chối.
+6. **Độ nhạy:** (a) loại các repo có mặt trong tập phát triển; (b) tỉ trọng G2 bằng 0, 50, 100%.
+7. **Thăm dò (RQ4, model mạnh):** cùng các thước đo trên patch của `gemini-4-argon`, ghép cặp theo instance.
+8. **RQ3:** theo `research_closure/results/RQ3_PLAN.md` (đồng thuận phát hiện giữa bộ sinh viết tay và bộ sinh tự động trên 14 target của Study D, E, G).
+
+**Giới hạn của nhãn tham chiếu:** "chấp nhận được" được định nghĩa bằng θ̂ trên chính các đầu vào dùng cho các cổng, nên so sánh cổng ở RQ4 mang tính nội tại. Điều này được nêu rõ trong bài.
+
 ## 8. Tài liệu tham khảo cho các công thức và quyết định
 
+- Cohen, J. (1960). A coefficient of agreement for nominal scales. *Educational and Psychological Measurement*, 20(1), 37–46.
 - Cumming, G. (2014). The new statistics: Why and how. *Psychological Science*, 25(1), 7–29.
 - Kelley, K., & Rausch, J. R. (2006). Sample size planning for the standardized mean difference: Accuracy in parameter estimation via narrow confidence intervals. *Psychological Methods*, 11(4), 363–385.
 - Newcombe, R. G. (1998). Two-sided confidence intervals for the single proportion: Comparison of seven methods. *Statistics in Medicine*, 17(8), 857–872.

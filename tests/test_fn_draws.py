@@ -53,6 +53,8 @@ class FnDraws(unittest.TestCase):
             o, b = self.base(tmp)
             sc, _ = D.score_fn_patch(sys.executable, b, o, {"k.py": partial}, [], Path(tmp) / "w", "partial", env=ENV)
         rate = gates.h_hat(sc["harm"])
+        self.assertEqual(sum(v["harm"] for v in sc["by_source"].values()), sum(sc["harm"]))     # strata add up
+        self.assertEqual(set(sc["by_source"]), {"G0", "G2"})
         self.assertGreater(sum(sc["harm"]), 0)
         self.assertLess(rate, 0.2)                                                # a rate, not an all-or-nothing verdict
         d = gates.decisions(sc["harm"], True, sc["help"])
