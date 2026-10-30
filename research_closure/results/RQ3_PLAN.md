@@ -4,7 +4,9 @@
 
 ## Đối tượng
 
-Mọi target đánh giá **không phải smoke** của Study D, E, G (14 target: A1, C1, C2, D1 đến D5; E1, E2, E3, K1, K2; G1). Study H không có target đánh giá. Với mỗi target: mã ở commit đã ghi, và cùng mã sau khi áp kỹ năng (`bind_modules`, như nghiên cứu gốc). Target mà kỹ năng không áp được (OUT_OF_SCOPE) được báo cáo và loại khỏi phép so.
+**Quy tắc:** mọi target đánh giá (`study_d`, `study_e`, `study_g`, thư mục `eval_targets`) **trừ target smoke** (manifest ghi "SMOKE" trong `role`, hoặc dùng fixture cục bộ). Study H không có target đánh giá. Danh sách thật được workflow in ra và lưu ở mỗi lượt chạy.
+
+**Sửa trước khi có dữ liệu (2/11/2026):** bản đầu của kế hoạch ghi "14 target", đếm trên bản repo cục bộ của người soạn; repo thật có 16 thư mục target. Lượt chạy đầu dừng ở bước lập kế hoạch, **trước** khi đo bất kỳ target nào, nên con số được thay bằng quy tắc trên. Với mỗi target: mã ở commit đã ghi, và cùng mã sau khi áp kỹ năng (`bind_modules`, như nghiên cứu gốc). Target mà kỹ năng không áp được (OUT_OF_SCOPE) được báo cáo và loại khỏi phép so.
 
 ## Bộ sinh
 

@@ -1,0 +1,9 @@
+{
+ "name": "fix_rq3_freeze (patch_fix_rq3_freeze.zip)",
+ "files": {
+  ".github/workflows/rq3.yml": "27dc626fe4588736abe3d7404f1d2839a5f9195cd782dfd16f6b690fc6fea170",
+  ".github/workflows/study-p-freeze.yml": "5445e965a698f429a08494b9cf614f6a2eca94655088733d30350c293ebfb855",
+  "research_closure/results/RQ3_PLAN.md": "a08c978df3691a2841c7741dced34e2fa5b8ac527f8c7811116b6bd14ca9c4ed",
+  "tools/repo_hygiene.py": "3eb6074571210ba438e10f18737485b1ddb156c8f922cd915c3c81d86a0be7a7"
+ }
+}

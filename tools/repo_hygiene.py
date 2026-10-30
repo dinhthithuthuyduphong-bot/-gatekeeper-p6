@@ -1,6 +1,6 @@
 """Find (and optionally remove) files left at the repository ROOT by a package extracted to the wrong place.
 
-python tools/repo_hygiene.py [--remove]
+python tools/repo_hygiene.py [--remove] [--strict]   (--strict: exit 1 when stray files exist)
 
 A root-level file is a stray duplicate when a file with the same name exists in one of the canonical directories.
 Such files break `python -m unittest discover -s tests` (a root copy of a test module shadows the one in tests/), so
@@ -39,6 +39,9 @@ def main(argv):
             (ROOT / name).unlink()
             print("removed", name)
     print("%d stray duplicate(s), %d lone root test file(s)" % (len(dup), len(lone)))
+    if "--strict" in argv and (dup or lone) and "--remove" not in argv:
+        print("::error::files at the repository root shadow the test modules; run the workflow `Gatekeeper repo hygiene` with mode=remove")
+        return 1
     return 0
 
 
