@@ -89,6 +89,12 @@ Model nhẹ `gemini-3.8-flash` bắt buộc: giả thuyết xác nhận dùng pa
 4. Mở rộng khung nếu cần; giai đoạn P-S3 tạo và băm chương trình sinh cho từng instance trước khi sinh patch.
 5. Đưa mọi file vào danh sách băm; chạy kiểm tra trước khi đóng băng.
 
+## 7b. Thay đổi rút ra từ PP1 (1/11/2026, trước khi đóng băng)
+
+1. **Lỗi HTTP 429 (RESOURCE_EXHAUSTED) được thử lại** theo giãn cách hàm mũ có chặn (10, 30, 90, 180 giây; tối đa 4 lần), đúng chiến lược Google khuyến nghị cho lỗi này trên Vertex (tài liệu "Error code 429"). Lý do: 2 trong 3 thất bại ở PP1 là 429; đó là tín hiệu về hạn mức, không phải câu trả lời của model, nên không được tính là thất bại của model. Mọi lỗi HTTP khác vẫn được ghi nhận ngay.
+2. **Chương trình sinh được tạo đúng một lần** ở P-S3, lưu cùng hash, và **không bao giờ tạo lại**. Lý do: ở PP1, chương trình sinh của `skeletoken_pr74` hỏng ở cả hai lần dù ở PP0 tạo được: việc tạo không ổn định, nên tạo lại sẽ làm phễu khả thi phụ thuộc vào lần chạy. Tỉ lệ tạo thất bại được báo cáo trong RQ1.
+3. **Nhánh model mạnh (thăm dò, RQ4) được mở theo quy tắc ở mục 6.** Trên các instance mà cả hai model đều sinh được patch không vướng lỗi hạ tầng (7 instance), Argon cho 6 patch plausible, Flash 5: điều kiện "không thấp hơn" thoả. Chi phí PP1 khoảng 0,015 USD mỗi lần sinh ở giá khuyến mãi; ở giá đầy đủ (4 và 20 USD mỗi triệu token) khoảng 0,03 USD, tức khoảng 9 USD cho 298 instance, trong ngân sách. Cỡ mẫu so sánh nhỏ (7), nên nhánh này chỉ là thăm dò; giả thuyết xác nhận chỉ dùng patch của model nhẹ.
+
 ## 8. Tài liệu tham khảo cho các công thức và quyết định
 
 - Clopper, C. J., & Pearson, E. S. (1934). The use of confidence or fiducial limits illustrated in the case of the binomial. *Biometrika*, 26(4), 404–413.

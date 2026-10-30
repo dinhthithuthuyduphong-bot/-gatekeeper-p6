@@ -1,0 +1,135 @@
+{
+ "stage": "PP1",
+ "instances_run": 10,
+ "planned": 10,
+ "instances_status": {
+  "FINISHED": 8,
+  "HARNESS_NOT_ELIGIBLE": 2
+ },
+ "instances_with_full_chain": 7,
+ "criterion_a_full_chain": false,
+ "criterion_b_some_plausible_patch": true,
+ "min_instances": 8,
+ "pilot_pass": false,
+ "spent_usd": 0.1196,
+ "models": {
+  "vertex-gemini-argon": {
+   "attempts": 8,
+   "submitted": 7,
+   "first_call_visible_pass": 7,
+   "stopped_by_spend_guard": 0,
+   "plausible": 6,
+   "cost_usd": 0.1196,
+   "finish_reasons": {
+    "stop": 7
+   },
+   "median_output_tokens_per_call": 319.0,
+   "mean_calls_per_attempt": 0.88,
+   "plausible_rate": 0.75,
+   "plausible_rate_wilson_low": 0.409,
+   "icc_of_plausibility": null,
+   "truncated_calls_share": 0.0
+  }
+ },
+ "h_hat_of_plausible": {
+  "n": 6,
+  "median": 0.0,
+  "share_in_band": 0.0,
+  "share_above_5pct": 0.0
+ },
+ "plausible_patches": [
+  {
+   "name": "agenticseek_pr2",
+   "model": "vertex-gemini-argon",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": false,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "aioresponses_pr232",
+   "model": "vertex-gemini-argon",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "gapic_generator_python_pr1657",
+   "model": "vertex-gemini-argon",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "litellm_pr14155",
+   "model": "vertex-gemini-argon",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "seedcase_sprout_pr1179",
+   "model": "vertex-gemini-argon",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  },
+  {
+   "name": "sympy_pr24589",
+   "model": "vertex-gemini-argon",
+   "h_hat": 0.0,
+   "in_band": false,
+   "acceptable": true,
+   "gates": {
+    "census_only": true,
+    "zero_tolerance": true,
+    "b8_plus": true,
+    "smoke20": true,
+    "fixed_sample": true,
+    "gatekeeper": true
+   }
+  }
+ ],
+ "plausible_in_band": 0,
+ "plausible_with_discordant_gates": 1,
+ "note": "Development instances (exposed). Not evidence for any gate of Study N."
+}

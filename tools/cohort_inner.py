@@ -26,8 +26,14 @@ from gatekeeper_lite.skill import Target  # noqa: E402
 
 
 class RefreshingClient(b9_cohort.CohortClient):
-    """CohortClient that refreshes its bearer token (they last about an hour) with GK_TOKEN_CMD when set."""
+    """CohortClient that refreshes its bearer token (they last about an hour) with GK_TOKEN_CMD when set, and retries
+    HTTP 429 (RESOURCE_EXHAUSTED, Vertex dynamic shared quota) with truncated exponential backoff, the strategy Google
+    recommends for that error.  A 429 is a capacity signal, not a model answer, so retrying it does not change what the
+    model is measured on; every other HTTP error is still recorded at once as a result."""
     _last = 0.0
+    BACKOFF_429 = (10, 30, 90, 180)                              # seconds; at most four retries, about five minutes in total
+    _sleep = staticmethod(time.sleep)
+    retries_429 = 0
 
     def complete(self, model, messages, max_tokens, temperature, seed):
         cmd = os.environ.get("GK_TOKEN_CMD")
@@ -36,11 +42,16 @@ class RefreshingClient(b9_cohort.CohortClient):
             if out.returncode == 0 and out.stdout.strip():
                 os.environ[self.key_env] = out.stdout.strip()
                 RefreshingClient._last = time.time()
-        try:
-            return super().complete(model, messages, max_tokens, temperature, seed)
-        except urllib.error.HTTPError as e:              # keep the provider's explanation (a bare "400" cannot be diagnosed)
-            body = e.read().decode("utf-8", "replace")[:500] if hasattr(e, "read") else ""
-            raise RuntimeError("HTTP %d: %s" % (e.code, body)) from None
+        for wait in self.BACKOFF_429 + (None,):
+            try:
+                return super().complete(model, messages, max_tokens, temperature, seed)
+            except urllib.error.HTTPError as e:          # keep the provider's explanation (a bare "400" cannot be diagnosed)
+                body = e.read().decode("utf-8", "replace")[:500] if hasattr(e, "read") else ""
+                if e.code == 429 and wait is not None:
+                    RefreshingClient.retries_429 += 1
+                    self._sleep(wait)
+                    continue
+                raise RuntimeError("HTTP %d: %s" % (e.code, body)) from None
 
 
 API_SEED_MODULUS = 2_000_000_000     # the Gemini API takes a signed 32-bit seed; draw seeds may be larger

@@ -1,0 +1,1 @@
+PP1 không có điều kiện đạt hay không đạt (giao thức Study P mục 4.3): dòng "NOT PASSED" trong PILOT_SUMMARY.md là điều kiện của P0 được áp mặc định và không có ý nghĩa ở đây. 2 trong 3 instance không chạy trọn gặp HTTP 429; instance thứ ba (`skeletoken_pr74`) có chương trình sinh do model viết hỏng ở cả hai lần. Xem giao thức, mục 7b.

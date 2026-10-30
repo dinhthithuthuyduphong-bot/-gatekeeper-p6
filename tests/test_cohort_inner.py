@@ -118,6 +118,55 @@ class Fixes(unittest.TestCase):
         self.assertEqual(inst["hidden_p2p"], ["src/pk/tests/unit/test_a.py::T::test_y"])
         self.assertEqual(remap["tests.unit.test_a.T::test_x"], "src.pk.tests.unit.test_a.T::test_x")
 
+    def test_http_429_is_retried_with_backoff_then_succeeds(self):
+        import io
+        import json as J
+        import os
+        import urllib.error
+        import urllib.request
+        os.environ["TOK_Z"] = "k"
+        calls = {"n": 0}
+
+        class R:
+            def read(self):
+                return J.dumps({"choices": [{"message": {"content": "ok"}, "finish_reason": "stop"}],
+                                "usage": {"prompt_tokens": 5, "total_tokens": 7}}).encode()
+
+        def flaky(req, timeout=0):
+            calls["n"] += 1
+            if calls["n"] <= 2:
+                raise urllib.error.HTTPError(req.full_url, 429, "Too Many", {}, io.BytesIO(b'{"error":{"status":"RESOURCE_EXHAUSTED"}}'))
+            return R()
+        waits = []
+        old, old_sleep = urllib.request.urlopen, CI.RefreshingClient._sleep
+        urllib.request.urlopen, CI.RefreshingClient._sleep = flaky, staticmethod(lambda s: waits.append(s))
+        try:
+            r = CI.RefreshingClient("https://h", "TOK_Z").complete("m", [{"role": "user", "content": "x"}], 16, 0, 1)
+        finally:
+            urllib.request.urlopen, CI.RefreshingClient._sleep = old, old_sleep
+        self.assertEqual(r["text"], "ok")
+        self.assertEqual(waits, [10, 30])
+
+    def test_http_429_gives_up_after_four_retries(self):
+        import io
+        import os
+        import urllib.error
+        import urllib.request
+        os.environ["TOK_Z"] = "k"
+
+        def always(req, timeout=0):
+            raise urllib.error.HTTPError(req.full_url, 429, "Too Many", {}, io.BytesIO(b"{}"))
+        waits = []
+        old, old_sleep = urllib.request.urlopen, CI.RefreshingClient._sleep
+        urllib.request.urlopen, CI.RefreshingClient._sleep = always, staticmethod(lambda s: waits.append(s))
+        try:
+            with self.assertRaises(RuntimeError) as cm:
+                CI.RefreshingClient("https://h", "TOK_Z").complete("m", [{"role": "user", "content": "x"}], 16, 0, 1)
+        finally:
+            urllib.request.urlopen, CI.RefreshingClient._sleep = old, old_sleep
+        self.assertEqual(waits, [10, 30, 90, 180])
+        self.assertIn("HTTP 429", str(cm.exception))
+
     def test_http_errors_keep_the_provider_message(self):
         import io
         import os

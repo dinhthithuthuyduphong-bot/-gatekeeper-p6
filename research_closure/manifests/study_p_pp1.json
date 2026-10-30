@@ -1,0 +1,12 @@
+{
+ "name": "study_p_pp1 (patch_study_p_pp1.zip)",
+ "files": {
+  "research_closure/pilot/pp1/NOTE.md": "302d65b5519defbfa6892d8428ff9046734c8c6ba50858b690ae8ad91908e1a0",
+  "research_closure/pilot/pp1/PILOT_SUMMARY.json": "2de421b11f3531fbcfbea4cb7809af0e186defdf57fab175678bec32c3d29176",
+  "research_closure/pilot/pp1/PILOT_SUMMARY.md": "112393e55eda998d3008603c6f4d35c73bcda42cdfb73cb6b84a0bc86d4bb92b",
+  "research_closure/results/ALIGNMENT_WITH_FSE.md": "1c1e13fba3ea75d3ea6563318473dc24a0145474b7dce91fb78401144b158b9c",
+  "study_p/STUDY_P_PROTOCOL.md": "6651e2aa0b8cfb8a7ffde8c43f39da615953f098fa7a9792e731b43d6e5dca2c",
+  "tests/test_cohort_inner.py": "552e39e5c1b8469cc85a0bb4384d81d177ca22b52de159a808f2a3ac1a856272",
+  "tools/cohort_inner.py": "771f87f2627dcf266ff8e4e26df62b6b8187a8edd40614a90d64536ecaf3c54b"
+ }
+}

@@ -31,3 +31,20 @@
 **Khẳng định cần bỏ hoặc thu hẹp:** "Gatekeeper mạnh hơn kiểm định cỡ mẫu cố định" (bỏ); "kỹ năng học được" thành "thay đổi mã" (thu hẹp); giữ "kiểm định hợp lệ mọi lúc" như một **tính chất** (hiệu lực khi dừng tuỳ ý, dừng sớm), không như lợi thế công suất.
 
 **(B) Thêm chiều tái sử dụng vào Study P** (áp một patch sang các chỗ gọi khác): không tự nhiên với patch LLM, và cần một oracle mới; không đề xuất.
+
+## Quyết định đóng khung (1/11/2026, người nghiên cứu giao cho trợ lý quyết)
+
+**Quyết định: đóng khung lại ở mức nghiên cứu ngay bây giờ; khẳng định của bài chỉ được chọn sau kết quả xác nhận của Study P, theo một quy tắc ghi trước.**
+
+**Lý do trung thực:** câu hỏi về cổng chấp nhận chỉ trả lời được trên một quần thể **có** thay đổi nằm trong vùng tác hại một phần. Với đối tượng gốc (kỹ năng học được), 12 target thật của Study D đến H **không có** trường hợp nào trong vùng đó (0/2.400 sai khác); đây là bằng chứng âm vững, đã đăng ký trước. Với patch LLM, PP0 có trường hợp trong vùng (2 trên 11 instance có patch plausible), nhưng đó là dữ liệu **thăm dò**, trên instance **đã lộ**, cỡ mẫu nhỏ. Vì vậy:
+- **đủ cơ sở** để chuyển đối tượng nghiên cứu sang "chấp nhận một thay đổi mã vào một phạm vi" (vì đối tượng gốc không tạo ra quần thể cần thiết);
+- **chưa đủ cơ sở** để khẳng định trong bài rằng tác hại một phần của patch LLM là phổ biến.
+
+**Quy tắc chọn khẳng định của bài (cố định trước khi có dữ liệu cohort):**
+
+| Kết quả H1 của Study P (nhị thức chính xác một phía, α = 0,05) | Bài A\* |
+|---|---|
+| **Bác bỏ H0** (hơn 10% patch plausible của model nhẹ có θ̂ trong vùng) | "Tác hại một phần của patch LLM plausible và việc chọn cổng chấp nhận"; kỹ năng (Study D đến H) là bằng chứng liên quan, RQ3 là cầu nối |
+| **Không bác bỏ** | Bài đo đạc và kết quả âm: tác hại một phần hiếm ở cả kỹ năng lẫn patch; cổng thống kê chỉ có ý nghĩa trong một vùng hẹp suy ra được; hướng 4 cộng phần lý thuyết |
+
+Ở cả hai nhánh, luận văn giữ tựa "Scope before Reuse" và báo cáo đầy đủ Study D đến P.
