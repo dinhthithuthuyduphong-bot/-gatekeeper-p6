@@ -1,0 +1,75 @@
+{
+ "C1_per_cell_validity": {
+  "statement": "per-cell false admission <= alpha",
+  "alpha": 0.1,
+  "theta": 0.1,
+  "n": 300,
+  "reps": 2000,
+  "false_admissions": 131,
+  "rate": 0.0655,
+  "wilson95": [
+   0.055468358869967115,
+   0.07719761632487863
+  ],
+  "held": true
+ },
+ "C2_budget_per_cell_vs_per_scope": {
+  "statement": "shared per-scope threshold can exceed alpha family-wise; per-cell alpha/L does not",
+  "cells_in_scope": 10,
+  "familywise_shared": 0.4535,
+  "familywise_shared_wilson95": [
+   0.43179139242361536,
+   0.4753868995132324
+  ],
+  "familywise_split": 0.0505,
+  "familywise_split_wilson95": [
+   0.04173532690686044,
+   0.060988161816000704
+  ],
+  "union_bound_shared": 0.655,
+  "held": true,
+  "draft_budget_exceeded_alpha": true
+ },
+ "C3_bounded_shift": {
+  "statement": "|STR_Q - STR_P| <= 2 TV, attained; draft bound (TV) violated",
+  "example_tv": 0.09999999999999999,
+  "example_gap": 0.19999999999999996,
+  "ratio_gap_over_tv": 1.9999999999999998,
+  "max_ratio_random": 1.5924391396810538,
+  "held": true
+ },
+ "C4_composition": {
+  "statement": "STR(S1 o S2) <= 1 + min(STR1, STR2); attained by the construction",
+  "random_instances": 20000,
+  "violations": 0,
+  "construction_theta": 0.1,
+  "construction_str_single": -0.1,
+  "construction_str_composite": 0.9,
+  "bound": 0.9,
+  "draft_claim_1_minus_eps_possible_for_eps_below_theta": false,
+  "held": true
+ },
+ "C5_pairing": {
+  "statement": "unpaired/paired variance ratio = 1 + 2 sT^2/sS^2",
+  "sT2_over_sS2": 2.1,
+  "measured_ratio": 5.198867480235385,
+  "corrected_formula": 5.2,
+  "draft_formula": 3.1,
+  "held": true
+ },
+ "C6_alpha_ledger": {
+  "statement": "sum over epochs of 6/(pi^2 (k+1)^2) <= 1",
+  "partial_sum_1e6": 0.9999993920732021,
+  "held": true
+ },
+ "C7_corollary8_consistency": {
+  "statement": "Corollary 8: d_bar implied by the overlap share",
+  "skills": 94,
+  "overlap_share": 0.114,
+  "implied_mean_partners": 10.602,
+  "overlapping_pairs": 498.29400000000004,
+  "draft_dbar": 0.34,
+  "held": false,
+  "note": "held=False means the draft's numbers are inconsistent (expected)"
+ }
+}
