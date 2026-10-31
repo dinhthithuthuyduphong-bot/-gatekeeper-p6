@@ -58,3 +58,9 @@ Chạy G2 (model nhẹ viết chương trình sinh, xem mô tả issue và diff)
 Quy tắc chọn patch phải cố định trước khi đo; ngưỡng phụ thuộc số instance có ít nhất một patch resolved công khai. Q-F2 đếm, cho 182 bản nộp: dự đoán, danh sách resolved, số patch resolved và số patch khác nhau theo nội dung ở mỗi instance. Đây là siêu dữ liệu của các bản nộp, không phụ thuộc phép đo nào của nghiên cứu này.
 
 **Quy tắc chọn dự kiến (sẽ ghi trong giao thức):** khung = các instance có ít nhất một patch resolved; với mỗi instance, chọn **một** patch resolved bằng hash có seed (seed drand lúc đóng băng) trong số các patch khác nhau theo nội dung, để các instance độc lập và hiệu ứng thiết kế bằng 1 [Kish 1965].
+
+## Q-F2 lần 1: THẤT BẠI (lỗi giả định của trợ lý), lần 2: sửa theo cấu trúc thật
+
+Lần 1 tìm `all_preds.jsonl` **trong** kho `SWE-bench/experiments`: 0/182 bản nộp dùng được (135 có danh sách resolved, không bản nào có dự đoán). README hiện tại của kho nói rõ kho **chỉ chứa mục đăng ký, không chứa dữ liệu**: dự đoán nằm ở kho công khai của bên nộp (khối `assets` trong `metadata.yaml`), hoặc ở bucket công khai `s3://swe-bench-submissions/` với các mục trước giữa 2026. Công cụ đã được viết lại để đọc khối `assets`, thử mọi địa chỉ (GitHub dạng tệp thô, S3 dạng HTTPS; `all_preds.jsonl` và `preds.json`) và **lưu lại khối `assets` thật cùng mọi URL đã thử** để chẩn đoán nếu vẫn thất bại.
+
+**Lưu ý chính sách từ README (18/11/2025):** từ ngày đó, SWE-bench Verified chỉ nhận bản nộp của nhóm học thuật có phương pháp mã nguồn mở; các bản nộp trước đó vẫn giữ nguyên. Điều này không ảnh hưởng việc dùng các bản nộp đã công khai.

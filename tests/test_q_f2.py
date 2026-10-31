@@ -28,5 +28,32 @@ class Pool(unittest.TestCase):
         self.assertIsNone(Q.resolved_ids("not json"))
 
 
+class Entries(unittest.TestCase):
+    def test_asset_urls(self):
+        u, _ = Q.asset_urls({"assets": {"repo": "https://github.com/acme/swe-run", "logs": "s3://swe-bench-submissions/verified/20250101_x"}})
+        self.assertIn("https://raw.githubusercontent.com/acme/swe-run/HEAD/all_preds.jsonl", u)
+        self.assertIn("https://swe-bench-submissions.s3.amazonaws.com/verified/20250101_x/all_preds.jsonl", u)
+        u, _ = Q.asset_urls({"assets": {"repo": "https://github.com/acme/r/tree/main/sub/dir"}})
+        self.assertEqual(u[0], "https://raw.githubusercontent.com/acme/r/main/sub/dir/all_preds.jsonl")
+
+    def test_parse_both_formats(self):
+        self.assertEqual(Q.parse_preds('{"instance_id": "a", "model_patch": "p"}\n{"instance_id": "b", "model_patch": "q"}'), [("a", "p"), ("b", "q")])
+        self.assertEqual(Q.parse_preds(json.dumps({"a": {"instance_id": "a", "model_patch": "p"}})), [("a", "p")])
+
+    def test_entries_end_to_end(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            d = Path(tmp) / "evaluation" / "verified" / "20250101_x"
+            (d / "results").mkdir(parents=True)
+            (d / "metadata.yaml").write_text("assets:\n  repo: https://github.com/acme/run\n")
+            (d / "results" / "results.json").write_text(json.dumps({"resolved": ["i1"]}))
+            preds = json.dumps({"instance_id": "i1", "model_patch": "diff"}) + "\n" + json.dumps({"instance_id": "i2", "model_patch": "diff2"})
+            get = lambda u: preds if u.endswith("acme/run/HEAD/all_preds.jsonl") else None
+            per, pool = Q.entries(tmp, get=get)
+        self.assertTrue(per["20250101_x"]["usable"])
+        self.assertEqual([p["instance_id"] for p in pool], ["i1"])
+        self.assertEqual(per["20250101_x"]["tried"][0][1], True)
+
+
 if __name__ == "__main__":
     unittest.main()
