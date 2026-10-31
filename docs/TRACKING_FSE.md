@@ -125,3 +125,4 @@ PDF gốc: [`paper/source/`](paper/source/), đã đối chiếu toàn văn ngà
 | 31/10/2026 ~18:15 | A14: độ nhạy hệ số phạt regression — không quyết định hay nhãn nào phụ thuộc (7.200 lần rút + demo, λ = 0…5); đưa vào bài |
 | 31/10/2026 ~19:30 | Rà soát toàn bài như phản biện (PHASE4_REVIEW W1–W7): sửa Abstract tự mâu thuẫn, thêm mô phỏng thư viện (27,9% → 0%), trích PatchDiff, always-valid A/B testing, Smith 2015, Vovk & Wang |
 | 31/10/2026 ~20:30 | Vòng 2: độ vững Study Q theo repo, Hình 1 (pipeline), Bảng 2 (quyết định trên target thật); 28 con số kiểm; bài 12 trang |
+| 31/10/2026 ~21:30 | Vòng 3: CI tự chạy, ghim SHA mọi action, auth@v3; Study R (footprint census thật: 1 hàm chung trên 16 repo) đưa vào bài; 30 con số kiểm |

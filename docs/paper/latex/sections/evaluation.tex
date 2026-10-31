@@ -60,6 +60,11 @@ happened ($0/1{,}000$ at every $q$, consistent with Corollary~\ref{cor:execution
 beneficial skills executed per library, because undecided or rejected composites keep overlapping skills apart, and $8\%$ more trials.
 Measured on the executed set as a whole, one-by-one admission looked harmful in only $5.4\%$ of libraries: benefits elsewhere masked the
 harmful component, which is why the guarantee is stated per component.
+How often would real skills need composite cells?  A footprint census of our two real skill families (Study R, AST analysis only)
+over all $16$ target repositories at their pinned revisions scanned $655$ non-test source files: the \texttt{bool} guard touches
+$104$ functions and the \texttt{None}-comparison rewrite $16$, and only $1$ function is touched by both (in \texttt{hera\_pspec}); none of
+the modules the studies declared overlap.  Overlap is rare on real code, so the reuse cost of the execution rule in the simulation,
+where $12$ skills share $8$ regions, is a pessimistic bound.
 
 \subsection{Skill reuse on real targets}
 \label{sec:eval-skills}

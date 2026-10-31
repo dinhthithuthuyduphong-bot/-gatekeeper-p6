@@ -22,6 +22,13 @@
 
 **Sự cố trong vòng này:** một lần sửa bằng script làm hỏng `evaluation.tex` (tệp phình lên 119 nghìn dòng, vì lệnh thay nhận một chuỗi rỗng). `tools/check_paper_numbers.py` báo 21 con số không còn trong bài; tệp được khôi phục từ git **trước khi commit**, và sửa đổi được áp lại có kiểm vị trí.
 
+## Vòng 3 (mã, GitHub Actions và dữ liệu thật về tổ hợp)
+
+| # | Mức | Điểm yếu | Sửa |
+|---|---|---|---|
+| W11 | 🔴 | Lý thuyết và mô phỏng về tổ hợp không có dữ liệu thật nào | **Study R** (đăng ký trước, không tốn tiền): đo footprint của hai họ kỹ năng thật trên 16 repo. 1 hàm chung trong 655 tệp; 0 chồng lấn trên module khai báo. Đã đưa vào mục 7.2 và Threats |
+| W12 | 🔴 | Không có CI; action không ghim SHA; auth@v2 chạy Node 20 | `docs/CODE_AUDIT.md`: CI khi push và PR, ghim SHA cho 346 lần dùng action, auth@v3, Dependabot |
+
 **Trích dẫn mới đã tra** (tìm kiếm web, 31/10/2026):
 - PatchDiff: ICSE 2026, DOI 10.1145/3744916.3764576.
 - Johari và cộng sự: Operations Research 70(3):1806–1821, DOI 10.1287/opre.2021.2135.

@@ -35,6 +35,7 @@ RQ3 = lambda: J("research_closure/results/rq3/RQ3_SUMMARY.json")         # noqa:
 TH = lambda: J("research_closure/results/theory/THEORY_CHECKS.json")     # noqa: E731
 LS = "research_closure/results/library_sim/LIBRARY_SIMULATION.json"
 QR = "research_closure/results/study_q/Q_ROBUSTNESS.json"
+RC = "research_closure/results/study_r/FOOTPRINT_CENSUS.json"
 
 CLAIMS = [
     ("Q usable instances", "$245$ instances usable", lambda: "$%d$ instances usable" % QA()["Q1_funnel"]["FINISHED"]),
@@ -88,6 +89,10 @@ CLAIMS = [
                                                                               pct(J(QR)["HQ1_max_upper_bound"]))),
     ("Q robustness Q4 range", "between $8.2\\%$ and\n$14.0\\%$",
      lambda: "between $%s\\%%$ and\n$%s\\%%$" % (pct(J(QR)["Q4_range"][0]), pct(J(QR)["Q4_range"][1]))),
+    ("study R census", "scanned $655$ non-test source files: the \\texttt{bool} guard touches\n$104$ functions and the \\texttt{None}-comparison rewrite $16$, and only $1$ function is touched by both",
+     lambda: "scanned $%d$ non-test source files: the \\texttt{bool} guard touches\n$%d$ functions and the \\texttt{None}-comparison rewrite $%d$, and only $%d$ function is touched by both" % (
+         J(RC)["total"]["files_scanned"], J(RC)["total"]["repo_functions_bool"], J(RC)["total"]["repo_functions_none"], J(RC)["total"]["repo_functions_both"])),
+    ("study R targets", "over all $16$ target repositories", lambda: "over all $%d$ target repositories" % J(RC)["total"]["cloned"]),
     # abstract (main.tex)
     ("abstract: plausible patches", "in $205$ plausible LLM patches", lambda: "in $%d$ plausible LLM patches" % PA()["PRIMARY"]["plausible"]),
     ("abstract: census admits", "the test census admitted all $16$ with partial\nbehavioural differences",

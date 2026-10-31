@@ -224,3 +224,7 @@ Mỗi dòng: kết quả trích trong `docs/paper/latex/sections/evaluation.tex`
 3. Không tạo lại repo mà mất lịch sử. Nếu phải tạo lại, lưu tag đóng băng và bản lưu trữ của lịch sử cũ.
 
 Các study mà bài dùng (D, E, G, H, P, Q) đều kiểm được: D, E, G, H, Q verified tại HEAD; P verified tại commit đóng băng.
+
+## 31/10/2026 — Study R: footprint census (đăng ký: `study_r/PROTOCOL.md`, commit `d655dfd`, trước khi chạy)
+
+16/16 target của Study D, E, G được clone tại revision ghim; 655 tệp nguồn không phải test. Họ `bool` chạm 104 hàm, họ `None` chạm 16 hàm, **1 hàm chung** (`hera_pspec/pspecdata.py: pspec`); trên các module khai báo: 0 chồng lấn. Run 41218737641; kết quả `research_closure/results/study_r/FOOTPRINT_CENSUS.json`. Chỉ phân tích AST, không chạy mã của target, không gọi model.

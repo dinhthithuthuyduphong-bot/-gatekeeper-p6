@@ -241,3 +241,12 @@ Mẫu cho mỗi mục:
 - **W9:** thêm Hình 1 (pipeline, TikZ) và Bảng 2 (quyết định theo ô trên target thật).
 - **W10:** mức giao footprint thật không đo được từ dữ liệu sẵn có; ghi trong Threats.
 - **Sự cố:** script sửa làm hỏng `evaluation.tex`. Bộ kiểm số bắt được (21 con số biến mất); tệp được khôi phục từ git trước khi commit.
+
+### ~21:30 — Vòng 3: mã, GitHub Actions, dữ liệu thật về tổ hợp
+- **Mã và Actions** (`docs/CODE_AUDIT.md`):
+  - CI mới (`ci.yml`) chạy khi push và khi có PR; trước đó 0/101 workflow tự chạy.
+  - Ghim SHA cho 346 lần dùng action (`tools/pin_actions.py`, tra SHA trong Actions run 41217291272); `auth` nâng v2 → v3, đã kiểm (run 41218337136); Dependabot.
+  - Xoá workflow trùng; thêm timeout cho workflow gọi model.
+  - ruff: không lỗi thật; 21 import thừa đã dọn; 16 cảnh báo B023 đều là báo động giả.
+  - Sự cố nhỏ: lệnh `pkill` khớp nhầm cả shell của chính mình, chạy lại không dùng `pkill`. CI lint ban đầu mất hơn 9 phút vì shellcheck, đã tắt shellcheck trong CI.
+- **Study R:** giao thức commit trước (`d655dfd`), chạy run 41218737641: 16/16 repo, 655 tệp, 104 + 16 hàm, **1 hàm chung**. Đưa vào bài (mục 7.2, Intro, Threats); bộ kiểm số lên 30.
