@@ -135,3 +135,10 @@ Số trong bảng khớp với lần audit thứ ba (run 41207250040), và đã 
 ### 3.5 Kiểm tra từ phiên trợ lý (không phải lỗi của repo)
 - Proxy của phiên chặn: tải artifact (`*.blob.core.windows.net`), tải log trực tiếp, GraphQL (`gh workflow run`), và push tag.
 - Cách làm: kích hoạt workflow qua REST/MCP; đọc log qua MCP hoặc trong workflow; mốc amendment ghi bằng commit thay cho tag.
+
+
+## Lỗi cài đặt: `SETUPTOOLS_SCM_PRETEND_VERSION` toàn cục (tìm ra 31/10/2026, Study S-A4)
+- **Triệu chứng:** `ERROR: No matching distribution found for uvtools>=0.2.0`, dù PyPI có `uvtools 0.2.0`.
+- **Nguyên nhân gốc:** harness đặt `SETUPTOOLS_SCM_PRETEND_VERSION=0.0.0` trong môi trường của lệnh `pip install` để build gói đang kiểm (repo clone không có tag). Biến này áp cho **mọi** gói build từ mã nguồn bằng setuptools-scm, nên `uvtools` được build thành 0.0.0 ("Requested uvtools>=0.2.0 ... but installing version 0.0.0").
+- **Sửa:** chỉ đặt phiên bản giả cho gói đang kiểm, `SETUPTOOLS_SCM_PRETEND_VERSION_FOR_<TÊN_GÓI>` (Study S-A5).
+- **Ảnh hưởng tới study cũ:** `tools/rq3_target.py`, `statelessness_check.py`, `run_study_d.py` và một số tool khác dùng cùng mẫu. Các target của chúng đã cài được, nên kết quả không bị ảnh hưởng; khi dùng lại các tool này cho target mới thì phải sửa giống S-A5.
