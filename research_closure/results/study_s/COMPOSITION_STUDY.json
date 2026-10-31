@@ -1,0 +1,335 @@
+{
+ "total": {
+  "units": 23,
+  "usable": 2,
+  "unusable_reasons": [
+   "did not run: UNCALLABLE attribute Mongo.__select not found",
+   "did not run: UNCALLABLE import failed: ImportError / ImportError",
+   "did not run: UNCALLABLE import failed: ModuleNotFoundError / ModuleNotFoundError",
+   "did not run: UNCALLABLE instance method of a class that cannot be built without arguments (TypeError)"
+  ],
+  "units_any_behaviour_change": 0,
+  "units_emergent": 0,
+  "units_masking": 0,
+  "units_order_dependent": 0,
+  "units_non_additive": 0,
+  "cells": 8,
+  "cells_admitted": 8,
+  "units_singles_admitted_composite_not": 0,
+  "units_composite_admitted_single_not": 0
+ },
+ "units": [
+  {
+   "kind": "shared",
+   "file": "cerberus/schema.py",
+   "qualname": "DefinitionSchema.__init__",
+   "a": "bare_except",
+   "b": "mutable_default",
+   "usable": false,
+   "why": "did not run: UNCALLABLE import failed: ImportError / ImportError",
+   "target": "D2_cerberus"
+  },
+  {
+   "kind": "shared",
+   "file": "pycubrid/_cursor_common.py",
+   "qualname": "format_parameter",
+   "a": "negative_type_guard",
+   "b": "type_eq_isinstance",
+   "usable": true,
+   "stable": 200,
+   "d": {
+    "A": 0.0,
+    "B": 0.0,
+    "AB": 0.0,
+    "BA": 0.0
+   },
+   "counts": {
+    "A": 0,
+    "B": 0,
+    "AB": 0,
+    "BA": 0
+   },
+   "emergent": 0,
+   "masking": 0,
+   "order_dependent": 0,
+   "non_additive": 0,
+   "examples": [],
+   "target": "D5_pycubrid",
+   "cells": {
+    "A": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "B": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "AB": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "BA": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    }
+   },
+   "singles_admitted_composite_not": false,
+   "composite_admitted_single_not": false
+  },
+  {
+   "kind": "enabling",
+   "file": "pycubrid/protocol.py",
+   "qualname": "_PreparedLob.__post_init__",
+   "a": "negative_type_guard",
+   "b": "type_eq_isinstance",
+   "usable": false,
+   "why": "did not run: UNCALLABLE instance method of a class that cannot be built without arguments (TypeError)",
+   "target": "D5_pycubrid"
+  },
+  {
+   "kind": "shared",
+   "file": "trino/client.py",
+   "qualname": "TrinoRequest.http_headers",
+   "a": "dict_keys_membership",
+   "b": "len_zero_falsy",
+   "usable": false,
+   "why": "did not run: UNCALLABLE instance method of a class that cannot be built without arguments (TypeError)",
+   "target": "K1_trino"
+  },
+  {
+   "kind": "shared",
+   "file": "pydal/backends/mongo.py",
+   "qualname": "Mongo.__select",
+   "a": "bare_except",
+   "b": "mutable_default",
+   "usable": false,
+   "why": "did not run: UNCALLABLE attribute Mongo.__select not found",
+   "target": "G1_pydal"
+  },
+  {
+   "kind": "shared",
+   "file": "pydal/backends/mongo.py",
+   "qualname": "MongoDialect._cmp_ops_aggregation_pipeline",
+   "a": "bare_except",
+   "b": "mutable_default",
+   "usable": false,
+   "why": "did not run: UNCALLABLE instance method of a class that cannot be built without arguments (TypeError)",
+   "target": "G1_pydal"
+  },
+  {
+   "kind": "shared",
+   "file": "pydal/backends/mongo.py",
+   "qualname": "MongoDialect.add",
+   "a": "bare_except",
+   "b": "mutable_default",
+   "usable": false,
+   "why": "did not run: UNCALLABLE instance method of a class that cannot be built without arguments (TypeError)",
+   "target": "G1_pydal"
+  },
+  {
+   "kind": "shared",
+   "file": "pydal/backends/mongo.py",
+   "qualname": "MongoDialect.contains",
+   "a": "mutable_default",
+   "b": "negative_type_guard",
+   "usable": false,
+   "why": "did not run: UNCALLABLE instance method of a class that cannot be built without arguments (TypeError)",
+   "target": "G1_pydal"
+  },
+  {
+   "kind": "shared",
+   "file": "pydal/backends/postgres.py",
+   "qualname": "PostgresDialect.st_transform",
+   "a": "mutable_default",
+   "b": "negative_type_guard",
+   "usable": false,
+   "why": "did not run: UNCALLABLE instance method of a class that cannot be built without arguments (TypeError)",
+   "target": "G1_pydal"
+  },
+  {
+   "kind": "shared",
+   "file": "pydal/backends/snowflake.py",
+   "qualname": "SnowflakeDialect.st_transform",
+   "a": "mutable_default",
+   "b": "negative_type_guard",
+   "usable": false,
+   "why": "did not run: UNCALLABLE instance method of a class that cannot be built without arguments (TypeError)",
+   "target": "G1_pydal"
+  },
+  {
+   "kind": "shared",
+   "file": "pydal/contrib/imap_adapter.py",
+   "qualname": "IMAPAdapter.select",
+   "a": "dict_keys_membership",
+   "b": "len_zero_falsy",
+   "usable": false,
+   "why": "did not run: UNCALLABLE instance method of a class that cannot be built without arguments (TypeError)",
+   "target": "G1_pydal"
+  },
+  {
+   "kind": "shared",
+   "file": "pydal/querybuilder.py",
+   "qualname": "QueryBuilder.parse",
+   "a": "eq_bool_identity",
+   "b": "none_identity",
+   "usable": false,
+   "why": "did not run: UNCALLABLE instance method of a class that cannot be built without arguments (TypeError)",
+   "target": "G1_pydal"
+  },
+  {
+   "kind": "shared",
+   "file": "pydal/validators.py",
+   "qualname": "IS_STRONG.validate",
+   "a": "len_zero_falsy",
+   "b": "negative_type_guard",
+   "usable": true,
+   "stable": 200,
+   "d": {
+    "A": 0.0,
+    "B": 0.0,
+    "AB": 0.0,
+    "BA": 0.0
+   },
+   "counts": {
+    "A": 0,
+    "B": 0,
+    "AB": 0,
+    "BA": 0
+   },
+   "emergent": 0,
+   "masking": 0,
+   "order_dependent": 0,
+   "non_additive": 0,
+   "examples": [],
+   "target": "G1_pydal",
+   "cells": {
+    "A": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "B": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "AB": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "BA": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    }
+   },
+   "singles_admitted_composite_not": false,
+   "composite_admitted_single_not": false
+  },
+  {
+   "kind": "enabling",
+   "file": "pydal/backends/oracle.py",
+   "qualname": "Oracle.parse",
+   "a": "negative_type_guard",
+   "b": "type_eq_isinstance",
+   "usable": false,
+   "why": "did not run: UNCALLABLE instance method of a class that cannot be built without arguments (TypeError)",
+   "target": "G1_pydal"
+  },
+  {
+   "kind": "shared",
+   "file": "src/hera_pspec/grouping.py",
+   "qualname": "average_spectra",
+   "a": "dict_keys_membership",
+   "b": "eq_bool_identity",
+   "usable": false,
+   "why": "did not run: UNCALLABLE import failed: ModuleNotFoundError / ModuleNotFoundError",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "kind": "shared",
+   "file": "src/hera_pspec/grouping.py",
+   "qualname": "spherical_average",
+   "a": "mutable_default",
+   "b": "negative_type_guard",
+   "usable": false,
+   "why": "did not run: UNCALLABLE import failed: ModuleNotFoundError / ModuleNotFoundError",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "kind": "shared",
+   "file": "src/hera_pspec/pspecdata.py",
+   "qualname": "PSpecData.C_model",
+   "a": "dict_keys_membership",
+   "b": "negative_type_guard",
+   "usable": false,
+   "why": "did not run: UNCALLABLE import failed: ModuleNotFoundError / ModuleNotFoundError",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "kind": "shared",
+   "file": "src/hera_pspec/pspecdata.py",
+   "qualname": "PSpecData.pspec",
+   "a": "len_zero_falsy",
+   "b": "negative_type_guard",
+   "usable": false,
+   "why": "did not run: UNCALLABLE import failed: ModuleNotFoundError / ModuleNotFoundError",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "kind": "shared",
+   "file": "src/hera_pspec/pspecdata.py",
+   "qualname": "PSpecData.pspec",
+   "a": "len_zero_falsy",
+   "b": "none_identity",
+   "usable": false,
+   "why": "did not run: UNCALLABLE import failed: ModuleNotFoundError / ModuleNotFoundError",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "kind": "shared",
+   "file": "src/hera_pspec/pspecdata.py",
+   "qualname": "PSpecData.pspec",
+   "a": "negative_type_guard",
+   "b": "none_identity",
+   "usable": false,
+   "why": "did not run: UNCALLABLE import failed: ModuleNotFoundError / ModuleNotFoundError",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "kind": "shared",
+   "file": "src/hera_pspec/utils.py",
+   "qualname": "config_pspec_blpairs",
+   "a": "bare_except",
+   "b": "len_zero_falsy",
+   "usable": false,
+   "why": "did not run: UNCALLABLE import failed: ModuleNotFoundError / ModuleNotFoundError",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "kind": "shared",
+   "file": "src/hera_pspec/utils.py",
+   "qualname": "load_config",
+   "a": "open_encoding",
+   "b": "reraise_bare",
+   "usable": false,
+   "why": "did not run: UNCALLABLE import failed: ModuleNotFoundError / ModuleNotFoundError",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "kind": "shared",
+   "file": "src/hera_pspec/uvpspec_utils.py",
+   "qualname": "_select",
+   "a": "len_zero_falsy",
+   "b": "negative_type_guard",
+   "usable": false,
+   "why": "did not run: UNCALLABLE import failed: ModuleNotFoundError / ModuleNotFoundError",
+   "target": "K1_hera_pspec"
+  }
+ ]
+}
