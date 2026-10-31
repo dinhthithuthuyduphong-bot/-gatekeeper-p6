@@ -1,0 +1,86 @@
+# Study P, amendment P-A3: process the candidates of ONE shard each in its own job (a candidate whose code terminates
+# processes outside its own process group can then only lose its own job).  Uses tools/p_stream_resume.py (P-A2)
+# unchanged: each job receives a list of every other candidate as already done.  Refuses unless P-A3 is applied.
+name: Gatekeeper Study P stream isolate (amendment P-A3)
+on:
+  workflow_dispatch:
+    inputs:
+      shard: {description: "the shard whose candidates each get their own job", default: "151"}
+      shards: {description: "number of shards of the cohort run", default: "200"}
+permissions:
+  contents: read
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.m.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Freeze check
+        run: |
+          python -c "import json,sys;c=json.load(open('study_p/config_study_p.json'));sys.exit(0 if c.get('status')=='FROZEN' else 'study_p is not FROZEN')"
+          python tools/freeze_study.py verify study_p
+          python -c "import json,sys;c=json.load(open('study_p/config_study_p.json'));sys.exit(0 if 'P-A3' in c.get('amendments_applied',[]) else 'amendment P-A3 is not applied')"
+      - id: m
+        env:
+          SHARD: ${{ inputs.shard }}
+          SHARDS: ${{ inputs.shards }}
+        run: |
+          python - <<'PY'
+          import json, os
+          k, s = int(os.environ['SHARDS']), int(os.environ['SHARD'])
+          cands = json.load(open('study_p/candidates_astar.json'))
+          done = set(json.load(open('research_closure/results/p_stream/DONE.json')))
+          names = [c['name'] for c in cands[s::k] if c['name'] not in done]
+          print('candidates, one job each (%d):' % len(names), names)
+          open(os.environ['GITHUB_OUTPUT'], 'a').write('matrix=' + json.dumps({'name': names}) + '\n')
+          PY
+  one:
+    needs: plan
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Google Cloud auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+      - name: Vertex access token
+        run: |
+          echo "GOOGLE_OAUTH_TOKEN=$(gcloud auth print-access-token)" >> "$GITHUB_ENV"
+          echo "GCP_PROJECT=${{ secrets.GCP_PROJECT }}" >> "$GITHUB_ENV"
+          echo "GK_TOKEN_CMD=gcloud auth print-access-token" >> "$GITHUB_ENV"
+      - name: Process one candidate
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ github.token }}
+          NAME: ${{ matrix.name }}
+          SHARD: ${{ inputs.shard }}
+          SHARDS: ${{ inputs.shards }}
+        run: |
+          set -euo pipefail
+          mkdir -p out_s
+          python - <<'PY'
+          import json, os
+          k, s, name = int(os.environ['SHARDS']), int(os.environ['SHARD']), os.environ['NAME']
+          cands = json.load(open('study_p/candidates_astar.json'))
+          done = set(json.load(open('research_closure/results/p_stream/DONE.json')))
+          done |= {c['name'] for c in cands[s::k] if c['name'] != name}     # every other candidate of the shard
+          json.dump(sorted(done), open('/tmp/done_one.json', 'w'))
+          PY
+          python -u tools/p_stream_resume.py study_p/candidates_astar.json out_s "$SHARD" "$SHARDS" research_closure/pilot/models.json /tmp/done_one.json 2>&1 | tee out_s/log_one.txt
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: P_STREAM_ONE_${{ matrix.name }}
+          path: out_s
