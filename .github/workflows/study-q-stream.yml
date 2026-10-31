@@ -35,10 +35,16 @@ jobs:
           h = hashlib.sha256(open('study_q/FREEZE.json', 'rb').read()).hexdigest()
           seed = drand_seed(cfg.get('seed_freeze_sha256') or h, cfg['seed_time_utc'])['seed']
           ids = sorted(json.load(open('study_q/evidence/POOL_SUMMARY.json'))['per_instance'])
-          only = [x for x in os.environ.get('ONLY', '').replace(' ', '').split(',') if x]
+          import re
+          # tolerant input: commas, semicolons, spaces or new lines; quotes copied from JSON are dropped
+          only = [x.strip('"\'') for x in re.split(r'[\s,;]+', os.environ.get('ONLY', '')) if x.strip('"\'')]
           half = (len(ids) + 1) // 2
           sel = only or (ids[:half] if os.environ['PART'] == '0' else ids[half:])
-          assert set(sel) <= set(ids) and len(sel) <= 256
+          unknown = sorted(set(sel) - set(ids))
+          if unknown:
+              raise SystemExit('ids not in the frame: %s; for example %s' % (unknown, ', '.join(ids[:3])))
+          if len(sel) > 256:
+              raise SystemExit('at most 256 jobs per run, got %d' % len(sel))
           with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
               f.write('matrix=' + json.dumps({'iid': sel}) + '\n')
               f.write('seed=%s\n' % seed)
