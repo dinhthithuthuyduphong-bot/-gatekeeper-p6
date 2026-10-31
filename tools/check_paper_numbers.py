@@ -94,7 +94,7 @@ CLAIMS = [
                                                                               pct(J(QR)["HQ1_max_upper_bound"]))),
     ("Q robustness Q4 range", "between $8.2\\%$ and\n$14.0\\%$",
      lambda: "between $%s\\%%$ and\n$%s\\%%$" % (pct(J(QR)["Q4_range"][0]), pct(J(QR)["Q4_range"][1]))),
-    ("R2 census", "($655$ non-test files) found $59$ single-skill cells,\n$3.7$ per repository, touching $456$ functions, of which $21$ are touched by two or more families",
+    ("R2 census", "($655$ non-test files) found $59$ single-skill cells,\n$3.7$ per repository, touching $467$ functions, of which $21$ are touched by two or more families",
      lambda: "($%d$ non-test files) found $%d$ single-skill cells,\n$%.1f$ per repository, touching $%d$ functions, of which $%d$ are touched by two or more families" % (
          J(R2)["total"]["files_scanned"], J(R2)["total"]["cells"], J(R2)["total"]["mean_cells_per_target"], J(R2)["total"]["functions_touched"],
          J(R2)["total"]["functions_touched_by_two_or_more"])),
