@@ -16,9 +16,9 @@ Cập nhật sau **mỗi** lần chạy. **THẮNG** = đạt, có bằng chứn
 | S2 | Mã làm đúng lý thuyết đã chứng minh | **THẮNG** | THEORY_CODE_AUDIT TC1–TC24 |
 | S3 | Đóng góp mới, nói rõ cái gì không mới | **THẮNG** | Mục 5, Intro |
 | S4 | Thực nghiệm thật, đăng ký trước, có kết quả âm | **THẮNG** | D, E, G, H, P, Q, R2, S |
-| S5 | **Tiêu chí chính của bài FSE gốc:** thắng replay + fingerprint (B6-R) **ở cùng mức giữ lợi ích** | **THUA** | Tác hại: B6-R admit 4/4 ô có hại, mình 0/4 (thắng). Lợi ích: mình giữ 2/3, B6-R giữ 3/3 (thua). → **D1, D2** |
-| S6 | Thắng các baseline thống kê (fixed-sample, smoke) và always-retest (B8) | **THUA một phần** | Smoke: thắng ở tác hại hiếm (H). Fixed-sample: chứng nhận 0 tác hại cần 99 draw, mình 110, nên thua nhẹ. B8: chỉ rẻ hơn 11% (3.220 so với 3.600). → **D2, D3** |
-| S7 | Nguồn thực nghiệm đa dạng, đủ lớn | **THUA một phần** | 14 target (D–G), 16 repo (R2, S), SWE-bench (Q). Số ô có quyết định thật còn nhỏ (28 + 64). → **D3** |
+| S5 | **Tiêu chí chính của bài FSE gốc:** thắng B6-R ở cùng mức giữ lợi ích | **THẮNG (Study T)** | Trên 1.439 ô Ruff: B6-R admit 9/11 ô có hại và giữ 928 ô an toàn; G admit 0/11 và giữ 1.420. Thắng cả hai chiều |
+| S6 | Thắng baseline thống kê và B8 | **THUA một phần** | Study T: G giữ nhiều hơn FS (1.400) và B8 (1.414) ở cùng 0 tác hại (thắng); **smoke 20 ngang G và rẻ hơn 10 lần** (thua); chi phí G bằng B8 (thua W3) |
+| S7 | Nguồn đa dạng, đủ lớn | **THẮNG** | Study T: 60 gói phổ biến nhất PyPI, 235 kỹ năng có trên thị trường (Ruff), 1.465 ô có quyết định thật |
 | S8 | Người chấm độc lập (model đã hiệu chuẩn) | **THẮNG** | 20/20 mỗi model; Q-A1 5/36 – 8/36 |
 | S9 | Tái lập, artifact ẩn danh | **THẮNG** (chờ upload) | submission check |
 | S10 | Venue, định dạng | **THẮNG** | ISSTA 2027, 11/1/2027, 16/18 trang |
@@ -164,7 +164,9 @@ Mỗi dòng gồm:
 | R31 | 31/10 | Paper build (88f54c0) | PDF | — | — | **THẮNG**: 16 trang (giới hạn 18 + tham khảo), 51/51 con số khớp | — |
 | R32 | 31/10 | Model kiểm chứng minh vòng 4 (ddfe12f) | Kiểm sau vòng 3 | — | 10/11 mệnh đề "correct"; còn 1: chứng minh Hệ quả 1 ngầm dùng tính giao hoán khi gom các thành phần bị xen kẽ trong thứ tự chuẩn | **THẮNG**: thêm phần (i) giao hoán vào Giả định 4 (phiên bản ngữ nghĩa của cạnh enabling) và bước hoán vị vào chứng minh | — |
 | R33 | 31/10 | Model kiểm chứng minh vòng 5 (101db84); PDF (6fb8605) | Kiểm sau vòng 4 | — | 10/11 "correct"; điểm còn lại chỉ là ký hiệu ở Mệnh đề 3(a) | **THẮNG**: đã sửa ký hiệu. Phần lý thuyết hội tụ (lỗi lớn qua 5 vòng: 0; điểm nhỏ: 5 → 5 → 6 → 1 → 1 về ký hiệu); PDF 16 trang | — |
-| R34 | 31/10 | Study T: giao thức (b8cd5ac) + census (đang chạy) | Ba yếu tố thắng: baseline thuyết phục, phổ rộng, kỹ năng có trên thị trường | Kỹ năng: rule autofix của Ruff (kèm nhãn safe/unsafe của chính Ruff) + 12 họ R2. Target: 60 gói thuần Python được tải nhiều nhất trên PyPI (chọn theo quy tắc). Baseline: U, Ruff-safe, test pass, B6-R (replay ví dụ trong tài liệu Ruff), LLM judge, smoke, fixed-sample, B8 | Nhắm thẳng tiêu chí chính của bài gốc (S5) và RQ4 chi phí (S15) | *chờ census* | — |
+| R34 | 31/10 | Study T census (a42c8df) | Ba yếu tố thắng | — | — | **THẮNG**: 60 gói phổ biến nhất, 235 kỹ năng (225 rule Ruff thuộc 40 nhóm, 10 họ R2), 2.578 ô (1.171 Ruff gắn safe, 1.163 unsafe) | — |
+| R35 | 31/10 | Study T-A1 (trước trial) | Sửa baseline không công bằng | Fixed-sample 99 → 199 draw (tính cho K = 2.578; ở 99 draw FS không thể admit gì) | — | **THẮNG** (công bằng trước khi chạy) | — |
+| R36 | 31/10 | Study T trials (41237317062, 0ae6608) | 1.465 ô dùng được (1.439 Ruff) / 2.578 | — | Ground truth trên mẫu input độc lập; 12 ô có hại, đều được Ruff gắn "unsafe" hoặc "mixed" | **W2 THẮNG lớn:** G giữ 1.420 ô an toàn, nhãn Ruff giữ 633 (×2,2), cả hai 0 ô có hại; G admit an toàn 727/744 ô "unsafe". **W4 THẮNG** theo định nghĩa. **W1 THUA** theo định nghĩa chặt: G 0 ô có hại, thắng U (11) và B6-R (9), nhưng nhãn Ruff cũng 0. **W3 THUA:** G 198 draw so với B8 200. **Smoke 20 ngang G** về tác hại, giữ nhiều hơn 6 ô, rẻ hơn 10 lần | Vòng C: (1) **môi trường:** 961 ô không dùng được (467 không gọi được hàm, 494 thiếu input ổn định); shard 7 bị tắt runner nên thiếu 3 gói (đang chạy lại); phân tích im lặng bỏ qua gói thiếu, đã sửa. (2) **thua thật:** trên lint fix, tác hại khi có thì rõ (≥ 5%, smoke bắt hết) và rất hiếm (12/1.465), nên lợi thế "tác hại hiếm" và "dừng sớm" của G không phát huy. Hướng tiếp: (a) LLM judge (đang chạy); (b) test suite (T-A3), vì B8 thật gồm cả suite, đắt hơn nhiều; (c) báo cáo trung thực: G là luật tốt nhất trong các luật có bảo đảm (FS 1.400, B8 1.414) |
 
 ## C. Vòng debug khi THUA (làm theo thứ tự)
 
