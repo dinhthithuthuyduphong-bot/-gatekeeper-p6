@@ -1,0 +1,777 @@
+{
+ "model": "google/gemini-4-argon",
+ "spent_usd": 0.380782,
+ "shards": 6,
+ "ratings": [
+  {
+   "id": "002bda9eb397",
+   "code": "R",
+   "reason": "The candidate returns an empty list whereas the reference returns a list of three matched expressions."
+  },
+  {
+   "id": "0094d4ba8bd8",
+   "code": "R",
+   "reason": "The reference version determines the expression is definitively non-zero (returning False), whereas the candidate version fails to decide and returns None."
+  },
+  {
+   "id": "04a070b1a598",
+   "code": "R",
+   "reason": "The candidate raises an AttributeError when accessing `node.parent` while the reference returns None without error."
+  },
+  {
+   "id": "056223c821fa",
+   "code": "R",
+   "reason": "The reference version returns a tuple, whereas the candidate version raises a ValueError on the same input."
+  },
+  {
+   "id": "0a0d1673cc83",
+   "code": "R",
+   "reason": "The candidate returns a different RGBA color tuple (1, 2, 2, 2) instead of the reference's (0, 0, 0, 0) due to wrapping the special lookup indices modulo 256."
+  },
+  {
+   "id": "0ee3e2b25163",
+   "code": "R",
+   "reason": "The reference version returns False while the candidate version returns True, which is an opposite boolean outcome."
+  },
+  {
+   "id": "0fae6c90c64c",
+   "code": "R",
+   "reason": "The candidate raises a ValueError due to constructing an invalid CSR index pointer when n_class == 1, whereas the reference succeeds and returns None."
+  },
+  {
+   "id": "188459789015",
+   "code": "R",
+   "reason": "The candidate raises an AttributeError when accessing model._meta on a model object lacking that attribute, whereas the reference succeeds and returns None."
+  },
+  {
+   "id": "1989ea5f4097",
+   "code": "R",
+   "reason": "The candidate includes the 'storage' key in the returned kwargs dictionary when the callable returns default_storage, whereas the reference omits 'storage' from kwargs."
+  },
+  {
+   "id": "1ee8bc782b8f",
+   "code": "R",
+   "reason": "The candidate incorrectly pulls the factor 3 out of the modulo expression, returning 3*Mod(j, 4) which is mathematically unequal to the reference's Mod(3*j, 4) (e.g., for j=2, 6 != 2)."
+  },
+  {
+   "id": "20a1cd1692bf",
+   "code": "R",
+   "reason": "The candidate returns a simplified Mul expression where the power is distributed into the tensor product, whereas the reference returns an unsimplified Pow expression."
+  },
+  {
+   "id": "217234f1bc93",
+   "code": "R",
+   "reason": "The candidate returns a different formatted string ('1/(1/x)') than the reference ('1/1/x'), which changes the printed output and the mathematical meaning of the string."
+  },
+  {
+   "id": "21a1fda47ba6",
+   "code": "R",
+   "reason": "The candidate output includes preserved attributes on the returned DataArray whereas the reference output has empty attributes."
+  },
+  {
+   "id": "22beb090cb3c",
+   "code": "R",
+   "reason": "The candidate returns the JSON string '[]' instead of the empty_value_display ('') returned by the reference for an empty list value."
+  },
+  {
+   "id": "24744491854d",
+   "code": "R",
+   "reason": "The candidate raises an AttributeError when accessing model._meta on a model object lacking that attribute, whereas the reference succeeds and returns None."
+  },
+  {
+   "id": "257674f9947a",
+   "code": "R",
+   "reason": "The candidate raises an AttributeError because the unconditional return of `self.__getattribute__(attr)` makes the subsequent frame lookup code unreachable, whereas the reference returns a transformed SkyCoord object."
+  },
+  {
+   "id": "262e983f259d",
+   "code": "R",
+   "reason": "The reference version returns False while the candidate version returns True, which is a direct change in the boolean return value."
+  },
+  {
+   "id": "2b02d2a9c4e1",
+   "code": "R",
+   "reason": "The candidate raises an AttributeError when accessing model._meta on a model object lacking that attribute, whereas the reference succeeds and returns None."
+  },
+  {
+   "id": "2b5ed5511e0e",
+   "code": "R",
+   "reason": "The reference version returns True while the candidate version returns False, which is a direct difference in boolean return value."
+  },
+  {
+   "id": "2c1225ce8f60",
+   "code": "R",
+   "reason": "The candidate raises an InvalidVersion exception on non-PEP 440 version strings (e.g., when using packaging.version.Version instead of loose version comparison), whereas the reference returns None without error."
+  },
+  {
+   "id": "2da792c8814d",
+   "code": "R",
+   "reason": "The candidate omits the 'storage' key from the deconstructed kwargs dictionary when storage is a non-default storage instance rather than a callable."
+  },
+  {
+   "id": "30fdd72fdfb5",
+   "code": "R",
+   "reason": "The candidate raises a TypeError on string input with a negative denominator (e.g. '29/-38') because fractions.Fraction rejects it, whereas the reference successfully returns a Rational."
+  },
+  {
+   "id": "314d2bf2a126",
+   "code": "R",
+   "reason": "The reference version successfully returns a Rational object (-112/5), whereas the candidate version raises a TypeError because fractions.Fraction does not accept strings with negative denominators like '25/-14'."
+  },
+  {
+   "id": "3206f5f8f0d6",
+   "code": "R",
+   "reason": "The candidate raises an AttributeError when accessing `node.parent` while the reference returns None without error."
+  },
+  {
+   "id": "3378d99fcf3f",
+   "code": "R",
+   "reason": "The candidate returns the simplified expression 0 (type Zero), whereas the reference returns an unsimplified symbolic expression (type Mul) that mathematically equals 0, which is an observable behavioral difference in SymPy."
+  },
+  {
+   "id": "339e52d00cd8",
+   "code": "R",
+   "reason": "The candidate returns the JSON string '[]' instead of the empty_value_display string '' when displaying an empty list on a JSONField."
+  },
+  {
+   "id": "344dde85a96d",
+   "code": "R",
+   "reason": "The candidate version makes `datetime_unit` a keyword-only argument, causing a `TypeError` when it is passed positionally, whereas the reference version accepts it positionally and returns a `DataArray`."
+  },
+  {
+   "id": "345bb3ed984f",
+   "code": "R",
+   "reason": "The candidate unwraps a 1-element tuple input when cls=Function, returning a single UndefinedFunction object instead of a 1-tuple containing it as the reference does."
+  },
+  {
+   "id": "348d71757938",
+   "code": "R",
+   "reason": "The candidate unwraps a 1-element tuple input when cls=Function, returning a single UndefinedFunction object instead of a 1-tuple containing it."
+  },
+  {
+   "id": "3a53a1f0976d",
+   "code": "R",
+   "reason": "The candidate omits the 'storage' key from the deconstructed kwargs dictionary when storage is a non-default storage instance rather than a callable."
+  },
+  {
+   "id": "3d66aa076c1b",
+   "code": "R",
+   "reason": "The candidate version includes the 'storage' key with a callable in the returned kwargs dictionary when the callable evaluates to default_storage, whereas the reference omits 'storage' from kwargs."
+  },
+  {
+   "id": "3f1f2d70ce6a",
+   "code": "R",
+   "reason": "The candidate returns NotImplemented instead of False from __eq__, which changes the return value and alters how Python delegates equality comparisons to the other operand."
+  },
+  {
+   "id": "40d4fae4f1e4",
+   "code": "R",
+   "reason": "The reference version returns a Float value whereas the candidate returns None (likely because the result of _imp_ is a standard Python float lacking an evalf method, raising an AttributeError that is caught)."
+  },
+  {
+   "id": "41bfa488176f",
+   "code": "R",
+   "reason": "The reference version returns False normally, whereas the candidate version raises a DatabaseError exception."
+  },
+  {
+   "id": "42d14caeb9f4",
+   "code": "R",
+   "reason": "The candidate output includes preserved attributes (`attrs`) on the returned DataArray, whereas the reference output has empty attributes."
+  },
+  {
+   "id": "43ded979fec7",
+   "code": "R",
+   "reason": "The candidate returns a two-element list containing both '[' and ']' nodes for an empty list annotation, whereas the reference pops '[' and returns only ']'."
+  },
+  {
+   "id": "44212104acbc",
+   "code": "R",
+   "reason": "The reference version returns True while the candidate version returns False, which is a direct difference in boolean return value."
+  },
+  {
+   "id": "4452ddff4a87",
+   "code": "R",
+   "reason": "The candidate raises an AttributeError when accessing `node.parent` while the reference returns None without error."
+  },
+  {
+   "id": "45cf1c334d91",
+   "code": "R",
+   "reason": "The candidate raises an AttributeError when comparing fields without a 'model' attribute, whereas the reference returns True."
+  },
+  {
+   "id": "4626ac454a68",
+   "code": "R",
+   "reason": "The candidate raises an AttributeError when accessing `node.parent` while the reference returns None without error."
+  },
+  {
+   "id": "4702ff30ad96",
+   "code": "R",
+   "reason": "The candidate version returns a different string representation with added parentheses around the denominator ('1*a/(x**3)' vs '1*a/x**3'), which is a meaningful behavioral difference for a string printer."
+  },
+  {
+   "id": "47625ddfdc96",
+   "code": "R",
+   "reason": "The candidate unwraps a 1-element tuple into a flat tuple `(x, y, z)` instead of returning the nested tuple `((x, y, z),)` produced by the reference."
+  },
+  {
+   "id": "4a9bb27a9447",
+   "code": "R",
+   "reason": "The candidate returns the symbolic expression 2*Mod(p, 4) (of type Mul) instead of evaluating to the integer 2."
+  },
+  {
+   "id": "4ba09639a004",
+   "code": "R",
+   "reason": "The candidate takes modulo 256 of the special indices (_i_over, _i_under, _i_bad) when bytes=True, causing it to index into the wrong LUT entries and return different RGBA byte values."
+  },
+  {
+   "id": "4bb1a13d4b66",
+   "code": "R",
+   "reason": "The candidate version raises an InvalidVersion exception on non-PEP 440 version strings, whereas the reference version succeeds and returns None."
+  },
+  {
+   "id": "4be2f232731b",
+   "code": "R",
+   "reason": "The reference version returns False while the candidate version returns True, which is a direct difference in boolean return value."
+  },
+  {
+   "id": "4c21aa86a7d5",
+   "code": "R",
+   "reason": "The candidate version makes `datetime_unit` a keyword-only argument, causing a `TypeError` when it is passed positionally, whereas the reference version accepts it positionally and returns a `DataArray`."
+  },
+  {
+   "id": "4f9b9cdfd7bb",
+   "code": "R",
+   "reason": "The candidate returns a two-element list containing both '[' and ']' nodes for an empty list annotation, whereas the reference pops '[' and returns only ']'."
+  },
+  {
+   "id": "5268d3c41353",
+   "code": "R",
+   "reason": "The reference version determines the expression is definitively non-zero (returning False), whereas the candidate version fails to decide and returns None."
+  },
+  {
+   "id": "54a181753f27",
+   "code": "R",
+   "reason": "The reference version returns False while the candidate version returns True, which is a direct difference in boolean return value."
+  },
+  {
+   "id": "569769e50f48",
+   "code": "R",
+   "reason": "The candidate version makes `datetime_unit` a keyword-only argument, causing a `TypeError` when called with two positional arguments where the reference version succeeds and returns a `DataArray`."
+  },
+  {
+   "id": "59f6a77c05c8",
+   "code": "R",
+   "reason": "The candidate raises an AttributeError because the unconditional return of `self.__getattribute__(attr)` makes the subsequent frame transformation lookup unreachable, whereas the reference successfully returns the transformed SkyCoord."
+  },
+  {
+   "id": "5abe72465637",
+   "code": "R",
+   "reason": "The candidate returns a simplified SymPy Zero object whereas the reference returns an unexpanded Add expression, which behave differently in structural equality checks, type checks, and zero-testing in SymPy."
+  },
+  {
+   "id": "5cdc1a779fd1",
+   "code": "R",
+   "reason": "The candidate returns the JSON-encoded empty string '\"\"' instead of the empty_value_display string '' (likely when value is None or an empty value handled before JSON serialization in the reference)."
+  },
+  {
+   "id": "5e294c6a3d75",
+   "code": "R",
+   "reason": "The candidate simplifies the multiplication of IdentityOperator with a Dagger of a non-operator symbol (returning `Dagger(X)`), whereas the reference preserves the unsimplified `Mul` (`Dagger(X)*I`)."
+  },
+  {
+   "id": "6174f4489d55",
+   "code": "R",
+   "reason": "The candidate raises a ValueError for a non-dimensionless argument to `tan`, whereas the reference returns a tuple without raising an exception."
+  },
+  {
+   "id": "64163d75914a",
+   "code": "R",
+   "reason": "The candidate returns True (indicating an update occurred) whereas the reference returns False (indicating an insert occurred)."
+  },
+  {
+   "id": "66c21eebed94",
+   "code": "R",
+   "reason": "The candidate returns a mathematically inequivalent symbolic expression (`10*Mod(p, 12)` vs `2*Mod(5*p, 6)`), which produces different values for `p=2` (20 vs 8)."
+  },
+  {
+   "id": "6824d62a6d93",
+   "code": "R",
+   "reason": "The candidate version raises an InvalidVersion exception on non-PEP 440 version strings, whereas the reference version succeeds and returns None."
+  },
+  {
+   "id": "68c0f6a9e4ed",
+   "code": "R",
+   "reason": "The candidate returns the JSON-formatted string 'false' instead of the Python string representation 'False' returned by the reference."
+  },
+  {
+   "id": "696fa8ffa257",
+   "code": "R",
+   "reason": "The candidate returns NotImplemented instead of False from __eq__, which changes the return value and alters how Python delegates equality comparisons to the other operand."
+  },
+  {
+   "id": "6a896a424a7f",
+   "code": "R",
+   "reason": "The candidate raises a ValueError due to constructing an invalid index pointer array when `n_class == 1`, whereas the reference returns normally."
+  },
+  {
+   "id": "6aaa5d33108e",
+   "code": "R",
+   "reason": "The candidate omits the 'storage' key from the deconstructed kwargs dictionary when the storage is a non-callable non-default storage instance, whereas the reference includes it."
+  },
+  {
+   "id": "6c862291f7e0",
+   "code": "R",
+   "reason": "The candidate unwraps a 1-element tuple input when `cls=Function`, returning a flat 3-tuple `(a, b, c)` instead of the nested 1-tuple `((a, b, c),)` returned by the reference."
+  },
+  {
+   "id": "6d72eec6f98c",
+   "code": "R",
+   "reason": "The candidate returns a different RGBA color tuple (1, 2, 2, 2) instead of the reference's (0, 0, 0, 0) due to wrapping the special lookup indices modulo 256."
+  },
+  {
+   "id": "718749c2e79c",
+   "code": "R",
+   "reason": "The candidate version makes `datetime_unit` a keyword-only argument, causing a `TypeError` when it is passed positionally, whereas the reference version accepts it positionally and returns a `DataArray`."
+  },
+  {
+   "id": "723f3ac62311",
+   "code": "R",
+   "reason": "The reference returns a Float value whereas the candidate returns None (likely because _imp_ returned a standard Python float or mpf without an evalf method, raising an AttributeError that was caught)."
+  },
+  {
+   "id": "73a5c561713c",
+   "code": "R",
+   "reason": "The candidate returns None instead of the expected Float value because calling .evalf() on a non-SymPy numeric result (like a Python float) raises an AttributeError that gets caught and swallowed."
+  },
+  {
+   "id": "74be6caee38f",
+   "code": "R",
+   "reason": "The candidate omits the 'storage' key from the deconstructed kwargs dictionary when storage is a non-callable non-default storage instance."
+  },
+  {
+   "id": "76c4dcc1578c",
+   "code": "R",
+   "reason": "The candidate applies column formatting to split multicolumn values (producing '5.65'), whereas the reference outputs the unformatted float ('5.649184865561083') in the generated HTML string."
+  },
+  {
+   "id": "76c52b75b4be",
+   "code": "R",
+   "reason": "The candidate returns the simplified SymPy Zero object `0`, whereas the reference returns an unexpanded `Add` expression that is structurally distinct and does not compare equal (`==`) in SymPy."
+  },
+  {
+   "id": "795b19eca7af",
+   "code": "R",
+   "reason": "The candidate unwraps a 1-element tuple and returns a single UndefinedFunction object instead of a 1-element tuple containing the function."
+  },
+  {
+   "id": "7c6c417f7de7",
+   "code": "R",
+   "reason": "The candidate version includes the 'storage' key with a callable in the returned kwargs dictionary when the callable evaluates to default_storage, whereas the reference omits 'storage' from kwargs."
+  },
+  {
+   "id": "7f5c23b7476d",
+   "code": "R",
+   "reason": "The reference version returns False while the candidate version returns True, which is an opposite boolean outcome."
+  },
+  {
+   "id": "7ff18c89dd0d",
+   "code": "R",
+   "reason": "The candidate raises an AttributeError when accessing model._meta on a model object lacking that attribute, whereas the reference succeeds and returns None."
+  },
+  {
+   "id": "825d98898eba",
+   "code": "R",
+   "reason": "The candidate incorrectly pulls the factor 7 out of the modulo expression, returning 7*Mod(n, 12) instead of the mathematically distinct Mod(7*n, 12)."
+  },
+  {
+   "id": "8569fb07d219",
+   "code": "R",
+   "reason": "The candidate raises an AttributeError when comparing fields without a 'model' attribute, whereas the reference returns True."
+  },
+  {
+   "id": "89b654df43aa",
+   "code": "R",
+   "reason": "The candidate formats the table numbers differently (e.g., '5.26e+00' instead of '5.2591889842226704'), producing a meaningfully different HTML string output."
+  },
+  {
+   "id": "8d39227d6cc6",
+   "code": "R",
+   "reason": "The candidate returns a mathematically and structurally different symbolic expression ('4*Mod(p, 6)') than the reference ('2*Mod(2*p, 3)')."
+  },
+  {
+   "id": "8e35241e8756",
+   "code": "R",
+   "reason": "The candidate returns a two-element list containing both '[' and ']' nodes for an empty list annotation, whereas the reference pops '[' and returns only ']'."
+  },
+  {
+   "id": "8effb3c8f07c",
+   "code": "R",
+   "reason": "The candidate returns an array with completely different uint8 values (e.g., `[1, 2, 2, 2]` instead of `[0, 0, 0, 0]`) due to wrapping the special indices modulo 256."
+  },
+  {
+   "id": "9225f91644df",
+   "code": "R",
+   "reason": "The reference version returns False while the candidate version returns True, which is a direct difference in boolean return value."
+  },
+  {
+   "id": "931f547636e2",
+   "code": "R",
+   "reason": "The candidate raises a ValueError when constructing the sparse matrix for n_class == 1, whereas the reference completes normally and returns None."
+  },
+  {
+   "id": "93aeb4b68ac4",
+   "code": "R",
+   "reason": "The candidate returns a Mul expression where the power is distributed into the tensor product and scalar factor, whereas the reference returns an unsimplified Pow expression."
+  },
+  {
+   "id": "93b600163050",
+   "code": "R",
+   "reason": "The candidate version includes the 'storage' key with a callable in the returned kwargs dictionary when the callable evaluates to default_storage, whereas the reference omits 'storage' in that case."
+  },
+  {
+   "id": "954cdacecbe2",
+   "code": "R",
+   "reason": "The reference version determines the expression is definitively non-zero (returning False), whereas the candidate version fails to decide and returns None."
+  },
+  {
+   "id": "95915f4ddb1a",
+   "code": "R",
+   "reason": "The candidate returns an empty list `[]` whereas the reference returns a list of three matched components `[2 + 2*I, -1, 10 + 10*I]`."
+  },
+  {
+   "id": "9933b9218f2e",
+   "code": "R",
+   "reason": "The candidate returns a two-element list containing both '[' and ']' punctuation nodes for an empty list annotation, whereas the reference pops the '[' node and returns a one-element list containing only ']'."
+  },
+  {
+   "id": "998de8b19235",
+   "code": "R",
+   "reason": "The reference returns a valid Rational object while the candidate raises a TypeError because fractions.Fraction does not accept negative signs in the denominator of a string representation."
+  },
+  {
+   "id": "9aeb0306beb7",
+   "code": "R",
+   "reason": "The candidate returns True (indicating an update occurred) whereas the reference returns False (indicating an insert occurred)."
+  },
+  {
+   "id": "9c5d5b11dd39",
+   "code": "R",
+   "reason": "The candidate version raises an AttributeError on an object lacking a `_meta` attribute where the reference version succeeds and returns None."
+  },
+  {
+   "id": "9cdf6bf91bcb",
+   "code": "R",
+   "reason": "The candidate returns NotImplemented instead of False from __eq__, which changes the return value and alters how Python delegates equality comparisons to the other operand."
+  },
+  {
+   "id": "9d099192c9f7",
+   "code": "R",
+   "reason": "The candidate raises a ValueError for a non-dimensionless argument to exp, whereas the reference returns a tuple."
+  },
+  {
+   "id": "9d9bddbf54ea",
+   "code": "R",
+   "reason": "The candidate applies the column format to split multicolumn values (producing '4.1'), whereas the reference outputs the unformatted floating-point value ('4.064925839...')."
+  },
+  {
+   "id": "9f363be138a7",
+   "code": "R",
+   "reason": "The reference version returns True while the candidate version returns False, which is a direct difference in boolean return value."
+  },
+  {
+   "id": "9f3e90b3114c",
+   "code": "R",
+   "reason": "The candidate returns True (indicating an update occurred) whereas the reference returns False (indicating an insert occurred)."
+  },
+  {
+   "id": "9f4a3c02e9ca",
+   "code": "R",
+   "reason": "The candidate simplifies the multiplication of IdentityOperator with any Dagger/adjoint object (even non-Operator ones like a Bra) to the Dagger object itself, whereas the reference returns an unsimplified Mul expression."
+  },
+  {
+   "id": "a00517dc4816",
+   "code": "R",
+   "reason": "The candidate unparses an empty tuple subscript as 'a[]' (invalid Python syntax) instead of the reference's 'a[()]'."
+  },
+  {
+   "id": "a0235f19b131",
+   "code": "R",
+   "reason": "The function is a string printer whose exact output string is its primary return value, and the candidate adds redundant parentheses ('1/(a**2)' vs '1/a**2')."
+  },
+  {
+   "id": "a3de2593cac2",
+   "code": "R",
+   "reason": "The reference returns a Pow expression where the tensor product power is not distributed, whereas the candidate returns a Mul expression with the power improperly distributed inside the tensor product."
+  },
+  {
+   "id": "a7e7589a6a00",
+   "code": "R",
+   "reason": "The candidate raises an AttributeError when accessing `node.parent` while the reference returns None without error."
+  },
+  {
+   "id": "a81a52c6d7dc",
+   "code": "R",
+   "reason": "The candidate raises a ValueError due to constructing an invalid index pointer array when `n_class == 1`, whereas the reference returns normally."
+  },
+  {
+   "id": "a919914434ae",
+   "code": "R",
+   "reason": "The candidate returns an empty list `[]` whereas the reference returns a non-empty list `[2 + 3*I, 1, 10 + 15*I]`."
+  },
+  {
+   "id": "aabf993d9ef3",
+   "code": "R",
+   "reason": "The candidate returns an empty list whereas the reference returns a non-empty list of matched terms."
+  },
+  {
+   "id": "af2870667c53",
+   "code": "R",
+   "reason": "The candidate raises a TypeError when parsing a string fraction with a negative denominator via fractions.Fraction, whereas the reference successfully returns a Rational object."
+  },
+  {
+   "id": "af2f8f06578b",
+   "code": "R",
+   "reason": "The reference returns a Float value of 1.5, whereas the candidate catches an AttributeError when calling `.evalf()` on a Python float and returns None instead."
+  },
+  {
+   "id": "b165a75582d8",
+   "code": "R",
+   "reason": "The candidate raises a ValueError due to constructing an invalid index pointer array when n_class == 1, whereas the reference completes normally and returns None."
+  },
+  {
+   "id": "b2af876cab66",
+   "code": "R",
+   "reason": "The candidate applies a custom format ('fmt_') to the table cell value in the generated HTML string where the reference does not."
+  },
+  {
+   "id": "b2b7c9da156c",
+   "code": "R",
+   "reason": "The candidate unparses an empty tuple subscript as syntactically invalid Python `'a[]'` instead of `'a[()]'`."
+  },
+  {
+   "id": "ba62cfb8e7a2",
+   "code": "R",
+   "reason": "The candidate version returns a different string representation ('1*b/(a**2)' with extra parentheses around the denominator instead of '1*b/a**2'), which is a meaningful difference in the output of a string printer."
+  },
+  {
+   "id": "bc358fbbc42e",
+   "code": "R",
+   "reason": "The candidate returns a simplified SymPy Zero object whereas the reference returns an unexpanded Add expression, which behave differently in structural checks and attributes like is_zero."
+  },
+  {
+   "id": "bd84052fa963",
+   "code": "R",
+   "reason": "The candidate raises a ValueError for a non-dimensionless argument to cos, whereas the reference returns a tuple containing the evaluated factor and dimension."
+  },
+  {
+   "id": "bdc085740c5d",
+   "code": "R",
+   "reason": "The candidate raises an InvalidVersion exception on non-PEP 440 version strings (e.g., when using packaging.version.Version instead of loose version comparison), whereas the reference returns None without error."
+  },
+  {
+   "id": "bfc15bdfc567",
+   "code": "R",
+   "reason": "The reference version returns True while the candidate version returns False, representing a directly opposite boolean result."
+  },
+  {
+   "id": "c0e106507880",
+   "code": "R",
+   "reason": "The reference version returns False while the candidate version returns True, which is a direct difference in boolean return value."
+  },
+  {
+   "id": "c18614933d31",
+   "code": "R",
+   "reason": "The candidate returns NotImplemented instead of False from __eq__, which changes the equality comparison behaviour (e.g. allowing fallback to the other operand's __eq__ or truthiness if called directly)."
+  },
+  {
+   "id": "c2be9590239b",
+   "code": "R",
+   "reason": "The candidate unparses an empty tuple subscript as 'a[]' (invalid Python syntax) instead of the reference's 'a[()]'."
+  },
+  {
+   "id": "c442b975e0be",
+   "code": "R",
+   "reason": "The candidate raises an AttributeError because the unconditional return of `self.__getattribute__(attr)` makes the subsequent frame lookup code unreachable, whereas the reference returns a transformed SkyCoord object."
+  },
+  {
+   "id": "c49bfe3ae265",
+   "code": "R",
+   "reason": "The candidate raises a TypeError on string input with a negative denominator (e.g. '46/-50') because fractions.Fraction rejects it, whereas the reference version successfully parses it and returns a Rational."
+  },
+  {
+   "id": "c5eee3036827",
+   "code": "R",
+   "reason": "The reference returns a numeric Float value whereas the candidate catches an AttributeError (likely because `self._imp_` returned a native Python float without an `.evalf` method) and returns None."
+  },
+  {
+   "id": "c897d022ad01",
+   "code": "R",
+   "reason": "The candidate version returns a different string representation with added parentheses around the denominator ('1*d/(a**(-2))' instead of '1*d/a**(-2)'), which is a meaningful difference in the output of a string printer."
+  },
+  {
+   "id": "cdf8a6330d3f",
+   "code": "R",
+   "reason": "The candidate unparses an empty tuple subscript as syntactically invalid Python `'a[]'` instead of `'a[()]'`."
+  },
+  {
+   "id": "ce2456bf9fcf",
+   "code": "R",
+   "reason": "The candidate version makes `datetime_unit` a keyword-only argument, causing a `TypeError` when it is passed positionally, whereas the reference version accepts it positionally and returns a `DataArray`."
+  },
+  {
+   "id": "ce74791ff673",
+   "code": "R",
+   "reason": "The reference version returns a tuple of RGBA values, while the candidate version raises a TypeError."
+  },
+  {
+   "id": "cf90d72138cd",
+   "code": "R",
+   "reason": "The candidate raises an AttributeError because the unconditional return of `self.__getattribute__(attr)` makes the frame transformation lookup unreachable, whereas the reference successfully returns the transformed SkyCoord."
+  },
+  {
+   "id": "d2f7f0437ffa",
+   "code": "R",
+   "reason": "The candidate simplifies the multiplication of IdentityOperator with a Dagger of a non-operator to just the Dagger expression, whereas the reference returns an unsimplified Mul expression."
+  },
+  {
+   "id": "d541553cfabb",
+   "code": "R",
+   "reason": "The candidate raises an AttributeError when comparing fields without a 'model' attribute, whereas the reference returns True."
+  },
+  {
+   "id": "d618a7a87f0b",
+   "code": "R",
+   "reason": "The candidate returns a Mul expression where the power is distributed into the tensor product (`x**n*1x(A**n)`), whereas the reference returns an unexpanded Pow expression (`(x*1xA)**n`)."
+  },
+  {
+   "id": "d628409536ff",
+   "code": "R",
+   "reason": "The candidate raises an AttributeError when comparing fields without a 'model' attribute, whereas the reference returns True."
+  },
+  {
+   "id": "d82521c108e4",
+   "code": "R",
+   "reason": "The candidate unparses an empty tuple subscript as syntactically invalid Python `'a[]'` instead of `'a[()]'`."
+  },
+  {
+   "id": "de3ef0add28d",
+   "code": "R",
+   "reason": "The candidate returns NotImplemented instead of False from __eq__, which changes the equality comparison behaviour (e.g. allowing fallback to the other operand's __eq__ or having a truthy return value when called directly)."
+  },
+  {
+   "id": "def0fd26b97d",
+   "code": "R",
+   "reason": "The candidate omits the 'storage' key from the deconstructed kwargs dictionary when a non-callable non-default storage instance is used, whereas the reference includes it."
+  },
+  {
+   "id": "df374613b659",
+   "code": "R",
+   "reason": "The candidate output includes preserved attributes (`attrs`) on the returned DataArray, whereas the reference output has empty attributes."
+  },
+  {
+   "id": "df67a6429f8d",
+   "code": "R",
+   "reason": "The candidate simplifies the multiplication of IdentityOperator with a Dagger of a non-operator to just the Dagger expression, whereas the reference returns an unsimplified Mul expression."
+  },
+  {
+   "id": "e1057210e7c4",
+   "code": "R",
+   "reason": "The reference version returns False while the candidate version returns True, which is an opposite boolean outcome."
+  },
+  {
+   "id": "e1fc183e34d5",
+   "code": "R",
+   "reason": "The candidate returns a Mul expression with powers distributed into the tensor product instead of the unsimplified Pow expression returned by the reference."
+  },
+  {
+   "id": "e2f9ea0fafbd",
+   "code": "R",
+   "reason": "The candidate raises a ValueError for a non-dimensionless argument to sin whereas the reference version returns a tuple with the factor and dimension."
+  },
+  {
+   "id": "e39d28794e72",
+   "code": "R",
+   "reason": "The candidate raises an AttributeError because calling __getattribute__ unconditionally makes the subsequent frame lookup code unreachable, whereas the reference returns a transformed SkyCoord object."
+  },
+  {
+   "id": "e3f3114e5d43",
+   "code": "R",
+   "reason": "The candidate version includes the 'storage' key with a callable in the deconstructed kwargs dictionary, whereas the reference version omits 'storage' entirely."
+  },
+  {
+   "id": "e421286ecba6",
+   "code": "R",
+   "reason": "The candidate version formats the multi-column float values (e.g., '9.2' instead of '9.20920338643288'), producing a meaningfully different HTML string output compared to the reference."
+  },
+  {
+   "id": "e6bea5c30c32",
+   "code": "R",
+   "reason": "The candidate returns an empty list `[]` indicating no match, whereas the reference returns a 3-element list of symbolic components `[2 + 3*I, -1, 15 + 15*I]`."
+  },
+  {
+   "id": "e7155335ffb0",
+   "code": "R",
+   "reason": "The candidate returns a two-element list containing both '[' and ']' nodes for an empty list annotation, whereas the reference pops '[' and returns only ']'."
+  },
+  {
+   "id": "e7c322a13674",
+   "code": "R",
+   "reason": "The candidate raises an InvalidVersion exception on non-PEP 440 version strings (e.g., using packaging.version.Version instead of pkg_resources.parse_version), whereas the reference version returns None without error."
+  },
+  {
+   "id": "eadd7b9de2fd",
+   "code": "R",
+   "reason": "The candidate returns the JSON-encoded empty string '\"\"' instead of the empty_value_display string '' (likely when value is None or an empty value handled before JSON serialization in the reference)."
+  },
+  {
+   "id": "ed001e998f60",
+   "code": "R",
+   "reason": "The candidate returns a simplified SymPy Zero object whereas the reference returns an unexpanded Add expression, which behave differently in structural checks and attributes like is_zero."
+  },
+  {
+   "id": "ee2f66469dc8",
+   "code": "R",
+   "reason": "The candidate returns True (indicating an update occurred) whereas the reference returns False (indicating an insert occurred)."
+  },
+  {
+   "id": "ee45e42d9daf",
+   "code": "R",
+   "reason": "The candidate simplifies the multiplication of IdentityOperator with any Dagger/adjoint object (even non-Operator ones like a Bra) to the Dagger object itself, whereas the reference returns an unsimplified Mul expression."
+  },
+  {
+   "id": "efc1d35a0113",
+   "code": "R",
+   "reason": "The candidate raises an AttributeError when comparing fields without a 'model' attribute, whereas the reference returns True."
+  },
+  {
+   "id": "f0d7c2cae9d4",
+   "code": "R",
+   "reason": "The reference version determines the expression is definitively non-zero (returning False), whereas the candidate version fails to decide and returns None."
+  },
+  {
+   "id": "f0e7dd638f2c",
+   "code": "R",
+   "reason": "The reference version returns False while the candidate version returns True, which is an opposite boolean outcome."
+  },
+  {
+   "id": "fb2569e5b56f",
+   "code": "R",
+   "reason": "The candidate output includes dataset attributes (`ds_attr: x_attr`) that are missing from the reference output."
+  },
+  {
+   "id": "fb27a8274bf5",
+   "code": "R",
+   "reason": "The candidate returns a DataArray with preserved attributes (`attr_38: 3.14`), whereas the reference returns a DataArray with no attributes."
+  },
+  {
+   "id": "fc9d85b83058",
+   "code": "R",
+   "reason": "The reference version returns False (indicating the expression is definitely non-zero), whereas the candidate version returns None (indicating it is unknown whether the expression is zero)."
+  },
+  {
+   "id": "fe1895b55d96",
+   "code": "R",
+   "reason": "The reference version returns False while the candidate version returns True, which is an opposite boolean outcome."
+  }
+ ]
+}
