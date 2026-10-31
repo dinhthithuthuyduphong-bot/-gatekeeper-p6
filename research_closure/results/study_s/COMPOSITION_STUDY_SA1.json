@@ -1,0 +1,961 @@
+{
+ "total": {
+  "units": 23,
+  "usable": 12,
+  "unusable_reasons": [
+   "did not run: CRASHED",
+   "did not run: UNCALLABLE import failed: ModuleNotFoundError / ModuleNotFoundError",
+   "did not run: UNCALLABLE no signature"
+  ],
+  "units_any_behaviour_change": 2,
+  "units_emergent": 0,
+  "units_masking": 1,
+  "units_order_dependent": 0,
+  "units_non_additive": 1,
+  "cells": 48,
+  "cells_admitted": 45,
+  "units_singles_admitted_composite_not": 0,
+  "units_composite_admitted_single_not": 0
+ },
+ "units": [
+  {
+   "kind": "shared",
+   "file": "cerberus/schema.py",
+   "qualname": "DefinitionSchema.__init__",
+   "a": "bare_except",
+   "b": "mutable_default",
+   "usable": true,
+   "stable": 200,
+   "d": {
+    "A": 0.0,
+    "B": 0.0,
+    "AB": 0.0,
+    "BA": 0.0
+   },
+   "counts": {
+    "A": 0,
+    "B": 0,
+    "AB": 0,
+    "BA": 0
+   },
+   "emergent": 0,
+   "masking": 0,
+   "order_dependent": 0,
+   "non_additive": 0,
+   "examples": [],
+   "target": "D2_cerberus",
+   "cells": {
+    "A": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "B": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "AB": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "BA": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    }
+   },
+   "singles_admitted_composite_not": false,
+   "composite_admitted_single_not": false
+  },
+  {
+   "kind": "shared",
+   "file": "pycubrid/_cursor_common.py",
+   "qualname": "format_parameter",
+   "a": "negative_type_guard",
+   "b": "type_eq_isinstance",
+   "usable": false,
+   "why": "did not run: CRASHED",
+   "target": "D5_pycubrid"
+  },
+  {
+   "kind": "enabling",
+   "file": "pycubrid/protocol.py",
+   "qualname": "_PreparedLob.__post_init__",
+   "a": "negative_type_guard",
+   "b": "type_eq_isinstance",
+   "usable": true,
+   "stable": 200,
+   "d": {
+    "A": 0.0,
+    "B": 0.0,
+    "AB": 0.0,
+    "BA": 0.0
+   },
+   "counts": {
+    "A": 0,
+    "B": 0,
+    "AB": 0,
+    "BA": 0
+   },
+   "emergent": 0,
+   "masking": 0,
+   "order_dependent": 0,
+   "non_additive": 0,
+   "examples": [],
+   "target": "D5_pycubrid",
+   "cells": {
+    "A": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "B": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "AB": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "BA": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    }
+   },
+   "singles_admitted_composite_not": false,
+   "composite_admitted_single_not": false
+  },
+  {
+   "kind": "shared",
+   "file": "trino/client.py",
+   "qualname": "TrinoRequest.http_headers",
+   "a": "dict_keys_membership",
+   "b": "len_zero_falsy",
+   "usable": false,
+   "why": "did not run: UNCALLABLE no signature",
+   "target": "K1_trino"
+  },
+  {
+   "kind": "shared",
+   "file": "pydal/backends/mongo.py",
+   "qualname": "Mongo.__select",
+   "a": "bare_except",
+   "b": "mutable_default",
+   "usable": true,
+   "stable": 200,
+   "d": {
+    "A": 0.0,
+    "B": 0.0,
+    "AB": 0.0,
+    "BA": 0.0
+   },
+   "counts": {
+    "A": 0,
+    "B": 0,
+    "AB": 0,
+    "BA": 0
+   },
+   "emergent": 0,
+   "masking": 0,
+   "order_dependent": 0,
+   "non_additive": 0,
+   "examples": [],
+   "target": "G1_pydal",
+   "cells": {
+    "A": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "B": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "AB": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "BA": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    }
+   },
+   "singles_admitted_composite_not": false,
+   "composite_admitted_single_not": false
+  },
+  {
+   "kind": "shared",
+   "file": "pydal/backends/mongo.py",
+   "qualname": "MongoDialect._cmp_ops_aggregation_pipeline",
+   "a": "bare_except",
+   "b": "mutable_default",
+   "usable": true,
+   "stable": 200,
+   "d": {
+    "A": 0.0,
+    "B": 0.0,
+    "AB": 0.0,
+    "BA": 0.0
+   },
+   "counts": {
+    "A": 0,
+    "B": 0,
+    "AB": 0,
+    "BA": 0
+   },
+   "emergent": 0,
+   "masking": 0,
+   "order_dependent": 0,
+   "non_additive": 0,
+   "examples": [],
+   "target": "G1_pydal",
+   "cells": {
+    "A": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "B": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "AB": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "BA": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    }
+   },
+   "singles_admitted_composite_not": false,
+   "composite_admitted_single_not": false
+  },
+  {
+   "kind": "shared",
+   "file": "pydal/backends/mongo.py",
+   "qualname": "MongoDialect.add",
+   "a": "bare_except",
+   "b": "mutable_default",
+   "usable": true,
+   "stable": 200,
+   "d": {
+    "A": 0.0,
+    "B": 0.0,
+    "AB": 0.0,
+    "BA": 0.0
+   },
+   "counts": {
+    "A": 0,
+    "B": 0,
+    "AB": 0,
+    "BA": 0
+   },
+   "emergent": 0,
+   "masking": 0,
+   "order_dependent": 0,
+   "non_additive": 0,
+   "examples": [],
+   "target": "G1_pydal",
+   "cells": {
+    "A": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "B": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "AB": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "BA": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    }
+   },
+   "singles_admitted_composite_not": false,
+   "composite_admitted_single_not": false
+  },
+  {
+   "kind": "shared",
+   "file": "pydal/backends/mongo.py",
+   "qualname": "MongoDialect.contains",
+   "a": "mutable_default",
+   "b": "negative_type_guard",
+   "usable": true,
+   "stable": 200,
+   "d": {
+    "A": 0.0,
+    "B": 0.0,
+    "AB": 0.0,
+    "BA": 0.0
+   },
+   "counts": {
+    "A": 0,
+    "B": 0,
+    "AB": 0,
+    "BA": 0
+   },
+   "emergent": 0,
+   "masking": 0,
+   "order_dependent": 0,
+   "non_additive": 0,
+   "examples": [],
+   "target": "G1_pydal",
+   "cells": {
+    "A": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "B": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "AB": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "BA": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    }
+   },
+   "singles_admitted_composite_not": false,
+   "composite_admitted_single_not": false
+  },
+  {
+   "kind": "shared",
+   "file": "pydal/backends/postgres.py",
+   "qualname": "PostgresDialect.st_transform",
+   "a": "mutable_default",
+   "b": "negative_type_guard",
+   "usable": true,
+   "stable": 200,
+   "d": {
+    "A": 0.0,
+    "B": 0.0,
+    "AB": 0.0,
+    "BA": 0.0
+   },
+   "counts": {
+    "A": 0,
+    "B": 0,
+    "AB": 0,
+    "BA": 0
+   },
+   "emergent": 0,
+   "masking": 0,
+   "order_dependent": 0,
+   "non_additive": 0,
+   "examples": [],
+   "target": "G1_pydal",
+   "cells": {
+    "A": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "B": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "AB": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "BA": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    }
+   },
+   "singles_admitted_composite_not": false,
+   "composite_admitted_single_not": false
+  },
+  {
+   "kind": "shared",
+   "file": "pydal/backends/snowflake.py",
+   "qualname": "SnowflakeDialect.st_transform",
+   "a": "mutable_default",
+   "b": "negative_type_guard",
+   "usable": true,
+   "stable": 200,
+   "d": {
+    "A": 0.0,
+    "B": 0.0,
+    "AB": 0.0,
+    "BA": 0.0
+   },
+   "counts": {
+    "A": 0,
+    "B": 0,
+    "AB": 0,
+    "BA": 0
+   },
+   "emergent": 0,
+   "masking": 0,
+   "order_dependent": 0,
+   "non_additive": 0,
+   "examples": [],
+   "target": "G1_pydal",
+   "cells": {
+    "A": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "B": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "AB": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "BA": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    }
+   },
+   "singles_admitted_composite_not": false,
+   "composite_admitted_single_not": false
+  },
+  {
+   "kind": "shared",
+   "file": "pydal/contrib/imap_adapter.py",
+   "qualname": "IMAPAdapter.select",
+   "a": "dict_keys_membership",
+   "b": "len_zero_falsy",
+   "usable": true,
+   "stable": 200,
+   "d": {
+    "A": 0.0,
+    "B": 0.0,
+    "AB": 0.0,
+    "BA": 0.0
+   },
+   "counts": {
+    "A": 0,
+    "B": 0,
+    "AB": 0,
+    "BA": 0
+   },
+   "emergent": 0,
+   "masking": 0,
+   "order_dependent": 0,
+   "non_additive": 0,
+   "examples": [],
+   "target": "G1_pydal",
+   "cells": {
+    "A": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "B": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "AB": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "BA": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    }
+   },
+   "singles_admitted_composite_not": false,
+   "composite_admitted_single_not": false
+  },
+  {
+   "kind": "shared",
+   "file": "pydal/querybuilder.py",
+   "qualname": "QueryBuilder.parse",
+   "a": "eq_bool_identity",
+   "b": "none_identity",
+   "usable": true,
+   "stable": 200,
+   "d": {
+    "A": 0.0,
+    "B": 0.005,
+    "AB": 0.0,
+    "BA": 0.0
+   },
+   "counts": {
+    "A": 0,
+    "B": 1,
+    "AB": 0,
+    "BA": 0
+   },
+   "emergent": 0,
+   "masking": 1,
+   "order_dependent": 0,
+   "non_additive": 1,
+   "examples": [],
+   "target": "G1_pydal",
+   "cells": {
+    "A": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "B": {
+     "e": 999.5294989813704,
+     "alarm": false,
+     "admitted": true
+    },
+    "AB": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "BA": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    }
+   },
+   "singles_admitted_composite_not": false,
+   "composite_admitted_single_not": false
+  },
+  {
+   "kind": "shared",
+   "file": "pydal/validators.py",
+   "qualname": "IS_STRONG.validate",
+   "a": "len_zero_falsy",
+   "b": "negative_type_guard",
+   "usable": true,
+   "stable": 200,
+   "d": {
+    "A": 0.0,
+    "B": 0.115,
+    "AB": 0.115,
+    "BA": 0.115
+   },
+   "counts": {
+    "A": 0,
+    "B": 23,
+    "AB": 23,
+    "BA": 23
+   },
+   "emergent": 0,
+   "masking": 0,
+   "order_dependent": 0,
+   "non_additive": 0,
+   "examples": [
+    {
+     "input": 1,
+     "O": [
+      [
+       "exc",
+       "ValidationError",
+       "Password too simple (0.0/True), Must include at least True lowercase"
+      ],
+      [
+       "ok",
+       "dict",
+       "{'entropy': True, 'error_message': None, 'estring': False, 'invalid': ' \"', 'lower': True, 'max': [7], 'min': [255, 1], 'number': 'a', 'special': None, 'specials': '~!@#$%^&*()_+-=?<>,.:;{}[]|', 'upper': [-10, 255, ' ']}"
+      ]
+     ],
+     "A": [
+      [
+       "exc",
+       "ValidationError",
+       "Password too simple (0.0/True), Must include at least True lowercase"
+      ],
+      [
+       "ok",
+       "dict",
+       "{'entropy': True, 'error_message': None, 'estring': False, 'invalid': ' \"', 'lower': True, 'max': [7], 'min': [255, 1], 'number': 'a', 'special': None, 'specials': '~!@#$%^&*()_+-=?<>,.:;{}[]|', 'upper': [-10, 255, ' ']}"
+      ]
+     ],
+     "B": [
+      [
+       "exc",
+       "ValidationError",
+       "Password too simple (0.0/True)"
+      ],
+      [
+       "ok",
+       "dict",
+       "{'entropy': True, 'error_message': None, 'estring': False, 'invalid': ' \"', 'lower': True, 'max': [7], 'min': [255, 1], 'number': 'a', 'special': None, 'specials': '~!@#$%^&*()_+-=?<>,.:;{}[]|', 'upper': [-10, 255, ' ']}"
+      ]
+     ],
+     "AB": [
+      [
+       "exc",
+       "ValidationError",
+       "Password too simple (0.0/True)"
+      ],
+      [
+       "ok",
+       "dict",
+       "{'entropy': True, 'error_message': None, 'estring': False, 'invalid': ' \"', 'lower': True, 'max': [7], 'min': [255, 1], 'number': 'a', 'special': None, 'specials': '~!@#$%^&*()_+-=?<>,.:;{}[]|', 'upper': [-10, 255, ' ']}"
+      ]
+     ],
+     "BA": [
+      [
+       "exc",
+       "ValidationError",
+       "Password too simple (0.0/True)"
+      ],
+      [
+       "ok",
+       "dict",
+       "{'entropy': True, 'error_message': None, 'estring': False, 'invalid': ' \"', 'lower': True, 'max': [7], 'min': [255, 1], 'number': 'a', 'special': None, 'specials': '~!@#$%^&*()_+-=?<>,.:;{}[]|', 'upper': [-10, 255, ' ']}"
+      ]
+     ]
+    },
+    {
+     "input": 4,
+     "O": [
+      [
+       "exc",
+       "ValidationError",
+       "Must include at least 1 of the following: ~!@#$%^&*()_+-=?<>,.:;{}[]|, Must include at least True number"
+      ],
+      [
+       "ok",
+       "dict",
+       "{'entropy': None, 'error_message': None, 'estring': False, 'invalid': ' \"', 'lower': '1', 'max': True, 'min': [], 'number': True, 'special': 1, 'specials': '~!@#$%^&*()_+-=?<>,.:;{}[]|', 'upper': '\\t'}"
+      ]
+     ],
+     "A": [
+      [
+       "exc",
+       "ValidationError",
+       "Must include at least 1 of the following: ~!@#$%^&*()_+-=?<>,.:;{}[]|, Must include at least True number"
+      ],
+      [
+       "ok",
+       "dict",
+       "{'entropy': None, 'error_message': None, 'estring': False, 'invalid': ' \"', 'lower': '1', 'max': True, 'min': [], 'number': True, 'special': 1, 'specials': '~!@#$%^&*()_+-=?<>,.:;{}[]|', 'upper': '\\t'}"
+      ]
+     ],
+     "B": [
+      [
+       "exc",
+       "ValidationError",
+       "Must include at least 1 of the following: ~!@#$%^&*()_+-=?<>,.:;{}[]|"
+      ],
+      [
+       "ok",
+       "dict",
+       "{'entropy': None, 'error_message': None, 'estring': False, 'invalid': ' \"', 'lower': '1', 'max': True, 'min': [], 'number': True, 'special': 1, 'specials': '~!@#$%^&*()_+-=?<>,.:;{}[]|', 'upper': '\\t'}"
+      ]
+     ],
+     "AB": [
+      [
+       "exc",
+       "ValidationError",
+       "Must include at least 1 of the following: ~!@#$%^&*()_+-=?<>,.:;{}[]|"
+      ],
+      [
+       "ok",
+       "dict",
+       "{'entropy': None, 'error_message': None, 'estring': False, 'invalid': ' \"', 'lower': '1', 'max': True, 'min': [], 'number': True, 'special': 1, 'specials': '~!@#$%^&*()_+-=?<>,.:;{}[]|', 'upper': '\\t'}"
+      ]
+     ],
+     "BA": [
+      [
+       "exc",
+       "ValidationError",
+       "Must include at least 1 of the following: ~!@#$%^&*()_+-=?<>,.:;{}[]|"
+      ],
+      [
+       "ok",
+       "dict",
+       "{'entropy': None, 'error_message': None, 'estring': False, 'invalid': ' \"', 'lower': '1', 'max': True, 'min': [], 'number': True, 'special': 1, 'specials': '~!@#$%^&*()_+-=?<>,.:;{}[]|', 'upper': '\\t'}"
+      ]
+     ]
+    },
+    {
+     "input": 13,
+     "O": [
+      [
+       "exc",
+       "ValidationError",
+       "Must include at least 1 of the following: ~!@#$%^&*()_+-=?<>,.:;{}[]|, Must include at least True number"
+      ],
+      [
+       "ok",
+       "dict",
+       "{'entropy': None, 'error_message': None, 'estring': False, 'invalid': ' \"', 'lower': nan, 'max': [True], 'min': 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', 'number': True, 'special': 1, 'specials': '~!@#$%^&*()_+-=?<>,.:;{}[]|', 'upper': '{}'}"
+      ]
+     ],
+     "A": [
+      [
+       "exc",
+       "ValidationError",
+       "Must include at least 1 of the following: ~!@#$%^&*()_+-=?<>,.:;{}[]|, Must include at least True number"
+      ],
+      [
+       "ok",
+       "dict",
+       "{'entropy': None, 'error_message': None, 'estring': False, 'invalid': ' \"', 'lower': nan, 'max': [True], 'min': 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', 'number': True, 'special': 1, 'specials': '~!@#$%^&*()_+-=?<>,.:;{}[]|', 'upper': '{}'}"
+      ]
+     ],
+     "B": [
+      [
+       "exc",
+       "ValidationError",
+       "Must include at least 1 of the following: ~!@#$%^&*()_+-=?<>,.:;{}[]|"
+      ],
+      [
+       "ok",
+       "dict",
+       "{'entropy': None, 'error_message': None, 'estring': False, 'invalid': ' \"', 'lower': nan, 'max': [True], 'min': 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', 'number': True, 'special': 1, 'specials': '~!@#$%^&*()_+-=?<>,.:;{}[]|', 'upper': '{}'}"
+      ]
+     ],
+     "AB": [
+      [
+       "exc",
+       "ValidationError",
+       "Must include at least 1 of the following: ~!@#$%^&*()_+-=?<>,.:;{}[]|"
+      ],
+      [
+       "ok",
+       "dict",
+       "{'entropy': None, 'error_message': None, 'estring': False, 'invalid': ' \"', 'lower': nan, 'max': [True], 'min': 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', 'number': True, 'special': 1, 'specials': '~!@#$%^&*()_+-=?<>,.:;{}[]|', 'upper': '{}'}"
+      ]
+     ],
+     "BA": [
+      [
+       "exc",
+       "ValidationError",
+       "Must include at least 1 of the following: ~!@#$%^&*()_+-=?<>,.:;{}[]|"
+      ],
+      [
+       "ok",
+       "dict",
+       "{'entropy': None, 'error_message': None, 'estring': False, 'invalid': ' \"', 'lower': nan, 'max': [True], 'min': 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', 'number': True, 'special': 1, 'specials': '~!@#$%^&*()_+-=?<>,.:;{}[]|', 'upper': '{}'}"
+      ]
+     ]
+    }
+   ],
+   "target": "G1_pydal",
+   "cells": {
+    "A": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "B": {
+     "e": 3.6108309461518194e-20,
+     "alarm": false,
+     "admitted": false
+    },
+    "AB": {
+     "e": 3.6108309461518194e-20,
+     "alarm": false,
+     "admitted": false
+    },
+    "BA": {
+     "e": 3.6108309461518194e-20,
+     "alarm": false,
+     "admitted": false
+    }
+   },
+   "singles_admitted_composite_not": false,
+   "composite_admitted_single_not": false
+  },
+  {
+   "kind": "enabling",
+   "file": "pydal/backends/oracle.py",
+   "qualname": "Oracle.parse",
+   "a": "negative_type_guard",
+   "b": "type_eq_isinstance",
+   "usable": true,
+   "stable": 200,
+   "d": {
+    "A": 0.0,
+    "B": 0.0,
+    "AB": 0.0,
+    "BA": 0.0
+   },
+   "counts": {
+    "A": 0,
+    "B": 0,
+    "AB": 0,
+    "BA": 0
+   },
+   "emergent": 0,
+   "masking": 0,
+   "order_dependent": 0,
+   "non_additive": 0,
+   "examples": [],
+   "target": "G1_pydal",
+   "cells": {
+    "A": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "B": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "AB": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    },
+    "BA": {
+     "e": 10468.75633143669,
+     "alarm": false,
+     "admitted": true
+    }
+   },
+   "singles_admitted_composite_not": false,
+   "composite_admitted_single_not": false
+  },
+  {
+   "kind": "shared",
+   "file": "src/hera_pspec/grouping.py",
+   "qualname": "average_spectra",
+   "a": "dict_keys_membership",
+   "b": "eq_bool_identity",
+   "usable": false,
+   "why": "did not run: UNCALLABLE import failed: ModuleNotFoundError / ModuleNotFoundError",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "kind": "shared",
+   "file": "src/hera_pspec/grouping.py",
+   "qualname": "spherical_average",
+   "a": "mutable_default",
+   "b": "negative_type_guard",
+   "usable": false,
+   "why": "did not run: UNCALLABLE import failed: ModuleNotFoundError / ModuleNotFoundError",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "kind": "shared",
+   "file": "src/hera_pspec/pspecdata.py",
+   "qualname": "PSpecData.C_model",
+   "a": "dict_keys_membership",
+   "b": "negative_type_guard",
+   "usable": false,
+   "why": "did not run: UNCALLABLE import failed: ModuleNotFoundError / ModuleNotFoundError",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "kind": "shared",
+   "file": "src/hera_pspec/pspecdata.py",
+   "qualname": "PSpecData.pspec",
+   "a": "len_zero_falsy",
+   "b": "negative_type_guard",
+   "usable": false,
+   "why": "did not run: UNCALLABLE import failed: ModuleNotFoundError / ModuleNotFoundError",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "kind": "shared",
+   "file": "src/hera_pspec/pspecdata.py",
+   "qualname": "PSpecData.pspec",
+   "a": "len_zero_falsy",
+   "b": "none_identity",
+   "usable": false,
+   "why": "did not run: UNCALLABLE import failed: ModuleNotFoundError / ModuleNotFoundError",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "kind": "shared",
+   "file": "src/hera_pspec/pspecdata.py",
+   "qualname": "PSpecData.pspec",
+   "a": "negative_type_guard",
+   "b": "none_identity",
+   "usable": false,
+   "why": "did not run: UNCALLABLE import failed: ModuleNotFoundError / ModuleNotFoundError",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "kind": "shared",
+   "file": "src/hera_pspec/utils.py",
+   "qualname": "config_pspec_blpairs",
+   "a": "bare_except",
+   "b": "len_zero_falsy",
+   "usable": false,
+   "why": "did not run: UNCALLABLE import failed: ModuleNotFoundError / ModuleNotFoundError",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "kind": "shared",
+   "file": "src/hera_pspec/utils.py",
+   "qualname": "load_config",
+   "a": "open_encoding",
+   "b": "reraise_bare",
+   "usable": false,
+   "why": "did not run: UNCALLABLE import failed: ModuleNotFoundError / ModuleNotFoundError",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "kind": "shared",
+   "file": "src/hera_pspec/uvpspec_utils.py",
+   "qualname": "_select",
+   "a": "len_zero_falsy",
+   "b": "negative_type_guard",
+   "usable": false,
+   "why": "did not run: UNCALLABLE import failed: ModuleNotFoundError / ModuleNotFoundError",
+   "target": "K1_hera_pspec"
+  }
+ ],
+ "install": {
+  "D2_cerberus": {
+   "python": "/opt/hostedtoolcache/Python/3.8.18/x64/bin/python3.8",
+   "install_rc": 0,
+   "install_tail": "  DEPRECATION: Cerberus is being installed using the legacy 'setup.py install' method, because it does not have a 'pyproject.toml' and the 'wheel' package is not installed. pip 23.1 will enforce this behaviour change. A possible replacement is to enable the '--use-pep517' option. Discussion can be found at https://github.com/pypa/pip/issues/8559\n\n[notice] A new release of pip is available: 23.0.1 -> 25.0.1\n[notice] To update, run: /tmp/s_work/D2_cerberus/venv/bin/python -m pip install --upgrade pip\n"
+  },
+  "D5_pycubrid": {
+   "python": "/opt/hostedtoolcache/Python/3.12.15/x64/bin/python3.12",
+   "install_rc": 0,
+   "install_tail": "\n[notice] A new release of pip is available: 25.0.1 -> 26.2.2\n[notice] To update, run: python -m pip install --upgrade pip\n"
+  },
+  "K1_trino": {
+   "python": "/opt/hostedtoolcache/Python/3.12.15/x64/bin/python3.12",
+   "install_rc": 0,
+   "install_tail": "\n[notice] A new release of pip is available: 25.0.1 -> 26.2.2\n[notice] To update, run: python -m pip install --upgrade pip\n"
+  },
+  "G1_pydal": {
+   "python": "/opt/hostedtoolcache/Python/3.12.15/x64/bin/python3.12",
+   "install_rc": 0,
+   "install_tail": "\n[notice] A new release of pip is available: 25.0.1 -> 26.2.2\n[notice] To update, run: python -m pip install --upgrade pip\n"
+  },
+  "K1_hera_pspec": {
+   "python": "/opt/hostedtoolcache/Python/3.12.15/x64/bin/python3.12",
+   "install_rc": 1,
+   "install_tail": "  WARNING: Requested uvtools>=0.2.0 from https://files.pythonhosted.org/packages/a1/87/49ffbf6b7917069f47c42f8772f358020c925e4ea30ed39b8ca54f795f24/uvtools-0.2.0.tar.gz (from hera_pspec==0.0.0), but installing version 0.0.0\nERROR: Could not find a version that satisfies the requirement uvtools>=0.2.0 (from hera-pspec) (from versions: 0.1.0, 0.2.0)\n\n[notice] A new release of pip is available: 25.0.1 -> 26.2.2\n[notice] To update, run: python -m pip install --upgrade pip\nERROR: No matching distribution found for uvtools>=0.2.0\n"
+  }
+ }
+}
