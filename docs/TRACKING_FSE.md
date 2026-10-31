@@ -59,6 +59,8 @@ Giao thức: [STUDY_Q_PROTOCOL](../study_q/STUDY_Q_PROTOCOL.md). Amendment: chư
 
 ## 4. Kết quả Q sẽ quyết định khẳng định nào trong bài
 
+> **Quyết định 31/10/2026: chọn khung A** (bài phương pháp và lý thuyết: chấp nhận thay đổi mã có kiểm soát rủi ro). Study Q và Q-A1 vào bài như bằng chứng về định nghĩa tác hại (mục Evaluation, "Naive differences versus contract regressions"), không phải khẳng định chính.
+
 Bảng này được suy ra từ ALIGNMENT_WITH_FSE (mục sau RQ5) và giao thức Q. **Chọn nhánh nào là quyết định của người hướng dẫn.**
 
 | Kết quả Study Q | Khẳng định trong bài A\* |
@@ -116,3 +118,4 @@ PDF gốc: [`paper/source/`](paper/source/), đã đối chiếu toàn văn ngà
 | 31/10/2026 ~13:00 | Lý thuyết: THEORY.md (chứng minh), theory checks; PAPER_TODO.md; API_AND_FAILURES.md + failure audit (64 run thất bại, đã phân nhóm) |
 | 31/10/2026 ~14:05 | Giai đoạn 1: LaTeX các mục Problem formulation, Theory, Related work (thống kê); build PDF trên Actions (run 41208218636) |
 | 31/10/2026 ~15:00 | Rà soát giai đoạn 1 (PHASE1_REVIEW: G1–G9, C8, C9); giai đoạn 2: NUMBERS_MAP, evaluation.tex, threats.tex, check_paper_numbers |
+| 31/10/2026 ~15:30 | Chọn khung A; giai đoạn 3: freeze lệch giải thích (P sạch tại commit đóng băng), token Vertex sửa tận gốc (fresh_gcp_token), TECH_DEBT.md |

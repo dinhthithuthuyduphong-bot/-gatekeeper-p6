@@ -19,7 +19,8 @@ jobs:
         run: |
           t="$(gcloud auth print-access-token)"; echo "::add-mask::$t"; echo "GOOGLE_OAUTH_TOKEN=$t" >> "$GITHUB_ENV"
           echo "GCP_PROJECT=${{ secrets.GCP_PROJECT }}" >> "$GITHUB_ENV"
-          echo "GK_TOKEN_CMD=gcloud auth print-access-token" >> "$GITHUB_ENV"
+          pip install -q google-auth requests
+          echo "GK_TOKEN_CMD=python $GITHUB_WORKSPACE/tools/fresh_gcp_token.py" >> "$GITHUB_ENV"
       - run: |
           [ -f research_closure/results/rq5/RQ5_RATINGS_ASSISTANT.json ] || { echo "::error::the first rater's codes must be committed before the second rater runs"; exit 1; }
           mkdir -p out_rate

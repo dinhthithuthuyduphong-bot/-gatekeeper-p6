@@ -20,10 +20,10 @@ Trạng thái tổng hợp: [TRACKING_FSE](TRACKING_FSE.md). Lý thuyết: [THEO
 
 - [ ] **0.1 Đọc lại ba tài liệu theo thứ tự:** [TRACKING_FSE](TRACKING_FSE.md) mục 2 (đối chiếu kỳ vọng), [STUDY_Q_RESULT](../research_closure/results/study_q/STUDY_Q_RESULT.md), [THEORY](paper/THEORY.md) mục 7.
   *Xong khi:* tự viết được, trong 5 câu, bài này khẳng định gì và không khẳng định gì.
-- [ ] **0.2 Chọn khung bài.** Có hai khung hợp lý theo dữ liệu hiện có:
+- [x] **0.2 Chọn khung bài.** Có hai khung hợp lý theo dữ liệu hiện có:
   - **(A) Bài phương pháp và lý thuyết:** chấp nhận thay đổi mã có kiểm soát rủi ro (Định lý 4′, 6′, 7′ đã sửa) cộng bằng chứng thực nghiệm trung thực, gồm kết quả âm của Study D–H và đồ thị pha các cổng.
   - **(B) Bài thực nghiệm về oracle:** "khoảng 11% patch resolved trên SWE-bench Verified khác hành vi bản fix trên đầu vào hợp lệ" (Study Q, Q-A1), với lý thuyết là phần phụ.
-  *Xong khi:* thầy chọn một khung, ghi vào TRACKING_FSE mục 4.
+  *Xong khi:* thầy chọn một khung, ghi vào TRACKING_FSE mục 4. **→ Đã chọn khung A (31/10/2026).**
 - [ ] **0.3 Chọn hội nghị hoặc tạp chí và hạn nộp** (FSE, ICSE, ISSTA, ASE, EMSE, TOSEM). Ghi hạn, giới hạn số trang, double-blind hay không.
   *Xong khi:* có một dòng trong TRACKING_FSE: tên venue, hạn, số trang.
 - [ ] **0.4 Liệt kê 3 đến 5 câu hỏi nghiên cứu (RQ) cuối cùng.** Mỗi RQ phải có tệp kết quả tương ứng; RQ nào chưa có dữ liệu thì đưa sang giai đoạn 2.
@@ -71,12 +71,14 @@ Mọi bản sửa đã có sẵn câu chữ trong [THEORY](paper/THEORY.md); vi�
 
 ## Giai đoạn 3: dọn nợ kỹ thuật ảnh hưởng tới tính tin cậy (song song với giai đoạn 2)
 
-- [ ] **3.1 Freeze lệch của Study B, C, N, P** (xem PROCESS_LOG): viết amendment hoặc giải thích trong EVIDENCE_LEDGER cho từng study.
+> **Trạng thái 31/10/2026:** 3.1, 3.2, 3.4, 3.5 xong; 3.3 đã ghi trong Threats, còn bản sửa mã cho study sau. Chi tiết: [TECH_DEBT](TECH_DEBT.md).
+
+- [x] **3.1 Freeze lệch của Study B, C, N, P** (xem PROCESS_LOG): viết amendment hoặc giải thích trong EVIDENCE_LEDGER cho từng study.
   *Xong khi:* `python tools/freeze_study.py verify study_<x>` cho kết quả đã giải thích được với mọi study.
-- [ ] **3.2 Q5 trong `q_analyze.py`** tính khác định nghĩa của giao thức: ghi chú trong bài là dùng số tính lại (3,88).
+- [x] **3.2 Q5 trong `q_analyze.py`** tính khác định nghĩa của giao thức: ghi chú trong bài là dùng số tính lại (3,88).
 - [ ] **3.3 Lỗi `FileNotFoundError`** của 4 instance trong Study Q (patch tạo tệp mới): ghi trong Threats; sửa công cụ cho study sau.
-- [ ] **3.4 Token Vertex hết hạn sau khoảng 1 giờ:** mọi workflow gọi model chạy lâu nên chia job (như `study-q-review-rate.yml`). Xem API_AND_FAILURES mục 3.
-- [ ] **3.5 Chạy `Gatekeeper failure audit`** và kiểm rằng mọi lần thất bại đều có nguyên nhân được ghi trong API_AND_FAILURES.
+- [x] **3.4 Token Vertex hết hạn sau khoảng 1 giờ:** mọi workflow gọi model chạy lâu nên chia job (như `study-q-review-rate.yml`). Xem API_AND_FAILURES mục 3.
+- [x] **3.5 Chạy `Gatekeeper failure audit`** và kiểm rằng mọi lần thất bại đều có nguyên nhân được ghi trong API_AND_FAILURES.
 
 ## Giai đoạn 4: viết bài (2 đến 3 tuần)
 

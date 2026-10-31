@@ -207,3 +207,20 @@ Mỗi dòng: kết quả trích trong `docs/paper/latex/sections/evaluation.tex`
 | Harness không trạng thái (2.400 lần rút) | `harness_checks/STATELESSNESS_SUMMARY.md` | workflow `statelessness-check.yml` |
 | Đồ thị pha các cổng | `paper_snippets/P0_AND_PHASE_DIAGRAM.md`, `tools/gate_phase_diagram.py` | — |
 | Kiểm lý thuyết C1–C9 | `research_closure/results/theory/THEORY_CHECKS.json` | workflow `Gatekeeper theory checks` |
+
+## 31/10/2026 — Giải thích freeze lệch của Study B, C, N, P (PAPER_TODO 3.1)
+
+`python tools/freeze_study.py verify` ở HEAD báo đổi cho bốn study đã xong. Đã điều tra từng study:
+
+| Study | Tệp lệch | Nguyên nhân | Ảnh hưởng tới kết quả | Ảnh hưởng tới bài |
+|---|---|---|---|---|
+| P | `research_closure/results/ALIGNMENT_WITH_FSE.md` | Sau lần đóng băng cuối (P-A5, commit `6437ecf`), commit `c214516` **thêm 8 dòng văn bản** (mục "Sau RQ5") vào tài liệu diễn giải này. **Kiểm tại `6437ecf`: "freeze verified: 91 files unchanged".** | Không: tệp là văn bản, không được công cụ nào đọc khi tính | Không |
+| B, C | mã dùng chung `gatekeeper_lite/*.py`, `tools/run_study_d.py`, … | `freeze_study.py` băm **mọi** module của `gatekeeper_lite` cho mọi study. B và C được đóng băng và chạy trước Study D; mã dùng chung sau đó được phát triển tiếp cho D–H. Lịch sử git trước commit gốc `656ab92` (repo tạo lại ngày 30/10/2026) **không còn trong repo này**, nên không kiểm lại được tại thời điểm đóng băng | Chưa kiểm lại được | Không: bài không trích Study B, C |
+| N | `tools/repo_hygiene.py` | Công cụ dọn tệp trùng ở gốc repo được sửa sau khi N đóng băng; lịch sử cũ không còn | Không: công cụ không tham gia phép đo | Không: bài không trích Study N |
+
+**Quy tắc từ nay:**
+1. Kiểm freeze **tại commit đóng băng** (git worktree), không tại HEAD, với study đã xong.
+2. Tệp diễn giải không nên nằm trong `extra_tracked`.
+3. Không tạo lại repo mà mất lịch sử. Nếu phải tạo lại, lưu tag đóng băng và bản lưu trữ của lịch sử cũ.
+
+Các study mà bài dùng (D, E, G, H, P, Q) đều kiểm được: D, E, G, H, Q verified tại HEAD; P verified tại commit đóng băng.

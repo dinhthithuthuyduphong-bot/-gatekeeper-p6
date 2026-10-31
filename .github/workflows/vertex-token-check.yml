@@ -1,0 +1,38 @@
+# Check the token refresh used by every model-calling workflow (tools/fresh_gcp_token.py): two tokens minted a minute apart
+# must both be valid for about an hour from the moment they are minted.  No model call, 0 USD.
+name: Gatekeeper Vertex token check
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Google Cloud auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+      - shell: bash
+        run: |
+          set -euo pipefail
+          pip install -q google-auth requests
+          python - <<'PY'
+          import datetime, sys, time
+          sys.path.insert(0, 'tools')
+          import fresh_gcp_token as F
+          out = []
+          for i in range(2):
+              tok, exp = F.mint()
+              now = datetime.datetime.utcnow()
+              left = (exp - now).total_seconds() / 60
+              out.append((tok, left))
+              print('mint %d: expires in %.1f min' % (i + 1, left))
+              if i == 0:
+                  time.sleep(60)
+          assert all(left > 50 for _t, left in out), 'a minted token expires too soon'
+          print('different tokens:', out[0][0] != out[1][0])
+          PY

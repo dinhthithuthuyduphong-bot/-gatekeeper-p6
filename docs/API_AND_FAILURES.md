@@ -119,7 +119,7 @@ Số trong bảng khớp với lần audit thứ ba (run 41207250040), và đã 
   3. `RefreshingClient` gọi lại `gcloud auth print-access-token` mỗi 25 phút, nhưng `gcloud` trả **token còn hạn trong bộ nhớ đệm**, chính là token cũ;
   4. tới phút 60 token hết hạn.
 - **Sửa:** mỗi job xử lý một phần (6 phần, khoảng 10 phút mỗi phần), mỗi job có token mới.
-- **Phòng sau này:** mọi job gọi model nên ước lượng thời gian chạy dưới 45 phút; công cụ nên ghi kết quả dần dần.
+- **Sửa tận gốc (31/10/2026):** `tools/fresh_gcp_token.py` luôn tạo token mới bằng google-auth; 13 workflow dùng nó làm `GK_TOKEN_CMD`. Kiểm: workflow `Gatekeeper Vertex token check`. Vẫn nên giữ job dưới 45 phút và ghi kết quả dần dần.
 
 ### 3.2 `only=3` (run 41182723003)
 - Ô `only` nhận id instance; "3" không phải id, nên `assert set(sel) <= set(ids)` hỏng mà không có thông báo.
