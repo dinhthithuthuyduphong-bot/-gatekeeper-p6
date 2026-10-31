@@ -1,0 +1,84 @@
+# Study Q analysis (protocol section 6): collect the per-instance records of the stream runs, check the frame is complete
+# (every instance exactly once), run tools/q_analyze.py, and commit the analysis plus all raw records (artifacts expire).
+# No model calls, 0 USD.
+name: Gatekeeper Study Q analyze
+on:
+  workflow_dispatch:
+    inputs:
+      runs: {description: "comma-separated stream run ids (part 0, part 1, re-runs; later runs win on duplicates)", default: "41185100083,41187862326"}
+      commit: {description: "commit results to research_closure/results/study_q (yes/no)", default: "yes"}
+permissions:
+  contents: write
+  actions: read
+jobs:
+  analyze:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: python tools/freeze_study.py verify study_q
+      - name: Download records
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUNS: ${{ inputs.runs }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          i=0
+          for id in $(echo "$RUNS" | tr ',;' '  '); do
+            i=$((i+1))
+            gh run download "$id" -R "$GITHUB_REPOSITORY" -p 'Q_*' -D "raw/$(printf '%02d' $i)_$id"
+          done
+      - name: Merge (later runs win) and check the frame
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, sys
+          from pathlib import Path
+          frame = sorted(json.load(open('study_q/evidence/POOL_SUMMARY.json'))['per_instance'])
+          recs = {}
+          for d in sorted(Path('raw').iterdir()):                  # ordered by position in the input list
+              for f in sorted(d.rglob('Q_*.json')):
+                  r = json.loads(f.read_text())
+                  recs[r['instance_id']] = (r, d.name)
+          missing = sorted(set(frame) - set(recs))
+          extra = sorted(set(recs) - set(frame))
+          out = Path('merged'); out.mkdir()
+          for iid, (r, src) in recs.items():
+              (out / ('Q_%s.json' % iid)).write_text(json.dumps(r, indent=1))
+          with open('Q_RECORDS.jsonl', 'w') as fh:
+              for iid in sorted(recs):
+                  fh.write(json.dumps(dict(recs[iid][0], _source_run=recs[iid][1].split('_', 1)[1])) + '\n')
+          check = {'frame': len(frame), 'records': len(recs), 'missing': missing, 'not_in_frame': extra}
+          Path('FRAME_CHECK.json').write_text(json.dumps(check, indent=1))
+          print(json.dumps(check, indent=1))
+          if missing or extra:
+              sys.exit('frame incomplete: re-run the missing ids with the stream workflow (input "only") and add that run id here')
+          PY
+      - name: Analyze
+        run: |
+          python tools/q_analyze.py merged "$(python -c "import json;print(len(json.load(open('study_q/evidence/POOL_SUMMARY.json'))['per_instance']))")" out_qa
+          mv Q_RECORDS.jsonl FRAME_CHECK.json out_qa/
+          { echo '```json'; python -c "import json;r=json.load(open('out_qa/Q_ANALYSIS.json'));print(json.dumps({k:r[k] for k in ('Q1_funnel','patches_scored','HQ1','Q5_inflation_naive_over_contract')},indent=1))"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: Q_ANALYSIS
+          path: out_qa
+      - name: Commit
+        if: inputs.commit == 'yes'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p research_closure/results/study_q
+          cp out_qa/Q_ANALYSIS.json out_qa/FRAME_CHECK.json research_closure/results/study_q/
+          gzip -9 -c out_qa/Q_RECORDS.jsonl > research_closure/results/study_q/Q_RECORDS.jsonl.gz
+          git config user.name "gatekeeper-freeze-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add research_closure/results/study_q
+          git commit -m "Study Q analysis (runs ${{ inputs.runs }})"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin HEAD:"${GITHUB_REF_NAME}"
