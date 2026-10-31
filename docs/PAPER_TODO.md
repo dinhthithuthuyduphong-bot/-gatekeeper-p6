@@ -55,6 +55,7 @@ Mỗi dòng gồm:
 | R17 | 31/10 | Paper build (cb65df4) + submission check | PDF có Study S | — | — | **THẮNG** | — |
 | R18 | 31/10 | Study S-A2 (c2eb155) | Thay một phần `int` bằng `bool`; thử cài hera_pspec bằng Python 3.11 | `subst()` trong `composition_inner.py`, fallback 3.11 | Dự đoán viết trước: các phép viết lại nhạy với bool đổi hành vi nhiều hơn → đúng một phần (IS_STRONG 23 → 29/200). **Lần đầu thấy phụ thuộc thứ tự trên mã thật** (pydal `QueryBuilder.parse`, 1/200 input) | **THUA một phần**: biến thể mới chạy một lần, chưa loại được nhiễu; hera_pspec vẫn không cài được (`uvtools>=0.2.0` không có bản phù hợp cho 3.11 lẫn 3.12) | Vòng C bước 4: viết phép kiểm loại nhiễu, chạy mỗi biến thể hai lần (S-A3). Quy tắc quyết định viết trước: chỉ báo phụ thuộc thứ tự là thật nếu còn sau S-A3 |
 | R19 | 31/10 | Study S-A3 (ef8e41a) | Lặp lại mọi biến thể | Chỉ tính input ổn định ở O và mọi biến thể | Quy tắc viết trước: phụ thuộc thứ tự ở R18 không còn sau khi lặp → là **nhiễu**, không báo là phát hiện. Giả thuyết nguyên nhân: `PYTHONHASHSEED` ngẫu nhiên giữa các tiến trình | **THẮNG**: kết quả cuối sạch. 12 hàm, tổ hợp cộng tính (0 nảy sinh, 0 masking, 0 phụ thuộc thứ tự); cổng loại đúng 3/48 ô có thay đổi hành vi | Còn: hera_pspec (9 đơn vị) không cài được; nên cố định `PYTHONHASHSEED` ở các lần chạy sau |
+| R20 | 31/10 | Paper build (10cccea) | PDF có kết quả cuối của Study S | — | — | **THẮNG**: 14 trang, 47/47 con số khớp | — |
 
 ## C. Vòng debug khi THUA (làm theo thứ tự)
 
