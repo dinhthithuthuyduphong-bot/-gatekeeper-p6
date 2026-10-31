@@ -13,16 +13,19 @@ import sys
 from pathlib import Path
 
 RULES = [
-    ("TOKEN_EXPIRED", r"ACCESS_TOKEN_EXPIRED|invalid authentication credentials|HTTP 401", "Vertex OAuth token outlived (about 1 h) or not refreshed"),
-    ("RATE_LIMIT_429", r"HTTP 429|RESOURCE_EXHAUSTED|rate limit", "provider quota; retried with back-off where the client supports it"),
-    ("INPUT_VALIDATION", r"ids not in the frame|not Q-A1 targets|AssertionError|at most 256 jobs", "workflow input rejected (e.g. an instance id that is not in the frame)"),
-    ("NOT_FROZEN_OR_FREEZE_DRIFT", r"is not FROZEN|freeze .*changed|FREEZE.*mismatch|changed since freeze|amendment .* not applied", "study not frozen, or a frozen file changed"),
-    ("UNIT_TESTS_FAILED", r"FAILED \((failures|errors)=", "unit tests failed before the guarded step"),
-    ("CANCELLED_OR_TIMEOUT", r"exceeded the maximum execution time|The operation was canceled|exit code 143|SIGTERM|timed out", "job cancelled, killed (143) or over its time limit"),
+    ("TOKEN_EXPIRED", r"ACCESS_TOKEN_EXPIRED|invalid authentication credentials", "Vertex OAuth token outlived (about 1 h) or not refreshed"),
+    ("RATE_LIMIT_429", r"HTTP Error 429|HTTP 429:|\"code\": 429|RESOURCE_EXHAUSTED", "provider quota; retried with back-off where the client supports it"),
+    ("UPSTREAM_HTTP_5XX", r"HTTP Error 5\d\d|Bad Gateway|Service Unavailable", "external service returned 5xx"),
+    ("RUNNER_SHUTDOWN_143", r"received a shutdown signal|exit code 143", "runner killed (SIGTERM 143), e.g. a repository's code signalled the process group"),
+    ("TIMEOUT_OR_CANCELLED", r"exceeded the maximum execution time|The operation was canceled|timed out", "job over its time limit or cancelled"),
+    ("INPUT_VALIDATION", r"ids not in the frame|not Q-A1 targets|AssertionError|at most 256 jobs", "an input or a pre-registered expectation was rejected"),
+    ("STUDY_STATE_GUARD", r"is not FROZEN|status is 'DRAFT'|already applied|not documented in|amendment .* not applied|seed round is in the future", "a guard refused: study not frozen, amendment already applied, etc."),
+    ("UNIT_TESTS_FAILED", r"FAILED \((failures|errors)=|incorrectly imported from", "unit tests failed (often a stray copy of a test module at the repository root)"),
+    ("DEPENDENCY_MISSING", r"ModuleNotFoundError|No module named|ImportError|cannot import name|pip', 'install|version .* was not found|exit code 127", "a module, package or tool was missing or failed to install"),
     ("GIT_PUSH_REJECTED", r"\[rejected\]|non-fast-forward|failed to push|Updates were rejected", "push raced with another commit"),
     ("MISSING_FILE", r"FileNotFoundError|No such file or directory|can't open file", "a path the step expected was missing"),
     ("NETWORK", r"URLError|Connection reset|Temporary failure in name resolution|RemoteDisconnected|Read timed out", "network error to an external service"),
-    ("PYTHON_EXCEPTION", r"Traceback \(most recent call last\)|Error: ", "uncaught Python exception (see evidence)"),
+    ("PYTHON_EXCEPTION", r"Traceback \(most recent call last\)|\w+Error: |\w+Exception", "uncaught Python exception (see evidence)"),
 ]
 EVIDENCE = re.compile(r"##\[error\]|Traceback|Error|Exception|HTTP \d{3}|AssertionError|SystemExit|FAILED|exit code|rejected|ACCESS_TOKEN|RESOURCE_EXHAUSTED|No such file")
 TS = re.compile(r"^\d{4}-\d\d-\d\dT[\d:.]+Z ")
@@ -45,6 +48,15 @@ def failed_runs(repo, max_runs):
         runs += batch
         page += 1
     return [r for r in runs[:max_runs] if r.get("conclusion") in ("failure", "timed_out", "startup_failure")]
+
+
+def failed_segment(lines):
+    """Lines of the failing step only: after the last '##[group]Run' header before the first '##[error]', up to it."""
+    err = next((i for i, l in enumerate(lines) if "##[error]" in l), len(lines))
+    start = max((i for i, l in enumerate(lines[:err]) if l.startswith("##[group]Run")), default=max(0, err - 60))
+    seg = [l for l in lines[start:err + 1] if not l.startswith(("##[group]", "##[endgroup]")) and "\x1b[36;1m" not in l]
+    body = [l for l in seg if not l.startswith(("shell:", "env:", "  "))]
+    return body[-60:] or lines[max(0, err - 30):err + 1]
 
 
 def classify(text):
@@ -80,8 +92,9 @@ def audit_run(repo, run):
                 lines = [TS.sub("", l) for l in gh("repos/%s/actions/jobs/%d/logs" % (repo, j["id"])).splitlines()]
             except RuntimeError:
                 lines = []
-        ev = [l.strip()[:300] for l in lines if EVIDENCE.search(l)][-12:]
-        texts.append("\n".join(lines[-400:]))
+        seg = failed_segment(lines)
+        ev = [l.strip()[:300] for l in seg if l.strip()][-10:]
+        texts.append("\n".join(seg))
         rec["failed_jobs"].append({"job": j.get("name"), "failed_steps": steps, "evidence": ev})
         if len(rec["failed_jobs"]) >= 5:                      # matrix runs: five failed jobs are enough to see the pattern
             break
