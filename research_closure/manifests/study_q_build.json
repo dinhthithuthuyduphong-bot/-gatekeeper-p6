@@ -1,0 +1,18 @@
+{
+ "name": "study_q_build (patch_study_q_build.zip)",
+ "files": {
+  ".github/workflows/study-q-freeze.yml": "2b6f9634b7e9ba4f9379254003d92ba3cf0689413fa9df8de3b9f4852a4837b1",
+  ".github/workflows/study-q-pool.yml": "49bdc3bb92f67df9769d115e1863a80346500e20fadf65bf3e2f0416cccbeb61",
+  ".github/workflows/study-q-stream.yml": "04a5473b66655f2aa2112320df1591aede2cd35fcb69bf77e7958246e95a127a",
+  "gatekeeper_ext/q_classify.py": "8f4832285e7ea022d2bb92399b1e23245da18d4344841944ba651fd358af782c",
+  "study_q/AMENDMENTS.md": "a8887372f5b0dd40c8c31db468b33f57332c41e13b28c953772bdd9690102ea1",
+  "study_q/STUDY_Q_PROTOCOL.md": "b2798c3d7910e86fc3a538a4eb1e241d2737819dd15768690567367375b911dc",
+  "study_q/config_study_q.json": "d52219c7e20853ec8846ffbc893874c9a449211ce042fb23ee429ddcc1a5a12e",
+  "tests/test_q_analyze.py": "ec5f65af6f7a1116ae15cd531f61003233ad1fe1724e61b3f56ee87128e0122d",
+  "tests/test_q_core.py": "b18d2781ec635afc8d5b496cf052c8286e44d8820fb2ce673c8dbd7857a89fc7",
+  "tools/q_analyze.py": "c31488b87a0e9b23e3d5aca7eead07bcc614e6eddab03b78406563b25fddb189",
+  "tools/q_instance.py": "b87b5d55e39023fafdcff70ad28b9fcbbe434cd2650ac3a1689cd4f95377af8e",
+  "tools/q_prepare_freeze.py": "9805670a6ba452fcaf280bff4aaa964ca5ce8ab77670fa1993b0febe5921609c",
+  "tools/q_probe_inner.py": "a07b58aac00926fa8f28711dc29d8a388bbd0a8f1844cf1b91eb808b54d2ab9f"
+ }
+}

@@ -1,0 +1,7 @@
+{
+  "experiment_id": "study-q-v1",
+  "status": "DRAFT",
+  "requires_freeze": true,
+  "seed_time_utc": "SET_AT_FREEZE",
+  "extra_tracked": []
+}
