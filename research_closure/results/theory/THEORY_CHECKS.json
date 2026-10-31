@@ -80,5 +80,18 @@
   "error_ledger": 0.04,
   "held": true,
   "no_ledger_exceeded_alpha": true
+ },
+ "C9_harm_certificate": {
+  "statement": "harm certificate at h = eta certifies with rate <= alpha",
+  "reps": 2000,
+  "n": 300,
+  "certification_rate_at_boundary": 0.1035,
+  "wilson95": [
+   0.09090113877201708,
+   0.11761913548518968
+  ],
+  "growth_threshold_over_eta": 0.3940689303437901,
+  "clean_draws_family16": 110,
+  "held": true
  }
 }

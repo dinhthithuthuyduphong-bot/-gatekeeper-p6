@@ -8,3 +8,4 @@
 | C6_alpha_ledger | sum over epochs of 6/(pi^2 (k+1)^2) <= 1 | True | partial_sum_1e6=1.0 |
 | C7_corollary8_consistency | Corollary 8: d_bar implied by the overlap share | False | implied_mean_partners=10.602, draft_dbar=0.34 |
 | C8_readmission_ledger | re-admission: full alpha per epoch can exceed alpha; the ledger does not | True | error_full_alpha_each_epoch=0.452, error_ledger=0.04 |
+| C9_harm_certificate | harm certificate at h = eta certifies with rate <= alpha | True | certification_rate_at_boundary=0.1035, growth_threshold_over_eta=0.3941, clean_draws_family16=110 |
