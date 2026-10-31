@@ -18,7 +18,7 @@ Cập nhật sau **mỗi** lần chạy. Mỗi tiêu chí có trạng thái **TH
 | S4 | Đánh giá trên dữ liệu thật, có đăng ký trước, có kết quả âm | **THẮNG** | Study D, E, G, H, P, Q, R2; FREEZE + submission check |
 | S5 | So sánh với baseline mạnh và với công trình gần nhất | **THẮNG một phần** | B2, B6-R (kiểu GSE), B8; PatchDiff. **Thiếu:** chạy chính GSE (A12) |
 | S6 | Kỹ năng đa dạng, quy mô thư viện thực tế | **THẮNG một phần** | R2: 12 họ trên 16 repo (footprint, tương tác). Study S: cổng ra quyết định thật cho 8 họ trên 12 hàm thật (48 ô). **Thiếu:** admit với oracle của chuyên gia cho các họ mới (hiện "tác hại" = khác bản gốc) |
-| S7 | Tác hại của tổ hợp đo trên dữ liệu thật | **THẮNG một phần** | Study S (S-A3, kết quả cuối): 12 hàm thật, tổ hợp cộng tính, cổng loại đúng 3/48 ô. **Thiếu:** 11 đơn vị không chạy được (hera_pspec: phụ thuộc không có trên PyPI); chưa có tổ hợp thật nào gây hại "nảy sinh" để minh hoạ Định lý 2.5 |
+| S7 | Tác hại của tổ hợp đo trên dữ liệu thật | **THẮNG một phần** | Study S (S-A5, kết quả cuối): 16/23 hàm thật, tổ hợp cộng tính, cổng loại đúng 3/64 ô. **Thiếu:** chưa có tổ hợp thật nào gây hại "nảy sinh" để minh hoạ Định lý 2.5 (bài nói rõ) |
 | S8 | Người chấm độc lập là con người | **THUA → thay bằng model (đang chạy)** | Người chấm thứ ba là model khác (gemini-flash), chấm mù; nhãn đa số của 3 người chấm, Fleiss κ. Vẫn không phải người: nói rõ trong bài |
 | S9 | Tái lập được, có artifact ẩn danh | **THẮNG** (chờ upload) | submission check pass; `make_anonymous_artifact.py`. Người làm: upload |
 | S10 | Đúng định dạng và hạn của venue | **THẮNG** (cần xem lại khi có call for papers chính thức) | FSE 2027 đã hết hạn → **ISSTA 2027**, hạn bài 11/1/2027, 18 trang + tham khảo (quy định 2026); bài 14 trang; đã thêm mục Data Availability bắt buộc |
@@ -59,8 +59,10 @@ Mỗi dòng gồm:
 | R21 | 31/10 | Tra venue (WebSearch) | Giới hạn trang, hạn nộp | — | — | **THUA → đổi hướng**: FSE 2027 đã hết hạn (2–3/10). Chọn ISSTA 2027 (11/1/2027, 18 trang): **THẮNG** | — |
 | R22 | 31/10 | Rà yếu điểm bằng máy | Kiểm yêu cầu bắt buộc của venue | Thêm mục Data Availability; DOI Smith 2015; sửa câu "a single command" thành "four commands" cho đúng README | — | **THẮNG** | — |
 | R23 | 31/10 | Study S-A4 (3e8a99e) | Cài các gói HERA từ GitHub | `--s-a4`, cố định `PYTHONHASHSEED` | — | **THUA** với hera_pspec; kết quả 12 đơn vị lặp lại y hệt S-A3 (ổn định với hash seed cố định) | Vòng C bước 1, **tìm ra nguyên nhân gốc** từ log: harness đặt `SETUPTOOLS_SCM_PRETEND_VERSION=0.0.0` cho mọi gói, nên `uvtools` build từ mã nguồn thành 0.0.0. Sửa: S-A5 |
-| R24 | 31/10 | Study S-A5 (đang chạy) | Phiên bản giả chỉ áp cho gói đang kiểm | `SETUPTOOLS_SCM_PRETEND_VERSION_FOR_<NAME>` | — | *chờ* | — |
-| R25 | 31/10 | Model stand-ins (41229462629, đang chạy) | Người chấm thứ 3; model kiểm chứng minh; 3 phản biện giả lập | `qa1_three_raters.py`, `llm_review.py` | — | *chờ* | — |
+| R24 | 31/10 | Study S-A5 (684b956) | Phiên bản giả chỉ áp cho gói đang kiểm | `SETUPTOOLS_SCM_PRETEND_VERSION_FOR_<NAME>` | — | **THẮNG**: hera_pspec cài được; 16/23 đơn vị dùng được; tổ hợp cộng tính; cổng loại đúng 3/64 ô | Còn 7 đơn vị gọi không được (6 crash, 1 property) |
+| R25 | 31/10 | Model stand-ins (41229462629, a2a004c) | Người chấm thứ 3; model kiểm chứng minh; 3 phản biện giả lập | `qa1_three_raters.py`, `llm_review.py` | **Model tìm 5 điểm chứng minh** (sổ cái theo scope, thời điểm dừng của e-Holm, Giả định 3 trong Định lý 2, luật thực thi cho thành phần đơn, tính hiện thực ở Mệnh đề 1b), đều đúng, đều đã sửa. Phản biện: accept / strong accept / weak accept; 13 điểm, xử lý trong MODEL_REVIEW_RESPONSE.md | **THẮNG một phần**: cả hai model chấm R cho toàn bộ 154 mục, nên κ vô nghĩa; theo đa số 3 người chấm, Q-A1 thành 5/36 | Vòng C bước 2: model chấm có phân biệt R/B không? → phép kiểm hiệu chuẩn (R26) |
+| R26 | 31/10 | Hiệu chuẩn người chấm (41230256324, đang chạy) | 20 mục tổng hợp biết trước đáp án (10 B, 10 R) | `rater_calibration.py` | — | *chờ* | — |
+| R27 | 31/10 | Paper round 5 (0d6eff1) | Sửa theo model review | Xem MODEL_REVIEW_RESPONSE.md; thêm bảng tổng quan các study; sửa câu sai "mọi study dùng seed drand" | — | **THẮNG**: 49/49 con số khớp | — |
 
 ## C. Vòng debug khi THUA (làm theo thứ tự)
 

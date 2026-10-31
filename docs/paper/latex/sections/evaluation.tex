@@ -105,19 +105,20 @@ overlapping pair is harmful), ours in $0/1{,}000$, at the cost of $1.64$ instead
 overlap less than the synthetic ones, so both the risk of one-by-one admission and the cost of the rule are smaller; neither vanishes.
 
 \paragraph{Do real compositions behave like their parts? (Study S)}
-% source: research_closure/results/study_s/COMPOSITION_STUDY.json (registered), COMPOSITION_STUDY_SA1.json (amendment S-A1); study_s/
+% source: research_closure/results/study_s/COMPOSITION_STUDY.json (registered), COMPOSITION_STUDY_SA1..SA5.json; study_s/AMENDMENTS.md
 We called each of the $23$ functions that two families touch, or where one enables the other, on $200$ signature-generated inputs in
 five versions: the original, each rewrite alone, and both in either order.  As registered only $2$ of $23$ could be called, because
-methods need a receiver; with receivers built from constructor signatures (post hoc amendment S-A1) $12$ were usable, and the rest
-could not be installed ($9$, one repository) or called ($2$).  Two further post hoc runs replaced integer arguments by
-booleans with probability $1/4$ (a valid subtype, S-A2) and repeated every version (S-A3).  In the final run, no composition changed
-behaviour where both of its parts kept it, none masked a change of a part, and none depended on the order; an apparent order
-dependence on one input of \texttt{pydal}'s \texttt{QueryBuilder.parse} in S-A2 did not survive the repetition, as our pre-stated rule
-required, and is counted as noise.  The \texttt{bool} guard alone changed \texttt{pydal}'s \texttt{IS\_STRONG.validate} on $29$ of
-$200$ inputs and both of its compositions did the same.  With the harm certificate and e-Holm over all $48$ cells, the gate rejected
-exactly the $3$ cells that contain that guard and admitted the other $45$; no function had both singles admitted and a composite
-rejected.  On these functions overlapping rewrites composed additively, consistent with Assumption~\ref{ass:noninteract}; the
-evidence is limited to $12$ functions and generated inputs, so the theorem's warning stands.
+methods need a receiver.  Five post hoc amendments, each written before its run, fixed the harness: receivers built from
+constructor signatures ($12$ usable, S-A1), integer arguments replaced by booleans with probability $1/4$ (a valid subtype, S-A2),
+every version run twice (S-A3), a fixed hash seed (S-A4), and an installation bug of our harness that had given every dependency
+built from source a placeholder version (S-A5).  In the final run $16$ functions were usable and $7$ could not be called.  No
+composition changed behaviour where both of its parts kept it, none masked a change of a part, and none depended on the order; an
+apparent order dependence on one input of \texttt{pydal}'s \texttt{QueryBuilder.parse} in S-A2 did not survive the repetition, as
+our pre-stated rule required, and is counted as noise.  The \texttt{bool} guard alone changed \texttt{pydal}'s
+\texttt{IS\_STRONG.validate} on $29$ of $200$ inputs and both of its compositions did the same.  With the harm certificate and
+e-Holm over all $64$ cells, the gate rejected exactly the $3$ cells that contain that guard and admitted the other $61$; no function had
+both singles admitted and a composite rejected.  On these functions overlapping rewrites composed additively, consistent with
+Assumption~\ref{ass:noninteract}; the evidence is limited to $16$ functions and generated inputs, so the theorem's warning stands.
 
 \begin{table}[t]
 \caption{The Study R2 library: families, the inputs on which each rewrite changes behaviour, and the number of the $16$ target

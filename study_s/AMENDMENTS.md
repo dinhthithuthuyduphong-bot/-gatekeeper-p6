@@ -72,3 +72,9 @@ could not satisfy `uvtools>=0.2.0` ("Requested uvtools>=0.2.0 ... but installing
 ## S-A5 (written before running): pretend version only for the target package
 **Change.** As S-A4, but the pretend version is set only for the target's own distribution
 (`SETUPTOOLS_SCM_PRETEND_VERSION_FOR_<NAME>`), so dependencies keep their real versions. Results in `COMPOSITION_STUDY_SA5.json`.
+
+### Outcome of S-A5
+hera_pspec installed (return code 0): the root cause was the global pretend version. 16 of 23 units usable (7 could not be called:
+5 hera_pspec functions crashed the inner process, 1 pycubrid crash, 1 trino property without a signature). Results unchanged in
+kind: 0 emergent, 0 masking, 0 order-dependent; the gate rejected the same 3 cells (bool guard on `IS_STRONG.validate`) and admitted
+61 of 64. This is the result reported in the paper.

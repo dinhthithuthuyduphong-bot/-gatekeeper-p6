@@ -41,6 +41,7 @@ SS = "research_closure/results/study_s/COMPOSITION_STUDY.json"
 SA = "research_closure/results/study_s/COMPOSITION_STUDY_SA1.json"
 S2 = "research_closure/results/study_s/COMPOSITION_STUDY_SA2.json"
 S3 = "research_closure/results/study_s/COMPOSITION_STUDY_SA3.json"
+S5 = "research_closure/results/study_s/COMPOSITION_STUDY_SA5.json"
 
 CLAIMS = [
     ("Q usable instances", "$245$ instances usable", lambda: "$%d$ instances usable" % QA()["Q1_funnel"]["FINISHED"]),
@@ -128,22 +129,21 @@ CLAIMS = [
                                                                       J(RG)["main"]["P1"]["mean_beneficial_skills_executed"])),
     ("S registered usable", "As registered only $2$ of $23$ could be called",
      lambda: "As registered only $%d$ of $%d$ could be called" % (J(SS)["total"]["usable"], J(SS)["total"]["units"])),
-    ("S-A1 usable", "(post hoc amendment S-A1) $12$ were usable",
-     lambda: "(post hoc amendment S-A1) $%d$ were usable" % J(SA)["total"]["usable"]),
-    ("S-A1 unusable split", "could not be installed ($9$, one repository) or called ($2$)",
-     lambda: "could not be installed ($%d$, one repository) or called ($%d$)" % (
-         sum(1 for u in J(SA)["units"] if not u.get("usable") and "import failed" in u.get("why", "")),
-         sum(1 for u in J(SA)["units"] if not u.get("usable") and "import failed" not in u.get("why", "")))),
-    ("S-A3 final", "no composition changed\nbehaviour where both of its parts kept it, none masked a change of a part, and none depended on the order",
-     lambda: "no composition changed\nbehaviour where both of its parts kept it, none masked a change of a part, and none depended on the order"
-     if all(J(S3)["total"][k] == 0 for k in ("units_emergent", "units_masking", "units_order_dependent")) else "CHANGED"),
+    ("S-A1 usable", "($12$ usable, S-A1)", lambda: "($%d$ usable, S-A1)" % J(SA)["total"]["usable"]),
+    ("S-A5 usable", "In the final run $16$ functions were usable and $7$ could not be called",
+     lambda: "In the final run $%d$ functions were usable and $%d$ could not be called" % (J(S5)["total"]["usable"],
+                                                                                        J(S5)["total"]["units"] - J(S5)["total"]["usable"])),
+    ("S-A5 final", "No\ncomposition changed behaviour where both of its parts kept it, none masked a change of a part, and none depended on the order",
+     lambda: "No\ncomposition changed behaviour where both of its parts kept it, none masked a change of a part, and none depended on the order"
+     if all(J(S5)["total"][k] == 0 for k in ("units_emergent", "units_masking", "units_order_dependent")) else "CHANGED"),
     ("S-A2 noise unit", "an apparent order\ndependence on one input of",
      lambda: "an apparent order\ndependence on %s input of" % {1: "one"}[sum(1 for u in J(S2)["units"] if u.get("order_dependent"))]),
     ("S-A3 IS_STRONG", "on $29$ of\n$200$ inputs",
-     lambda: "on $%d$ of\n$%d$ inputs" % next((u["counts"]["B"], u["stable"]) for u in J(S3)["units"] if u.get("qualname") == "IS_STRONG.validate")),
-    ("S-A3 gate", "over all $48$ cells, the gate rejected\nexactly the $3$ cells",
-     lambda: "over all $%d$ cells, the gate rejected\nexactly the $%d$ cells" % (J(S3)["total"]["cells"], J(S3)["total"]["cells"] - J(S3)["total"]["cells_admitted"])),
-    ("S-A3 admitted", "admitted the other $45$", lambda: "admitted the other $%d$" % J(S3)["total"]["cells_admitted"]),
+     lambda: "on $%d$ of\n$%d$ inputs" % next((u["counts"]["B"], u["stable"]) for u in J(S5)["units"] if u.get("qualname") == "IS_STRONG.validate")),
+    ("S-A5 gate", "over all $64$ cells, the gate rejected exactly the $3$ cells",
+     lambda: "over all $%d$ cells, the gate rejected exactly the $%d$ cells" % (J(S5)["total"]["cells"], J(S5)["total"]["cells"] - J(S5)["total"]["cells_admitted"])),
+    ("S-A5 admitted", "admitted the other $61$", lambda: "admitted the other $%d$" % J(S5)["total"]["cells_admitted"]),
+    ("S-A5 limited", "the evidence is limited to $16$ functions", lambda: "the evidence is limited to $%d$ functions" % J(S5)["total"]["usable"]),
     ("Q-A1 generator changed", "re-generating it gave a different program for $17$ of the other $19$ units",
      lambda: "re-generating it gave a different program for $%d$ of the other $%d$ units" % (
          sum(1 for x in J("research_closure/results/study_q/qa1/REPRO.json")["units"] if not x["reproduced"] and not x["same_generator"]),
