@@ -105,9 +105,15 @@ Thứ tự viết nên đi từ phần chắc nhất tới phần khó nhất:
 
 ## Giai đoạn 5: kiểm trước khi nộp (1 tuần)
 
-- [ ] **5.1 Kiểm tái lập:** người khác clone repo, chạy `python -m unittest discover -s tests` (343+ test pass) và workflow `theory checks`, rồi được cùng số.
-- [ ] **5.2 Artifact ẩn danh** (double-blind): repo hiện công khai và có tên người dùng. Tạo bản ẩn danh (ví dụ anonymous.4open.science), bỏ tên và email trong commit.
-- [ ] **5.3 Kiểm số lần cuối:** mỗi con số trong PDF có trong bảng 2.1.
+> **Trạng thái 31/10/2026:**
+> - 5.1–5.3 tự động hoá, đã pass trên Actions: workflow `Gatekeeper submission check` (tái lập + artifact ẩn danh) và `Gatekeeper paper LaTeX build`.
+> - 5.4: đã chuyển sang `acmsmall` một cột, `review,anonymous` (FSE 2027); **giới hạn trang và hạn nộp phải xác minh trên trang chính thức**.
+> - 5.5: việc của thầy.
+> - Danh sách việc của người: [`paper/SUBMISSION_CHECKLIST.md`](paper/SUBMISSION_CHECKLIST.md).
+
+- [x] **5.1 Kiểm tái lập:** người khác clone repo, chạy `python -m unittest discover -s tests` (343+ test pass) và workflow `theory checks`, rồi được cùng số.
+- [x] **5.2 Artifact ẩn danh** (double-blind): repo hiện công khai và có tên người dùng. Tạo bản ẩn danh (ví dụ anonymous.4open.science), bỏ tên và email trong commit.
+- [x] **5.3 Kiểm số lần cuối:** mỗi con số trong PDF có trong bảng 2.1.
 - [ ] **5.4 Kiểm định dạng:** số trang, template ACM, mục Data availability chỉ mô tả những gì thật sự có trong artifact (bản nháp mô tả nhiều thứ không có, PAPER_AUDIT N5).
 - [ ] **5.5 Thầy duyệt bản cuối;** ghi vào PROCESS_LOG ngày nộp và mã bài.
 

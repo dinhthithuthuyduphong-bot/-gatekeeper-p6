@@ -192,3 +192,14 @@ Mẫu cho mỗi mục:
 - **Bản bài đầy đủ**, `docs/paper/latex/main.tex`: intro, motivation, approach, implementation, related, conclusion (mới); evaluation có RQ1–RQ4; abstract chỉ dùng số đo được.
 - Build (run 41211396873): thành công, 6 trang, không còn tham chiếu thiếu; 16/16 con số khớp.
 - Còn mở: chép đủ tác giả MemCoder và MemGovern; mục 1.9 (người đọc độc lập); thầy đọc toàn bài; số trang theo venue.
+
+### ~17:00 — Giai đoạn 5: kiểm trước khi nộp
+- **5.2 Artifact ẩn danh:** `tools/make_anonymous_artifact.py`.
+  - Lấy các tệp được git theo dõi, bỏ ghi chú nội bộ (PROCESS_LOG, TRACKING, PAPER_TODO, các audit), PDF bản nháp, `archive/`, `docs/history/` và `.git`.
+  - Thay link repo bằng `ANONYMOUS/gatekeeper-artifact`; quét văn bản và tệp `.gz` / `.tar.gz` theo tên tài khoản và tác giả trong `git log`.
+  - Cục bộ: 1.708 tệp, 223 chỗ thay, **0 dấu vết**.
+  - Bên trong artifact (không có `.git`): test pass, freeze D/E/G/H/Q verified, 16/16 rồi 19/19 con số khớp, kết quả kiểm lý thuyết **giống hệt từng byte** bản commit.
+  - Có `README_ARTIFACT.md` và test.
+- **5.1, 5.3:** workflow `Gatekeeper submission check` gồm job `repro` và `artifact`; run 41212215560 pass cả hai. Bộ kiểm số mở rộng sang Abstract (19 con số).
+- **5.4:** tìm kiếm cho thấy FSE 2027 dùng `acmsmall` một cột với `review,anonymous`; bài đã chuyển (run build 41212373969: 10 trang tính cả tài liệu tham khảo). Trang conf.researchr.org bị chặn trong phiên, nên giới hạn trang và hạn nộp chưa xác minh.
+- Việc của người: `docs/paper/SUBMISSION_CHECKLIST.md`.
