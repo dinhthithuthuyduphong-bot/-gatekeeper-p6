@@ -41,3 +41,15 @@ is conservative). Mean draws of G count every draw up to its stopping time.
 LJ (model judge) and T (test suites) follow in amendments T-A2 and T-A3, written before they run.
 
 **Win criteria W1–W4 unchanged.**
+
+## T-A2 (written before it runs): LLM-judge baseline LJ
+- **Input to the model:** for every census cell, the unified diff of the cell's change on the package (the skill applied to the
+  cell's files, as in the trials), truncated to its first 2,000 characters, plus the skill's name. The model sees no trial or
+  reference outcome.
+- **Model and settings:** gemini-3.8-flash, temperature 0, one call per cell, hard cap 3 USD (`SpendGuard`). If the cap is reached,
+  the remaining cells are reported as *not judged* and LJ is compared on the judged cells only.
+- **Prompt (fixed here):** *"You review an automated code change (a lint autofix or refactoring). Will applying it change the
+  observable behaviour of the program for any caller (return values, raised exceptions, side effects)? Reply with JSON only:
+  {"verdict": "safe" | "unsafe", "reason": "<one sentence>"}."*
+- **Decision:** LJ admits iff the verdict is `safe`; an unparsable reply counts as `unsafe`.
+- Tool `tools/market_judge.py`; workflow `Gatekeeper Study T LLM judge`; output `JUDGE_*.json`, merged into the analysis.
