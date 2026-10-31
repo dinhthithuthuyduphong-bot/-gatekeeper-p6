@@ -43,6 +43,17 @@ class CompositionStudyTest(unittest.TestCase):
         self.assertEqual(CI.mangled("_Priv", "__x"), "_Priv__x")
         self.assertEqual(CI.mangled("A", "__init__"), "__init__")
 
+    def test_subtype_substitution(self):
+        import random
+        import composition_inner as CI
+        rng = random.Random(1)
+        vals = [CI.subst(5, rng) for _ in range(400)]
+        n_bool = sum(type(v) is bool for v in vals)
+        self.assertTrue(60 < n_bool < 140)                        # about 1/4
+        self.assertIs(CI.subst(True, rng), True)                   # bools stay
+        self.assertEqual(CI.subst("x", rng), "x")
+        self.assertTrue(all(type(v) in (int, bool) for v in CI.subst([1, (2, 3), {"k": 4}], rng)[:1]))
+
     def test_harm_e(self):
         e, fired = S.harm_e([0] * 150)
         self.assertGreater(e, 100)

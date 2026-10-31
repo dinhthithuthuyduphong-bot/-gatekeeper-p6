@@ -31,6 +31,7 @@ VARIANTS = ("A", "B", "AB", "BA")
 UNITS_ONLY = False   # --units-only: list the units (no function is run, no outcome is seen)
 S_A1 = False         # --s-a1: amendment S-A1 (post hoc): receivers built from the constructor signature, mangled names,
 #                      manifest Python version, install log recorded (study_s/AMENDMENTS.md)
+S_A2 = False         # --s-a2: amendment S-A2 (S-A1 plus subtype substitution and a Python 3.11 install fallback)
 INSTALL_LOG = {}
 
 
@@ -39,7 +40,7 @@ def inner(py, root, pp, rel, qualname, mode, calls, out, n, seed=0):
     if not S_A1:
         return FP.inner(py, root, pp, rel, qualname, mode, calls, out, n, seed)
     args = {"root": str(root), "pythonpath": pp, "file": rel, "qualname": qualname, "mode": mode, "n": n, "seed": seed,
-            "calls": str(calls), "out": str(out), "timeout": 2}
+            "calls": str(calls), "out": str(out), "timeout": 2, "subtype": S_A2}
     ap = Path(str(out) + ".args.json")
     try:
         with FP.at_common_path(root) as common:
@@ -148,6 +149,15 @@ def make_env(work, root, manifest):
         r = subprocess.run([str(py), "-m", "pip", "install", "-q", str(root)], env=e, capture_output=True, text=True, timeout=1800)
         log.update(install_rc=r.returncode, install_tail=(r.stderr or r.stdout)[-600:])
         subprocess.run([str(py), "-m", "pip", "uninstall", "-y", "-q", pkg], capture_output=True, timeout=600)
+    if S_A2 and log.get("install_rc") and shutil.which("python3.11") and manifest.get("python") != "3.11":
+        env2 = work / "venv311"
+        subprocess.run([shutil.which("python3.11"), "-m", "venv", str(env2)], check=True)
+        py2 = env2 / "bin" / "python"
+        r = subprocess.run([str(py2), "-m", "pip", "install", "-q", str(root)], env=e, capture_output=True, text=True, timeout=1800)
+        log["fallback_311"] = {"install_rc": r.returncode, "install_tail": (r.stderr or r.stdout)[-600:]}
+        if r.returncode == 0:
+            subprocess.run([str(py2), "-m", "pip", "uninstall", "-y", "-q", pkg], capture_output=True, timeout=600)
+            py = py2
     INSTALL_LOG[str(root)] = log
     return py
 
@@ -265,9 +275,10 @@ def main(argv):
     work, out = Path(argv[0]), Path(argv[1])
     opt = lambda k, d: type(d)(argv[argv.index(k) + 1]) if k in argv else d   # noqa: E731
     n = opt("--n", 200)
-    global UNITS_ONLY, S_A1
+    global UNITS_ONLY, S_A1, S_A2
     UNITS_ONLY = "--units-only" in argv
-    S_A1 = "--s-a1" in argv
+    S_A2 = "--s-a2" in argv
+    S_A1 = "--s-a1" in argv or S_A2
     census = json.loads(CENSUS.read_text())
     only = set(opt("--targets", "").split(",")) - {""}
     edge_targets = {k for k, v in census["with_enabling_edges"]["targets"].items() if v["edges"]}
@@ -292,7 +303,7 @@ def main(argv):
     summary = summarise(res)
     summary["install"] = {r["target"]: r.get("install") for r in res}
     out.mkdir(parents=True, exist_ok=True)
-    name = "COMPOSITION_STUDY_SA1.json" if S_A1 else "COMPOSITION_STUDY.json"
+    name = "COMPOSITION_STUDY_SA2.json" if S_A2 else "COMPOSITION_STUDY_SA1.json" if S_A1 else "COMPOSITION_STUDY.json"
     (out / name).write_text(json.dumps(summary, indent=1, default=str))
     print(json.dumps(summary["total"], indent=1))
     return 0

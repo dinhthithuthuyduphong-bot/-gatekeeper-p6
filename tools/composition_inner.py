@@ -37,6 +37,19 @@ def resolve_target(a):
     return mod, parent, name, why
 
 
+def subst(value, rng):
+    """Amendment S-A2: replace each int (not bool) by True/False with probability 1/4; bool is a subclass of int."""
+    if type(value) is int:
+        return rng.choice([True, False]) if rng.random() < 0.25 else value
+    if isinstance(value, list):
+        return [subst(v, rng) for v in value]
+    if isinstance(value, tuple):
+        return tuple(subst(v, rng) for v in value)
+    if isinstance(value, dict):
+        return {k: subst(v, rng) for k, v in value.items()}
+    return value
+
+
 def state(obj):
     try:
         d = vars(obj)
@@ -66,6 +79,14 @@ def main(path):
             fn = getattr(parent, name)
             plain, why = FI.generate(fn, n, seed, False)
             calls = [[None, None, c[0], c[1]] for c in plain]
+        if a.get("subtype"):
+            import random
+            out_calls = []
+            for i, c in enumerate(calls):
+                rng = random.Random("%s:subtype:%d" % (seed, i))
+                out_calls.append([subst(c[0], rng) if c[0] is not None else None, subst(c[1], rng) if c[1] is not None else None,
+                                  subst(c[2], rng), subst(c[3], rng)])
+            calls = out_calls
         Path(a["calls"]).write_text(json.dumps([[FI.dumps_calls([[c[0] or [], c[1] or {}]]), FI.dumps_calls([[c[2], c[3]]]),
                                                  c[0] is None] for c in calls]))
         Path(a["out"]).write_text(json.dumps({"status": "UNCALLABLE" if (why or not calls) else "GENERATED", "reason": why,
