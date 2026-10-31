@@ -1,0 +1,15 @@
+{
+ "name": "rq5_rate_study_q (patch_rq5_rate_study_q.zip)",
+ "files": {
+  ".github/workflows/rq5-rate.yml": "a5fa6b5360e8d26e251c658667664f914d9de70f84119187e1e35c2eef4ecc33",
+  ".github/workflows/study-q-f0.yml": "af2fdf67b0a5cae2660e683e2d13bb45aecc2ca641b470a40604d5c24adf6a7d",
+  "research_closure/results/STUDY_Q_DRAFT.md": "b22eec8bc83c94afee2886ac30def2871e01e3bec89d6b875e9700d979b9d625",
+  "research_closure/results/rq5/RQ5_RATINGS_ASSISTANT.json": "127fbc9617c93ce229789166b940458302c0e6c1ae89a484047c19043bf15c27",
+  "research_closure/results/rq5/RQ5_REVIEW_ITEMS.json": "a977765c642ebc195e0fa4bb05e9c8c260e005f5ad7f7f6f68373485e822a145",
+  "tests/test_q_f0.py": "fa631882cb7b5cafaff4a4a7ddc48be76bb96f4b74d5604d9dc1dd66d9161cb8",
+  "tests/test_rq5_rating.py": "fc611ee779f5d5acd432b29a5b4cc6fbf650036363965ffe2a45bbb34d9a87a6",
+  "tools/q_f0.py": "2f43823d0507c6e65fec1f871fdf5f514fc5fbe43884bfd9a8f1f8d5bf614de3",
+  "tools/rq5_agreement.py": "7ac9aca4d920a044558e6c7bd403622f0c330d083d77129bc2ded216a8f0c4bf",
+  "tools/rq5_rate_llm.py": "71832f669588beaee8601a0f9ce01e28becafcdf78b38051432e12c7d6527cf6"
+ }
+}

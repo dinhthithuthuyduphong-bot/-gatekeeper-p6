@@ -1,0 +1,308 @@
+[
+ {
+  "id": "litellm_pr13466#1",
+  "patch": "litellm_pr13466",
+  "function": "GetRoutes.get_routes_for_mounted_app",
+  "file": "litellm/proxy/common_utils/get_routes.py",
+  "reference_output": [
+   "ok",
+   "list",
+   "[{'path': '/mounted/service', 'methods': ['GET', 'POST'], 'name': None, 'endpoint': None, 'mounted_app': True}]"
+  ],
+  "patch_output": [
+   "exc",
+   "RuntimeError",
+   "Property error"
+  ],
+  "diff": "--- a/litellm/proxy/common_utils/get_routes.py\n+++ b/litellm/proxy/common_utils/get_routes.py\n@@ -8,6 +8,14 @@\n \n \n class GetRoutes:\n+    @staticmethod\n+    def _safe_get_endpoint_name(endpoint_func: Any) -> str:\n+        if hasattr(endpoint_func, \"__name__\"):\n+            return endpoint_func.__name__\n+        if hasattr(endpoint_func, \"__class__\"):\n+            return endpoint_func.__class__.__name__\n+        return str(endpoint_func)\n+\n     @staticmethod\n     def get_app_routes(\n         route: BaseRoute,\n@@ -53,7 +61,7 @@\n                         \"path\": full_path,\n                         \"methods\": getattr(sub_route, \"methods\", [\"GET\", \"POST\"]),\n                         \"name\": getattr(sub_route, \"name\", None),\n-                        \"endpoint\": endpoint_func.__name__ if callable(endpoint_func) else None,\n+                        \"endpoint\": GetRoutes._safe_get_endpoint_name(endpoint_func),\n                         \"mounted_app\": True,\n                     }\n                     routes.append(route_info)\n",
+  "origin": "C1 (planned)"
+ },
+ {
+  "id": "litellm_pr13466#2",
+  "patch": "litellm_pr13466",
+  "function": "GetRoutes.get_routes_for_mounted_app",
+  "file": "litellm/proxy/common_utils/get_routes.py",
+  "reference_output": [
+   "ok",
+   "list",
+   "[{'path': '/mounted/service/items/', 'methods': ['GET', 'POST'], 'name': None, 'endpoint': None, 'mounted_app': True}]"
+  ],
+  "patch_output": [
+   "exc",
+   "RuntimeError",
+   "Property error"
+  ],
+  "diff": "--- a/litellm/proxy/common_utils/get_routes.py\n+++ b/litellm/proxy/common_utils/get_routes.py\n@@ -8,6 +8,14 @@\n \n \n class GetRoutes:\n+    @staticmethod\n+    def _safe_get_endpoint_name(endpoint_func: Any) -> str:\n+        if hasattr(endpoint_func, \"__name__\"):\n+            return endpoint_func.__name__\n+        if hasattr(endpoint_func, \"__class__\"):\n+            return endpoint_func.__class__.__name__\n+        return str(endpoint_func)\n+\n     @staticmethod\n     def get_app_routes(\n         route: BaseRoute,\n@@ -53,7 +61,7 @@\n                         \"path\": full_path,\n                         \"methods\": getattr(sub_route, \"methods\", [\"GET\", \"POST\"]),\n                         \"name\": getattr(sub_route, \"name\", None),\n-                        \"endpoint\": endpoint_func.__name__ if callable(endpoint_func) else None,\n+                        \"endpoint\": GetRoutes._safe_get_endpoint_name(endpoint_func),\n                         \"mounted_app\": True,\n                     }\n                     routes.append(route_info)\n",
+  "origin": "C1 (planned)"
+ },
+ {
+  "id": "litellm_pr13466#3",
+  "patch": "litellm_pr13466",
+  "function": "GetRoutes.get_routes_for_mounted_app",
+  "file": "litellm/proxy/common_utils/get_routes.py",
+  "reference_output": [
+   "ok",
+   "list",
+   "[{'path': '/test', 'methods': ['GET', 'POST'], 'name': None, 'endpoint': None, 'mounted_app': True}]"
+  ],
+  "patch_output": [
+   "exc",
+   "RuntimeError",
+   "Property error"
+  ],
+  "diff": "--- a/litellm/proxy/common_utils/get_routes.py\n+++ b/litellm/proxy/common_utils/get_routes.py\n@@ -8,6 +8,14 @@\n \n \n class GetRoutes:\n+    @staticmethod\n+    def _safe_get_endpoint_name(endpoint_func: Any) -> str:\n+        if hasattr(endpoint_func, \"__name__\"):\n+            return endpoint_func.__name__\n+        if hasattr(endpoint_func, \"__class__\"):\n+            return endpoint_func.__class__.__name__\n+        return str(endpoint_func)\n+\n     @staticmethod\n     def get_app_routes(\n         route: BaseRoute,\n@@ -53,7 +61,7 @@\n                         \"path\": full_path,\n                         \"methods\": getattr(sub_route, \"methods\", [\"GET\", \"POST\"]),\n                         \"name\": getattr(sub_route, \"name\", None),\n-                        \"endpoint\": endpoint_func.__name__ if callable(endpoint_func) else None,\n+                        \"endpoint\": GetRoutes._safe_get_endpoint_name(endpoint_func),\n                         \"mounted_app\": True,\n                     }\n                     routes.append(route_info)\n",
+  "origin": "C1 (planned)"
+ },
+ {
+  "id": "litellm_pr13466#4",
+  "patch": "litellm_pr13466",
+  "function": "GetRoutes.get_routes_for_mounted_app",
+  "file": "litellm/proxy/common_utils/get_routes.py",
+  "reference_output": [
+   "ok",
+   "list",
+   "[{'path': '/test', 'methods': ['GET', 'POST'], 'name': None, 'endpoint': None, 'mounted_app': True}]"
+  ],
+  "patch_output": [
+   "exc",
+   "RuntimeError",
+   "Property error"
+  ],
+  "diff": "--- a/litellm/proxy/common_utils/get_routes.py\n+++ b/litellm/proxy/common_utils/get_routes.py\n@@ -8,6 +8,14 @@\n \n \n class GetRoutes:\n+    @staticmethod\n+    def _safe_get_endpoint_name(endpoint_func: Any) -> str:\n+        if hasattr(endpoint_func, \"__name__\"):\n+            return endpoint_func.__name__\n+        if hasattr(endpoint_func, \"__class__\"):\n+            return endpoint_func.__class__.__name__\n+        return str(endpoint_func)\n+\n     @staticmethod\n     def get_app_routes(\n         route: BaseRoute,\n@@ -53,7 +61,7 @@\n                         \"path\": full_path,\n                         \"methods\": getattr(sub_route, \"methods\", [\"GET\", \"POST\"]),\n                         \"name\": getattr(sub_route, \"name\", None),\n-                        \"endpoint\": endpoint_func.__name__ if callable(endpoint_func) else None,\n+                        \"endpoint\": GetRoutes._safe_get_endpoint_name(endpoint_func),\n                         \"mounted_app\": True,\n                     }\n                     routes.append(route_info)\n",
+  "origin": "C1 (planned)"
+ },
+ {
+  "id": "litellm_pr13466#5",
+  "patch": "litellm_pr13466",
+  "function": "GetRoutes.get_routes_for_mounted_app",
+  "file": "litellm/proxy/common_utils/get_routes.py",
+  "reference_output": [
+   "ok",
+   "list",
+   "[{'path': '/v1', 'methods': ['GET', 'POST'], 'name': None, 'endpoint': None, 'mounted_app': True}]"
+  ],
+  "patch_output": [
+   "exc",
+   "RuntimeError",
+   "Property error"
+  ],
+  "diff": "--- a/litellm/proxy/common_utils/get_routes.py\n+++ b/litellm/proxy/common_utils/get_routes.py\n@@ -8,6 +8,14 @@\n \n \n class GetRoutes:\n+    @staticmethod\n+    def _safe_get_endpoint_name(endpoint_func: Any) -> str:\n+        if hasattr(endpoint_func, \"__name__\"):\n+            return endpoint_func.__name__\n+        if hasattr(endpoint_func, \"__class__\"):\n+            return endpoint_func.__class__.__name__\n+        return str(endpoint_func)\n+\n     @staticmethod\n     def get_app_routes(\n         route: BaseRoute,\n@@ -53,7 +61,7 @@\n                         \"path\": full_path,\n                         \"methods\": getattr(sub_route, \"methods\", [\"GET\", \"POST\"]),\n                         \"name\": getattr(sub_route, \"name\", None),\n-                        \"endpoint\": endpoint_func.__name__ if callable(endpoint_func) else None,\n+                        \"endpoint\": GetRoutes._safe_get_endpoint_name(endpoint_func),\n                         \"mounted_app\": True,\n                     }\n                     routes.append(route_info)\n",
+  "origin": "C1 (planned)"
+ },
+ {
+  "id": "splunk_ansible_pr896#1",
+  "patch": "splunk_ansible_pr896",
+  "function": "merge_dict",
+  "file": "inventory/environ.py",
+  "reference_output": [
+   "ok",
+   "dict",
+   "{'host': ['val2', 36], 'port': None, 'secret': None, 'idxc': {'list_key': -82}, 'shc': False, 'enabled': [-6, None, False]}"
+  ],
+  "patch_output": [
+   "ok",
+   "dict",
+   "{'host': ['val2', 36], 'port': None, 'secret': True, 'idxc': {'list_key': -82}, 'shc': False, 'enabled': [-6, None, False]}"
+  ],
+  "diff": "--- a/inventory/environ.py\n+++ b/inventory/environ.py\n@@ -705,6 +705,12 @@\n     if path is None: path = []\n     for key in dict2:\n         if key in dict1:\n+            if dict2[key] is None:\n+                continue\n+            if isinstance(dict1[key], dict) and isinstance(dict2[key], list) and all(isinstance(item, dict) for item in dict2[key]):\n+                for item in dict2[key]:\n+                    merge_dict(dict1[key], item, path + [str(key)])\n+                continue\n             if isinstance(dict1[key], dict) and isinstance(dict2[key], dict):\n                 merge_dict(dict1[key], dict2[key], path + [str(key)])\n             elif isinstance(dict1[key], list) and isinstance(dict2[key], list):\n",
+  "origin": "C1 (planned)"
+ },
+ {
+  "id": "splunk_ansible_pr896#2",
+  "patch": "splunk_ansible_pr896",
+  "function": "merge_dict",
+  "file": "inventory/environ.py",
+  "reference_output": [
+   "ok",
+   "dict",
+   "{'enabled': None, 'host': 'val1', 'port': {'idxc': 67, 'secret': [None, False], 'list_key': 'localhost'}, 'idxc': ['secret', 'secret', True], 'shc': {'list_key': None}}"
+  ],
+  "patch_output": [
+   "ok",
+   "dict",
+   "{'enabled': False, 'host': 'val1', 'port': {'idxc': 67, 'secret': [None, False], 'list_key': 'localhost'}, 'idxc': ['secret', 'secret', True], 'shc': {'list_key': None}}"
+  ],
+  "diff": "--- a/inventory/environ.py\n+++ b/inventory/environ.py\n@@ -705,6 +705,12 @@\n     if path is None: path = []\n     for key in dict2:\n         if key in dict1:\n+            if dict2[key] is None:\n+                continue\n+            if isinstance(dict1[key], dict) and isinstance(dict2[key], list) and all(isinstance(item, dict) for item in dict2[key]):\n+                for item in dict2[key]:\n+                    merge_dict(dict1[key], item, path + [str(key)])\n+                continue\n             if isinstance(dict1[key], dict) and isinstance(dict2[key], dict):\n                 merge_dict(dict1[key], dict2[key], path + [str(key)])\n             elif isinstance(dict1[key], list) and isinstance(dict2[key], list):\n",
+  "origin": "C1 (planned)"
+ },
+ {
+  "id": "swmmanywhere_pr177#1",
+  "patch": "swmmanywhere_pr177",
+  "function": "download_river",
+  "file": "swmmanywhere/prepare_data.py",
+  "reference_output": [
+   "exc",
+   "ValueError",
+   "Some other error"
+  ],
+  "patch_output": [
+   "ok",
+   "MultiDiGraph",
+   "<networkx.classes.multidigraph.MultiDiGraph object at 0x?>"
+  ],
+  "diff": "--- a/swmmanywhere/prepare_data.py\n+++ b/swmmanywhere/prepare_data.py\n@@ -123,11 +123,14 @@\n             ``truncate_by_edge set`` to True.\n     \"\"\"\n     west, south, east, north = bbox\n-    graph = ox.graph_from_bbox(\n-        bbox = (north, south, east, west),\n-        truncate_by_edge=True, \n-        custom_filter='[\"waterway\"]')\n-    \n+    try:\n+        graph = ox.graph_from_bbox(\n+            bbox = (north, south, east, west),\n+            truncate_by_edge=True, \n+            custom_filter='[\"waterway\"]')\n+    except ValueError:\n+        graph = nx.MultiDiGraph()\n+\n     return cast(\"nx.MultiDiGraph\", graph)\n \n def download_elevation(fid: Path, \n",
+  "origin": "deliberate rejection (post hoc extension)"
+ },
+ {
+  "id": "swmmanywhere_pr177#2",
+  "patch": "swmmanywhere_pr177",
+  "function": "download_river",
+  "file": "swmmanywhere/prepare_data.py",
+  "reference_output": [
+   "exc",
+   "ValueError",
+   "Some other error"
+  ],
+  "patch_output": [
+   "ok",
+   "MultiDiGraph",
+   "<networkx.classes.multidigraph.MultiDiGraph object at 0x?>"
+  ],
+  "diff": "--- a/swmmanywhere/prepare_data.py\n+++ b/swmmanywhere/prepare_data.py\n@@ -123,11 +123,14 @@\n             ``truncate_by_edge set`` to True.\n     \"\"\"\n     west, south, east, north = bbox\n-    graph = ox.graph_from_bbox(\n-        bbox = (north, south, east, west),\n-        truncate_by_edge=True, \n-        custom_filter='[\"waterway\"]')\n-    \n+    try:\n+        graph = ox.graph_from_bbox(\n+            bbox = (north, south, east, west),\n+            truncate_by_edge=True, \n+            custom_filter='[\"waterway\"]')\n+    except ValueError:\n+        graph = nx.MultiDiGraph()\n+\n     return cast(\"nx.MultiDiGraph\", graph)\n \n def download_elevation(fid: Path, \n",
+  "origin": "deliberate rejection (post hoc extension)"
+ },
+ {
+  "id": "swmmanywhere_pr177#3",
+  "patch": "swmmanywhere_pr177",
+  "function": "download_river",
+  "file": "swmmanywhere/prepare_data.py",
+  "reference_output": [
+   "exc",
+   "ValueError",
+   "The geometry of `polygon` is invalid."
+  ],
+  "patch_output": [
+   "ok",
+   "MultiDiGraph",
+   "<networkx.classes.multidigraph.MultiDiGraph object at 0x?>"
+  ],
+  "diff": "--- a/swmmanywhere/prepare_data.py\n+++ b/swmmanywhere/prepare_data.py\n@@ -123,11 +123,14 @@\n             ``truncate_by_edge set`` to True.\n     \"\"\"\n     west, south, east, north = bbox\n-    graph = ox.graph_from_bbox(\n-        bbox = (north, south, east, west),\n-        truncate_by_edge=True, \n-        custom_filter='[\"waterway\"]')\n-    \n+    try:\n+        graph = ox.graph_from_bbox(\n+            bbox = (north, south, east, west),\n+            truncate_by_edge=True, \n+            custom_filter='[\"waterway\"]')\n+    except ValueError:\n+        graph = nx.MultiDiGraph()\n+\n     return cast(\"nx.MultiDiGraph\", graph)\n \n def download_elevation(fid: Path, \n",
+  "origin": "deliberate rejection (post hoc extension)"
+ },
+ {
+  "id": "swmmanywhere_pr177#4",
+  "patch": "swmmanywhere_pr177",
+  "function": "download_river",
+  "file": "swmmanywhere/prepare_data.py",
+  "reference_output": [
+   "exc",
+   "ValueError",
+   "The geometry of `polygon` is invalid."
+  ],
+  "patch_output": [
+   "ok",
+   "MultiDiGraph",
+   "<networkx.classes.multidigraph.MultiDiGraph object at 0x?>"
+  ],
+  "diff": "--- a/swmmanywhere/prepare_data.py\n+++ b/swmmanywhere/prepare_data.py\n@@ -123,11 +123,14 @@\n             ``truncate_by_edge set`` to True.\n     \"\"\"\n     west, south, east, north = bbox\n-    graph = ox.graph_from_bbox(\n-        bbox = (north, south, east, west),\n-        truncate_by_edge=True, \n-        custom_filter='[\"waterway\"]')\n-    \n+    try:\n+        graph = ox.graph_from_bbox(\n+            bbox = (north, south, east, west),\n+            truncate_by_edge=True, \n+            custom_filter='[\"waterway\"]')\n+    except ValueError:\n+        graph = nx.MultiDiGraph()\n+\n     return cast(\"nx.MultiDiGraph\", graph)\n \n def download_elevation(fid: Path, \n",
+  "origin": "deliberate rejection (post hoc extension)"
+ },
+ {
+  "id": "swmmanywhere_pr177#5",
+  "patch": "swmmanywhere_pr177",
+  "function": "download_river",
+  "file": "swmmanywhere/prepare_data.py",
+  "reference_output": [
+   "exc",
+   "ValueError",
+   "Some other error"
+  ],
+  "patch_output": [
+   "ok",
+   "MultiDiGraph",
+   "<networkx.classes.multidigraph.MultiDiGraph object at 0x?>"
+  ],
+  "diff": "--- a/swmmanywhere/prepare_data.py\n+++ b/swmmanywhere/prepare_data.py\n@@ -123,11 +123,14 @@\n             ``truncate_by_edge set`` to True.\n     \"\"\"\n     west, south, east, north = bbox\n-    graph = ox.graph_from_bbox(\n-        bbox = (north, south, east, west),\n-        truncate_by_edge=True, \n-        custom_filter='[\"waterway\"]')\n-    \n+    try:\n+        graph = ox.graph_from_bbox(\n+            bbox = (north, south, east, west),\n+            truncate_by_edge=True, \n+            custom_filter='[\"waterway\"]')\n+    except ValueError:\n+        graph = nx.MultiDiGraph()\n+\n     return cast(\"nx.MultiDiGraph\", graph)\n \n def download_elevation(fid: Path, \n",
+  "origin": "deliberate rejection (post hoc extension)"
+ },
+ {
+  "id": "ceci_pr85#1",
+  "patch": "ceci_pr85",
+  "function": "PipelineStage.parse_command_line",
+  "file": "ceci/stage.py",
+  "reference_output": [
+   "exc",
+   "NotImplementedError",
+   "Only handles str, int and float list arguments"
+  ],
+  "patch_output": [
+   "ok",
+   "Namespace",
+   "Namespace(stage_name='TestStage_195', my_list=['single'], name='renamed_195', config='config.yml', mpi=False, pdb=False, cprofile='', memmon=0)"
+  ],
+  "diff": "--- a/ceci/stage.py\n+++ b/ceci/stage.py\n@@ -498,9 +498,15 @@\n                     f\"--no-{conf}\", dest=conf, action=\"store_const\", const=False\n                 )\n             elif opt_type == list:\n-                out_type = (\n-                    def_val[0] if isinstance(def_val[0], type) else type(def_val[0])\n-                )\n+                list_val = def_val.default if isinstance(def_val, StageParameter) else def_val\n+                if isinstance(list_val, list) and len(list_val) > 0:\n+                    item = list_val[0]\n+                    out_type = item if isinstance(item, type) else type(item)\n+                elif getattr(def_val, \"dtype\", None) not in [None, list]:\n+                    out_type = def_val.dtype\n+                else:\n+                    out_type = str\n+\n                 if out_type is str:  # pragma: no cover\n                     parser.add_argument(\n                         f\"--{conf}\", type=lambda string: string.split(\",\")\n",
+  "origin": "deliberate rejection (post hoc extension)"
+ },
+ {
+  "id": "ceci_pr85#2",
+  "patch": "ceci_pr85",
+  "function": "PipelineStage.parse_command_line",
+  "file": "ceci/stage.py",
+  "reference_output": [
+   "exc",
+   "NotImplementedError",
+   "Only handles str, int and float list arguments"
+  ],
+  "patch_output": [
+   "ok",
+   "Namespace",
+   "Namespace(stage_name='TestStage_1', my_list=None, name='TestStage_1', config=None, mpi=False, pdb=False, cprofile='', memmon=0)"
+  ],
+  "diff": "--- a/ceci/stage.py\n+++ b/ceci/stage.py\n@@ -498,9 +498,15 @@\n                     f\"--no-{conf}\", dest=conf, action=\"store_const\", const=False\n                 )\n             elif opt_type == list:\n-                out_type = (\n-                    def_val[0] if isinstance(def_val[0], type) else type(def_val[0])\n-                )\n+                list_val = def_val.default if isinstance(def_val, StageParameter) else def_val\n+                if isinstance(list_val, list) and len(list_val) > 0:\n+                    item = list_val[0]\n+                    out_type = item if isinstance(item, type) else type(item)\n+                elif getattr(def_val, \"dtype\", None) not in [None, list]:\n+                    out_type = def_val.dtype\n+                else:\n+                    out_type = str\n+\n                 if out_type is str:  # pragma: no cover\n                     parser.add_argument(\n                         f\"--{conf}\", type=lambda string: string.split(\",\")\n",
+  "origin": "deliberate rejection (post hoc extension)"
+ },
+ {
+  "id": "ceci_pr85#3",
+  "patch": "ceci_pr85",
+  "function": "PipelineStage.parse_command_line",
+  "file": "ceci/stage.py",
+  "reference_output": [
+   "exc",
+   "NotImplementedError",
+   "Only handles str, int and float list arguments"
+  ],
+  "patch_output": [
+   "ok",
+   "Namespace",
+   "Namespace(stage_name='TestStage_73', my_list=['a', 'b', 'c'], name='TestStage_73', config=None, mpi=False, pdb=False, cprofile='', memmon=0)"
+  ],
+  "diff": "--- a/ceci/stage.py\n+++ b/ceci/stage.py\n@@ -498,9 +498,15 @@\n                     f\"--no-{conf}\", dest=conf, action=\"store_const\", const=False\n                 )\n             elif opt_type == list:\n-                out_type = (\n-                    def_val[0] if isinstance(def_val[0], type) else type(def_val[0])\n-                )\n+                list_val = def_val.default if isinstance(def_val, StageParameter) else def_val\n+                if isinstance(list_val, list) and len(list_val) > 0:\n+                    item = list_val[0]\n+                    out_type = item if isinstance(item, type) else type(item)\n+                elif getattr(def_val, \"dtype\", None) not in [None, list]:\n+                    out_type = def_val.dtype\n+                else:\n+                    out_type = str\n+\n                 if out_type is str:  # pragma: no cover\n                     parser.add_argument(\n                         f\"--{conf}\", type=lambda string: string.split(\",\")\n",
+  "origin": "deliberate rejection (post hoc extension)"
+ },
+ {
+  "id": "ceci_pr85#4",
+  "patch": "ceci_pr85",
+  "function": "PipelineStage.parse_command_line",
+  "file": "ceci/stage.py",
+  "reference_output": [
+   "exc",
+   "NotImplementedError",
+   "Only handles str, int and float list arguments"
+  ],
+  "patch_output": [
+   "ok",
+   "Namespace",
+   "Namespace(stage_name='TestStage_185', my_list=None, name='TestStage_185', config=None, mpi=False, pdb=False, cprofile='', memmon=0)"
+  ],
+  "diff": "--- a/ceci/stage.py\n+++ b/ceci/stage.py\n@@ -498,9 +498,15 @@\n                     f\"--no-{conf}\", dest=conf, action=\"store_const\", const=False\n                 )\n             elif opt_type == list:\n-                out_type = (\n-                    def_val[0] if isinstance(def_val[0], type) else type(def_val[0])\n-                )\n+                list_val = def_val.default if isinstance(def_val, StageParameter) else def_val\n+                if isinstance(list_val, list) and len(list_val) > 0:\n+                    item = list_val[0]\n+                    out_type = item if isinstance(item, type) else type(item)\n+                elif getattr(def_val, \"dtype\", None) not in [None, list]:\n+                    out_type = def_val.dtype\n+                else:\n+                    out_type = str\n+\n                 if out_type is str:  # pragma: no cover\n                     parser.add_argument(\n                         f\"--{conf}\", type=lambda string: string.split(\",\")\n",
+  "origin": "deliberate rejection (post hoc extension)"
+ },
+ {
+  "id": "ceci_pr85#5",
+  "patch": "ceci_pr85",
+  "function": "PipelineStage.parse_command_line",
+  "file": "ceci/stage.py",
+  "reference_output": [
+   "exc",
+   "NotImplementedError",
+   "Only handles str, int and float list arguments"
+  ],
+  "patch_output": [
+   "ok",
+   "Namespace",
+   "Namespace(stage_name='TestStage_121', my_list=['0.1', '0.2'], name='TestStage_121', config=None, mpi=False, pdb=False, cprofile='', memmon=0)"
+  ],
+  "diff": "--- a/ceci/stage.py\n+++ b/ceci/stage.py\n@@ -498,9 +498,15 @@\n                     f\"--no-{conf}\", dest=conf, action=\"store_const\", const=False\n                 )\n             elif opt_type == list:\n-                out_type = (\n-                    def_val[0] if isinstance(def_val[0], type) else type(def_val[0])\n-                )\n+                list_val = def_val.default if isinstance(def_val, StageParameter) else def_val\n+                if isinstance(list_val, list) and len(list_val) > 0:\n+                    item = list_val[0]\n+                    out_type = item if isinstance(item, type) else type(item)\n+                elif getattr(def_val, \"dtype\", None) not in [None, list]:\n+                    out_type = def_val.dtype\n+                else:\n+                    out_type = str\n+\n                 if out_type is str:  # pragma: no cover\n                     parser.add_argument(\n                         f\"--{conf}\", type=lambda string: string.split(\",\")\n",
+  "origin": "deliberate rejection (post hoc extension)"
+ }
+]

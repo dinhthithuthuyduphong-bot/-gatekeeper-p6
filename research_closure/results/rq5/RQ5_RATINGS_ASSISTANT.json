@@ -1,0 +1,87 @@
+[
+ {
+  "id": "litellm_pr13466#1",
+  "code": "R",
+  "reason": "patch crashes (RuntimeError) where the fix returns the route list: the new helper uses hasattr, which only swallows AttributeError; the input is a synthetic object whose __name__ property raises"
+ },
+ {
+  "id": "litellm_pr13466#2",
+  "code": "R",
+  "reason": "patch crashes (RuntimeError) where the fix returns the route list: the new helper uses hasattr, which only swallows AttributeError; the input is a synthetic object whose __name__ property raises"
+ },
+ {
+  "id": "litellm_pr13466#3",
+  "code": "R",
+  "reason": "patch crashes (RuntimeError) where the fix returns the route list: the new helper uses hasattr, which only swallows AttributeError; the input is a synthetic object whose __name__ property raises"
+ },
+ {
+  "id": "litellm_pr13466#4",
+  "code": "R",
+  "reason": "patch crashes (RuntimeError) where the fix returns the route list: the new helper uses hasattr, which only swallows AttributeError; the input is a synthetic object whose __name__ property raises"
+ },
+ {
+  "id": "litellm_pr13466#5",
+  "code": "R",
+  "reason": "patch crashes (RuntimeError) where the fix returns the route list: the new helper uses hasattr, which only swallows AttributeError; the input is a synthetic object whose __name__ property raises"
+ },
+ {
+  "id": "splunk_ansible_pr896#1",
+  "code": "R",
+  "reason": "merge result differs: the patch skips None values of the second dict, so 'secret' keeps True instead of None"
+ },
+ {
+  "id": "splunk_ansible_pr896#2",
+  "code": "R",
+  "reason": "merge result differs: the patch skips None values of the second dict, so 'secret' keeps True instead of None"
+ },
+ {
+  "id": "swmmanywhere_pr177#1",
+  "code": "R",
+  "reason": "the patch catches every ValueError and returns an empty graph, silently hiding the 'invalid polygon' error the fix raises"
+ },
+ {
+  "id": "swmmanywhere_pr177#2",
+  "code": "R",
+  "reason": "the patch catches every ValueError and returns an empty graph, silently hiding the 'invalid polygon' error the fix raises"
+ },
+ {
+  "id": "swmmanywhere_pr177#3",
+  "code": "R",
+  "reason": "the patch catches every ValueError and returns an empty graph, silently hiding the 'invalid polygon' error the fix raises"
+ },
+ {
+  "id": "swmmanywhere_pr177#4",
+  "code": "R",
+  "reason": "the patch catches every ValueError and returns an empty graph, silently hiding the 'invalid polygon' error the fix raises"
+ },
+ {
+  "id": "swmmanywhere_pr177#5",
+  "code": "R",
+  "reason": "the patch catches every ValueError and returns an empty graph, silently hiding the 'invalid polygon' error the fix raises"
+ },
+ {
+  "id": "ceci_pr85#1",
+  "code": "R",
+  "reason": "the fix deliberately rejects unsupported list argument types (NotImplementedError); the patch silently accepts them as strings"
+ },
+ {
+  "id": "ceci_pr85#2",
+  "code": "R",
+  "reason": "the fix deliberately rejects unsupported list argument types (NotImplementedError); the patch silently accepts them as strings"
+ },
+ {
+  "id": "ceci_pr85#3",
+  "code": "R",
+  "reason": "the fix deliberately rejects unsupported list argument types (NotImplementedError); the patch silently accepts them as strings"
+ },
+ {
+  "id": "ceci_pr85#4",
+  "code": "R",
+  "reason": "the fix deliberately rejects unsupported list argument types (NotImplementedError); the patch silently accepts them as strings"
+ },
+ {
+  "id": "ceci_pr85#5",
+  "code": "R",
+  "reason": "the fix deliberately rejects unsupported list argument types (NotImplementedError); the patch silently accepts them as strings"
+ }
+]
