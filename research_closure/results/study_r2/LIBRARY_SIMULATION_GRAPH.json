@@ -1,0 +1,204 @@
+{
+ "source": "out_r2/LIBRARY_CENSUS.json",
+ "libraries": 13,
+ "library_sizes": [
+  2,
+  2,
+  2,
+  2,
+  3,
+  4,
+  4,
+  4,
+  5,
+  5,
+  5,
+  9,
+  10
+ ],
+ "overlapping_pairs_per_library": [
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  1,
+  1,
+  2,
+  6,
+  8
+ ],
+ "main": {
+  "model": {
+   "skills": "per target (graph mode)",
+   "regions": "measured footprints",
+   "bad_pair_prob": 0.3,
+   "trials_per_cell": 300,
+   "theta": 0.1,
+   "alpha": 0.1,
+   "reps": 1000,
+   "seed": 11,
+   "libraries_with_a_bad_pair": 202
+  },
+  "P1": {
+   "harmful_component_rate": 0.052,
+   "harmful_component_wilson95": [
+    0.039872841792417534,
+    0.06755605934098838
+   ],
+   "harmful_execution_rate": 0.029,
+   "wilson95": [
+    0.020266315636487793,
+    0.04133862283189209
+   ],
+   "mean_beneficial_skills_executed": 1.975,
+   "mean_trials": 1013.715
+  },
+  "P2": {
+   "harmful_component_rate": 0.0,
+   "harmful_component_wilson95": [
+    0.0,
+    0.003826898586390522
+   ],
+   "harmful_execution_rate": 0.0,
+   "wilson95": [
+    0.0,
+    0.003826898586390522
+   ],
+   "mean_beneficial_skills_executed": 1.65,
+   "mean_trials": 1097.484
+  },
+  "P2_within_alpha": true
+ },
+ "sweep_bad_pair_prob": {
+  "0.1": {
+   "model": {
+    "skills": "per target (graph mode)",
+    "regions": "measured footprints",
+    "bad_pair_prob": 0.1,
+    "trials_per_cell": 300,
+    "theta": 0.1,
+    "alpha": 0.1,
+    "reps": 1000,
+    "seed": 11,
+    "libraries_with_a_bad_pair": 114
+   },
+   "P1": {
+    "harmful_component_rate": 0.019,
+    "harmful_component_wilson95": [
+     0.012196787737404147,
+     0.02948468870270354
+    ],
+    "harmful_execution_rate": 0.011,
+    "wilson95": [
+     0.006153110089114164,
+     0.019589596728375767
+    ],
+    "mean_beneficial_skills_executed": 1.996,
+    "mean_trials": 1012.449
+   },
+   "P2": {
+    "harmful_component_rate": 0.0,
+    "harmful_component_wilson95": [
+     0.0,
+     0.003826898586390522
+    ],
+    "harmful_execution_rate": 0.0,
+    "wilson95": [
+     0.0,
+     0.003826898586390522
+    ],
+    "mean_beneficial_skills_executed": 1.613,
+    "mean_trials": 1094.022
+   },
+   "P2_within_alpha": true
+  },
+  "0.5": {
+   "model": {
+    "skills": "per target (graph mode)",
+    "regions": "measured footprints",
+    "bad_pair_prob": 0.5,
+    "trials_per_cell": 300,
+    "theta": 0.1,
+    "alpha": 0.1,
+    "reps": 1000,
+    "seed": 11,
+    "libraries_with_a_bad_pair": 281
+   },
+   "P1": {
+    "harmful_component_rate": 0.101,
+    "harmful_component_wilson95": [
+     0.08382372191011535,
+     0.12123014316182433
+    ],
+    "harmful_execution_rate": 0.065,
+    "wilson95": [
+     0.0513235473878793,
+     0.08200585438228047
+    ],
+    "mean_beneficial_skills_executed": 1.957,
+    "mean_trials": 1017.745
+   },
+   "P2": {
+    "harmful_component_rate": 0.0,
+    "harmful_component_wilson95": [
+     0.0,
+     0.003826898586390522
+    ],
+    "harmful_execution_rate": 0.0,
+    "wilson95": [
+     0.0,
+     0.003826898586390522
+    ],
+    "mean_beneficial_skills_executed": 1.578,
+    "mean_trials": 1108.957
+   },
+   "P2_within_alpha": true
+  },
+  "1.0": {
+   "model": {
+    "skills": "per target (graph mode)",
+    "regions": "measured footprints",
+    "bad_pair_prob": 1.0,
+    "trials_per_cell": 300,
+    "theta": 0.1,
+    "alpha": 0.1,
+    "reps": 1000,
+    "seed": 11,
+    "libraries_with_a_bad_pair": 384
+   },
+   "P1": {
+    "harmful_component_rate": 0.161,
+    "harmful_component_wilson95": [
+     0.1395241618401623,
+     0.1850704754014105
+    ],
+    "harmful_execution_rate": 0.106,
+    "wilson95": [
+     0.08840477020504056,
+     0.12661082588103517
+    ],
+    "mean_beneficial_skills_executed": 1.984,
+    "mean_trials": 1014.794
+   },
+   "P2": {
+    "harmful_component_rate": 0.0,
+    "harmful_component_wilson95": [
+     0.0,
+     0.003826898586390522
+    ],
+    "harmful_execution_rate": 0.0,
+    "wilson95": [
+     0.0,
+     0.003826898586390522
+    ],
+    "mean_beneficial_skills_executed": 1.584,
+    "mean_trials": 1114.43
+   },
+   "P2_within_alpha": true
+  }
+ }
+}

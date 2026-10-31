@@ -1,0 +1,2436 @@
+{
+ "total": {
+  "targets": 16,
+  "cloned": 16,
+  "families": 12,
+  "files_scanned": 655,
+  "cells": 59,
+  "mean_cells_per_target": 3.69,
+  "family_pairs_possible": 136,
+  "family_pairs_overlapping": 18,
+  "composite_cells_required": 6,
+  "largest_component": 7,
+  "functions_touched": 456,
+  "functions_touched_by_two_or_more": 21,
+  "families_binding_on_targets": {
+   "bare_except": 5,
+   "dict_keys_membership": 3,
+   "eq_bool_identity": 2,
+   "len_zero_falsy": 8,
+   "mutable_default": 5,
+   "negative_type_guard": 15,
+   "none_identity": 3,
+   "open_encoding": 10,
+   "reraise_bare": 4,
+   "type_eq_isinstance": 4
+  },
+  "families_binding_nowhere": [
+   "is_literal_eq",
+   "yaml_safe_load"
+  ],
+  "interaction_shared_function": {
+   "file_pairs": 21,
+   "non_commuting": 0,
+   "site_changing": 0,
+   "nested_only": 0
+  },
+  "interaction_disjoint_functions": {
+   "file_pairs": 82,
+   "non_commuting": 2,
+   "site_changing": 2,
+   "nested_only": 0
+  },
+  "non_commuting_family_pairs": [
+   "negative_type_guard+type_eq_isinstance"
+  ],
+  "site_changing_family_pairs": [
+   "negative_type_guard+type_eq_isinstance"
+  ]
+ },
+ "targets": [
+  {
+   "study": "D",
+   "target": "A1_speckit_catalog",
+   "repository": "github/spec-kit",
+   "clone_error": null,
+   "files_scanned": 69,
+   "files_skipped": 0,
+   "cells": 2,
+   "families": [
+    "negative_type_guard",
+    "open_encoding"
+   ],
+   "functions": {
+    "negative_type_guard": 5,
+    "open_encoding": 4
+   },
+   "overlapping_pairs": [],
+   "components": [
+    [
+     "negative_type_guard"
+    ],
+    [
+     "open_encoding"
+    ]
+   ],
+   "composite_cells_required": 0,
+   "largest_component": 1,
+   "footprints": {
+    "negative_type_guard": [
+     "src/specify_cli/__init__.py::extension_set_priority",
+     "src/specify_cli/__init__.py::preset_set_priority",
+     "src/specify_cli/workflows/engine.py::_execute_steps",
+     "src/specify_cli/workflows/steps/do_while/__init__.py::validate",
+     "src/specify_cli/workflows/steps/while_loop/__init__.py::validate"
+    ],
+    "open_encoding": [
+     "src/specify_cli/extensions.py::_load",
+     "src/specify_cli/extensions.py::_save",
+     "src/specify_cli/presets.py::_load",
+     "src/specify_cli/presets.py::_save"
+    ]
+   }
+  },
+  {
+   "study": "D",
+   "target": "C1_jsonschema",
+   "repository": "python-jsonschema/jsonschema",
+   "clone_error": null,
+   "files_scanned": 25,
+   "files_skipped": 0,
+   "cells": 2,
+   "families": [
+    "negative_type_guard",
+    "open_encoding"
+   ],
+   "functions": {
+    "negative_type_guard": 2,
+    "open_encoding": 1
+   },
+   "overlapping_pairs": [],
+   "components": [
+    [
+     "negative_type_guard"
+    ],
+    [
+     "open_encoding"
+    ]
+   ],
+   "composite_cells_required": 0,
+   "largest_component": 1,
+   "footprints": {
+    "negative_type_guard": [
+     "jsonschema/_types.py::is_integer",
+     "jsonschema/exceptions.py::json_path"
+    ],
+    "open_encoding": [
+     "jsonschema/cli.py::load"
+    ]
+   }
+  },
+  {
+   "study": "D",
+   "target": "C2_voluptuous",
+   "repository": "alecthomas/voluptuous",
+   "clone_error": null,
+   "files_scanned": 7,
+   "files_skipped": 0,
+   "cells": 4,
+   "families": [
+    "bare_except",
+    "len_zero_falsy",
+    "negative_type_guard",
+    "reraise_bare"
+   ],
+   "functions": {
+    "negative_type_guard": 1,
+    "bare_except": 3,
+    "len_zero_falsy": 2,
+    "reraise_bare": 1
+   },
+   "overlapping_pairs": [],
+   "components": [
+    [
+     "bare_except"
+    ],
+    [
+     "len_zero_falsy"
+    ],
+    [
+     "negative_type_guard"
+    ],
+    [
+     "reraise_bare"
+    ]
+   ],
+   "composite_cells_required": 0,
+   "largest_component": 1,
+   "footprints": {
+    "negative_type_guard": [
+     "voluptuous/validators.py::_get_precision_scale"
+    ],
+    "bare_except": [
+     "voluptuous/validators.py::Email",
+     "voluptuous/validators.py::FqdnUrl",
+     "voluptuous/validators.py::Url"
+    ],
+    "len_zero_falsy": [
+     "voluptuous/schema_builder.py::validate_schema_decorator",
+     "voluptuous/schema_builder.py::value_to_schema_type"
+    ],
+    "reraise_bare": [
+     "voluptuous/schema_builder.py::__call__"
+    ]
+   }
+  },
+  {
+   "study": "D",
+   "target": "D1_py_ecc",
+   "repository": "ethereum/py_ecc",
+   "clone_error": null,
+   "files_scanned": 37,
+   "files_skipped": 0,
+   "cells": 2,
+   "families": [
+    "negative_type_guard",
+    "open_encoding"
+   ],
+   "functions": {
+    "negative_type_guard": 21,
+    "open_encoding": 4
+   },
+   "overlapping_pairs": [],
+   "components": [
+    [
+     "negative_type_guard"
+    ],
+    [
+     "open_encoding"
+    ]
+   ],
+   "composite_cells_required": 0,
+   "largest_component": 1,
+   "footprints": {
+    "negative_type_guard": [
+     "py_ecc/bls/ciphersuites.py::_is_valid_privkey",
+     "py_ecc/fields/field_elements.py::__add__",
+     "py_ecc/fields/field_elements.py::__div__",
+     "py_ecc/fields/field_elements.py::__eq__",
+     "py_ecc/fields/field_elements.py::__init__",
+     "py_ecc/fields/field_elements.py::__lt__",
+     "py_ecc/fields/field_elements.py::__mul__",
+     "py_ecc/fields/field_elements.py::__rdiv__",
+     "py_ecc/fields/field_elements.py::__rsub__",
+     "py_ecc/fields/field_elements.py::__sub__",
+     "py_ecc/fields/optimized_field_elements.py::__add__",
+     "py_ecc/fields/optimized_field_elements.py::__div__",
+     "py_ecc/fields/optimized_field_elements.py::__eq__",
+     "py_ecc/fields/optimized_field_elements.py::__init__",
+     "py_ecc/fields/optimized_field_elements.py::__lt__",
+     "py_ecc/fields/optimized_field_elements.py::__mul__",
+     "py_ecc/fields/optimized_field_elements.py::__rdiv__",
+     "py_ecc/fields/optimized_field_elements.py::__rsub__",
+     "py_ecc/fields/optimized_field_elements.py::__sub__",
+     "py_ecc/fields/optimized_field_elements.py::mod_int",
+     "py_ecc/secp256k1/secp256k1.py::safe_ord"
+    ],
+    "open_encoding": [
+     ".project-template/fill_template_vars.py::_replace",
+     ".project-template/refill_template_vars.py::main"
+    ]
+   }
+  },
+  {
+   "study": "D",
+   "target": "D2_cerberus",
+   "repository": "pyeve/cerberus",
+   "clone_error": null,
+   "files_scanned": 8,
+   "files_skipped": 0,
+   "cells": 5,
+   "families": [
+    "bare_except",
+    "len_zero_falsy",
+    "mutable_default",
+    "negative_type_guard",
+    "open_encoding"
+   ],
+   "functions": {
+    "negative_type_guard": 2,
+    "bare_except": 4,
+    "len_zero_falsy": 1,
+    "mutable_default": 3,
+    "open_encoding": 1
+   },
+   "overlapping_pairs": [
+    [
+     "bare_except",
+     "mutable_default"
+    ]
+   ],
+   "components": [
+    [
+     "bare_except",
+     "mutable_default"
+    ],
+    [
+     "len_zero_falsy"
+    ],
+    [
+     "negative_type_guard"
+    ],
+    [
+     "open_encoding"
+    ]
+   ],
+   "composite_cells_required": 1,
+   "largest_component": 2,
+   "footprints": {
+    "negative_type_guard": [
+     "cerberus/cerberus.py::_validate_allowed",
+     "cerberus/cerberus.py::_validate_forbidden"
+    ],
+    "bare_except": [
+     "cerberus/schema.py::__delitem__",
+     "cerberus/schema.py::__init__",
+     "cerberus/schema.py::__setitem__",
+     "cerberus/schema.py::update"
+    ],
+    "len_zero_falsy": [
+     "cerberus/cerberus.py::_validate_empty"
+    ],
+    "mutable_default": [
+     "cerberus/errors.py::__init__",
+     "cerberus/schema.py::__init__",
+     "cerberus/utils.py::validator_fabric"
+    ],
+    "open_encoding": []
+   }
+  },
+  {
+   "study": "D",
+   "target": "D3_speckit",
+   "repository": "github/spec-kit",
+   "clone_error": null,
+   "files_scanned": 117,
+   "files_skipped": 0,
+   "cells": 2,
+   "families": [
+    "negative_type_guard",
+    "open_encoding"
+   ],
+   "functions": {
+    "negative_type_guard": 3,
+    "open_encoding": 4
+   },
+   "overlapping_pairs": [],
+   "components": [
+    [
+     "negative_type_guard"
+    ],
+    [
+     "open_encoding"
+    ]
+   ],
+   "composite_cells_required": 0,
+   "largest_component": 1,
+   "footprints": {
+    "negative_type_guard": [
+     "scripts/python/check_prerequisites.py::main",
+     "src/specify_cli/extensions/_commands.py::extension_set_priority",
+     "src/specify_cli/workflows/expressions.py::_safe_compare"
+    ],
+    "open_encoding": [
+     "src/specify_cli/extensions/__init__.py::_load",
+     "src/specify_cli/extensions/__init__.py::_save",
+     "src/specify_cli/presets/__init__.py::_load",
+     "src/specify_cli/presets/__init__.py::_save"
+    ]
+   }
+  },
+  {
+   "study": "D",
+   "target": "D4_openfeature",
+   "repository": "open-feature/python-sdk",
+   "clone_error": null,
+   "files_scanned": 30,
+   "files_skipped": 0,
+   "cells": 0,
+   "families": [],
+   "functions": {},
+   "overlapping_pairs": [],
+   "components": [],
+   "composite_cells_required": 0,
+   "largest_component": 0,
+   "footprints": {}
+  },
+  {
+   "study": "D",
+   "target": "D5_pycubrid",
+   "repository": "cubrid-lab/pycubrid",
+   "clone_error": null,
+   "files_scanned": 47,
+   "files_skipped": 0,
+   "cells": 4,
+   "families": [
+    "len_zero_falsy",
+    "negative_type_guard",
+    "open_encoding",
+    "type_eq_isinstance"
+   ],
+   "functions": {
+    "negative_type_guard": 6,
+    "len_zero_falsy": 1,
+    "open_encoding": 1,
+    "type_eq_isinstance": 12
+   },
+   "overlapping_pairs": [
+    [
+     "negative_type_guard",
+     "type_eq_isinstance"
+    ]
+   ],
+   "components": [
+    [
+     "len_zero_falsy"
+    ],
+    [
+     "negative_type_guard",
+     "type_eq_isinstance"
+    ],
+    [
+     "open_encoding"
+    ]
+   ],
+   "composite_cells_required": 1,
+   "largest_component": 2,
+   "footprints": {
+    "negative_type_guard": [
+     "pycubrid/_cursor_common.py::format_parameter",
+     "pycubrid/compat/native.py::bind_lob",
+     "pycubrid/protocol.py::_encode_prepared_scalar",
+     "pycubrid/types.py::__eq__",
+     "pycubrid/types.py::__ne__",
+     "scripts/bench_regression.py::_load_medians"
+    ],
+    "len_zero_falsy": [
+     "pycubrid/lob.py::write"
+    ],
+    "open_encoding": [
+     "demos/render_gif.py::render"
+    ],
+    "type_eq_isinstance": [
+     "pycubrid/_connection_common.py::_init_common_state",
+     "pycubrid/_cursor_common.py::_format_tz",
+     "pycubrid/_cursor_common.py::format_parameter",
+     "pycubrid/aio/connection.py::_copy_setup_error",
+     "pycubrid/aio/cursor.py::arraysize",
+     "pycubrid/aio/cursor.py::fetch_size",
+     "pycubrid/connection.py::_validate_prepared_generation",
+     "pycubrid/cursor.py::arraysize",
+     "pycubrid/cursor.py::fetch_size",
+     "pycubrid/lob.py::_require_non_negative_int",
+     "pycubrid/protocol.py::__post_init__",
+     "pycubrid/protocol.py::_encode_prepared_collection"
+    ]
+   }
+  },
+  {
+   "study": "E",
+   "target": "E1_pyyaml",
+   "repository": "yaml/pyyaml",
+   "clone_error": null,
+   "files_scanned": 24,
+   "files_skipped": 0,
+   "cells": 1,
+   "families": [
+    "negative_type_guard"
+   ],
+   "functions": {
+    "negative_type_guard": 2
+   },
+   "overlapping_pairs": [],
+   "components": [
+    [
+     "negative_type_guard"
+    ]
+   ],
+   "composite_cells_required": 0,
+   "largest_component": 1,
+   "footprints": {
+    "negative_type_guard": [
+     "lib/yaml/representer.py::ignore_aliases",
+     "lib/yaml/resolver.py::add_path_resolver"
+    ]
+   }
+  },
+  {
+   "study": "E",
+   "target": "E2_packaging",
+   "repository": "pypa/packaging",
+   "clone_error": null,
+   "files_scanned": 39,
+   "files_skipped": 0,
+   "cells": 4,
+   "families": [
+    "len_zero_falsy",
+    "negative_type_guard",
+    "open_encoding",
+    "type_eq_isinstance"
+   ],
+   "functions": {
+    "negative_type_guard": 6,
+    "len_zero_falsy": 1,
+    "open_encoding": 5,
+    "type_eq_isinstance": 1
+   },
+   "overlapping_pairs": [],
+   "components": [
+    [
+     "len_zero_falsy"
+    ],
+    [
+     "negative_type_guard"
+    ],
+    [
+     "open_encoding"
+    ],
+    [
+     "type_eq_isinstance"
+    ]
+   ],
+   "composite_cells_required": 0,
+   "largest_component": 1,
+   "footprints": {
+    "negative_type_guard": [
+     "src/packaging/version.py::_cmpkey",
+     "src/packaging/version.py::_validate_dev",
+     "src/packaging/version.py::_validate_epoch",
+     "src/packaging/version.py::_validate_post",
+     "src/packaging/version.py::_validate_pre",
+     "src/packaging/version.py::_validate_release"
+    ],
+    "len_zero_falsy": [
+     "src/packaging/tags.py::_is_threaded_cpython"
+    ],
+    "open_encoding": [
+     "noxfile.py::_replace_file"
+    ],
+    "type_eq_isinstance": [
+     "tasks/pickle_compat.py::verify"
+    ]
+   }
+  },
+  {
+   "study": "E",
+   "target": "E3_databricks",
+   "repository": "databricks/databricks-sql-python",
+   "clone_error": null,
+   "files_scanned": 38,
+   "files_skipped": 0,
+   "cells": 5,
+   "families": [
+    "bare_except",
+    "mutable_default",
+    "negative_type_guard",
+    "open_encoding",
+    "reraise_bare"
+   ],
+   "functions": {
+    "negative_type_guard": 2,
+    "bare_except": 2,
+    "mutable_default": 1,
+    "open_encoding": 2,
+    "reraise_bare": 9
+   },
+   "overlapping_pairs": [],
+   "components": [
+    [
+     "bare_except"
+    ],
+    [
+     "mutable_default"
+    ],
+    [
+     "negative_type_guard"
+    ],
+    [
+     "open_encoding"
+    ],
+    [
+     "reraise_bare"
+    ]
+   ],
+   "composite_cells_required": 0,
+   "largest_component": 1,
+   "footprints": {
+    "negative_type_guard": [
+     "src/databricks/sql/types.py::__getitem__",
+     "src/databricks/sql/utils.py::escape_item"
+    ],
+    "bare_except": [
+     "src/databricks/sql/thrift_backend.py::__init__",
+     "src/databricks/sql/thrift_backend.py::open_session"
+    ],
+    "mutable_default": [
+     "src/databricks/sql/auth/retry.py::__init__"
+    ],
+    "open_encoding": [
+     "src/databricks/sql/experimental/oauth_persistence.py::persist",
+     "src/databricks/sql/experimental/oauth_persistence.py::read"
+    ],
+    "reraise_bare": [
+     "src/databricks/sql/auth/authenticators.py::__init__",
+     "src/databricks/sql/auth/authenticators.py::_initial_get_token",
+     "src/databricks/sql/auth/authenticators.py::_update_token_if_expired",
+     "src/databricks/sql/auth/oauth.py::__fetch_well_known_config",
+     "src/databricks/sql/auth/oauth.py::__get_authorization_code",
+     "src/databricks/sql/auth/oauth.py::check_and_refresh_access_token",
+     "src/databricks/sql/auth/oauth.py::get_tokens",
+     "src/databricks/sql/thrift_backend.py::attempt_request",
+     "src/databricks/sqlalchemy/dialect/__init__.py::has_table"
+    ]
+   }
+  },
+  {
+   "study": "E",
+   "target": "K1_trino",
+   "repository": "trinodb/trino-python-client",
+   "clone_error": null,
+   "files_scanned": 19,
+   "files_skipped": 0,
+   "cells": 3,
+   "families": [
+    "dict_keys_membership",
+    "len_zero_falsy",
+    "negative_type_guard"
+   ],
+   "functions": {
+    "negative_type_guard": 3,
+    "dict_keys_membership": 1,
+    "len_zero_falsy": 3
+   },
+   "overlapping_pairs": [
+    [
+     "dict_keys_membership",
+     "len_zero_falsy"
+    ],
+    [
+     "len_zero_falsy",
+     "negative_type_guard"
+    ]
+   ],
+   "components": [
+    [
+     "dict_keys_membership",
+     "len_zero_falsy",
+     "negative_type_guard"
+    ]
+   ],
+   "composite_cells_required": 1,
+   "largest_component": 3,
+   "footprints": {
+    "negative_type_guard": [
+     "trino/client.py::_parse_retry_after_header",
+     "trino/dbapi.py::_format_prepared_param",
+     "trino/mapper.py::map"
+    ],
+    "dict_keys_membership": [
+     "trino/client.py::http_headers"
+    ],
+    "len_zero_falsy": [
+     "trino/client.py::http_headers",
+     "trino/mapper.py::_get_precision",
+     "trino/mapper.py::map"
+    ]
+   }
+  },
+  {
+   "study": "E",
+   "target": "K2_tomlkit",
+   "repository": "python-poetry/tomlkit",
+   "clone_error": null,
+   "files_scanned": 13,
+   "files_skipped": 0,
+   "cells": 1,
+   "families": [
+    "negative_type_guard"
+   ],
+   "functions": {
+    "negative_type_guard": 1
+   },
+   "overlapping_pairs": [],
+   "components": [
+    [
+     "negative_type_guard"
+    ]
+   ],
+   "composite_cells_required": 0,
+   "largest_component": 1,
+   "footprints": {
+    "negative_type_guard": [
+     "tomlkit/items.py::item"
+    ]
+   }
+  },
+  {
+   "study": "G",
+   "target": "G1_pydal",
+   "repository": "web2py/pydal",
+   "clone_error": null,
+   "files_scanned": 57,
+   "files_skipped": 0,
+   "cells": 9,
+   "families": [
+    "bare_except",
+    "dict_keys_membership",
+    "eq_bool_identity",
+    "len_zero_falsy",
+    "mutable_default",
+    "negative_type_guard",
+    "none_identity",
+    "reraise_bare",
+    "type_eq_isinstance"
+   ],
+   "functions": {
+    "negative_type_guard": 16,
+    "none_identity": 6,
+    "bare_except": 9,
+    "dict_keys_membership": 1,
+    "eq_bool_identity": 3,
+    "len_zero_falsy": 2,
+    "mutable_default": 210,
+    "reraise_bare": 1,
+    "type_eq_isinstance": 2
+   },
+   "overlapping_pairs": [
+    [
+     "bare_except",
+     "mutable_default"
+    ],
+    [
+     "dict_keys_membership",
+     "len_zero_falsy"
+    ],
+    [
+     "eq_bool_identity",
+     "mutable_default"
+    ],
+    [
+     "eq_bool_identity",
+     "none_identity"
+    ],
+    [
+     "len_zero_falsy",
+     "negative_type_guard"
+    ],
+    [
+     "mutable_default",
+     "negative_type_guard"
+    ]
+   ],
+   "components": [
+    [
+     "bare_except",
+     "dict_keys_membership",
+     "eq_bool_identity",
+     "len_zero_falsy",
+     "mutable_default",
+     "negative_type_guard",
+     "none_identity"
+    ],
+    [
+     "reraise_bare"
+    ],
+    [
+     "type_eq_isinstance"
+    ]
+   ],
+   "composite_cells_required": 1,
+   "largest_component": 7,
+   "footprints": {
+    "negative_type_guard": [
+     "pydal/backend_base.py::_binary_cmp",
+     "pydal/backend_base.py::insert",
+     "pydal/backend_base.py::smart_adapt",
+     "pydal/backends/google.py::_id",
+     "pydal/backends/google.py::_reference",
+     "pydal/backends/mongo.py::contains",
+     "pydal/backends/mongo.py::object_id",
+     "pydal/backends/oracle.py::insert",
+     "pydal/backends/postgres.py::json_key",
+     "pydal/backends/postgres.py::json_key_value",
+     "pydal/backends/postgres.py::st_transform",
+     "pydal/backends/snowflake.py::st_transform",
+     "pydal/compilers/sql.py::_default_represent",
+     "pydal/objects.py::__getitem__",
+     "pydal/validators.py::range_error_message",
+     "pydal/validators.py::validate"
+    ],
+    "none_identity": [
+     "pydal/backend_base.py::id_query",
+     "pydal/base.py::where",
+     "pydal/objects.py::belongs",
+     "pydal/objects.py::where",
+     "pydal/querybuilder.py::parse",
+     "pydal/tools/scheduler.py::next_run"
+    ],
+    "bare_except": [
+     "pydal/backends/couchdb.py::create_table",
+     "pydal/backends/mongo.py::__select",
+     "pydal/backends/mongo.py::_cmp_ops_aggregation_pipeline",
+     "pydal/backends/mongo.py::add",
+     "pydal/backends/sqlite.py::web2py_extract",
+     "pydal/contrib/imap_adapter.py::reconnect",
+     "pydal/contrib/mockimaplib.py::append"
+    ],
+    "dict_keys_membership": [
+     "pydal/contrib/imap_adapter.py::select"
+    ],
+    "eq_bool_identity": [
+     "pydal/backend_base.py::__init__",
+     "pydal/objects.py::_enable_record_versioning",
+     "pydal/querybuilder.py::parse"
+    ],
+    "len_zero_falsy": [
+     "pydal/contrib/imap_adapter.py::select",
+     "pydal/validators.py::validate"
+    ],
+    "mutable_default": [
+     "pydal/backend_base.py::__init__",
+     "pydal/backend_base.py::_and",
+     "pydal/backend_base.py::_as",
+     "pydal/backend_base.py::_expand",
+     "pydal/backend_base.py::_expand_for_index",
+     "pydal/backend_base.py::_not",
+     "pydal/backend_base.py::_or",
+     "pydal/backend_base.py::_select_wcols",
+     "pydal/backend_base.py::add",
+     "pydal/backend_base.py::aggregate",
+     "pydal/backend_base.py::belongs",
+     "pydal/backend_base.py::case",
+     "pydal/backend_base.py::cast",
+     "pydal/backend_base.py::coalesce",
+     "pydal/backend_base.py::coalesce_zero",
+     "pydal/backend_base.py::comma",
+     "pydal/backend_base.py::contains",
+     "pydal/backend_base.py::count",
+     "pydal/backend_base.py::cross_join",
+     "pydal/backend_base.py::div",
+     "pydal/backend_base.py::endswith",
+     "pydal/backend_base.py::epoch",
+     "pydal/backend_base.py::eq",
+     "pydal/backend_base.py::extract",
+     "pydal/backend_base.py::gt",
+     "pydal/backend_base.py::gte",
+     "pydal/backend_base.py::ilike",
+     "pydal/backend_base.py::invert",
+     "pydal/backend_base.py::join",
+     "pydal/backend_base.py::left_join",
+     "pydal/backend_base.py::length",
+     "pydal/backend_base.py::like",
+     "pydal/backend_base.py::lower",
+     "pydal/backend_base.py::lt",
+     "pydal/backend_base.py::lte",
+     "pydal/backend_base.py::mod",
+     "pydal/backend_base.py::mul",
+     "pydal/backend_base.py::ne",
+     "pydal/backend_base.py::on",
+     "pydal/backend_base.py::raw",
+     "pydal/backend_base.py::replace",
+     "pydal/backend_base.py::startswith",
+     "pydal/backend_base.py::sub",
+     "pydal/backend_base.py::substring",
+     "pydal/backend_base.py::table_alias",
+     "pydal/backend_base.py::upper",
+     "pydal/backends/couchdb.py::_and",
+     "pydal/backends/couchdb.py::_expand",
+     "pydal/backends/couchdb.py::_or",
+     "pydal/backends/couchdb.py::_select",
+     "pydal/backends/couchdb.py::comma",
+     "pydal/backends/couchdb.py::eq",
+     "pydal/backends/couchdb.py::ne",
+     "pydal/backends/db2.py::left_join",
+     "pydal/backends/firebird.py::contains",
+     "pydal/backends/firebird.py::epoch",
+     "pydal/backends/firebird.py::length",
+     "pydal/backends/firebird.py::substring",
+     "pydal/backends/google.py::_and",
+     "pydal/backends/google.py::_expand",
+     "pydal/backends/google.py::_not",
+     "pydal/backends/google.py::_or",
+     "pydal/backends/google.py::belongs",
+     "pydal/backends/google.py::comma",
+     "pydal/backends/google.py::contains",
+     "pydal/backends/google.py::eq",
+     "pydal/backends/google.py::gt",
+     "pydal/backends/google.py::gte",
+     "pydal/backends/google.py::invert",
+     "pydal/backends/google.py::lt",
+     "pydal/backends/google.py::lte",
+     "pydal/backends/google.py::ne",
+     "pydal/backends/ingres.py::left_join",
+     "pydal/backends/mongo.py::__select",
+     "pydal/backends/mongo.py::_and",
+     "pydal/backends/mongo.py::_as",
+     "pydal/backends/mongo.py::_build_like_regex",
+     "pydal/backends/mongo.py::_cmp_ops_aggregation_pipeline",
+     "pydal/backends/mongo.py::_expand",
+     "pydal/backends/mongo.py::_not",
+     "pydal/backends/mongo.py::_or",
+     "pydal/backends/mongo.py::add",
+     "pydal/backends/mongo.py::aggregate",
+     "pydal/backends/mongo.py::belongs",
+     "pydal/backends/mongo.py::case",
+     "pydal/backends/mongo.py::coalesce",
+     "pydal/backends/mongo.py::comma",
+     "pydal/backends/mongo.py::contains",
+     "pydal/backends/mongo.py::count",
+     "pydal/backends/mongo.py::div",
+     "pydal/backends/mongo.py::endswith",
+     "pydal/backends/mongo.py::epoch",
+     "pydal/backends/mongo.py::eq",
+     "pydal/backends/mongo.py::extract",
+     "pydal/backends/mongo.py::gt",
+     "pydal/backends/mongo.py::gte",
+     "pydal/backends/mongo.py::ilike",
+     "pydal/backends/mongo.py::invert",
+     "pydal/backends/mongo.py::length",
+     "pydal/backends/mongo.py::like",
+     "pydal/backends/mongo.py::lower",
+     "pydal/backends/mongo.py::lt",
+     "pydal/backends/mongo.py::lte",
+     "pydal/backends/mongo.py::mod",
+     "pydal/backends/mongo.py::mul",
+     "pydal/backends/mongo.py::ne",
+     "pydal/backends/mongo.py::on",
+     "pydal/backends/mongo.py::regexp",
+     "pydal/backends/mongo.py::startswith",
+     "pydal/backends/mongo.py::sub",
+     "pydal/backends/mongo.py::substring",
+     "pydal/backends/mongo.py::upper",
+     "pydal/backends/mssql.py::__init__",
+     "pydal/backends/mssql.py::aggregate",
+     "pydal/backends/mssql.py::cast",
+     "pydal/backends/mssql.py::epoch",
+     "pydal/backends/mssql.py::extract",
+     "pydal/backends/mssql.py::ilike",
+     "pydal/backends/mssql.py::left_join",
+     "pydal/backends/mssql.py::length",
+     "pydal/backends/mssql.py::regexp",
+     "pydal/backends/mssql.py::st_astext",
+     "pydal/backends/mssql.py::st_contains",
+     "pydal/backends/mssql.py::st_distance",
+     "pydal/backends/mssql.py::st_equals",
+     "pydal/backends/mssql.py::st_intersects",
+     "pydal/backends/mssql.py::st_overlaps",
+     "pydal/backends/mssql.py::st_touches",
+     "pydal/backends/mssql.py::st_within",
+     "pydal/backends/mssql.py::substring",
+     "pydal/backends/mysql.py::cast",
+     "pydal/backends/mysql.py::epoch",
+     "pydal/backends/mysql.py::regexp",
+     "pydal/backends/mysql.py::substring",
+     "pydal/backends/oracle.py::_as",
+     "pydal/backends/oracle.py::_expand",
+     "pydal/backends/oracle.py::cast",
+     "pydal/backends/oracle.py::epoch",
+     "pydal/backends/oracle.py::eq",
+     "pydal/backends/oracle.py::expand",
+     "pydal/backends/oracle.py::extract",
+     "pydal/backends/oracle.py::left_join",
+     "pydal/backends/oracle.py::mod",
+     "pydal/backends/oracle.py::regexp",
+     "pydal/backends/postgres.py::__init__",
+     "pydal/backends/postgres.py::add",
+     "pydal/backends/postgres.py::any",
+     "pydal/backends/postgres.py::contains",
+     "pydal/backends/postgres.py::eq",
+     "pydal/backends/postgres.py::ilike",
+     "pydal/backends/postgres.py::like",
+     "pydal/backends/postgres.py::regexp",
+     "pydal/backends/postgres.py::st_asgeojson",
+     "pydal/backends/postgres.py::st_astext",
+     "pydal/backends/postgres.py::st_aswkb",
+     "pydal/backends/postgres.py::st_contains",
+     "pydal/backends/postgres.py::st_distance",
+     "pydal/backends/postgres.py::st_dwithin",
+     "pydal/backends/postgres.py::st_equals",
+     "pydal/backends/postgres.py::st_intersects",
+     "pydal/backends/postgres.py::st_overlaps",
+     "pydal/backends/postgres.py::st_simplify",
+     "pydal/backends/postgres.py::st_simplifypreservetopology",
+     "pydal/backends/postgres.py::st_touches",
+     "pydal/backends/postgres.py::st_transform",
+     "pydal/backends/postgres.py::st_within",
+     "pydal/backends/postgres.py::st_x",
+     "pydal/backends/postgres.py::st_y",
+     "pydal/backends/snowflake.py::add",
+     "pydal/backends/snowflake.py::ilike",
+     "pydal/backends/snowflake.py::like",
+     "pydal/backends/snowflake.py::regexp",
+     "pydal/backends/snowflake.py::st_asgeojson",
+     "pydal/backends/snowflake.py::st_astext",
+     "pydal/backends/snowflake.py::st_aswkb",
+     "pydal/backends/snowflake.py::st_contains",
+     "pydal/backends/snowflake.py::st_distance",
+     "pydal/backends/snowflake.py::st_dwithin",
+     "pydal/backends/snowflake.py::st_equals",
+     "pydal/backends/snowflake.py::st_intersects",
+     "pydal/backends/snowflake.py::st_overlaps",
+     "pydal/backends/snowflake.py::st_simplify",
+     "pydal/backends/snowflake.py::st_simplifypreservetopology",
+     "pydal/backends/snowflake.py::st_touches",
+     "pydal/backends/snowflake.py::st_transform",
+     "pydal/backends/snowflake.py::st_within",
+     "pydal/backends/snowflake.py::st_x",
+     "pydal/backends/snowflake.py::st_y",
+     "pydal/backends/sqlite.py::extract",
+     "pydal/backends/sqlite.py::regexp",
+     "pydal/backends/sqlite.py::st_asgeojson",
+     "pydal/backends/sqlite.py::st_astext",
+     "pydal/backends/sqlite.py::st_contains",
+     "pydal/backends/sqlite.py::st_distance",
+     "pydal/backends/sqlite.py::st_equals",
+     "pydal/backends/sqlite.py::st_intersects",
+     "pydal/backends/sqlite.py::st_overlaps",
+     "pydal/backends/sqlite.py::st_simplify",
+     "pydal/backends/sqlite.py::st_touches",
+     "pydal/backends/sqlite.py::st_within",
+     "pydal/backends/teradata.py::left_join",
+     "pydal/contrib/imap_adapter.py::__init__",
+     "pydal/contrib/mockimaplib.py::setup",
+     "pydal/objects.py::__init__",
+     "pydal/objects.py::_compile",
+     "pydal/objects.py::get_default_validator",
+     "pydal/objects.py::join",
+     "pydal/objects.py::query_name",
+     "pydal/tools/scheduler.py::enqueue_run",
+     "pydal/validators.py::__init__"
+    ],
+    "reraise_bare": [
+     "pydal/backends/mongo.py::insert"
+    ],
+    "type_eq_isinstance": [
+     "pydal/backends/oracle.py::fetchall",
+     "pydal/backends/oracle.py::parse"
+    ]
+   }
+  },
+  {
+   "study": "G",
+   "target": "G2_emmett",
+   "repository": "emmett-framework/emmett",
+   "clone_error": null,
+   "files_scanned": 99,
+   "files_skipped": 0,
+   "cells": 5,
+   "families": [
+    "len_zero_falsy",
+    "mutable_default",
+    "negative_type_guard",
+    "none_identity",
+    "open_encoding"
+   ],
+   "functions": {
+    "negative_type_guard": 6,
+    "none_identity": 3,
+    "len_zero_falsy": 3,
+    "mutable_default": 23,
+    "open_encoding": 1
+   },
+   "overlapping_pairs": [],
+   "components": [
+    [
+     "len_zero_falsy"
+    ],
+    [
+     "mutable_default"
+    ],
+    [
+     "negative_type_guard"
+    ],
+    [
+     "none_identity"
+    ],
+    [
+     "open_encoding"
+    ]
+   ],
+   "composite_cells_required": 0,
+   "largest_component": 1,
+   "footprints": {
+    "negative_type_guard": [
+     "emmett/orm/engines/postgres.py::_jget_common",
+     "emmett/orm/migrations/helpers.py::_feasible_as_dbms_default",
+     "emmett/tools/auth/apis.py::add_membership",
+     "emmett/tools/auth/apis.py::remove_membership",
+     "emmett/validators/__init__.py::__call__",
+     "emmett/validators/inside.py::_range_error"
+    ],
+    "none_identity": [
+     "emmett/orm/base.py::where",
+     "emmett/orm/models.py::__define_query_helpers",
+     "emmett/orm/objects.py::where"
+    ],
+    "len_zero_falsy": [
+     "emmett/tools/mailer.py::has_bad_headers",
+     "emmett/tools/mailer.py::message",
+     "emmett/validators/helpers.py::is_empty"
+    ],
+    "mutable_default": [
+     "emmett/app.py::from_app",
+     "emmett/app.py::from_module",
+     "emmett/app.py::from_module_group",
+     "emmett/forms.py::__init__",
+     "emmett/helpers.py::get_flashed_messages",
+     "emmett/orm/adapters.py::_select_wcols",
+     "emmett/orm/apis.py::__init__",
+     "emmett/orm/engines/postgres.py::_jcontains",
+     "emmett/orm/engines/postgres.py::_jget",
+     "emmett/orm/engines/postgres.py::_jgetv",
+     "emmett/orm/engines/postgres.py::_jhas",
+     "emmett/orm/engines/postgres.py::_jin",
+     "emmett/orm/engines/postgres.py::_jpath",
+     "emmett/orm/engines/postgres.py::_jpathv",
+     "emmett/orm/migrations/engine.py::_gen_primary_key",
+     "emmett/orm/migrations/engine.py::_new_table_sql",
+     "emmett/orm/migrations/generation.py::__init__",
+     "emmett/orm/migrations/operations.py::__init__",
+     "emmett/orm/migrations/operations.py::create_index",
+     "emmett/orm/objects.py::__init__",
+     "emmett/orm/objects.py::_from_set",
+     "emmett/tools/auth/ext.py::log_event",
+     "emmett/validators/consist.py::__init__"
+    ],
+    "open_encoding": [
+     "emmett/orm/migrations/scripts.py::_generate_template"
+    ]
+   }
+  },
+  {
+   "study": "G",
+   "target": "K1_hera_pspec",
+   "repository": "HERA-Team/hera_pspec",
+   "clone_error": null,
+   "files_scanned": 26,
+   "files_skipped": 0,
+   "cells": 10,
+   "families": [
+    "bare_except",
+    "dict_keys_membership",
+    "eq_bool_identity",
+    "len_zero_falsy",
+    "mutable_default",
+    "negative_type_guard",
+    "none_identity",
+    "open_encoding",
+    "reraise_bare",
+    "type_eq_isinstance"
+   ],
+   "functions": {
+    "negative_type_guard": 28,
+    "none_identity": 7,
+    "bare_except": 6,
+    "dict_keys_membership": 9,
+    "eq_bool_identity": 10,
+    "len_zero_falsy": 17,
+    "mutable_default": 1,
+    "open_encoding": 1,
+    "reraise_bare": 2,
+    "type_eq_isinstance": 1
+   },
+   "overlapping_pairs": [
+    [
+     "bare_except",
+     "len_zero_falsy"
+    ],
+    [
+     "dict_keys_membership",
+     "eq_bool_identity"
+    ],
+    [
+     "dict_keys_membership",
+     "negative_type_guard"
+    ],
+    [
+     "len_zero_falsy",
+     "negative_type_guard"
+    ],
+    [
+     "len_zero_falsy",
+     "none_identity"
+    ],
+    [
+     "mutable_default",
+     "negative_type_guard"
+    ],
+    [
+     "negative_type_guard",
+     "none_identity"
+    ],
+    [
+     "open_encoding",
+     "reraise_bare"
+    ]
+   ],
+   "components": [
+    [
+     "bare_except",
+     "dict_keys_membership",
+     "eq_bool_identity",
+     "len_zero_falsy",
+     "mutable_default",
+     "negative_type_guard",
+     "none_identity"
+    ],
+    [
+     "open_encoding",
+     "reraise_bare"
+    ],
+    [
+     "type_eq_isinstance"
+    ]
+   ],
+   "composite_cells_required": 2,
+   "largest_component": 7,
+   "footprints": {
+    "negative_type_guard": [
+     "src/hera_pspec/grouping.py::spherical_average",
+     "src/hera_pspec/plot.py::delay_wedge",
+     "src/hera_pspec/pspecbeam.py::get_Omegas",
+     "src/hera_pspec/pspecdata.py::C_model",
+     "src/hera_pspec/pspecdata.py::cov_q_hat",
+     "src/hera_pspec/pspecdata.py::dset_idx",
+     "src/hera_pspec/pspecdata.py::parse_blkey",
+     "src/hera_pspec/pspecdata.py::pspec",
+     "src/hera_pspec/pspecdata.py::scalar",
+     "src/hera_pspec/pspecdata.py::set_filter_extension",
+     "src/hera_pspec/pspecdata.py::set_spw",
+     "src/hera_pspec/pspecdata.py::validate_pol",
+     "src/hera_pspec/uvpspec.py::_normalize_spw_array_input",
+     "src/hera_pspec/uvpspec.py::blpair_to_indices",
+     "src/hera_pspec/uvpspec.py::generate_noise_spectra",
+     "src/hera_pspec/uvpspec.py::get_spw_ranges",
+     "src/hera_pspec/uvpspec.py::key_to_indices",
+     "src/hera_pspec/uvpspec.py::polpair_to_indices",
+     "src/hera_pspec/uvpspec.py::spw_indices",
+     "src/hera_pspec/uvpspec.py::spw_to_dly_indices",
+     "src/hera_pspec/uvpspec.py::spw_to_freq_indices",
+     "src/hera_pspec/uvpspec.py::time_to_indices",
+     "src/hera_pspec/uvpspec_utils.py::_blpair_to_bls",
+     "src/hera_pspec/uvpspec_utils.py::_get_blpairs_from_bls",
+     "src/hera_pspec/uvpspec_utils.py::_select",
+     "src/hera_pspec/uvpspec_utils.py::polpair_int2tuple",
+     "src/hera_pspec/uvwindow.py::__init__",
+     "src/hera_pspec/uvwindow.py::gaussian"
+    ],
+    "none_identity": [
+     "src/hera_pspec/pspecdata.py::get_G",
+     "src/hera_pspec/pspecdata.py::get_H",
+     "src/hera_pspec/pspecdata.py::get_MW",
+     "src/hera_pspec/pspecdata.py::get_Q",
+     "src/hera_pspec/pspecdata.py::get_unnormed_E",
+     "src/hera_pspec/pspecdata.py::pspec",
+     "src/hera_pspec/utils.py::get_delays"
+    ],
+    "bare_except": [
+     "src/hera_pspec/container.py::__del__",
+     "src/hera_pspec/pspecbeam.py::add_pol",
+     "src/hera_pspec/utils.py::config_pspec_blpairs",
+     "src/hera_pspec/utils.py::spw_range_from_freqs",
+     "src/hera_pspec/uvpspec.py::check"
+    ],
+    "dict_keys_membership": [
+     "src/hera_pspec/grouping.py::average_spectra",
+     "src/hera_pspec/pspecbeam.py::__init__",
+     "src/hera_pspec/pspecbeam.py::power_beam_int",
+     "src/hera_pspec/pspecbeam.py::power_beam_sq_int",
+     "src/hera_pspec/pspecdata.py::C_model",
+     "src/hera_pspec/pspecdata.py::cross_covar_model",
+     "src/hera_pspec/uvpspec.py::get_stats",
+     "src/hera_pspec/uvpspec.py::set_stats"
+    ],
+    "eq_bool_identity": [
+     "src/hera_pspec/container.py::combine_psc_spectra",
+     "src/hera_pspec/grouping.py::average_spectra",
+     "src/hera_pspec/plot.py::delay_spectrum",
+     "src/hera_pspec/plot.py::delay_waterfall",
+     "src/hera_pspec/pspecdata.py::check_key_in_dset",
+     "src/hera_pspec/pspecdata.py::validate_blpairs",
+     "src/hera_pspec/pstokes.py::construct_pstokes",
+     "src/hera_pspec/uvpspec.py::convert_to_deltasq",
+     "src/hera_pspec/uvpspec.py::select",
+     "src/hera_pspec/uvpspec.py::set_cosmology"
+    ],
+    "len_zero_falsy": [
+     "src/hera_pspec/grouping.py::_normalize_grouped_input",
+     "src/hera_pspec/pspecdata.py::__str__",
+     "src/hera_pspec/pspecdata.py::delays",
+     "src/hera_pspec/pspecdata.py::pspec",
+     "src/hera_pspec/pspecdata.py::pspec_run",
+     "src/hera_pspec/pspecdata.py::units",
+     "src/hera_pspec/utils.py::config_pspec_blpairs",
+     "src/hera_pspec/utils.py::job_monitor",
+     "src/hera_pspec/uvpspec.py::__init__",
+     "src/hera_pspec/uvpspec.py::_normalize_nested_sequence",
+     "src/hera_pspec/uvpspec.py::combine_uvpspec",
+     "src/hera_pspec/uvpspec.py::get_uvp_overlap",
+     "src/hera_pspec/uvpspec.py::recursive_combine_uvpspec",
+     "src/hera_pspec/uvpspec_utils.py::_select",
+     "src/hera_pspec/uvpspec_utils.py::select_common",
+     "src/hera_pspec/uvwindow.py::get_spherical_wf",
+     "src/hera_pspec/uvwindow.py::run_and_write"
+    ],
+    "mutable_default": [
+     "src/hera_pspec/grouping.py::spherical_average"
+    ],
+    "open_encoding": [
+     "src/hera_pspec/utils.py::load_config"
+    ],
+    "reraise_bare": [
+     "src/hera_pspec/container.py::wrapper",
+     "src/hera_pspec/utils.py::load_config"
+    ],
+    "type_eq_isinstance": [
+     "src/hera_pspec/uvpspec_utils.py::polpair_tuple2int"
+    ]
+   }
+  }
+ ],
+ "pairs": [
+  {
+   "a": "len_zero_falsy",
+   "b": "reraise_bare",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "voluptuous/schema_builder.py",
+   "target": "C2_voluptuous"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "bare_except",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "voluptuous/validators.py",
+   "target": "C2_voluptuous"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "len_zero_falsy",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "cerberus/cerberus.py",
+   "target": "D2_cerberus"
+  },
+  {
+   "a": "bare_except",
+   "b": "mutable_default",
+   "shared_function": true,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "cerberus/schema.py",
+   "target": "D2_cerberus"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "type_eq_isinstance",
+   "shared_function": true,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pycubrid/_cursor_common.py",
+   "target": "D5_pycubrid"
+  },
+  {
+   "a": "len_zero_falsy",
+   "b": "type_eq_isinstance",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pycubrid/lob.py",
+   "target": "D5_pycubrid"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "type_eq_isinstance",
+   "shared_function": false,
+   "commute": false,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": true,
+   "nested": false,
+   "file": "pycubrid/protocol.py",
+   "target": "D5_pycubrid"
+  },
+  {
+   "a": "bare_except",
+   "b": "reraise_bare",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/databricks/sql/thrift_backend.py",
+   "target": "E3_databricks"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "dict_keys_membership",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "trino/client.py",
+   "target": "K1_trino"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "len_zero_falsy",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "trino/client.py",
+   "target": "K1_trino"
+  },
+  {
+   "a": "dict_keys_membership",
+   "b": "len_zero_falsy",
+   "shared_function": true,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "trino/client.py",
+   "target": "K1_trino"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "len_zero_falsy",
+   "shared_function": true,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "trino/mapper.py",
+   "target": "K1_trino"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "none_identity",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/backend_base.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "eq_bool_identity",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/backend_base.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "mutable_default",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/backend_base.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "none_identity",
+   "b": "eq_bool_identity",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/backend_base.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "none_identity",
+   "b": "mutable_default",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/backend_base.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "eq_bool_identity",
+   "b": "mutable_default",
+   "shared_function": true,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/backend_base.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "bare_except",
+   "b": "mutable_default",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/backends/couchdb.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "mutable_default",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/backends/google.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "bare_except",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/backends/mongo.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "mutable_default",
+   "shared_function": true,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/backends/mongo.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "reraise_bare",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/backends/mongo.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "bare_except",
+   "b": "mutable_default",
+   "shared_function": true,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/backends/mongo.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "bare_except",
+   "b": "reraise_bare",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/backends/mongo.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "mutable_default",
+   "b": "reraise_bare",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/backends/mongo.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "mutable_default",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/backends/oracle.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "type_eq_isinstance",
+   "shared_function": false,
+   "commute": false,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": true,
+   "nested": false,
+   "file": "pydal/backends/oracle.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "mutable_default",
+   "b": "type_eq_isinstance",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/backends/oracle.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "mutable_default",
+   "shared_function": true,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/backends/postgres.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "mutable_default",
+   "shared_function": true,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/backends/snowflake.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "bare_except",
+   "b": "mutable_default",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/backends/sqlite.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "bare_except",
+   "b": "dict_keys_membership",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/contrib/imap_adapter.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "bare_except",
+   "b": "len_zero_falsy",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/contrib/imap_adapter.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "bare_except",
+   "b": "mutable_default",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/contrib/imap_adapter.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "dict_keys_membership",
+   "b": "len_zero_falsy",
+   "shared_function": true,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/contrib/imap_adapter.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "dict_keys_membership",
+   "b": "mutable_default",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/contrib/imap_adapter.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "len_zero_falsy",
+   "b": "mutable_default",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/contrib/imap_adapter.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "bare_except",
+   "b": "mutable_default",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/contrib/mockimaplib.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "none_identity",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/objects.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "eq_bool_identity",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/objects.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "mutable_default",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/objects.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "none_identity",
+   "b": "eq_bool_identity",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/objects.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "none_identity",
+   "b": "mutable_default",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/objects.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "eq_bool_identity",
+   "b": "mutable_default",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/objects.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "none_identity",
+   "b": "eq_bool_identity",
+   "shared_function": true,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/querybuilder.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "none_identity",
+   "b": "mutable_default",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/tools/scheduler.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "len_zero_falsy",
+   "shared_function": true,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/validators.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "mutable_default",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/validators.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "len_zero_falsy",
+   "b": "mutable_default",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "pydal/validators.py",
+   "target": "G1_pydal"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "mutable_default",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "emmett/orm/engines/postgres.py",
+   "target": "G2_emmett"
+  },
+  {
+   "a": "none_identity",
+   "b": "mutable_default",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "emmett/orm/objects.py",
+   "target": "G2_emmett"
+  },
+  {
+   "a": "bare_except",
+   "b": "eq_bool_identity",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/container.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "bare_except",
+   "b": "reraise_bare",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/container.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "eq_bool_identity",
+   "b": "reraise_bare",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/container.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "dict_keys_membership",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/grouping.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "eq_bool_identity",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/grouping.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "len_zero_falsy",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/grouping.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "mutable_default",
+   "shared_function": true,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/grouping.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "dict_keys_membership",
+   "b": "eq_bool_identity",
+   "shared_function": true,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/grouping.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "dict_keys_membership",
+   "b": "len_zero_falsy",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/grouping.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "dict_keys_membership",
+   "b": "mutable_default",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/grouping.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "eq_bool_identity",
+   "b": "len_zero_falsy",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/grouping.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "eq_bool_identity",
+   "b": "mutable_default",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/grouping.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "len_zero_falsy",
+   "b": "mutable_default",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/grouping.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "eq_bool_identity",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/plot.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "bare_except",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/pspecbeam.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "dict_keys_membership",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/pspecbeam.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "bare_except",
+   "b": "dict_keys_membership",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/pspecbeam.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "none_identity",
+   "shared_function": true,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/pspecdata.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "dict_keys_membership",
+   "shared_function": true,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/pspecdata.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "eq_bool_identity",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/pspecdata.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "len_zero_falsy",
+   "shared_function": true,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/pspecdata.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "none_identity",
+   "b": "dict_keys_membership",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/pspecdata.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "none_identity",
+   "b": "eq_bool_identity",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/pspecdata.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "none_identity",
+   "b": "len_zero_falsy",
+   "shared_function": true,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/pspecdata.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "dict_keys_membership",
+   "b": "eq_bool_identity",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/pspecdata.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "dict_keys_membership",
+   "b": "len_zero_falsy",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/pspecdata.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "eq_bool_identity",
+   "b": "len_zero_falsy",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/pspecdata.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "none_identity",
+   "b": "bare_except",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/utils.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "none_identity",
+   "b": "len_zero_falsy",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/utils.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "none_identity",
+   "b": "open_encoding",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/utils.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "none_identity",
+   "b": "reraise_bare",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/utils.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "bare_except",
+   "b": "len_zero_falsy",
+   "shared_function": true,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/utils.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "bare_except",
+   "b": "open_encoding",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/utils.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "bare_except",
+   "b": "reraise_bare",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/utils.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "len_zero_falsy",
+   "b": "open_encoding",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/utils.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "len_zero_falsy",
+   "b": "reraise_bare",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/utils.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "open_encoding",
+   "b": "reraise_bare",
+   "shared_function": true,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/utils.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "bare_except",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/uvpspec.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "dict_keys_membership",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/uvpspec.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "eq_bool_identity",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/uvpspec.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "len_zero_falsy",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/uvpspec.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "bare_except",
+   "b": "dict_keys_membership",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/uvpspec.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "bare_except",
+   "b": "eq_bool_identity",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/uvpspec.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "bare_except",
+   "b": "len_zero_falsy",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/uvpspec.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "dict_keys_membership",
+   "b": "eq_bool_identity",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/uvpspec.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "dict_keys_membership",
+   "b": "len_zero_falsy",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/uvpspec.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "eq_bool_identity",
+   "b": "len_zero_falsy",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/uvpspec.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "len_zero_falsy",
+   "shared_function": true,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/uvpspec_utils.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "type_eq_isinstance",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/uvpspec_utils.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "len_zero_falsy",
+   "b": "type_eq_isinstance",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/uvpspec_utils.py",
+   "target": "K1_hera_pspec"
+  },
+  {
+   "a": "negative_type_guard",
+   "b": "len_zero_falsy",
+   "shared_function": false,
+   "commute": true,
+   "a_changes_b_sites": false,
+   "b_changes_a_sites": false,
+   "nested": false,
+   "file": "src/hera_pspec/uvwindow.py",
+   "target": "K1_hera_pspec"
+  }
+ ]
+}
