@@ -17,7 +17,7 @@ Cập nhật sau **mỗi** lần chạy. Mỗi tiêu chí có trạng thái **TH
 | S3 | Đóng góp mới, nói rõ cái gì không mới | **THẮNG** | Mục 5 đoạn đầu; Intro "What we do not claim" |
 | S4 | Đánh giá trên dữ liệu thật, có đăng ký trước, có kết quả âm | **THẮNG** | Study D, E, G, H, P, Q, R2; FREEZE + submission check |
 | S5 | So sánh với baseline mạnh và với công trình gần nhất | **THẮNG một phần** | B2, B6-R (kiểu GSE), B8; PatchDiff. **Thiếu:** chạy chính GSE (A12) |
-| S6 | Kỹ năng đa dạng, quy mô thư viện thực tế | **THẮNG một phần** | R2: 12 họ trên 16 repo, chỉ đo footprint và tương tác. **Thiếu:** admit thật với 12 họ (cần oracle) |
+| S6 | Kỹ năng đa dạng, quy mô thư viện thực tế | **THẮNG một phần** | R2: 12 họ trên 16 repo (footprint, tương tác). Study S: cổng ra quyết định thật cho 8 họ trên 12 hàm thật (48 ô). **Thiếu:** admit với oracle của chuyên gia cho các họ mới (hiện "tác hại" = khác bản gốc) |
 | S7 | Tác hại của tổ hợp đo trên dữ liệu thật | **THẮNG một phần** | Study S (S-A3, kết quả cuối): 12 hàm thật, tổ hợp cộng tính, cổng loại đúng 3/48 ô. **Thiếu:** 11 đơn vị không chạy được (hera_pspec: phụ thuộc không có trên PyPI); chưa có tổ hợp thật nào gây hại "nảy sinh" để minh hoạ Định lý 2.5 |
 | S8 | Người chấm độc lập là con người | **THUA** | Người chấm thứ hai là LLM (A9). Việc 1.9 và 7.6 |
 | S9 | Tái lập được, có artifact ẩn danh | **THẮNG** (chờ upload) | submission check pass; `make_anonymous_artifact.py`. Người làm: upload |
