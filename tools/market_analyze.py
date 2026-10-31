@@ -111,6 +111,10 @@ def analyse(res_dir):
     k = census["total"]["cells"]
     replay = json.loads((res_dir / "REPLAY.json").read_text()) if (res_dir / "REPLAY.json").exists() else {}
     rows, errors, unusable = [], [], {}
+    targets = json.loads((res_dir / "TARGETS.json").read_text())["selected"] if (res_dir / "TARGETS.json").exists() else []
+    seen = {json.loads(p.read_text()).get("project") for p in res_dir.glob("TRIALS_*.json")}
+    missing = [t["project"] for t in targets if t["project"] not in seen]   # a failed shard must be reported, not dropped
+    errors += [{"project": m, "error": "no trial record (shard did not finish)"} for m in missing]
     for p in sorted(res_dir.glob("TRIALS_*.json")):
         t = json.loads(p.read_text())
         if t.get("error"):
