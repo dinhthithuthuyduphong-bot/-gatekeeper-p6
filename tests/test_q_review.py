@@ -87,5 +87,21 @@ class ItemsTest(unittest.TestCase):
             self.assertEqual((st["reproduced"], st["items"]), (0, 0))
 
 
+class AgreementTest(unittest.TestCase):
+    def test_confirmed_needs_both_raters(self):
+        import q_review_agreement as QA
+        with tempfile.TemporaryDirectory() as t:
+            d = Path(t)
+            units = [{"instance_id": "a", "reproduced": True}, {"instance_id": "b", "reproduced": True}, {"instance_id": "c", "reproduced": False}]
+            (d / "REPRO.json").write_text(json.dumps({"units": units}))
+            (d / "KEY.json").write_text(json.dumps([{"id": "1", "instance_id": "a"}, {"id": "2", "instance_id": "b"}]))
+            (d / "RATINGS_ASSISTANT.json").write_text(json.dumps([{"id": "1", "code": "R"}, {"id": "2", "code": "R"}]))
+            (d / "RATINGS_SECOND.json").write_text(json.dumps({"ratings": [{"id": "1", "code": "R"}, {"id": "2", "code": "B"}]}))
+            r = QA.report(d)
+            self.assertEqual(r["confirmed_units"], ["a"])
+            self.assertEqual((r["without_confirmed_regression"]["k"], r["without_confirmed_regression"]["n"]), (1, 2))
+            self.assertEqual((r["bounds_over_all_units"]["low"], r["bounds_over_all_units"]["high"]), (1 / 3, 2 / 3))
+
+
 if __name__ == "__main__":
     unittest.main()
