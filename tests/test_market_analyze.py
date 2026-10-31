@@ -14,6 +14,14 @@ def fn(gate, ref):
     return {"gate": {"usable": True, "flags": gate}, "ref": {"usable": True, "flags": ref}}
 
 
+class MarketJudgeTest(unittest.TestCase):
+    def test_parse_verdict(self):
+        import market_judge as J
+        self.assertEqual(J.parse('{"verdict": "safe", "reason": "r"}')[:2], ("safe", "r"))
+        self.assertEqual(J.parse("garbage")[0], "unsafe")            # unparsable counts as unsafe (T-A2)
+        self.assertFalse(J.parse("garbage")[2])
+
+
 class MarketAnalyzeTest(unittest.TestCase):
     def test_doc_example_parsing_and_ast(self):
         ex = "## Example\n```python\nx = dict()\n```\n\nUse instead:\n```python\nx = {}\n```\n"
