@@ -36,6 +36,32 @@ class Entries(unittest.TestCase):
         u, _ = Q.asset_urls({"assets": {"repo": "https://github.com/acme/r/tree/main/sub/dir"}})
         self.assertEqual(u[0], "https://raw.githubusercontent.com/acme/r/main/sub/dir/all_preds.jsonl")
 
+    def test_old_s3_entries_use_the_submission_folder_then_per_instance_patches(self):
+        meta = {"assets": {"logs": "s3://swe-bench-submissions/verified/2024_x/logs", "trajs": "s3://swe-bench-submissions/verified/2024_x/trajs"}}
+        u, _ = Q.asset_urls(meta)
+        self.assertEqual(u[0], "https://swe-bench-submissions.s3.amazonaws.com/verified/2024_x/all_preds.jsonl")
+        self.assertEqual(Q.logs_bases(meta), ["https://swe-bench-submissions.s3.amazonaws.com/verified/2024_x/logs/"])
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            d = Path(tmp) / "evaluation" / "verified" / "2024_x"
+            (d / "results").mkdir(parents=True)
+            (d / "metadata.yaml").write_text("assets:\n  logs: s3://swe-bench-submissions/verified/2024_x/logs\n")
+            (d / "results" / "results.json").write_text(json.dumps({"resolved": ["i1", "i2"]}))
+            get = lambda url: "diff for " + url.split("/")[-2] if url.endswith("/i1/patch.diff") else None
+            per, pool = Q.entries(tmp, get=get)
+        self.assertTrue(per["2024_x"]["usable"])
+        self.assertEqual([p["instance_id"] for p in pool], ["i1"])            # i2 has no patch file: not in the pool
+
+    def test_unreadable_results_are_described(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            d = Path(tmp) / "evaluation" / "verified" / "y"
+            (d / "results").mkdir(parents=True)
+            (d / "metadata.yaml").write_text("assets: {}\n")
+            (d / "results" / "by_repo.json").write_text(json.dumps({"django": 3}))
+            per, _ = Q.entries(tmp, get=lambda u: None)
+        self.assertEqual(per["y"]["results_files"], [["by_repo.json", ["django"]]])
+
     def test_parse_both_formats(self):
         self.assertEqual(Q.parse_preds('{"instance_id": "a", "model_patch": "p"}\n{"instance_id": "b", "model_patch": "q"}'), [("a", "p"), ("b", "q")])
         self.assertEqual(Q.parse_preds(json.dumps({"a": {"instance_id": "a", "model_patch": "p"}})), [("a", "p")])

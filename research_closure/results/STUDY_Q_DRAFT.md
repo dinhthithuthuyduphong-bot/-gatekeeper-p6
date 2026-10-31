@@ -64,3 +64,7 @@ Quy tắc chọn patch phải cố định trước khi đo; ngưỡng phụ thu
 Lần 1 tìm `all_preds.jsonl` **trong** kho `SWE-bench/experiments`: 0/182 bản nộp dùng được (135 có danh sách resolved, không bản nào có dự đoán). README hiện tại của kho nói rõ kho **chỉ chứa mục đăng ký, không chứa dữ liệu**: dự đoán nằm ở kho công khai của bên nộp (khối `assets` trong `metadata.yaml`), hoặc ở bucket công khai `s3://swe-bench-submissions/` với các mục trước giữa 2026. Công cụ đã được viết lại để đọc khối `assets`, thử mọi địa chỉ (GitHub dạng tệp thô, S3 dạng HTTPS; `all_preds.jsonl` và `preds.json`) và **lưu lại khối `assets` thật cùng mọi URL đã thử** để chẩn đoán nếu vẫn thất bại.
 
 **Lưu ý chính sách từ README (18/11/2025):** từ ngày đó, SWE-bench Verified chỉ nhận bản nộp của nhóm học thuật có phương pháp mã nguồn mở; các bản nộp trước đó vẫn giữ nguyên. Điều này không ảnh hưởng việc dùng các bản nộp đã công khai.
+
+## Q-F2 lần 2: lấy được 2/182 bản nộp (692 patch resolved, phủ 398/500 instance)
+
+Bản nộp mới (kho GitHub riêng) lấy được từ `all_preds.jsonl` ở gốc kho. Đa số bản nộp cũ (131) chỉ trỏ tới hai thư mục S3 `logs` và `trajs`; dự đoán không nằm trong `logs`. **Lần 3:** thử tệp dự đoán ở thư mục cha; nếu không có, lấy `logs/<instance_id>/patch.diff` (theo README chính thức) cho **đúng các instance resolved**. 47 bản nộp không đọc được danh sách resolved: công cụ ghi lại tên tệp và khoá JSON để chẩn đoán.

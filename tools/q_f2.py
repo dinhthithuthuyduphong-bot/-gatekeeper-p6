@@ -107,8 +107,10 @@ def asset_urls(meta):
         m = re.match(r"s3://([^/\s]+)/?(\S*)$", f)
         if m:
             bucket, prefix = m.group(1), m.group(2).strip("/")
-            base = "https://%s.s3.amazonaws.com/%s" % (bucket, prefix + "/" if prefix else "")
-            urls += [base + "all_preds.jsonl", base + "preds.json"]
+            parent = prefix.rsplit("/", 1)[0] if prefix.endswith(("/logs", "/trajs")) else None
+            for pre in ([parent] if parent else []) + [prefix]:              # the submission folder first, then the asset folder
+                base = "https://%s.s3.amazonaws.com/%s" % (bucket, pre + "/" if pre else "")
+                urls += [base + "all_preds.jsonl", base + "preds.json"]
             continue
         if f.startswith("http") and f.endswith((".jsonl", ".json")):
             urls.append(f)
@@ -131,19 +133,52 @@ def parse_preds(text):
     return [(p.get("instance_id"), p.get("model_patch")) for p in out]
 
 
+def logs_bases(meta):
+    """HTTPS bases of the per-instance evaluation folders (logs/<instance_id>/patch.diff) named by the assets block."""
+    _, raw = asset_urls(meta)
+    out = []
+    for f in raw:
+        m = re.match(r"s3://([^/\s]+)/(\S*/logs)/?$", f)
+        if m:
+            out.append("https://%s.s3.amazonaws.com/%s/" % (m.group(1), m.group(2)))
+        m = re.match(r"https?://github\.com/([^/\s]+)/([^/\s]+)/tree/([^/\s]+)/(\S*logs)/?$", f)
+        if m:
+            out.append("https://raw.githubusercontent.com/%s/%s/%s/%s/" % m.groups())
+    return out
+
+
+def per_instance_patches(bases, ids, get=fetch, workers=16):
+    """Fetch logs/<id>/patch.diff for the resolved instances only (in parallel)."""
+    from concurrent.futures import ThreadPoolExecutor
+    for base in bases:
+        with ThreadPoolExecutor(workers) as ex:
+            got = dict(zip(ids, ex.map(lambda i: get(base + i + "/patch.diff"), ids)))
+        found = [(i, t) for i, t in got.items() if t]
+        if found:
+            return found, base
+    return None, None
+
+
 def entries(clone, get=fetch):
     import yaml
     base = Path(clone) / "evaluation" / "verified"
     per_sub, pool = {}, []
     for d in sorted(x for x in base.iterdir() if x.is_dir()):
         meta = yaml.safe_load((d / "metadata.yaml").read_text()) if (d / "metadata.yaml").exists() else None
-        resolved = None
+        resolved, shapes = None, []
         for f in sorted((d / "results").glob("*.json")) if (d / "results").is_dir() else []:
             resolved = resolved_ids(f.read_text())
             if resolved is not None:
                 break
+            try:                                                     # diagnosis: which files and keys exist instead
+                j = json.loads(f.read_text())
+                shapes.append([f.name, sorted(j)[:12] if isinstance(j, dict) else type(j).__name__])
+            except ValueError:
+                shapes.append([f.name, "not json"])
         urls, raw = asset_urls(meta)
         rec = {"assets": raw[:6], "tried": [], "resolved_listed": len(resolved) if resolved is not None else None}
+        if resolved is None:
+            rec["results_files"] = shapes or (sorted(x.name for x in (d / "results").iterdir()) if (d / "results").is_dir() else "no results folder")
         preds = None
         for u in urls:
             t = get(u)
@@ -152,6 +187,11 @@ def entries(clone, get=fetch):
                 preds = parse_preds(t)
                 rec["preds_url"] = u
                 break
+        if preds is None and resolved:
+            found, base = per_instance_patches(logs_bases(meta), sorted(resolved), get)
+            if found:
+                preds = found
+                rec["preds_url"] = base + "<instance_id>/patch.diff"
         if preds is None or resolved is None:
             rec["usable"] = False
             per_sub[d.name] = rec

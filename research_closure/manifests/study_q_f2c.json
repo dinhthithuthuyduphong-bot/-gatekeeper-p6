@@ -1,0 +1,9 @@
+{
+ "name": "study_q_f2c (patch_study_q_f2c.zip)",
+ "files": {
+  ".github/workflows/study-q-f2.yml": "058778e2207b2dd02fa72bb606fd743658c72e1109fbc6a68d5260ad8d49d07e",
+  "research_closure/results/STUDY_Q_DRAFT.md": "2898768bc55b48511b8b990347c0f136cfbb27108de7e22d27de984d9ba50205",
+  "tests/test_q_f2.py": "401fa2fced30d664bbfbf5ef8a9f2e9a343f4ed6a1a73a1c7fb12332c4c0254a",
+  "tools/q_f2.py": "a8a14a9be4fa93dd0d02d331f436e288816c2a3db2568b4aefa3f9c808d6e7af"
+ }
+}
