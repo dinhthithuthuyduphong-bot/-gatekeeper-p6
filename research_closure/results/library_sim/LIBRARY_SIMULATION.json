@@ -1,0 +1,130 @@
+{
+ "main": {
+  "model": {
+   "skills": 12,
+   "regions": 8,
+   "bad_pair_prob": 0.3,
+   "trials_per_cell": 300,
+   "theta": 0.1,
+   "alpha": 0.1,
+   "reps": 1000,
+   "seed": 11,
+   "libraries_with_a_bad_pair": 915
+  },
+  "P1": {
+   "harmful_component_rate": 0.279,
+   "harmful_component_wilson95": [
+    0.25208731565785697,
+    0.3076041735173278
+   ],
+   "harmful_execution_rate": 0.054,
+   "wilson95": [
+    0.04162111458513981,
+    0.06979247895392054
+   ],
+   "mean_beneficial_skills_executed": 4.479,
+   "mean_trials": 2995.017
+  },
+  "P2": {
+   "harmful_component_rate": 0.0,
+   "harmful_component_wilson95": [
+    0.0,
+    0.003826898586390522
+   ],
+   "harmful_execution_rate": 0.0,
+   "wilson95": [
+    0.0,
+    0.003826898586390522
+   ],
+   "mean_beneficial_skills_executed": 3.589,
+   "mean_trials": 3229.836
+  },
+  "P2_within_alpha": true
+ },
+ "sweep_bad_pair_prob": {
+  "0.1": {
+   "model": {
+    "skills": 12,
+    "regions": 8,
+    "bad_pair_prob": 0.1,
+    "trials_per_cell": 300,
+    "theta": 0.1,
+    "alpha": 0.1,
+    "reps": 1000,
+    "seed": 11,
+    "libraries_with_a_bad_pair": 551
+   },
+   "P1": {
+    "harmful_component_rate": 0.099,
+    "harmful_component_wilson95": [
+     0.08199515586127223,
+     0.119074016805013
+    ],
+    "harmful_execution_rate": 0.01,
+    "wilson95": [
+     0.005440695309270557,
+     0.01830966530539216
+    ],
+    "mean_beneficial_skills_executed": 4.554,
+    "mean_trials": 2985.075
+   },
+   "P2": {
+    "harmful_component_rate": 0.0,
+    "harmful_component_wilson95": [
+     0.0,
+     0.003826898586390522
+    ],
+    "harmful_execution_rate": 0.0,
+    "wilson95": [
+     0.0,
+     0.003826898586390522
+    ],
+    "mean_beneficial_skills_executed": 3.618,
+    "mean_trials": 3211.951
+   },
+   "P2_within_alpha": true
+  },
+  "0.5": {
+   "model": {
+    "skills": 12,
+    "regions": 8,
+    "bad_pair_prob": 0.5,
+    "trials_per_cell": 300,
+    "theta": 0.1,
+    "alpha": 0.1,
+    "reps": 1000,
+    "seed": 11,
+    "libraries_with_a_bad_pair": 991
+   },
+   "P1": {
+    "harmful_component_rate": 0.424,
+    "harmful_component_wilson95": [
+     0.39371789757876074,
+     0.4548637910063707
+    ],
+    "harmful_execution_rate": 0.108,
+    "wilson95": [
+     0.09024089880433962,
+     0.12875938968739056
+    ],
+    "mean_beneficial_skills_executed": 4.541,
+    "mean_trials": 2987.356
+   },
+   "P2": {
+    "harmful_component_rate": 0.0,
+    "harmful_component_wilson95": [
+     0.0,
+     0.003826898586390522
+    ],
+    "harmful_execution_rate": 0.0,
+    "wilson95": [
+     0.0,
+     0.003826898586390522
+    ],
+    "mean_beneficial_skills_executed": 3.4,
+    "mean_trials": 3268.846
+   },
+   "P2_within_alpha": true
+  }
+ }
+}

@@ -24,6 +24,11 @@ reproduce because the model-written generator changed; they enter as bounds.  Th
 inputs concentrate near the changed region.  Four Study Q instances failed for a tool limitation (patches that create files) and
 count as unusable.  The Study Q analysis script defined the inflation ratio differently from the protocol; we report both.
 
+\paragraph{Simulation.}
+The library-level results (Section~\ref{sec:eval-library}) come from synthetic libraries whose interaction model satisfies
+Assumption~\ref{ass:noninteract} by construction; they show what the design guarantees and costs under that model, not how often real
+skills interact.
+
 \paragraph{External validity.}
 The skill studies cover two hand-written rewrite families on $14$ targets; we make no claim about learned skill libraries at scale,
 compositions in the wild, or retirement beyond a constructed demonstration.  In Study P half of the in-band cases come from repositories

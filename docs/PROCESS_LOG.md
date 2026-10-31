@@ -223,3 +223,14 @@ Mẫu cho mỗi mục:
 - **MemCoder** (arXiv:2603.13258): Yi-Xuan Deng, Xiaoqin Liu, Yi Zhang, Guo-Wei Yang, Shuojin Yang. Listing arXiv khớp với ResearchGate và Papers with Code.
 - **MemGovern** (arXiv:2601.06789): 15 tác giả (listing arXiv khớp với papers.cool); bài đã được nhận ở Findings of EMNLP 2026, nên `refs.bib` trích bản hội nghị.
 - `refs.bib` không còn mục "and others"; PAPER_TODO 4.4 xong.
+
+### ~19:30 — "Fix potential issues sao cho thắng": rà soát toàn bài như phản biện FSE
+- Chi tiết: `docs/paper/PHASE4_REVIEW.md`, W1–W7.
+- **W1, sửa Abstract tự mâu thuẫn** về 16 patch của Study P: câu cũ ngầm nói chúng có hại thật, trong khi RQ5 cho thấy phần lớn không phải hồi quy.
+- **W2, mô phỏng thư viện** (`tools/library_simulation.py`, có test; kết quả trong `research_closure/results/library_sim/`), dùng đúng e-process, sổ cái và luật thực thi của hệ thống:
+  - chỉ admit từng kỹ năng: 27,9% thư viện chạy thành phần có hại (q = 0,1 / 0,3 / 0,5 cho 9,9% / 27,9% / 42,4%);
+  - cách của bài: 0/1.000 ở mọi q;
+  - cái giá: chạy ít hơn khoảng 20% kỹ năng có lợi, thêm 8% lần thử;
+  - đo trên toàn tập thì phần hại bị che (5,4%).
+- **W3–W6, trích dẫn mới** (đã tra): PatchDiff (ICSE 2026), Johari và cộng sự (OR 2022), Vovk & Wang (AoS 2021), Smith và cộng sự (ESEC/FSE 2015; số trang cần kiểm).
+- Bộ kiểm số: 26 con số. Workflow submission check thêm bước tái lập mô phỏng thư viện (phải giống hệt bản commit).

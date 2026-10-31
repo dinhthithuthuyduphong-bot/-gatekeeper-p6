@@ -123,3 +123,4 @@ PDF gốc: [`paper/source/`](paper/source/), đã đối chiếu toàn văn ngà
 | 31/10/2026 ~17:15 | Giai đoạn 5: artifact ẩn danh (0 dấu vết danh tính), submission check pass (run 41212215560), bài chuyển sang acmsmall theo FSE 2027 (10 trang) |
 | 31/10/2026 ~17:45 | Giai đoạn 6 chuẩn bị (bài chưa nộp): workflow snapshot bản nộp, mẫu trả lời phản biện, 16 phản biện giả định |
 | 31/10/2026 ~18:15 | A14: độ nhạy hệ số phạt regression — không quyết định hay nhãn nào phụ thuộc (7.200 lần rút + demo, λ = 0…5); đưa vào bài |
+| 31/10/2026 ~19:30 | Rà soát toàn bài như phản biện (PHASE4_REVIEW W1–W7): sửa Abstract tự mâu thuẫn, thêm mô phỏng thư viện (27,9% → 0%), trích PatchDiff, always-valid A/B testing, Smith 2015, Vovk & Wang |

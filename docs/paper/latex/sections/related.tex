@@ -11,6 +11,13 @@ Formal verification of agent skills~\cite{metere2026formal} and privilege contro
 decide what a change may touch.  That predicate is different from whether the change is functionally right for the target, and we keep
 the two decisions apart.
 \subsection{Patch correctness}
-Plausible patches that pass the tests can still be wrong; we measure behaviour against the developers' fix on SWE-bench
-Verified~\cite{jimenez2024swebench} and find that how ``harm'' is defined changes the measured rate by a factor of about four.
+Plausible patches that pass the tests can still be wrong: automated repair overfits weak test suites~\cite{smith2015overfitting}, and on
+SWE-bench Verified~\cite{jimenez2024swebench} PatchDiff exposed behavioural differences from the developers' fix in $29.6\%$ of plausible
+patches~\cite{wang2026patchdiff}.  We measure the same kind of difference with function-level inputs and show that how ``harm'' is defined
+(any difference versus a contract regression) changes the measured rate by a factor of about four.
+\subsection{Sequential testing in deployment}
+Always-valid inference lets online experiments be monitored continuously without inflating error~\cite{johari2022always}.  Admission is
+the same kind of decision applied to a reusable code change, with three differences we address: the decision is relative to a declared
+scope that may shift (Proposition~\ref{prop:nofree}), it must hold over a growing library with re-admission, and compositions are
+decisions of their own (Theorem~\ref{thm:composition}).
 \input{sections/related_stats}

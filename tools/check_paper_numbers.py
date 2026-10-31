@@ -33,6 +33,7 @@ QA1 = lambda: J("research_closure/results/study_q/qa1/QA1_RESULT.json")  # noqa:
 PA = lambda: J("research_closure/results/study_p/P_ANALYSIS.json")       # noqa: E731
 RQ3 = lambda: J("research_closure/results/rq3/RQ3_SUMMARY.json")         # noqa: E731
 TH = lambda: J("research_closure/results/theory/THEORY_CHECKS.json")     # noqa: E731
+LS = "research_closure/results/library_sim/LIBRARY_SIMULATION.json"
 
 CLAIMS = [
     ("Q usable instances", "$245$ instances usable", lambda: "$%d$ instances usable" % QA()["Q1_funnel"]["FINISHED"]),
@@ -68,10 +69,23 @@ CLAIMS = [
     ("theory C9 draws", "=110$ clean draws", lambda: "=%d$ clean draws" % TH()["C9_harm_certificate"]["clean_draws_family16"]),
     ("loss-weight sensitivity draws", "Recomputing all $7{,}200$ recorded draws",
      lambda: "Recomputing all $%s$ recorded draws" % "{:,}".format(J("research_closure/results/sensitivity/LOSS_WEIGHT_SENSITIVITY.json")["A_recorded_draws"]["draws"]).replace(",", "{,}")),
+    ("library sim P1 q=0.3", "in $27.9\\%$ of the\nlibraries at $q=0.3$",
+     lambda: "in $%s\\%%$ of the\nlibraries at $q=0.3$" % pct(J(LS)["main"]["P1"]["harmful_component_rate"])),
+    ("library sim sweep", "($9.9\\%$ at $q=0.1$, $42.4\\%$ at $q=0.5$)",
+     lambda: "($%s\\%%$ at $q=0.1$, $%s\\%%$ at $q=0.5$)" % (pct(J(LS)["sweep_bad_pair_prob"]["0.1"]["P1"]["harmful_component_rate"]),
+                                                         pct(J(LS)["sweep_bad_pair_prob"]["0.5"]["P1"]["harmful_component_rate"]))),
+    ("library sim P2 zero", "($0/1{,}000$ at every $q$",
+     lambda: "($%d/1{,}000$ at every $q$" % max(round(r["P2"]["harmful_component_rate"] * 1000) for r in [J(LS)["main"]] + list(J(LS)["sweep_bad_pair_prob"].values()))),
+    ("library sim reuse", "$3.59$ instead of $4.48$",
+     lambda: "$%.2f$ instead of $%.2f$" % (J(LS)["main"]["P2"]["mean_beneficial_skills_executed"], J(LS)["main"]["P1"]["mean_beneficial_skills_executed"])),
+    ("library sim masked", "harmful in only $5.4\\%$ of libraries",
+     lambda: "harmful in only $%s\\%%$ of libraries" % pct(J(LS)["main"]["P1"]["harmful_execution_rate"])),
+    ("abstract: library sim", "ran a harmful composition in $28\\%$ of libraries",
+     lambda: "ran a harmful composition in $%d\\%%$ of libraries" % round(100 * J(LS)["main"]["P1"]["harmful_component_rate"])),
     # abstract (main.tex)
     ("abstract: plausible patches", "in $205$ plausible LLM patches", lambda: "in $%d$ plausible LLM patches" % PA()["PRIMARY"]["plausible"]),
-    ("abstract: census admits", "the census admitted all $16$ with high partial harm",
-     lambda: "the census admitted all $%s$ with high partial harm" % PA()["RQ4"]["census_only"]["admits_inadmissible"].split("/")[0]),
+    ("abstract: census admits", "the test census admitted all $16$ with partial\nbehavioural differences",
+     lambda: "the test census admitted all $%s$ with partial\nbehavioural differences" % PA()["RQ4"]["census_only"]["admits_inadmissible"].split("/")[0]),
     ("abstract: factor ~4 (Q2/Q4)", "changes by a factor of about four with its definition",
      lambda: "changes by a factor of about %s with its definition" % {3: "three", 4: "four", 5: "five"}[round(QA()["Q2_divergent"]["share"] / QA()["Q4_contract_regression"]["share"])]),
 ]

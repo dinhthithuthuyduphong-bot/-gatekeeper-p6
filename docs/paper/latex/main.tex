@@ -19,10 +19,12 @@ relative to a declared scope family and give Gatekeeper, which admits a change i
 a benefit margin.  We prove an anytime-valid guarantee that holds over a whole library, over adaptively chosen cells, over compositions
 and over re-admission after the environment changes, through a per-cell error ledger; we show that its shift term is necessary and
 tight, characterise composition risk exactly, and bound every executed set through an execution rule.  Every statement is checked
-numerically.  Pre-registered experiments, negative results included, show where such a gate matters: on $14$ real skill-reuse targets
-harm was frequent and a simple gate with target evidence sufficed, while replay plus fingerprints admitted every harmful cell; in $205$
-plausible LLM patches the census admitted all $16$ with high partial harm, which the statistical gates rejected; and on SWE-bench
-Verified the measured harm rate changes by a factor of about four with its definition.
+numerically.  Pre-registered experiments, negative results included, show where such a gate matters.  On $14$ real skill-reuse targets harm was
+frequent and a simple gate with target evidence sufficed, while replay plus fingerprints admitted all four harmful cells.  In a
+simulated library built on our implementation, admitting skills one by one ran a harmful composition in $28\%$ of libraries, and
+composite cells with the execution rule in none.  In $205$ plausible LLM patches, the test census admitted all $16$ with partial
+behavioural differences and the statistical gates none, yet a manual check traced most of those differences to inputs the developers'
+fix also rejects; on SWE-bench Verified the measured harm rate changes by a factor of about four with its definition.
 \end{abstract}
 \keywords{code reuse, coding agents, e-processes, anytime-valid inference, software engineering}
 \maketitle

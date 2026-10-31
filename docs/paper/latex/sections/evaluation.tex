@@ -4,8 +4,8 @@
 \section{Evaluation}
 \label{sec:evaluation}
 
-We ask four questions.  \textbf{RQ1} Does the certificate behave as the theory predicts, and where do simple gates fail?
-(Section~\ref{sec:eval-phase})  \textbf{RQ2} On real skill reuse, how does admission compare with replay plus fingerprints and with
+We ask four questions.  \textbf{RQ1} Does the certificate behave as the theory predicts, where do simple gates fail, and does the library-level
+guarantee hold for what actually runs? (Sections~\ref{sec:eval-phase} and~\ref{sec:eval-library})  \textbf{RQ2} On real skill reuse, how does admission compare with replay plus fingerprints and with
 always-retest? (Section~\ref{sec:eval-skills})  \textbf{RQ3} Does partial harm occur in plausible LLM patches, and which gates catch
 it? (Section~\ref{sec:eval-patches})  \textbf{RQ4} How much of the measured harm depends on how harm is defined?
 (Sections~\ref{sec:eval-swebench} and~\ref{sec:eval-oracle})
@@ -46,6 +46,21 @@ $h$ & smoke 20 & zero-tol.\ 300 & fixed 300 & certificate, 300 & mixture, 1000 \
 \end{tabular}
 \end{table}
 
+\subsection{Library-level control (simulation)}
+\label{sec:eval-library}
+% source: research_closure/results/library_sim/LIBRARY_SIMULATION.json; tools/library_simulation.py
+No real library in our studies has overlapping skills, so we test the library-level parts of the design (composite cells, the
+per-cell ledger and the execution rule) on synthetic libraries built with the implementation's own e-process, ledger and execution
+rule.  Each library has $12$ skills in one scope ($70\%$ beneficial, $\mathrm{STR}=-0.3$; the rest not admissible), each touching one of
+$8$ code regions; every overlapping pair is, with probability $q$, the harmful construction of Theorem~\ref{thm:composition}
+($\mathrm{STR}=+0.5$ when applied together), and risks otherwise add ($1{,}000$ libraries, $300$ trials per cell, $\theta=\alpha=0.1$).
+Admitting skills one by one and running every admitted skill together executed a harmful footprint component in $27.9\%$ of the
+libraries at $q=0.3$ ($9.9\%$ at $q=0.1$, $42.4\%$ at $q=0.5$).  With composite cells, the ledger and the execution rule this never
+happened ($0/1{,}000$ at every $q$, consistent with Corollary~\ref{cor:execution}).  The price is reuse: $3.59$ instead of $4.48$
+beneficial skills executed per library, because undecided or rejected composites keep overlapping skills apart, and $8\%$ more trials.
+Measured on the executed set as a whole, one-by-one admission looked harmful in only $5.4\%$ of libraries: benefits elsewhere masked the
+harmful component, which is why the guarantee is stated per component.
+
 \subsection{Skill reuse on real targets}
 \label{sec:eval-skills}
 % sources: study_d/results/RESULTS_SUMMARY_study-d-v1.md; study_e/results/RESULTS_SUMMARY_study-e-v1.md;
@@ -55,7 +70,7 @@ Two skill families, both frozen AST rewrites (excluding \texttt{bool} from \text
 were applied to $14$ real targets in three pre-registered studies ($28$ cells).
 \emph{Study D} ($8$ targets, $16$ cells): ground truth from $300$ draws plus the target's full test suite gave $3$ beneficial,
 $9$ unchanged, $4$ out-of-scope and $0$ harmful cells.  B2, replay plus fingerprints (B6-R) and always-retest (B8) each admitted
-$12$ cells, the $3$ beneficial ones and all $9$ unchanged ones; the certificate (benefit e-process with e-Holm over the $16$ cells, family-wise $\alpha=0.1$) admitted $2$ cells, both
+$12$ cells, the $3$ beneficial ones and all $9$ unchanged ones; the certificate (benefit e-process with an e-value Holm procedure over the $16$ cells~\cite{vovk2021evalues}, family-wise $\alpha=0.1$) admitted $2$ cells, both
 beneficial, after $110$ draws each, and missed the third, whose mean benefit ($-0.11$) is smaller than the margin $\theta=0.2$.  It used $3{,}220$ trial runs
 against $3{,}600$ for B8.
 \emph{Studies E and G}: on the four harmful cells (\texttt{pyyaml}, \texttt{packaging}, \texttt{databricks}: harm on $87$--$100\%$ of
@@ -91,7 +106,10 @@ A manual review added after the result (labelled as such) re-ran the $55$ units 
 independent raters agreed on $87.7\%$ of $154$ items.  $8/36$ ($22.2\%$, Wilson $11.7$--$38.1\%$) units had no regression confirmed by
 both raters; excluding three units whose inputs are model-built stand-in objects gives $11/36$ ($18.0$--$46.9\%$).  The RQ5 conclusion
 therefore does not generalise: on SWE-bench Verified most naive differences are real, observable behaviour differences from the fix.
-Whether they are \emph{wrong} is a separate question that a reference implementation cannot answer.
+Whether they are \emph{wrong} is a separate question that a reference implementation cannot answer.  The orders of magnitude agree
+with PatchDiff~\cite{wang2026patchdiff}, which found $29.6\%$ of plausible SWE-bench Verified patches behaving differently from the
+fix with differential tests and judged $28.6\%$ of those certainly incorrect; our function-level inputs find more differences ($43.1\%$),
+and our contract classification is a cheaper, automatic proxy for their manual judgement.
 
 \subsection{Who defines harm}
 \label{sec:eval-oracle}
