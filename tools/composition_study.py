@@ -29,6 +29,29 @@ CENSUS = ROOT / "research_closure/results/study_r2/LIBRARY_CENSUS.json"
 ETA, ALPHA, ALPHA_ALARM, MIN_STABLE = 0.05, 0.1, 0.05, 50
 VARIANTS = ("A", "B", "AB", "BA")
 UNITS_ONLY = False   # --units-only: list the units (no function is run, no outcome is seen)
+S_A1 = False         # --s-a1: amendment S-A1 (post hoc): receivers built from the constructor signature, mangled names,
+#                      manifest Python version, install log recorded (study_s/AMENDMENTS.md)
+INSTALL_LOG = {}
+
+
+def inner(py, root, pp, rel, qualname, mode, calls, out, n, seed=0):
+    """FP.inner (frozen) as registered; under S-A1 the same call through tools/composition_inner.py."""
+    if not S_A1:
+        return FP.inner(py, root, pp, rel, qualname, mode, calls, out, n, seed)
+    args = {"root": str(root), "pythonpath": pp, "file": rel, "qualname": qualname, "mode": mode, "n": n, "seed": seed,
+            "calls": str(calls), "out": str(out), "timeout": 2}
+    ap = Path(str(out) + ".args.json")
+    try:
+        with FP.at_common_path(root) as common:
+            args["root"] = str(common)
+            ap.write_text(json.dumps(args))
+            p = subprocess.run([str(py), str(ROOT / "tools" / "composition_inner.py"), str(ap)], capture_output=True, text=True,
+                               timeout=120 + n * 2)
+    except subprocess.TimeoutExpired:
+        return {"status": "PROCESS_TIMEOUT"}
+    if not Path(out).exists():
+        return {"status": "CRASHED", "tail": (p.stdout + p.stderr)[-400:]}
+    return json.loads(Path(out).read_text())
 
 
 # ------------------------------------------------------------------ units
@@ -111,14 +134,21 @@ def variant_source(skills, a, b, src, v):
 
 def make_env(work, root, manifest):
     env_dir = work / "venv"
+    base = shutil.which("python%s" % manifest.get("python", "")) if S_A1 else None
     if not env_dir.exists():
-        venv.create(env_dir, with_pip=True)
+        if base:
+            subprocess.run([base, "-m", "venv", str(env_dir)], check=True)
+        else:
+            venv.create(env_dir, with_pip=True)
     py = env_dir / "bin" / "python"
     kind, _, pkg = (manifest.get("install") or "").partition(":")
+    log = {"python": base or sys.executable}
     if kind == "self-then-uninstall":
         e = dict(os.environ, SETUPTOOLS_SCM_PRETEND_VERSION="0.0.0")
-        subprocess.run([str(py), "-m", "pip", "install", "-q", str(root)], env=e, capture_output=True, timeout=1800)
+        r = subprocess.run([str(py), "-m", "pip", "install", "-q", str(root)], env=e, capture_output=True, text=True, timeout=1800)
+        log.update(install_rc=r.returncode, install_tail=(r.stderr or r.stdout)[-600:])
         subprocess.run([str(py), "-m", "pip", "uninstall", "-y", "-q", pkg], capture_output=True, timeout=600)
+    INSTALL_LOG[str(root)] = log
     return py
 
 
@@ -168,12 +198,12 @@ def run_target(t, pairs, skills, work, n):
         src = (root / u["file"]).read_text(encoding="utf-8")
         tag = "u%02d" % k
         calls = work / (tag + ".calls.json")
-        gen = FP.inner(py, root, pp, u["file"], u["qualname"], "generate", calls, work / (tag + ".gen.json"), n, 0)
+        gen = inner(py, root, pp, u["file"], u["qualname"], "generate", calls, work / (tag + ".gen.json"), n, 0)
         if gen.get("status") != "GENERATED":
             u.update(usable=False, why="did not run: %s %s" % (gen.get("status"), str(gen.get("reason") or gen.get("tail") or "")[:200]))
             continue
-        o1 = FP.inner(py, root, pp, u["file"], u["qualname"], "run", calls, work / (tag + ".o1.json"), n)
-        o2 = FP.inner(py, root, pp, u["file"], u["qualname"], "run", calls, work / (tag + ".o2.json"), n)
+        o1 = inner(py, root, pp, u["file"], u["qualname"], "run", calls, work / (tag + ".o1.json"), n)
+        o2 = inner(py, root, pp, u["file"], u["qualname"], "run", calls, work / (tag + ".o2.json"), n)
         runs = {}
         for v in VARIANTS:
             snap = work / ("snap_" + v)
@@ -181,7 +211,7 @@ def run_target(t, pairs, skills, work, n):
                 shutil.rmtree(snap)
             shutil.copytree(root, snap, symlinks=True, ignore=shutil.ignore_patterns(".git", "__pycache__"))
             (snap / u["file"]).write_text(variant_source(skills, u["a"], u["b"], src, v), encoding="utf-8")
-            runs[v] = FP.inner(py, snap, pp, u["file"], u["qualname"], "run", calls, work / ("%s.%s.json" % (tag, v)), n)
+            runs[v] = inner(py, snap, pp, u["file"], u["qualname"], "run", calls, work / ("%s.%s.json" % (tag, v)), n)
             shutil.rmtree(snap)
         bad = [x for x in [o1, o2] + list(runs.values()) if x.get("status") != "RAN"]
         if bad:
@@ -197,7 +227,7 @@ def run_target(t, pairs, skills, work, n):
                            for i in stable if runs["AB"]["outcomes"][i] != o1["outcomes"][i]
                            or runs["BA"]["outcomes"][i] != o1["outcomes"][i]][:3])
         u["losses"] = L
-    return {"target": t["target"], "units": units}
+    return {"target": t["target"], "units": units, "install": INSTALL_LOG.get(str(root))}
 
 
 def summarise(targets):
@@ -235,8 +265,9 @@ def main(argv):
     work, out = Path(argv[0]), Path(argv[1])
     opt = lambda k, d: type(d)(argv[argv.index(k) + 1]) if k in argv else d   # noqa: E731
     n = opt("--n", 200)
-    global UNITS_ONLY
+    global UNITS_ONLY, S_A1
     UNITS_ONLY = "--units-only" in argv
+    S_A1 = "--s-a1" in argv
     census = json.loads(CENSUS.read_text())
     only = set(opt("--targets", "").split(",")) - {""}
     edge_targets = {k for k, v in census["with_enabling_edges"]["targets"].items() if v["edges"]}
@@ -259,8 +290,10 @@ def main(argv):
                 print(r["target"], u["kind"], u["file"], u["qualname"], u["a"], u["b"], u.get("why", ""))
         return 0
     summary = summarise(res)
+    summary["install"] = {r["target"]: r.get("install") for r in res}
     out.mkdir(parents=True, exist_ok=True)
-    (out / "COMPOSITION_STUDY.json").write_text(json.dumps(summary, indent=1, default=str))
+    name = "COMPOSITION_STUDY_SA1.json" if S_A1 else "COMPOSITION_STUDY.json"
+    (out / name).write_text(json.dumps(summary, indent=1, default=str))
     print(json.dumps(summary["total"], indent=1))
     return 0
 

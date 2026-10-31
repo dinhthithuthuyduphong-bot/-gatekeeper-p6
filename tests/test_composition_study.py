@@ -37,6 +37,12 @@ class CompositionStudyTest(unittest.TestCase):
         self.assertIn("isinstance(x, bool)", ba)          # B first creates the site the bool guard then rewrites
         self.assertNotEqual(ab, ba)
 
+    def test_mangled_private_method(self):
+        import composition_inner as CI
+        self.assertEqual(CI.mangled("Mongo", "__select"), "_Mongo__select")
+        self.assertEqual(CI.mangled("_Priv", "__x"), "_Priv__x")
+        self.assertEqual(CI.mangled("A", "__init__"), "__init__")
+
     def test_harm_e(self):
         e, fired = S.harm_e([0] * 150)
         self.assertGreater(e, 100)
