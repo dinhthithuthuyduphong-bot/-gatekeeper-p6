@@ -18,7 +18,7 @@
   target dương/âm hoặc oracle cấp 1 mới.
 
 Các mục bên dưới là nhật ký lịch sử; các trạng thái BLOCKED/bản nháp ở mốc cũ
-không thay thế bảng cập nhật trên và `REVIEW_RESPONSE_PLAN.md`.
+không thay thế bảng cập nhật trên và `docs/history/REVIEW_RESPONSE_PLAN.md`.
 
 Mỗi dòng là một lần chạy trên GitHub Actions. "Phạm vi" ghi rõ điều được và **không** được kết luận. Digest có dấu `…` là bản rút gọn (12 ký tự đầu, tính từ file artifact đã tải về); cần bổ sung đầy đủ từ trang Actions.
 
@@ -147,7 +147,7 @@ Oracle đúng trên mã gốc ở cả 6 target (10/10 lần rút mỗi scope). 
 
 ## Study E v1 — kết quả (tag `study-e-freeze`, drand vòng 33247360)
 
-E1 pyyaml/bool, E2 packaging/bool, E3 databricks/bool: **Gatekeeper REJECT_HARM sau 2 lần rút; B2 và B6-R ADMIT; B8 REJECT**. Census (bộ test gốc: 1.287 / 51.524 / 130 test) **không phát hiện regression nào**. Đối chứng K1 trino, K2 tomlkit: không đổi hành vi, Gatekeeper không admit. H-E1 đến H-E4 được xác nhận; 6 ablation cho cùng quyết định. Chi tiết: `study_e/results/`; tổng hợp D+E: `RESEARCH_SUMMARY_D_E.md`.
+E1 pyyaml/bool, E2 packaging/bool, E3 databricks/bool: **Gatekeeper REJECT_HARM sau 2 lần rút; B2 và B6-R ADMIT; B8 REJECT**. Census (bộ test gốc: 1.287 / 51.524 / 130 test) **không phát hiện regression nào**. Đối chứng K1 trino, K2 tomlkit: không đổi hành vi, Gatekeeper không admit. H-E1 đến H-E4 được xác nhận; 6 ablation cho cùng quyết định. Chi tiết: `study_e/results/`; tổng hợp D+E: `docs/history/RESEARCH_SUMMARY_D_E.md`.
 
 ## Phân tích bổ sung không tốn tiền (sau Study E)
 
@@ -162,7 +162,7 @@ E1 pyyaml/bool, E2 packaging/bool, E3 databricks/bool: **Gatekeeper REJECT_HARM 
 2. **Truy vết B6-R:** `study_d/PROVENANCE_B6R.md` + `SUPPLEMENTARY_MANIFEST.json` (hash các file replay; ví dụ replay là fixture tự dựng).
 3. **Chi phí:** tách đo thật và mô hình; đo thật 1.038,82 s so với 1.049,49 s (−1,02%); Study E 2.106 lần rút (sửa từ 2.104).
 4. **Artifact:** `results_check.py` kiểm cả quyết định, số lần rút, đếm, census, tổng; thiếu dữ liệu thì FAIL; workflow bật `pipefail`; workflow chạy D/E ghi `pip freeze`; sửa tài liệu lỗi thời.
-5. **Độ nhạy theo cấp oracle** của Study E (chỉ E1 / E1+E2 / cả ba) trong `RESEARCH_SUMMARY_D_E.md`.
+5. **Độ nhạy theo cấp oracle** của Study E (chỉ E1 / E1+E2 / cả ba) trong `docs/history/RESEARCH_SUMMARY_D_E.md`.
 - **Chạy thử B9 trên 6 target thật** bằng bản fix upstream (workflow `b9-dryrun.yml`, 0 đồng, dùng nguyên `run_b9.py` đã đóng băng).
 
 ## Tái lập Study E và chạy thử B9 (0 đồng)

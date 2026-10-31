@@ -1,0 +1,86 @@
+# Nhật ký quá trình
+
+Ghi mọi việc đã làm, theo thứ tự thời gian (UTC): làm gì, vì sao, bằng chứng ở đâu, kết quả ra sao. Mục mới thêm ở **cuối**. Trạng thái tổng hợp ở [TRACKING_FSE](TRACKING_FSE.md); cấu trúc repo ở [STRUCTURE](STRUCTURE.md).
+
+Mẫu cho mỗi mục:
+
+```
+### <ngày giờ UTC> — <việc>
+- Vì sao:
+- Đã làm:
+- Bằng chứng: commit / run / tệp
+- Kết quả:
+- Còn mở:
+```
+
+---
+
+## 31/10/2026
+
+### 06:47 — Đóng băng Study Q
+- Bằng chứng: commit `94c87bc` ("Freeze Study Q"); `study_q/FREEZE.json` băm 68 tệp; seed drand lúc 2026-10-31T07:47:53Z.
+
+### 06:50 và 07:59 — Stream run #1 và #2 thất bại
+- Đã làm: chạy workflow `Gatekeeper Study Q stream` với `only=3`.
+- Kết quả: job `plan` dừng với `AssertionError`, vì `3` không phải id instance (cần dạng `astropy__astropy-12907`). Không tốn chi phí model.
+
+### 08:21 — Đưa patch `study_q_stream_msg` lên main
+- Vì sao: ô `only` cần nhận nhiều định dạng hơn và báo lỗi rõ ràng thay cho `AssertionError`.
+- Bằng chứng: commit `4898596`; `.github/workflows/study-q-stream.yml` có SHA-256 `a75e602e…`, khớp `research_closure/manifests/study_q_stream_msg.json`.
+- Kết quả: `freeze_study.py verify study_q` báo 68 tệp không đổi (workflow không nằm trong freeze).
+
+### 08:29 — Smoke 3 instance (run #3)
+- Đã làm: `only = astropy__astropy-12907, astropy__astropy-13033, astropy__astropy-13236`.
+- Bằng chứng: [run 41184775725](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41184775725).
+- Kết quả: 3/3 thành công, `status: FINISHED, error: null`; seed `460798324973423911`. Mỗi instance khoảng 1 phút, artifact khoảng 1 KB.
+- Còn mở: chưa mở artifact để xem có hàm dùng được không (sandbox của trợ lý không tải được artifact).
+
+### 08:33 — Che token Vertex trong log
+- Vì sao: log của run #3 in nguyên văn `GOOGLE_OAUTH_TOKEN` (`ya29…`) ở mọi bước sau bước "Vertex access token", do token được ghi vào `GITHUB_ENV` mà không che.
+- Đã làm: thêm `echo "::add-mask::$t"` trước khi ghi token, ở cả 13 workflow có cùng mẫu; manifest `research_closure/manifests/workflow_mask_vertex_token.json`.
+- Bằng chứng: commit `206da51`; cả 13 tệp YAML vẫn parse được; freeze Study Q không đổi.
+- Còn mở: token đã lộ (sống khoảng 1 giờ) vẫn còn trong log của các run trước; nên xoá các log đó nếu cần.
+
+### 08:33 — Bắt đầu stream part 0 (235 instance)
+- Bằng chứng: [run 41185100083](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41185100083), chạy trên commit `206da51`; 236 job (1 plan + 235 instance); job `plan` thành công.
+
+### 08:35 — Thêm file tracking
+- Bằng chứng: commit `9ea7356`, `TRACKING_FSE.md` (nay ở `docs/`).
+- Nội dung: 10 kỳ vọng của bài so với study tương ứng, checklist Study Q, quy tắc chọn khẳng định, nhật ký.
+
+### ~08:50 — Thêm review kiến thức và công thức
+- Bằng chứng: commit `635eebc`, `REVIEW_FSE.md` (nay ở `docs/paper/`).
+- Đã làm: viết từ ghi chép của repo và mã nguồn (lúc này chưa có PDF); chạy lại mọi phép tính (vùng [0,75%; 10,87%], ngưỡng chịu hại 1,97%, 110 lần rút, alpha ledger, công suất HQ1 với n = 18).
+
+### Sau đó — Kiểm tra toàn bộ bài FSE theo PDF gốc
+- Vì sao: người nghiên cứu cung cấp 3 PDF và cho biết bản thảo do AI sinh, chưa chắc đúng.
+- Đã làm:
+  1. Kiểm SHA-256 của 3 PDF: khớp `research_closure/PRIVATE_SOURCE_DIGESTS.json`.
+  2. Đọc toàn văn bằng `pdftotext`; kiểm từng định lý, mệnh đề, con số, trích dẫn; tính lại mọi phép tính tính lại được.
+  3. Viết [`docs/paper/PAPER_AUDIT.md`](paper/PAPER_AUDIT.md): 9 lỗi toán (T1 đến T9), 7 lỗi số liệu và thống kê (S1 đến S7), 5 lỗi trình bày (N1 đến N5), mỗi lỗi kèm cách sửa; có phát biểu và chứng minh thay thế cho Định lý 4 và Định lý 7.
+  4. Cập nhật `REVIEW_FSE.md` (bỏ ghi chú "[đối chiếu PDF]", thêm R13, R14) và mục 5 của `TRACKING_FSE.md`.
+- Kết quả chính:
+  - Định lý 4: hằng số 2ξ_s; α phải cấp theo ô; admit lại cần sổ cái.
+  - Định lý 7: không thể đạt 1 − ε; cận đúng và chặt là 1 + min(a, b).
+  - Mệnh đề 9: tỉ lệ phương sai đúng là 1 + 2σ_T²/σ_S².
+  - CI [3,1; 9,8] không vượt biên 5 điểm.
+  - Các tỉ lệ 5,1% / 11,5% / 22,7% không ứng với số nguyên trên 63 cặp có hại.
+  - d̄ = 0,34 mâu thuẫn với 11,4%.
+  - Phép tính số học đơn giản trong bài đều khớp.
+- Còn mở: sửa bản LaTeX (repo không có `main.tex`); xác minh 7 trích dẫn placeholder.
+
+### Sau đó — Sắp xếp lại repo
+- Vì sao: gốc repo có khoảng 30 tệp lẫn lộn (tài liệu, script của gói cập nhật cũ, manifest, log).
+- Nguyên tắc: **không chuyển** tệp nào nằm trong một `FREEZE.json` hoặc được workflow, công cụ hay test gọi tới. Trước khi chuyển, đã kiểm tham chiếu của từng tệp gốc bằng `grep` trên toàn repo và trên mọi `FREEZE.json`.
+- Đã làm:
+  - `docs/`: `TRACKING_FSE.md`, `PROCESS_LOG.md` (tệp này), `STRUCTURE.md`; `docs/paper/`: `REVIEW_FSE.md`, `PAPER_AUDIT.md`, `source/` (3 PDF); `docs/history/`: `RESEARCH_SUMMARY_D_E.md`, `REVIEW_RESPONSE_PLAN.md`, `START_HERE.md`, `START_HERE_VI.md`, `README_PRE_B9.md`, `RESULTS_AND_SCAN.md`, `WORKFLOW_FIX_RESULT.md`.
+  - `archive/root_packages/`: `APPLY_CI_FIX.py`, `APPLY_NEXT_UPDATE.py`, `APPLY_UPDATE.py`, `CI_FIX_MANIFEST.json`, `DELTA_MANIFEST.json`, `FILE_CHANGES.md`, `MANIFEST_SHA256.json`, `MISSING_FILES.txt`, `PACKAGE_MANIFEST.json`, `PACKAGE_VALIDATION.json`, `SHA256.json`, `STATIC_VALIDATION.json`, `UPDATE_MANIFEST.json`, `UPDATE_PATHS.txt`, `hygiene.log`, `PACKAGE_CHECKS/`.
+  - Xoá `study_p_feasibility.json` ở gốc: bản trùng y hệt (`cmp`) của `research_closure/manifests/study_p_feasibility.json`.
+  - Sửa đường dẫn trong `README.md`, `README_VI.md`, `EVIDENCE_LEDGER.md` và các liên kết tương đối trong hai tệp đã chuyển vào `docs/`.
+  - Thêm `.gitignore` (`__pycache__/`, `*.pyc`).
+- Giữ ở gốc: `README.md`, `README_VI.md`, `EVIDENCE_LEDGER.md`, `RUN_P6_REMOTE.py` (workflow `p6-remote-smoke.yml` và `tests/test_remote.py` gọi tới).
+- Không chuyển `study_*`, `tools/`, `gatekeeper_*`: đường dẫn của chúng nằm trong các `FREEZE.json` và workflow (lý do chi tiết ở [STRUCTURE](STRUCTURE.md)).
+- Kiểm tra:
+  - 339 unit test pass trước và sau khi sắp xếp; `tools/repo_hygiene.py`: 0 tệp trùng.
+  - `freeze_study.py verify` trên 13 study có `FREEZE.json`, chạy ở commit trước (git worktree) và sau khi sắp xếp: **kết quả giống hệt nhau**. D, E, F, G, H, L, M, M-A\*, Q: verified.
+  - **Phát hiện (đã có từ trước, không do đợt này):** B, C báo đổi `tools/run_study_d.py`; N báo đổi `tools/repo_hygiene.py`; P báo đổi `research_closure/results/ALIGNMENT_WITH_FSE.md`. Các study này đã xong. Cần ghi nhận như amendment, hoặc giải thích trong EVIDENCE_LEDGER, trước khi dùng làm bằng chứng đóng băng.

@@ -120,7 +120,7 @@ Array-like hỏng ở một phép so sánh khác (`default_value not in (None, U
 
 Trên rich-click v1.9.9 và asyncclick 8.3.0.6 (chưa từng chạy trước khi đóng băng): B6-R admit 3/3 cặp có hại, B8 và Gatekeeper-Lite từ chối cả 3; Gatekeeper dừng sau 9 task mỗi cặp với chi phí khoảng một nửa B8. Bỏ lớp chuỗi lazy thì cả 3 cặp thành có lợi. Xem `study_b/results/RESULTS_SUMMARY_study-b-v1.md`.
 
-## Study D: thiết kế chính (đã đóng băng và chạy xong; kết quả trong `study_d/results/`, tổng hợp D+E trong `RESEARCH_SUMMARY_D_E.md`)
+## Study D: thiết kế chính (đã đóng băng và chạy xong; kết quả trong `study_d/results/`, tổng hợp D+E trong `docs/history/RESEARCH_SUMMARY_D_E.md`)
 
 Study B/C là pilot. Harness rút mẫu tuần tự (`drawharness.py`), B9 (`b9.py`), đóng băng một lần bấm và kiểm tra tái lập sạch đã sẵn sàng. Thiết kế chính mới nằm ở `study_d/STUDY_D_PROTOCOL_DRAFT.md`; mô phỏng quy tắc quyết định: `python tools/decision_sim.py`; kiểm định target: workflow `vet-targets.yml`.
 

@@ -2,9 +2,9 @@
 
 **Bài:** *Scope before Reuse: Risk-Controlled Admission of Learned Coding Skills* (FSE-2027-13), kèm reading list và summary.
 
-**Nguồn của bản review này.** Ba PDF gốc **không có trong repo** (repo công khai; chỉ lưu SHA-256 ở [`PRIVATE_SOURCE_DIGESTS.json`](research_closure/PRIVATE_SOURCE_DIGESTS.json)). Mọi phát biểu về bài dưới đây lấy từ những gì repo đã ghi lại khi đọc PDF ngày 24/10/2026 ([PAPER_EXPECTATION_AUDIT](research_closure/PAPER_EXPECTATION_AUDIT.md), [README_VI](README_VI.md), [ALIGNMENT_WITH_FSE](research_closure/results/ALIGNMENT_WITH_FSE.md)). Phần cài đặt lấy từ mã nguồn. Chỗ nào cần đối chiếu lại với PDF thì ghi **[đối chiếu PDF]**.
+**Nguồn của bản review này.** Ba PDF gốc nằm ở [`source/`](source/) (đưa lên ngày 31/10/2026; SHA-256 khớp với [`PRIVATE_SOURCE_DIGESTS.json`](../../research_closure/PRIVATE_SOURCE_DIGESTS.json)). Bản review ban đầu viết từ ghi chép của repo; ngày 31/10 đã đối chiếu lại với toàn văn PDF. **Danh sách đầy đủ các lỗi của bài, kèm cách sửa, ở [PAPER_AUDIT](PAPER_AUDIT.md).** File này giữ vai trò ôn kiến thức và công thức.
 
-Mọi phép tính số trong file này đã được chạy lại ngày 31/10/2026, mục 9. Tiến độ review nằm ở mục 10 và ở [TRACKING_FSE](TRACKING_FSE.md).
+Mọi phép tính số trong file này đã được chạy lại ngày 31/10/2026, mục 9. Tiến độ review nằm ở mục 10 và ở [TRACKING_FSE](../TRACKING_FSE.md).
 
 ---
 
@@ -30,7 +30,7 @@ Theo audit, tiêu chí quan trọng nhất của proposal là **lợi thế so v
 
 Với mỗi task i, gọi **Z_i = loss(có kỹ năng) − loss(không kỹ năng)**, với Z_i ∈ [−1, 1].
 
-- Loss của bộ test là (1 − tỉ lệ pass) + 0,5 cho mỗi regression, chặn trong [0, 1]. Đây là quy ước của repo **[đối chiếu PDF]**.
+- Loss của bộ test là (1 − tỉ lệ pass) + 0,5 cho mỗi regression, chặn trong [0, 1]. Bài viết đúng công thức này nhưng **không nói là chặn**, trong khi nó có thể vượt 1 (PAPER_AUDIT, T9); repo chặn trong `runner.py`.
 - **STR = E[Z]** (skill transfer risk). STR âm nghĩa là kỹ năng có lợi.
 - **Tiêu chí admit:** STR ≤ −θ, với θ là biên lợi ích tối thiểu.
 - Đặt Y = −Z. Khi đó tiêu chí là E[Y] ≥ θ, và giả thuyết không là **H₀: E[Y] < θ**.
@@ -161,19 +161,21 @@ n_cert, K = 16, alpha = 0.1     = 109.7 -> 110
 HQ1: n = 18, k* = 13, power     = 0.867
 ```
 
-## 10. Trạng thái review (song song với [TRACKING_FSE](TRACKING_FSE.md))
+## 10. Trạng thái review (song song với [TRACKING_FSE](../TRACKING_FSE.md))
 
 | # | Mục | Kết luận review | Việc tiếp |
 |---|---|---|---|
-| R1 | STR, tiêu chí STR ≤ −θ | Nhất quán | Đối chiếu quy ước loss với PDF |
+| R1 | STR, tiêu chí STR ≤ −θ | Nhất quán với PDF; bài thiếu câu "chặn loss tại 1" | Sửa bài (T9) |
 | R2 | E-process + Ville, ngưỡng 1/α | **Đúng** (siêu martingale không âm, cược dự đoán được) | |
 | R3 | Alpha ledger 6/(π²(k+1)²) | **Đúng** | |
-| R4 | Định lý 4 | **Cần sửa:** hằng số 2·TV | Trao đổi với tác giả |
-| R5 | Định lý 7 | **Cần sửa:** cận 1 − θ; giữ construction hợp lệ | Trao đổi với tác giả |
+| R4 | Định lý 4 | **Cần sửa:** hằng số 2ξ_s; α phải cấp theo ô; admit lại cần sổ cái (T1 đến T3) | Đã có câu sửa trong PAPER_AUDIT |
+| R5 | Định lý 7 | **Cần sửa:** cận chặt 1 + min(a, b); "không có g" sai (T4, T5) | Đã có phát biểu và chứng minh thay thế |
 | R6 | Số headline (180 cặp / 25 repo, 6,4 điểm, 84,3%, 41/46, 1,9×) | **Projected**, không phải kết quả đo | Không trích như kết quả |
 | R7 | "Gatekeeper mạnh hơn cổng đơn giản" | **Không đứng được** về công suất (đồ thị pha, Study P) | Thu hẹp thành "dừng sớm + hợp lệ khi dừng tuỳ ý" |
 | R8 | "Learned skills" | Hai kỹ năng thử là AST rewrite viết tay | Thu hẹp thành "frozen code transformations" |
 | R9 | Câu SWE-bench "6,4 điểm … consistent with our census" | Chưa gắn với dữ liệu | Gỡ, hoặc thay bằng kết quả Study Q |
-| R10 | Trích dẫn VERIFY trong reading list | Chưa xác minh | Kiểm từng mục |
+| R10 | Trích dẫn VERIFY trong reading list | 7 mục có tác giả placeholder (N4) | Kiểm qua DBLP / arXiv |
 | R11 | Composition / retirement | Chỉ có demo dựng sẵn | Không tuyên bố thực nghiệm |
+| R13 | Mệnh đề 9 (ghép cặp) | Tỉ lệ đúng là 1 + 2σ_T²/σ_S²; "lợi ròng 1,55×" đếm sai (T6) | Sửa bài |
+| R14 | Số liệu projected | Không ứng với số nguyên trên 63 cặp; CI không vượt biên 5 điểm; diễn giải mục 10.3 sai (S1 đến S4) | Sinh lại từ bảng đếm giả lập |
 | R12 | Định nghĩa tác hại (không có trong bài gốc) | RQ5: oracle ngây thơ phóng đại 3 đến 15 lần | **Study Q** kiểm định (đang chạy) |

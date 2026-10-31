@@ -1,14 +1,14 @@
 # Theo dõi tiến độ, đối chiếu với bài FSE-2027-13
 
-**Bài gốc:** *Scope before Reuse: Risk-Controlled Admission of Learned Coding Skills* (FSE-2027-13). Mọi số headline trong bài là **projected** ([PAPER_EXPECTATION_AUDIT](research_closure/PAPER_EXPECTATION_AUDIT.md)). File này chỉ ghi những gì đã **đo** trong repo, kèm đường dẫn tới bằng chứng.
+**Bài gốc:** *Scope before Reuse: Risk-Controlled Admission of Learned Coding Skills* (FSE-2027-13). Mọi số headline trong bài là **projected** ([PAPER_EXPECTATION_AUDIT](../research_closure/PAPER_EXPECTATION_AUDIT.md)). File này chỉ ghi những gì đã **đo** trong repo, kèm đường dẫn tới bằng chứng.
 
-Cập nhật lần cuối: **31/10/2026**. Quy ước trạng thái: ✅ xong · 🔄 đang chạy · ⏳ chưa làm · ❌ kết quả âm (đã báo cáo) · ⛔ bị khoá.
+Cập nhật lần cuối: **31/10/2026** (sau khi đối chiếu PDF và sắp xếp lại repo). Nhật ký đầy đủ: [PROCESS_LOG](PROCESS_LOG.md). Quy ước trạng thái: ✅ xong · 🔄 đang chạy · ⏳ chưa làm · ❌ kết quả âm (đã báo cáo) · ⛔ bị khoá.
 
 ---
 
 ## 1. Khung hiện tại (đã chốt)
 
-Đối tượng nghiên cứu đã chuyển từ "kỹ năng học được" sang **chấp nhận một thay đổi mã vào một phạm vi**. Luận văn giữ tựa "Scope before Reuse" ([ALIGNMENT_WITH_FSE](research_closure/results/ALIGNMENT_WITH_FSE.md)).
+Đối tượng nghiên cứu đã chuyển từ "kỹ năng học được" sang **chấp nhận một thay đổi mã vào một phạm vi**. Luận văn giữ tựa "Scope before Reuse" ([ALIGNMENT_WITH_FSE](../research_closure/results/ALIGNMENT_WITH_FSE.md)).
 
 - **Phần 1, kỹ năng** (Study D đến H): kết quả âm.
 - **Phần 2, thay đổi mã** (Study M đến Q): Study P đo trên patch LLM; RQ5 cho thấy oracle so khác biệt "ngây thơ" phóng đại tỉ lệ hồi quy; **Study Q** kiểm định lại kết luận này trên SWE-bench Verified.
@@ -19,19 +19,19 @@ Cập nhật lần cuối: **31/10/2026**. Quy ước trạng thái: ✅ xong ·
 | # | Kỳ vọng / khẳng định của bài FSE | Study | Trạng thái | Bằng chứng hiện có |
 |---|---|---|---|---|
 | E1 | Tác hại một phần phổ biến khi tái sử dụng kỹ năng | D đến H | ❌ | 12 target thật, 0/2.400 khác biệt; cổng đơn giản là đủ |
-| E2 | Gatekeeper mạnh hơn cổng đơn giản | Đồ thị pha, PP0, Study P (H3) | ❌ về công suất | Kiểm định cỡ mẫu cố định an toàn như Gatekeeper và mạnh hơn; ở Study P hai cổng có cùng tỉ lệ admit (0,898); H3 không kiểm định được vì P4 không đạt ([P_RESULT](research_closure/results/study_p/P_RESULT.md)). Giữ lại như một **tính chất**: hợp lệ khi dừng tuỳ ý, dừng sớm |
+| E2 | Gatekeeper mạnh hơn cổng đơn giản | Đồ thị pha, PP0, Study P (H3) | ❌ về công suất | Kiểm định cỡ mẫu cố định an toàn như Gatekeeper và mạnh hơn; ở Study P hai cổng có cùng tỉ lệ admit (0,898); H3 không kiểm định được vì P4 không đạt ([P_RESULT](../research_closure/results/study_p/P_RESULT.md)). Giữ lại như một **tính chất**: hợp lệ khi dừng tuỳ ý, dừng sớm |
 | E3 | Cổng có kiểm soát rủi ro hơn census / smoke test | Study P | ✅ | Census admit 16/16 patch có θ̂ > 5%, smoke 20 admit 2/16; cổng thống kê admit 0/16 |
 | E4 | Oracle hành vi đo được tác hại | N, P | ✅ (mức hàm) | Oracle mức test dùng được 8/107; oracle mức hàm dùng được 54,3% số ELIGIBLE (Study P) |
-| E5 | Tác hại một phần tồn tại trong thay đổi mã thật | P, RQ5 | ⚠️ thu hẹp | Kết quả đăng ký 16/205 = 7,8%; sau RQ5, hồi quy theo hợp đồng chỉ 0,5% đến 2,9% ([RQ5_RESULT](research_closure/results/rq5/RQ5_RESULT.md)) |
-| E6 | "Phạm vi trước khi tái sử dụng": oracle phải nhìn ra ngoài ý đồ của tác giả | RQ3 | ✅ | `D2_cerberus`: oracle viết tay không thấy gì, G2 thấy 24 đến 56/200 đầu vào đổi hành vi ([RQ3_RESULT](research_closure/results/rq3/RQ3_RESULT.md)) |
+| E5 | Tác hại một phần tồn tại trong thay đổi mã thật | P, RQ5 | ⚠️ thu hẹp | Kết quả đăng ký 16/205 = 7,8%; sau RQ5, hồi quy theo hợp đồng chỉ 0,5% đến 2,9% ([RQ5_RESULT](../research_closure/results/rq5/RQ5_RESULT.md)) |
+| E6 | "Phạm vi trước khi tái sử dụng": oracle phải nhìn ra ngoài ý đồ của tác giả | RQ3 | ✅ | `D2_cerberus`: oracle viết tay không thấy gì, G2 thấy 24 đến 56/200 đầu vào đổi hành vi ([RQ3_RESULT](../research_closure/results/rq3/RQ3_RESULT.md)) |
 | E7 | Tác hại phải định nghĩa theo hợp đồng, không theo mọi khác biệt (đóng góp mới, không có trong bài gốc) | **Q** | 🔄 | HQ1 đang được đo trên SWE-bench Verified, mục 3 |
 | E8 | So sánh với B9 (sửa trực tiếp) | F / B9 | ⛔ HOLD | `pre_b9/RELEASE_GATE.json` |
-| E9 | Composition, retirement | (không có study) | ⏳ | Chưa có bằng chứng thực nghiệm mới; có hai lưu ý toán (Định lý 4 và 7) trong [PAPER_EXPECTATION_AUDIT](research_closure/PAPER_EXPECTATION_AUDIT.md) |
+| E9 | Composition, retirement | (không có study) | ⏳ | Chưa có bằng chứng thực nghiệm mới; có hai lưu ý toán (Định lý 4 và 7) trong [PAPER_EXPECTATION_AUDIT](../research_closure/PAPER_EXPECTATION_AUDIT.md) |
 | E10 | Tổng quát hoá trên cohort mới đã đóng băng trước khi có kết quả | J, P, Q | 🔄 | P đã xong; Q đã đóng băng, đang chạy |
 
 ## 3. Study Q: tiến độ chi tiết
 
-Giao thức: [STUDY_Q_PROTOCOL](study_q/STUDY_Q_PROTOCOL.md). Amendment: chưa có ([AMENDMENTS](study_q/AMENDMENTS.md)).
+Giao thức: [STUDY_Q_PROTOCOL](../study_q/STUDY_Q_PROTOCOL.md). Amendment: chưa có ([AMENDMENTS](../study_q/AMENDMENTS.md)).
 
 | Bước | Trạng thái | Ghi chú |
 |---|---|---|
@@ -64,22 +64,26 @@ Bảng này được suy ra từ ALIGNMENT_WITH_FSE (mục sau RQ5) và giao th�
 | Bác bỏ H0 của HQ1 (phần lớn khác biệt ngây thơ không phải hồi quy theo hợp đồng) | (a) patch plausible hiếm khi hồi quy trên đầu vào hợp lệ; (b) oracle ngây thơ phóng đại nhiều lần (Q5). Kết luận RQ5 được xác nhận trên dữ liệu độc lập |
 | Không bác bỏ, hoặc Q-G1 không đạt | Báo cáo mô tả; kết luận RQ5 chỉ là thăm dò, giới hạn ở dữ liệu của Study P |
 
-## 5. Review lý thuyết của bài (song song, chi tiết ở [REVIEW_FSE](REVIEW_FSE.md))
+## 5. Review bài FSE (song song; chi tiết ở [REVIEW_FSE](paper/REVIEW_FSE.md) và [PAPER_AUDIT](paper/PAPER_AUDIT.md))
 
-| Mục | Kết luận | Trạng thái |
-|---|---|---|
-| R1 STR và tiêu chí STR ≤ −θ | Nhất quán; cần đối chiếu quy ước loss với PDF | ⏳ đối chiếu |
-| R2 E-process + Ville, ngưỡng 1/α | Đúng | ✅ |
-| R3 Alpha ledger 6/(π²(k+1)²) | Đúng (đã kiểm bằng số) | ✅ |
-| R4 Định lý 4 (dịch chuyển bị chặn) | Cần sửa: hằng số là 2·TV | ⏳ trao đổi với tác giả |
-| R5 Định lý 7 (composition) | Cần sửa: STR của bản ghép ≤ 1 − θ | ⏳ trao đổi với tác giả |
-| R6 Số headline của bài | Projected, không trích như kết quả | ✅ đã ghi |
-| R7 "Gatekeeper mạnh hơn" | Không đứng được về công suất; thu hẹp lại | ✅ đã ghi |
-| R8 "Learned skills" | Thu hẹp thành "frozen code transformations" | ⏳ sửa bài |
-| R9 Câu SWE-bench 6,4 điểm | Gỡ, hoặc thay bằng kết quả Study Q | ⏳ chờ Q |
-| R10 Trích dẫn VERIFY | Chưa xác minh | ⏳ |
-| R11 Composition / retirement | Chỉ có demo | ✅ đã ghi giới hạn |
-| R12 Định nghĩa tác hại theo hợp đồng | Study Q đang kiểm định | 🔄 |
+PDF gốc: [`paper/source/`](paper/source/), đã đối chiếu toàn văn ngày 31/10/2026. Bài do AI sinh, mọi số là projected.
+
+| Nhóm | Mục | Kết luận | Trạng thái |
+|---|---|---|---|
+| Toán | T1 Định lý 4: hằng số | Đúng là 2ξ_s | ✅ có câu sửa · ⏳ sửa bài |
+| Toán | T2 Định lý 4: ngân sách α | Phải cấp theo ô (kỹ năng, phạm vi), kể cả tổ hợp | ✅ có câu sửa · ⏳ sửa bài |
+| Toán | T3 Retirement / admit lại | Cần sổ cái 6/(π²(k+1)²) (đã cài trong repo) | ✅ |
+| Toán | T4, T5 Định lý 7 | Cận chặt 1 + min(a, b); "không có g" sai | ✅ có phát biểu thay thế · ⏳ sửa bài |
+| Toán | T6 Mệnh đề 9 | Tỉ lệ 1 + 2σ_T²/σ_S²; "lợi ròng 1,55×" đếm sai | ⏳ sửa bài |
+| Toán | T7 Mệnh đề 6 | Lượng từ thừa; phạm vi áp dụng | ⏳ sửa bài |
+| Toán | T8 Hệ quả 8 | d̄ = 0,34 mâu thuẫn với 11,4% cặp giao nhau | ⏳ sửa bài |
+| Toán | T9 Giả định 3 | i.i.d. với tập task hữu hạn; loss phải chặn tại 1 | ⏳ sửa bài |
+| Số liệu | S1 CI so với biên 5 điểm | Cận dưới 3,1 < 5: không vượt cổng go/no-go | ⏳ sửa bài |
+| Số liệu | S2 Mẫu số | 5,1%, 11,5%, 22,7% không nguyên trên 63 cặp | ⏳ sinh lại số |
+| Số liệu | S3, S4 Mục 10.3 | Diễn giải sai về θ và ξ_s | ⏳ sửa bài |
+| Số liệu | S5 đến S7 | Clean reuse không khớp; công thức hoà vốn; BH (FDR) so với FWER | ⏳ sửa bài |
+| Trình bày | N1 đến N5 | Ví dụ retry/async mâu thuẫn; 7 trích dẫn placeholder; tài liệu bị nhắc nhưng không tồn tại | ⏳ |
+| Kiến thức | R1 đến R3 (STR, e-process + Ville, alpha ledger) | Đúng | ✅ |
 
 ## 6. Việc còn mở ngoài Study Q
 
@@ -98,4 +102,5 @@ Bảng này được suy ra từ ALIGNMENT_WITH_FSE (mục sau RQ5) và giao th�
 | 31/10/2026 08:29 | Smoke run #3 (3 instance): thành công |
 | 31/10/2026 08:33 | Che token Vertex (`206da51`); bắt đầu part 0 (run #4) |
 | 31/10/2026 08:35 | Thêm TRACKING_FSE.md (`9ea7356`) |
-| 31/10/2026 | Thêm REVIEW_FSE.md: review công thức, kiểm lại bằng số; part 0 vẫn đang chạy |
+| 31/10/2026 | Thêm REVIEW_FSE.md (`635eebc`): review công thức, kiểm lại bằng số |
+| 31/10/2026 | Đưa 3 PDF lên `docs/paper/source/`; kiểm tra toàn bài (PAPER_AUDIT.md); sắp xếp lại repo (`docs/`, `archive/`); part 0 vẫn đang chạy |
