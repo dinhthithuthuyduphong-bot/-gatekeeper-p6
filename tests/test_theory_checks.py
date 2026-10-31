@@ -33,6 +33,11 @@ class TheoryChecksTest(unittest.TestCase):
         self.assertGreater(c2["familywise_shared"], 0.1)
         self.assertLessEqual(c2["familywise_split"], 0.1)
 
+    def test_harm_certificate(self):
+        r = TC.check_harm_certificate(reps=300, n=300, seed=7)
+        self.assertTrue(r["held"])
+        self.assertAlmostEqual(r["growth_threshold_over_eta"], 0.394, places=2)
+
     def test_readmission_needs_the_ledger(self):
         r = TC.check_readmission(reps=150, epochs=10, n=300, seed=7)
         self.assertGreater(r["error_full_alpha_each_epoch"], 0.1)

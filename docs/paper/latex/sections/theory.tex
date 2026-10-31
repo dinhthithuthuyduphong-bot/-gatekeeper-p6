@@ -11,19 +11,33 @@ risk.
 \subsection{Per-cell evidence}
 
 \begin{lemma}[Betting e-process]\label{lem:eprocess}
-Fix a cell $c$ and let $Y_i=-Z_i$.  Under $H_0^c:\ \mathbb{E}[Y]\le\theta$ (the cell is not admissible), the process
-$K_0=1$, $K_n=\prod_{i\le n}\bigl(1+\lambda_i(Y_i-\theta)\bigr)$ with predictable $\lambda_i\in[0,1/(1+\theta))$ satisfies
-$\Pr[\exists n:\ K_n\ge 1/\beta]\le\beta$ for every $\beta\in(0,1)$.
+Let $Y_1,Y_2,\dots$ take values in $[y_{\min},y_{\max}]$ with $y_{\min}<\theta$, and suppose
+$\mathbb{E}[Y_i\mid\mathcal{F}_{i-1}]\le\theta$ for all $i$ (the null $H_0$).  The process $K_0=1$,
+$K_n=\prod_{i\le n}\bigl(1+\lambda_i(Y_i-\theta)\bigr)$ with predictable $\lambda_i\in[0,1/(\theta-y_{\min}))$ satisfies
+$\Pr[\exists n:\ K_n\ge 1/\beta]\le\beta$ for every $\beta\in(0,1)$.  For admission, $Y_i=-Z_i\in[-1,1]$ and $H_0^c$ is
+$\mathbb{E}[Y]\le\theta$ (the cell is not admissible), so $\lambda_i<1/(1+\theta)$.
 \end{lemma}
 
 \begin{proof}
-Since $Y_i\ge-1$, every factor is at least $1-\lambda_i(1+\theta)>0$.  By Assumption~\ref{ass:trials} and predictability,
+Since $Y_i\ge y_{\min}$, every factor is at least $1-\lambda_i(\theta-y_{\min})>0$.  By the null and predictability,
 $\mathbb{E}[K_i\mid\mathcal{F}_{i-1}]=K_{i-1}\bigl(1+\lambda_i(\mathbb{E}[Y_i]-\theta)\bigr)\le K_{i-1}$, so $(K_n)$ is a
 nonnegative supermartingale with $K_0=1$, and Ville's inequality gives the claim.
 \end{proof}
 
 The bound holds at any data-dependent stopping time, including the end of the validation budget, which is why a fixed-sample
-interval would not do.
+interval would not do.  Under Assumption~\ref{ass:trials} the trials are i.i.d., so the null on the conditional mean reduces to
+$\mathbb{E}[Y]\le\theta$.
+
+\begin{remark}[Harm certificate used in the experiments]
+The experiments of Section~\ref{sec:evaluation} also use a certificate against \emph{harm}: with $H_i\in\{0,1\}$ indicating a
+harmful draw and a tolerated harm rate $\eta$, the null is $\Pr[H=1]\ge\eta$.  Setting $Y_i=1-H_i\in[0,1]$ and
+$\theta=1-\eta$ gives factors $1+\lambda(\eta-H_i)$, that is, $1+\lambda\eta$ for a clean draw and $1-c$ for a harmful one
+when $\lambda=c/(1-\eta)$; the condition $\lambda<1/(\theta-y_{\min})=1/(1-\eta)$ is $c<1$.  Lemma~\ref{lem:eprocess} and
+Theorem~\ref{thm:admission} therefore apply unchanged, with ``harm rate at least $\eta$'' in place of ``not admissible''.  With
+$c=0.9$ and $\eta=5\%$ the wealth grows only when the true harm rate is below
+$\log(1+\lambda\eta)/(\log(1+\lambda\eta)-\log(1-c))\approx0.39\eta$, and certifying zero harm in a family of $16$ cells at
+$\alpha=0.1$ takes $\lceil\log(160)/\log(1+\lambda\eta)\rceil=110$ clean draws.
+\end{remark}
 
 \subsection{Library-wide admission guarantee}
 

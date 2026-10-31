@@ -11,6 +11,7 @@ Each check is a falsifiable statement; the script records the numbers and whethe
   C5  pairing: variance ratio unpaired/paired = 1 + 2 sT^2/sS^2 (draft: 1 + sT^2/sS^2)
   C6  alpha ledger: sum_k 6/(pi^2 (k+1)^2) <= 1
   C8  re-admission after retirement: full alpha at every epoch vs the 6/(pi^2 (k+1)^2) ledger
+  C9  harm certificate of the experiments (gatekeeper_ext.gates) at h = eta: certification <= alpha; 0.39 eta; 110 draws
   C7  Corollary 8 consistency: mean overlapping partners implied by 11.4% overlapping pairs of 94 skills
 """
 import json
@@ -138,6 +139,26 @@ def check_readmission(reps, epochs, n, seed, theta=0.1, alpha=0.1):
     return res
 
 
+def check_harm_certificate(reps, n, seed, eta=0.05, alpha=0.1):
+    """The harm certificate of the experiments (gatekeeper_ext.gates.gatekeeper_path) at the null boundary h = eta:
+    certification rate <= alpha; plus the two closed-form constants quoted in the paper."""
+    from gatekeeper_ext import gates as G
+    rng = random.Random(seed + 2)
+    cert = 0
+    for _ in range(reps):
+        flags = [rng.random() < eta for _i in range(n)]
+        admit, _c, _a = G.gatekeeper_path(flags, k_family=1, eta=eta, alpha=alpha)
+        cert += bool(admit)
+    lam = G.C_STAKE / (1 - eta)
+    g = math.log(1 + lam * eta)
+    res = {"statement": "harm certificate at h = eta certifies with rate <= alpha", "reps": reps, "n": n,
+           "certification_rate_at_boundary": cert / reps, "wilson95": wilson(cert, reps),
+           "growth_threshold_over_eta": g / (g - math.log(1 - G.C_STAKE)) / eta, "clean_draws_family16": math.ceil(math.log(16 / alpha) / g)}
+    # the fixed bet nearly exhausts alpha at the boundary, so test "not significantly above alpha" (Wilson lower bound)
+    res["held"] = res["wilson95"][0] <= alpha and res["clean_draws_family16"] == 110
+    return res
+
+
 def check_tv():
     # two task types: a (loss with skill 1, without 0: Z=+1) and b (Z=-1)
     p = {"a": 0.1, "b": 0.9}
@@ -234,7 +255,8 @@ def main(argv):
     res = {"C1_per_cell_validity": c1, "C2_budget_per_cell_vs_per_scope": c2, "C3_bounded_shift": check_tv(),
            "C4_composition": check_composition(), "C5_pairing": check_pairing(seed), "C6_alpha_ledger": check_ledger(),
            "C7_corollary8_consistency": check_corollary8(),
-           "C8_readmission_ledger": check_readmission(max(100, reps // 4), 10, n, seed)}
+           "C8_readmission_ledger": check_readmission(max(100, reps // 4), 10, n, seed),
+           "C9_harm_certificate": check_harm_certificate(reps, n, seed)}
     out.mkdir(parents=True, exist_ok=True)
     (out / "THEORY_CHECKS.json").write_text(json.dumps(res, indent=1))
     lines = ["| Check | Statement | Held | Key numbers |", "|---|---|---|---|"]
@@ -242,7 +264,8 @@ def main(argv):
             "C3_bounded_shift": ("ratio_gap_over_tv", "max_ratio_random"), "C4_composition": ("violations", "construction_str_composite"),
             "C5_pairing": ("measured_ratio", "corrected_formula"), "C6_alpha_ledger": ("partial_sum_1e6",),
             "C7_corollary8_consistency": ("implied_mean_partners", "draft_dbar"),
-            "C8_readmission_ledger": ("error_full_alpha_each_epoch", "error_ledger")}
+            "C8_readmission_ledger": ("error_full_alpha_each_epoch", "error_ledger"),
+            "C9_harm_certificate": ("certification_rate_at_boundary", "growth_threshold_over_eta", "clean_draws_family16")}
     for k, v in res.items():
         nums = ", ".join("%s=%s" % (x, json.dumps(v[x]) if not isinstance(v[x], float) else round(v[x], 4)) for x in keys[k])
         lines.append("| %s | %s | %s | %s |" % (k, v["statement"], v["held"], nums))
