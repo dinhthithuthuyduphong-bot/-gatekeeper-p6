@@ -1,6 +1,7 @@
 {
  "source": "out_r2/LIBRARY_CENSUS.json",
  "libraries": 13,
+ "enabling_edges": 2,
  "library_sizes": [
   2,
   2,
@@ -28,7 +29,7 @@
   1,
   1,
   2,
-  6,
+  7,
   8
  ],
  "main": {
@@ -41,21 +42,21 @@
    "alpha": 0.1,
    "reps": 1000,
    "seed": 11,
-   "libraries_with_a_bad_pair": 202
+   "libraries_with_a_bad_pair": 226
   },
   "P1": {
-   "harmful_component_rate": 0.052,
+   "harmful_component_rate": 0.071,
    "harmful_component_wilson95": [
-    0.039872841792417534,
-    0.06755605934098838
+    0.05666945999361375,
+    0.08861401899350932
    ],
-   "harmful_execution_rate": 0.029,
+   "harmful_execution_rate": 0.044,
    "wilson95": [
-    0.020266315636487793,
-    0.04133862283189209
+    0.032938039690433484,
+    0.058552091820354674
    ],
-   "mean_beneficial_skills_executed": 1.975,
-   "mean_trials": 1013.715
+   "mean_beneficial_skills_executed": 1.958,
+   "mean_trials": 1020.862
   },
   "P2": {
    "harmful_component_rate": 0.0,
@@ -68,8 +69,8 @@
     0.0,
     0.003826898586390522
    ],
-   "mean_beneficial_skills_executed": 1.65,
-   "mean_trials": 1097.484
+   "mean_beneficial_skills_executed": 1.64,
+   "mean_trials": 1094.225
   },
   "P2_within_alpha": true
  },
@@ -84,21 +85,21 @@
     "alpha": 0.1,
     "reps": 1000,
     "seed": 11,
-    "libraries_with_a_bad_pair": 114
+    "libraries_with_a_bad_pair": 116
    },
    "P1": {
-    "harmful_component_rate": 0.019,
+    "harmful_component_rate": 0.016,
     "harmful_component_wilson95": [
-     0.012196787737404147,
-     0.02948468870270354
+     0.009872155867426248,
+     0.025832281964199785
     ],
-    "harmful_execution_rate": 0.011,
+    "harmful_execution_rate": 0.009,
     "wilson95": [
-     0.006153110089114164,
-     0.019589596728375767
+     0.004742006589011481,
+     0.017016007822824013
     ],
-    "mean_beneficial_skills_executed": 1.996,
-    "mean_trials": 1012.449
+    "mean_beneficial_skills_executed": 1.984,
+    "mean_trials": 1012.958
    },
    "P2": {
     "harmful_component_rate": 0.0,
@@ -111,8 +112,8 @@
      0.0,
      0.003826898586390522
     ],
-    "mean_beneficial_skills_executed": 1.613,
-    "mean_trials": 1094.022
+    "mean_beneficial_skills_executed": 1.694,
+    "mean_trials": 1079.916
    },
    "P2_within_alpha": true
   },
@@ -126,21 +127,21 @@
     "alpha": 0.1,
     "reps": 1000,
     "seed": 11,
-    "libraries_with_a_bad_pair": 281
+    "libraries_with_a_bad_pair": 297
    },
    "P1": {
-    "harmful_component_rate": 0.101,
+    "harmful_component_rate": 0.097,
     "harmful_component_wilson95": [
-     0.08382372191011535,
-     0.12123014316182433
+     0.08016887955855043,
+     0.11691560070208036
     ],
-    "harmful_execution_rate": 0.065,
+    "harmful_execution_rate": 0.059,
     "wilson95": [
-     0.0513235473878793,
-     0.08200585438228047
+     0.04601408784574914,
+     0.07536123670744731
     ],
-    "mean_beneficial_skills_executed": 1.957,
-    "mean_trials": 1017.745
+    "mean_beneficial_skills_executed": 2.04,
+    "mean_trials": 1008.561
    },
    "P2": {
     "harmful_component_rate": 0.0,
@@ -153,8 +154,8 @@
      0.0,
      0.003826898586390522
     ],
-    "mean_beneficial_skills_executed": 1.578,
-    "mean_trials": 1108.957
+    "mean_beneficial_skills_executed": 1.668,
+    "mean_trials": 1094.733
    },
    "P2_within_alpha": true
   },
@@ -171,18 +172,18 @@
     "libraries_with_a_bad_pair": 384
    },
    "P1": {
-    "harmful_component_rate": 0.161,
+    "harmful_component_rate": 0.145,
     "harmful_component_wilson95": [
-     0.1395241618401623,
-     0.1850704754014105
+     0.12453458493047025,
+     0.16818251306586704
     ],
-    "harmful_execution_rate": 0.106,
+    "harmful_execution_rate": 0.099,
     "wilson95": [
-     0.08840477020504056,
-     0.12661082588103517
+     0.08199515586127223,
+     0.119074016805013
     ],
-    "mean_beneficial_skills_executed": 1.984,
-    "mean_trials": 1014.794
+    "mean_beneficial_skills_executed": 1.978,
+    "mean_trials": 1015.476
    },
    "P2": {
     "harmful_component_rate": 0.0,
@@ -195,8 +196,8 @@
      0.0,
      0.003826898586390522
     ],
-    "mean_beneficial_skills_executed": 1.584,
-    "mean_trials": 1114.43
+    "mean_beneficial_skills_executed": 1.575,
+    "mean_trials": 1110.275
    },
    "P2_within_alpha": true
   }
