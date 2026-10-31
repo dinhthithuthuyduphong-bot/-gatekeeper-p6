@@ -93,5 +93,39 @@
   "growth_threshold_over_eta": 0.3940689303437901,
   "clean_draws_family16": 110,
   "held": true
+ },
+ "C10_decision_rule_studies_DH": {
+  "statement": "Studies D-H rule: FWER <= alpha and E[min(e_ben, e_cert) at the stopping time] <= 1 at both null boundaries",
+  "cells": 16,
+  "reps": 1000,
+  "theta": 0.2,
+  "eta": 0.05,
+  "alpha": 0.1,
+  "benefit_boundary": {
+   "familywise_false_admission": 0.024,
+   "wilson95": [
+    0.016180052367186296,
+    0.03546315508705749
+   ],
+   "mean_e_at_stop": 1.0862218530339116,
+   "mean_e_se": 0.056036111071434434
+  },
+  "harm_boundary": {
+   "familywise_false_admission": 0.073,
+   "wilson95": [
+    0.058458786926264744,
+    0.09080938446651278
+   ],
+   "mean_e_at_stop": 0.8026669949703062,
+   "mean_e_se": 0.08932905129068158
+  },
+  "held": true
+ },
+ "C11_library_ledger": {
+  "statement": "library ledger and simulation allocation: total over all cells and epochs <= alpha",
+  "max_total_capacity_1_to_200": 0.09984763763684362,
+  "exhaustive_6_skills": 0.0942019494536058,
+  "simulation_total_12_skills": 0.09999257810891427,
+  "held": true
  }
 }
