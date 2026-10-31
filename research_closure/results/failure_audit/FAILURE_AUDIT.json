@@ -13,13 +13,22 @@
     "failed_steps": [
      "Run D=research_closure/results/study_q/qa1"
     ],
-    "evidence": []
+    "evidence": [
+     "Traceback (most recent call last):",
+     "raise RuntimeError(\"HTTP %d: %s\" % (e.code, body)) from None",
+     "RuntimeError: HTTP 401: [***",
+     "\"@type\": \"type.googleapis.com/google.rpc.ErrorInfo\",",
+     "\"reason\": \"ACCESS_TOKEN_EXPIRED\",",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 29790,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "TOKEN_EXPIRED",
+  "why": "Vertex OAuth token outlived (about 1 h) or not refreshed",
+  "rule": "ACCESS_TOKEN_EXPIRED|invalid authentication credentials|HTTP 401"
  },
  {
   "run_id": 41182723003,
@@ -35,13 +44,19 @@
     "failed_steps": [
      "Run python - <<'PY'"
     ],
-    "evidence": []
+    "evidence": [
+     "Traceback (most recent call last):",
+     "AssertionError",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 21975,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "INPUT_VALIDATION",
+  "why": "workflow input rejected (e.g. an instance id that is not in the frame)",
+  "rule": "ids not in the frame|not Q-A1 targets|AssertionError|at most 256 jobs"
  },
  {
   "run_id": 41178191261,
@@ -57,13 +72,17 @@
     "failed_steps": [
      "Run python - <<'PY'"
     ],
-    "evidence": []
+    "evidence": [
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 21843,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "NOT_FROZEN_OR_FREEZE_DRIFT",
+  "why": "study not frozen, or a frozen file changed",
+  "rule": "is not FROZEN|freeze .*changed|FREEZE.*mismatch|changed since freeze|amendment .* not applied"
  },
  {
   "run_id": 41176885851,
@@ -79,13 +98,19 @@
     "failed_steps": [
      "Run python tools/q_prepare_freeze.py"
     ],
-    "evidence": []
+    "evidence": [
+     "| Model | OK | HTTP 429 | Served model | Implied cost (USD) | First error |",
+     "| Model | OK | HTTP 429 | Served model | Implied cost (USD) | First error |",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 50548,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "RATE_LIMIT_429",
+  "why": "provider quota; retried with back-off where the client supports it",
+  "rule": "HTTP 429|RESOURCE_EXHAUSTED|rate limit"
  },
  {
   "run_id": 41175551823,
@@ -101,13 +126,26 @@
     "failed_steps": [
      "Run python -m unittest discover -s tests"
     ],
-    "evidence": []
+    "evidence": [
+     "Traceback (most recent call last):",
+     "ModuleNotFoundError: No module named 'yaml'",
+     "Traceback (most recent call last):",
+     "ModuleNotFoundError: No module named 'yaml'",
+     "Traceback (most recent call last):",
+     "ModuleNotFoundError: No module named 'yaml'",
+     "FAILED (errors=3)",
+     "| Model | OK | HTTP 429 | Served model | Implied cost (USD) | First error |",
+     "| Model | OK | HTTP 429 | Served model | Implied cost (USD) | First error |",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 50789,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "RATE_LIMIT_429",
+  "why": "provider quota; retried with back-off where the client supports it",
+  "rule": "HTTP 429|RESOURCE_EXHAUSTED|rate limit"
  },
  {
   "run_id": 41174696114,
@@ -123,13 +161,18 @@
     "failed_steps": [
      "Run mkdir -p out_pool"
     ],
-    "evidence": []
+    "evidence": [
+     "cp: target 'study_q/evidence/': No such file or directory",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 23764,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "MISSING_FILE",
+  "why": "a path the step expected was missing",
+  "rule": "FileNotFoundError|No such file or directory|can't open file"
  },
  {
   "run_id": 41173700753,
@@ -145,13 +188,20 @@
     "failed_steps": [
      "Run mkdir -p out_pool"
     ],
-    "evidence": []
+    "evidence": [
+     "Traceback (most recent call last):",
+     "raise HTTPError(req.full_url, code, msg, hdrs, fp)",
+     "urllib.error.HTTPError: HTTP Error 502: Bad Gateway",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 26871,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "PYTHON_EXCEPTION",
+  "why": "uncaught Python exception (see evidence)",
+  "rule": "Traceback \\(most recent call last\\)|Error: "
  },
  {
   "run_id": 41150030282,
@@ -167,13 +217,18 @@
     "failed_steps": [
      "Process one candidate"
     ],
-    "evidence": []
+    "evidence": [
+     "##[error]The runner has received a shutdown signal. This can happen when the runner service is stopped, or a manually started runner is canceled.",
+     "##[error]Process completed with exit code 143."
+    ]
    }
   ],
+  "log_chars": 26465,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "CANCELLED_OR_TIMEOUT",
+  "why": "job cancelled, killed (143) or over its time limit",
+  "rule": "exceeded the maximum execution time|The operation was canceled|exit code 143|SIGTERM|timed out"
  },
  {
   "run_id": 41143189760,
@@ -189,13 +244,18 @@
     "failed_steps": [
      "Stream one shard"
     ],
-    "evidence": []
+    "evidence": [
+     "##[error]The runner has received a shutdown signal. This can happen when the runner service is stopped, or a manually started runner is canceled.",
+     "##[error]Process completed with exit code 143."
+    ]
    }
   ],
+  "log_chars": 25651,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "CANCELLED_OR_TIMEOUT",
+  "why": "job cancelled, killed (143) or over its time limit",
+  "rule": "exceeded the maximum execution time|The operation was canceled|exit code 143|SIGTERM|timed out"
  },
  {
   "run_id": 41142934629,
@@ -211,13 +271,19 @@
     "failed_steps": [
      "Run set -euo pipefail"
     ],
-    "evidence": []
+    "evidence": [
+     "| Model | OK | HTTP 429 | Served model | Implied cost (USD) | First error |",
+     "| Model | OK | HTTP 429 | Served model | Implied cost (USD) | First error |",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 43872,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "RATE_LIMIT_429",
+  "why": "provider quota; retried with back-off where the client supports it",
+  "rule": "HTTP 429|RESOURCE_EXHAUSTED|rate limit"
  },
  {
   "run_id": 41115845403,
@@ -233,13 +299,18 @@
     "failed_steps": [
      "Stream one shard"
     ],
-    "evidence": []
+    "evidence": [
+     "##[error]Process completed with exit code 143.",
+     "##[error]The runner has received a shutdown signal. This can happen when the runner service is stopped, or a manually started runner is canceled."
+    ]
    }
   ],
+  "log_chars": 25654,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "CANCELLED_OR_TIMEOUT",
+  "why": "job cancelled, killed (143) or over its time limit",
+  "rule": "exceeded the maximum execution time|The operation was canceled|exit code 143|SIGTERM|timed out"
  },
  {
   "run_id": 41036085344,
@@ -250,6 +321,8 @@
   "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41036085344",
   "jobs_total": 100,
   "failed_jobs": [],
+  "log_chars": 49298,
+  "log_error": null,
   "failed_job_count": 0,
   "category": "OTHER",
   "why": "no rule matched; read the evidence",
@@ -269,13 +342,20 @@
     "failed_steps": [
      "Run python -m unittest discover -s tests"
     ],
-    "evidence": []
+    "evidence": [
+     "Traceback (most recent call last):",
+     "raise ImportError(",
+     "ImportError: 'test_fn_probe' module incorrectly imported from '/home/runner/work/-gatekeeper-p6/-gatekeeper-p6'. Expected '/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/tests'. Is this module globally installed?",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 21968,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "PYTHON_EXCEPTION",
+  "why": "uncaught Python exception (see evidence)",
+  "rule": "Traceback \\(most recent call last\\)|Error: "
  },
  {
   "run_id": 41034302581,
@@ -291,13 +371,19 @@
     "failed_steps": [
      "Run [ -f research_closure/results/RQ3_PLAN.md ] || { echo \"::error::the RQ3 plan is not committed\"; exit 1; }"
     ],
-    "evidence": []
+    "evidence": [
+     "Traceback (most recent call last):",
+     "AssertionError: expected the 14 evaluation targets of the plan, found 16",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 19875,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "INPUT_VALIDATION",
+  "why": "workflow input rejected (e.g. an instance id that is not in the frame)",
+  "rule": "ids not in the frame|not Q-A1 targets|AssertionError|at most 256 jobs"
  },
  {
   "run_id": 41033970565,
@@ -313,13 +399,20 @@
     "failed_steps": [
      "Run python -m unittest discover -s tests"
     ],
-    "evidence": []
+    "evidence": [
+     "Traceback (most recent call last):",
+     "raise ImportError(",
+     "ImportError: 'test_fn_probe' module incorrectly imported from '/home/runner/work/-gatekeeper-p6/-gatekeeper-p6'. Expected '/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/tests'. Is this module globally installed?",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 21962,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "PYTHON_EXCEPTION",
+  "why": "uncaught Python exception (see evidence)",
+  "rule": "Traceback \\(most recent call last\\)|Error: "
  },
  {
   "run_id": 41033811601,
@@ -335,13 +428,19 @@
     "failed_steps": [
      "Run [ -f research_closure/results/RQ3_PLAN.md ] || { echo \"::error::the RQ3 plan is not committed\"; exit 1; }"
     ],
-    "evidence": []
+    "evidence": [
+     "Traceback (most recent call last):",
+     "AssertionError: expected the 14 evaluation targets of the plan, found 16",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 19880,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "INPUT_VALIDATION",
+  "why": "workflow input rejected (e.g. an instance id that is not in the frame)",
+  "rule": "ids not in the frame|not Q-A1 targets|AssertionError|at most 256 jobs"
  },
  {
   "run_id": 40998288220,
@@ -357,13 +456,18 @@
     "failed_steps": [
      "Discover part B"
     ],
-    "evidence": []
+    "evidence": [
+     "Traceback (most recent call last):",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 31283,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "NOT_FROZEN_OR_FREEZE_DRIFT",
+  "why": "study not frozen, or a frozen file changed",
+  "rule": "is not FROZEN|freeze .*changed|FREEZE.*mismatch|changed since freeze|amendment .* not applied"
  },
  {
   "run_id": 40970807135,
@@ -379,13 +483,17 @@
     "failed_steps": [
      "Append part B to the frames and commit"
     ],
-    "evidence": []
+    "evidence": [
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 29906,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "NOT_FROZEN_OR_FREEZE_DRIFT",
+  "why": "study not frozen, or a frozen file changed",
+  "rule": "is not FROZEN|freeze .*changed|FREEZE.*mismatch|changed since freeze|amendment .* not applied"
  },
  {
   "run_id": 40922607378,
@@ -401,13 +509,19 @@
     "failed_steps": [
      "Run python tools/package_check.py \"research_closure/manifests/study_p_feasibility.json\" --out out_pkg"
     ],
-    "evidence": []
+    "evidence": [
+     "Traceback (most recent call last):",
+     "FileNotFoundError: [Errno 2] No such file or directory: 'research_closure/manifests/study_p_feasibility.json'",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 22164,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "MISSING_FILE",
+  "why": "a path the step expected was missing",
+  "rule": "FileNotFoundError|No such file or directory|can't open file"
  },
  {
   "run_id": 40922457671,
@@ -423,13 +537,19 @@
     "failed_steps": [
      "Run python tools/package_check.py \"research_closure/manifests/study_p_feasibility.json\" --out out_pkg"
     ],
-    "evidence": []
+    "evidence": [
+     "Traceback (most recent call last):",
+     "FileNotFoundError: [Errno 2] No such file or directory: 'research_closure/manifests/study_p_feasibility.json'",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 22170,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "MISSING_FILE",
+  "why": "a path the step expected was missing",
+  "rule": "FileNotFoundError|No such file or directory|can't open file"
  },
  {
   "run_id": 40922252255,
@@ -445,13 +565,19 @@
     "failed_steps": [
      "Run python tools/package_check.py \"research_closure/manifests/study_p_feasibility.json\" --out out_pkg"
     ],
-    "evidence": []
+    "evidence": [
+     "Traceback (most recent call last):",
+     "FileNotFoundError: [Errno 2] No such file or directory: 'research_closure/manifests/study_p_feasibility.json'",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 22166,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "MISSING_FILE",
+  "why": "a path the step expected was missing",
+  "rule": "FileNotFoundError|No such file or directory|can't open file"
  },
  {
   "run_id": 40922173813,
@@ -467,13 +593,19 @@
     "failed_steps": [
      "Run python tools/package_check.py \"research_closure/manifests/study_p_feasibility.json\" --out out_pkg"
     ],
-    "evidence": []
+    "evidence": [
+     "Traceback (most recent call last):",
+     "FileNotFoundError: [Errno 2] No such file or directory: 'research_closure/manifests/study_p_feasibility.json'",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 22170,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "MISSING_FILE",
+  "why": "a path the step expected was missing",
+  "rule": "FileNotFoundError|No such file or directory|can't open file"
  },
  {
   "run_id": 40478521741,
@@ -489,13 +621,20 @@
     "failed_steps": [
      "Run python -m unittest discover -s tests"
     ],
-    "evidence": []
+    "evidence": [
+     "Traceback (most recent call last):",
+     "raise ImportError(",
+     "ImportError: 'test_vet_target2' module incorrectly imported from '/home/runner/work/-gatekeeper-p6/-gatekeeper-p6'. Expected '/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/tests'. Is this module globally installed?",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 21968,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "PYTHON_EXCEPTION",
+  "why": "uncaught Python exception (see evidence)",
+  "rule": "Traceback \\(most recent call last\\)|Error: "
  },
  {
   "run_id": 40478008306,
@@ -511,13 +650,20 @@
     "failed_steps": [
      "Run python -m unittest discover -s tests"
     ],
-    "evidence": []
+    "evidence": [
+     "Traceback (most recent call last):",
+     "raise ImportError(",
+     "ImportError: 'test_vet_target2' module incorrectly imported from '/home/runner/work/-gatekeeper-p6/-gatekeeper-p6'. Expected '/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/tests'. Is this module globally installed?",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 21965,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "PYTHON_EXCEPTION",
+  "why": "uncaught Python exception (see evidence)",
+  "rule": "Traceback \\(most recent call last\\)|Error: "
  },
  {
   "run_id": 40399062737,
@@ -533,13 +679,18 @@
     "failed_steps": [
      "Vet shard (version 2 provisioning)"
     ],
-    "evidence": []
+    "evidence": [
+     "##[error]Process completed with exit code 143.",
+     "##[error]The runner has received a shutdown signal. This can happen when the runner service is stopped, or a manually started runner is canceled."
+    ]
    }
   ],
+  "log_chars": 15173,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "CANCELLED_OR_TIMEOUT",
+  "why": "job cancelled, killed (143) or over its time limit",
+  "rule": "exceeded the maximum execution time|The operation was canceled|exit code 143|SIGTERM|timed out"
  },
  {
   "run_id": 40326417115,
@@ -555,41 +706,58 @@
     "failed_steps": [
      "Vet shard (version 2 provisioning)"
     ],
-    "evidence": []
+    "evidence": [
+     "python: can't open file '/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/tools/vet_dev.py': [Errno 2] No such file or directory",
+     "##[error]Process completed with exit code 2."
+    ]
    },
    {
     "job": "vet (1)",
     "failed_steps": [
      "Vet shard (version 2 provisioning)"
     ],
-    "evidence": []
+    "evidence": [
+     "python: can't open file '/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/tools/vet_dev.py': [Errno 2] No such file or directory",
+     "##[error]Process completed with exit code 2."
+    ]
    },
    {
     "job": "vet (7)",
     "failed_steps": [
      "Vet shard (version 2 provisioning)"
     ],
-    "evidence": []
+    "evidence": [
+     "python: can't open file '/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/tools/vet_dev.py': [Errno 2] No such file or directory",
+     "##[error]Process completed with exit code 2."
+    ]
    },
    {
     "job": "vet (22)",
     "failed_steps": [
      "Vet shard (version 2 provisioning)"
     ],
-    "evidence": []
+    "evidence": [
+     "python: can't open file '/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/tools/vet_dev.py': [Errno 2] No such file or directory",
+     "##[error]Process completed with exit code 2."
+    ]
    },
    {
     "job": "vet (5)",
     "failed_steps": [
      "Vet shard (version 2 provisioning)"
     ],
-    "evidence": []
+    "evidence": [
+     "python: can't open file '/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/tools/vet_dev.py': [Errno 2] No such file or directory",
+     "##[error]Process completed with exit code 2."
+    ]
    }
   ],
+  "log_chars": 567492,
+  "log_error": null,
   "failed_job_count": 25,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "MISSING_FILE",
+  "why": "a path the step expected was missing",
+  "rule": "FileNotFoundError|No such file or directory|can't open file"
  },
  {
   "run_id": 40302719672,
@@ -605,13 +773,19 @@
     "failed_steps": [
      "Run set -euo pipefail"
     ],
-    "evidence": []
+    "evidence": [
+     "| Model | OK | HTTP 429 | Served model | Implied cost (USD) | First error |",
+     "| Model | OK | HTTP 429 | Served model | Implied cost (USD) | First error |",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 30408,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "RATE_LIMIT_429",
+  "why": "provider quota; retried with back-off where the client supports it",
+  "rule": "HTTP 429|RESOURCE_EXHAUSTED|rate limit"
  },
  {
   "run_id": 40301594894,
@@ -627,13 +801,19 @@
     "failed_steps": [
      "Run set -euo pipefail"
     ],
-    "evidence": []
+    "evidence": [
+     "| Model | OK | HTTP 429 | Served model | Implied cost (USD) | First error |",
+     "| Model | OK | HTTP 429 | Served model | Implied cost (USD) | First error |",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 30410,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "RATE_LIMIT_429",
+  "why": "provider quota; retried with back-off where the client supports it",
+  "rule": "HTTP 429|RESOURCE_EXHAUSTED|rate limit"
  },
  {
   "run_id": 40300865755,
@@ -649,13 +829,19 @@
     "failed_steps": [
      "Run set -euo pipefail"
     ],
-    "evidence": []
+    "evidence": [
+     "| Model | OK | HTTP 429 | Served model | Implied cost (USD) | First error |",
+     "| Model | OK | HTTP 429 | Served model | Implied cost (USD) | First error |",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 30410,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "RATE_LIMIT_429",
+  "why": "provider quota; retried with back-off where the client supports it",
+  "rule": "HTTP 429|RESOURCE_EXHAUSTED|rate limit"
  },
  {
   "run_id": 40296709754,
@@ -671,13 +857,19 @@
     "failed_steps": [
      "Freeze check"
     ],
-    "evidence": []
+    "evidence": [
+     "Traceback (most recent call last):",
+     "FileNotFoundError: [Errno 2] No such file or directory: 'study_m_astar/candidates.json'",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 20619,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "NOT_FROZEN_OR_FREEZE_DRIFT",
+  "why": "study not frozen, or a frozen file changed",
+  "rule": "is not FROZEN|freeze .*changed|FREEZE.*mismatch|changed since freeze|amendment .* not applied"
  },
  {
   "run_id": 40223310552,
@@ -693,13 +885,18 @@
     "failed_steps": [
      "Run set -euo pipefail"
     ],
-    "evidence": []
+    "evidence": [
+     "Traceback (most recent call last):",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 35872,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "CANCELLED_OR_TIMEOUT",
+  "why": "job cancelled, killed (143) or over its time limit",
+  "rule": "exceeded the maximum execution time|The operation was canceled|exit code 143|SIGTERM|timed out"
  },
  {
   "run_id": 40176250681,
@@ -715,13 +912,20 @@
     "failed_steps": [
      "Run regression and evidence audits on GitHub"
     ],
-    "evidence": []
+    "evidence": [
+     "Traceback (most recent call last):",
+     "if p.returncode:raise RuntimeError(label+' failed; inspect '+str(out/(label+'.log')))",
+     "RuntimeError: unit_tests failed; inspect /home/runner/work/_temp/next-audit/checks/unit_tests.log",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 28359,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "PYTHON_EXCEPTION",
+  "why": "uncaught Python exception (see evidence)",
+  "rule": "Traceback \\(most recent call last\\)|Error: "
  },
  {
   "run_id": 40175830437,
@@ -737,13 +941,20 @@
     "failed_steps": [
      "Run regression and evidence audits on GitHub"
     ],
-    "evidence": []
+    "evidence": [
+     "Traceback (most recent call last):",
+     "if p.returncode:raise RuntimeError(label+' failed; inspect '+str(out/(label+'.log')))",
+     "RuntimeError: study_k_evidence_inventory failed; inspect /home/runner/work/_temp/next-audit/checks/study_k_evidence_inventory.log",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 28567,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "PYTHON_EXCEPTION",
+  "why": "uncaught Python exception (see evidence)",
+  "rule": "Traceback \\(most recent call last\\)|Error: "
  },
  {
   "run_id": 40174906235,
@@ -759,13 +970,20 @@
     "failed_steps": [
      "Run regression and evidence audits on GitHub"
     ],
-    "evidence": []
+    "evidence": [
+     "Traceback (most recent call last):",
+     "if p.returncode:raise RuntimeError(label+' failed; inspect '+str(out/(label+'.log')))",
+     "RuntimeError: study_k_evidence_inventory failed; inspect /home/runner/work/_temp/next-audit/checks/study_k_evidence_inventory.log",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 28564,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "PYTHON_EXCEPTION",
+  "why": "uncaught Python exception (see evidence)",
+  "rule": "Traceback \\(most recent call last\\)|Error: "
  },
  {
   "run_id": 40173786064,
@@ -781,13 +999,20 @@
     "failed_steps": [
      "Run regression and evidence audits on GitHub"
     ],
-    "evidence": []
+    "evidence": [
+     "Traceback (most recent call last):",
+     "if p.returncode:raise RuntimeError(label+' failed; inspect '+str(out/(label+'.log')))",
+     "RuntimeError: unit_tests failed; inspect /home/runner/work/_temp/next-audit/checks/unit_tests.log",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 28352,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "PYTHON_EXCEPTION",
+  "why": "uncaught Python exception (see evidence)",
+  "rule": "Traceback \\(most recent call last\\)|Error: "
  },
  {
   "run_id": 40081924050,
@@ -810,6 +1035,8 @@
     ]
    }
   ],
+  "log_chars": 25581,
+  "log_error": null,
   "failed_job_count": 1,
   "category": "OTHER",
   "why": "no rule matched; read the evidence",
@@ -829,13 +1056,19 @@
     "failed_steps": [
      "Run and analyse"
     ],
-    "evidence": []
+    "evidence": [
+     "Traceback (most recent call last):",
+     "AttributeError: module 'gk_draw_oracle_coord' has no attribute 'scopes'",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 24534,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "NOT_FROZEN_OR_FREEZE_DRIFT",
+  "why": "study not frozen, or a frozen file changed",
+  "rule": "is not FROZEN|freeze .*changed|FREEZE.*mismatch|changed since freeze|amendment .* not applied"
  },
  {
   "run_id": 39751249581,
@@ -851,13 +1084,19 @@
     "failed_steps": [
      "Run set -euo pipefail"
     ],
-    "evidence": []
+    "evidence": [
+     "Traceback (most recent call last):",
+     "ImportError: cannot import name '_set' from 'amend_study_d' (/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/tools/amend_study_d.py)",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 24584,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "PYTHON_EXCEPTION",
+  "why": "uncaught Python exception (see evidence)",
+  "rule": "Traceback \\(most recent call last\\)|Error: "
  },
  {
   "run_id": 39751158239,
@@ -873,13 +1112,19 @@
     "failed_steps": [
      "Run set -euo pipefail"
     ],
-    "evidence": []
+    "evidence": [
+     "Traceback (most recent call last):",
+     "ImportError: cannot import name '_set' from 'amend_study_d' (/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/tools/amend_study_d.py)",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 24556,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "PYTHON_EXCEPTION",
+  "why": "uncaught Python exception (see evidence)",
+  "rule": "Traceback \\(most recent call last\\)|Error: "
  },
  {
   "run_id": 39653618837,
@@ -895,13 +1140,18 @@
     "failed_steps": [
      "Verify frozen Studies D E F"
     ],
-    "evidence": []
+    "evidence": [
+     "test_harmful_scope_rejected_fast (test_core.DrawHarnessAcceptanceTests.test_harmful_scope_rejected_fast) ... ok",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 40123,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "NOT_FROZEN_OR_FREEZE_DRIFT",
+  "why": "study not frozen, or a frozen file changed",
+  "rule": "is not FROZEN|freeze .*changed|FREEZE.*mismatch|changed since freeze|amendment .* not applied"
  },
  {
   "run_id": 39646607726,
@@ -917,13 +1167,19 @@
     "failed_steps": [
      "Verify Study F freeze"
     ],
-    "evidence": []
+    "evidence": [
+     "Traceback (most recent call last):",
+     "FileNotFoundError: [Errno 2] No such file or directory: '/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/study_f/FREEZE.json'",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 22378,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "NOT_FROZEN_OR_FREEZE_DRIFT",
+  "why": "study not frozen, or a frozen file changed",
+  "rule": "is not FROZEN|freeze .*changed|FREEZE.*mismatch|changed since freeze|amendment .* not applied"
  },
  {
   "run_id": 39419852803,
@@ -975,20 +1231,34 @@
     "failed_steps": [
      "Run"
     ],
-    "evidence": []
+    "evidence": [
+     "\u2502 exit code: 1",
+     "Traceback (most recent call last):",
+     "LookupError: Error getting the version from source `vcs`: setuptools-scm was unable to detect version for /tmp/study_d_jhk4t72v/C1_jsonschema.",
+     "Traceback (most recent call last):",
+     "raise CalledProcessError(retcode, process.args,",
+     "subprocess.CalledProcessError: Command '['/opt/hostedtoolcache/Python/3.12.15/x64/bin/python', '-m', 'pip', 'install', '-q', '/tmp/study_d_jhk4t72v/C1_jsonschema']' returned non-zero exit status 1.",
+     "##[error]Process completed with exit code 1."
+    ]
    },
    {
     "job": "target (D2_cerberus, 3.8, ubuntu-22.04)",
     "failed_steps": [
      "Run"
     ],
-    "evidence": []
+    "evidence": [
+     "Traceback (most recent call last):",
+     "AttributeError: module 'ast' has no attribute 'unparse'",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 77705,
+  "log_error": null,
   "failed_job_count": 2,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "NOT_FROZEN_OR_FREEZE_DRIFT",
+  "why": "study not frozen, or a frozen file changed",
+  "rule": "is not FROZEN|freeze .*changed|FREEZE.*mismatch|changed since freeze|amendment .* not applied"
  },
  {
   "run_id": 39383887559,
@@ -1004,13 +1274,20 @@
     "failed_steps": [
      "Smoke run"
     ],
-    "evidence": []
+    "evidence": [
+     "Traceback (most recent call last):",
+     "raise RuntimeError(\"worker failed to start: \" + self.proc.stderr.read()[-800:])",
+     "RuntimeError: worker failed to start: Fatal Python error: config_init_hash_seed: PYTHONHASHSEED must be \"random\" or an integer in range [0; 4294967295]",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 24193,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "PYTHON_EXCEPTION",
+  "why": "uncaught Python exception (see evidence)",
+  "rule": "Traceback \\(most recent call last\\)|Error: "
  },
  {
   "run_id": 39218891370,
@@ -1026,13 +1303,21 @@
     "failed_steps": [
      "Run (refuses while DRAFT)"
     ],
-    "evidence": []
+    "evidence": [
+     "Traceback (most recent call last):",
+     "raise RuntimeError(f\"pytest produced no report (exit {proc.returncode}): \"",
+     "RuntimeError: pytest produced no report (exit 4): ImportError while loading conftest '/tmp/gk_baseline_scee_0m7/snapshot/tests/conftest.py'.",
+     "E   ModuleNotFoundError: No module named 'typer'",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 36732,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "NOT_FROZEN_OR_FREEZE_DRIFT",
+  "why": "study not frozen, or a frozen file changed",
+  "rule": "is not FROZEN|freeze .*changed|FREEZE.*mismatch|changed since freeze|amendment .* not applied"
  },
  {
   "run_id": 39218140976,
@@ -1048,13 +1333,21 @@
     "failed_steps": [
      "Run (refuses while DRAFT)"
     ],
-    "evidence": []
+    "evidence": [
+     "Traceback (most recent call last):",
+     "raise RuntimeError(f\"pytest produced no report (exit {proc.returncode}): \"",
+     "RuntimeError: pytest produced no report (exit 4): ImportError while loading conftest '/tmp/gk_baseline_d55sc01c/snapshot/tests/conftest.py'.",
+     "E   ModuleNotFoundError: No module named 'typer'",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 32143,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "NOT_FROZEN_OR_FREEZE_DRIFT",
+  "why": "study not frozen, or a frozen file changed",
+  "rule": "is not FROZEN|freeze .*changed|FREEZE.*mismatch|changed since freeze|amendment .* not applied"
  },
  {
   "run_id": 39217073114,
@@ -1070,9 +1363,14 @@
     "failed_steps": [
      "Check protocol freeze (fails closed while DRAFT)"
     ],
-    "evidence": []
+    "evidence": [
+     "##[error]Study B protocol status is 'DRAFT'; freeze it before running.",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 21468,
+  "log_error": null,
   "failed_job_count": 1,
   "category": "OTHER",
   "why": "no rule matched; read the evidence",
@@ -1092,9 +1390,14 @@
     "failed_steps": [
      "Check protocol freeze (fails closed while DRAFT)"
     ],
-    "evidence": []
+    "evidence": [
+     "##[error]Study B protocol status is 'DRAFT'; freeze it before running.",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 21468,
+  "log_error": null,
   "failed_job_count": 1,
   "category": "OTHER",
   "why": "no rule matched; read the evidence",
@@ -1114,13 +1417,20 @@
     "failed_steps": [
      "Fetch source files and frozen Study B targets"
     ],
-    "evidence": []
+    "evidence": [
+     "Traceback (most recent call last):",
+     "raise CalledProcessError(retcode, process.args,",
+     "subprocess.CalledProcessError: Command '['git', '-c', 'gc.auto=0', '-c', 'maintenance.auto=false', '-c', 'fetch.writeCommitGraph=false', '-c', 'core.fsmonitor=false', 'fetch', '-q', '--depth', '1', 'origin', 'FILL_FULL_COMMIT_FROM_SCAN']' returned non-zero exit status 128.",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 26226,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "PYTHON_EXCEPTION",
+  "why": "uncaught Python exception (see evidence)",
+  "rule": "Traceback \\(most recent call last\\)|Error: "
  },
  {
   "run_id": 39144743457,
@@ -1136,13 +1446,19 @@
     "failed_steps": [
      "Fetch frozen real targets"
     ],
-    "evidence": []
+    "evidence": [
+     "Traceback (most recent call last):",
+     "OSError: [Errno 39] Directory not empty: '/tmp/tmpw444ta7x/repo/.git/objects/pack'",
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 26835,
+  "log_error": null,
   "failed_job_count": 1,
-  "category": "OTHER",
-  "why": "no rule matched; read the evidence",
-  "rule": null
+  "category": "PYTHON_EXCEPTION",
+  "why": "uncaught Python exception (see evidence)",
+  "rule": "Traceback \\(most recent call last\\)|Error: "
  },
  {
   "run_id": 39138728680,
@@ -1158,9 +1474,13 @@
     "failed_steps": [
      "Unit tests"
     ],
-    "evidence": []
+    "evidence": [
+     "##[error]Process completed with exit code 127."
+    ]
    }
   ],
+  "log_chars": 13120,
+  "log_error": null,
   "failed_job_count": 1,
   "category": "OTHER",
   "why": "no rule matched; read the evidence",
@@ -1300,9 +1620,13 @@
     "failed_steps": [
      "Run six isolated containers and compare exact P4 test outcomes"
     ],
-    "evidence": []
+    "evidence": [
+     "##[error]Process completed with exit code 1."
+    ]
    }
   ],
+  "log_chars": 125058,
+  "log_error": null,
   "failed_job_count": 1,
   "category": "OTHER",
   "why": "no rule matched; read the evidence",
