@@ -142,7 +142,9 @@ def main(argv):
     funnel = {"frame": len(frame), "streamed": len(streams),
               "eligible": sum(1 for s in streams if s.get("vet_verdict") == "ELIGIBLE"),
               "usable": sum(1 for s in streams if s.get("stage_reached") == "P-GEN"),
-              "generator_failures": sum(1 for s in streams if s.get("stage_reached") == "P-S3" and "generator" in str(s.get("fn_verdict", "")))}
+              "generator_failures": sum(1 for s in streams if s.get("stage_reached") == "P-S3" and "generator" in str(s.get("fn_verdict", ""))),
+              "stage_errors": sum(1 for s in streams if s.get("stage_reached") == "STAGE_ERROR"),
+              "job_lost": len(frame) - len(streams)}            # amendment P-A3: candidates whose job left no record
     light = patches(art, LIGHT)
     plaus = [r for r in light if r["plausible"]]
     res = {"RQ1_funnel": funnel, "light_patches": len(light), "PRIMARY": primary(plaus, boot), "H3": h3(plaus), "RQ4": rq4(plaus),

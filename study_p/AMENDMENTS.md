@@ -17,3 +17,15 @@ Nếu văn bản này đã có mặt lúc đóng băng, bản sửa có trước
 **Thay đổi:** thêm `tools/p_stream_resume.py` (sha256 `2133251ecf0ca601bfdb3a244fbf46d2ea4668794a962a9a50732ff2097e475f`) và workflow `Gatekeeper Study P stream resume (amendment P-A2)`. Công cụ dùng nguyên `tools/p_stream.py` (không sửa), cùng thứ tự và cùng cách chia mảnh, chỉ xử lý ứng viên **chưa có bản ghi** (danh sách `research_closure/results/p_stream/DONE.json`, sha256 `9a23dc8e5e28bac57d1aefb6a3482efb911b4bcbf7a3d4acda1982c04a1ab99e`, 3.527 tên), và ghi lỗi của một ứng viên vào chính ứng viên đó thay vì làm dừng cả mảnh.
 
 **Không thay đổi:** khung, các giai đoạn, mọi ngưỡng, kế hoạch phân tích. Kết quả chính **chưa được tính** khi viết amendment này; quyết định chỉ dựa vào việc hai mảnh không có artifact.
+
+## P-A3 (3/11/2026): mỗi ứng viên của mảnh 151 chạy trong một job riêng
+
+**Bằng chứng:** mảnh 181 đã hoàn tất dưới P-A2 (17/17 ứng viên). Mảnh 151 bị dừng thêm một lần dưới P-A2: lần đầu (lượt cohort) sau ứng viên thứ 7, lần này khi đang xử lý ứng viên thứ 15; cả hai lần bước bị dừng bằng SIGTERM (mã 143) **và** bước tải artifact (chạy cả khi thất bại) cũng không chạy, nên **không ai thấy kết quả** của bất kỳ ứng viên nào trong mảnh. Hai lần dừng ở hai ứng viên khác nhau, và công cụ kiểm định đã dọn thư mục tạm, nên đây không phải lỗi ổn định của một ứng viên. Giải thích phù hợp nhất: mã của một repo gửi tín hiệu dừng ra ngoài nhóm tiến trình của nó.
+
+**Thay đổi:** workflow `Gatekeeper Study P stream isolate (amendment P-A3)` (sha256 `ac346a78134c66a6bc964bc4897d5ee6e8f9912bb5c7bb296c6b343e4bf0ba52`): mỗi ứng viên chưa có bản ghi của mảnh 151 (18 ứng viên) được xử lý trong **một job riêng**, bằng `tools/p_stream_resume.py` của P-A2 **không sửa** (job nhận mọi ứng viên khác của mảnh như đã xong).
+
+**Thay đổi kèm theo trong `tools/p_analyze.py`:** phễu RQ1 đếm thêm hai dòng, `stage_errors` (ứng viên có lỗi giai đoạn dưới P-A2) và `job_lost` (ứng viên của khung không có bản ghi); không phép tính nào khác thay đổi.
+
+**Quy tắc cho job bị mất:** nếu job của một ứng viên vẫn không có artifact, ứng viên đó được ghi là `JOB_LOST` trong phễu, không chạy lại thêm, và không đóng góp patch nào vào phân tích chính.
+
+**Không thay đổi:** khung, các giai đoạn, mọi ngưỡng, kế hoạch phân tích. Kết quả chính vẫn **chưa được tính**.

@@ -1,0 +1,8 @@
+{
+ "name": "study_p_a3 (patch_study_p_a3.zip)",
+ "files": {
+  ".github/workflows/study-p-stream-isolate.yml": "ac346a78134c66a6bc964bc4897d5ee6e8f9912bb5c7bb296c6b343e4bf0ba52",
+  "study_p/AMENDMENTS.md": "1c7599e5665fbc45bfca376d2f251c53fd46987af770765b47999a79eb368fe4",
+  "tools/p_analyze.py": "d32ce5e79acc85f3d093ff508e9db62e08973a1df3a6da19980cabb87048cde3"
+ }
+}
