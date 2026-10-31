@@ -1,0 +1,19 @@
+{
+ "name": "workflow_mask_vertex_token",
+ "note": "mask the Vertex OAuth token before exporting it to GITHUB_ENV; it was printed in clear in every later step's env dump",
+ "files": {
+  ".github/workflows/b9-run.yml": "e2033722ad464e6a8d135701ddd60b81d0912d98559d10dd4a2f777fecbc8b93",
+  ".github/workflows/rq3.yml": "3971aaea4fdf18d18d53ff0ff3cf6651d89dc77d9af7dfebd5baaf4bdfcff86b",
+  ".github/workflows/rq5-rate.yml": "19b2d684cae1e60f6ef497749a5c366bacb1276d21cd8177e7587a41414f1b81",
+  ".github/workflows/rq5.yml": "01b794a10489d8dea87d6f15cc9ea4d287053856c73d923c180fdf6f3cd1b11f",
+  ".github/workflows/study-n-pilot.yml": "1378c2d3c13b829e8dbe2b031ac914023584f7a9c1dd5748fb07d0bb5f1bced4",
+  ".github/workflows/study-p-feasibility-llm.yml": "9ac87ccf73f1494d2200c77214968a0be7404623cb221fc39ec27ac67782bde7",
+  ".github/workflows/study-p-pilot.yml": "b77ca039888a155500d6ed5a028c131eab979487e9f7ef80a9ad6c68a87ae94d",
+  ".github/workflows/study-p-stream-isolate.yml": "f19da874a2558c5de88657f8377614bf871e064b424c27cb5b776dfaaca04d74",
+  ".github/workflows/study-p-stream-resume.yml": "58be6fdc981ed988e90e725cbfb92460c18b7a88edfe6ac28ff1f28445181f97",
+  ".github/workflows/study-p-stream.yml": "94e33d2aa6b982e51b83b3da69c64e13c0a89dc25b9464ae479c705050f65272",
+  ".github/workflows/study-q-f0.yml": "e3d3452dd96c7f87ddfe2ab951e9ded2909c7bf8cf8ad35303b0967e5c418dba",
+  ".github/workflows/study-q-stream.yml": "da9ed8b77332777014b53e47ccf1010b976652f5b5bc5e6dee06af03c4a9c383",
+  ".github/workflows/vertex-smoke.yml": "63a744111199ad047ed35757945a9ea49091c0e5c895db4f95d774cc94897739"
+ }
+}

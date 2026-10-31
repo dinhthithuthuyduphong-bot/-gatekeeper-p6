@@ -64,7 +64,7 @@ jobs:
       - name: Vertex access token (G2 only)
         if: ${{ inputs.generator == 'G2' }}
         run: |
-          echo "GOOGLE_OAUTH_TOKEN=$(gcloud auth print-access-token)" >> "$GITHUB_ENV"
+          t="$(gcloud auth print-access-token)"; echo "::add-mask::$t"; echo "GOOGLE_OAUTH_TOKEN=$t" >> "$GITHUB_ENV"
           echo "GCP_PROJECT=${{ secrets.GCP_PROJECT }}" >> "$GITHUB_ENV"
           echo "GK_TOKEN_CMD=gcloud auth print-access-token" >> "$GITHUB_ENV"
       - name: Probe one instance

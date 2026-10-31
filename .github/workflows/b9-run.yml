@@ -50,7 +50,7 @@ jobs:
       - name: Vertex access token
         if: ${{ startsWith(inputs.model, 'vertex-') }}
         run: |
-          echo "GOOGLE_OAUTH_TOKEN=$(gcloud auth print-access-token)" >> "$GITHUB_ENV"
+          t="$(gcloud auth print-access-token)"; echo "::add-mask::$t"; echo "GOOGLE_OAUTH_TOKEN=$t" >> "$GITHUB_ENV"
           echo "GCP_PROJECT=${{ secrets.GCP_PROJECT }}" >> "$GITHUB_ENV"
       - name: Run B9
         env:

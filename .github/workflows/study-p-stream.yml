@@ -64,7 +64,7 @@ jobs:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
       - name: Vertex access token
         run: |
-          echo "GOOGLE_OAUTH_TOKEN=$(gcloud auth print-access-token)" >> "$GITHUB_ENV"
+          t="$(gcloud auth print-access-token)"; echo "::add-mask::$t"; echo "GOOGLE_OAUTH_TOKEN=$t" >> "$GITHUB_ENV"
           echo "GCP_PROJECT=${{ secrets.GCP_PROJECT }}" >> "$GITHUB_ENV"
           echo "GK_TOKEN_CMD=gcloud auth print-access-token" >> "$GITHUB_ENV"
       - name: Stream one shard
