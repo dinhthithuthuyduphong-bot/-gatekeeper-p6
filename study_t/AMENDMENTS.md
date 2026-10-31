@@ -5,9 +5,9 @@
 **What the census showed (sizes only).** 60 targets, 2,578 cells (2,436 Ruff, 142 R2), 235 skills; Ruff version 0.17.3.
 
 **Fairness correction (before any outcome).** The protocol fixed the fixed-sample test at n = 99 draws, a number computed for 16
-cells. With K = 2,578 cells, certifying zero harm at level α/K needs n_FS = ⌈log(α/K)/log(1−η)⌉ = 198 draws for *any* method; at
-n = 99 FS could never admit, which would make it a strawman. FS therefore uses n_FS = 198 (admit iff the exact one-sided binomial
-test rejects h ≥ η at level α/K, i.e. zero changes in 198 draws).
+cells. With K = 2,578 cells, certifying zero harm at level α/K needs n_FS = ⌈log(α/K)/log(1−η)⌉ = 199 draws for *any* method; at
+n = 99 FS could never admit, which would make it a strawman. FS therefore uses n_FS = 199 (admit iff the exact one-sided binomial
+test rejects h ≥ η at level α/K, i.e. zero changes in 199 draws).
 
 **Gatekeeper (G), fixed here.** Harm certificate (c = 0.9, η = 5%) and harm alarm (fires at 20) on the cell's gate draws, stopped
 at the first of: e ≥ K/α, alarm, or the budget of 200 draws; e = 0 if the alarm fired; admission by **e-Holm** over all K cells
@@ -35,7 +35,7 @@ is conservative). Mean draws of G count every draw up to its stopping time.
 - B6R: the rule's documentation example, fixed by the same Ruff version, equals the documented "Use instead" code (AST
   equality); the fingerprint matches by construction (one environment).
 - S20: no change in the first 20 gate draws.
-- FS: no change in the first 198.
+- FS: no change in the first 199.
 - B8: no change in all 200.
 
 LJ (model judge) and T (test suites) follow in amendments T-A2 and T-A3, written before they run.
