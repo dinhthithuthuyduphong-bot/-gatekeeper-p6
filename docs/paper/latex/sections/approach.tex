@@ -4,25 +4,28 @@ Figure~\ref{fig:pipeline} summarises the pipeline.  For a skill $S$ and a target
 
 \begin{figure}[t]
 \centering
-\begin{tikzpicture}[font=\footnotesize, node distance=4mm and 5mm,
-  box/.style={draw, rounded corners=2pt, align=center, minimum height=8mm, inner sep=3pt},
-  arr/.style={-{Stealth[length=2mm]}}]
+\begin{tikzpicture}[font=\scriptsize, node distance=6mm and 4mm,
+  box/.style={draw, rounded corners=2pt, align=center, minimum height=8mm, text width=17mm, inner sep=2pt},
+  arr/.style={-{Stealth[length=1.6mm]}}]
 \node[box] (pkg) {skill package\\$\langle\pi,\mathcal{D},\mathcal{I},\mathcal{P},\mathcal{K}\rangle$};
 \node[box, right=of pkg] (scr) {scope screen\\$\mathcal{I}(x)$, $\mathcal{D}$};
 \node[box, right=of scr] (bind) {AST binder\\(abstains)};
 \node[box, right=of bind] (tri) {paired trials\\with / without $\pi$};
 \node[box, right=of tri] (cert) {e-process\\$\ge 1/\alpha_{c,k}$?};
+\node[box, right=of cert] (quar) {quarantine};
 \node[box, below=of cert] (adm) {admit cell $c$};
-\node[box, below=of tri] (quar) {quarantine};
-\node[box, below=of bind] (exe) {execution rule:\\components admitted?};
-\node[box, below=of scr] (comp) {composite cells\\for overlapping $\mathcal{K}$};
-\node[box, below=of pkg] (ret) {retirement:\\epoch $k{+}1$ of ledger};
+\node[box, below=of tri] (exe) {execution rule:\\components admitted?};
+\node[box, below=of bind] (comp) {composite cells\\(overlapping $\mathcal{K}$)};
+\node[box, below=of pkg] (ret) {retirement:\\next ledger epoch};
 \draw[arr] (pkg) -- (scr); \draw[arr] (scr) -- (bind); \draw[arr] (bind) -- (tri); \draw[arr] (tri) -- (cert);
-\draw[arr] (cert) -- node[right]{yes} (adm); \draw[arr] (cert) -- node[above, sloped]{budget spent} (quar);
-\draw[arr] (adm) -- (exe); \draw[arr] (exe) -- (comp); \draw[arr] (comp) |- (tri);
+\draw[arr] (cert) -- node[above]{no} (quar);
+\draw[arr] (cert) -- node[right]{yes} (adm);
+\draw[arr] (adm) -- (exe);
+\draw[arr] (exe) -- node[above]{no} (comp);
+\draw[arr] (comp.north east) -- (tri.south west);
 \draw[arr] (ret) -- (pkg);
 \end{tikzpicture}
-\caption{Gatekeeper.  Evidence comes from paired trials on the target scope; each cell (single skill or composite) has its own
+\caption{Gatekeeper.  ``No'' at the e-process means the trial budget was spent.  Evidence comes from paired trials on the target scope; each cell (single skill or composite) has its own
 entry in a pre-allocated error ledger; overlapping skills run together only when their composite cell is admitted; a fingerprint change
 retires an admission and re-admission draws the next ledger entry.}
 \label{fig:pipeline}
