@@ -79,6 +79,27 @@ three.  The targets' own test suites ($1{,}287$, $51{,}524$ and $130$ tests) sho
 they did ($21$ new failures).
 Re-running $2{,}400$ recorded draws in shuffled order with fresh workers reproduced every paired outcome, so the draws behave as
 independent, as Assumption~\ref{ass:trials} requires.
+Table~\ref{tab:cells} summarises the decisions.
+
+\begin{table}[t]
+\centering\footnotesize
+\caption{Cells admitted by each comparator on real skill-reuse targets, by ground truth from $300$ draws plus the target's test
+suite.  Study G's second cell (no change in draws, a census regression) is omitted.}
+\label{tab:cells}
+% sources: study_d/results/RESULTS_SUMMARY_study-d-v1.md (table 1); study_e/results/RESULTS_SUMMARY_study-e-v1.md; study_g/results/RESULTS_SUMMARY_study-g-v1.md
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+ & \multicolumn{2}{c}{Study D} & Study E & Studies E, G \\
+Comparator & beneficial (of 3) & unchanged (of 9) & unchanged (of 7) & harmful (of 4) \\
+\midrule
+B2 unrestricted reuse          & 3 & 9 & 7 & 4 \\
+B6-R replay + fingerprints     & 3 & 9 & 7 & 4 \\
+B8 always-retest               & 3 & 9 & 7 & 0 \\
+Gatekeeper (certificate)       & 2 & 0 & 0 & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \emph{Reading.} On these targets harm was frequent and deterministic, so a simple gate with target evidence suffices; the
 certificate's distinctive behaviour is refusing changes that are not beneficial, not catching rare harm.
 
@@ -104,7 +125,9 @@ and the patch accepts.  The confirmatory hypothesis, that most naive differences
 supported: $6/55$ ($10.9\%$, Wilson $5.1$--$21.8\%$; one-sided $p\approx1$).
 A manual review added after the result (labelled as such) re-ran the $55$ units with outputs kept: $36$ reproduced exactly, and two
 independent raters agreed on $87.7\%$ of $154$ items.  $8/36$ ($22.2\%$, Wilson $11.7$--$38.1\%$) units had no regression confirmed by
-both raters; excluding three units whose inputs are model-built stand-in objects gives $11/36$ ($18.0$--$46.9\%$).  The RQ5 conclusion
+both raters; excluding three units whose inputs are model-built stand-in objects gives $11/36$ ($18.0$--$46.9\%$).  The result does not hinge on one repository (post hoc): leaving out any one of the twelve repositories keeps the HQ1 share between
+$8.2\%$ and $16.7\%$ (largest Wilson upper bound $31.9\%$, without \texttt{sympy}) and the contract-regression share between $8.2\%$ and
+$14.0\%$, although Django contributes $215$ of the $469$ instances.  The RQ5 conclusion
 therefore does not generalise: on SWE-bench Verified most naive differences are real, observable behaviour differences from the fix.
 Whether they are \emph{wrong} is a separate question that a reference implementation cannot answer.  The orders of magnitude agree
 with PatchDiff~\cite{wang2026patchdiff}, which found $29.6\%$ of plausible SWE-bench Verified patches behaving differently from the

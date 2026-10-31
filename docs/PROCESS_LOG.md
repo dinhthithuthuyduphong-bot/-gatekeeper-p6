@@ -234,3 +234,10 @@ Mẫu cho mỗi mục:
   - đo trên toàn tập thì phần hại bị che (5,4%).
 - **W3–W6, trích dẫn mới** (đã tra): PatchDiff (ICSE 2026), Johari và cộng sự (OR 2022), Vovk & Wang (AoS 2021), Smith và cộng sự (ESEC/FSE 2015; số trang cần kiểm).
 - Bộ kiểm số: 26 con số. Workflow submission check thêm bước tái lập mô phỏng thư viện (phải giống hệt bản commit).
+
+### ~20:00 — "Fix cho tới khi thắng", vòng 2
+- **Nói thẳng với người nghiên cứu:** không thể bảo đảm bài được nhận. Việc làm được là bịt mọi chỗ phản biện có thể tấn công mà sửa được ngay, không tốn tiền.
+- **W8:** độ vững của Study Q theo từng repo (`tools/q_robustness.py`): bỏ từng repo thì HQ1 nằm trong 8,2% – 16,7% (cận trên lớn nhất 31,9%) và Q4 trong 8,2% – 14,0%. Đã đưa vào bài, có trong bộ kiểm số.
+- **W9:** thêm Hình 1 (pipeline, TikZ) và Bảng 2 (quyết định theo ô trên target thật).
+- **W10:** mức giao footprint thật không đo được từ dữ liệu sẵn có; ghi trong Threats.
+- **Sự cố:** script sửa làm hỏng `evaluation.tex`. Bộ kiểm số bắt được (21 con số biến mất); tệp được khôi phục từ git trước khi commit.

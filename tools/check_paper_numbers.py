@@ -34,6 +34,7 @@ PA = lambda: J("research_closure/results/study_p/P_ANALYSIS.json")       # noqa:
 RQ3 = lambda: J("research_closure/results/rq3/RQ3_SUMMARY.json")         # noqa: E731
 TH = lambda: J("research_closure/results/theory/THEORY_CHECKS.json")     # noqa: E731
 LS = "research_closure/results/library_sim/LIBRARY_SIMULATION.json"
+QR = "research_closure/results/study_q/Q_ROBUSTNESS.json"
 
 CLAIMS = [
     ("Q usable instances", "$245$ instances usable", lambda: "$%d$ instances usable" % QA()["Q1_funnel"]["FINISHED"]),
@@ -82,6 +83,11 @@ CLAIMS = [
      lambda: "harmful in only $%s\\%%$ of libraries" % pct(J(LS)["main"]["P1"]["harmful_execution_rate"])),
     ("abstract: library sim", "ran a harmful composition in $28\\%$ of libraries",
      lambda: "ran a harmful composition in $%d\\%%$ of libraries" % round(100 * J(LS)["main"]["P1"]["harmful_component_rate"])),
+    ("Q robustness HQ1 range", "between\n$8.2\\%$ and $16.7\\%$ (largest Wilson upper bound $31.9\\%$",
+     lambda: "between\n$%s\\%%$ and $%s\\%%$ (largest Wilson upper bound $%s\\%%$" % (pct(J(QR)["HQ1_share_range"][0]), pct(J(QR)["HQ1_share_range"][1]),
+                                                                              pct(J(QR)["HQ1_max_upper_bound"]))),
+    ("Q robustness Q4 range", "between $8.2\\%$ and\n$14.0\\%$",
+     lambda: "between $%s\\%%$ and\n$%s\\%%$" % (pct(J(QR)["Q4_range"][0]), pct(J(QR)["Q4_range"][1]))),
     # abstract (main.tex)
     ("abstract: plausible patches", "in $205$ plausible LLM patches", lambda: "in $%d$ plausible LLM patches" % PA()["PRIMARY"]["plausible"]),
     ("abstract: census admits", "the test census admitted all $16$ with partial\nbehavioural differences",

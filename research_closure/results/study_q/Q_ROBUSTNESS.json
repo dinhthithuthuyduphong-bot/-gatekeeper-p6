@@ -1,0 +1,213 @@
+{
+ "per_repo": {
+  "astropy/astropy": {
+   "patches": 44,
+   "contract": 6,
+   "units": 6,
+   "without": 2
+  },
+  "django/django": {
+   "patches": 281,
+   "contract": 19,
+   "units": 14,
+   "without": 2
+  },
+  "matplotlib/matplotlib": {
+   "patches": 28,
+   "contract": 1,
+   "units": 1,
+   "without": 0
+  },
+  "mwaskom/seaborn": {
+   "patches": 3,
+   "contract": 0,
+   "units": 0,
+   "without": 0
+  },
+  "pallets/flask": {
+   "patches": 3,
+   "contract": 0,
+   "units": 0,
+   "without": 0
+  },
+  "psf/requests": {
+   "patches": 14,
+   "contract": 3,
+   "units": 2,
+   "without": 0
+  },
+  "pydata/xarray": {
+   "patches": 46,
+   "contract": 5,
+   "units": 3,
+   "without": 1
+  },
+  "pylint-dev/pylint": {
+   "patches": 12,
+   "contract": 2,
+   "units": 2,
+   "without": 0
+  },
+  "pytest-dev/pytest": {
+   "patches": 11,
+   "contract": 0,
+   "units": 0,
+   "without": 0
+  },
+  "scikit-learn/scikit-learn": {
+   "patches": 66,
+   "contract": 1,
+   "units": 2,
+   "without": 1
+  },
+  "sphinx-doc/sphinx": {
+   "patches": 40,
+   "contract": 8,
+   "units": 6,
+   "without": 0
+  },
+  "sympy/sympy": {
+   "patches": 146,
+   "contract": 32,
+   "units": 19,
+   "without": 0
+  }
+ },
+ "total": {
+  "patches": 694,
+  "contract": 77,
+  "units": 55,
+  "without": 6
+ },
+ "leave_one_repo_out": {
+  "astropy/astropy": {
+   "Q4": 0.10923076923076923,
+   "HQ1_units": 49,
+   "HQ1_without": 4,
+   "HQ1_share": 0.08163265306122448,
+   "HQ1_wilson95": [
+    0.03220229624171222,
+    0.19189387041486136
+   ]
+  },
+  "django/django": {
+   "Q4": 0.14043583535108958,
+   "HQ1_units": 41,
+   "HQ1_without": 4,
+   "HQ1_share": 0.0975609756097561,
+   "HQ1_wilson95": [
+    0.03859645975296141,
+    0.22547975519030555
+   ]
+  },
+  "matplotlib/matplotlib": {
+   "Q4": 0.11411411411411411,
+   "HQ1_units": 54,
+   "HQ1_without": 6,
+   "HQ1_share": 0.1111111111111111,
+   "HQ1_wilson95": [
+    0.05192951817556752,
+    0.22194948932076727
+   ]
+  },
+  "mwaskom/seaborn": {
+   "Q4": 0.11143270622286541,
+   "HQ1_units": 55,
+   "HQ1_without": 6,
+   "HQ1_share": 0.10909090909090909,
+   "HQ1_wilson95": [
+    0.05096655628305132,
+    0.21825793795231957
+   ]
+  },
+  "pallets/flask": {
+   "Q4": 0.11143270622286541,
+   "HQ1_units": 55,
+   "HQ1_without": 6,
+   "HQ1_share": 0.10909090909090909,
+   "HQ1_wilson95": [
+    0.05096655628305132,
+    0.21825793795231957
+   ]
+  },
+  "psf/requests": {
+   "Q4": 0.10882352941176471,
+   "HQ1_units": 53,
+   "HQ1_without": 6,
+   "HQ1_share": 0.11320754716981132,
+   "HQ1_wilson95": [
+    0.05292958911068668,
+    0.22576770301339144
+   ]
+  },
+  "pydata/xarray": {
+   "Q4": 0.1111111111111111,
+   "HQ1_units": 52,
+   "HQ1_without": 5,
+   "HQ1_share": 0.09615384615384616,
+   "HQ1_wilson95": [
+    0.041773735183410265,
+    0.20609881861160995
+   ]
+  },
+  "pylint-dev/pylint": {
+   "Q4": 0.10997067448680352,
+   "HQ1_units": 53,
+   "HQ1_without": 6,
+   "HQ1_share": 0.11320754716981132,
+   "HQ1_wilson95": [
+    0.05292958911068668,
+    0.22576770301339144
+   ]
+  },
+  "pytest-dev/pytest": {
+   "Q4": 0.11273792093704246,
+   "HQ1_units": 55,
+   "HQ1_without": 6,
+   "HQ1_share": 0.10909090909090909,
+   "HQ1_wilson95": [
+    0.05096655628305132,
+    0.21825793795231957
+   ]
+  },
+  "scikit-learn/scikit-learn": {
+   "Q4": 0.12101910828025478,
+   "HQ1_units": 53,
+   "HQ1_without": 5,
+   "HQ1_share": 0.09433962264150944,
+   "HQ1_wilson95": [
+    0.04097203744189685,
+    0.20253975673701435
+   ]
+  },
+  "sphinx-doc/sphinx": {
+   "Q4": 0.10550458715596331,
+   "HQ1_units": 49,
+   "HQ1_without": 6,
+   "HQ1_share": 0.12244897959183673,
+   "HQ1_wilson95": [
+    0.057347477598098245,
+    0.2424466240188096
+   ]
+  },
+  "sympy/sympy": {
+   "Q4": 0.08211678832116788,
+   "HQ1_units": 36,
+   "HQ1_without": 6,
+   "HQ1_share": 0.16666666666666666,
+   "HQ1_wilson95": [
+    0.07870340628564097,
+    0.3189111473467432
+   ]
+  }
+ },
+ "Q4_range": [
+  0.08211678832116788,
+  0.14043583535108958
+ ],
+ "HQ1_share_range": [
+  0.08163265306122448,
+  0.16666666666666666
+ ],
+ "HQ1_max_upper_bound": 0.3189111473467432
+}

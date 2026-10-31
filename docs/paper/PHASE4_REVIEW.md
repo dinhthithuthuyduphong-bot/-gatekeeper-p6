@@ -12,6 +12,16 @@
 | W6 | 🟡 | Study D dùng thủ tục Holm trên e-value, còn lý thuyết dùng hợp cận; câu chữ chưa có trích dẫn. | Trích Vovk & Wang 2021 cho kiểm định nhiều giả thuyết với e-value. | `evaluation.tex` (7.3) |
 | W7 | 🟡 | Số test trong mục Implementation đã cũ (359). | Đổi thành "hơn 350"; số chính xác thay đổi theo mã. | `implementation.tex` |
 
+## Vòng 2 ("fix cho tới khi thắng")
+
+| # | Mức | Điểm yếu | Sửa | Bằng chứng |
+|---|---|---|---|---|
+| W8 | 🟠 | Django chiếm 215/469 instance của Study Q: kết quả có bị một repo chi phối không? | Kiểm bỏ từng repo (post hoc): tỉ lệ HQ1 trong khoảng 8,2% – 16,7%, cận trên Wilson lớn nhất 31,9% (khi bỏ sympy); Q4 trong khoảng 8,2% – 14,0%. Kết luận không đổi. Đã thêm vào mục 7.5 | `tools/q_robustness.py`; `research_closure/results/study_q/Q_ROBUSTNESS.json` |
+| W9 | 🟡 | Bài không có hình; các quyết định trên target thật chỉ nằm trong văn bản | Thêm **Hình 1** (sơ đồ pipeline, TikZ) và **Bảng 2** (số ô được admit theo từng baseline, tách theo study) | `approach.tex`, `evaluation.tex` |
+| W10 | 🟡 | Giả định 4: chưa có dữ liệu thật về mức giao footprint | Không đo được từ dữ liệu sẵn có (mỗi study chỉ bind một họ kỹ năng); ghi rõ trong Threats, không đoán số | `threats.tex` |
+
+**Sự cố trong vòng này:** một lần sửa bằng script làm hỏng `evaluation.tex` (tệp phình lên 119 nghìn dòng, vì lệnh thay nhận một chuỗi rỗng). `tools/check_paper_numbers.py` báo 21 con số không còn trong bài; tệp được khôi phục từ git **trước khi commit**, và sửa đổi được áp lại có kiểm vị trí.
+
 **Trích dẫn mới đã tra** (tìm kiếm web, 31/10/2026):
 - PatchDiff: ICSE 2026, DOI 10.1145/3744916.3764576.
 - Johari và cộng sự: Operations Research 70(3):1806–1821, DOI 10.1287/opre.2021.2135.
