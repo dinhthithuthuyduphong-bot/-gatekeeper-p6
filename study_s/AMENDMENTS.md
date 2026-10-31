@@ -19,3 +19,20 @@ could not be called.
 
 **Known limit (seen in the synthetic smoke test, not on targets):** G0 follows annotations, so a parameter annotated `int` never
 receives a `bool`; witnesses of type-check rewrites may therefore be missed.
+
+## S-A2 (written before running; post hoc with respect to S-A1's results, labelled as such)
+
+**Why.** S-A1 left two gaps (docs/PAPER_TODO.md R16): (1) G0 follows annotations, so an `int` parameter never receives a
+`bool`, the subtype on which the type-check rewrites change behaviour; (2) hera_pspec (9 units) could not be installed under
+Python 3.12 (`uvtools>=0.2.0` has no matching distribution).
+
+**Changes (units, seed, measures and gate unchanged):**
+- *Subtype substitution:* after G0 generates a call, every `int` value (not `bool`) in the receiver's and the call's arguments is
+  replaced, independently with probability 1/4 (seeded by the call index), by `True` or `False`. `bool` is a subclass of `int`,
+  so these are valid values of the annotated type. n stays 200.
+- *Install fallback:* if installing under the manifest's Python fails, the same install is tried once under Python 3.11; the
+  attempt and its log are recorded.
+- Results in `COMPOSITION_STUDY_SA2.json`; S and S-A1 results stay as they are.
+
+**Prediction written before running:** the bool-sensitive rewrites (`type_eq_isinstance`, the bool guard) will show more
+behaviour change than under S-A1; whether any composition becomes emergent, masking or order-dependent is open.
