@@ -32,6 +32,7 @@ UNITS_ONLY = False   # --units-only: list the units (no function is run, no outc
 S_A1 = False         # --s-a1: amendment S-A1 (post hoc): receivers built from the constructor signature, mangled names,
 #                      manifest Python version, install log recorded (study_s/AMENDMENTS.md)
 S_A2 = False         # --s-a2: amendment S-A2 (S-A1 plus subtype substitution and a Python 3.11 install fallback)
+S_A3 = False         # --s-a3: S-A2 plus every variant run twice; only inputs stable in O and every variant count
 INSTALL_LOG = {}
 
 
@@ -214,7 +215,7 @@ def run_target(t, pairs, skills, work, n):
             continue
         o1 = inner(py, root, pp, u["file"], u["qualname"], "run", calls, work / (tag + ".o1.json"), n)
         o2 = inner(py, root, pp, u["file"], u["qualname"], "run", calls, work / (tag + ".o2.json"), n)
-        runs = {}
+        runs, rep2 = {}, {}
         for v in VARIANTS:
             snap = work / ("snap_" + v)
             if snap.exists():
@@ -222,12 +223,19 @@ def run_target(t, pairs, skills, work, n):
             shutil.copytree(root, snap, symlinks=True, ignore=shutil.ignore_patterns(".git", "__pycache__"))
             (snap / u["file"]).write_text(variant_source(skills, u["a"], u["b"], src, v), encoding="utf-8")
             runs[v] = inner(py, snap, pp, u["file"], u["qualname"], "run", calls, work / ("%s.%s.json" % (tag, v)), n)
+            if S_A3:
+                rep2[v] = inner(py, snap, pp, u["file"], u["qualname"], "run", calls, work / ("%s.%s.r2.json" % (tag, v)), n)
             shutil.rmtree(snap)
-        bad = [x for x in [o1, o2] + list(runs.values()) if x.get("status") != "RAN"]
+        bad = [x for x in [o1, o2] + list(runs.values()) + list(rep2.values()) if x.get("status") != "RAN"]
         if bad:
             u.update(usable=False, why="did not run: %s" % bad[0].get("status"))
             continue
         stable, L = losses(o1, o2, runs)
+        if S_A3:   # keep only inputs on which every variant repeats its own outcome
+            keep = [k for k, i in enumerate(stable) if all(runs[v]["outcomes"][i] == rep2[v]["outcomes"][i] for v in VARIANTS)]
+            u["variant_unstable_inputs"] = len(stable) - len(keep)
+            stable = [stable[k] for k in keep]
+            L = {v: [L[v][k] for k in keep] for v in VARIANTS}
         if len(stable) < MIN_STABLE:
             u.update(usable=False, why="only %d stable inputs" % len(stable))
             continue
@@ -266,6 +274,7 @@ def summarise(targets):
            "units_order_dependent": sum(1 for u in ok if u["order_dependent"]),
            "units_non_additive": sum(1 for u in ok if u["non_additive"]),
            "cells": len(evals), "cells_admitted": len(adm),
+           "variant_unstable_inputs": sum(u.get("variant_unstable_inputs", 0) for u in ok),
            "units_singles_admitted_composite_not": sum(1 for u in ok if u["singles_admitted_composite_not"]),
            "units_composite_admitted_single_not": sum(1 for u in ok if u["composite_admitted_single_not"])}
     return {"total": tot, "units": units}
@@ -275,9 +284,10 @@ def main(argv):
     work, out = Path(argv[0]), Path(argv[1])
     opt = lambda k, d: type(d)(argv[argv.index(k) + 1]) if k in argv else d   # noqa: E731
     n = opt("--n", 200)
-    global UNITS_ONLY, S_A1, S_A2
+    global UNITS_ONLY, S_A1, S_A2, S_A3
     UNITS_ONLY = "--units-only" in argv
-    S_A2 = "--s-a2" in argv
+    S_A3 = "--s-a3" in argv
+    S_A2 = "--s-a2" in argv or S_A3
     S_A1 = "--s-a1" in argv or S_A2
     census = json.loads(CENSUS.read_text())
     only = set(opt("--targets", "").split(",")) - {""}
@@ -303,7 +313,7 @@ def main(argv):
     summary = summarise(res)
     summary["install"] = {r["target"]: r.get("install") for r in res}
     out.mkdir(parents=True, exist_ok=True)
-    name = "COMPOSITION_STUDY_SA2.json" if S_A2 else "COMPOSITION_STUDY_SA1.json" if S_A1 else "COMPOSITION_STUDY.json"
+    name = "COMPOSITION_STUDY_SA3.json" if S_A3 else "COMPOSITION_STUDY_SA2.json" if S_A2 else "COMPOSITION_STUDY_SA1.json" if S_A1 else "COMPOSITION_STUDY.json"
     (out / name).write_text(json.dumps(summary, indent=1, default=str))
     print(json.dumps(summary["total"], indent=1))
     return 0

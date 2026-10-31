@@ -36,3 +36,14 @@ Python 3.12 (`uvtools>=0.2.0` has no matching distribution).
 
 **Prediction written before running:** the bool-sensitive rewrites (`type_eq_isinstance`, the bool guard) will show more
 behaviour change than under S-A1; whether any composition becomes emergent, masking or order-dependent is open.
+
+## S-A3 (written before running): replication of every variant
+
+**Why.** S-A2 found the first order dependence on real code (pydal `QueryBuilder.parse`: on 1 of 200 inputs AB keeps the original
+behaviour and BA does not), but only O was run twice; the variants were run once, so a non-deterministic function could produce
+it.
+
+**Change.** Same as S-A2, but every variant (A, B, AB, BA) is also run twice; an input counts only if O and every variant give the
+same outcome in both runs. Stricter, so it can only remove differences. Results in `COMPOSITION_STUDY_SA3.json`.
+
+**Decision rule written before running:** the order dependence is reported as real only if it survives S-A3.
