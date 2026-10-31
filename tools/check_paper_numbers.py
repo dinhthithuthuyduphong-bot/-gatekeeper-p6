@@ -39,6 +39,8 @@ R2 = "research_closure/results/study_r2/LIBRARY_CENSUS.json"
 RG = "research_closure/results/study_r2/LIBRARY_SIMULATION_GRAPH.json"
 SS = "research_closure/results/study_s/COMPOSITION_STUDY.json"
 SA = "research_closure/results/study_s/COMPOSITION_STUDY_SA1.json"
+S2 = "research_closure/results/study_s/COMPOSITION_STUDY_SA2.json"
+S3 = "research_closure/results/study_s/COMPOSITION_STUDY_SA3.json"
 
 CLAIMS = [
     ("Q usable instances", "$245$ instances usable", lambda: "$%d$ instances usable" % QA()["Q1_funnel"]["FINISHED"]),
@@ -132,14 +134,16 @@ CLAIMS = [
      lambda: "could not be installed ($%d$, one repository) or called ($%d$)" % (
          sum(1 for u in J(SA)["units"] if not u.get("usable") and "import failed" in u.get("why", "")),
          sum(1 for u in J(SA)["units"] if not u.get("usable") and "import failed" not in u.get("why", "")))),
-    ("S-A1 no emergent/order", "no composition changed behaviour where both of its parts\nkept it and none depended on the order",
-     lambda: "no composition changed behaviour where both of its parts\nkept it and none depended on the order"
-     if J(SA)["total"]["units_emergent"] == 0 and J(SA)["total"]["units_order_dependent"] == 0 else "CHANGED"),
-    ("S-A1 IS_STRONG", "on\n$23$ of $200$ inputs",
-     lambda: "on\n$%d$ of $%d$ inputs" % next((u["counts"]["B"], u["stable"]) for u in J(SA)["units"] if u.get("qualname") == "IS_STRONG.validate")),
-    ("S-A1 gate", "over all $48$ cells, the gate rejected\nexactly the $3$ cells",
-     lambda: "over all $%d$ cells, the gate rejected\nexactly the $%d$ cells" % (J(SA)["total"]["cells"], J(SA)["total"]["cells"] - J(SA)["total"]["cells_admitted"])),
-    ("S-A1 admitted", "admitted the other $45$", lambda: "admitted the other $%d$" % J(SA)["total"]["cells_admitted"]),
+    ("S-A3 final", "no composition changed\nbehaviour where both of its parts kept it, none masked a change of a part, and none depended on the order",
+     lambda: "no composition changed\nbehaviour where both of its parts kept it, none masked a change of a part, and none depended on the order"
+     if all(J(S3)["total"][k] == 0 for k in ("units_emergent", "units_masking", "units_order_dependent")) else "CHANGED"),
+    ("S-A2 noise unit", "an apparent order\ndependence on one input of",
+     lambda: "an apparent order\ndependence on %s input of" % {1: "one"}[sum(1 for u in J(S2)["units"] if u.get("order_dependent"))]),
+    ("S-A3 IS_STRONG", "on $29$ of\n$200$ inputs",
+     lambda: "on $%d$ of\n$%d$ inputs" % next((u["counts"]["B"], u["stable"]) for u in J(S3)["units"] if u.get("qualname") == "IS_STRONG.validate")),
+    ("S-A3 gate", "over all $48$ cells, the gate rejected\nexactly the $3$ cells",
+     lambda: "over all $%d$ cells, the gate rejected\nexactly the $%d$ cells" % (J(S3)["total"]["cells"], J(S3)["total"]["cells"] - J(S3)["total"]["cells_admitted"])),
+    ("S-A3 admitted", "admitted the other $45$", lambda: "admitted the other $%d$" % J(S3)["total"]["cells_admitted"]),
     # abstract (main.tex)
     ("abstract: plausible patches", "in $205$ plausible LLM patches", lambda: "in $%d$ plausible LLM patches" % PA()["PRIMARY"]["plausible"]),
     ("abstract: census admits", "the test census admitted all $16$ with partial\nbehavioural differences",

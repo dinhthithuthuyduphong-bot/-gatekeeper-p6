@@ -18,7 +18,7 @@ Cập nhật sau **mỗi** lần chạy. Mỗi tiêu chí có trạng thái **TH
 | S4 | Đánh giá trên dữ liệu thật, có đăng ký trước, có kết quả âm | **THẮNG** | Study D, E, G, H, P, Q, R2; FREEZE + submission check |
 | S5 | So sánh với baseline mạnh và với công trình gần nhất | **THẮNG một phần** | B2, B6-R (kiểu GSE), B8; PatchDiff. **Thiếu:** chạy chính GSE (A12) |
 | S6 | Kỹ năng đa dạng, quy mô thư viện thực tế | **THẮNG một phần** | R2: 12 họ trên 16 repo, chỉ đo footprint và tương tác. **Thiếu:** admit thật với 12 họ (cần oracle) |
-| S7 | Tác hại của tổ hợp đo trên dữ liệu thật | **THẮNG một phần** | Study S (sau S-A1): 12 hàm thật, tổ hợp cộng tính, cổng loại đúng 3 ô có hại. **Thiếu:** 11 đơn vị chưa chạy được; input G0 yếu (việc 7.8) |
+| S7 | Tác hại của tổ hợp đo trên dữ liệu thật | **THẮNG một phần** | Study S (S-A3, kết quả cuối): 12 hàm thật, tổ hợp cộng tính, cổng loại đúng 3/48 ô. **Thiếu:** 11 đơn vị không chạy được (hera_pspec: phụ thuộc không có trên PyPI); chưa có tổ hợp thật nào gây hại "nảy sinh" để minh hoạ Định lý 2.5 |
 | S8 | Người chấm độc lập là con người | **THUA** | Người chấm thứ hai là LLM (A9). Việc 1.9 và 7.6 |
 | S9 | Tái lập được, có artifact ẩn danh | **THẮNG** (chờ upload) | submission check pass; `make_anonymous_artifact.py`. Người làm: upload |
 | S10 | Đúng định dạng và hạn của venue | **THUA** (chưa xác minh) | Bài hiện 14 trang `acmsmall`. Việc 0.3, 5.4 (người làm): tra giới hạn trang FSE 2027 |
@@ -54,7 +54,7 @@ Mỗi dòng gồm:
 | R16 | 31/10 | Study S-A1 (6de047c) | Chạy lại với receiver dựng từ constructor | `composition_inner.py`; Python theo manifest; lưu log cài | Giả định 4 trên tổ hợp thật: 12 đơn vị không có thay đổi "nảy sinh" khi ghép, không phụ thuộc thứ tự; 1 input masking chưa lặp lại | **THẮNG một phần**: 12/23 dùng được; cổng loại đúng 3 ô có thay đổi hành vi (pydal IS_STRONG.validate, 23/200 input), admit 45 ô | Còn THUA ở: hera_pspec không cài được (`uvtools>=0.2.0` không có bản cho Python 3.12; 9 đơn vị); G0 không sinh `bool` cho tham số `int`. Việc tiếp: 7.8 |
 | R17 | 31/10 | Paper build (cb65df4) + submission check | PDF có Study S | — | — | **THẮNG** | — |
 | R18 | 31/10 | Study S-A2 (c2eb155) | Thay một phần `int` bằng `bool`; thử cài hera_pspec bằng Python 3.11 | `subst()` trong `composition_inner.py`, fallback 3.11 | Dự đoán viết trước: các phép viết lại nhạy với bool đổi hành vi nhiều hơn → đúng một phần (IS_STRONG 23 → 29/200). **Lần đầu thấy phụ thuộc thứ tự trên mã thật** (pydal `QueryBuilder.parse`, 1/200 input) | **THUA một phần**: biến thể mới chạy một lần, chưa loại được nhiễu; hera_pspec vẫn không cài được (`uvtools>=0.2.0` không có bản phù hợp cho 3.11 lẫn 3.12) | Vòng C bước 4: viết phép kiểm loại nhiễu, chạy mỗi biến thể hai lần (S-A3). Quy tắc quyết định viết trước: chỉ báo phụ thuộc thứ tự là thật nếu còn sau S-A3 |
-| R19 | 31/10 | Study S-A3 (đang chạy) | Lặp lại mọi biến thể | Chỉ tính input ổn định ở O và mọi biến thể | — | *chờ kết quả* | — |
+| R19 | 31/10 | Study S-A3 (ef8e41a) | Lặp lại mọi biến thể | Chỉ tính input ổn định ở O và mọi biến thể | Quy tắc viết trước: phụ thuộc thứ tự ở R18 không còn sau khi lặp → là **nhiễu**, không báo là phát hiện. Giả thuyết nguyên nhân: `PYTHONHASHSEED` ngẫu nhiên giữa các tiến trình | **THẮNG**: kết quả cuối sạch. 12 hàm, tổ hợp cộng tính (0 nảy sinh, 0 masking, 0 phụ thuộc thứ tự); cổng loại đúng 3/48 ô có thay đổi hành vi | Còn: hera_pspec (9 đơn vị) không cài được; nên cố định `PYTHONHASHSEED` ở các lần chạy sau |
 
 ## C. Vòng debug khi THUA (làm theo thứ tự)
 
@@ -196,7 +196,7 @@ Thứ tự viết nên đi từ phần chắc nhất tới phần khó nhất:
 - [ ] **7.5 (S6) Admit thật với 12 họ** trên các target có oracle sẵn (Study D/E/G): dùng `drawharness` với skill R2. Cần giao thức trước.
 - [ ] **7.6 (S8) Người chấm thứ hai là con người** cho Q-A1 (154 mục): việc của người.
 - [ ] **7.7 (S5) Chạy GSE gốc** nếu có mã công khai (A12).
-- [ ] **7.8 (S7, phần còn lại) Study S mở rộng:**
+- [x] **7.8 (S7, phần còn lại) Study S mở rộng:** đã làm S-A2, S-A3. hera_pspec không cài được (đã báo). Mô tả ban đầu:
   - cài hera_pspec bằng Python 3.11 hoặc từ nguồn `uvtools`;
   - thêm bộ sinh input dựa trên kiểu thật, ví dụ sinh `bool` cho tham số `int` vì `bool` là lớp con của `int`.
 

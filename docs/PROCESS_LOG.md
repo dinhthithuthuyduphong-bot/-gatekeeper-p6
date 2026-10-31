@@ -282,3 +282,8 @@ Mẫu cho mỗi mục:
   - Amendment S-A1 (post hoc), chạy lại: 12/23 dùng được. Tổ hợp cộng tính; cổng loại đúng 3 ô có thay đổi hành vi, admit 45.
   - hera_pspec không cài được (`uvtools`).
 - **Bài:** thêm đoạn Study S trong mục 7.2 và Threats. Bộ kiểm số: 46 con số.
+- **Study S-A2, S-A3:**
+  - S-A2: thay một phần `int` bằng `bool`. IS_STRONG đổi hành vi trên 29/200 input; có một dấu hiệu phụ thuộc thứ tự (1 input).
+  - S-A3: lặp lại mọi biến thể; dấu hiệu đó biến mất, nên theo quy tắc viết trước là nhiễu.
+  - Kết quả cuối: tổ hợp cộng tính; cổng 45/48.
+  - hera_pspec: `uvtools>=0.2.0` không cài được cả trên 3.11 và 3.12.

@@ -47,3 +47,8 @@ it.
 same outcome in both runs. Stricter, so it can only remove differences. Results in `COMPOSITION_STUDY_SA3.json`.
 
 **Decision rule written before running:** the order dependence is reported as real only if it survives S-A3.
+
+### Outcome of S-A3 (run after the amendment above)
+The order dependence of S-A2 did not survive (0 variant-unstable inputs in this run, and no difference on `QueryBuilder.parse`); by
+the rule written before the run it is reported as noise. Probable cause (hypothesis, not tested): hash randomisation differs between
+the fresh processes of each version (set or dict iteration order). Future runs should fix `PYTHONHASHSEED`.
