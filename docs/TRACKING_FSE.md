@@ -18,7 +18,7 @@ Cập nhật lần cuối: **31/10/2026** (sau khi đối chiếu PDF và sắp 
 
 | # | Kỳ vọng / khẳng định của bài FSE | Study | Trạng thái | Bằng chứng hiện có |
 |---|---|---|---|---|
-| E1 | Tác hại một phần phổ biến khi tái sử dụng kỹ năng | D đến H | ❌ | 12 target thật, 0/2.400 khác biệt; cổng đơn giản là đủ |
+| E1 | Tác hại một phần phổ biến khi tái sử dụng kỹ năng | D đến H | ❌ | Study D: 16 ô, 3 có lợi, 9 không đổi, 4 ngoài phạm vi, 0 có hại; Study E, G: 4 ô có hại, đều tất định và thường xuyên (87–100% đầu vào), nên cổng đơn giản đã đủ. (Con số 0/2.400 trước đây là kiểm tính không trạng thái của harness, không phải đo tác hại.) |
 | E2 | Gatekeeper mạnh hơn cổng đơn giản | Đồ thị pha, PP0, Study P (H3) | ❌ về công suất | Kiểm định cỡ mẫu cố định an toàn như Gatekeeper và mạnh hơn; ở Study P hai cổng có cùng tỉ lệ admit (0,898); H3 không kiểm định được vì P4 không đạt ([P_RESULT](../research_closure/results/study_p/P_RESULT.md)). Giữ lại như một **tính chất**: hợp lệ khi dừng tuỳ ý, dừng sớm |
 | E3 | Cổng có kiểm soát rủi ro hơn census / smoke test | Study P | ✅ | Census admit 16/16 patch có θ̂ > 5%, smoke 20 admit 2/16; cổng thống kê admit 0/16 |
 | E4 | Oracle hành vi đo được tác hại | N, P | ✅ (mức hàm) | Oracle mức test dùng được 8/107; oracle mức hàm dùng được 54,3% số ELIGIBLE (Study P) |
@@ -115,3 +115,4 @@ PDF gốc: [`paper/source/`](paper/source/), đã đối chiếu toàn văn ngà
 | 31/10/2026 ~10:15–12:30 | Amendment Q-A1: chạy lại 55 đơn vị, chấm tay hai người; kết luận HQ1 giữ nguyên |
 | 31/10/2026 ~13:00 | Lý thuyết: THEORY.md (chứng minh), theory checks; PAPER_TODO.md; API_AND_FAILURES.md + failure audit (64 run thất bại, đã phân nhóm) |
 | 31/10/2026 ~14:05 | Giai đoạn 1: LaTeX các mục Problem formulation, Theory, Related work (thống kê); build PDF trên Actions (run 41208218636) |
+| 31/10/2026 ~15:00 | Rà soát giai đoạn 1 (PHASE1_REVIEW: G1–G9, C8, C9); giai đoạn 2: NUMBERS_MAP, evaluation.tex, threats.tex, check_paper_numbers |

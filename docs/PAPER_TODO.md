@@ -48,9 +48,17 @@ Mọi bản sửa đã có sẵn câu chữ trong [THEORY](paper/THEORY.md); vi�
 
 ## Giai đoạn 2: thay số projected bằng số đo được (2 đến 4 tuần)
 
-- [ ] **2.1 Lập bảng "số trong bài → tệp nguồn":** mỗi con số của Bảng 1, 2, 3 và Hình 3 trong bản nháp đi kèm (a) tệp kết quả thật, hoặc (b) "BỎ".
+> **Trạng thái 31/10/2026:**
+> - 2.1 [`paper/NUMBERS_MAP.md`](paper/NUMBERS_MAP.md): mọi số của bản nháp → nguồn thật hoặc BỎ.
+> - 2.2 [`paper/latex/sections/evaluation.tex`](paper/latex/sections/evaluation.tex): chỉ số đo được; `tools/check_paper_numbers.py` kiểm ở mỗi lần build.
+> - 2.3 nêu trong [`threats.tex`](paper/latex/sections/threats.tex) là chưa kiểm; **thiết kế phép đo vẫn cần thầy quyết**.
+> - 2.4 3/31 đơn vị; độ nhạy 11/36 = 30,6%.
+> - 2.5 EVIDENCE_LEDGER.
+> - Sửa một lỗi diễn giải: "0/2.400" là kiểm tính không trạng thái của harness, không phải đo tác hại.
+
+- [x] **2.1 Lập bảng "số trong bài → tệp nguồn":** mỗi con số của Bảng 1, 2, 3 và Hình 3 trong bản nháp đi kèm (a) tệp kết quả thật, hoặc (b) "BỎ".
   *Xong khi:* không còn con số projected nào trong bài. Mọi số của SkillShift-SE (180 cặp, 22,7% → 5,1%, 41/46, …) đều là projected, nên phải bỏ, trừ khi thật sự xây benchmark đó.
-- [ ] **2.2 Đưa các kết quả đã có vào bài:**
+- [x] **2.2 Đưa các kết quả đã có vào bài:**
   - Study D–H: 0/2.400 khác biệt (kết quả âm về kỹ năng);
   - đồ thị pha các cổng (`paper_snippets/P0_AND_PHASE_DIAGRAM.md`);
   - Study P: 16/205 = 7,8%, RQ5;
@@ -58,8 +66,8 @@ Mọi bản sửa đã có sẵn câu chữ trong [THEORY](paper/THEORY.md); vi�
   - Q-A1: 8/36 = 22,2%, đồng thuận 87,7%;
   - RQ3: `D2_cerberus`.
 - [ ] **2.3 Quyết định về Giả định D:** hoặc đo trên một mẫu cặp kỹ năng có footprint rời nhau (cần thiết kế study mới, có đăng ký trước), hoặc nêu nó là giả định chưa kiểm trong Threats.
-- [ ] **2.4 (Nếu chọn khung B)** Giới hạn "bản fix trả giá trị ≠ đầu vào hợp lệ": đếm số đơn vị HQ1 mà mọi mục là đối tượng giả do G2 dựng. Đây là phân tích sau khi thấy dữ liệu, phải ghi nhãn rõ.
-- [ ] **2.5 Ghi vào EVIDENCE_LEDGER** run id và commit cho mọi kết quả đưa vào bài.
+- [x] **2.4 (Nếu chọn khung B)** Giới hạn "bản fix trả giá trị ≠ đầu vào hợp lệ": đếm số đơn vị HQ1 mà mọi mục là đối tượng giả do G2 dựng. Đây là phân tích sau khi thấy dữ liệu, phải ghi nhãn rõ.
+- [x] **2.5 Ghi vào EVIDENCE_LEDGER** run id và commit cho mọi kết quả đưa vào bài.
 
 ## Giai đoạn 3: dọn nợ kỹ thuật ảnh hưởng tới tính tin cậy (song song với giai đoạn 2)
 

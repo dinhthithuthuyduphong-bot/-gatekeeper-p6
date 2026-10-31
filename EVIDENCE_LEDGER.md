@@ -191,3 +191,19 @@ Sau Study B, `gatekeeper_lite/` có thêm admission theo scope (`scoped.py`), n�
 ## 25/10/2026 — Study K, retrospective follow-up
 
 Python-control: unchanged 16-test upstream module, baseline 15 pass/1 fail, skill and upstream gold 16 pass, three repetitions per arm. 600 paired diagnostic draws and 200 state/order rechecks are preserved. The witness is an upstream smoke oracle; the numerical draw oracle is researcher-authored. Selected-module coverage only, 2/3 edited sites reached. See `study_k/RESULT_VI.md`. Additional static search found no applicable production edit in 11 repositories at 14 snapshots. Airflow revert is a documented lead, not a reproduced tier-1 harmful target. B9 HOLD; no prospective/generalization claim.
+
+## 31/10/2026 — Bằng chứng dùng trong bản bài (giai đoạn 2.5 của PAPER_TODO)
+
+Mỗi dòng: kết quả trích trong `docs/paper/latex/sections/evaluation.tex` → tệp nguồn → run hoặc commit. `tools/check_paper_numbers.py` tính lại các con số từ tệp nguồn ở mỗi lần build (workflow `Gatekeeper paper LaTeX build`).
+
+| Kết quả | Tệp nguồn | Run / commit |
+|---|---|---|
+| Study Q (Q1, Q2, Q4, HQ1, Q5) | `research_closure/results/study_q/Q_ANALYSIS.json`, `Q_RECORDS.jsonl.gz` | stream 41185100083 + 41187862326; analyze, commit `9a8ab44` |
+| Q-A1 (chấm tay) | `research_closure/results/study_q/qa1/` | capture 41192489807; items 41193394796; rater 41197881665; amendment commit `f275126` |
+| Study P (chính, RQ4) | `research_closure/results/study_p/P_ANALYSIS.json`, `P_RESULT.md` | xem các mục Study P ở trên |
+| RQ5 | `research_closure/results/rq5/RQ5_RESULT.md` | xem các mục RQ5 |
+| RQ3 | `research_closure/results/rq3/RQ3_SUMMARY.json` | xem các mục RQ3 |
+| Study D, E, G, H | `study_{d,e,g,h}/results/RESULTS_SUMMARY_*.md` | các tag freeze `study-{d,e,g,h}-freeze` |
+| Harness không trạng thái (2.400 lần rút) | `harness_checks/STATELESSNESS_SUMMARY.md` | workflow `statelessness-check.yml` |
+| Đồ thị pha các cổng | `paper_snippets/P0_AND_PHASE_DIAGRAM.md`, `tools/gate_phase_diagram.py` | — |
+| Kiểm lý thuyết C1–C9 | `research_closure/results/theory/THEORY_CHECKS.json` | workflow `Gatekeeper theory checks` |

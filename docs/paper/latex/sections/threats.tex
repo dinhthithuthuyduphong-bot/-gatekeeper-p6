@@ -1,0 +1,30 @@
+% PAPER_TODO 2.3 and 4.3: threats that follow from the theory and the measured studies.  Sources in comments.
+\section{Threats to Validity}
+\label{sec:threats}
+
+\paragraph{Assumptions of the guarantee.}
+Theorem~\ref{thm:admission} assumes i.i.d.\ trials drawn with replacement (Assumption~\ref{ass:trials}); we checked that the
+harness is stateless ($2{,}400$ re-run draws, $0$ differences) but not that real task streams are identically distributed.
+The shift bound $\xi_s$ (Assumption~\ref{ass:shift}) is declared, not estimated; the guarantee excludes harmful admissions only
+when $2\xi_s\le\theta$, and Proposition~\ref{prop:nofree} shows that no procedure learning from trials alone can do better.
+Screening only footprint-overlapping pairs relies on Assumption~\ref{ass:noninteract}, which \emph{we have not tested}: two edits in
+different functions can still interact through state no footprint records.  The execution rule is a design constraint that a
+deployment must enforce.
+
+\paragraph{Construct validity.}
+``Harm'' is a difference from a reference: a hand-written oracle (Studies D--H), or the developers' fix (Studies P, Q).  A
+difference from the fix is not necessarily a defect: in the manual review some patches arguably behaved better than the fix.
+Classifying an input as valid because the fix returns a value overestimates contract regressions when generated inputs are
+stand-in objects (three of $31$ reviewed units); the sensitivity analysis keeps the conclusion.  Hand-written oracles check the
+author's intent and miss side effects outside it (\texttt{cerberus}).
+
+\paragraph{Internal validity.}
+The second rater shares a model family with the input generator, and sees outputs but not inputs.  $19/55$ re-run units did not
+reproduce because the model-written generator changed; they enter as bounds.  The model-written generator sees the fix's diff, so
+inputs concentrate near the changed region.  Four Study Q instances failed for a tool limitation (patches that create files) and
+count as unusable.  The Study Q analysis script defined the inflation ratio differently from the protocol; we report both.
+
+\paragraph{External validity.}
+The skill studies cover two hand-written rewrite families on $14$ targets; we make no claim about learned skill libraries at scale,
+compositions in the wild, or retirement beyond a constructed demonstration.  In Study P half of the in-band cases come from repositories
+that look like student assignments; Study Q covers public resolved submissions to one benchmark.

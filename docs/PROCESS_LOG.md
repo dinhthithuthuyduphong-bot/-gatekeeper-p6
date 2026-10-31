@@ -156,3 +156,18 @@ Mẫu cho mỗi mục:
   - Workflow `Gatekeeper paper LaTeX build` (`paper-latex.yml`): biên dịch bằng TeX Live, dừng nếu còn tham chiếu hoặc trích dẫn không xác định, commit `build/theory_sections.pdf`. Run 41208218636 thành công.
   - PAPER_TODO: 1.1–1.8 đánh dấu xong.
 - Còn mở: 1.9 (một người đọc độc lập kiểm từng chứng minh); dán vào bản bài chính khi có.
+
+### ~14:30 — Rà soát giai đoạn 1 (yêu cầu "review kĩ và chứng minh")
+- Kiểm từng bước của từng chứng minh (`docs/paper/PHASE1_REVIEW.md`). Tìm thấy 9 lỗ hổng, G1–G9.
+- Lỗ hổng lớn nhất, **G1**: định lý chỉ bảo đảm cho ô được admit, không cho tập kỹ năng thực sự chạy chung. Sửa bằng luật thực thi, Giả định 4 cho tập, và Corollary "What actually runs".
+- Thêm C8 (admit lại không có sổ cái: 0,45; có sổ cái: 0,04) và C9 (chứng chỉ tác hại của thí nghiệm ở biên h = η: tỉ lệ ≈ α; 0,394η; 110 lần rút).
+- Tổng quát Lemma cho Y bị chặn bất kỳ, để bao cả chứng chỉ tác hại mà Study D–P dùng.
+- Workflow: theory checks 41208862692, LaTeX build 41208865501, đều thành công.
+
+### ~15:00 — Giai đoạn 2
+- 2.1: `docs/paper/NUMBERS_MAP.md`. Mọi số của bản nháp được đánh dấu BỎ, hoặc thay bằng số đo gần nghĩa nhất (kèm tệp nguồn).
+  - **Phát hiện:** "0/2.400" trong TRACKING là kiểm tính không trạng thái của harness, không phải đo tác hại. Đã sửa TRACKING. ALIGNMENT_WITH_FSE thuộc freeze nên không sửa; ghi chú trong NUMBERS_MAP.
+- 2.2: `sections/evaluation.tex`, chỉ số đo được, mỗi số có chú thích nguồn. `tools/check_paper_numbers.py` tính lại 16 con số từ JSON và kiểm chúng có trong LaTeX; được gắn vào workflow build.
+- 2.3: `sections/threats.tex` nêu Assumption 4 là **chưa kiểm**. Thiết kế phép đo cần thầy quyết.
+- 2.4: 3/31 đơn vị chỉ có đầu vào là đối tượng giả; độ nhạy 11/36 = 30,6% (18,0% – 46,9%); kết luận HQ1 giữ nguyên.
+- 2.5: thêm bảng nguồn vào `EVIDENCE_LEDGER.md`.

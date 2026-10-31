@@ -1,0 +1,97 @@
+% PAPER_TODO 2.2: evaluation with MEASURED numbers only.  Every number has a source comment (file in the repository);
+% docs/paper/NUMBERS_MAP.md maps each projected number of the draft to these, or marks it as dropped.
+% Framing-neutral: usable for frame (A) theory+method or (B) oracle study (PAPER_TODO 0.2); reorder subsections accordingly.
+\section{Evaluation}
+\label{sec:evaluation}
+
+All studies were pre-registered: protocol, configuration and tools were hashed before any outcome was seen, seeds were drawn
+from the public drand beacon after the freeze, and amendments are recorded and labelled.  Results that were analysed after
+seeing data are marked as such.  Every number below is produced by a workflow in the artifact.
+
+\subsection{Where simple gates fail: the phase diagram}
+\label{sec:eval-phase}
+% source: paper_snippets/P0_AND_PHASE_DIAGRAM.md, tools/gate_phase_diagram.py; study_h/results/RESULTS_SUMMARY_study-h-v1.md
+For a patch that always helps, Table~\ref{tab:phase} gives the probability that each gate admits it as a function of the true
+harm rate $h$ ($\eta=5\%$, $\alpha=0.1$; exact for the smoke, zero-tolerance and fixed-sample gates, Monte Carlo for the
+sequential rules).  A zero-tolerance gate with $300$ draws keeps fewer than half of the acceptable patches once $h>0.23\%$; a
+$20$-draw smoke test still admits more than $10\%$ of inadmissible patches until $h\approx11\%$.  Outside the band
+$[3/n,\,1-0.1^{1/20}]\approx[0.75\%,10.9\%]$ ($n=400$) a simple gate suffices.  At the same number of draws a fixed-sample test is
+as safe as the sequential certificate and \emph{more} powerful ($0.92$ versus $0.65$ at $h=2\%$, $300$ draws).  What the
+sequential rule buys is validity at data-dependent stopping and early stopping (110 clean draws in a 16-cell family), not power.
+On synthetic targets with rare harm (Study H, $50$ repetitions per cell, $300$ draws), the certificate admitted $0/100$ cells with
+$\rho\ge\eta$, while a $5$-draw smoke test admitted $38/50$ and $27/50$ at $\rho=5\%$ and $10\%$, and replay plus fingerprints
+admitted every cell.
+
+\begin{table}[t]
+\centering\footnotesize
+\caption{Probability that a gate admits an always-helpful patch, by true harm rate $h$ ($h\ge\eta$: admitting is an error).}
+\label{tab:phase}
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+$h$ & smoke 20 & zero-tol.\ 300 & fixed 300 & certificate, 300 & mixture, 1000 \\
+\midrule
+0.3\%  & 0.94 & 0.41 & 1.00 & 1.00 & 1.00 \\
+1\%    & 0.82 & 0.05 & 1.00 & 0.95 & 1.00 \\
+2\%    & 0.67 & 0.00 & 0.92 & 0.65 & 1.00 \\
+3\%    & 0.54 & 0.00 & 0.59 & 0.36 & 0.78 \\
+5\% (error)  & 0.36 & 0.00 & 0.06 & 0.10 & 0.10 \\
+10\% (error) & 0.12 & 0.00 & 0.00 & 0.01 & 0.00 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Skill reuse on real targets}
+\label{sec:eval-skills}
+% sources: study_d/results/RESULTS_SUMMARY_study-d-v1.md; study_e/results/RESULTS_SUMMARY_study-e-v1.md;
+%          study_g/results/RESULTS_SUMMARY_study-g-v1.md; harness_checks/STATELESSNESS_SUMMARY.md
+Two skill families, both frozen AST rewrites (excluding \texttt{bool} from \texttt{int} checks, learned from one PySStuBs fix, and
+\texttt{== None}$\to$\texttt{is None}),
+were applied to $14$ real targets in three pre-registered studies ($28$ cells).
+\emph{Study D} ($8$ targets, $16$ cells): ground truth from $300$ draws plus the target's full test suite gave $3$ beneficial,
+$9$ unchanged, $4$ out-of-scope and $0$ harmful cells.  B2, replay plus fingerprints (B6-R) and always-retest (B8) each admitted
+$12$ cells, the $3$ beneficial ones and all $9$ unchanged ones; the certificate (benefit e-process with e-Holm over the $16$ cells, family-wise $\alpha=0.1$) admitted $2$ cells, both
+beneficial, after $110$ draws each, and missed the third, whose mean benefit ($-0.11$) is smaller than the margin $\theta=0.2$.  It used $3{,}220$ trial runs
+against $3{,}600$ for B8.
+\emph{Studies E and G}: on the four harmful cells (\texttt{pyyaml}, \texttt{packaging}, \texttt{databricks}: harm on $87$--$100\%$ of
+inputs; \texttt{pydal}: $81/300$), B2 and B6-R admitted all four and the certificate rejected all four, within two draws for the first
+three.  The targets' own test suites ($1{,}287$, $51{,}524$ and $130$ tests) showed \emph{no} new regression in Study E; in Study G
+they did ($21$ new failures).
+Re-running $2{,}400$ recorded draws in shuffled order with fresh workers reproduced every paired outcome, so the draws behave as
+independent, as Assumption~\ref{ass:trials} requires.
+\emph{Reading.} On these targets harm was frequent and deterministic, so a simple gate with target evidence suffices; the
+certificate's distinctive behaviour is refusing changes that are not beneficial, not catching rare harm.
+
+\subsection{Partial harm in LLM patches}
+\label{sec:eval-patches}
+% sources: research_closure/results/study_p/P_RESULT.md; research_closure/results/rq5/RQ5_RESULT.md
+Study P drew fresh repository changes from a pre-registered frame of $3{,}562$ candidates; for each usable instance a light
+model generated one patch, and $205$ patches were plausible (they pass the hidden tests).  With a function-level oracle ($400$ inputs per patch), $16/205=7.8\%$ (Wilson $4.9$--$12.3\%$) had an
+estimated regression rate inside the partial-harm band.  The test-based census admitted all $16$ patches with $\hat\theta>5\%$, a
+$20$-draw smoke test admitted $2$, and the zero-tolerance, fixed-sample and sequential gates admitted none.  A pre-registered manual
+check (RQ5) then found that $97.5\%$ of the ``regression'' inputs were inputs the developers' fix also rejects; counting only
+regressions on inputs the fix accepts left $1$ of $205$ patches as planned, $3$ when deliberate rejections that the patch skips are
+added (after seeing data), and at most $6$ when non-reproducible patches are counted.
+
+\subsection{Naive differences versus contract regressions on SWE-bench Verified}
+\label{sec:eval-swebench}
+% source: research_closure/results/study_q/STUDY_Q_RESULT.md; qa1/QA1_RESULT.json
+Study Q tested the RQ5 finding on an independent, widely used benchmark.  For $469$ SWE-bench Verified instances with at least one
+public resolved patch, up to three distinct resolved patches were scored in the official Docker images ($245$ instances usable,
+$694$ patches).  $43.1\%$ of patches behaved differently from the developers' fix on some input; $11.1\%$ (Wilson $9.0$--$13.6\%$)
+had a \emph{contract regression}, an input on which the fix returns a value and the patch does not, or the fix rejects on purpose
+and the patch accepts.  The confirmatory hypothesis, that most naive differences are not contract regressions, was \emph{not}
+supported: $6/55$ ($10.9\%$, Wilson $5.1$--$21.8\%$; one-sided $p\approx1$).
+A manual review added after the result (labelled as such) re-ran the $55$ units with outputs kept: $36$ reproduced exactly, and two
+independent raters agreed on $87.7\%$ of $154$ items.  $8/36$ ($22.2\%$, Wilson $11.7$--$38.1\%$) units had no regression confirmed by
+both raters; excluding three units whose inputs are model-built stand-in objects gives $11/36$ ($18.0$--$46.9\%$).  The RQ5 conclusion
+therefore does not generalise: on SWE-bench Verified most naive differences are real, observable behaviour differences from the fix.
+Whether they are \emph{wrong} is a separate question that a reference implementation cannot answer.
+
+\subsection{Who defines harm}
+\label{sec:eval-oracle}
+% source: research_closure/results/rq3/RQ3_RESULT.md
+On $14$ measurable targets of Studies D, E and G, a model-written input generator agreed with the authors' hand-written oracles on
+$11/14$ detection decisions (Cohen's $\kappa=0.57$), a signature-based generator on $8/14$ ($\kappa=0.19$).  In one disagreement the
+generated inputs were right: on \texttt{cerberus} the skill rewrote two functions other than the intended one; the hand-written
+oracle, which checks the intended region, saw nothing, while generated inputs changed behaviour on $24$--$56$ of $200$ inputs.  An
+oracle written from the author's intent misses side effects outside that intent, which is the scope problem this paper is about.

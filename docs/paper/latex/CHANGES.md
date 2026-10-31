@@ -31,3 +31,11 @@ Các tệp LaTeX trong `sections/` là **câu chữ tiếng Anh để dán thẳ
 | §7 Implementation "α_s pre-allocated proportional to expected reuse frequency" | | "α_c pre-allocated per cell (proportional to expected reuse frequency), with the 6/(π²(k+1)²) schedule across epochs" |
 | Threats, theory | "where the scope is coarse the shift term dominates" | thêm "the guarantee excludes harmful admissions only when 2ξ_s < θ (Theorem 2.2); ξ_s is declared, not estimated" |
 | Keywords | "conformal prediction" | "e-processes, anytime-valid inference" |
+
+## Giai đoạn 2 (31/10/2026)
+
+| Việc | Tệp | Thay cho |
+|---|---|---|
+| 2.2 | `sections/evaluation.tex` | §9–§10 của bản nháp (Bảng 1, 2, 3, Hình 3, RQ1–RQ4): toàn bộ số projected thay bằng 5 tiểu mục số đo được: đồ thị pha + Study H; kỹ năng trên target thật (D, E, G); patch LLM (P, RQ5); SWE-bench Verified (Q, Q-A1); oracle (RQ3). Bảng đối chiếu từng số: [`../NUMBERS_MAP.md`](../NUMBERS_MAP.md) |
+| 2.3 | `sections/threats.tex` | Threats của bản nháp: thêm các giả định của định lý, Assumption 4 chưa kiểm, luật thực thi, đối tượng giả do G2 dựng, người chấm cùng họ model, 19/55 không tái tạo |
+| Theory | Remark "Harm certificate" | Nối lý thuyết với chứng chỉ tác hại mà thí nghiệm dùng (0,39η; 110 lần rút) |

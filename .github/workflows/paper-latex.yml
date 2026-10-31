@@ -8,6 +8,11 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Numbers quoted in the paper match the result files
+        run: python tools/check_paper_numbers.py | tee -a "$GITHUB_STEP_SUMMARY"
       - uses: xu-cheng/latex-action@v3
         with:
           root_file: main.tex
