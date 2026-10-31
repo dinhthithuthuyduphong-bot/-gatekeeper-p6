@@ -7,6 +7,12 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 import q_f2 as Q  # noqa: E402
 
+try:
+    import yaml  # noqa: F401
+    HAVE_YAML = True
+except ImportError:                      # optional dependency: only the census reads metadata.yaml
+    HAVE_YAML = False
+
 
 class Pool(unittest.TestCase):
     def test_census(self):
@@ -28,6 +34,7 @@ class Pool(unittest.TestCase):
         self.assertIsNone(Q.resolved_ids("not json"))
 
 
+@unittest.skipUnless(HAVE_YAML, "pyyaml is not installed (only Q-F2 needs it)")
 class Entries(unittest.TestCase):
     def test_asset_urls(self):
         u, _ = Q.asset_urls({"assets": {"repo": "https://github.com/acme/swe-run", "logs": "s3://swe-bench-submissions/verified/20250101_x"}})

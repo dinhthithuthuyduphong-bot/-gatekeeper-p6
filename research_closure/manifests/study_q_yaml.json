@@ -1,0 +1,7 @@
+{
+ "name": "study_q_yaml (patch_study_q_yaml.zip)",
+ "files": {
+  ".github/workflows/study-q-freeze.yml": "f81ed85cb40f57814ea5a60c178183ca31436584d53579837426b6e1e302f3fc",
+  "tests/test_q_f2.py": "ccb636b572b3373714644bf588bcfe33b6bbac7967e8bfbfc9241f9260ece7a6"
+ }
+}
