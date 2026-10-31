@@ -1,10 +1,10 @@
 {
  "stats": {
   "hq1_units": 55,
-  "captured": 2,
-  "reproduced": 2,
-  "items": 5,
-  "units_with_items": 1
+  "captured": 55,
+  "reproduced": 36,
+  "items": 154,
+  "units_with_items": 31
  },
  "units": [
   {
@@ -48,12 +48,20 @@
     "contract_harm": 19
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
-   "reproduced": false
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 200,
+    "categories": {
+     "C1": 19
+    },
+    "divergent": 19,
+    "naive_harm": 19,
+    "contract_harm": 19
+   },
+   "same_generator": true,
+   "reproduced": true
   },
   {
    "instance_id": "astropy__astropy-14309",
@@ -96,10 +104,18 @@
     "contract_harm": 4
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 7
+    },
+    "divergent": 232,
+    "naive_harm": 7,
+    "contract_harm": 7
+   },
    "same_generator": false,
    "reproduced": false
   },
@@ -116,12 +132,20 @@
     "contract_harm": 0
    },
    "cohort_contract_regression": false,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
-   "reproduced": false
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 400,
+    "categories": {
+     "C2-O": 14
+    },
+    "divergent": 14,
+    "naive_harm": 14,
+    "contract_harm": 0
+   },
+   "same_generator": true,
+   "reproduced": true
   },
   {
    "instance_id": "astropy__astropy-7671",
@@ -136,12 +160,20 @@
     "contract_harm": 6
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
-   "reproduced": false
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 200,
+    "categories": {
+     "C1": 6
+    },
+    "divergent": 8,
+    "naive_harm": 6,
+    "contract_harm": 6
+   },
+   "same_generator": true,
+   "reproduced": true
   },
   {
    "instance_id": "django__django-11141",
@@ -156,12 +188,20 @@
     "contract_harm": 0
    },
    "cohort_contract_regression": false,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
-   "reproduced": false
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 200,
+    "categories": {
+     "C2-O": 76
+    },
+    "divergent": 131,
+    "naive_harm": 76,
+    "contract_harm": 0
+   },
+   "same_generator": true,
+   "reproduced": true
   },
   {
    "instance_id": "django__django-12209",
@@ -176,12 +216,20 @@
     "contract_harm": 11
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
-   "reproduced": false
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 200,
+    "categories": {
+     "C1": 11
+    },
+    "divergent": 11,
+    "naive_harm": 11,
+    "contract_harm": 11
+   },
+   "same_generator": true,
+   "reproduced": true
   },
   {
    "instance_id": "django__django-12308",
@@ -196,12 +244,20 @@
     "contract_harm": 20
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
-   "reproduced": false
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 200,
+    "categories": {
+     "C1": 20
+    },
+    "divergent": 25,
+    "naive_harm": 20,
+    "contract_harm": 20
+   },
+   "same_generator": true,
+   "reproduced": true
   },
   {
    "instance_id": "django__django-12774",
@@ -217,10 +273,19 @@
     "contract_harm": 78
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 200,
+    "categories": {
+     "C2-O": 107,
+     "C1": 44
+    },
+    "divergent": 200,
+    "naive_harm": 151,
+    "contract_harm": 44
+   },
    "same_generator": false,
    "reproduced": false
   },
@@ -237,12 +302,20 @@
     "contract_harm": 0
    },
    "cohort_contract_regression": false,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
-   "reproduced": false
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 200,
+    "categories": {
+     "C2-O": 39
+    },
+    "divergent": 39,
+    "naive_harm": 39,
+    "contract_harm": 0
+   },
+   "same_generator": true,
+   "reproduced": true
   },
   {
    "instance_id": "django__django-13315",
@@ -257,12 +330,20 @@
     "contract_harm": 40
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
-   "reproduced": false
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 200,
+    "categories": {
+     "C1": 40
+    },
+    "divergent": 134,
+    "naive_harm": 40,
+    "contract_harm": 40
+   },
+   "same_generator": true,
+   "reproduced": true
   },
   {
    "instance_id": "django__django-13343",
@@ -277,12 +358,20 @@
     "contract_harm": 20
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 20
+    },
+    "divergent": 20,
+    "naive_harm": 20,
+    "contract_harm": 20
+   },
    "same_generator": false,
-   "reproduced": false
+   "reproduced": true
   },
   {
    "instance_id": "django__django-13401",
@@ -297,12 +386,20 @@
     "contract_harm": 16
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
-   "reproduced": false
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 200,
+    "categories": {
+     "C1": 16
+    },
+    "divergent": 40,
+    "naive_harm": 16,
+    "contract_harm": 16
+   },
+   "same_generator": true,
+   "reproduced": true
   },
   {
    "instance_id": "django__django-14007",
@@ -317,10 +414,18 @@
     "contract_harm": 43
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 200,
+    "categories": {
+     "C1": 39
+    },
+    "divergent": 139,
+    "naive_harm": 39,
+    "contract_harm": 39
+   },
    "same_generator": false,
    "reproduced": false
   },
@@ -337,10 +442,18 @@
     "contract_harm": 36
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 200,
+    "categories": {
+     "C1": 30
+    },
+    "divergent": 30,
+    "naive_harm": 30,
+    "contract_harm": 30
+   },
    "same_generator": false,
    "reproduced": false
   },
@@ -357,11 +470,19 @@
     "contract_harm": 8
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 198,
+    "categories": {
+     "C1": 8
+    },
+    "divergent": 10,
+    "naive_harm": 8,
+    "contract_harm": 8
+   },
+   "same_generator": true,
    "reproduced": false
   },
   {
@@ -377,10 +498,18 @@
     "contract_harm": 52
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 200,
+    "categories": {
+     "C2-D": 69
+    },
+    "divergent": 69,
+    "naive_harm": 69,
+    "contract_harm": 69
+   },
    "same_generator": false,
    "reproduced": false
   },
@@ -397,12 +526,20 @@
     "contract_harm": 33
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
-   "reproduced": false
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 33
+    },
+    "divergent": 33,
+    "naive_harm": 33,
+    "contract_harm": 33
+   },
+   "same_generator": true,
+   "reproduced": true
   },
   {
    "instance_id": "django__django-16661",
@@ -417,12 +554,20 @@
     "contract_harm": 4
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
-   "reproduced": false
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 4
+    },
+    "divergent": 4,
+    "naive_harm": 4,
+    "contract_harm": 4
+   },
+   "same_generator": true,
+   "reproduced": true
   },
   {
    "instance_id": "matplotlib__matplotlib-24970",
@@ -437,12 +582,20 @@
     "contract_harm": 15
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
-   "reproduced": false
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 200,
+    "categories": {
+     "C1": 15
+    },
+    "divergent": 28,
+    "naive_harm": 15,
+    "contract_harm": 15
+   },
+   "same_generator": true,
+   "reproduced": true
   },
   {
    "instance_id": "psf__requests-1921",
@@ -457,10 +610,18 @@
     "contract_harm": 1
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 9
+    },
+    "divergent": 136,
+    "naive_harm": 9,
+    "contract_harm": 9
+   },
    "same_generator": false,
    "reproduced": false
   },
@@ -477,10 +638,18 @@
     "contract_harm": 4
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 7
+    },
+    "divergent": 7,
+    "naive_harm": 7,
+    "contract_harm": 7
+   },
    "same_generator": false,
    "reproduced": false
   },
@@ -498,12 +667,21 @@
     "contract_harm": 5
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
-   "reproduced": false
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 400,
+    "categories": {
+     "C2-O": 99,
+     "C1": 5
+    },
+    "divergent": 159,
+    "naive_harm": 104,
+    "contract_harm": 5
+   },
+   "same_generator": true,
+   "reproduced": true
   },
   {
    "instance_id": "pydata__xarray-4356",
@@ -518,10 +696,18 @@
     "contract_harm": 0
    },
    "cohort_contract_regression": false,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 400,
+    "categories": {
+     "C2-O": 124
+    },
+    "divergent": 200,
+    "naive_harm": 124,
+    "contract_harm": 0
+   },
    "same_generator": false,
    "reproduced": false
   },
@@ -538,12 +724,20 @@
     "contract_harm": 19
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
-   "reproduced": false
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 19
+    },
+    "divergent": 55,
+    "naive_harm": 19,
+    "contract_harm": 19
+   },
+   "same_generator": true,
+   "reproduced": true
   },
   {
    "instance_id": "pylint-dev__pylint-7080",
@@ -559,10 +753,19 @@
     "contract_harm": 189
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 196,
+     "C2-O": 170
+    },
+    "divergent": 400,
+    "naive_harm": 366,
+    "contract_harm": 196
+   },
    "same_generator": false,
    "reproduced": false
   },
@@ -579,10 +782,18 @@
     "contract_harm": 32
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 400,
+    "categories": {
+     "C2-D": 4
+    },
+    "divergent": 23,
+    "naive_harm": 4,
+    "contract_harm": 4
+   },
    "same_generator": false,
    "reproduced": false
   },
@@ -599,12 +810,20 @@
     "contract_harm": 0
    },
    "cohort_contract_regression": false,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
-   "reproduced": false
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 200,
+    "categories": {
+     "C2-O": 11
+    },
+    "divergent": 13,
+    "naive_harm": 11,
+    "contract_harm": 0
+   },
+   "same_generator": true,
+   "reproduced": true
   },
   {
    "instance_id": "scikit-learn__scikit-learn-14894",
@@ -619,12 +838,20 @@
     "contract_harm": 100
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
-   "reproduced": false
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 200,
+    "categories": {
+     "C1": 100
+    },
+    "divergent": 100,
+    "naive_harm": 100,
+    "contract_harm": 100
+   },
+   "same_generator": true,
+   "reproduced": true
   },
   {
    "instance_id": "sphinx-doc__sphinx-10449",
@@ -639,12 +866,20 @@
     "contract_harm": 8
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
-   "reproduced": false
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 8
+    },
+    "divergent": 83,
+    "naive_harm": 8,
+    "contract_harm": 8
+   },
+   "same_generator": true,
+   "reproduced": true
   },
   {
    "instance_id": "sphinx-doc__sphinx-7462",
@@ -659,12 +894,20 @@
     "contract_harm": 10
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
-   "reproduced": false
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 10
+    },
+    "divergent": 10,
+    "naive_harm": 10,
+    "contract_harm": 10
+   },
+   "same_generator": true,
+   "reproduced": true
   },
   {
    "instance_id": "sphinx-doc__sphinx-7889",
@@ -679,10 +922,18 @@
     "contract_harm": 22
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 398,
+    "categories": {
+     "C1": 20
+    },
+    "divergent": 55,
+    "naive_harm": 20,
+    "contract_harm": 20
+   },
    "same_generator": false,
    "reproduced": false
   },
@@ -699,12 +950,20 @@
     "contract_harm": 8
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
-   "reproduced": false
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 8
+    },
+    "divergent": 8,
+    "naive_harm": 8,
+    "contract_harm": 8
+   },
+   "same_generator": true,
+   "reproduced": true
   },
   {
    "instance_id": "sphinx-doc__sphinx-8721",
@@ -719,10 +978,16 @@
     "contract_harm": 71
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 400,
+    "categories": {},
+    "divergent": 58,
+    "naive_harm": 0,
+    "contract_harm": 0
+   },
    "same_generator": false,
    "reproduced": false
   },
@@ -740,12 +1005,21 @@
     "contract_harm": 17
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
-   "reproduced": false
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 17,
+     "C2-O": 14
+    },
+    "divergent": 31,
+    "naive_harm": 31,
+    "contract_harm": 17
+   },
+   "same_generator": true,
+   "reproduced": true
   },
   {
    "instance_id": "sympy__sympy-11618",
@@ -760,10 +1034,18 @@
     "contract_harm": 28
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 200,
+    "categories": {
+     "C1": 20
+    },
+    "divergent": 20,
+    "naive_harm": 20,
+    "contract_harm": 20
+   },
    "same_generator": false,
    "reproduced": false
   },
@@ -780,12 +1062,20 @@
     "contract_harm": 79
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
-   "reproduced": false
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 200,
+    "categories": {
+     "C1": 79
+    },
+    "divergent": 80,
+    "naive_harm": 79,
+    "contract_harm": 79
+   },
+   "same_generator": true,
+   "reproduced": true
   },
   {
    "instance_id": "sympy__sympy-13091",
@@ -800,12 +1090,20 @@
     "contract_harm": 22
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
-   "reproduced": false
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 22
+    },
+    "divergent": 22,
+    "naive_harm": 22,
+    "contract_harm": 22
+   },
+   "same_generator": true,
+   "reproduced": true
   },
   {
    "instance_id": "sympy__sympy-13615",
@@ -820,10 +1118,18 @@
     "contract_harm": 50
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 9
+    },
+    "divergent": 75,
+    "naive_harm": 9,
+    "contract_harm": 9
+   },
    "same_generator": false,
    "reproduced": false
   },
@@ -840,12 +1146,20 @@
     "contract_harm": 6
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
-   "reproduced": false
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 6
+    },
+    "divergent": 29,
+    "naive_harm": 6,
+    "contract_harm": 6
+   },
+   "same_generator": true,
+   "reproduced": true
   },
   {
    "instance_id": "sympy__sympy-13974",
@@ -860,12 +1174,20 @@
     "contract_harm": 5
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
-   "reproduced": false
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 5
+    },
+    "divergent": 16,
+    "naive_harm": 5,
+    "contract_harm": 5
+   },
+   "same_generator": true,
+   "reproduced": true
   },
   {
    "instance_id": "sympy__sympy-15599",
@@ -880,12 +1202,20 @@
     "contract_harm": 5
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
-   "reproduced": false
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 5
+    },
+    "divergent": 42,
+    "naive_harm": 5,
+    "contract_harm": 5
+   },
+   "same_generator": true,
+   "reproduced": true
   },
   {
    "instance_id": "sympy__sympy-15875",
@@ -900,12 +1230,20 @@
     "contract_harm": 11
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
-   "reproduced": false
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 11
+    },
+    "divergent": 11,
+    "naive_harm": 11,
+    "contract_harm": 11
+   },
+   "same_generator": true,
+   "reproduced": true
   },
   {
    "instance_id": "sympy__sympy-16450",
@@ -920,10 +1258,16 @@
     "contract_harm": 1
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 332,
+    "categories": {},
+    "divergent": 3,
+    "naive_harm": 0,
+    "contract_harm": 0
+   },
    "same_generator": false,
    "reproduced": false
   },
@@ -940,10 +1284,18 @@
     "contract_harm": 10
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 400,
+    "categories": {
+     "C2-D": 9
+    },
+    "divergent": 9,
+    "naive_harm": 9,
+    "contract_harm": 9
+   },
    "same_generator": false,
    "reproduced": false
   },
@@ -960,12 +1312,20 @@
     "contract_harm": 24
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
-   "reproduced": false
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 24
+    },
+    "divergent": 42,
+    "naive_harm": 24,
+    "contract_harm": 24
+   },
+   "same_generator": true,
+   "reproduced": true
   },
   {
    "instance_id": "sympy__sympy-18189",
@@ -980,11 +1340,19 @@
     "contract_harm": 19
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 368,
+    "categories": {
+     "C1": 16
+    },
+    "divergent": 46,
+    "naive_harm": 16,
+    "contract_harm": 16
+   },
+   "same_generator": true,
    "reproduced": false
   },
   {
@@ -1000,12 +1368,20 @@
     "contract_harm": 19
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
-   "reproduced": false
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 19
+    },
+    "divergent": 19,
+    "naive_harm": 19,
+    "contract_harm": 19
+   },
+   "same_generator": true,
+   "reproduced": true
   },
   {
    "instance_id": "sympy__sympy-21612",
@@ -1020,12 +1396,20 @@
     "contract_harm": 15
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
-   "reproduced": false
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 15
+    },
+    "divergent": 52,
+    "naive_harm": 15,
+    "contract_harm": 15
+   },
+   "same_generator": true,
+   "reproduced": true
   },
   {
    "instance_id": "sympy__sympy-22080",
@@ -1040,10 +1424,18 @@
     "contract_harm": 22
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 33
+    },
+    "divergent": 50,
+    "naive_harm": 33,
+    "contract_harm": 33
+   },
    "same_generator": false,
    "reproduced": false
   },
@@ -1060,12 +1452,20 @@
     "contract_harm": 6
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
-   "reproduced": false
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 6
+    },
+    "divergent": 6,
+    "naive_harm": 6,
+    "contract_harm": 6
+   },
+   "same_generator": true,
+   "reproduced": true
   },
   {
    "instance_id": "sympy__sympy-24066",
@@ -1080,12 +1480,20 @@
     "contract_harm": 17
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
-   "reproduced": false
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 200,
+    "categories": {
+     "C1": 17
+    },
+    "divergent": 17,
+    "naive_harm": 17,
+    "contract_harm": 17
+   },
+   "same_generator": true,
+   "reproduced": true
   },
   {
    "instance_id": "sympy__sympy-24443",
@@ -1100,12 +1508,20 @@
     "contract_harm": 21
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
-   "reproduced": false
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 21
+    },
+    "divergent": 22,
+    "naive_harm": 21,
+    "contract_harm": 21
+   },
+   "same_generator": true,
+   "reproduced": true
   },
   {
    "instance_id": "sympy__sympy-24562",
@@ -1121,12 +1537,21 @@
     "contract_harm": 13
    },
    "cohort_contract_regression": true,
-   "captured": false,
-   "rerun_status": null,
-   "same_target": false,
-   "rerun_summary": null,
-   "same_generator": false,
-   "reproduced": false
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 400,
+    "categories": {
+     "C2-O": 6,
+     "C1": 13
+    },
+    "divergent": 29,
+    "naive_harm": 19,
+    "contract_harm": 13
+   },
+   "same_generator": true,
+   "reproduced": true
   }
  ]
 }

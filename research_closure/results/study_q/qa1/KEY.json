@@ -38,5 +38,1197 @@
   "source": "G2",
   "i": 79,
   "category": "C1"
+ },
+ {
+  "id": "e39d28794e72",
+  "instance_id": "astropy__astropy-14096",
+  "sha": "bdb1d023f6aff9133249eb4699bae6895f743609c862393f11ce52c1f9e34ba3",
+  "source": "G2",
+  "i": 50,
+  "category": "C1"
+ },
+ {
+  "id": "257674f9947a",
+  "instance_id": "astropy__astropy-14096",
+  "sha": "bdb1d023f6aff9133249eb4699bae6895f743609c862393f11ce52c1f9e34ba3",
+  "source": "G2",
+  "i": 125,
+  "category": "C1"
+ },
+ {
+  "id": "59f6a77c05c8",
+  "instance_id": "astropy__astropy-14096",
+  "sha": "bdb1d023f6aff9133249eb4699bae6895f743609c862393f11ce52c1f9e34ba3",
+  "source": "G2",
+  "i": 101,
+  "category": "C1"
+ },
+ {
+  "id": "cf90d72138cd",
+  "instance_id": "astropy__astropy-14096",
+  "sha": "bdb1d023f6aff9133249eb4699bae6895f743609c862393f11ce52c1f9e34ba3",
+  "source": "G2",
+  "i": 174,
+  "category": "C1"
+ },
+ {
+  "id": "c442b975e0be",
+  "instance_id": "astropy__astropy-14096",
+  "sha": "bdb1d023f6aff9133249eb4699bae6895f743609c862393f11ce52c1f9e34ba3",
+  "source": "G2",
+  "i": 199,
+  "category": "C1"
+ },
+ {
+  "id": "7f5c23b7476d",
+  "instance_id": "astropy__astropy-7671",
+  "sha": "8f382d13f501ffc31d32bedfd435f33fb2fb880d0983ddd08996213caf6c342f",
+  "source": "G2",
+  "i": 143,
+  "category": "C1"
+ },
+ {
+  "id": "0ee3e2b25163",
+  "instance_id": "astropy__astropy-7671",
+  "sha": "8f382d13f501ffc31d32bedfd435f33fb2fb880d0983ddd08996213caf6c342f",
+  "source": "G2",
+  "i": 174,
+  "category": "C1"
+ },
+ {
+  "id": "f0e7dd638f2c",
+  "instance_id": "astropy__astropy-7671",
+  "sha": "8f382d13f501ffc31d32bedfd435f33fb2fb880d0983ddd08996213caf6c342f",
+  "source": "G2",
+  "i": 172,
+  "category": "C1"
+ },
+ {
+  "id": "fe1895b55d96",
+  "instance_id": "astropy__astropy-7671",
+  "sha": "8f382d13f501ffc31d32bedfd435f33fb2fb880d0983ddd08996213caf6c342f",
+  "source": "G2",
+  "i": 178,
+  "category": "C1"
+ },
+ {
+  "id": "e1057210e7c4",
+  "instance_id": "astropy__astropy-7671",
+  "sha": "8f382d13f501ffc31d32bedfd435f33fb2fb880d0983ddd08996213caf6c342f",
+  "source": "G2",
+  "i": 27,
+  "category": "C1"
+ },
+ {
+  "id": "ee2f66469dc8",
+  "instance_id": "django__django-12209",
+  "sha": "c80c5f5779756de929d7bca5fac19371e2a639a3659b408ea5cd245488238291",
+  "source": "G2",
+  "i": 33,
+  "category": "C1"
+ },
+ {
+  "id": "9aeb0306beb7",
+  "instance_id": "django__django-12209",
+  "sha": "c80c5f5779756de929d7bca5fac19371e2a639a3659b408ea5cd245488238291",
+  "source": "G2",
+  "i": 2,
+  "category": "C1"
+ },
+ {
+  "id": "64163d75914a",
+  "instance_id": "django__django-12209",
+  "sha": "c80c5f5779756de929d7bca5fac19371e2a639a3659b408ea5cd245488238291",
+  "source": "G2",
+  "i": 98,
+  "category": "C1"
+ },
+ {
+  "id": "41bfa488176f",
+  "instance_id": "django__django-12209",
+  "sha": "c80c5f5779756de929d7bca5fac19371e2a639a3659b408ea5cd245488238291",
+  "source": "G2",
+  "i": 21,
+  "category": "C1"
+ },
+ {
+  "id": "9f3e90b3114c",
+  "instance_id": "django__django-12209",
+  "sha": "c80c5f5779756de929d7bca5fac19371e2a639a3659b408ea5cd245488238291",
+  "source": "G2",
+  "i": 138,
+  "category": "C1"
+ },
+ {
+  "id": "339e52d00cd8",
+  "instance_id": "django__django-12308",
+  "sha": "07d4cbdf26c0e8be559ca9d0e5f63290e33eec795e1e9a835a7c6ea87088bcf7",
+  "source": "G2",
+  "i": 91,
+  "category": "C1"
+ },
+ {
+  "id": "22beb090cb3c",
+  "instance_id": "django__django-12308",
+  "sha": "07d4cbdf26c0e8be559ca9d0e5f63290e33eec795e1e9a835a7c6ea87088bcf7",
+  "source": "G2",
+  "i": 85,
+  "category": "C1"
+ },
+ {
+  "id": "68c0f6a9e4ed",
+  "instance_id": "django__django-12308",
+  "sha": "07d4cbdf26c0e8be559ca9d0e5f63290e33eec795e1e9a835a7c6ea87088bcf7",
+  "source": "G2",
+  "i": 145,
+  "category": "C1"
+ },
+ {
+  "id": "eadd7b9de2fd",
+  "instance_id": "django__django-12308",
+  "sha": "07d4cbdf26c0e8be559ca9d0e5f63290e33eec795e1e9a835a7c6ea87088bcf7",
+  "source": "G2",
+  "i": 154,
+  "category": "C1"
+ },
+ {
+  "id": "5cdc1a779fd1",
+  "instance_id": "django__django-12308",
+  "sha": "07d4cbdf26c0e8be559ca9d0e5f63290e33eec795e1e9a835a7c6ea87088bcf7",
+  "source": "G2",
+  "i": 32,
+  "category": "C1"
+ },
+ {
+  "id": "9c5d5b11dd39",
+  "instance_id": "django__django-13315",
+  "sha": "56c79624bac092556986ffd3f1cbf8d22c636c12aea04ad8010b4376cc8886e4",
+  "source": "G2",
+  "i": 136,
+  "category": "C1"
+ },
+ {
+  "id": "188459789015",
+  "instance_id": "django__django-13315",
+  "sha": "56c79624bac092556986ffd3f1cbf8d22c636c12aea04ad8010b4376cc8886e4",
+  "source": "G2",
+  "i": 65,
+  "category": "C1"
+ },
+ {
+  "id": "24744491854d",
+  "instance_id": "django__django-13315",
+  "sha": "56c79624bac092556986ffd3f1cbf8d22c636c12aea04ad8010b4376cc8886e4",
+  "source": "G2",
+  "i": 94,
+  "category": "C1"
+ },
+ {
+  "id": "7ff18c89dd0d",
+  "instance_id": "django__django-13315",
+  "sha": "56c79624bac092556986ffd3f1cbf8d22c636c12aea04ad8010b4376cc8886e4",
+  "source": "G2",
+  "i": 143,
+  "category": "C1"
+ },
+ {
+  "id": "2b02d2a9c4e1",
+  "instance_id": "django__django-13315",
+  "sha": "56c79624bac092556986ffd3f1cbf8d22c636c12aea04ad8010b4376cc8886e4",
+  "source": "G2",
+  "i": 168,
+  "category": "C1"
+ },
+ {
+  "id": "e3f3114e5d43",
+  "instance_id": "django__django-13343",
+  "sha": "760399b8f077857bd929556a66234c2470ce955db08daf0c3814863504a76223",
+  "source": "G2",
+  "i": 189,
+  "category": "C1"
+ },
+ {
+  "id": "3d66aa076c1b",
+  "instance_id": "django__django-13343",
+  "sha": "760399b8f077857bd929556a66234c2470ce955db08daf0c3814863504a76223",
+  "source": "G2",
+  "i": 25,
+  "category": "C1"
+ },
+ {
+  "id": "93b600163050",
+  "instance_id": "django__django-13343",
+  "sha": "760399b8f077857bd929556a66234c2470ce955db08daf0c3814863504a76223",
+  "source": "G2",
+  "i": 79,
+  "category": "C1"
+ },
+ {
+  "id": "1989ea5f4097",
+  "instance_id": "django__django-13343",
+  "sha": "760399b8f077857bd929556a66234c2470ce955db08daf0c3814863504a76223",
+  "source": "G2",
+  "i": 127,
+  "category": "C1"
+ },
+ {
+  "id": "7c6c417f7de7",
+  "instance_id": "django__django-13343",
+  "sha": "760399b8f077857bd929556a66234c2470ce955db08daf0c3814863504a76223",
+  "source": "G2",
+  "i": 169,
+  "category": "C1"
+ },
+ {
+  "id": "45cf1c334d91",
+  "instance_id": "django__django-13401",
+  "sha": "45a6f4b524dfcad4c14e030fa32f6e7605e15e2eb4869bb70eaa44ec2dedc8af",
+  "source": "G2",
+  "i": 49,
+  "category": "C1"
+ },
+ {
+  "id": "d541553cfabb",
+  "instance_id": "django__django-13401",
+  "sha": "45a6f4b524dfcad4c14e030fa32f6e7605e15e2eb4869bb70eaa44ec2dedc8af",
+  "source": "G2",
+  "i": 46,
+  "category": "C1"
+ },
+ {
+  "id": "efc1d35a0113",
+  "instance_id": "django__django-13401",
+  "sha": "45a6f4b524dfcad4c14e030fa32f6e7605e15e2eb4869bb70eaa44ec2dedc8af",
+  "source": "G2",
+  "i": 172,
+  "category": "C1"
+ },
+ {
+  "id": "d628409536ff",
+  "instance_id": "django__django-13401",
+  "sha": "45a6f4b524dfcad4c14e030fa32f6e7605e15e2eb4869bb70eaa44ec2dedc8af",
+  "source": "G2",
+  "i": 6,
+  "category": "C1"
+ },
+ {
+  "id": "8569fb07d219",
+  "instance_id": "django__django-13401",
+  "sha": "45a6f4b524dfcad4c14e030fa32f6e7605e15e2eb4869bb70eaa44ec2dedc8af",
+  "source": "G2",
+  "i": 104,
+  "category": "C1"
+ },
+ {
+  "id": "3a53a1f0976d",
+  "instance_id": "django__django-16493",
+  "sha": "df925ff3bf32f3cbbbc7a384160005fc29e5554ce90d92871f0c2e3962bc56b5",
+  "source": "G2",
+  "i": 36,
+  "category": "C1"
+ },
+ {
+  "id": "74be6caee38f",
+  "instance_id": "django__django-16493",
+  "sha": "df925ff3bf32f3cbbbc7a384160005fc29e5554ce90d92871f0c2e3962bc56b5",
+  "source": "G2",
+  "i": 8,
+  "category": "C1"
+ },
+ {
+  "id": "2da792c8814d",
+  "instance_id": "django__django-16493",
+  "sha": "df925ff3bf32f3cbbbc7a384160005fc29e5554ce90d92871f0c2e3962bc56b5",
+  "source": "G2",
+  "i": 185,
+  "category": "C1"
+ },
+ {
+  "id": "def0fd26b97d",
+  "instance_id": "django__django-16493",
+  "sha": "df925ff3bf32f3cbbbc7a384160005fc29e5554ce90d92871f0c2e3962bc56b5",
+  "source": "G2",
+  "i": 4,
+  "category": "C1"
+ },
+ {
+  "id": "6aaa5d33108e",
+  "instance_id": "django__django-16493",
+  "sha": "df925ff3bf32f3cbbbc7a384160005fc29e5554ce90d92871f0c2e3962bc56b5",
+  "source": "G2",
+  "i": 195,
+  "category": "C1"
+ },
+ {
+  "id": "44212104acbc",
+  "instance_id": "django__django-16661",
+  "sha": "fc8540a35e1fe9c44b044822f6381968d176e8897fdb5c23632d9a0f4c9a2d32",
+  "source": "G2",
+  "i": 184,
+  "category": "C1"
+ },
+ {
+  "id": "9f363be138a7",
+  "instance_id": "django__django-16661",
+  "sha": "fc8540a35e1fe9c44b044822f6381968d176e8897fdb5c23632d9a0f4c9a2d32",
+  "source": "G2",
+  "i": 196,
+  "category": "C1"
+ },
+ {
+  "id": "2b5ed5511e0e",
+  "instance_id": "django__django-16661",
+  "sha": "fc8540a35e1fe9c44b044822f6381968d176e8897fdb5c23632d9a0f4c9a2d32",
+  "source": "G2",
+  "i": 0,
+  "category": "C1"
+ },
+ {
+  "id": "bfc15bdfc567",
+  "instance_id": "django__django-16661",
+  "sha": "fc8540a35e1fe9c44b044822f6381968d176e8897fdb5c23632d9a0f4c9a2d32",
+  "source": "G2",
+  "i": 134,
+  "category": "C1"
+ },
+ {
+  "id": "ce74791ff673",
+  "instance_id": "matplotlib__matplotlib-24970",
+  "sha": "6e1ef0c28f70ff6112759f35877b0d742d74fc4a32de33df13bdd104a771d910",
+  "source": "G2",
+  "i": 70,
+  "category": "C1"
+ },
+ {
+  "id": "8effb3c8f07c",
+  "instance_id": "matplotlib__matplotlib-24970",
+  "sha": "6e1ef0c28f70ff6112759f35877b0d742d74fc4a32de33df13bdd104a771d910",
+  "source": "G2",
+  "i": 159,
+  "category": "C1"
+ },
+ {
+  "id": "4ba09639a004",
+  "instance_id": "matplotlib__matplotlib-24970",
+  "sha": "6e1ef0c28f70ff6112759f35877b0d742d74fc4a32de33df13bdd104a771d910",
+  "source": "G2",
+  "i": 114,
+  "category": "C1"
+ },
+ {
+  "id": "6d72eec6f98c",
+  "instance_id": "matplotlib__matplotlib-24970",
+  "sha": "6e1ef0c28f70ff6112759f35877b0d742d74fc4a32de33df13bdd104a771d910",
+  "source": "G2",
+  "i": 151,
+  "category": "C1"
+ },
+ {
+  "id": "0a0d1673cc83",
+  "instance_id": "matplotlib__matplotlib-24970",
+  "sha": "6e1ef0c28f70ff6112759f35877b0d742d74fc4a32de33df13bdd104a771d910",
+  "source": "G2",
+  "i": 97,
+  "category": "C1"
+ },
+ {
+  "id": "344dde85a96d",
+  "instance_id": "pydata__xarray-3993",
+  "sha": "18cf005de043003b2870f36bbdc0dcaddefedfd7720719d001929c9889a32f04",
+  "source": "G0",
+  "i": 79,
+  "category": "C1"
+ },
+ {
+  "id": "569769e50f48",
+  "instance_id": "pydata__xarray-3993",
+  "sha": "18cf005de043003b2870f36bbdc0dcaddefedfd7720719d001929c9889a32f04",
+  "source": "G0",
+  "i": 180,
+  "category": "C1"
+ },
+ {
+  "id": "4c21aa86a7d5",
+  "instance_id": "pydata__xarray-3993",
+  "sha": "18cf005de043003b2870f36bbdc0dcaddefedfd7720719d001929c9889a32f04",
+  "source": "G0",
+  "i": 89,
+  "category": "C1"
+ },
+ {
+  "id": "718749c2e79c",
+  "instance_id": "pydata__xarray-3993",
+  "sha": "18cf005de043003b2870f36bbdc0dcaddefedfd7720719d001929c9889a32f04",
+  "source": "G0",
+  "i": 140,
+  "category": "C1"
+ },
+ {
+  "id": "ce2456bf9fcf",
+  "instance_id": "pydata__xarray-3993",
+  "sha": "18cf005de043003b2870f36bbdc0dcaddefedfd7720719d001929c9889a32f04",
+  "source": "G0",
+  "i": 192,
+  "category": "C1"
+ },
+ {
+  "id": "fb2569e5b56f",
+  "instance_id": "pydata__xarray-4687",
+  "sha": "91c2e187d6440cb1a530fee121700770c04b3dbddaf4249b6db2a13461a1b40f",
+  "source": "G2",
+  "i": 117,
+  "category": "C1"
+ },
+ {
+  "id": "21a1fda47ba6",
+  "instance_id": "pydata__xarray-4687",
+  "sha": "91c2e187d6440cb1a530fee121700770c04b3dbddaf4249b6db2a13461a1b40f",
+  "source": "G2",
+  "i": 125,
+  "category": "C1"
+ },
+ {
+  "id": "42d14caeb9f4",
+  "instance_id": "pydata__xarray-4687",
+  "sha": "91c2e187d6440cb1a530fee121700770c04b3dbddaf4249b6db2a13461a1b40f",
+  "source": "G2",
+  "i": 131,
+  "category": "C1"
+ },
+ {
+  "id": "df374613b659",
+  "instance_id": "pydata__xarray-4687",
+  "sha": "91c2e187d6440cb1a530fee121700770c04b3dbddaf4249b6db2a13461a1b40f",
+  "source": "G2",
+  "i": 33,
+  "category": "C1"
+ },
+ {
+  "id": "fb27a8274bf5",
+  "instance_id": "pydata__xarray-4687",
+  "sha": "91c2e187d6440cb1a530fee121700770c04b3dbddaf4249b6db2a13461a1b40f",
+  "source": "G2",
+  "i": 137,
+  "category": "C1"
+ },
+ {
+  "id": "b165a75582d8",
+  "instance_id": "scikit-learn__scikit-learn-14894",
+  "sha": "e33eae1d12daac8f457385214a318175d8ee14896c7353aeec1d9d987e129988",
+  "source": "G2",
+  "i": 3,
+  "category": "C1"
+ },
+ {
+  "id": "6a896a424a7f",
+  "instance_id": "scikit-learn__scikit-learn-14894",
+  "sha": "e33eae1d12daac8f457385214a318175d8ee14896c7353aeec1d9d987e129988",
+  "source": "G2",
+  "i": 147,
+  "category": "C1"
+ },
+ {
+  "id": "0fae6c90c64c",
+  "instance_id": "scikit-learn__scikit-learn-14894",
+  "sha": "e33eae1d12daac8f457385214a318175d8ee14896c7353aeec1d9d987e129988",
+  "source": "G2",
+  "i": 37,
+  "category": "C1"
+ },
+ {
+  "id": "931f547636e2",
+  "instance_id": "scikit-learn__scikit-learn-14894",
+  "sha": "e33eae1d12daac8f457385214a318175d8ee14896c7353aeec1d9d987e129988",
+  "source": "G2",
+  "i": 73,
+  "category": "C1"
+ },
+ {
+  "id": "a81a52c6d7dc",
+  "instance_id": "scikit-learn__scikit-learn-14894",
+  "sha": "e33eae1d12daac8f457385214a318175d8ee14896c7353aeec1d9d987e129988",
+  "source": "G2",
+  "i": 131,
+  "category": "C1"
+ },
+ {
+  "id": "a7e7589a6a00",
+  "instance_id": "sphinx-doc__sphinx-10449",
+  "sha": "75f88cbb3305fb7471d4ca30480a526f573654625a87270e1a47f11d8749ee33",
+  "source": "G0",
+  "i": 82,
+  "category": "C1"
+ },
+ {
+  "id": "3206f5f8f0d6",
+  "instance_id": "sphinx-doc__sphinx-10449",
+  "sha": "75f88cbb3305fb7471d4ca30480a526f573654625a87270e1a47f11d8749ee33",
+  "source": "G0",
+  "i": 62,
+  "category": "C1"
+ },
+ {
+  "id": "4452ddff4a87",
+  "instance_id": "sphinx-doc__sphinx-10449",
+  "sha": "75f88cbb3305fb7471d4ca30480a526f573654625a87270e1a47f11d8749ee33",
+  "source": "G0",
+  "i": 23,
+  "category": "C1"
+ },
+ {
+  "id": "4626ac454a68",
+  "instance_id": "sphinx-doc__sphinx-10449",
+  "sha": "75f88cbb3305fb7471d4ca30480a526f573654625a87270e1a47f11d8749ee33",
+  "source": "G0",
+  "i": 108,
+  "category": "C1"
+ },
+ {
+  "id": "04a070b1a598",
+  "instance_id": "sphinx-doc__sphinx-10449",
+  "sha": "75f88cbb3305fb7471d4ca30480a526f573654625a87270e1a47f11d8749ee33",
+  "source": "G0",
+  "i": 43,
+  "category": "C1"
+ },
+ {
+  "id": "8e35241e8756",
+  "instance_id": "sphinx-doc__sphinx-7462",
+  "sha": "f29824c5ec30005155525abeadc08388dd17f53e494f7fe9055f9660d274065c",
+  "source": "G0",
+  "i": 76,
+  "category": "C1"
+ },
+ {
+  "id": "43ded979fec7",
+  "instance_id": "sphinx-doc__sphinx-7462",
+  "sha": "f29824c5ec30005155525abeadc08388dd17f53e494f7fe9055f9660d274065c",
+  "source": "G0",
+  "i": 49,
+  "category": "C1"
+ },
+ {
+  "id": "e7155335ffb0",
+  "instance_id": "sphinx-doc__sphinx-7462",
+  "sha": "f29824c5ec30005155525abeadc08388dd17f53e494f7fe9055f9660d274065c",
+  "source": "G0",
+  "i": 106,
+  "category": "C1"
+ },
+ {
+  "id": "4f9b9cdfd7bb",
+  "instance_id": "sphinx-doc__sphinx-7462",
+  "sha": "f29824c5ec30005155525abeadc08388dd17f53e494f7fe9055f9660d274065c",
+  "source": "G0",
+  "i": 72,
+  "category": "C1"
+ },
+ {
+  "id": "9933b9218f2e",
+  "instance_id": "sphinx-doc__sphinx-7462",
+  "sha": "f29824c5ec30005155525abeadc08388dd17f53e494f7fe9055f9660d274065c",
+  "source": "G0",
+  "i": 169,
+  "category": "C1"
+ },
+ {
+  "id": "cdf8a6330d3f",
+  "instance_id": "sphinx-doc__sphinx-8265",
+  "sha": "24c21d7252500b1c276451d736cbddd98a3fa928f347a1ccd6c3e4028e887a76",
+  "source": "G2",
+  "i": 66,
+  "category": "C1"
+ },
+ {
+  "id": "a00517dc4816",
+  "instance_id": "sphinx-doc__sphinx-8265",
+  "sha": "24c21d7252500b1c276451d736cbddd98a3fa928f347a1ccd6c3e4028e887a76",
+  "source": "G2",
+  "i": 142,
+  "category": "C1"
+ },
+ {
+  "id": "b2b7c9da156c",
+  "instance_id": "sphinx-doc__sphinx-8265",
+  "sha": "24c21d7252500b1c276451d736cbddd98a3fa928f347a1ccd6c3e4028e887a76",
+  "source": "G2",
+  "i": 46,
+  "category": "C1"
+ },
+ {
+  "id": "d82521c108e4",
+  "instance_id": "sphinx-doc__sphinx-8265",
+  "sha": "24c21d7252500b1c276451d736cbddd98a3fa928f347a1ccd6c3e4028e887a76",
+  "source": "G2",
+  "i": 12,
+  "category": "C1"
+ },
+ {
+  "id": "c2be9590239b",
+  "instance_id": "sphinx-doc__sphinx-8265",
+  "sha": "24c21d7252500b1c276451d736cbddd98a3fa928f347a1ccd6c3e4028e887a76",
+  "source": "G2",
+  "i": 26,
+  "category": "C1"
+ },
+ {
+  "id": "e7c322a13674",
+  "instance_id": "sphinx-doc__sphinx-9711",
+  "sha": "9d9687ec0951f5529697879c6eb1fd98d7002c56581cb0791afcf29b7dd1de4d",
+  "source": "G2",
+  "i": 135,
+  "category": "C1"
+ },
+ {
+  "id": "4bb1a13d4b66",
+  "instance_id": "sphinx-doc__sphinx-9711",
+  "sha": "9d9687ec0951f5529697879c6eb1fd98d7002c56581cb0791afcf29b7dd1de4d",
+  "source": "G2",
+  "i": 17,
+  "category": "C1"
+ },
+ {
+  "id": "6824d62a6d93",
+  "instance_id": "sphinx-doc__sphinx-9711",
+  "sha": "9d9687ec0951f5529697879c6eb1fd98d7002c56581cb0791afcf29b7dd1de4d",
+  "source": "G2",
+  "i": 37,
+  "category": "C1"
+ },
+ {
+  "id": "bdc085740c5d",
+  "instance_id": "sphinx-doc__sphinx-9711",
+  "sha": "9d9687ec0951f5529697879c6eb1fd98d7002c56581cb0791afcf29b7dd1de4d",
+  "source": "G2",
+  "i": 47,
+  "category": "C1"
+ },
+ {
+  "id": "2c1225ce8f60",
+  "instance_id": "sphinx-doc__sphinx-9711",
+  "sha": "9d9687ec0951f5529697879c6eb1fd98d7002c56581cb0791afcf29b7dd1de4d",
+  "source": "G2",
+  "i": 143,
+  "category": "C1"
+ },
+ {
+  "id": "40d4fae4f1e4",
+  "instance_id": "sympy__sympy-12096",
+  "sha": "d33db78c31cef3f6a3a2cd1752d9e8ab1da43b940cc0cfcb36276ff32e6a6a0d",
+  "source": "G2",
+  "i": 90,
+  "category": "C1"
+ },
+ {
+  "id": "723f3ac62311",
+  "instance_id": "sympy__sympy-12096",
+  "sha": "d33db78c31cef3f6a3a2cd1752d9e8ab1da43b940cc0cfcb36276ff32e6a6a0d",
+  "source": "G2",
+  "i": 141,
+  "category": "C1"
+ },
+ {
+  "id": "af2f8f06578b",
+  "instance_id": "sympy__sympy-12096",
+  "sha": "d33db78c31cef3f6a3a2cd1752d9e8ab1da43b940cc0cfcb36276ff32e6a6a0d",
+  "source": "G2",
+  "i": 41,
+  "category": "C1"
+ },
+ {
+  "id": "c5eee3036827",
+  "instance_id": "sympy__sympy-12096",
+  "sha": "d33db78c31cef3f6a3a2cd1752d9e8ab1da43b940cc0cfcb36276ff32e6a6a0d",
+  "source": "G2",
+  "i": 186,
+  "category": "C1"
+ },
+ {
+  "id": "73a5c561713c",
+  "instance_id": "sympy__sympy-12096",
+  "sha": "d33db78c31cef3f6a3a2cd1752d9e8ab1da43b940cc0cfcb36276ff32e6a6a0d",
+  "source": "G2",
+  "i": 158,
+  "category": "C1"
+ },
+ {
+  "id": "696fa8ffa257",
+  "instance_id": "sympy__sympy-13091",
+  "sha": "c34b682ccf2ac058e50e9bbd99bfb24cc996316568f111bed4ab26054ace84d5",
+  "source": "G2",
+  "i": 187,
+  "category": "C1"
+ },
+ {
+  "id": "de3ef0add28d",
+  "instance_id": "sympy__sympy-13091",
+  "sha": "c34b682ccf2ac058e50e9bbd99bfb24cc996316568f111bed4ab26054ace84d5",
+  "source": "G2",
+  "i": 130,
+  "category": "C1"
+ },
+ {
+  "id": "3f1f2d70ce6a",
+  "instance_id": "sympy__sympy-13091",
+  "sha": "c34b682ccf2ac058e50e9bbd99bfb24cc996316568f111bed4ab26054ace84d5",
+  "source": "G2",
+  "i": 24,
+  "category": "C1"
+ },
+ {
+  "id": "9cdf6bf91bcb",
+  "instance_id": "sympy__sympy-13091",
+  "sha": "c34b682ccf2ac058e50e9bbd99bfb24cc996316568f111bed4ab26054ace84d5",
+  "source": "G2",
+  "i": 165,
+  "category": "C1"
+ },
+ {
+  "id": "c18614933d31",
+  "instance_id": "sympy__sympy-13091",
+  "sha": "c34b682ccf2ac058e50e9bbd99bfb24cc996316568f111bed4ab26054ace84d5",
+  "source": "G2",
+  "i": 152,
+  "category": "C1"
+ },
+ {
+  "id": "5abe72465637",
+  "instance_id": "sympy__sympy-13877",
+  "sha": "10e282ce3cf3c4799fa4071049a04191869af9921a13d92964c3a00b7f30fa6c",
+  "source": "G2",
+  "i": 186,
+  "category": "C1"
+ },
+ {
+  "id": "76c52b75b4be",
+  "instance_id": "sympy__sympy-13877",
+  "sha": "10e282ce3cf3c4799fa4071049a04191869af9921a13d92964c3a00b7f30fa6c",
+  "source": "G2",
+  "i": 136,
+  "category": "C1"
+ },
+ {
+  "id": "bc358fbbc42e",
+  "instance_id": "sympy__sympy-13877",
+  "sha": "10e282ce3cf3c4799fa4071049a04191869af9921a13d92964c3a00b7f30fa6c",
+  "source": "G2",
+  "i": 124,
+  "category": "C1"
+ },
+ {
+  "id": "3378d99fcf3f",
+  "instance_id": "sympy__sympy-13877",
+  "sha": "10e282ce3cf3c4799fa4071049a04191869af9921a13d92964c3a00b7f30fa6c",
+  "source": "G2",
+  "i": 62,
+  "category": "C1"
+ },
+ {
+  "id": "ed001e998f60",
+  "instance_id": "sympy__sympy-13877",
+  "sha": "10e282ce3cf3c4799fa4071049a04191869af9921a13d92964c3a00b7f30fa6c",
+  "source": "G2",
+  "i": 34,
+  "category": "C1"
+ },
+ {
+  "id": "93aeb4b68ac4",
+  "instance_id": "sympy__sympy-13974",
+  "sha": "8069f38b7af71986fb5d46218d679367bde4945568e55d8c35a7a6ae903481a3",
+  "source": "G2",
+  "i": 99,
+  "category": "C1"
+ },
+ {
+  "id": "e1fc183e34d5",
+  "instance_id": "sympy__sympy-13974",
+  "sha": "8069f38b7af71986fb5d46218d679367bde4945568e55d8c35a7a6ae903481a3",
+  "source": "G2",
+  "i": 6,
+  "category": "C1"
+ },
+ {
+  "id": "a3de2593cac2",
+  "instance_id": "sympy__sympy-13974",
+  "sha": "8069f38b7af71986fb5d46218d679367bde4945568e55d8c35a7a6ae903481a3",
+  "source": "G2",
+  "i": 7,
+  "category": "C1"
+ },
+ {
+  "id": "d618a7a87f0b",
+  "instance_id": "sympy__sympy-13974",
+  "sha": "8069f38b7af71986fb5d46218d679367bde4945568e55d8c35a7a6ae903481a3",
+  "source": "G2",
+  "i": 19,
+  "category": "C1"
+ },
+ {
+  "id": "20a1cd1692bf",
+  "instance_id": "sympy__sympy-13974",
+  "sha": "8069f38b7af71986fb5d46218d679367bde4945568e55d8c35a7a6ae903481a3",
+  "source": "G2",
+  "i": 29,
+  "category": "C1"
+ },
+ {
+  "id": "4a9bb27a9447",
+  "instance_id": "sympy__sympy-15599",
+  "sha": "d14aee3a2084cadc7bdadd763dbf0d161c1c91a7d24badc51cd4e29029998d97",
+  "source": "G2",
+  "i": 79,
+  "category": "C1"
+ },
+ {
+  "id": "8d39227d6cc6",
+  "instance_id": "sympy__sympy-15599",
+  "sha": "d14aee3a2084cadc7bdadd763dbf0d161c1c91a7d24badc51cd4e29029998d97",
+  "source": "G2",
+  "i": 164,
+  "category": "C1"
+ },
+ {
+  "id": "825d98898eba",
+  "instance_id": "sympy__sympy-15599",
+  "sha": "d14aee3a2084cadc7bdadd763dbf0d161c1c91a7d24badc51cd4e29029998d97",
+  "source": "G2",
+  "i": 73,
+  "category": "C1"
+ },
+ {
+  "id": "1ee8bc782b8f",
+  "instance_id": "sympy__sympy-15599",
+  "sha": "d14aee3a2084cadc7bdadd763dbf0d161c1c91a7d24badc51cd4e29029998d97",
+  "source": "G2",
+  "i": 69,
+  "category": "C1"
+ },
+ {
+  "id": "66c21eebed94",
+  "instance_id": "sympy__sympy-15599",
+  "sha": "d14aee3a2084cadc7bdadd763dbf0d161c1c91a7d24badc51cd4e29029998d97",
+  "source": "G2",
+  "i": 56,
+  "category": "C1"
+ },
+ {
+  "id": "5268d3c41353",
+  "instance_id": "sympy__sympy-15875",
+  "sha": "5c8ce232089bce22fb667baf28ef8bbd216ff0d1d72c92a2d81d044d2846f0c0",
+  "source": "G2",
+  "i": 41,
+  "category": "C1"
+ },
+ {
+  "id": "0094d4ba8bd8",
+  "instance_id": "sympy__sympy-15875",
+  "sha": "5c8ce232089bce22fb667baf28ef8bbd216ff0d1d72c92a2d81d044d2846f0c0",
+  "source": "G2",
+  "i": 125,
+  "category": "C1"
+ },
+ {
+  "id": "fc9d85b83058",
+  "instance_id": "sympy__sympy-15875",
+  "sha": "5c8ce232089bce22fb667baf28ef8bbd216ff0d1d72c92a2d81d044d2846f0c0",
+  "source": "G2",
+  "i": 29,
+  "category": "C1"
+ },
+ {
+  "id": "954cdacecbe2",
+  "instance_id": "sympy__sympy-15875",
+  "sha": "5c8ce232089bce22fb667baf28ef8bbd216ff0d1d72c92a2d81d044d2846f0c0",
+  "source": "G2",
+  "i": 175,
+  "category": "C1"
+ },
+ {
+  "id": "f0d7c2cae9d4",
+  "instance_id": "sympy__sympy-15875",
+  "sha": "5c8ce232089bce22fb667baf28ef8bbd216ff0d1d72c92a2d81d044d2846f0c0",
+  "source": "G2",
+  "i": 199,
+  "category": "C1"
+ },
+ {
+  "id": "002bda9eb397",
+  "instance_id": "sympy__sympy-17318",
+  "sha": "85449b012d46c8499785838e51bc4b5d461abe5114070a0facec34afb11f696c",
+  "source": "G2",
+  "i": 82,
+  "category": "C1"
+ },
+ {
+  "id": "aabf993d9ef3",
+  "instance_id": "sympy__sympy-17318",
+  "sha": "85449b012d46c8499785838e51bc4b5d461abe5114070a0facec34afb11f696c",
+  "source": "G2",
+  "i": 122,
+  "category": "C1"
+ },
+ {
+  "id": "a919914434ae",
+  "instance_id": "sympy__sympy-17318",
+  "sha": "85449b012d46c8499785838e51bc4b5d461abe5114070a0facec34afb11f696c",
+  "source": "G2",
+  "i": 136,
+  "category": "C1"
+ },
+ {
+  "id": "e6bea5c30c32",
+  "instance_id": "sympy__sympy-17318",
+  "sha": "85449b012d46c8499785838e51bc4b5d461abe5114070a0facec34afb11f696c",
+  "source": "G2",
+  "i": 52,
+  "category": "C1"
+ },
+ {
+  "id": "95915f4ddb1a",
+  "instance_id": "sympy__sympy-17318",
+  "sha": "85449b012d46c8499785838e51bc4b5d461abe5114070a0facec34afb11f696c",
+  "source": "G2",
+  "i": 92,
+  "category": "C1"
+ },
+ {
+  "id": "d2f7f0437ffa",
+  "instance_id": "sympy__sympy-19783",
+  "sha": "0b2992eaabcb9c16ca3899830f4b4ba66c57844260ab482caa37ba0fb07e7226",
+  "source": "G2",
+  "i": 98,
+  "category": "C1"
+ },
+ {
+  "id": "df67a6429f8d",
+  "instance_id": "sympy__sympy-19783",
+  "sha": "0b2992eaabcb9c16ca3899830f4b4ba66c57844260ab482caa37ba0fb07e7226",
+  "source": "G2",
+  "i": 178,
+  "category": "C1"
+ },
+ {
+  "id": "9f4a3c02e9ca",
+  "instance_id": "sympy__sympy-19783",
+  "sha": "0b2992eaabcb9c16ca3899830f4b4ba66c57844260ab482caa37ba0fb07e7226",
+  "source": "G2",
+  "i": 168,
+  "category": "C1"
+ },
+ {
+  "id": "5e294c6a3d75",
+  "instance_id": "sympy__sympy-19783",
+  "sha": "0b2992eaabcb9c16ca3899830f4b4ba66c57844260ab482caa37ba0fb07e7226",
+  "source": "G2",
+  "i": 12,
+  "category": "C1"
+ },
+ {
+  "id": "ee45e42d9daf",
+  "instance_id": "sympy__sympy-19783",
+  "sha": "0b2992eaabcb9c16ca3899830f4b4ba66c57844260ab482caa37ba0fb07e7226",
+  "source": "G2",
+  "i": 36,
+  "category": "C1"
+ },
+ {
+  "id": "4702ff30ad96",
+  "instance_id": "sympy__sympy-21612",
+  "sha": "ee69fbd55442ff0e549a7b6201dd774f28fa4b79af4bb190ddc230e871175e52",
+  "source": "G2",
+  "i": 64,
+  "category": "C1"
+ },
+ {
+  "id": "ba62cfb8e7a2",
+  "instance_id": "sympy__sympy-21612",
+  "sha": "ee69fbd55442ff0e549a7b6201dd774f28fa4b79af4bb190ddc230e871175e52",
+  "source": "G2",
+  "i": 111,
+  "category": "C1"
+ },
+ {
+  "id": "a0235f19b131",
+  "instance_id": "sympy__sympy-21612",
+  "sha": "ee69fbd55442ff0e549a7b6201dd774f28fa4b79af4bb190ddc230e871175e52",
+  "source": "G2",
+  "i": 79,
+  "category": "C1"
+ },
+ {
+  "id": "217234f1bc93",
+  "instance_id": "sympy__sympy-21612",
+  "sha": "ee69fbd55442ff0e549a7b6201dd774f28fa4b79af4bb190ddc230e871175e52",
+  "source": "G2",
+  "i": 148,
+  "category": "C1"
+ },
+ {
+  "id": "c897d022ad01",
+  "instance_id": "sympy__sympy-21612",
+  "sha": "ee69fbd55442ff0e549a7b6201dd774f28fa4b79af4bb190ddc230e871175e52",
+  "source": "G2",
+  "i": 32,
+  "category": "C1"
+ },
+ {
+  "id": "6c862291f7e0",
+  "instance_id": "sympy__sympy-23534",
+  "sha": "89058f8df3433a13547b0fc06a0f5448a46696263b0742aa2eeef5a421b9ad43",
+  "source": "G2",
+  "i": 134,
+  "category": "C1"
+ },
+ {
+  "id": "47625ddfdc96",
+  "instance_id": "sympy__sympy-23534",
+  "sha": "89058f8df3433a13547b0fc06a0f5448a46696263b0742aa2eeef5a421b9ad43",
+  "source": "G2",
+  "i": 60,
+  "category": "C1"
+ },
+ {
+  "id": "348d71757938",
+  "instance_id": "sympy__sympy-23534",
+  "sha": "89058f8df3433a13547b0fc06a0f5448a46696263b0742aa2eeef5a421b9ad43",
+  "source": "G2",
+  "i": 110,
+  "category": "C1"
+ },
+ {
+  "id": "795b19eca7af",
+  "instance_id": "sympy__sympy-23534",
+  "sha": "89058f8df3433a13547b0fc06a0f5448a46696263b0742aa2eeef5a421b9ad43",
+  "source": "G2",
+  "i": 56,
+  "category": "C1"
+ },
+ {
+  "id": "345bb3ed984f",
+  "instance_id": "sympy__sympy-23534",
+  "sha": "89058f8df3433a13547b0fc06a0f5448a46696263b0742aa2eeef5a421b9ad43",
+  "source": "G2",
+  "i": 116,
+  "category": "C1"
+ },
+ {
+  "id": "bd84052fa963",
+  "instance_id": "sympy__sympy-24066",
+  "sha": "d7a414c86503017f9202d97d992f540fc49944de1389a46e596e0ce1644e0959",
+  "source": "G2",
+  "i": 37,
+  "category": "C1"
+ },
+ {
+  "id": "e2f9ea0fafbd",
+  "instance_id": "sympy__sympy-24066",
+  "sha": "d7a414c86503017f9202d97d992f540fc49944de1389a46e596e0ce1644e0959",
+  "source": "G2",
+  "i": 134,
+  "category": "C1"
+ },
+ {
+  "id": "056223c821fa",
+  "instance_id": "sympy__sympy-24066",
+  "sha": "d7a414c86503017f9202d97d992f540fc49944de1389a46e596e0ce1644e0959",
+  "source": "G2",
+  "i": 48,
+  "category": "C1"
+ },
+ {
+  "id": "6174f4489d55",
+  "instance_id": "sympy__sympy-24066",
+  "sha": "d7a414c86503017f9202d97d992f540fc49944de1389a46e596e0ce1644e0959",
+  "source": "G2",
+  "i": 86,
+  "category": "C1"
+ },
+ {
+  "id": "9d099192c9f7",
+  "instance_id": "sympy__sympy-24066",
+  "sha": "d7a414c86503017f9202d97d992f540fc49944de1389a46e596e0ce1644e0959",
+  "source": "G2",
+  "i": 101,
+  "category": "C1"
+ },
+ {
+  "id": "54a181753f27",
+  "instance_id": "sympy__sympy-24443",
+  "sha": "23dee654510a1ae019510622a38719baeed6b6fcb320c0dbf2fdb654875e7f5a",
+  "source": "G2",
+  "i": 10,
+  "category": "C1"
+ },
+ {
+  "id": "c0e106507880",
+  "instance_id": "sympy__sympy-24443",
+  "sha": "23dee654510a1ae019510622a38719baeed6b6fcb320c0dbf2fdb654875e7f5a",
+  "source": "G2",
+  "i": 80,
+  "category": "C1"
+ },
+ {
+  "id": "262e983f259d",
+  "instance_id": "sympy__sympy-24443",
+  "sha": "23dee654510a1ae019510622a38719baeed6b6fcb320c0dbf2fdb654875e7f5a",
+  "source": "G2",
+  "i": 62,
+  "category": "C1"
+ },
+ {
+  "id": "9225f91644df",
+  "instance_id": "sympy__sympy-24443",
+  "sha": "23dee654510a1ae019510622a38719baeed6b6fcb320c0dbf2fdb654875e7f5a",
+  "source": "G2",
+  "i": 20,
+  "category": "C1"
+ },
+ {
+  "id": "4be2f232731b",
+  "instance_id": "sympy__sympy-24443",
+  "sha": "23dee654510a1ae019510622a38719baeed6b6fcb320c0dbf2fdb654875e7f5a",
+  "source": "G2",
+  "i": 162,
+  "category": "C1"
+ },
+ {
+  "id": "30fdd72fdfb5",
+  "instance_id": "sympy__sympy-24562",
+  "sha": "4bdcf6c19c09fb69bb68927fb6387d4daefe807436cb028c11b97f814c3e3b8c",
+  "source": "G2",
+  "i": 42,
+  "category": "C1"
+ },
+ {
+  "id": "314d2bf2a126",
+  "instance_id": "sympy__sympy-24562",
+  "sha": "4bdcf6c19c09fb69bb68927fb6387d4daefe807436cb028c11b97f814c3e3b8c",
+  "source": "G2",
+  "i": 20,
+  "category": "C1"
+ },
+ {
+  "id": "af2870667c53",
+  "instance_id": "sympy__sympy-24562",
+  "sha": "4bdcf6c19c09fb69bb68927fb6387d4daefe807436cb028c11b97f814c3e3b8c",
+  "source": "G2",
+  "i": 184,
+  "category": "C1"
+ },
+ {
+  "id": "c49bfe3ae265",
+  "instance_id": "sympy__sympy-24562",
+  "sha": "4bdcf6c19c09fb69bb68927fb6387d4daefe807436cb028c11b97f814c3e3b8c",
+  "source": "G2",
+  "i": 66,
+  "category": "C1"
+ },
+ {
+  "id": "998de8b19235",
+  "instance_id": "sympy__sympy-24562",
+  "sha": "4bdcf6c19c09fb69bb68927fb6387d4daefe807436cb028c11b97f814c3e3b8c",
+  "source": "G2",
+  "i": 178,
+  "category": "C1"
  }
 ]
