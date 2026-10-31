@@ -1,0 +1,772 @@
+[
+ {
+  "id": "002bda9eb397",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe ([1 + 3*I, -1, 9 + 9*I] vs [])"
+ },
+ {
+  "id": "0094d4ba8bd8",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (False vs None)"
+ },
+ {
+  "id": "04a070b1a598",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value (input passes a plain list where a docutils node is expected)"
+ },
+ {
+  "id": "056223c821fa",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value"
+ },
+ {
+  "id": "0a0d1673cc83",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe ((0, 0, 0, 0) vs (1, 2, 2, 2))"
+ },
+ {
+  "id": "0ee3e2b25163",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (False vs True)"
+ },
+ {
+  "id": "0fae6c90c64c",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value"
+ },
+ {
+  "id": "188459789015",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value (input is a mock model without _meta)"
+ },
+ {
+  "id": "1989ea5f4097",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (('file_field', 'django.db.models.FileFie vs ('file_field', 'django.db.models.FileFie)"
+ },
+ {
+  "id": "1ee8bc782b8f",
+  "code": "R",
+  "reason": "the two results are not equal in general (e.g. Mod(3*j,4) vs 3*Mod(j,4) at j=2 gives 2 vs 6): different value"
+ },
+ {
+  "id": "20a1cd1692bf",
+  "code": "B",
+  "reason": "same tensor-product power written two ways ((c*A x B)**n vs c**n * A**n x B**n): equal value, different form"
+ },
+ {
+  "id": "217234f1bc93",
+  "code": "R",
+  "reason": "'1/1/x' parses as 1/x while '1/(1/x)' is x: the printed expressions mean different things"
+ },
+ {
+  "id": "21a1fda47ba6",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (<xarray.DataArray (dim0: 4)>\narray([ 5.  vs <xarray.DataArray (dim0: 4)>\narray([ 5. )"
+ },
+ {
+  "id": "22beb090cb3c",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe ('' vs '[]')"
+ },
+ {
+  "id": "24744491854d",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value (input is a mock model without _meta)"
+ },
+ {
+  "id": "257674f9947a",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value"
+ },
+ {
+  "id": "262e983f259d",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (False vs True)"
+ },
+ {
+  "id": "2b02d2a9c4e1",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value (input is a mock model without _meta)"
+ },
+ {
+  "id": "2b5ed5511e0e",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (True vs False)"
+ },
+ {
+  "id": "2c1225ce8f60",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value"
+ },
+ {
+  "id": "2da792c8814d",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (('attachment', 'django.db.models.FileFie vs ('attachment', 'django.db.models.FileFie)"
+ },
+ {
+  "id": "30fdd72fdfb5",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value"
+ },
+ {
+  "id": "314d2bf2a126",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value"
+ },
+ {
+  "id": "3206f5f8f0d6",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value (input passes a plain list where a docutils node is expected)"
+ },
+ {
+  "id": "3378d99fcf3f",
+  "code": "B",
+  "reason": "reference returns an unsimplified expression that expands to 0 (checked with sympy); the patch returns 0: same value, different form"
+ },
+ {
+  "id": "339e52d00cd8",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe ('' vs '[]')"
+ },
+ {
+  "id": "344dde85a96d",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value"
+ },
+ {
+  "id": "345bb3ed984f",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe ((h,) vs h)"
+ },
+ {
+  "id": "348d71757938",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe ((h,) vs h)"
+ },
+ {
+  "id": "3a53a1f0976d",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe ((None, 'django.db.models.FileField', [], vs (None, 'django.db.models.FileField', [],)"
+ },
+ {
+  "id": "3d66aa076c1b",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe ((None, 'django.db.models.FileField', [], vs (None, 'django.db.models.FileField', [],)"
+ },
+ {
+  "id": "3f1f2d70ce6a",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (False vs NotImplemented)"
+ },
+ {
+  "id": "40d4fae4f1e4",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (0.641120008059867 vs None)"
+ },
+ {
+  "id": "41bfa488176f",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value"
+ },
+ {
+  "id": "42d14caeb9f4",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (<xarray.DataArray (dim0: 3, dim1: 2)>\nar vs <xarray.DataArray (dim0: 3, dim1: 2)>\nar)"
+ },
+ {
+  "id": "43ded979fec7",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe ([<desc_sig_punctuation: <#text: ']'>>] vs [<desc_sig_punctuation: <#text: '['>>, <)"
+ },
+ {
+  "id": "44212104acbc",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (True vs False)"
+ },
+ {
+  "id": "4452ddff4a87",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value (input passes a plain list where a docutils node is expected)"
+ },
+ {
+  "id": "45cf1c334d91",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value (field not attached to a model)"
+ },
+ {
+  "id": "4626ac454a68",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value (input passes a plain list where a docutils node is expected)"
+ },
+ {
+  "id": "4702ff30ad96",
+  "code": "B",
+  "reason": "only redundant parentheses around a power in the denominator; both strings parse to the same expression"
+ },
+ {
+  "id": "47625ddfdc96",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (((x, y, z),) vs (x, y, z))"
+ },
+ {
+  "id": "4a9bb27a9447",
+  "code": "R",
+  "reason": "the two results are not equal in general (e.g. Mod(3*j,4) vs 3*Mod(j,4) at j=2 gives 2 vs 6): different value"
+ },
+ {
+  "id": "4ba09639a004",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (array([[ 93,  93,  94,  94],\n       [  0 vs array([[ 93,  93,  94,  94],\n       [  1)"
+ },
+ {
+  "id": "4bb1a13d4b66",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value"
+ },
+ {
+  "id": "4be2f232731b",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (False vs True)"
+ },
+ {
+  "id": "4c21aa86a7d5",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value"
+ },
+ {
+  "id": "4f9b9cdfd7bb",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe ([<desc_sig_punctuation: <#text: ']'>>] vs [<desc_sig_punctuation: <#text: '['>>, <)"
+ },
+ {
+  "id": "5268d3c41353",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (False vs None)"
+ },
+ {
+  "id": "54a181753f27",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (False vs True)"
+ },
+ {
+  "id": "569769e50f48",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value"
+ },
+ {
+  "id": "59f6a77c05c8",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value"
+ },
+ {
+  "id": "5abe72465637",
+  "code": "B",
+  "reason": "reference returns an unsimplified expression that expands to 0 (checked with sympy); the patch returns 0: same value, different form"
+ },
+ {
+  "id": "5cdc1a779fd1",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe ('' vs '\"\"')"
+ },
+ {
+  "id": "5e294c6a3d75",
+  "code": "B",
+  "reason": "Dagger(X)*I and Dagger(X) are equal (I is the identity operator): only the simplified form differs"
+ },
+ {
+  "id": "6174f4489d55",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value"
+ },
+ {
+  "id": "64163d75914a",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (False vs True)"
+ },
+ {
+  "id": "66c21eebed94",
+  "code": "R",
+  "reason": "the two results are not equal in general (e.g. Mod(3*j,4) vs 3*Mod(j,4) at j=2 gives 2 vs 6): different value"
+ },
+ {
+  "id": "6824d62a6d93",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value"
+ },
+ {
+  "id": "68c0f6a9e4ed",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe ('False' vs 'false')"
+ },
+ {
+  "id": "696fa8ffa257",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (False vs NotImplemented)"
+ },
+ {
+  "id": "6a896a424a7f",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value"
+ },
+ {
+  "id": "6aaa5d33108e",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe ((None, 'django.db.models.FileField', [], vs (None, 'django.db.models.FileField', [],)"
+ },
+ {
+  "id": "6c862291f7e0",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (((a, b, c),) vs (a, b, c))"
+ },
+ {
+  "id": "6d72eec6f98c",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe ((0, 0, 0, 0) vs (1, 2, 2, 2))"
+ },
+ {
+  "id": "718749c2e79c",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value"
+ },
+ {
+  "id": "723f3ac62311",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (1.34147098480789650487565722869476303458 vs None)"
+ },
+ {
+  "id": "73a5c561713c",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (1.64285714285714279370154144999105483293 vs None)"
+ },
+ {
+  "id": "74be6caee38f",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe ((None, 'django.db.models.FileField', [], vs (None, 'django.db.models.FileField', [],)"
+ },
+ {
+  "id": "76c4dcc1578c",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (['<html>\\n <head>\\n  <meta charset=\"utf- vs ['<html>\\n <head>\\n  <meta charset=\"utf-)"
+ },
+ {
+  "id": "76c52b75b4be",
+  "code": "B",
+  "reason": "reference returns an unsimplified expression that expands to 0 (checked with sympy); the patch returns 0: same value, different form"
+ },
+ {
+  "id": "795b19eca7af",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe ((z,) vs z)"
+ },
+ {
+  "id": "7c6c417f7de7",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (('doc', 'django.db.models.FileField', [] vs ('doc', 'django.db.models.FileField', [])"
+ },
+ {
+  "id": "7f5c23b7476d",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (False vs True)"
+ },
+ {
+  "id": "7ff18c89dd0d",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value (input is a mock model without _meta)"
+ },
+ {
+  "id": "825d98898eba",
+  "code": "R",
+  "reason": "the two results are not equal in general (e.g. Mod(3*j,4) vs 3*Mod(j,4) at j=2 gives 2 vs 6): different value"
+ },
+ {
+  "id": "8569fb07d219",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value (field not attached to a model)"
+ },
+ {
+  "id": "89b654df43aa",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (['<html>\\n <head>\\n  <meta charset=\"utf- vs ['<html>\\n <head>\\n  <meta charset=\"utf-)"
+ },
+ {
+  "id": "8d39227d6cc6",
+  "code": "R",
+  "reason": "the two results are not equal in general (e.g. Mod(3*j,4) vs 3*Mod(j,4) at j=2 gives 2 vs 6): different value"
+ },
+ {
+  "id": "8e35241e8756",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe ([<desc_sig_punctuation: <#text: ']'>>] vs [<desc_sig_punctuation: <#text: '['>>, <)"
+ },
+ {
+  "id": "8effb3c8f07c",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (array([[[  0,   0,   0,   0],\n        [1 vs array([[[  1,   2,   2,   2],\n        [1)"
+ },
+ {
+  "id": "9225f91644df",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (False vs True)"
+ },
+ {
+  "id": "931f547636e2",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value"
+ },
+ {
+  "id": "93aeb4b68ac4",
+  "code": "B",
+  "reason": "same tensor-product power written two ways ((c*A x B)**n vs c**n * A**n x B**n): equal value, different form"
+ },
+ {
+  "id": "93b600163050",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe ((None, 'django.db.models.FileField', [], vs (None, 'django.db.models.FileField', [],)"
+ },
+ {
+  "id": "954cdacecbe2",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (False vs None)"
+ },
+ {
+  "id": "95915f4ddb1a",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe ([2 + 2*I, -1, 10 + 10*I] vs [])"
+ },
+ {
+  "id": "9933b9218f2e",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe ([<desc_sig_punctuation: <#text: ']'>>] vs [<desc_sig_punctuation: <#text: '['>>, <)"
+ },
+ {
+  "id": "998de8b19235",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value"
+ },
+ {
+  "id": "9aeb0306beb7",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (False vs True)"
+ },
+ {
+  "id": "9c5d5b11dd39",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value (input is a mock model without _meta)"
+ },
+ {
+  "id": "9cdf6bf91bcb",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (False vs NotImplemented)"
+ },
+ {
+  "id": "9d099192c9f7",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value"
+ },
+ {
+  "id": "9d9bddbf54ea",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (['<html>\\n <head>\\n  <meta charset=\"utf- vs ['<html>\\n <head>\\n  <meta charset=\"utf-)"
+ },
+ {
+  "id": "9f363be138a7",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (True vs False)"
+ },
+ {
+  "id": "9f3e90b3114c",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (False vs True)"
+ },
+ {
+  "id": "9f4a3c02e9ca",
+  "code": "B",
+  "reason": "Dagger(X)*I and Dagger(X) are equal (I is the identity operator): only the simplified form differs"
+ },
+ {
+  "id": "a00517dc4816",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe ('a[()]' vs 'a[]')"
+ },
+ {
+  "id": "a0235f19b131",
+  "code": "B",
+  "reason": "only redundant parentheses around a power in the denominator; both strings parse to the same expression"
+ },
+ {
+  "id": "a3de2593cac2",
+  "code": "B",
+  "reason": "same tensor-product power written two ways ((c*A x B)**n vs c**n * A**n x B**n): equal value, different form"
+ },
+ {
+  "id": "a7e7589a6a00",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value (input passes a plain list where a docutils node is expected)"
+ },
+ {
+  "id": "a81a52c6d7dc",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value"
+ },
+ {
+  "id": "a919914434ae",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe ([2 + 3*I, 1, 10 + 15*I] vs [])"
+ },
+ {
+  "id": "aabf993d9ef3",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe ([1 + 3*I, 1, 10 + 15*I] vs [])"
+ },
+ {
+  "id": "af2870667c53",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value"
+ },
+ {
+  "id": "af2f8f06578b",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (1.50000000000000000000000000000000000000 vs None)"
+ },
+ {
+  "id": "b165a75582d8",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value"
+ },
+ {
+  "id": "b2af876cab66",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (['<html>\\n <head>\\n  <meta charset=\"utf- vs ['<html>\\n <head>\\n  <meta charset=\"utf-)"
+ },
+ {
+  "id": "b2b7c9da156c",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe ('a[()]' vs 'a[]')"
+ },
+ {
+  "id": "ba62cfb8e7a2",
+  "code": "B",
+  "reason": "only redundant parentheses around a power in the denominator; both strings parse to the same expression"
+ },
+ {
+  "id": "bc358fbbc42e",
+  "code": "B",
+  "reason": "reference returns an unsimplified expression that expands to 0 (checked with sympy); the patch returns 0: same value, different form"
+ },
+ {
+  "id": "bd84052fa963",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value"
+ },
+ {
+  "id": "bdc085740c5d",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value"
+ },
+ {
+  "id": "bfc15bdfc567",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (True vs False)"
+ },
+ {
+  "id": "c0e106507880",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (False vs True)"
+ },
+ {
+  "id": "c18614933d31",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (False vs NotImplemented)"
+ },
+ {
+  "id": "c2be9590239b",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe ('a[()]' vs 'a[]')"
+ },
+ {
+  "id": "c442b975e0be",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value"
+ },
+ {
+  "id": "c49bfe3ae265",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value"
+ },
+ {
+  "id": "c5eee3036827",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (-0.2568024953079282024503982029273174703 vs None)"
+ },
+ {
+  "id": "c897d022ad01",
+  "code": "B",
+  "reason": "only redundant parentheses around a power in the denominator; both strings parse to the same expression"
+ },
+ {
+  "id": "cdf8a6330d3f",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe ('a[()]' vs 'a[]')"
+ },
+ {
+  "id": "ce2456bf9fcf",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value"
+ },
+ {
+  "id": "ce74791ff673",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value"
+ },
+ {
+  "id": "cf90d72138cd",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value"
+ },
+ {
+  "id": "d2f7f0437ffa",
+  "code": "B",
+  "reason": "Dagger(X)*I and Dagger(X) are equal (I is the identity operator): only the simplified form differs"
+ },
+ {
+  "id": "d541553cfabb",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value (field not attached to a model)"
+ },
+ {
+  "id": "d618a7a87f0b",
+  "code": "B",
+  "reason": "same tensor-product power written two ways ((c*A x B)**n vs c**n * A**n x B**n): equal value, different form"
+ },
+ {
+  "id": "d628409536ff",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value (field not attached to a model)"
+ },
+ {
+  "id": "d82521c108e4",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe ('a[()]' vs 'a[]')"
+ },
+ {
+  "id": "de3ef0add28d",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (False vs NotImplemented)"
+ },
+ {
+  "id": "def0fd26b97d",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (('document', 'django.db.models.FileField vs ('document', 'django.db.models.FileField)"
+ },
+ {
+  "id": "df374613b659",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (<xarray.DataArray (dim0: 4)>\narray([  1, vs <xarray.DataArray (dim0: 4)>\narray([  1,)"
+ },
+ {
+  "id": "df67a6429f8d",
+  "code": "B",
+  "reason": "Dagger(X)*I and Dagger(X) are equal (I is the identity operator): only the simplified form differs"
+ },
+ {
+  "id": "e1057210e7c4",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (False vs True)"
+ },
+ {
+  "id": "e1fc183e34d5",
+  "code": "B",
+  "reason": "same tensor-product power written two ways ((c*A x B)**n vs c**n * A**n x B**n): equal value, different form"
+ },
+ {
+  "id": "e2f9ea0fafbd",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value"
+ },
+ {
+  "id": "e39d28794e72",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value"
+ },
+ {
+  "id": "e3f3114e5d43",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (('doc', 'django.db.models.FileField', [] vs ('doc', 'django.db.models.FileField', [])"
+ },
+ {
+  "id": "e421286ecba6",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (['<html>\\n <head>\\n  <meta charset=\"utf- vs ['<html>\\n <head>\\n  <meta charset=\"utf-)"
+ },
+ {
+  "id": "e6bea5c30c32",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe ([2 + 3*I, -1, 15 + 15*I] vs [])"
+ },
+ {
+  "id": "e7155335ffb0",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe ([<desc_sig_punctuation: <#text: ']'>>] vs [<desc_sig_punctuation: <#text: '['>>, <)"
+ },
+ {
+  "id": "e7c322a13674",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value"
+ },
+ {
+  "id": "eadd7b9de2fd",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe ('' vs '\"\"')"
+ },
+ {
+  "id": "ed001e998f60",
+  "code": "B",
+  "reason": "reference returns an unsimplified expression that expands to 0 (checked with sympy); the patch returns 0: same value, different form"
+ },
+ {
+  "id": "ee2f66469dc8",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (False vs True)"
+ },
+ {
+  "id": "ee45e42d9daf",
+  "code": "B",
+  "reason": "Dagger(X)*I and Dagger(X) are equal (I is the identity operator): only the simplified form differs"
+ },
+ {
+  "id": "efc1d35a0113",
+  "code": "R",
+  "reason": "the patch raises where the reference returns a value (field not attached to a model)"
+ },
+ {
+  "id": "f0d7c2cae9d4",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (False vs None)"
+ },
+ {
+  "id": "f0e7dd638f2c",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (False vs True)"
+ },
+ {
+  "id": "fb2569e5b56f",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (<xarray.Dataset>\nDimensions:  (x: 3)\nDim vs <xarray.Dataset>\nDimensions:  (x: 3)\nDim)"
+ },
+ {
+  "id": "fb27a8274bf5",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (<xarray.DataArray (dim0: 4)>\narray([ 4.1 vs <xarray.DataArray (dim0: 4)>\narray([ 4.1)"
+ },
+ {
+  "id": "fc9d85b83058",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (False vs None)"
+ },
+ {
+  "id": "fe1895b55d96",
+  "code": "R",
+  "reason": "different returned value or type that a caller can observe (False vs True)"
+ }
+]
