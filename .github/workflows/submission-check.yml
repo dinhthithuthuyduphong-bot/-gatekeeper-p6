@@ -1,0 +1,59 @@
+# Pre-submission checks (PAPER_TODO phase 5).  No model calls, 0 USD.
+#   repro:    fresh clone -> unit tests, theory checks equal to the committed ones, every quoted number recomputed,
+#             freeze of every cited study verified (Study P at its freeze commit).
+#   artifact: build the anonymous artifact, fail on any identifier, then run the same checks INSIDE the artifact (no .git).
+name: Gatekeeper submission check
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  repro:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: python -m unittest discover -s tests
+      - name: Theory checks reproduce the committed results exactly
+        run: |
+          python tools/theory_checks.py out_theory --reps 2000
+          python -c "import json,sys;a=json.load(open('out_theory/THEORY_CHECKS.json'));b=json.load(open('research_closure/results/theory/THEORY_CHECKS.json'));sys.exit(0 if a==b else 'theory checks differ from the committed results')"
+      - run: python tools/check_paper_numbers.py | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Freeze of every cited study
+        shell: bash
+        run: |
+          set -euo pipefail
+          for s in study_d study_e study_g study_h study_q; do python tools/freeze_study.py verify $s; done
+          git worktree add -q /tmp/p_freeze 6437ecf
+          (cd /tmp/p_freeze && python tools/freeze_study.py verify study_p)
+  artifact:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Build the anonymous artifact (fails on any identifier)
+        run: |
+          python tools/make_anonymous_artifact.py out_anon --owner "${{ github.repository_owner }}" | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Checks inside the artifact
+        shell: bash
+        working-directory: out_anon/gatekeeper-artifact
+        run: |
+          set -euo pipefail
+          test ! -d .git
+          python -m unittest discover -s tests
+          python tools/check_paper_numbers.py
+          for s in study_d study_e study_g study_h study_q; do python tools/freeze_study.py verify $s; done
+      - uses: actions/upload-artifact@v7
+        with:
+          name: ANONYMOUS_ARTIFACT
+          path: |
+            out_anon/gatekeeper-artifact.zip
+            out_anon/ANON_REPORT.json
+            out_anon/MANIFEST_SHA256.json

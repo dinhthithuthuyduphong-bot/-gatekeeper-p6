@@ -66,12 +66,19 @@ CLAIMS = [
      lambda: "family-wise\nfalse admission rate of our e-process is $%.2f$, against $%.2f$" % (TH()["C2_budget_per_cell_vs_per_scope"]["familywise_shared"],
                                                                                          TH()["C2_budget_per_cell_vs_per_scope"]["familywise_split"])),
     ("theory C9 draws", "=110$ clean draws", lambda: "=%d$ clean draws" % TH()["C9_harm_certificate"]["clean_draws_family16"]),
+    # abstract (main.tex)
+    ("abstract: plausible patches", "in $205$ plausible LLM patches", lambda: "in $%d$ plausible LLM patches" % PA()["PRIMARY"]["plausible"]),
+    ("abstract: census admits", "the census admitted all $16$ with high partial harm",
+     lambda: "the census admitted all $%s$ with high partial harm" % PA()["RQ4"]["census_only"]["admits_inadmissible"].split("/")[0]),
+    ("abstract: factor ~4 (Q2/Q4)", "changes by a factor of about four with its definition",
+     lambda: "changes by a factor of about %s with its definition" % {3: "three", 4: "four", 5: "five"}[round(QA()["Q2_divergent"]["share"] / QA()["Q4_contract_regression"]["share"])]),
 ]
 
 
 def main(argv):
     d = Path(argv[0]) if argv else ROOT / "docs/paper/latex/sections"
-    text = "\n".join(p.read_text() for p in sorted(d.glob("*.tex")))
+    files = sorted(d.glob("*.tex")) + ([d.parent / "main.tex"] if (d.parent / "main.tex").is_file() else [])
+    text = "\n".join(p.read_text() for p in files)
     flat = " ".join(text.split())
     bad = 0
     for label, quoted, fn in CLAIMS:
