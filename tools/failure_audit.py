@@ -13,13 +13,14 @@ import sys
 from pathlib import Path
 
 RULES = [
-    ("TOKEN_EXPIRED", r"ACCESS_TOKEN_EXPIRED|invalid authentication credentials", "Vertex OAuth token outlived (about 1 h) or not refreshed"),
+    ("TOKEN_EXPIRED", r"ACCESS_TOKEN_EXPIRED|invalid authentication credentials|HTTP 401", "Vertex OAuth token outlived (about 1 h) or not refreshed"),
     ("RATE_LIMIT_429", r"HTTP Error 429|HTTP 429:|\"code\": 429|RESOURCE_EXHAUSTED", "provider quota; retried with back-off where the client supports it"),
     ("UPSTREAM_HTTP_5XX", r"HTTP Error 5\d\d|Bad Gateway|Service Unavailable", "external service returned 5xx"),
     ("RUNNER_SHUTDOWN_143", r"received a shutdown signal|exit code 143", "runner killed (SIGTERM 143), e.g. a repository's code signalled the process group"),
     ("TIMEOUT_OR_CANCELLED", r"exceeded the maximum execution time|The operation was canceled|timed out", "job over its time limit or cancelled"),
     ("INPUT_VALIDATION", r"ids not in the frame|not Q-A1 targets|AssertionError|at most 256 jobs", "an input or a pre-registered expectation was rejected"),
-    ("STUDY_STATE_GUARD", r"is not FROZEN|status is 'DRAFT'|already applied|not documented in|amendment .* not applied|seed round is in the future", "a guard refused: study not frozen, amendment already applied, etc."),
+    ("STUDY_STATE_GUARD", r"is not FROZEN|status is 'DRAFT'|already applied|not documented in|amendment .* not applied|seed round is in the future|REFUSED:|amendments apply only to a FROZEN study|FROZEN FILES CHANGED", "a guard refused: study not frozen, amendment already applied, etc."),
+    ("RUNNER_INFRA", r"OCI runtime exec failed|No space left on device|lost communication with the server", "runner or container infrastructure failure"),
     ("UNIT_TESTS_FAILED", r"FAILED \((failures|errors)=|incorrectly imported from", "unit tests failed (often a stray copy of a test module at the repository root)"),
     ("DEPENDENCY_MISSING", r"ModuleNotFoundError|No module named|ImportError|cannot import name|pip', 'install|version .* was not found|exit code 127", "a module, package or tool was missing or failed to install"),
     ("GIT_PUSH_REJECTED", r"\[rejected\]|non-fast-forward|failed to push|Updates were rejected", "push raced with another commit"),
@@ -54,9 +55,9 @@ def failed_segment(lines):
     """Lines of the failing step only: after the last '##[group]Run' header before the first '##[error]', up to it."""
     err = next((i for i, l in enumerate(lines) if "##[error]" in l), len(lines))
     start = max((i for i, l in enumerate(lines[:err]) if l.startswith("##[group]Run")), default=max(0, err - 60))
-    seg = [l for l in lines[start:err + 1] if not l.startswith(("##[group]", "##[endgroup]")) and "\x1b[36;1m" not in l]
+    seg = [l for l in lines[start:err + 1] if not l.startswith(("##[group]", "##[endgroup]")) and "[36;1m" not in l]
     body = [l for l in seg if not l.startswith(("shell:", "env:", "  "))]
-    return body[-60:] or lines[max(0, err - 30):err + 1]
+    return body or lines[max(0, err - 30):err + 1]
 
 
 def classify(text):
@@ -67,7 +68,13 @@ def classify(text):
 
 
 def audit_run(repo, run):
-    jobs = json.loads(gh("repos/%s/actions/runs/%d/jobs?per_page=100" % (repo, run["id"]))).get("jobs") or []
+    jobs, page = [], 1
+    while True:                                                # matrix runs can have more than 100 jobs
+        batch = json.loads(gh("repos/%s/actions/runs/%d/jobs?per_page=100&page=%d" % (repo, run["id"], page))).get("jobs") or []
+        jobs += batch
+        if len(batch) < 100:
+            break
+        page += 1
     rec = {"run_id": run["id"], "workflow": run.get("name"), "created": run.get("created_at"), "sha": (run.get("head_sha") or "")[:7],
            "conclusion": run.get("conclusion"), "url": run.get("html_url"), "jobs_total": len(jobs), "failed_jobs": []}
     if not jobs:
