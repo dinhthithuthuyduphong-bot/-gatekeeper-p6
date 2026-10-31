@@ -64,14 +64,31 @@ Bảng này được suy ra từ ALIGNMENT_WITH_FSE (mục sau RQ5) và giao th�
 | Bác bỏ H0 của HQ1 (phần lớn khác biệt ngây thơ không phải hồi quy theo hợp đồng) | (a) patch plausible hiếm khi hồi quy trên đầu vào hợp lệ; (b) oracle ngây thơ phóng đại nhiều lần (Q5). Kết luận RQ5 được xác nhận trên dữ liệu độc lập |
 | Không bác bỏ, hoặc Q-G1 không đạt | Báo cáo mô tả; kết luận RQ5 chỉ là thăm dò, giới hạn ở dữ liệu của Study P |
 
-## 5. Việc còn mở ngoài Study Q
+## 5. Review lý thuyết của bài (song song, chi tiết ở [REVIEW_FSE](REVIEW_FSE.md))
+
+| Mục | Kết luận | Trạng thái |
+|---|---|---|
+| R1 STR và tiêu chí STR ≤ −θ | Nhất quán; cần đối chiếu quy ước loss với PDF | ⏳ đối chiếu |
+| R2 E-process + Ville, ngưỡng 1/α | Đúng | ✅ |
+| R3 Alpha ledger 6/(π²(k+1)²) | Đúng (đã kiểm bằng số) | ✅ |
+| R4 Định lý 4 (dịch chuyển bị chặn) | Cần sửa: hằng số là 2·TV | ⏳ trao đổi với tác giả |
+| R5 Định lý 7 (composition) | Cần sửa: STR của bản ghép ≤ 1 − θ | ⏳ trao đổi với tác giả |
+| R6 Số headline của bài | Projected, không trích như kết quả | ✅ đã ghi |
+| R7 "Gatekeeper mạnh hơn" | Không đứng được về công suất; thu hẹp lại | ✅ đã ghi |
+| R8 "Learned skills" | Thu hẹp thành "frozen code transformations" | ⏳ sửa bài |
+| R9 Câu SWE-bench 6,4 điểm | Gỡ, hoặc thay bằng kết quả Study Q | ⏳ chờ Q |
+| R10 Trích dẫn VERIFY | Chưa xác minh | ⏳ |
+| R11 Composition / retirement | Chỉ có demo | ✅ đã ghi giới hạn |
+| R12 Định nghĩa tác hại theo hợp đồng | Study Q đang kiểm định | 🔄 |
+
+## 6. Việc còn mở ngoài Study Q
 
 - B9: **HOLD**. Study J: **BLOCKED**.
 - Hai lưu ý toán về Định lý 4 (cận 2·TV) và Định lý 7 (composition) cần trao đổi với tác giả bản nháp.
 - Các trích dẫn đánh dấu VERIFY trong reading list, và trích dẫn "OpenAI 2024" cho SWE-bench Verified, cần kiểm tra lại.
 - Giới hạn cần ghi trong bài: một nửa số ca trong vùng của Study P đến từ bài tập của sinh viên; người chấm thứ hai ở RQ5 cùng họ model với model sinh patch.
 
-## 6. Nhật ký
+## 7. Nhật ký
 
 | Ngày (UTC) | Việc |
 |---|---|
@@ -80,3 +97,5 @@ Bảng này được suy ra từ ALIGNMENT_WITH_FSE (mục sau RQ5) và giao th�
 | 31/10/2026 08:21 | Đưa patch `study_q_stream_msg` lên main (`4898596`) |
 | 31/10/2026 08:29 | Smoke run #3 (3 instance): thành công |
 | 31/10/2026 08:33 | Che token Vertex (`206da51`); bắt đầu part 0 (run #4) |
+| 31/10/2026 08:35 | Thêm TRACKING_FSE.md (`9ea7356`) |
+| 31/10/2026 | Thêm REVIEW_FSE.md: review công thức, kiểm lại bằng số; part 0 vẫn đang chạy |
