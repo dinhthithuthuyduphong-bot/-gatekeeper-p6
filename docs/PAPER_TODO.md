@@ -119,6 +119,10 @@ Thứ tự viết nên đi từ phần chắc nhất tới phần khó nhất:
 
 ## Giai đoạn 6: sau khi nộp
 
+> **Trạng thái 31/10/2026: bài CHƯA nộp.** Đã chuẩn bị sẵn:
+> - 6.1: workflow `Gatekeeper submission snapshot` + `tools/snapshot_submission.py` (có test). Chạy ngay sau khi nộp, với venue và mã bài; nó lưu PDF, SHA-256 của PDF và artifact, commit, rồi gắn tag `submitted-<venue>-<mã>`.
+> - 6.2: mẫu [`paper/REVIEW_RESPONSE.md`](paper/REVIEW_RESPONSE.md) và 16 phản biện giả định có câu trả lời soạn sẵn [`paper/ANTICIPATED_REVIEWS.md`](paper/ANTICIPATED_REVIEWS.md).
+
 - [ ] **6.1 Lưu bản nộp** (PDF, commit hash của artifact) vào `docs/paper/submitted/`.
 - [ ] **6.2 Khi có phản biện:** mỗi ý kiến một dòng trong `docs/paper/REVIEW_RESPONSE.md`: ý kiến, đồng ý hay không, đã sửa ở đâu.
 

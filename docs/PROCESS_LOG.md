@@ -203,3 +203,8 @@ Mẫu cho mỗi mục:
 - **5.1, 5.3:** workflow `Gatekeeper submission check` gồm job `repro` và `artifact`; run 41212215560 pass cả hai. Bộ kiểm số mở rộng sang Abstract (19 con số).
 - **5.4:** tìm kiếm cho thấy FSE 2027 dùng `acmsmall` một cột với `review,anonymous`; bài đã chuyển (run build 41212373969: 10 trang tính cả tài liệu tham khảo). Trang conf.researchr.org bị chặn trong phiên, nên giới hạn trang và hạn nộp chưa xác minh.
 - Việc của người: `docs/paper/SUBMISSION_CHECKLIST.md`.
+
+### ~17:45 — Giai đoạn 6 (chuẩn bị; bài chưa nộp)
+- **6.1:** `tools/snapshot_submission.py` (có test) và workflow `Gatekeeper submission snapshot` (đầu vào: venue, mã bài, link artifact). Workflow kiểm lại số, dựng lại artifact ẩn danh, lưu `docs/paper/submitted/<venue>-<mã>/` gồm PDF, `SUBMISSION.json` (commit, SHA-256 của PDF, zip và manifest của artifact), commit, rồi gắn tag `submitted-<venue>-<mã>`. Tag được đẩy từ GitHub Actions; phiên của trợ lý bị proxy chặn đẩy tag.
+- **6.2:** `docs/paper/REVIEW_RESPONSE.md`: quy tắc trả lời cho người mới, bảng ý kiến, khung bản trả lời. `docs/paper/ANTICIPATED_REVIEWS.md`: 16 ý kiến có thể gặp (A1–A16), mỗi ý có câu trả lời tiếng Anh soạn sẵn, bằng chứng trong repo, và việc có thể làm thêm.
+- **Ghi nhận trung thực (A14):** bài chưa chạy phân tích độ nhạy cho hệ số phạt regression. Con số "sweep [0,2; 2,0]" của bản nháp là projected và đã bị bỏ.

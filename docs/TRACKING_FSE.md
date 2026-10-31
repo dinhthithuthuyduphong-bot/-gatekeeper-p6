@@ -121,3 +121,4 @@ PDF gốc: [`paper/source/`](paper/source/), đã đối chiếu toàn văn ngà
 | 31/10/2026 ~15:30 | Chọn khung A; giai đoạn 3: freeze lệch giải thích (P sạch tại commit đóng băng), token Vertex sửa tận gốc (fresh_gcp_token), TECH_DEBT.md |
 | 31/10/2026 ~16:30 | TD7 (luật thực thi) cài trong gatekeeper_ext/execution.py; giai đoạn 4: bản bài đầy đủ khung A (paper.pdf, 6 trang); kiểm trích dẫn |
 | 31/10/2026 ~17:15 | Giai đoạn 5: artifact ẩn danh (0 dấu vết danh tính), submission check pass (run 41212215560), bài chuyển sang acmsmall theo FSE 2027 (10 trang) |
+| 31/10/2026 ~17:45 | Giai đoạn 6 chuẩn bị (bài chưa nộp): workflow snapshot bản nộp, mẫu trả lời phản biện, 16 phản biện giả định |

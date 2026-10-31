@@ -1,0 +1,42 @@
+# Record the submitted version (PAPER_TODO 6.1).  Run it right after submitting, from the commit whose PDF was submitted.
+# Rebuilds the anonymous artifact, snapshots the committed PDF into docs/paper/submitted/<venue>-<paper id>/ with SUBMISSION.json
+# (commit, SHA-256 of PDF and artifact), commits it and tags the commit.  No model calls.
+name: Gatekeeper submission snapshot
+on:
+  workflow_dispatch:
+    inputs:
+      venue: {description: "venue, e.g. FSE2027", required: true}
+      paper_id: {description: "submission id given by the venue", required: true}
+      artifact_url: {description: "URL of the anonymous artifact as given in the paper", default: ""}
+permissions:
+  contents: write
+jobs:
+  snapshot:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: python tools/check_paper_numbers.py
+      - run: python tools/make_anonymous_artifact.py out_anon --owner "${{ github.repository_owner }}"
+      - name: Snapshot
+        shell: bash
+        run: |
+          set -euo pipefail
+          D="docs/paper/submitted/${{ inputs.venue }}-${{ inputs.paper_id }}"
+          python tools/snapshot_submission.py "$D" --venue "${{ inputs.venue }}" --paper-id "${{ inputs.paper_id }}" \
+            --pdf docs/paper/latex/build/paper.pdf --artifact-zip out_anon/gatekeeper-artifact.zip \
+            --artifact-manifest out_anon/MANIFEST_SHA256.json --artifact-url "${{ inputs.artifact_url }}" | tee -a "$GITHUB_STEP_SUMMARY"
+          git config user.name "gatekeeper-freeze-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add "$D"
+          git commit -m "Submission snapshot ${{ inputs.venue }} #${{ inputs.paper_id }}"
+          git tag "submitted-${{ inputs.venue }}-${{ inputs.paper_id }}"
+          git push origin HEAD:"${GITHUB_REF_NAME}" --tags
+      - uses: actions/upload-artifact@v7
+        with:
+          name: SUBMITTED_ARTIFACT
+          path: out_anon/gatekeeper-artifact.zip
