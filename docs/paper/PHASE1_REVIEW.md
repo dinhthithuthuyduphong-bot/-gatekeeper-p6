@@ -45,6 +45,7 @@ Lỗ hổng nào kiểm bằng số được thì thêm phép kiểm vào `tools
 | **G6** | 🟡 | Mệnh đề (a): thủ tục còn đọc fingerprint và vị từ của **đích**. | R† có cùng mọi đặc trưng mà thủ tục đọc, gồm cả đặc trưng của đích. |
 | **G7** | 🟡 | Rút **không hoàn lại** từ tập task hữu hạn làm trung bình có điều kiện trôi, nên K_n không còn là siêu martingale. | Nêu rõ trong Assumption 1: phải rút có hoàn lại, hoặc dùng e-process cho quần thể hữu hạn. |
 | **G8** | 🟡 | Mệnh đề ghép cặp chưa nói về nhiễu khi chạy lại. | Nhiễu nằm trong V_π, V_∅; chỉ phần chung của task nằm trong C. Công thức không đổi. |
+| **G10** | 🟠 | Lemma chỉ phát biểu cho Y ∈ [−1, 1], trong khi thí nghiệm (Study D–P) dùng **chứng chỉ tác hại** với Y ∈ {0, 1}. | Tổng quát Lemma cho Y ∈ [y_min, y_max], λ < 1/(θ − y_min); thêm Remark nối với chứng chỉ tác hại (c < 1); kiểm C9 trên đúng hàm `gates.gatekeeper_path`. |
 | **G9** | 🟡 | Lỗi "admit lại mà không có sổ cái" (bản nháp, §5.4) chưa được kiểm bằng số. | Thêm **C8**: kiểm lại một ô ở biên H₀ qua 10 epoch, mỗi epoch dùng đủ α, cho tỉ lệ admit sai **0,45**; dùng sổ cái chỉ **0,05** (α = 0,1). |
 
 ## Kiểm bằng số sau khi sửa
@@ -60,7 +61,8 @@ Workflow `Gatekeeper theory checks` ([kết quả](../../research_closure/result
 | C5 ghép cặp | 5,20 so với công thức 5,2 |
 | C6 sổ cái | tổng ≤ 1 |
 | C7 số của bản nháp | không khớp, đúng như dự đoán |
-| **C8 admit lại** | không có sổ cái 0,45; có sổ cái 0,05 |
+| **C8 admit lại** | không có sổ cái 0,45; có sổ cái 0,04 |
+| **C9 chứng chỉ tác hại của thí nghiệm** | ở biên h = η: 0,1035 (không vượt α có ý nghĩa; sai số chuẩn ≈ 0,007); 0,394η; 110 lần rút |
 
 ## Những gì vẫn là giả định (phải nêu trong bài, không chứng minh được)
 
