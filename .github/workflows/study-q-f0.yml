@@ -14,8 +14,8 @@ jobs:
     outputs:
       matrix: ${{ steps.m.outputs.matrix }}
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-python@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: "3.12"
       - name: Fetch SWE-bench Verified and draw the sample
@@ -31,7 +31,7 @@ jobs:
             || echo "could not list the submissions" | tee out_q/SUBMISSIONS_ERROR.txt
       - id: m
         run: python -c "import json;print('matrix='+json.dumps({'iid':json.load(open('out_q/SAMPLE.json'))}))" >> "$GITHUB_OUTPUT"
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: QF0_PLAN
           path: out_q
@@ -44,11 +44,11 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 120
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-python@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: "3.12"
-      - uses: actions/download-artifact@v7
+      - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
         with:
           name: QF0_PLAN
           path: out_q
@@ -58,7 +58,7 @@ jobs:
           df -h /
       - name: Google Cloud auth (G2 only)
         if: ${{ inputs.generator == 'G2' }}
-        uses: google-github-actions/auth@v2
+        uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
       - name: Vertex access token (G2 only)
@@ -76,7 +76,7 @@ jobs:
           MODELS=""
           if [ "${{ inputs.generator }}" = "G2" ]; then MODELS=research_closure/pilot/models.json; fi
           python -u tools/q_f0.py one "${{ matrix.iid }}" out_q/VERIFIED.json out_one $MODELS 2>&1 | tee out_one/log.txt
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         if: always()
         with:
           name: QF_${{ inputs.generator }}_${{ matrix.iid }}

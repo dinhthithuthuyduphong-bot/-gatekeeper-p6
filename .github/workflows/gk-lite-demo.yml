@@ -9,8 +9,8 @@ jobs:
   demo:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-python@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: "3.12"
       - name: Locate project folder
@@ -32,7 +32,7 @@ jobs:
           python -m gatekeeper_lite run --config demo/config.json --out out_demo
           sha256sum demo/config.json demo/skills/*.json > out_demo/INPUT_SHA256.txt
           cat out_demo/REPORT.md >> "$GITHUB_STEP_SUMMARY"
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: GK_LITE_DEMO_OUTPUT
           path: ${{ env.GK_DIR }}/out_demo
@@ -42,8 +42,8 @@ jobs:
     # Same pipeline on real Click code, scored by Click's own upstream tests.
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-python@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: "3.12"
       - name: Locate project folder
@@ -60,7 +60,7 @@ jobs:
           python -m gatekeeper_lite run --config real/config_real.json --out out_real
           cp real/FETCH_RECEIPT.json out_real/
           cat out_real/REPORT.md >> "$GITHUB_STEP_SUMMARY"
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         if: always()
         with:
           name: GK_LITE_REAL_CLICK_OUTPUT

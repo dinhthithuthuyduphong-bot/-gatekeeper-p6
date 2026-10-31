@@ -1,0 +1,8 @@
+# Keep the pinned action SHAs (tools/pin_actions.py) up to date: Dependabot opens a PR when a pinned action has a new release,
+# updating both the SHA and the version comment.  CI (ci.yml) runs on that PR.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly

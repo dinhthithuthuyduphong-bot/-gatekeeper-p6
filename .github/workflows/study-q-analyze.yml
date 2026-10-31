@@ -14,8 +14,8 @@ jobs:
   analyze:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-python@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: "3.12"
       - run: python tools/freeze_study.py verify study_q
@@ -63,7 +63,7 @@ jobs:
           python tools/q_analyze.py merged "$(python -c "import json;print(len(json.load(open('study_q/evidence/POOL_SUMMARY.json'))['per_instance']))")" out_qa
           mv Q_RECORDS.jsonl FRAME_CHECK.json out_qa/
           { echo '```json'; python -c "import json;r=json.load(open('out_qa/Q_ANALYSIS.json'));print(json.dumps({k:r[k] for k in ('Q1_funnel','patches_scored','HQ1','Q5_inflation_naive_over_contract')},indent=1))"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         if: always()
         with:
           name: Q_ANALYSIS

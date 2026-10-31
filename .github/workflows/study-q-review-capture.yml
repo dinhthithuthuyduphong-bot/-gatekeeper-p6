@@ -15,8 +15,8 @@ jobs:
       matrix: ${{ steps.m.outputs.matrix }}
       seed: ${{ steps.m.outputs.seed }}
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-python@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: "3.12"
       - run: |
@@ -52,14 +52,14 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 240
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-python@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: "3.12"
       - run: |
           sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL || true
       - name: Google Cloud auth
-        uses: google-github-actions/auth@v2
+        uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
       - name: Vertex access token
@@ -73,7 +73,7 @@ jobs:
           set -euo pipefail
           mkdir -p out_r
           python -u tools/q_review_capture.py "${{ matrix.iid }}" study_q/evidence/VERIFIED.json study_q/evidence/POOL.jsonl.gz "${{ needs.plan.outputs.seed }}" research_closure/pilot/models.json out_r 2>&1 | tee out_r/log.txt
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         if: always()
         with:
           name: R_${{ matrix.iid }}

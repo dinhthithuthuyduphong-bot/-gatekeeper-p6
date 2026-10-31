@@ -31,8 +31,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-python@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: "3.12"
       - shell: bash
@@ -41,7 +41,7 @@ jobs:
         run: |
           mkdir -p out_v
           python tools/vet_target.py study_g/targets/${{ matrix.name }}.json out_v 2>&1 | tail -40 | tee out_v/log_${{ matrix.name }}.txt || true
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         if: always()
         with:
           name: G_VET2_${{ matrix.name }}
@@ -50,15 +50,15 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-python@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: "3.12"
       - shell: bash
         run: |
           mkdir -p out_h
           python tools/runnable_check_g.py study_g/harm_candidates_retry.json karlicoss/promnesia out_h 2>&1 | tail -20 | tee out_h/log.txt || true
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         if: always()
         with:
           name: G_RUNNABLE_promnesia_retry
@@ -67,8 +67,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-python@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: "3.12"
       - shell: bash
@@ -76,7 +76,7 @@ jobs:
           python -m pip install -q "pytest==8.3.5"
           mkdir -p out_b
           python tools/baseline_check.py study_g/config_study_g.json G1_pydal out_b 2>&1 | tail -20 | tee out_b/log.txt || true
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         if: always()
         with:
           name: G_BASELINE_G1_pydal

@@ -23,8 +23,8 @@ jobs:
       B9_MODEL: ${{ inputs.model }}
       B9_MODE: ${{ inputs.mode }}
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-python@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: ${{ inputs.target == 'D2_cerberus' && '3.8' || '3.12' }}
       - name: Verify both frozen studies and pre-B9 review gate (no API calls)
@@ -44,7 +44,7 @@ jobs:
           fi
       - name: Google Cloud auth (Vertex AI models only)
         if: ${{ startsWith(inputs.model, 'vertex-') }}
-        uses: google-github-actions/auth@v2
+        uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
       - name: Vertex access token
@@ -61,7 +61,7 @@ jobs:
           mkdir -p out_b9
           python tools/run_b9.py "$B9_CONFIG" study_d/config_study_d.json \
             "$B9_TARGET" "$B9_MODEL" out_b9 "$B9_MODE"
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         if: always()
         with:
           name: ${{ inputs.mode == 'record' && 'B9_RECORD_' || 'B9_REPLAY_' }}${{ inputs.target }}_${{ inputs.model }}

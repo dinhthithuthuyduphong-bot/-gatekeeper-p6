@@ -14,10 +14,10 @@ jobs:
   snapshot:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           fetch-depth: 0
-      - uses: actions/setup-python@v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: "3.12"
       - run: python tools/check_paper_numbers.py
@@ -36,7 +36,7 @@ jobs:
           git commit -m "Submission snapshot ${{ inputs.venue }} #${{ inputs.paper_id }}"
           git tag "submitted-${{ inputs.venue }}-${{ inputs.paper_id }}"
           git push origin HEAD:"${GITHUB_REF_NAME}" --tags
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: SUBMITTED_ARTIFACT
           path: out_anon/gatekeeper-artifact.zip

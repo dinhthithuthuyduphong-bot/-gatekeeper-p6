@@ -8,8 +8,8 @@ jobs:
   aggregate:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-python@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: "3.12"
       - shell: bash
@@ -18,7 +18,7 @@ jobs:
           python tools/freeze_study.py verify study_f
           python tools/aggregate_study_f.py study_f/config_study_f.json study_f/heldout STUDY_F_RESULTS.md
           cat STUDY_F_RESULTS.md >> "$GITHUB_STEP_SUMMARY"
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: STUDY_F_RESULTS
           path: STUDY_F_RESULTS.md

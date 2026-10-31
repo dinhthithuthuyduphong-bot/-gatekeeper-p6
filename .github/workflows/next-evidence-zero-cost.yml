@@ -26,8 +26,8 @@ jobs:
         run: |
           mkdir -p "$RUNNER_TEMP/next-audit"
           printf 'commit=%s\nrun_id=%s\nattempt=%s\nB9=HOLD\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" > "$RUNNER_TEMP/next-audit/context.txt"
-      - uses: actions/checkout@v6
-      - uses: actions/setup-python@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: "3.12.14"
       - name: Install audit parser
@@ -41,7 +41,7 @@ jobs:
           set -euo pipefail
           python -u tools/closure_verify.py --out "$RUNNER_TEMP/next-audit/checks" 2>&1 | tee "$RUNNER_TEMP/next-audit/execution.log"
           cat "$RUNNER_TEMP/next-audit/checks/RESULT.md" >> "$GITHUB_STEP_SUMMARY"
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         if: always()
         with:
           name: next-raw-audit-a${{ github.run_attempt }}
@@ -65,8 +65,8 @@ jobs:
         run: |
           mkdir -p "$RUNNER_TEMP/next-scan"
           printf 'commit=%s\nrun_id=%s\nattempt=%s\ntarget=%s\ntests=NOT_RUN\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" '${{ matrix.target }}' > "$RUNNER_TEMP/next-scan/context.txt"
-      - uses: actions/checkout@v6
-      - uses: actions/setup-python@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: "3.12.14"
       - name: Inspect pinned source and possible upstream assertions
@@ -75,7 +75,7 @@ jobs:
           set -euo pipefail
           python -u next_evidence/source.py scout --target '${{ matrix.target }}' --out "$RUNNER_TEMP/next-scan/run" 2>&1 | tee "$RUNNER_TEMP/next-scan/execution.log"
           cat "$RUNNER_TEMP/next-scan/run/SCAN_RESULT.md" >> "$GITHUB_STEP_SUMMARY"
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         if: always()
         with:
           name: next-raw-scan-${{ matrix.target }}-a${{ github.run_attempt }}
@@ -96,8 +96,8 @@ jobs:
           mkdir -p "$RUNNER_TEMP/next-pydantic"
           printf 'commit=%s\nrun_id=%s\nattempt=%s\ntreatment=DISABLED\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" > "$RUNNER_TEMP/next-pydantic/context.txt"
           uname -a > "$RUNNER_TEMP/next-pydantic/runner.txt"
-      - uses: actions/checkout@v6
-      - uses: actions/setup-python@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: "3.12.14"
       - name: Fetch and verify the unchanged pinned source and tests
@@ -121,7 +121,7 @@ jobs:
         if: always()
         shell: bash
         run: printf 'status=%s\n' '${{ job.status }}' > "$RUNNER_TEMP/next-pydantic/job-status.txt"
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         if: always()
         with:
           name: next-raw-pydantic-baseline-a${{ github.run_attempt }}
@@ -154,8 +154,8 @@ jobs:
           mkdir -p "$RUNNER_TEMP/next-cost"
           printf 'commit=%s\nrun_id=%s\nattempt=%s\ntarget=%s\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" '${{ matrix.target }}' > "$RUNNER_TEMP/next-cost/context.txt"
           uname -a > "$RUNNER_TEMP/next-cost/runner.txt"
-      - uses: actions/checkout@v6
-      - uses: actions/setup-python@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         if: matrix.target == 'sqlalchemy'
         with:
           python-version: ${{ matrix.python }}
@@ -195,7 +195,7 @@ jobs:
         if: always()
         shell: bash
         run: printf 'status=%s\n' '${{ job.status }}' > "$RUNNER_TEMP/next-cost/job-status.txt"
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         if: always()
         with:
           name: next-raw-cost-${{ matrix.target }}-a${{ github.run_attempt }}
@@ -220,8 +220,8 @@ jobs:
           printf '%s\n' "$JOB_RESULTS" > "$RUNNER_TEMP/next-return/JOB_STATUS.json"
           printf 'commit=%s\nrun_id=%s\nattempt=%s\ncost_requested=%s\nscout_requested=%s\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" '${{ inputs.run_cost }}' '${{ inputs.run_scout }}' > "$RUNNER_TEMP/next-return/RUN_CONTEXT.txt"
           printf 'Send this compact review artifact and the run URL. Coverage databases remain in the individual next-raw-* artifacts; REVIEW_SCOPE.json lists hashes and omissions. A successful collect job does not mean the experiments passed; inspect JOB_STATUS.json. B9 remains HOLD.\n' > "$RUNNER_TEMP/next-return/README.txt"
-      - uses: actions/checkout@v6
-      - uses: actions/download-artifact@v8
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
         with:
           pattern: next-raw-*
           path: ${{ runner.temp }}/next-return/artifacts
@@ -239,7 +239,7 @@ jobs:
           printf 'collect_state_before_upload=%s\nCheck step failures and REVIEW_SCOPE.json; a partial bundle is not success.\n' '${{ job.status }}' > "$RUNNER_TEMP/next-review/COLLECT_STATUS.txt"
           cp "$RUNNER_TEMP/next-return/JOB_STATUS.json" "$RUNNER_TEMP/next-review/"
           cp "$RUNNER_TEMP/next-return/RUN_CONTEXT.txt" "$RUNNER_TEMP/next-review/"
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         if: always()
         with:
           name: next-evidence-return-a${{ github.run_attempt }}
