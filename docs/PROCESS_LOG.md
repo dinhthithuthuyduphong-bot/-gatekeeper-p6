@@ -171,3 +171,13 @@ Mẫu cho mỗi mục:
 - 2.3: `sections/threats.tex` nêu Assumption 4 là **chưa kiểm**. Thiết kế phép đo cần thầy quyết.
 - 2.4: 3/31 đơn vị chỉ có đầu vào là đối tượng giả; độ nhạy 11/36 = 30,6% (18,0% – 46,9%); kết luận HQ1 giữ nguyên.
 - 2.5: thêm bảng nguồn vào `EVIDENCE_LEDGER.md`.
+
+### ~15:30 — Chọn khung A; giai đoạn 3
+- Người nghiên cứu chọn **khung A** (phương pháp và lý thuyết). Đã ghi ở TRACKING mục 4 và PAPER_TODO 0.2.
+- **3.1 Freeze lệch:**
+  - Study P: commit `c214516` thêm 8 dòng văn bản vào `ALIGNMENT_WITH_FSE.md` sau lần đóng băng cuối; kiểm tại commit đóng băng `6437ecf`: 91 tệp không đổi.
+  - B, C, N: mã dùng chung, đóng băng trong phần lịch sử đã mất khi repo được tạo lại (gốc `656ab92`); bài không trích các study này.
+  - Giải thích và quy tắc mới ghi trong `EVIDENCE_LEDGER.md`.
+- **3.2** Q5: đã ghi trong Threats. **3.3** `FileNotFoundError`: tệp đã đóng băng nên chưa sửa mã; cách sửa cho study sau ghi ở `docs/TECH_DEBT.md`.
+- **3.4 Token Vertex, sửa tận gốc:** `tools/fresh_gcp_token.py` tạo token mới bằng google-auth thay cho token cũ trong bộ nhớ đệm của `gcloud`; 13 workflow gọi model dùng nó làm `GK_TOKEN_CMD`. Workflow `Gatekeeper Vertex token check` (run 41210471245): hai token cách nhau một phút **khác nhau**, mỗi token còn hạn 60,0 phút. Có test.
+- **3.5** Failure audit chạy lại (run 41210473427): vẫn 64 run thất bại, đều đã có nguyên nhân trong API_AND_FAILURES.
