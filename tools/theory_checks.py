@@ -316,7 +316,7 @@ def main(argv):
            "C7_corollary8_consistency": check_corollary8(),
            "C8_readmission_ledger": check_readmission(max(100, reps // 4), 10, n, seed),
            "C9_harm_certificate": check_harm_certificate(reps, n, seed),
-           "C10_decision_rule_studies_DH": check_decision_rule(max(200, reps // 5), seed),
+           "C10_decision_rule_studies_DH": check_decision_rule(max(200, reps // 2), seed),
            "C11_library_ledger": check_library_ledger()}
     out.mkdir(parents=True, exist_ok=True)
     (out / "THEORY_CHECKS.json").write_text(json.dumps(res, indent=1))
