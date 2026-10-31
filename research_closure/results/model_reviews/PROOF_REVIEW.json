@@ -11,27 +11,27 @@
    },
    {
     "label": "Proposition 1",
-    "verdict": "minor_issue",
-    "issue": "The almost sure limit of log C_n / n via the strong law of large numbers requires the indicators H_i to be i.i.d. (or ergodic) with Pr[H_i=1]=h, whereas the first sentence only states a conditional null Pr[H_i=1 | F_{i-1}] >= eta.",
-    "fix": "Change 'If the harm rate is h' to 'If the draws are i.i.d. with harm rate Pr[H_i=1]=h'."
+    "verdict": "correct",
+    "issue": "",
+    "fix": ""
    },
    {
     "label": "Theorem 1",
-    "verdict": "minor_issue",
-    "issue": "The theorem assumes the task sequence of epoch k is i.i.d. from P_s^{(k)} 'given the decision to open the epoch', and the proof applies Lemma 1 unconditionally to the infinite sequence of epoch k. If epoch k is opened only on a data-dependent event E_{c,k}, Lemma 1 must be applied conditionally on E_{c,k} (with Pr[A_{c,k} and E_{c,k}] <= alpha_{c,k} Pr[E_{c,k}] <= alpha_{c,k}), or the epoch-k sequence must be defined unconditionally in advance.",
-    "fix": "In the proof, define A_{c,k} as the event that epoch k is opened and sup_n K_n^{c,k} >= 1/alpha_{c,k}, and apply Lemma 1 conditionally on the filtration at the opening of epoch k."
+    "verdict": "correct",
+    "issue": "",
+    "fix": ""
    },
    {
     "label": "Lemma 2",
-    "verdict": "minor_issue",
-    "issue": "A composite cell is described earlier as (S o S', s), where edit composition o is generally ordered, whereas the proof counts composites of size m as unordered subsets of size m (binom(N, m)).",
-    "fix": "State explicitly that each subset of skills is equipped with a single canonical execution order (so there is at most one composite cell per subset), or replace binom(N, m) with N!/(N-m)! if ordered sequences are distinct cells."
+    "verdict": "correct",
+    "issue": "",
+    "fix": ""
    },
    {
     "label": "Proposition 2",
-    "verdict": "minor_issue",
-    "issue": "In part (a), optional stopping for nonnegative supermartingales already holds for any (possibly unbounded) stopping time; however, in the proof of (a) the conditional expectations in Lemma 1 and Proposition 1 are with respect to each cell's own filtration F^{(c)}, which should be stated explicitly so tau_c is a stopping time with respect to F^{(c)}.",
-    "fix": "Specify that tau_c is a stopping time with respect to cell c's own trial filtration F^{(c)}."
+    "verdict": "correct",
+    "issue": "",
+    "fix": ""
    },
    {
     "label": "Remark 1",
@@ -47,21 +47,21 @@
    },
    {
     "label": "Proposition 3",
-    "verdict": "minor_issue",
-    "issue": "In part (b), for P(d) = (1+theta+delta)/2 >= xi to be guaranteed for all xi in (0, 1/2], one needs (1+theta+delta)/2 >= 1/2, which holds since theta, delta > 0; however, the proof writes P(d) = (1+theta+delta)/2 >= xi without noting this follows from xi <= 1/2 and theta+delta > 0. Also, for the {0,1}-loss realization in (b) to be valid on a rich target class without changing observed features, Assumption 3 (or a task space with at least two tasks) is implicitly used.",
-    "fix": "Note that P(d) > 1/2 >= xi since theta+delta > 0 and xi <= 1/2, and assume the scope has at least two tasks with outcomes as specified."
-   },
-   {
-    "label": "Theorem 2",
-    "verdict": "minor_issue",
-    "issue": "The attainment construction with binary losses {0,1} requires the underlying probability space of tasks to support measurable subsets of mass -a and b-a (e.g., to be atomless, or to allow choosing the distribution P_s along with the repository).",
-    "fix": "State in the theorem or proof that the supremum is over both skill pairs and task distributions P_s (or assume an atomless task distribution for the {0,1}-loss attainment)."
-   },
-   {
-    "label": "Corollary 1",
     "verdict": "correct",
     "issue": "",
     "fix": ""
+   },
+   {
+    "label": "Theorem 2",
+    "verdict": "correct",
+    "issue": "",
+    "fix": ""
+   },
+   {
+    "label": "Corollary 1",
+    "verdict": "minor_issue",
+    "issue": "The induction step in the proof writes \\ell(x,\\pi_E) = \\ell(x,\\pi_{E_1 \\cup \\dots \\cup E_j} \\circ \\pi_{E_{j+1}}), implicitly assuming that the canonical registration order on E is compatible with ordering the connected components sequentially, or that non-adjacent skills commute in loss when interleaved with other skills.",
+    "fix": "State explicitly in Assumption 4 (or in the execution rule) that non-adjacent skills commute, so that permuting the canonical order of E to group connected components E_1, ..., E_m sequentially does not change \\ell(x,\\pi_E)."
    },
    {
     "label": "Proposition 4",
@@ -70,7 +70,7 @@
     "fix": ""
    }
   ],
-  "overall": "The mathematical results and proofs are fundamentally sound, with all constants, inequalities, and numerical examples (including the 110 clean draws and the TV shift bound of 2) checking out. Only minor clarifications regarding conditioning at epoch boundaries, canonical ordering of composite cells, and probability-space assumptions for the binary-loss attainment are needed."
+  "overall": "The mathematical formulation and all proofs in the theory section are rigorous, precise, and free of counterexamples, with all constants and inequalities verified. Only Corollary 1 has a minor implicit step regarding the ordering of skills across connected components relative to the canonical registration order."
  },
- "spent_usd": 0.026959999999999998
+ "spent_usd": 0.020718
 }
