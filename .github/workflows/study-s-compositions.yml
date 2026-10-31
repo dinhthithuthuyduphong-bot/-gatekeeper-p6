@@ -4,7 +4,7 @@ name: Gatekeeper Study S compositions
 on:
   workflow_dispatch:
     inputs:
-      mode: {description: "registered, s-a1, s-a2, s-a3 or s-a4 (amendments)", default: "s-a4"}
+      mode: {description: "registered, s-a1, s-a2, s-a3, s-a4 or s-a5 (amendments)", default: "s-a5"}
 permissions:
   contents: write
 jobs:
@@ -25,7 +25,7 @@ jobs:
         env:
           MODE: ${{ inputs.mode }}
         run: |
-          flag=""; [ "$MODE" = "s-a1" ] && flag="--s-a1"; [ "$MODE" = "s-a2" ] && flag="--s-a2"; [ "$MODE" = "s-a3" ] && flag="--s-a3"; [ "$MODE" = "s-a4" ] && flag="--s-a4"
+          flag=""; [ "$MODE" = "s-a1" ] && flag="--s-a1"; [ "$MODE" = "s-a2" ] && flag="--s-a2"; [ "$MODE" = "s-a3" ] && flag="--s-a3"; [ "$MODE" = "s-a4" ] && flag="--s-a4"; [ "$MODE" = "s-a5" ] && flag="--s-a5"
           python -W ignore tools/composition_study.py /tmp/s_work out_s $flag | tee -a "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         if: always()

@@ -34,7 +34,8 @@ S_A1 = False         # --s-a1: amendment S-A1 (post hoc): receivers built from t
 #                      manifest Python version, install log recorded (study_s/AMENDMENTS.md)
 S_A2 = False         # --s-a2: amendment S-A2 (S-A1 plus subtype substitution and a Python 3.11 install fallback)
 S_A3 = False         # --s-a3: S-A2 plus every variant run twice; only inputs stable in O and every variant count
-S_A3_FIXED_HASH = "--fixed-hash" in sys.argv or "--s-a4" in sys.argv   # after S-A3; the reported S-A3 run did not fix it
+S_A3_FIXED_HASH = "--fixed-hash" in sys.argv or "--s-a4" in sys.argv or "--s-a5" in sys.argv   # after S-A3; the reported S-A3 run did not fix it
+S_A5 = False         # --s-a5: S-A4 with the setuptools-scm pretend version restricted to the target package
 S_A4 = False         # --s-a4: S-A3 + fixed hash seed + missing HERA dependencies installed from GitHub source
 INSTALL_LOG = {}
 
@@ -150,7 +151,10 @@ def make_env(work, root, manifest):
     kind, _, pkg = (manifest.get("install") or "").partition(":")
     log = {"python": base or sys.executable}
     if kind == "self-then-uninstall":
-        e = dict(os.environ, SETUPTOOLS_SCM_PRETEND_VERSION="0.0.0")
+        if S_A5:   # pretend version only for the target itself; dependencies keep their real versions (S-A5)
+            e = dict(os.environ, **{"SETUPTOOLS_SCM_PRETEND_VERSION_FOR_" + re.sub(r"[-_.]+", "_", pkg).upper(): "0.0.0"})
+        else:
+            e = dict(os.environ, SETUPTOOLS_SCM_PRETEND_VERSION="0.0.0")
         r = subprocess.run([str(py), "-m", "pip", "install", "-q", str(root)], env=e, capture_output=True, text=True, timeout=1800)
         log.update(install_rc=r.returncode, install_tail=(r.stderr or r.stdout)[-600:])
         retries = 0
@@ -301,9 +305,10 @@ def main(argv):
     work, out = Path(argv[0]), Path(argv[1])
     opt = lambda k, d: type(d)(argv[argv.index(k) + 1]) if k in argv else d   # noqa: E731
     n = opt("--n", 200)
-    global UNITS_ONLY, S_A1, S_A2, S_A3, S_A4
+    global UNITS_ONLY, S_A1, S_A2, S_A3, S_A4, S_A5
     UNITS_ONLY = "--units-only" in argv
-    S_A4 = "--s-a4" in argv
+    S_A5 = "--s-a5" in argv
+    S_A4 = "--s-a4" in argv or S_A5
     S_A3 = "--s-a3" in argv or S_A4
     S_A2 = "--s-a2" in argv or S_A3
     S_A1 = "--s-a1" in argv or S_A2
@@ -331,7 +336,7 @@ def main(argv):
     summary = summarise(res)
     summary["install"] = {r["target"]: r.get("install") for r in res}
     out.mkdir(parents=True, exist_ok=True)
-    name = "COMPOSITION_STUDY_SA4.json" if S_A4 else "COMPOSITION_STUDY_SA3.json" if S_A3 else "COMPOSITION_STUDY_SA2.json" if S_A2 else "COMPOSITION_STUDY_SA1.json" if S_A1 else "COMPOSITION_STUDY.json"
+    name = "COMPOSITION_STUDY_SA5.json" if S_A5 else "COMPOSITION_STUDY_SA4.json" if S_A4 else "COMPOSITION_STUDY_SA3.json" if S_A3 else "COMPOSITION_STUDY_SA2.json" if S_A2 else "COMPOSITION_STUDY_SA1.json" if S_A1 else "COMPOSITION_STUDY.json"
     (out / name).write_text(json.dumps(summary, indent=1, default=str))
     print(json.dumps(summary["total"], indent=1))
     return 0

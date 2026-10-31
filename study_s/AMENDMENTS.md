@@ -62,3 +62,13 @@ for Python 3.11 or 3.12 (install logs in `COMPOSITION_STUDY_SA2.json`).
 "No matching distribution found for X", X is installed once from the HERA-Team GitHub repository (`git+https://github.com/HERA-Team/X`)
 and the package install is retried; up to three such retries, all logged. Units, inputs, measures and gate unchanged. Results in
 `COMPOSITION_STUDY_SA4.json`. If hera_pspec still cannot be imported, its units stay unusable and are reported as such.
+
+### Outcome of S-A4
+Same 12 usable units and the same results as S-A3 (now with a fixed hash seed): 0 emergent, 0 masking, 0 order-dependent; 45/48
+cells admitted. hera_pspec still failed. **Root cause found in the install log:** the harness set `SETUPTOOLS_SCM_PRETEND_VERSION=0.0.0`
+for the whole install, so every dependency built from source with setuptools-scm, `uvtools` included, got version 0.0.0 and
+could not satisfy `uvtools>=0.2.0` ("Requested uvtools>=0.2.0 ... but installing version 0.0.0").
+
+## S-A5 (written before running): pretend version only for the target package
+**Change.** As S-A4, but the pretend version is set only for the target's own distribution
+(`SETUPTOOLS_SCM_PRETEND_VERSION_FOR_<NAME>`), so dependencies keep their real versions. Results in `COMPOSITION_STUDY_SA5.json`.
