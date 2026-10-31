@@ -66,7 +66,7 @@ Cập nhật sau **mỗi** lần chạy. **THẮNG** = đạt, có bằng chứn
 - **Tiêu chí thắng:** ASN của gate (hoặc gate lai) < ASN của fixed-sample **trên tập ô thực tế** ở cùng mức lỗi; chi phí < B8 ít nhất 30%.
 - **Nếu thua:** báo cáo và giữ lập luận "hợp lệ khi dừng tuỳ ý", không khẳng định về chi phí.
 
-### D3. Bộ dữ liệu đa dạng, đủ lớn: Study T (đóng S7; là dữ liệu xác nhận cho D1, D2)
+### D3. Bộ dữ liệu đa dạng, đủ lớn: Study T (giao thức `study_t/PROTOCOL.md`, đã commit; kỹ năng = rule autofix của Ruff + R2) (đóng S7; là dữ liệu xác nhận cho D1, D2)
 - **Nguồn:**
   - 12 họ kỹ năng (R2) trên **mọi** site của 16 repo hiện có (467 hàm);
   - thêm khoảng 50 gói PyPI phổ biến, chọn theo thứ hạng tải về công khai (không chọn tay), cố định danh sách trước khi chạy.
@@ -164,6 +164,7 @@ Mỗi dòng gồm:
 | R31 | 31/10 | Paper build (88f54c0) | PDF | — | — | **THẮNG**: 16 trang (giới hạn 18 + tham khảo), 51/51 con số khớp | — |
 | R32 | 31/10 | Model kiểm chứng minh vòng 4 (ddfe12f) | Kiểm sau vòng 3 | — | 10/11 mệnh đề "correct"; còn 1: chứng minh Hệ quả 1 ngầm dùng tính giao hoán khi gom các thành phần bị xen kẽ trong thứ tự chuẩn | **THẮNG**: thêm phần (i) giao hoán vào Giả định 4 (phiên bản ngữ nghĩa của cạnh enabling) và bước hoán vị vào chứng minh | — |
 | R33 | 31/10 | Model kiểm chứng minh vòng 5 (101db84); PDF (6fb8605) | Kiểm sau vòng 4 | — | 10/11 "correct"; điểm còn lại chỉ là ký hiệu ở Mệnh đề 3(a) | **THẮNG**: đã sửa ký hiệu. Phần lý thuyết hội tụ (lỗi lớn qua 5 vòng: 0; điểm nhỏ: 5 → 5 → 6 → 1 → 1 về ký hiệu); PDF 16 trang | — |
+| R34 | 31/10 | Study T: giao thức (b8cd5ac) + census (đang chạy) | Ba yếu tố thắng: baseline thuyết phục, phổ rộng, kỹ năng có trên thị trường | Kỹ năng: rule autofix của Ruff (kèm nhãn safe/unsafe của chính Ruff) + 12 họ R2. Target: 60 gói thuần Python được tải nhiều nhất trên PyPI (chọn theo quy tắc). Baseline: U, Ruff-safe, test pass, B6-R (replay ví dụ trong tài liệu Ruff), LLM judge, smoke, fixed-sample, B8 | Nhắm thẳng tiêu chí chính của bài gốc (S5) và RQ4 chi phí (S15) | *chờ census* | — |
 
 ## C. Vòng debug khi THUA (làm theo thứ tự)
 
