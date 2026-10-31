@@ -1,8 +1,8 @@
 {
   "files": {
-    "study_q/config_study_q.json": "3de28c996a0a49204d1fd65d224dd94819c0aeaf0153d35f3438024730df41f1",
+    "study_q/config_study_q.json": "8fee487065304df0a4e7a24db877a3480678b0a805b12f7a4bd2bab99c15d334",
     "study_q/STUDY_Q_PROTOCOL.md": "b2798c3d7910e86fc3a538a4eb1e241d2737819dd15768690567367375b911dc",
-    "study_q/AMENDMENTS.md": "a8887372f5b0dd40c8c31db468b33f57332c41e13b28c953772bdd9690102ea1",
+    "study_q/AMENDMENTS.md": "6ff6ff9b46b32fea173fbf28b3bdfe89ee42a78e238016229382c2816925e743",
     "gatekeeper_lite/__init__.py": "be8ddeba61bbc4885994020bcb9b4f19573f4a22b8a759b079e00e45c3f334e7",
     "gatekeeper_lite/__main__.py": "7aa7d5b275d60de01de9074e0bd8a864c99527435885098a2243986a48699e90",
     "gatekeeper_lite/b9.py": "80e274eb9e30f3f51870e2e7939e68fc199029e627d8cf20635ffc6f4b09128e",

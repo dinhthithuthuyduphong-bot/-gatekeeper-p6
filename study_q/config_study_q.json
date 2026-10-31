@@ -39,5 +39,16 @@
     "tools/q_probe_inner.py",
     "tools/repo_hygiene.py"
   ],
-  "frozen_on": "2026-10-31T06:47:53Z"
+  "frozen_on": "2026-10-31T06:47:53Z",
+  "seed_freeze_sha256": "39c55e0c980075077a5a1a05988070d56d5de02accad55c82f55607d50e4cb29",
+  "amendments_applied": [
+    "Q-A1"
+  ],
+  "amendment_log": [
+    {
+      "id": "Q-A1",
+      "edits": [],
+      "applied_utc": "2026-10-31T10:16:24+00:00"
+    }
+  ]
 }
