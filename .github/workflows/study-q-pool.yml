@@ -20,6 +20,7 @@ jobs:
           mkdir -p out_pool
           python -u tools/q_f2.py entries /tmp/experiments out_pool
           python -u tools/q_f0.py sample out_rows 3
+          mkdir -p study_q/evidence                       # git keeps no empty folder
           cp out_pool/POOL.jsonl.gz out_pool/POOL_SUMMARY.json study_q/evidence/
           cp out_rows/VERIFIED.json study_q/evidence/
           git -C /tmp/experiments rev-parse HEAD > study_q/evidence/EXPERIMENTS_COMMIT.txt
