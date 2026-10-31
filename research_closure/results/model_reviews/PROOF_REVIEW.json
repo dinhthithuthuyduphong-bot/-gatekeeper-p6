@@ -4,73 +4,73 @@
  "review": {
   "items": [
    {
-    "label": "Lemma 1",
+    "label": "Lemma 1 (lem:eprocess)",
     "verdict": "correct",
     "issue": "",
     "fix": ""
    },
    {
-    "label": "Proposition 1",
+    "label": "Proposition 1 (prop:harm)",
     "verdict": "correct",
     "issue": "",
     "fix": ""
    },
    {
-    "label": "Theorem 1",
+    "label": "Theorem 1 (thm:admission)",
     "verdict": "correct",
     "issue": "",
     "fix": ""
    },
    {
-    "label": "Lemma 2",
+    "label": "Lemma 2 (lem:ledger)",
     "verdict": "correct",
     "issue": "",
     "fix": ""
    },
    {
-    "label": "Proposition 2",
+    "label": "Proposition 2 (rem:eholm)",
     "verdict": "correct",
     "issue": "",
     "fix": ""
    },
    {
-    "label": "Remark 1",
+    "label": "Remark 1 (Data-dependent budgets)",
     "verdict": "correct",
     "issue": "",
     "fix": ""
    },
    {
-    "label": "Lemma 3",
+    "label": "Lemma 3 (lem:shift)",
     "verdict": "correct",
     "issue": "",
     "fix": ""
    },
    {
-    "label": "Proposition 3",
-    "verdict": "correct",
-    "issue": "",
-    "fix": ""
-   },
-   {
-    "label": "Theorem 2",
-    "verdict": "correct",
-    "issue": "",
-    "fix": ""
-   },
-   {
-    "label": "Corollary 1",
+    "label": "Proposition 3 (prop:nofree)",
     "verdict": "minor_issue",
-    "issue": "The induction step in the proof writes \\ell(x,\\pi_E) = \\ell(x,\\pi_{E_1 \\cup \\dots \\cup E_j} \\circ \\pi_{E_{j+1}}), implicitly assuming that the canonical registration order on E is compatible with ordering the connected components sequentially, or that non-adjacent skills commute in loss when interleaved with other skills.",
-    "fix": "State explicitly in Assumption 4 (or in the execution rule) that non-adjacent skills commute, so that permuting the canonical order of E to group connected components E_1, ..., E_m sequentially does not change \\ell(x,\\pi_E)."
+    "issue": "In part (b), taking $\\xi = 1/2$ yields $P(d) - \\xi = (\\theta+\\delta)/2 > 0$ (which is valid), but for $Q$ to have mass moved from $d$ to $u$ when $\\theta+\\delta \\to 0$ and $\\xi=1/2$, we rely strictly on $\\theta+\\delta>0$; more importantly, if $\\xi=1/2$ and $\\theta>0$, $P(d)=(1+\\theta+\\delta)/2 > 1/2 = \\xi$ holds, so $Q(d)=P(d)-\\xi > 0$ is valid, EXCEPT the statement only requires $\\theta\\in(0,1)$ and $\\xi\\in(0,1/2]$, which actually works! However, in part (a), $\\mathrm{STR}(S,\\{R^\\dagger\\})$ uses notation $\\mathrm{STR}(S, \\{R^\\dagger\\})$ instead of the defined $\\mathrm{STR}_D(c)$.",
+    "fix": "Change $\\mathrm{STR}(S,\\{R^\\dagger\\})=1$ to $\\mathrm{STR}_{D^\\dagger}(c)=1$ where $D^\\dagger$ is a distribution supported on $R^\\dagger$, matching Definition 1."
    },
    {
-    "label": "Proposition 4",
+    "label": "Theorem 2 (thm:composition)",
+    "verdict": "correct",
+    "issue": "",
+    "fix": ""
+   },
+   {
+    "label": "Corollary 1 (cor:execution)",
+    "verdict": "correct",
+    "issue": "",
+    "fix": ""
+   },
+   {
+    "label": "Proposition 4 (prop:pairing)",
     "verdict": "correct",
     "issue": "",
     "fix": ""
    }
   ],
-  "overall": "The mathematical formulation and all proofs in the theory section are rigorous, precise, and free of counterexamples, with all constants and inequalities verified. Only Corollary 1 has a minor implicit step regarding the ordering of skills across connected components relative to the canonical registration order."
+  "overall": "The mathematical formulation and all proofs in the theory section are rigorous, precise, and self-contained, with all constants, inequalities, and filtration/stopping-time conditions properly stated and verified. Only a trivial notational inconsistency in Proposition 3(a) was found."
  },
- "spent_usd": 0.020718
+ "spent_usd": 0.022878000000000003
 }
