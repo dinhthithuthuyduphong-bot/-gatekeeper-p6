@@ -1,0 +1,6 @@
+{
+ "name": "study_q_pool_fix (patch_study_q_pool_fix.zip)",
+ "files": {
+  ".github/workflows/study-q-pool.yml": "aed8ca5ceb809cbc15b2e98af2d05e9cdac58ca6e4534534e1f913e22c4c4ab1"
+ }
+}
