@@ -1,0 +1,33 @@
+# Study Q frame (0 cost): census of the public patch pool and the SWE-bench Verified rows, committed into study_q/evidence
+# while study_q is DRAFT (files too large for the web upload).  Refuses once study_q is frozen.
+name: Gatekeeper Study Q pool
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  pool:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: python -c "import json,sys;c=json.load(open('study_q/config_study_q.json'));sys.exit(0 if c.get('status')=='DRAFT' else 'study_q is not DRAFT')"
+      - run: pip install -q pyyaml
+      - run: git clone --depth 1 https://github.com/SWE-bench/experiments.git /tmp/experiments
+      - run: |
+          mkdir -p out_pool
+          python -u tools/q_f2.py entries /tmp/experiments out_pool
+          python -u tools/q_f0.py sample out_rows 3
+          cp out_pool/POOL.jsonl.gz out_pool/POOL_SUMMARY.json study_q/evidence/
+          cp out_rows/VERIFIED.json study_q/evidence/
+          git -C /tmp/experiments rev-parse HEAD > study_q/evidence/EXPERIMENTS_COMMIT.txt
+          date -u +%Y-%m-%dT%H:%M:%SZ > study_q/evidence/CENSUS_UTC.txt
+          if ! git diff --quiet -- study_m study_m_astar study_m_rr study_n study_p; then echo "::error::a frozen study changed"; exit 1; fi
+          git config user.name "gatekeeper-freeze-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add study_q
+          git commit -m "Study Q frame: patch pool census and SWE-bench Verified rows"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin HEAD

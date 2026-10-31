@@ -1,0 +1,80 @@
+# Study Q main run: one job per instance (as amendment P-A3), in two parts (a matrix holds at most 256 jobs).
+# Refuses unless study_q is FROZEN and verifies; the seed comes from drand after the freeze.
+name: Gatekeeper Study Q stream
+on:
+  workflow_dispatch:
+    inputs:
+      part: {description: "0 = first half of the instances, 1 = second half", default: "0"}
+      only: {description: "optional comma-separated instance ids to (re)run", default: ""}
+permissions:
+  contents: read
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.m.outputs.matrix }}
+      seed: ${{ steps.m.outputs.seed }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: |
+          python -c "import json,sys;c=json.load(open('study_q/config_study_q.json'));sys.exit(0 if c.get('status')=='FROZEN' else 'study_q is not FROZEN')"
+          python tools/freeze_study.py verify study_q
+      - id: m
+        env:
+          PART: ${{ inputs.part }}
+          ONLY: ${{ inputs.only }}
+        run: |
+          python - <<'PY'
+          import hashlib, json, os, sys
+          sys.path.insert(0, 'tools')
+          from run_study_d import drand_seed
+          cfg = json.load(open('study_q/config_study_q.json'))
+          h = hashlib.sha256(open('study_q/FREEZE.json', 'rb').read()).hexdigest()
+          seed = drand_seed(cfg.get('seed_freeze_sha256') or h, cfg['seed_time_utc'])['seed']
+          ids = sorted(json.load(open('study_q/evidence/POOL_SUMMARY.json'))['per_instance'])
+          only = [x for x in os.environ.get('ONLY', '').replace(' ', '').split(',') if x]
+          half = (len(ids) + 1) // 2
+          sel = only or (ids[:half] if os.environ['PART'] == '0' else ids[half:])
+          assert set(sel) <= set(ids) and len(sel) <= 256
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              f.write('matrix=' + json.dumps({'iid': sel}) + '\n')
+              f.write('seed=%s\n' % seed)
+          print(len(sel), 'instances; seed', seed)
+          PY
+  one:
+    needs: plan
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL || true
+      - name: Google Cloud auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+      - name: Vertex access token
+        run: |
+          echo "GOOGLE_OAUTH_TOKEN=$(gcloud auth print-access-token)" >> "$GITHUB_ENV"
+          echo "GCP_PROJECT=${{ secrets.GCP_PROJECT }}" >> "$GITHUB_ENV"
+          echo "GK_TOKEN_CMD=gcloud auth print-access-token" >> "$GITHUB_ENV"
+      - shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out_q
+          python -u tools/q_instance.py "${{ matrix.iid }}" study_q/evidence/VERIFIED.json study_q/evidence/POOL.jsonl.gz "${{ needs.plan.outputs.seed }}" research_closure/pilot/models.json out_q 2>&1 | tee out_q/log.txt
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: Q_${{ matrix.iid }}
+          path: out_q

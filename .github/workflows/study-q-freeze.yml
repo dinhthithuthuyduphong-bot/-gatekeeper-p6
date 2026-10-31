@@ -1,0 +1,27 @@
+name: Gatekeeper Study Q freeze
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  freeze:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: python tools/repo_hygiene.py --strict
+      - run: python -m unittest discover -s tests
+      - run: |
+          python tools/q_prepare_freeze.py
+          python tools/freeze_doctor.py study_q --out out_doctor
+          grep -q "BLOCKERS: 0" out_doctor/FREEZE_DOCTOR.md || { cat out_doctor/FREEZE_DOCTOR.md; exit 1; }
+          python tools/freeze_named_study.py study_q --delay-minutes 60
+          python tools/freeze_study.py verify study_q
+          git config user.name "gatekeeper-freeze-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add study_q
+          git commit -m "Freeze Study Q"
+          git tag study-q-freeze
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin HEAD --tags
