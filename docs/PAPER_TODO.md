@@ -50,7 +50,8 @@ Mỗi dòng gồm:
 | R12 | 31/10 | Theory checks (00fe817) | C10, C11 | — | Luật D–H khớp Nhận xét e-Holm | **THẮNG**: FWER 2,4% / 7,3% ≤ 10%; ledger ≤ α | — |
 | R13 | 31/10 | Study R2-A2 (193b136; 41226541891 không đổi số) | Census có mã cấp module | Census giữ `file::<module>` | — | **THẮNG**: 467 hàm/vùng (trước 456), các số khác không đổi; kết luận giữ nguyên | — |
 | R14 | 31/10 | Paper build (bf6c5e3) | PDF sau R2 + rà lý thuyết | — | — | **THẮNG**: 14 trang, 39/39 con số khớp; bảng 2 (thư viện 12 họ) hiển thị đúng | — |
-| R15 | 31/10 | Study S (đang chạy) | Hành vi thật của tổ hợp trên 23 đơn vị (21 vùng chung + 2 cặp enabling) | `composition_study.py`: snapshot O/A/B/AB/BA, input G0, harm certificate + e-Holm | Định lý 2.5 (tổ hợp) lần đầu được đo trên mã thật; phát hiện TC12 (gộp method cùng tên, bảo thủ) | *chờ kết quả* | — |
+| R15 | 31/10 | Study S (41227728959) | Hành vi thật của tổ hợp trên 23 đơn vị (21 vùng chung + 2 cặp enabling) | `composition_study.py`: snapshot O/A/B/AB/BA, input G0, harm certificate + e-Holm | Định lý 2.5 lần đầu đo trên mã thật; phát hiện TC12 (gộp method cùng tên, bảo thủ) | **THUA**: chỉ 2/23 đơn vị chạy được, 0 thay đổi hành vi, nên không kết luận được gì | Vòng C bước 1 (hạ tầng): 14 method cần constructor có tham số; 1 method private bị name mangling; hera_pspec và cerberus import lỗi (không lưu log cài, sai phiên bản Python). Không phải lỗi lý thuyết. Sửa: amendment S-A1 |
+| R16 | 31/10 | Study S-A1 (đang chạy) | Chạy lại với receiver dựng từ chữ ký constructor | `composition_inner.py`; Python theo manifest; lưu log cài | — | *chờ kết quả* | — |
 
 ## C. Vòng debug khi THUA (làm theo thứ tự)
 
