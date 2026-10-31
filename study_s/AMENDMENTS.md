@@ -52,3 +52,13 @@ same outcome in both runs. Stricter, so it can only remove differences. Results 
 The order dependence of S-A2 did not survive (0 variant-unstable inputs in this run, and no difference on `QueryBuilder.parse`); by
 the rule written before the run it is reported as noise. Probable cause (hypothesis, not tested): hash randomisation differs between
 the fresh processes of each version (set or dict iteration order). Future runs should fix `PYTHONHASHSEED`.
+
+## S-A4 (written before running): install hera_pspec's dependencies from source
+
+**Why.** The 9 hera_pspec units are unusable in S-A1 to S-A3 because `uvtools>=0.2.0` has no installable distribution on PyPI
+for Python 3.11 or 3.12 (install logs in `COMPOSITION_STUDY_SA2.json`).
+
+**Change.** Same as S-A3, with the hash seed fixed (`PYTHONHASHSEED=0`, `--fixed-hash`); when the package install fails with
+"No matching distribution found for X", X is installed once from the HERA-Team GitHub repository (`git+https://github.com/HERA-Team/X`)
+and the package install is retried; up to three such retries, all logged. Units, inputs, measures and gate unchanged. Results in
+`COMPOSITION_STUDY_SA4.json`. If hera_pspec still cannot be imported, its units stay unusable and are reported as such.
