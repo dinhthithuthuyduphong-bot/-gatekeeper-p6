@@ -1,0 +1,42 @@
+# Study Q amendment Q-A1, step 3: the second, BLIND rater (strong model) codes the review items R / B / U with the RQ5
+# codebook and tools/rq5_rate_llm.py unchanged.  Refuses unless the first rater's codes are committed.  Under 1 USD.
+name: Gatekeeper Study Q second rater (amendment Q-A1)
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  rate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Google Cloud auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+      - name: Vertex access token
+        run: |
+          t="$(gcloud auth print-access-token)"; echo "::add-mask::$t"; echo "GOOGLE_OAUTH_TOKEN=$t" >> "$GITHUB_ENV"
+          echo "GCP_PROJECT=${{ secrets.GCP_PROJECT }}" >> "$GITHUB_ENV"
+          echo "GK_TOKEN_CMD=gcloud auth print-access-token" >> "$GITHUB_ENV"
+      - run: |
+          D=research_closure/results/study_q/qa1
+          [ -f $D/RATINGS_ASSISTANT.json ] || { echo "::error::the first rater's codes must be committed before the second rater runs"; exit 1; }
+          python tools/rq5_rate_llm.py $D/ITEMS.json $D/RATINGS_SECOND.json research_closure/pilot/models.json vertex-gemini-argon 2
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: QA1_RATINGS_SECOND
+          path: research_closure/results/study_q/qa1/RATINGS_SECOND.json
+      - name: Commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "gatekeeper-freeze-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add research_closure/results/study_q/qa1/RATINGS_SECOND.json
+          git commit -m "Study Q Q-A1 second rater"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin HEAD:"${GITHUB_REF_NAME}"
