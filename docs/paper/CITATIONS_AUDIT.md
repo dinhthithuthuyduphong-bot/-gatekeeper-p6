@@ -20,3 +20,6 @@ Các mục kinh điển của bản nháp (LTT, CRC, BH, CaMeL, Howard et al., P
 **Nguồn tra (trang tìm kiếm):** listing arXiv của 2608.06153, 2605.23951, 2603.13258, 2601.06789, 2606.24322, 2601.13295, 2605.26252, cùng các trang alphaxiv, emergentmind, huggingface papers tương ứng.
 
 **Cập nhật 31/10/2026:** đã bổ sung đủ tác giả MemCoder và MemGovern, đối chiếu listing arXiv với ResearchGate, Papers with Code và papers.cool. Không còn mục "and others" nào trong `refs.bib`. CooperBench và TMA-NM không dùng trong bài nên không bổ sung.
+
+
+**31/10/2026:** Smith et al. 2015, số trang **532–543** đã xác minh (researchr, GP bibliography, DOI 10.1145/2786805.2786825); DOI đã thêm vào `refs.bib`.

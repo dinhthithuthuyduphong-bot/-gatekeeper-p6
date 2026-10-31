@@ -19,10 +19,10 @@ Cập nhật sau **mỗi** lần chạy. Mỗi tiêu chí có trạng thái **TH
 | S5 | So sánh với baseline mạnh và với công trình gần nhất | **THẮNG một phần** | B2, B6-R (kiểu GSE), B8; PatchDiff. **Thiếu:** chạy chính GSE (A12) |
 | S6 | Kỹ năng đa dạng, quy mô thư viện thực tế | **THẮNG một phần** | R2: 12 họ trên 16 repo (footprint, tương tác). Study S: cổng ra quyết định thật cho 8 họ trên 12 hàm thật (48 ô). **Thiếu:** admit với oracle của chuyên gia cho các họ mới (hiện "tác hại" = khác bản gốc) |
 | S7 | Tác hại của tổ hợp đo trên dữ liệu thật | **THẮNG một phần** | Study S (S-A3, kết quả cuối): 12 hàm thật, tổ hợp cộng tính, cổng loại đúng 3/48 ô. **Thiếu:** 11 đơn vị không chạy được (hera_pspec: phụ thuộc không có trên PyPI); chưa có tổ hợp thật nào gây hại "nảy sinh" để minh hoạ Định lý 2.5 |
-| S8 | Người chấm độc lập là con người | **THUA** | Người chấm thứ hai là LLM (A9). Việc 1.9 và 7.6 |
+| S8 | Người chấm độc lập là con người | **THUA → thay bằng model (đang chạy)** | Người chấm thứ ba là model khác (gemini-flash), chấm mù; nhãn đa số của 3 người chấm, Fleiss κ. Vẫn không phải người: nói rõ trong bài |
 | S9 | Tái lập được, có artifact ẩn danh | **THẮNG** (chờ upload) | submission check pass; `make_anonymous_artifact.py`. Người làm: upload |
-| S10 | Đúng định dạng và hạn của venue | **THUA** (chưa xác minh) | Bài hiện 14 trang `acmsmall`. Việc 0.3, 5.4 (người làm): tra giới hạn trang FSE 2027 |
-| S11 | Thầy và một người đọc độc lập đã duyệt | **THUA** | Việc 1.9, 5.5 (người làm) |
+| S10 | Đúng định dạng và hạn của venue | **THẮNG** (cần xem lại khi có call for papers chính thức) | FSE 2027 đã hết hạn → **ISSTA 2027**, hạn bài 11/1/2027, 18 trang + tham khảo (quy định 2026); bài 14 trang; đã thêm mục Data Availability bắt buộc |
+| S11 | Thầy và một người đọc độc lập đã duyệt | **THUA → thay một phần bằng model (đang chạy)** | Model kiểm từng chứng minh + 3 phản biện giả lập theo ISSTA. Thầy duyệt cuối vẫn là việc của người |
 
 **Kết luận hiện tại:** bài đạt S1–S4 và S9; bài **chưa** chắc thắng vì S7 và S8 (phần phản biện hay tấn công nhất), và S10, S11 là việc của người. Không thể bảo đảm bài được nhận. Việc làm được là đóng từng ô THUA.
 
@@ -86,7 +86,7 @@ Mỗi dòng gồm:
   - **(A) Bài phương pháp và lý thuyết:** chấp nhận thay đổi mã có kiểm soát rủi ro (Định lý 4′, 6′, 7′ đã sửa) cộng bằng chứng thực nghiệm trung thực, gồm kết quả âm của Study D–H và đồ thị pha các cổng.
   - **(B) Bài thực nghiệm về oracle:** "khoảng 11% patch resolved trên SWE-bench Verified khác hành vi bản fix trên đầu vào hợp lệ" (Study Q, Q-A1), với lý thuyết là phần phụ.
   *Xong khi:* thầy chọn một khung, ghi vào TRACKING_FSE mục 4. **→ Đã chọn khung A (31/10/2026).**
-- [ ] **0.3 Chọn hội nghị hoặc tạp chí và hạn nộp** (FSE, ICSE, ISSTA, ASE, EMSE, TOSEM). Ghi hạn, giới hạn số trang, double-blind hay không.
+- [x] **0.3 Chọn hội nghị hoặc tạp chí và hạn nộp** → ISSTA 2027 (11/1/2027), xem SUBMISSION_CHECKLIST. (FSE, ICSE, ISSTA, ASE, EMSE, TOSEM). Ghi hạn, giới hạn số trang, double-blind hay không.
   *Xong khi:* có một dòng trong TRACKING_FSE: tên venue, hạn, số trang.
 - [ ] **0.4 Liệt kê 3 đến 5 câu hỏi nghiên cứu (RQ) cuối cùng.** Mỗi RQ phải có tệp kết quả tương ứng; RQ nào chưa có dữ liệu thì đưa sang giai đoạn 2.
 

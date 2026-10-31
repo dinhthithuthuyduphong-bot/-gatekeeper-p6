@@ -41,6 +41,14 @@ fix also rejects; on SWE-bench Verified the measured harm rate changes by a fact
 \input{sections/threats}
 \input{sections/related}
 \input{sections/conclusion}
+
+\section*{Data Availability}
+An anonymous replication package is available at \url{https://anonymous.4open.science/r/gatekeeper-artifact} (link to be
+activated at submission).  It contains the implementation (Section~\ref{sec:impl}), every study's protocol, frozen configuration
+and amendments, the recorded trials and result files from which every number in this paper is computed, the scripts that compute
+them, and the workflow definitions that ran them.  Four commands, without network access or cost, re-run the unit tests, the numerical checks of
+Section~\ref{sec:checks} and the recomputation of every quoted number; studies that call language models or clone third-party
+repositories can be re-run from their workflows, and their recorded outputs are included so that no number depends on a re-run.
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{refs}
 \end{document}
