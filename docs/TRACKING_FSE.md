@@ -43,8 +43,9 @@ Giao thức: [STUDY_Q_PROTOCOL](../study_q/STUDY_Q_PROTOCOL.md). Amendment: chư
 | Sửa workflow stream (patch `study_q_stream_msg`) | ✅ | Ô `only` nhận nhiều định dạng hơn, báo lỗi rõ ràng; run #1 và #2 lỗi vì `only=3` không phải id |
 | Che token Vertex trong log (commit `206da51`) | ✅ | Thêm `::add-mask::` cho 13 workflow; đã xác nhận trong log của part 0 (`GOOGLE_OAUTH_TOKEN: ***`) |
 | Smoke 3 instance ([run #3](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41184775725)) | ✅ | 3/3 thành công, `FINISHED`. Lưu ý: mỗi instance khoảng 1 phút, artifact khoảng 1 KB, cần mở ra kiểm tra |
-| **Stream part 0**, 235 instance ([run #4](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41185100083)) | 🔄 | Bắt đầu 31/10 08:33 UTC; lúc 09:05: đang chạy, 0 job lỗi |
-| Stream part 1, 234 instance | ⏳ | Chạy sau khi part 0 xong |
+| Stream part 0, 235 instance ([run #4](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41185100083)) | ✅ | 08:33 đến 09:11 UTC; 235/235 job thành công, 0 lỗi |
+| Stream part 1, 234 instance ([run #5](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41187862326)) | 🔄 | Bắt đầu 09:14 UTC |
+| ⚠️ Lệch giao thức: không lưu đầu ra từng đầu vào | ⏳ quyết định | `q_instance.py` chỉ lưu tóm tắt C1/C2/C3, trong khi giao thức mục 3 nói lưu mọi đầu ra. Cần amendment hoặc chạy lại có lưu (xem PROCESS_LOG) |
 | Chạy lại instance lỗi hạ tầng (`only=...`) | ⏳ | Theo quy tắc P-A3: mỗi instance là một job |
 | Workflow tổng hợp chạy `tools/q_analyze.py` | ⏳ | **Chưa có workflow nào gọi `q_analyze.py`**, cần thêm |
 | Cổng Q-G1: có ≥ 18 instance có patch có khác biệt | ⏳ | Nếu < 18 thì không kiểm định HQ1, chỉ báo cáo mô tả |
@@ -103,4 +104,6 @@ PDF gốc: [`paper/source/`](paper/source/), đã đối chiếu toàn văn ngà
 | 31/10/2026 08:33 | Che token Vertex (`206da51`); bắt đầu part 0 (run #4) |
 | 31/10/2026 08:35 | Thêm TRACKING_FSE.md (`9ea7356`) |
 | 31/10/2026 | Thêm REVIEW_FSE.md (`635eebc`): review công thức, kiểm lại bằng số |
+| 31/10/2026 09:11 | Part 0 xong: 235/235 thành công |
+| 31/10/2026 09:14 | Bắt đầu part 1 (run #5); ghi nhận lệch giao thức về lưu đầu ra |
 | 31/10/2026 | Đưa 3 PDF lên `docs/paper/source/`; kiểm tra toàn bài (PAPER_AUDIT.md); sắp xếp lại repo (`docs/`, `archive/`); part 0 vẫn đang chạy |

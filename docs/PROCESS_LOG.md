@@ -89,3 +89,9 @@ Mẫu cho mỗi mục:
 - Bằng chứng: [run 41185100083](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41185100083), trạng thái `in_progress` sau khoảng 32 phút; `get_job_logs failed_only`: **0 job lỗi**.
 - **Xác nhận bản sửa che token:** log job `Q_astropy__astropy-12907` (job 124490360875) in `GOOGLE_OAUTH_TOKEN: ***`.
 - Còn mở: chưa chạy part 1 (chờ part 0 xong). Artifact mỗi instance vẫn khoảng 1 KB, cần mở ra kiểm tra trước khi phân tích.
+
+### 09:14 — Part 0 xong; bắt đầu part 1
+- Part 0: [run 41185100083](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41185100083) xong lúc 09:11, kết luận `success`, **0 job lỗi** trên 236 job (1 plan + 235 instance).
+- Kiểm tra mẫu: artifact nhỏ (100 artifact đầu: 595 đến 1.806 byte, trung vị 734). Log cho thấy trạng thái khác nhau giữa các instance, ví dụ `django__django-13807`: `NOT_USABLE`; `astropy__astropy-13033`: `FINISHED`. Nghĩa là pipeline chạy đúng các nhánh của `tools/q_instance.py`.
+- **Phát hiện, lệch giao thức:** giao thức mục 3 ghi "Chế độ ghi lại bật: lưu patch và mọi đầu ra". `q_instance.py` có bật `capture=True`, nhưng chỉ lưu **bản tóm tắt** (`q_classify.summarise`: số đếm theo loại C1/C2/C3) vào `Q_<id>.json`. Danh sách đầu ra từng đầu vào bị xoá cùng thư mục tạm. Patch vẫn truy lại được từ `POOL.jsonl.gz` qua `sha`. **Không sửa** công cụ vì đã đóng băng và đang chạy. Cần người nghiên cứu quyết: ghi một amendment mô tả lệch này, hoặc chạy lại có lưu đầu ra cho các instance cần kiểm tra thủ công.
+- Part 1: [run 41187862326](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41187862326), 234 instance, bắt đầu 09:14 trên commit `3d8ff85`. Kiểm tra trước khi chạy: các tệp mà job dùng (`tools/q_instance.py`, `study_q/`, `research_closure/pilot/models.json`) không bị đợt sắp xếp lại đụng tới; `freeze_study.py verify study_q` vẫn verified.
