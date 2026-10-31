@@ -54,7 +54,7 @@ def file_pairs(skills, src):
         ab = apply_all(skills[b], base[a][0])
         ba = apply_all(skills[a], base[b][0])
         pairs.append({"a": a, "b": b,
-                      "shared_function": bool({f for f, _ in base[a][1]} & {f for f, _ in base[b][1]} - {"<module>"}),
+                      "shared_function": bool({f for f, _ in base[a][1]} & {f for f, _ in base[b][1]}),   # module level counts (TC5)
                       "commute": ab[0] == ba[0],
                       # enables/disables: the number of sites per function changes; nested: same sites, but one edit lies
                       # inside the other's span (the site text changes)
