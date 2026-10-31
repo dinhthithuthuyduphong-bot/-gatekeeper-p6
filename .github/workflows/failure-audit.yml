@@ -1,0 +1,46 @@
+# Root-cause audit of failed workflow runs: failed job/step, error lines, category (tools/failure_audit.py).
+# Commits research_closure/results/failure_audit/FAILURE_AUDIT.{json,md}.  No model calls.
+name: Gatekeeper failure audit
+on:
+  workflow_dispatch:
+    inputs:
+      runs: {description: "optional comma-separated run ids (empty = every failed run among the latest max_runs)", default: ""}
+      max_runs: {description: "how many recent runs to scan", default: "400"}
+permissions:
+  contents: write
+  actions: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: python -m unittest tests.test_failure_audit -v
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          ARGS=(--max-runs "${{ inputs.max_runs }}")
+          [ -n "${{ inputs.runs }}" ] && ARGS+=(--runs "${{ inputs.runs }}")
+          python tools/failure_audit.py "$GITHUB_REPOSITORY" out_audit "${ARGS[@]}"
+          cat out_audit/FAILURE_AUDIT.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: FAILURE_AUDIT
+          path: out_audit
+      - name: Commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p research_closure/results/failure_audit
+          cp out_audit/* research_closure/results/failure_audit/
+          git config user.name "gatekeeper-freeze-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add research_closure/results/failure_audit
+          git diff --cached --quiet && { echo "no change"; exit 0; }
+          git commit -m "Failure audit"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin HEAD:"${GITHUB_REF_NAME}"
