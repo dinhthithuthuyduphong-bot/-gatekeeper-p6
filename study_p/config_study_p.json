@@ -69,7 +69,8 @@
   "amendments_applied": [
     "P-A1",
     "P-A2",
-    "P-A3"
+    "P-A3",
+    "P-A4"
   ],
   "amendment_log": [
     {
@@ -86,6 +87,11 @@
       "id": "P-A3",
       "edits": [],
       "applied_utc": "2026-10-31T00:21:07+00:00"
+    },
+    {
+      "id": "P-A4",
+      "edits": [],
+      "applied_utc": "2026-10-31T00:57:01+00:00"
     }
   ]
 }
