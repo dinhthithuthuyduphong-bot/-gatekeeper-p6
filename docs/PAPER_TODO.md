@@ -48,7 +48,7 @@ Mỗi dòng gồm:
 | R10 | 31/10 | Paper build (41224364294) | PDF | — | — | **THUA**: LaTeX lỗi | Không phải lỗi lý thuyết: `_` chưa escape trong `\texttt{yaml.safe_load}`. Đã sửa |
 | R11 | 31/10 | Rà lý thuyết ↔ mã (6b44846) | Kiểm mã có đúng lý thuyết | `ledger.py` (TC2), `conformance.py` (TC7), `site_footprint` (TC5), C10, C11 | **Lỗi:** (TC5) mã cấp module bị coi là rời nhau, sai với Hệ quả 2.6; (TC3/TC4) bài không nói luật e-Holm mà D–H dùng | **THUA → sửa**: TC5 là lỗi không chặt thật | Debug: census R2 lần trước cũng bỏ `<module>`, phải chạy lại (R2-A2) |
 | R12 | 31/10 | Theory checks (00fe817) | C10, C11 | — | Luật D–H khớp Nhận xét e-Holm | **THẮNG**: FWER 2,4% / 7,3% ≤ 10%; ledger ≤ α | — |
-| R13 | 31/10 | Study R2-A2 (193b136, 2d2cac8) | Census có mã cấp module | Census giữ `file::<module>` | — | **THẮNG**: 467 hàm/vùng (trước 456), các số khác không đổi; kết luận giữ nguyên | — |
+| R13 | 31/10 | Study R2-A2 (193b136; 41226541891 không đổi số) | Census có mã cấp module | Census giữ `file::<module>` | — | **THẮNG**: 467 hàm/vùng (trước 456), các số khác không đổi; kết luận giữ nguyên | — |
 
 ## C. Vòng debug khi THUA (làm theo thứ tự)
 
