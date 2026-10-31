@@ -1,5 +1,5 @@
 # Study Q, feasibility Q-F2 (0 cost): census of the public patch pool of SWE-bench Verified (predictions and resolved lists
-# of every public submission).  Reads research_closure/results/study_q/SUBMISSIONS.json.
+# of every public submission).  Reads each entry's metadata.yaml `assets` block, which points at the predictions.
 name: Gatekeeper Study Q feasibility Q-F2 (patch pool census)
 on: workflow_dispatch
 permissions:
@@ -13,9 +13,12 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
+      - run: pip install -q pyyaml
+      - name: Clone the experiments repository (entries only, small)
+        run: git clone --depth 1 https://github.com/SWE-bench/experiments.git /tmp/experiments
       - run: |
           mkdir -p out_pool
-          python -u tools/q_f2.py research_closure/results/study_q/SUBMISSIONS.json out_pool 2>&1 | tee out_pool/log.txt
+          python -u tools/q_f2.py entries /tmp/experiments out_pool 2>&1 | tee out_pool/log.txt
       - uses: actions/upload-artifact@v7
         if: always()
         with:
