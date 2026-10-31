@@ -33,3 +33,16 @@ Mẫu phân tầng 3 instance mỗi repo (khoảng 36 trên 12 repo), chỉ G0, 
 - OpenAI (2024). Introducing SWE-bench Verified. (bài đăng kỹ thuật; cần kiểm tra lại trích dẫn chính xác)
 - Meyer, B. (1992). Applying "design by contract". *Computer*, 25(10), 40–51.
 - Các tài liệu khác như trong giao thức Study P, mục 8.
+
+## Kết quả Q-F0 (G0, 0 USD)
+
+- Hạ tầng chạy trọn **33/33** instance ngay lần đầu: quy ước tên image đúng, bản fix áp được, mọi môi trường Python (3.6 đến 3.11) chạy được qua `docker exec`. Có **182** bản nộp công khai trên SWE-bench Verified.
+- Dùng được: **3/33 = 9%** (Wilson 3% đến 24%). Nguyên nhân thất bại giống hệt bước khả thi 1 của Study P: bản gốc không bao giờ khác bản fix trên đầu vào theo chữ ký (17 instance), và phương thức của lớp không dựng được (17 hàm); Django cần cấu hình settings khi import.
+
+## Yêu cầu cỡ mẫu (suy ra bằng công thức)
+
+HQ1 (nhị thức chính xác, α = 0,05, công suất 0,8, H0: 0,5, thay thế 0,8 theo RQ5) cần **18 patch có khác biệt ngây thơ**. Với cận dưới Wilson của tỉ lệ đó ở Study P (29/205, cận dưới 0,10) và một patch mỗi instance: cần **180 patch plausible**, tức **khoảng 180 instance dùng được** trên khung 500, tỉ lệ dùng được khoảng **36%**.
+
+## Q-F1 (G2, khoảng 1 USD): quy tắc ghi trước
+
+Chạy G2 (model nhẹ viết chương trình sinh, xem mô tả issue và diff) trên **đúng 33 instance** của Q-F0. **Đi tiếp với thiết kế một patch mỗi instance** khi cận dưới Wilson 95% của tỉ lệ dùng được, nhân 500, **≥ 180**. Nếu không đạt, xét thiết kế nhiều patch mỗi instance (các bản nộp khác nhau) với hiệu chỉnh hiệu ứng thiết kế [Kish 1965], dùng hệ số tương quan ước lượng từ dữ liệu, trước khi đăng ký.

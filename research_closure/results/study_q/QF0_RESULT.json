@@ -1,0 +1,1055 @@
+{
+ "summary": {
+  "sample": 33,
+  "finished": 33,
+  "usable": 3,
+  "verdicts": {
+   "usable": 3,
+   "the original never differs from the fix on generated inputs": 17,
+   "no edited function could be imported or called": 12,
+   "no edited function present in both versions": 1
+  },
+  "python": {
+   "3.9.20": 20,
+   "3.10.15": 3,
+   "3.8.20": 2,
+   "3.6.13": 2,
+   "3.9.21": 2,
+   "3.11.10": 2,
+   "3.11.11": 2
+  },
+  "public_submissions": 182
+ },
+ "records": [
+  {
+   "instance_id": "astropy__astropy-14309",
+   "repo": "astropy/astropy",
+   "image": "swebench/sweb.eval.x86_64.astropy_1776_astropy-14309:latest",
+   "modules": [
+    "astropy/io/fits/connect.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "astropy/io/fits/connect.py",
+     "qualname": "is_fits",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 3,
+     "trigger_rate": 0.015,
+     "both_raise": 197,
+     "examples": [
+      {
+       "orig": [
+        "exc",
+        "IndexError",
+        "tuple index out of range"
+       ],
+       "fix": [
+        "ok",
+        "bool",
+        "False"
+       ]
+      },
+      {
+       "orig": [
+        "exc",
+        "IndexError",
+        "tuple index out of range"
+       ],
+       "fix": [
+        "ok",
+        "bool",
+        "False"
+       ]
+      },
+      {
+       "orig": [
+        "exc",
+        "IndexError",
+        "tuple index out of range"
+       ],
+       "fix": [
+        "ok",
+        "bool",
+        "False"
+       ]
+      }
+     ],
+     "usable": true,
+     "why": "usable"
+    }
+   ],
+   "verdict": "usable",
+   "seconds": 38
+  },
+  {
+   "instance_id": "pydata__xarray-6461",
+   "repo": "pydata/xarray",
+   "image": "swebench/sweb.eval.x86_64.pydata_1776_xarray-6461:latest",
+   "modules": [
+    "xarray/core/computation.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.10.15",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "xarray/core/computation.py",
+     "qualname": "where",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 47,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    }
+   ],
+   "verdict": "the original never differs from the fix on generated inputs",
+   "seconds": 64
+  },
+  {
+   "instance_id": "django__django-14765",
+   "repo": "django/django",
+   "image": "swebench/sweb.eval.x86_64.django_1776_django-14765:latest",
+   "modules": [
+    "django/db/migrations/state.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.8.20",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "django/db/migrations/state.py",
+     "qualname": "ProjectState.__init__",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 44,
+     "trigger_rate": 0.22,
+     "both_raise": 18,
+     "examples": [
+      {
+       "orig": [
+        "exc",
+        "TypeError",
+        "'float' object is not iterable"
+       ],
+       "fix": [
+        "exc",
+        "AssertionError",
+        ""
+       ]
+      },
+      {
+       "orig": [
+        "exc",
+        "TypeError",
+        "'float' object is not iterable"
+       ],
+       "fix": [
+        "exc",
+        "AssertionError",
+        ""
+       ]
+      },
+      {
+       "orig": [
+        "ok",
+        "NoneType",
+        "None"
+       ],
+       "fix": [
+        "exc",
+        "AssertionError",
+        ""
+       ]
+      }
+     ],
+     "usable": true,
+     "why": "usable"
+    }
+   ],
+   "verdict": "usable",
+   "seconds": 46
+  },
+  {
+   "instance_id": "psf__requests-5414",
+   "repo": "psf/requests",
+   "image": "swebench/sweb.eval.x86_64.psf_1776_requests-5414:latest",
+   "modules": [
+    "requests/models.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "requests/models.py",
+     "qualname": "PreparedRequest.prepare_url",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 197,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    }
+   ],
+   "verdict": "the original never differs from the fix on generated inputs",
+   "seconds": 35
+  },
+  {
+   "instance_id": "psf__requests-1766",
+   "repo": "psf/requests",
+   "image": "swebench/sweb.eval.x86_64.psf_1776_requests-1766:latest",
+   "modules": [
+    "requests/auth.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "requests/auth.py",
+     "qualname": "HTTPDigestAuth.build_digest_header",
+     "usable": false,
+     "why": "did not run: UNCALLABLE instance method of a class that cannot be built without arguments (TypeError)"
+    }
+   ],
+   "verdict": "no edited function could be imported or called",
+   "seconds": 32
+  },
+  {
+   "instance_id": "pydata__xarray-3677",
+   "repo": "pydata/xarray",
+   "image": "swebench/sweb.eval.x86_64.pydata_1776_xarray-3677:latest",
+   "modules": [
+    "xarray/core/dataset.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.10.15",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "xarray/core/dataset.py",
+     "qualname": "Dataset.merge",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 200,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    }
+   ],
+   "verdict": "the original never differs from the fix on generated inputs",
+   "seconds": 75
+  },
+  {
+   "instance_id": "pytest-dev__pytest-7205",
+   "repo": "pytest-dev/pytest",
+   "image": "swebench/sweb.eval.x86_64.pytest-dev_1776_pytest-7205:latest",
+   "modules": [
+    "src/_pytest/setuponly.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "src/_pytest/setuponly.py",
+     "qualname": "_show_fixture_action",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 200,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    }
+   ],
+   "verdict": "the original never differs from the fix on generated inputs",
+   "seconds": 40
+  },
+  {
+   "instance_id": "pylint-dev__pylint-6903",
+   "repo": "pylint-dev/pylint",
+   "image": "swebench/sweb.eval.x86_64.pylint-dev_1776_pylint-6903:latest",
+   "modules": [
+    "pylint/lint/run.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "pylint/lint/run.py",
+     "qualname": "_query_cpu",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 0,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    }
+   ],
+   "verdict": "the original never differs from the fix on generated inputs",
+   "seconds": 46
+  },
+  {
+   "instance_id": "pylint-dev__pylint-6528",
+   "repo": "pylint-dev/pylint",
+   "image": "swebench/sweb.eval.x86_64.pylint-dev_1776_pylint-6528:latest",
+   "modules": [
+    "pylint/lint/expand_modules.py",
+    "pylint/lint/pylinter.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "edited_functions": 2,
+   "functions": [
+    {
+     "file": "pylint/lint/expand_modules.py",
+     "qualname": "expand_modules",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 182,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    },
+    {
+     "file": "pylint/lint/pylinter.py",
+     "qualname": "PyLinter._discover_files",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 0,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    }
+   ],
+   "verdict": "the original never differs from the fix on generated inputs",
+   "seconds": 39
+  },
+  {
+   "instance_id": "sphinx-doc__sphinx-10614",
+   "repo": "sphinx-doc/sphinx",
+   "image": "swebench/sweb.eval.x86_64.sphinx-doc_1776_sphinx-10614:latest",
+   "modules": [
+    "sphinx/ext/inheritance_diagram.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "sphinx/ext/inheritance_diagram.py",
+     "qualname": "html_visit_inheritance_diagram",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 200,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    }
+   ],
+   "verdict": "the original never differs from the fix on generated inputs",
+   "seconds": 40
+  },
+  {
+   "instance_id": "pytest-dev__pytest-8399",
+   "repo": "pytest-dev/pytest",
+   "image": "swebench/sweb.eval.x86_64.pytest-dev_1776_pytest-8399:latest",
+   "modules": [
+    "src/_pytest/python.py",
+    "src/_pytest/unittest.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "edited_functions": 5,
+   "functions": [
+    {
+     "file": "src/_pytest/python.py",
+     "qualname": "Class._inject_setup_class_fixture",
+     "usable": false,
+     "why": "did not run: UNCALLABLE instance method of a class that cannot be built without arguments (Failed)"
+    },
+    {
+     "file": "src/_pytest/python.py",
+     "qualname": "Class._inject_setup_method_fixture",
+     "usable": false,
+     "why": "did not run: UNCALLABLE instance method of a class that cannot be built without arguments (Failed)"
+    },
+    {
+     "file": "src/_pytest/python.py",
+     "qualname": "Module._inject_setup_function_fixture",
+     "usable": false,
+     "why": "did not run: UNCALLABLE instance method of a class that cannot be built without arguments (Failed)"
+    }
+   ],
+   "verdict": "no edited function could be imported or called",
+   "seconds": 41
+  },
+  {
+   "instance_id": "sympy__sympy-15345",
+   "repo": "sympy/sympy",
+   "image": "swebench/sweb.eval.x86_64.sympy_1776_sympy-15345:latest",
+   "modules": [
+    "sympy/printing/mathematica.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "edited_functions": 0,
+   "functions": [],
+   "verdict": "no edited function present in both versions",
+   "seconds": 36
+  },
+  {
+   "instance_id": "pylint-dev__pylint-7080",
+   "repo": "pylint-dev/pylint",
+   "image": "swebench/sweb.eval.x86_64.pylint-dev_1776_pylint-7080:latest",
+   "modules": [
+    "pylint/lint/expand_modules.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "pylint/lint/expand_modules.py",
+     "qualname": "_is_ignored_file",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 186,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    }
+   ],
+   "verdict": "the original never differs from the fix on generated inputs",
+   "seconds": 39
+  },
+  {
+   "instance_id": "scikit-learn__scikit-learn-13328",
+   "repo": "scikit-learn/scikit-learn",
+   "image": "swebench/sweb.eval.x86_64.scikit-learn_1776_scikit-learn-13328:latest",
+   "modules": [
+    "sklearn/linear_model/huber.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.6.13",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "sklearn/linear_model/huber.py",
+     "qualname": "HuberRegressor.fit",
+     "usable": false,
+     "why": "did not run: CRASHED \"n\", 200), a.get(\"seed\", 0), skip_first)\n  File \"/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/gatekeeper_ext/fn_inputs.py\", line 73, in generate\n    v = value_for(ann, p.default, rng)\n  File \"/home/runner/work/-gatekeeper-p6/-gatekeeper-p6/gatekeeper_ext/fn_inputs.py\", line 27, in value_for\n    origin = typing.get_origin(annotation)\nAttributeError: module 'typing' has no attribute 'get_origin'\n"
+    }
+   ],
+   "verdict": "no edited function could be imported or called",
+   "seconds": 46
+  },
+  {
+   "instance_id": "pytest-dev__pytest-10356",
+   "repo": "pytest-dev/pytest",
+   "image": "swebench/sweb.eval.x86_64.pytest-dev_1776_pytest-10356:latest",
+   "modules": [
+    "src/_pytest/mark/structures.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "edited_functions": 2,
+   "functions": [
+    {
+     "file": "src/_pytest/mark/structures.py",
+     "qualname": "get_unpacked_marks",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 0,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    },
+    {
+     "file": "src/_pytest/mark/structures.py",
+     "qualname": "store_mark",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 200,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    }
+   ],
+   "verdict": "the original never differs from the fix on generated inputs",
+   "seconds": 36
+  },
+  {
+   "instance_id": "sphinx-doc__sphinx-9658",
+   "repo": "sphinx-doc/sphinx",
+   "image": "swebench/sweb.eval.x86_64.sphinx-doc_1776_sphinx-9658:latest",
+   "modules": [
+    "sphinx/ext/autodoc/mock.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "edited_functions": 2,
+   "functions": [
+    {
+     "file": "sphinx/ext/autodoc/mock.py",
+     "qualname": "_MockObject.__init__",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 0,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    },
+    {
+     "file": "sphinx/ext/autodoc/mock.py",
+     "qualname": "_make_subclass",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 175,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    }
+   ],
+   "verdict": "the original never differs from the fix on generated inputs",
+   "seconds": 38
+  },
+  {
+   "instance_id": "scikit-learn__scikit-learn-25931",
+   "repo": "scikit-learn/scikit-learn",
+   "image": "swebench/sweb.eval.x86_64.scikit-learn_1776_scikit-learn-25931:latest",
+   "modules": [
+    "sklearn/ensemble/_iforest.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.21",
+   "edited_functions": 2,
+   "functions": [
+    {
+     "file": "sklearn/ensemble/_iforest.py",
+     "qualname": "IsolationForest.fit",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 200,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    },
+    {
+     "file": "sklearn/ensemble/_iforest.py",
+     "qualname": "IsolationForest.score_samples",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 200,
+     "trigger_rate": 1.0,
+     "both_raise": 200,
+     "examples": [
+      {
+       "orig": [
+        "exc",
+        "NotFittedError",
+        "This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator."
+       ],
+       "fix": [
+        "exc",
+        "ValueError",
+        "Expected 2D array, got scalar array instead:\narray=1.0.\nReshape your data either using array.reshape(-1, 1) if your data"
+       ]
+      },
+      {
+       "orig": [
+        "exc",
+        "NotFittedError",
+        "This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator."
+       ],
+       "fix": [
+        "exc",
+        "ValueError",
+        "Expected 2D array, got scalar array instead:\narray=nan.\nReshape your data either using array.reshape(-1, 1) if your data"
+       ]
+      },
+      {
+       "orig": [
+        "exc",
+        "NotFittedError",
+        "This IsolationForest instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator."
+       ],
+       "fix": [
+        "exc",
+        "ValueError",
+        "Expected 2D array, got scalar array instead:\narray=2147483648.0.\nReshape your data either using array.reshape(-1, 1) if "
+       ]
+      }
+     ],
+     "usable": true,
+     "why": "usable"
+    }
+   ],
+   "verdict": "usable",
+   "seconds": 64
+  },
+  {
+   "instance_id": "django__django-13551",
+   "repo": "django/django",
+   "image": "swebench/sweb.eval.x86_64.django_1776_django-13551:latest",
+   "modules": [
+    "django/contrib/auth/tokens.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.6.13",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "django/contrib/auth/tokens.py",
+     "qualname": "PasswordResetTokenGenerator._make_hash_value",
+     "usable": false,
+     "why": "did not run: UNCALLABLE import failed: ImproperlyConfigured / ImproperlyConfigured"
+    }
+   ],
+   "verdict": "no edited function could be imported or called",
+   "seconds": 41
+  },
+  {
+   "instance_id": "sympy__sympy-15875",
+   "repo": "sympy/sympy",
+   "image": "swebench/sweb.eval.x86_64.sympy_1776_sympy-15875:latest",
+   "modules": [
+    "sympy/core/add.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "sympy/core/add.py",
+     "qualname": "Add._eval_is_zero",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 0,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    }
+   ],
+   "verdict": "the original never differs from the fix on generated inputs",
+   "seconds": 42
+  },
+  {
+   "instance_id": "astropy__astropy-13033",
+   "repo": "astropy/astropy",
+   "image": "swebench/sweb.eval.x86_64.astropy_1776_astropy-13033:latest",
+   "modules": [
+    "astropy/timeseries/core.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "astropy/timeseries/core.py",
+     "qualname": "BaseTimeSeries._check_required_columns",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 0,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    }
+   ],
+   "verdict": "the original never differs from the fix on generated inputs",
+   "seconds": 39
+  },
+  {
+   "instance_id": "matplotlib__matplotlib-20859",
+   "repo": "matplotlib/matplotlib",
+   "image": "swebench/sweb.eval.x86_64.matplotlib_1776_matplotlib-20859:latest",
+   "modules": [
+    "lib/matplotlib/legend.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.8.20",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "lib/matplotlib/legend.py",
+     "qualname": "Legend.__init__",
+     "usable": false,
+     "why": "did not run: UNCALLABLE instance method of a class that cannot be built without arguments (TypeError)"
+    }
+   ],
+   "verdict": "no edited function could be imported or called",
+   "seconds": 69
+  },
+  {
+   "instance_id": "psf__requests-1921",
+   "repo": "psf/requests",
+   "image": "swebench/sweb.eval.x86_64.psf_1776_requests-1921:latest",
+   "modules": [
+    "requests/sessions.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "requests/sessions.py",
+     "qualname": "merge_setting",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 0,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    }
+   ],
+   "verdict": "the original never differs from the fix on generated inputs",
+   "seconds": 31
+  },
+  {
+   "instance_id": "django__django-17084",
+   "repo": "django/django",
+   "image": "swebench/sweb.eval.x86_64.django_1776_django-17084:latest",
+   "modules": [
+    "django/db/models/sql/query.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.11.10",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "django/db/models/sql/query.py",
+     "qualname": "Query.get_aggregation",
+     "usable": false,
+     "why": "did not run: UNCALLABLE instance method of a class that cannot be built without arguments (TypeError)"
+    }
+   ],
+   "verdict": "no edited function could be imported or called",
+   "seconds": 44
+  },
+  {
+   "instance_id": "mwaskom__seaborn-3069",
+   "repo": "mwaskom/seaborn",
+   "image": "swebench/sweb.eval.x86_64.mwaskom_1776_seaborn-3069:latest",
+   "modules": [
+    "seaborn/_core/plot.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "edited_functions": 2,
+   "functions": [
+    {
+     "file": "seaborn/_core/plot.py",
+     "qualname": "Plotter._finalize_figure",
+     "usable": false,
+     "why": "did not run: UNCALLABLE instance method of a class that cannot be built without arguments (TypeError)"
+    },
+    {
+     "file": "seaborn/_core/plot.py",
+     "qualname": "Plotter._setup_scales",
+     "usable": false,
+     "why": "did not run: UNCALLABLE instance method of a class that cannot be built without arguments (TypeError)"
+    }
+   ],
+   "verdict": "no edited function could be imported or called",
+   "seconds": 40
+  },
+  {
+   "instance_id": "sphinx-doc__sphinx-7910",
+   "repo": "sphinx-doc/sphinx",
+   "image": "swebench/sweb.eval.x86_64.sphinx-doc_1776_sphinx-7910:latest",
+   "modules": [
+    "sphinx/ext/napoleon/__init__.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "sphinx/ext/napoleon/__init__.py",
+     "qualname": "_skip_member",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 0,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    }
+   ],
+   "verdict": "the original never differs from the fix on generated inputs",
+   "seconds": 37
+  },
+  {
+   "instance_id": "astropy__astropy-13977",
+   "repo": "astropy/astropy",
+   "image": "swebench/sweb.eval.x86_64.astropy_1776_astropy-13977:latest",
+   "modules": [
+    "astropy/units/quantity.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "astropy/units/quantity.py",
+     "qualname": "Quantity.__array_ufunc__",
+     "usable": false,
+     "why": "did not run: UNCALLABLE instance method of a class that cannot be built without arguments (TypeError)"
+    }
+   ],
+   "verdict": "no edited function could be imported or called",
+   "seconds": 37
+  },
+  {
+   "instance_id": "pydata__xarray-6938",
+   "repo": "pydata/xarray",
+   "image": "swebench/sweb.eval.x86_64.pydata_1776_xarray-6938:latest",
+   "modules": [
+    "xarray/core/dataset.py",
+    "xarray/core/variable.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.10.15",
+   "edited_functions": 8,
+   "functions": [
+    {
+     "file": "xarray/core/dataset.py",
+     "qualname": "Dataset.swap_dims",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 45,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    },
+    {
+     "file": "xarray/core/variable.py",
+     "qualname": "IndexVariable.level_names",
+     "usable": false,
+     "why": "did not run: UNCALLABLE instance method of a class that cannot be built without arguments (TypeError)"
+    },
+    {
+     "file": "xarray/core/variable.py",
+     "qualname": "IndexVariable.name",
+     "usable": false,
+     "why": "did not run: UNCALLABLE instance method of a class that cannot be built without arguments (TypeError)"
+    }
+   ],
+   "verdict": "the original never differs from the fix on generated inputs",
+   "seconds": 79
+  },
+  {
+   "instance_id": "scikit-learn__scikit-learn-25102",
+   "repo": "scikit-learn/scikit-learn",
+   "image": "swebench/sweb.eval.x86_64.scikit-learn_1776_scikit-learn-25102:latest",
+   "modules": [
+    "sklearn/base.py",
+    "sklearn/feature_selection/_base.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.21",
+   "edited_functions": 3,
+   "functions": [
+    {
+     "file": "sklearn/base.py",
+     "qualname": "BaseEstimator._validate_data",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 200,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    },
+    {
+     "file": "sklearn/feature_selection/_base.py",
+     "qualname": "SelectorMixin._transform",
+     "usable": false,
+     "why": "did not run: UNCALLABLE instance method of a class that cannot be built without arguments (TypeError)"
+    },
+    {
+     "file": "sklearn/feature_selection/_base.py",
+     "qualname": "SelectorMixin.transform",
+     "usable": false,
+     "why": "did not run: UNCALLABLE instance method of a class that cannot be built without arguments (TypeError)"
+    }
+   ],
+   "verdict": "the original never differs from the fix on generated inputs",
+   "seconds": 61
+  },
+  {
+   "instance_id": "pallets__flask-5014",
+   "repo": "pallets/flask",
+   "image": "swebench/sweb.eval.x86_64.pallets_1776_flask-5014:latest",
+   "modules": [
+    "src/flask/blueprints.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.11.10",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "src/flask/blueprints.py",
+     "qualname": "Blueprint.__init__",
+     "usable": false,
+     "why": "did not run: UNCALLABLE instance method of a class that cannot be built without arguments (TypeError)"
+    }
+   ],
+   "verdict": "no edited function could be imported or called",
+   "seconds": 37
+  },
+  {
+   "instance_id": "matplotlib__matplotlib-26342",
+   "repo": "matplotlib/matplotlib",
+   "image": "swebench/sweb.eval.x86_64.matplotlib_1776_matplotlib-26342:latest",
+   "modules": [
+    "lib/matplotlib/collections.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.11.11",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "lib/matplotlib/collections.py",
+     "qualname": "Collection.set_paths",
+     "usable": false,
+     "why": "did not run: UNCALLABLE import failed: KeyError / ImportError"
+    }
+   ],
+   "verdict": "no edited function could be imported or called",
+   "seconds": 92
+  },
+  {
+   "instance_id": "matplotlib__matplotlib-26208",
+   "repo": "matplotlib/matplotlib",
+   "image": "swebench/sweb.eval.x86_64.matplotlib_1776_matplotlib-26208:latest",
+   "modules": [
+    "lib/matplotlib/axes/_base.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.11.11",
+   "edited_functions": 2,
+   "functions": [
+    {
+     "file": "lib/matplotlib/axes/_base.py",
+     "qualname": "_AxesBase.twinx",
+     "usable": false,
+     "why": "did not run: UNCALLABLE instance method of a class that cannot be built without arguments (TypeError)"
+    },
+    {
+     "file": "lib/matplotlib/axes/_base.py",
+     "qualname": "_AxesBase.twiny",
+     "usable": false,
+     "why": "did not run: UNCALLABLE instance method of a class that cannot be built without arguments (TypeError)"
+    }
+   ],
+   "verdict": "no edited function could be imported or called",
+   "seconds": 96
+  },
+  {
+   "instance_id": "mwaskom__seaborn-3187",
+   "repo": "mwaskom/seaborn",
+   "image": "swebench/sweb.eval.x86_64.mwaskom_1776_seaborn-3187:latest",
+   "modules": [
+    "seaborn/_core/scales.py",
+    "seaborn/utils.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "edited_functions": 2,
+   "functions": [
+    {
+     "file": "seaborn/_core/scales.py",
+     "qualname": "ContinuousBase._setup",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 200,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    },
+    {
+     "file": "seaborn/utils.py",
+     "qualname": "locator_to_legend_entries",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 200,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    }
+   ],
+   "verdict": "the original never differs from the fix on generated inputs",
+   "seconds": 47
+  },
+  {
+   "instance_id": "sympy__sympy-18211",
+   "repo": "sympy/sympy",
+   "image": "swebench/sweb.eval.x86_64.sympy_1776_sympy-18211:latest",
+   "modules": [
+    "sympy/core/relational.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "sympy/core/relational.py",
+     "qualname": "Relational._eval_as_set",
+     "usable": false,
+     "why": "did not run: UNCALLABLE instance method of a class that cannot be built without arguments (TypeError)"
+    }
+   ],
+   "verdict": "no edited function could be imported or called",
+   "seconds": 36
+  }
+ ]
+}

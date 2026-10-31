@@ -14,6 +14,11 @@ class QF0(unittest.TestCase):
     def test_image_name(self):
         self.assertEqual(Q.image_name("django__django-11099"), "swebench/sweb.eval.x86_64.django_1776_django-11099:latest")
 
+    def test_file_diffs(self):
+        d = Q.file_diffs(PATCH)
+        self.assertEqual(sorted(d), ["django/db/models/x.py", "tests/test_x.py"])
+        self.assertTrue(d["django/db/models/x.py"].startswith("diff --git a/django"))
+
     def test_edited_modules_skip_tests(self):
         self.assertEqual(Q.edited_modules(PATCH), ["django/db/models/x.py"])
 

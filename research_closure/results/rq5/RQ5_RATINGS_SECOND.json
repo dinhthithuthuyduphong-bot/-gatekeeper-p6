@@ -1,0 +1,91 @@
+{
+ "model": "google/gemini-4-argon",
+ "spent_usd": 0.028421999999999996,
+ "ratings": [
+  {
+   "id": "litellm_pr13466#1",
+   "code": "R",
+   "reason": "The candidate raises a RuntimeError where the reference successfully returns a list of route info dictionaries."
+  },
+  {
+   "id": "litellm_pr13466#2",
+   "code": "R",
+   "reason": "The reference version returns a list of route info dictionaries with 'endpoint' set to None, whereas the candidate version raises a RuntimeError when inspecting the non-callable endpoint object."
+  },
+  {
+   "id": "litellm_pr13466#3",
+   "code": "R",
+   "reason": "The candidate raises a RuntimeError where the reference successfully returns a list of route info dictionaries."
+  },
+  {
+   "id": "litellm_pr13466#4",
+   "code": "R",
+   "reason": "The candidate raises a RuntimeError where the reference successfully returns a list of route info dictionaries."
+  },
+  {
+   "id": "litellm_pr13466#5",
+   "code": "R",
+   "reason": "The reference version returns a list of route dicts while the candidate version raises a RuntimeError when checking attributes on a non-callable endpoint object."
+  },
+  {
+   "id": "splunk_ansible_pr896#1",
+   "code": "R",
+   "reason": "The candidate skips overwriting existing keys when the value in dict2 is None, causing 'secret' to remain True instead of becoming None as in the reference."
+  },
+  {
+   "id": "splunk_ansible_pr896#2",
+   "code": "R",
+   "reason": "The candidate skips overwriting keys when the value in `dict2` is `None`, causing the returned dictionary to have `'enabled': False` instead of `'enabled': None`."
+  },
+  {
+   "id": "swmmanywhere_pr177#1",
+   "code": "R",
+   "reason": "The reference version raises a ValueError, whereas the candidate version catches all ValueErrors and returns an empty MultiDiGraph instead."
+  },
+  {
+   "id": "swmmanywhere_pr177#2",
+   "code": "R",
+   "reason": "The reference version raises a ValueError, whereas the candidate version catches all ValueErrors and returns an empty MultiDiGraph instead."
+  },
+  {
+   "id": "swmmanywhere_pr177#3",
+   "code": "R",
+   "reason": "The candidate catches the `ValueError` raised by the reference implementation and returns an empty `MultiDiGraph` instead."
+  },
+  {
+   "id": "swmmanywhere_pr177#4",
+   "code": "R",
+   "reason": "The candidate catches the `ValueError` raised by the reference implementation and returns an empty `MultiDiGraph` instead."
+  },
+  {
+   "id": "swmmanywhere_pr177#5",
+   "code": "R",
+   "reason": "The reference version raises a ValueError, whereas the candidate version catches all ValueErrors and returns an empty MultiDiGraph instead."
+  },
+  {
+   "id": "ceci_pr85#1",
+   "code": "R",
+   "reason": "The reference version raises a NotImplementedError, whereas the candidate version defaults the list item type to str and returns a parsed Namespace."
+  },
+  {
+   "id": "ceci_pr85#2",
+   "code": "R",
+   "reason": "The reference version raises a NotImplementedError, whereas the candidate version defaults to str and returns a Namespace object without raising."
+  },
+  {
+   "id": "ceci_pr85#3",
+   "code": "R",
+   "reason": "The reference version raises a NotImplementedError, whereas the candidate version defaults the list item type to str and returns a parsed Namespace."
+  },
+  {
+   "id": "ceci_pr85#4",
+   "code": "R",
+   "reason": "The reference version raises a NotImplementedError, whereas the candidate version defaults the list item type to str and returns a Namespace object."
+  },
+  {
+   "id": "ceci_pr85#5",
+   "code": "R",
+   "reason": "The reference version raises a NotImplementedError, whereas the candidate version defaults the list item type to str and returns a parsed Namespace."
+  }
+ ]
+}

@@ -40,3 +40,16 @@ Nếu tính thêm hai patch thuộc nhóm cuối (`swmmanywhere_pr177`, 8,1%; `c
 ## Còn phải làm (bước 3 của kế hoạch)
 
 Hai người chấm độc lập (trợ lý và `gemini-4-argon`) xem các ví dụ C1, và **mở rộng sau khi thấy dữ liệu** (ghi rõ) sang các ví dụ "từ chối có chủ đích" của `swmmanywhere_pr177` và `ceci_pr85`.
+
+## Bước 3: hai người chấm (hoàn tất)
+
+17 mục (7 ví dụ C1 theo kế hoạch; 10 ví dụ "từ chối có chủ đích" theo phần mở rộng sau khi thấy dữ liệu). Trợ lý chấm và commit trước; `gemini-4-argon` chấm mù (không thấy loại, nguồn gốc, giả thuyết), tốn 0,03 USD.
+
+**Đồng thuận 17/17, cả hai chấm R cho mọi mục; kappa không xác định** (không có biến thiên). Bốn patch có khác biệt hành vi thật được xác nhận: `litellm_pr13466`, `splunk_ansible_pr896`, `swmmanywhere_pr177`, `ceci_pr85`.
+
+**Kết quả RQ5 cuối cùng:**
+- theo kế hoạch (C1, tái tạo được, trong vùng, được hai người xác nhận): **1/205 = 0,5%** (Wilson 0,09% đến 2,7%), `litellm_pr13466`, mà đầu vào là một đối tượng giả do model dựng;
+- thêm các ca "từ chối có chủ đích" (sau khi thấy dữ liệu): **3/205 = 1,5%** (0,5% đến 4,2%);
+- cận trên khi tính cả 3 patch không tái tạo được: 6/205 = 2,9% (1,3% đến 6,2%).
+
+**Giới hạn của bước chấm:** các mục đã được lọc sẵn (chỉ C1 và từ chối có chủ đích), nên bước chấm không có ca nào để phân biệt R với B và không đo được độ tin cậy giữa người chấm; người chấm thứ hai cùng họ model với model sinh patch; người chấm chỉ thấy đầu ra, không thấy đầu vào.

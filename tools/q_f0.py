@@ -3,7 +3,9 @@ official SWE-bench Docker image of each instance, can the functions edited by th
 and does the original differ from the fix on signature-driven inputs (G0)?
 
 python tools/q_f0.py sample OUT_DIR [PER_REPO=3]           fetch the 500 instances, write VERIFIED.json and SAMPLE.json
-python tools/q_f0.py one INSTANCE_ID VERIFIED.json OUT_DIR  probe one instance (needs docker)
+python tools/q_f0.py one INSTANCE_ID VERIFIED.json OUT_DIR [MODELS.json]
+                                                           probe one instance (needs docker); with MODELS.json the
+                                                           light model writes the generators (Q-F1, G2)
 
 Inside the container only the target interpreter runs; the snapshots live on the host under /tmp (bind-mounted at the same
 path) so tools/fn_probe.py works unchanged, with a wrapper interpreter that executes through `docker exec`.
@@ -61,11 +63,21 @@ def stratified(rows, per_repo=3, seed=SAMPLE_SEED):
     return [i for repo in sorted(by) for i in by[repo]]
 
 
+def file_diffs(patch):
+    """Split a unified diff into {path: diff of that file}."""
+    out = {}
+    for part in re.split(r"(?m)^(?=diff --git )", patch):
+        m = re.search(r"^\+\+\+ b/(\S+)", part, re.M)
+        if m:
+            out[m.group(1)] = part
+    return out
+
+
 def sh(cmd, **kw):
     return subprocess.run(cmd, capture_output=True, text=True, **kw)
 
 
-def one(iid, verified_path, out_dir):
+def one(iid, verified_path, out_dir, models=None, client=None, cap=0.15):
     row = next(r for r in json.loads(Path(verified_path).read_text()) if r["instance_id"] == iid)
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
@@ -95,7 +107,23 @@ def one(iid, verified_path, out_dir):
         import fn_probe as FP
         env = dict(os.environ, PYTHONPATH=str(ROOT), PYTHONHASHSEED="0", PYTHONDONTWRITEBYTECODE="1")
         (work / "probe").mkdir()
-        res = FP.probe_roots(wrapper, orig, gold, rec["modules"], [], work / "probe", 200, 3, env)
+        if models or client is not None:                          # Q-F1: model-written generators (G2), as Study P step 2
+            import fn_probe_llm as FL
+            if client is None:
+                from cohort_inner import RefreshingClient
+                cfg = next(m for m in json.loads(Path(models).read_text())["models"] if m["name"] == "vertex-gemini-flash")
+                client = RefreshingClient(cfg["base_url"].replace("{GCP_PROJECT}", os.environ.get("GCP_PROJECT", "")), cfg["key_env"], cfg.get("extra", {}))
+                model_id, prices = cfg["model_id"], cfg["prices_usd_per_mtok"]
+            else:
+                model_id, prices = "fake", {"input": 1.0, "output": 1.0}
+            diffs = file_diffs(row["patch"])
+            seed = int(hashlib.sha256(("study-q-f1:" + iid).encode()).hexdigest()[:8], 16) % 2000000000
+            res = FL.probe_llm(client, model_id, prices, cap, wrapper, orig, gold, rec["modules"], [], (row.get("problem_statement") or "")[:3000],
+                               work / "probe", 200, 3, env, seed, lambda rel: diffs.get(rel, "")[:4000])
+            rec["generator"] = "G2"
+        else:
+            res = FP.probe_roots(wrapper, orig, gold, rec["modules"], [], work / "probe", 200, 3, env)
+            rec["generator"] = "G0"
         rec.update(res, status="FINISHED")
     except Exception as exc:
         rec.update(status="ERROR", error=("%s: %s" % (type(exc).__name__, exc))[:400])
@@ -119,7 +147,7 @@ def main(argv):
         (out / "SAMPLE.json").write_text(json.dumps(s))
         print(json.dumps({"instances": len(rows), "repos": len({r["repo"] for r in rows}), "sample": len(s)}))
         return 0
-    r = one(argv[1], argv[2], argv[3])
+    r = one(argv[1], argv[2], argv[3], models=argv[4] if len(argv) > 4 and argv[4] else None)
     print(json.dumps({k: r.get(k) for k in ("instance_id", "status", "python", "verdict", "error")}))
     return 0
 

@@ -1,0 +1,34 @@
+{
+ "items": 17,
+ "agreement": 1.0,
+ "kappa": null,
+ "codes_assistant": {
+  "R": 17,
+  "B": 0,
+  "U": 0
+ },
+ "codes_second": {
+  "R": 17,
+  "B": 0,
+  "U": 0
+ },
+ "disagreements": [],
+ "confirmed_patches": [
+  "ceci_pr85",
+  "litellm_pr13466",
+  "splunk_ansible_pr896",
+  "swmmanywhere_pr177"
+ ],
+ "second_rater_model": "google/gemini-4-argon",
+ "second_rater_spent_usd": 0.028421999999999996,
+ "planned_confirmed_in_band": {
+  "patches": [
+   "litellm_pr13466"
+  ],
+  "share_of_205": 0.004878048780487805,
+  "wilson95": [
+   0.0008615928370303422,
+   0.02710984580354701
+  ]
+ }
+}
