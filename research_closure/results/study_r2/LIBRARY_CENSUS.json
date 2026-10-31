@@ -10,7 +10,7 @@
   "family_pairs_overlapping": 18,
   "composite_cells_required": 6,
   "largest_component": 7,
-  "functions_touched": 456,
+  "functions_touched": 467,
   "functions_touched_by_two_or_more": 21,
   "families_binding_on_targets": {
    "bare_except": 5,
@@ -236,7 +236,9 @@
     ],
     "open_encoding": [
      ".project-template/fill_template_vars.py::_replace",
-     ".project-template/refill_template_vars.py::main"
+     ".project-template/refill_template_vars.py::main",
+     "docs/conf.py::<module>",
+     "setup.py::<module>"
     ]
    }
   },
@@ -304,7 +306,9 @@
      "cerberus/schema.py::__init__",
      "cerberus/utils.py::validator_fabric"
     ],
-    "open_encoding": []
+    "open_encoding": [
+     "setup.py::<module>"
+    ]
    }
   },
   {
@@ -514,7 +518,11 @@
      "src/packaging/tags.py::_is_threaded_cpython"
     ],
     "open_encoding": [
-     "noxfile.py::_replace_file"
+     "docs/conf.py::<module>",
+     "noxfile.py::_replace_file",
+     "tasks/select_pypi_dist.py::<module>",
+     "tasks/select_pypi_specs.py::<module>",
+     "tasks/select_pypi_versions.py::<module>"
     ],
     "type_eq_isinstance": [
      "tasks/pickle_compat.py::verify"
@@ -777,12 +785,14 @@
     ],
     "bare_except": [
      "pydal/backends/couchdb.py::create_table",
+     "pydal/backends/mongo.py::<module>",
      "pydal/backends/mongo.py::__select",
      "pydal/backends/mongo.py::_cmp_ops_aggregation_pipeline",
      "pydal/backends/mongo.py::add",
      "pydal/backends/sqlite.py::web2py_extract",
      "pydal/contrib/imap_adapter.py::reconnect",
-     "pydal/contrib/mockimaplib.py::append"
+     "pydal/contrib/mockimaplib.py::append",
+     "pydal/contrib/portalocker.py::<module>"
     ],
     "dict_keys_membership": [
      "pydal/contrib/imap_adapter.py::select"
@@ -1236,12 +1246,14 @@
     ],
     "bare_except": [
      "src/hera_pspec/container.py::__del__",
+     "src/hera_pspec/conversions.py::<module>",
      "src/hera_pspec/pspecbeam.py::add_pol",
      "src/hera_pspec/utils.py::config_pspec_blpairs",
      "src/hera_pspec/utils.py::spw_range_from_freqs",
      "src/hera_pspec/uvpspec.py::check"
     ],
     "dict_keys_membership": [
+     "scripts/pspec_red.py::<module>",
      "src/hera_pspec/grouping.py::average_spectra",
      "src/hera_pspec/pspecbeam.py::__init__",
      "src/hera_pspec/pspecbeam.py::power_beam_int",
