@@ -1,0 +1,68 @@
+# Study Q, feasibility Q-F0 (0 model cost): SWE-bench Verified, a stratified sample (3 instances per repository), the
+# function-level oracle (signature-driven inputs only) run inside the official SWE-bench Docker image of each instance.
+name: Gatekeeper Study Q feasibility Q-F0 (SWE-bench Verified)
+on:
+  workflow_dispatch:
+    inputs:
+      per_repo: {description: "instances per repository", default: "3"}
+permissions:
+  contents: read
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.m.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Fetch SWE-bench Verified and draw the sample
+        run: |
+          mkdir -p out_q
+          python tools/q_f0.py sample out_q "${{ inputs.per_repo }}"
+      - name: Public agent submissions on SWE-bench Verified (count only)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          curl -sf -H "Authorization: Bearer $GH_TOKEN" https://api.github.com/repos/SWE-bench/experiments/contents/evaluation/verified \
+            | python -c "import json,sys;d=[x['name'] for x in json.load(sys.stdin) if x.get('type')=='dir'];json.dump(d,open('out_q/SUBMISSIONS.json','w'));print(len(d),'submissions')" \
+            || echo "could not list the submissions" | tee out_q/SUBMISSIONS_ERROR.txt
+      - id: m
+        run: python -c "import json;print('matrix='+json.dumps({'iid':json.load(open('out_q/SAMPLE.json'))}))" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: QF0_PLAN
+          path: out_q
+  probe:
+    needs: plan
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - uses: actions/download-artifact@v7
+        with:
+          name: QF0_PLAN
+          path: out_q
+      - name: Free disk space for the image
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL || true
+          df -h /
+      - name: Probe one instance
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out_one
+          python -u tools/q_f0.py one "${{ matrix.iid }}" out_q/VERIFIED.json out_one 2>&1 | tee out_one/log.txt
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: QF0_${{ matrix.iid }}
+          path: out_one
