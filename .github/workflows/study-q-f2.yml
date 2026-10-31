@@ -1,0 +1,23 @@
+# Study Q, feasibility Q-F2 (0 cost): census of the public patch pool of SWE-bench Verified (predictions and resolved lists
+# of every public submission).  Reads research_closure/results/study_q/SUBMISSIONS.json.
+name: Gatekeeper Study Q feasibility Q-F2 (patch pool census)
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  census:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: |
+          mkdir -p out_pool
+          python -u tools/q_f2.py research_closure/results/study_q/SUBMISSIONS.json out_pool 2>&1 | tee out_pool/log.txt
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: QF2_POOL
+          path: out_pool
