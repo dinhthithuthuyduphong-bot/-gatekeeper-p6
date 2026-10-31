@@ -18,10 +18,10 @@ Cập nhật sau **mỗi** lần chạy. Mỗi tiêu chí có trạng thái **TH
 | S4 | Đánh giá trên dữ liệu thật, có đăng ký trước, có kết quả âm | **THẮNG** | Study D, E, G, H, P, Q, R2; FREEZE + submission check |
 | S5 | So sánh với baseline mạnh và với công trình gần nhất | **THẮNG một phần** | B2, B6-R (kiểu GSE), B8; PatchDiff. **Thiếu:** chạy chính GSE (A12) |
 | S6 | Kỹ năng đa dạng, quy mô thư viện thực tế | **THẮNG một phần** | R2: 12 họ trên 16 repo, chỉ đo footprint và tương tác. **Thiếu:** admit thật với 12 họ (cần oracle) |
-| S7 | Tác hại của tổ hợp đo trên dữ liệu thật | **THUA** | Mới có mô phỏng (rủi ro tổng hợp) và một tương tác cú pháp thật. Việc 7.4 |
+| S7 | Tác hại của tổ hợp đo trên dữ liệu thật | **THUA (đang làm)** | Mới có mô phỏng và một tương tác cú pháp thật. Study S đang chạy (việc 7.4) |
 | S8 | Người chấm độc lập là con người | **THUA** | Người chấm thứ hai là LLM (A9). Việc 1.9 và 7.6 |
 | S9 | Tái lập được, có artifact ẩn danh | **THẮNG** (chờ upload) | submission check pass; `make_anonymous_artifact.py`. Người làm: upload |
-| S10 | Đúng định dạng và hạn của venue | **THUA** (chưa xác minh) | Việc 0.3, 5.4 (người làm) |
+| S10 | Đúng định dạng và hạn của venue | **THUA** (chưa xác minh) | Bài hiện 14 trang `acmsmall`. Việc 0.3, 5.4 (người làm): tra giới hạn trang FSE 2027 |
 | S11 | Thầy và một người đọc độc lập đã duyệt | **THUA** | Việc 1.9, 5.5 (người làm) |
 
 **Kết luận hiện tại:** bài đạt S1–S4 và S9; bài **chưa** chắc thắng vì S7 và S8 (phần phản biện hay tấn công nhất), và S10, S11 là việc của người. Không thể bảo đảm bài được nhận. Việc làm được là đóng từng ô THUA.
@@ -49,6 +49,8 @@ Mỗi dòng gồm:
 | R11 | 31/10 | Rà lý thuyết ↔ mã (6b44846) | Kiểm mã có đúng lý thuyết | `ledger.py` (TC2), `conformance.py` (TC7), `site_footprint` (TC5), C10, C11 | **Lỗi:** (TC5) mã cấp module bị coi là rời nhau, sai với Hệ quả 2.6; (TC3/TC4) bài không nói luật e-Holm mà D–H dùng | **THUA → sửa**: TC5 là lỗi không chặt thật | Debug: census R2 lần trước cũng bỏ `<module>`, phải chạy lại (R2-A2) |
 | R12 | 31/10 | Theory checks (00fe817) | C10, C11 | — | Luật D–H khớp Nhận xét e-Holm | **THẮNG**: FWER 2,4% / 7,3% ≤ 10%; ledger ≤ α | — |
 | R13 | 31/10 | Study R2-A2 (193b136; 41226541891 không đổi số) | Census có mã cấp module | Census giữ `file::<module>` | — | **THẮNG**: 467 hàm/vùng (trước 456), các số khác không đổi; kết luận giữ nguyên | — |
+| R14 | 31/10 | Paper build (bf6c5e3) | PDF sau R2 + rà lý thuyết | — | — | **THẮNG**: 14 trang, 39/39 con số khớp; bảng 2 (thư viện 12 họ) hiển thị đúng | — |
+| R15 | 31/10 | Study S (đang chạy) | Hành vi thật của tổ hợp trên 23 đơn vị (21 vùng chung + 2 cặp enabling) | `composition_study.py`: snapshot O/A/B/AB/BA, input G0, harm certificate + e-Holm | Định lý 2.5 (tổ hợp) lần đầu được đo trên mã thật; phát hiện TC12 (gộp method cùng tên, bảo thủ) | *chờ kết quả* | — |
 
 ## C. Vòng debug khi THUA (làm theo thứ tự)
 
