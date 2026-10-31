@@ -1,0 +1,538 @@
+{
+ "total": {
+  "targets": 16,
+  "cloned": 16,
+  "repo_functions_bool": 104,
+  "repo_functions_none": 16,
+  "repo_functions_both": 1,
+  "targets_with_repo_overlap": 1,
+  "declared_functions_both": 0,
+  "files_scanned": 655
+ },
+ "targets": [
+  {
+   "study": "D",
+   "target": "A1_speckit_catalog",
+   "repository": "github/spec-kit",
+   "clone_error": null,
+   "files_scanned": 69,
+   "files_skipped": 0,
+   "declared_sites": {
+    "bool": [],
+    "none": []
+   },
+   "declared_both": [],
+   "repo_functions": {
+    "bool": 5,
+    "none": 0
+   },
+   "repo_both": [],
+   "footprint_overlap_declared": []
+  },
+  {
+   "study": "D",
+   "target": "C1_jsonschema",
+   "repository": "python-jsonschema/jsonschema",
+   "clone_error": null,
+   "files_scanned": 25,
+   "files_skipped": 0,
+   "declared_sites": {
+    "bool": [
+     [
+      "jsonschema/_types.py",
+      "is_integer"
+     ]
+    ],
+    "none": []
+   },
+   "declared_both": [],
+   "repo_functions": {
+    "bool": 2,
+    "none": 0
+   },
+   "repo_both": [],
+   "footprint_overlap_declared": []
+  },
+  {
+   "study": "D",
+   "target": "C2_voluptuous",
+   "repository": "alecthomas/voluptuous",
+   "clone_error": null,
+   "files_scanned": 7,
+   "files_skipped": 0,
+   "declared_sites": {
+    "bool": [
+     [
+      "voluptuous/validators.py",
+      "_get_precision_scale"
+     ]
+    ],
+    "none": []
+   },
+   "declared_both": [],
+   "repo_functions": {
+    "bool": 1,
+    "none": 0
+   },
+   "repo_both": [],
+   "footprint_overlap_declared": []
+  },
+  {
+   "study": "D",
+   "target": "D1_py_ecc",
+   "repository": "ethereum/py_ecc",
+   "clone_error": null,
+   "files_scanned": 37,
+   "files_skipped": 0,
+   "declared_sites": {
+    "bool": [
+     [
+      "py_ecc/bls/ciphersuites.py",
+      "_is_valid_privkey"
+     ],
+     [
+      "py_ecc/fields/field_elements.py",
+      "__add__"
+     ],
+     [
+      "py_ecc/fields/field_elements.py",
+      "__div__"
+     ],
+     [
+      "py_ecc/fields/field_elements.py",
+      "__eq__"
+     ],
+     [
+      "py_ecc/fields/field_elements.py",
+      "__init__"
+     ],
+     [
+      "py_ecc/fields/field_elements.py",
+      "__lt__"
+     ],
+     [
+      "py_ecc/fields/field_elements.py",
+      "__mul__"
+     ],
+     [
+      "py_ecc/fields/field_elements.py",
+      "__rdiv__"
+     ],
+     [
+      "py_ecc/fields/field_elements.py",
+      "__rsub__"
+     ],
+     [
+      "py_ecc/fields/field_elements.py",
+      "__sub__"
+     ],
+     [
+      "py_ecc/fields/optimized_field_elements.py",
+      "__add__"
+     ],
+     [
+      "py_ecc/fields/optimized_field_elements.py",
+      "__div__"
+     ],
+     [
+      "py_ecc/fields/optimized_field_elements.py",
+      "__eq__"
+     ],
+     [
+      "py_ecc/fields/optimized_field_elements.py",
+      "__init__"
+     ],
+     [
+      "py_ecc/fields/optimized_field_elements.py",
+      "__lt__"
+     ],
+     [
+      "py_ecc/fields/optimized_field_elements.py",
+      "__mul__"
+     ],
+     [
+      "py_ecc/fields/optimized_field_elements.py",
+      "__rdiv__"
+     ],
+     [
+      "py_ecc/fields/optimized_field_elements.py",
+      "__rsub__"
+     ],
+     [
+      "py_ecc/fields/optimized_field_elements.py",
+      "__sub__"
+     ],
+     [
+      "py_ecc/fields/optimized_field_elements.py",
+      "mod_int"
+     ]
+    ],
+    "none": []
+   },
+   "declared_both": [],
+   "repo_functions": {
+    "bool": 21,
+    "none": 0
+   },
+   "repo_both": [],
+   "footprint_overlap_declared": []
+  },
+  {
+   "study": "D",
+   "target": "D2_cerberus",
+   "repository": "pyeve/cerberus",
+   "clone_error": null,
+   "files_scanned": 8,
+   "files_skipped": 0,
+   "declared_sites": {
+    "bool": [
+     [
+      "cerberus/cerberus.py",
+      "_validate_allowed"
+     ],
+     [
+      "cerberus/cerberus.py",
+      "_validate_forbidden"
+     ]
+    ],
+    "none": []
+   },
+   "declared_both": [],
+   "repo_functions": {
+    "bool": 2,
+    "none": 0
+   },
+   "repo_both": [],
+   "footprint_overlap_declared": []
+  },
+  {
+   "study": "D",
+   "target": "D3_speckit",
+   "repository": "github/spec-kit",
+   "clone_error": null,
+   "files_scanned": 117,
+   "files_skipped": 0,
+   "declared_sites": {
+    "bool": [
+     [
+      "src/specify_cli/extensions/_commands.py",
+      "extension_set_priority"
+     ]
+    ],
+    "none": []
+   },
+   "declared_both": [],
+   "repo_functions": {
+    "bool": 3,
+    "none": 0
+   },
+   "repo_both": [],
+   "footprint_overlap_declared": []
+  },
+  {
+   "study": "D",
+   "target": "D4_openfeature",
+   "repository": "open-feature/python-sdk",
+   "clone_error": null,
+   "files_scanned": 30,
+   "files_skipped": 0,
+   "declared_sites": {
+    "bool": [],
+    "none": []
+   },
+   "declared_both": [],
+   "repo_functions": {
+    "bool": 0,
+    "none": 0
+   },
+   "repo_both": [],
+   "footprint_overlap_declared": []
+  },
+  {
+   "study": "D",
+   "target": "D5_pycubrid",
+   "repository": "cubrid-lab/pycubrid",
+   "clone_error": null,
+   "files_scanned": 47,
+   "files_skipped": 0,
+   "declared_sites": {
+    "bool": [
+     [
+      "pycubrid/types.py",
+      "__eq__"
+     ],
+     [
+      "pycubrid/types.py",
+      "__ne__"
+     ]
+    ],
+    "none": []
+   },
+   "declared_both": [],
+   "repo_functions": {
+    "bool": 6,
+    "none": 0
+   },
+   "repo_both": [],
+   "footprint_overlap_declared": []
+  },
+  {
+   "study": "E",
+   "target": "E1_pyyaml",
+   "repository": "yaml/pyyaml",
+   "clone_error": null,
+   "files_scanned": 24,
+   "files_skipped": 0,
+   "declared_sites": {
+    "bool": [
+     [
+      "lib/yaml/representer.py",
+      "ignore_aliases"
+     ]
+    ],
+    "none": []
+   },
+   "declared_both": [],
+   "repo_functions": {
+    "bool": 2,
+    "none": 0
+   },
+   "repo_both": [],
+   "footprint_overlap_declared": []
+  },
+  {
+   "study": "E",
+   "target": "E2_packaging",
+   "repository": "pypa/packaging",
+   "clone_error": null,
+   "files_scanned": 39,
+   "files_skipped": 0,
+   "declared_sites": {
+    "bool": [
+     [
+      "src/packaging/version.py",
+      "_cmpkey"
+     ],
+     [
+      "src/packaging/version.py",
+      "_validate_dev"
+     ],
+     [
+      "src/packaging/version.py",
+      "_validate_epoch"
+     ],
+     [
+      "src/packaging/version.py",
+      "_validate_post"
+     ],
+     [
+      "src/packaging/version.py",
+      "_validate_pre"
+     ],
+     [
+      "src/packaging/version.py",
+      "_validate_release"
+     ]
+    ],
+    "none": []
+   },
+   "declared_both": [],
+   "repo_functions": {
+    "bool": 6,
+    "none": 0
+   },
+   "repo_both": [],
+   "footprint_overlap_declared": []
+  },
+  {
+   "study": "E",
+   "target": "E3_databricks",
+   "repository": "databricks/databricks-sql-python",
+   "clone_error": null,
+   "files_scanned": 38,
+   "files_skipped": 0,
+   "declared_sites": {
+    "bool": [
+     [
+      "src/databricks/sql/utils.py",
+      "escape_item"
+     ]
+    ],
+    "none": []
+   },
+   "declared_both": [],
+   "repo_functions": {
+    "bool": 2,
+    "none": 0
+   },
+   "repo_both": [],
+   "footprint_overlap_declared": []
+  },
+  {
+   "study": "E",
+   "target": "K1_trino",
+   "repository": "trinodb/trino-python-client",
+   "clone_error": null,
+   "files_scanned": 19,
+   "files_skipped": 0,
+   "declared_sites": {
+    "bool": [
+     [
+      "trino/dbapi.py",
+      "_format_prepared_param"
+     ]
+    ],
+    "none": []
+   },
+   "declared_both": [],
+   "repo_functions": {
+    "bool": 3,
+    "none": 0
+   },
+   "repo_both": [],
+   "footprint_overlap_declared": []
+  },
+  {
+   "study": "E",
+   "target": "K2_tomlkit",
+   "repository": "python-poetry/tomlkit",
+   "clone_error": null,
+   "files_scanned": 13,
+   "files_skipped": 0,
+   "declared_sites": {
+    "bool": [
+     [
+      "tomlkit/items.py",
+      "item"
+     ]
+    ],
+    "none": []
+   },
+   "declared_both": [],
+   "repo_functions": {
+    "bool": 1,
+    "none": 0
+   },
+   "repo_both": [],
+   "footprint_overlap_declared": []
+  },
+  {
+   "study": "G",
+   "target": "G1_pydal",
+   "repository": "web2py/pydal",
+   "clone_error": null,
+   "files_scanned": 57,
+   "files_skipped": 0,
+   "declared_sites": {
+    "bool": [
+     [
+      "pydal/backend_base.py",
+      "_binary_cmp"
+     ],
+     [
+      "pydal/backend_base.py",
+      "insert"
+     ],
+     [
+      "pydal/backend_base.py",
+      "smart_adapt"
+     ],
+     [
+      "pydal/objects.py",
+      "__getitem__"
+     ]
+    ],
+    "none": [
+     [
+      "pydal/backend_base.py",
+      "id_query"
+     ],
+     [
+      "pydal/base.py",
+      "where"
+     ],
+     [
+      "pydal/objects.py",
+      "belongs"
+     ],
+     [
+      "pydal/objects.py",
+      "where"
+     ],
+     [
+      "pydal/querybuilder.py",
+      "parse"
+     ]
+    ]
+   },
+   "declared_both": [],
+   "repo_functions": {
+    "bool": 16,
+    "none": 6
+   },
+   "repo_both": [],
+   "footprint_overlap_declared": []
+  },
+  {
+   "study": "G",
+   "target": "G2_emmett",
+   "repository": "emmett-framework/emmett",
+   "clone_error": null,
+   "files_scanned": 99,
+   "files_skipped": 0,
+   "declared_sites": {
+    "bool": [],
+    "none": [
+     [
+      "emmett/orm/base.py",
+      "where"
+     ],
+     [
+      "emmett/orm/models.py",
+      "__define_query_helpers"
+     ],
+     [
+      "emmett/orm/objects.py",
+      "where"
+     ]
+    ]
+   },
+   "declared_both": [],
+   "repo_functions": {
+    "bool": 6,
+    "none": 3
+   },
+   "repo_both": [],
+   "footprint_overlap_declared": []
+  },
+  {
+   "study": "G",
+   "target": "K1_hera_pspec",
+   "repository": "HERA-Team/hera_pspec",
+   "clone_error": null,
+   "files_scanned": 26,
+   "files_skipped": 0,
+   "declared_sites": {
+    "bool": [],
+    "none": [
+     [
+      "src/hera_pspec/utils.py",
+      "get_delays"
+     ]
+    ]
+   },
+   "declared_both": [],
+   "repo_functions": {
+    "bool": 28,
+    "none": 7
+   },
+   "repo_both": [
+    [
+     "src/hera_pspec/pspecdata.py",
+     "pspec"
+    ]
+   ],
+   "footprint_overlap_declared": []
+  }
+ ]
+}
