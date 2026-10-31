@@ -62,15 +62,24 @@ def audit_run(repo, run):
         rec["category"], rec["why"] = "WORKFLOW_DID_NOT_START", "no job was created (invalid workflow file or startup failure)"
         return rec
     texts = []
+    p = subprocess.run(["gh", "run", "view", str(run["id"]), "-R", repo, "--log-failed"], capture_output=True, text=True)
+    failed_log = p.stdout if p.returncode == 0 else ""
+    rec["log_chars"], rec["log_error"] = len(failed_log), (p.stderr[:200] if p.returncode else None)
+    by_job = {}
+    for line in failed_log.splitlines():                       # "<job>\t<step>\t<timestamp> <text>"
+        parts = line.split("\t", 2)
+        if len(parts) == 3:
+            by_job.setdefault(parts[0], []).append(TS.sub("", parts[2]))
     for j in jobs:
         if j.get("conclusion") not in ("failure", "timed_out", "cancelled"):
             continue
         steps = [s["name"] for s in j.get("steps") or [] if s.get("conclusion") in ("failure", "timed_out", "cancelled")]
-        try:
-            log = gh("repos/%s/actions/jobs/%d/logs" % (repo, j["id"]))
-        except RuntimeError as exc:
-            log = "LOG UNAVAILABLE: %s" % exc
-        lines = [TS.sub("", l) for l in log.splitlines()]
+        lines = by_job.get(j.get("name"), [])
+        if not lines:                                          # fall back to the job-log endpoint
+            try:
+                lines = [TS.sub("", l) for l in gh("repos/%s/actions/jobs/%d/logs" % (repo, j["id"])).splitlines()]
+            except RuntimeError:
+                lines = []
         ev = [l.strip()[:300] for l in lines if EVIDENCE.search(l)][-12:]
         texts.append("\n".join(lines[-400:]))
         rec["failed_jobs"].append({"job": j.get("name"), "failed_steps": steps, "evidence": ev})
