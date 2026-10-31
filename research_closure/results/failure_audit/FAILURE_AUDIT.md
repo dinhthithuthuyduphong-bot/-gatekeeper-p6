@@ -3,38 +3,40 @@
 | Category | Runs |
 |---|---|
 | WORKFLOW_DID_NOT_START | 13 |
-| PYTHON_EXCEPTION | 9 |
-| OTHER | 9 |
+| STUDY_STATE_GUARD | 10 |
 | MISSING_FILE | 8 |
-| DEPENDENCY_MISSING | 7 |
-| STUDY_STATE_GUARD | 4 |
-| RUNNER_SHUTDOWN_143 | 4 |
-| UNIT_TESTS_FAILED | 4 |
+| PYTHON_EXCEPTION | 8 |
+| DEPENDENCY_MISSING | 6 |
+| UNIT_TESTS_FAILED | 5 |
+| RUNNER_SHUTDOWN_143 | 5 |
 | INPUT_VALIDATION | 3 |
+| TOKEN_EXPIRED | 1 |
 | UPSTREAM_HTTP_5XX | 1 |
 | NETWORK | 1 |
 | TIMEOUT_OR_CANCELLED | 1 |
+| RUNNER_INFRA | 1 |
+| OTHER | 1 |
 
 | Run | Workflow | Created | Category | Failed step | Last evidence line |
 |---|---|---|---|---|---|
-| [41193552100](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41193552100) | Gatekeeper Study Q second rater (amendment Q-A1) | 2026-10-31T10:38 | PYTHON_EXCEPTION | Run D=research_closure/results/study_q/qa1 | ##[error]Process completed with exit code 1. |
+| [41193552100](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41193552100) | Gatekeeper Study Q second rater (amendment Q-A1) | 2026-10-31T10:38 | TOKEN_EXPIRED | Run D=research_closure/results/study_q/qa1 | ##[error]Process completed with exit code 1. |
 | [41182723003](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41182723003) | Gatekeeper Study Q stream | 2026-10-31T07:59 | INPUT_VALIDATION | Run python - <<'PY' | ##[error]Process completed with exit code 1. |
 | [41178191261](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41178191261) | Gatekeeper Study Q stream | 2026-10-31T06:50 | STUDY_STATE_GUARD | Run python - <<'PY' | ##[error]Process completed with exit code 1. |
-| [41176885851](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41176885851) | Gatekeeper Study Q freeze | 2026-10-31T06:30 | OTHER | Run python tools/q_prepare_freeze.py | ##[error]Process completed with exit code 1. |
-| [41175551823](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41175551823) | Gatekeeper Study Q freeze | 2026-10-31T06:11 | OTHER | Run python -m unittest discover -s tests | ##[error]Process completed with exit code 1. |
+| [41176885851](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41176885851) | Gatekeeper Study Q freeze | 2026-10-31T06:30 | STUDY_STATE_GUARD | Run python tools/q_prepare_freeze.py | ##[error]Process completed with exit code 1. |
+| [41175551823](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41175551823) | Gatekeeper Study Q freeze | 2026-10-31T06:11 | UNIT_TESTS_FAILED | Run python -m unittest discover -s tests | ##[error]Process completed with exit code 1. |
 | [41174696114](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41174696114) | Gatekeeper Study Q pool | 2026-10-31T05:58 | MISSING_FILE | Run mkdir -p out_pool | ##[error]Process completed with exit code 1. |
 | [41173700753](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41173700753) | Gatekeeper Study Q pool | 2026-10-31T05:43 | UPSTREAM_HTTP_5XX | Run mkdir -p out_pool | ##[error]Process completed with exit code 1. |
 | [41150030282](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41150030282) | Gatekeeper Study P stream isolate (amendment P-A3) | 2026-10-31T00:24 | RUNNER_SHUTDOWN_143 | Process one candidate | ##[error]The runner has received a shutdown signal. This can happen when the runner service is stopped, or a manually started runner is canceled. |
 | [41143189760](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41143189760) | Gatekeeper Study P stream resume (amendment P-A2) | 2026-10-30T23:13 | RUNNER_SHUTDOWN_143 | Stream one shard | ##[error]The runner has received a shutdown signal. This can happen when the runner service is stopped, or a manually started runner is canceled. |
 | [41142934629](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41142934629) | Gatekeeper study amend | 2026-10-30T23:11 | STUDY_STATE_GUARD | Run set -euo pipefail | ##[error]Process completed with exit code 1. |
 | [41115845403](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41115845403) | Gatekeeper Study P stream resume (amendment P-A2) | 2026-10-30T19:30 | RUNNER_SHUTDOWN_143 | Stream one shard | ##[error]Process completed with exit code 143. |
-| [41036085344](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41036085344) | Gatekeeper Study P stream (confirmatory cohort) | 2026-10-30T09:48 | OTHER |  |  |
+| [41036085344](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41036085344) | Gatekeeper Study P stream (confirmatory cohort) | 2026-10-30T09:48 | RUNNER_SHUTDOWN_143 | Stream one shard | ##[error]The runner has received a shutdown signal. This can happen when the runner service is stopped, or a manually started runner is canceled. |
 | [41034373636](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41034373636) | Gatekeeper Study P freeze | 2026-10-30T09:34 | UNIT_TESTS_FAILED | Run python -m unittest discover -s tests | ##[error]Process completed with exit code 1. |
 | [41034302581](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41034302581) | Gatekeeper RQ3 (generator agreement) | 2026-10-30T09:33 | INPUT_VALIDATION | Run [ -f research_closure/results/RQ3_PLAN.md ] \|\| { echo ": | ##[error]Process completed with exit code 1. |
 | [41033970565](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41033970565) | Gatekeeper Study P freeze | 2026-10-30T09:30 | UNIT_TESTS_FAILED | Run python -m unittest discover -s tests | ##[error]Process completed with exit code 1. |
 | [41033811601](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41033811601) | Gatekeeper RQ3 (generator agreement) | 2026-10-30T09:29 | INPUT_VALIDATION | Run [ -f research_closure/results/RQ3_PLAN.md ] \|\| { echo ": | ##[error]Process completed with exit code 1. |
 | [40998288220](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40998288220) | Gatekeeper Study P extend frame (part B) | 2026-10-30T03:36 | NETWORK | Discover part B | ##[error]Process completed with exit code 1. |
-| [40970807135](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40970807135) | Gatekeeper Study P extend frame (part B) | 2026-10-29T23:06 | OTHER | Append part B to the frames and commit | ##[error]Process completed with exit code 1. |
+| [40970807135](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40970807135) | Gatekeeper Study P extend frame (part B) | 2026-10-29T23:06 | STUDY_STATE_GUARD | Append part B to the frames and commit | ##[error]Process completed with exit code 1. |
 | [40922607378](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40922607378) | Gatekeeper package check | 2026-10-29T17:34 | MISSING_FILE | Run python tools/package_check.py "research_closure/manifest | ##[error]Process completed with exit code 1. |
 | [40922457671](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40922457671) | Gatekeeper package check | 2026-10-29T17:33 | MISSING_FILE | Run python tools/package_check.py "research_closure/manifest | ##[error]Process completed with exit code 1. |
 | [40922252255](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40922252255) | Gatekeeper package check | 2026-10-29T17:32 | MISSING_FILE | Run python tools/package_check.py "research_closure/manifest | ##[error]Process completed with exit code 1. |
@@ -43,9 +45,9 @@
 | [40478008306](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40478008306) | Gatekeeper Study N freeze | 2026-10-27T09:04 | UNIT_TESTS_FAILED | Run python -m unittest discover -s tests | ##[error]Process completed with exit code 1. |
 | [40399062737](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40399062737) | Gatekeeper provisioning dev vet (A-star half) | 2026-10-26T20:49 | RUNNER_SHUTDOWN_143 | Vet shard (version 2 provisioning) | ##[error]Process completed with exit code 143. |
 | [40326417115](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40326417115) | Gatekeeper provisioning dev vet (A-star half) | 2026-10-26T12:56 | MISSING_FILE | Vet shard (version 2 provisioning) | ##[error]Process completed with exit code 2. |
-| [40302719672](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40302719672) | Gatekeeper study amend | 2026-10-26T09:50 | OTHER | Run set -euo pipefail | ##[error]Process completed with exit code 1. |
-| [40301594894](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40301594894) | Gatekeeper study amend | 2026-10-26T09:42 | OTHER | Run set -euo pipefail | ##[error]Process completed with exit code 1. |
-| [40300865755](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40300865755) | Gatekeeper study amend | 2026-10-26T09:36 | OTHER | Run set -euo pipefail | ##[error]Process completed with exit code 1. |
+| [40302719672](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40302719672) | Gatekeeper study amend | 2026-10-26T09:50 | STUDY_STATE_GUARD | Run set -euo pipefail | ##[error]Process completed with exit code 1. |
+| [40301594894](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40301594894) | Gatekeeper study amend | 2026-10-26T09:42 | STUDY_STATE_GUARD | Run set -euo pipefail | ##[error]Process completed with exit code 1. |
+| [40300865755](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40300865755) | Gatekeeper study amend | 2026-10-26T09:36 | STUDY_STATE_GUARD | Run set -euo pipefail | ##[error]Process completed with exit code 1. |
 | [40296709754](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40296709754) | Gatekeeper Study M A-star vet | 2026-10-26T09:03 | MISSING_FILE | Freeze check | ##[error]Process completed with exit code 1. |
 | [40223310552](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40223310552) | Gatekeeper test-mutation development check | 2026-10-25T18:52 | TIMEOUT_OR_CANCELLED | Run set -euo pipefail | ##[error]Process completed with exit code 1. |
 | [40176250681](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40176250681) | Gatekeeper next evidence - zero-cost | 2026-10-25T08:20 | PYTHON_EXCEPTION | Run regression and evidence audits on GitHub | ##[error]Process completed with exit code 1. |
@@ -56,7 +58,7 @@
 | [39892359008](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/39892359008) | Gatekeeper Study H run | 2026-10-23T02:57 | PYTHON_EXCEPTION | Run and analyse | ##[error]Process completed with exit code 1. |
 | [39751249581](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/39751249581) | Gatekeeper study amend | 2026-10-22T08:54 | DEPENDENCY_MISSING | Run set -euo pipefail | ##[error]Process completed with exit code 1. |
 | [39751158239](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/39751158239) | Gatekeeper study amend | 2026-10-22T08:53 | DEPENDENCY_MISSING | Run set -euo pipefail | ##[error]Process completed with exit code 1. |
-| [39653618837](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/39653618837) | Gatekeeper Phase 2 audit (no model API) | 2026-10-21T18:32 | OTHER | Verify frozen Studies D E F | ##[error]Process completed with exit code 1. |
+| [39653618837](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/39653618837) | Gatekeeper Phase 2 audit (no model API) | 2026-10-21T18:32 | STUDY_STATE_GUARD | Verify frozen Studies D E F | ##[error]Process completed with exit code 1. |
 | [39646607726](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/39646607726) | Gatekeeper clean-room check | 2026-10-21T17:45 | MISSING_FILE | Verify Study F freeze | ##[error]Process completed with exit code 1. |
 | [39419852803](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/39419852803) | .github/workflows/study-d-run.yml | 2026-10-20T12:07 | WORKFLOW_DID_NOT_START |  |  |
 | [39419442837](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/39419442837) | .github/workflows/study-d-run.yml | 2026-10-20T12:03 | WORKFLOW_DID_NOT_START |  |  |
@@ -69,7 +71,7 @@
 | [39215136600](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/39215136600) | Gatekeeper Study B run | 2026-10-19T07:18 | STUDY_STATE_GUARD | Check protocol freeze (fails closed while DRAFT) | ##[error]Study B protocol status is 'DRAFT'; freeze it before running. |
 | [39213668935](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/39213668935) | Gatekeeper Study B run | 2026-10-19T07:04 | PYTHON_EXCEPTION | Fetch source files and frozen Study B targets | ##[error]Process completed with exit code 1. |
 | [39144743457](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/39144743457) | Gatekeeper-Lite demo | 2026-10-18T16:23 | PYTHON_EXCEPTION | Fetch frozen real targets | ##[error]Process completed with exit code 1. |
-| [39138728680](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/39138728680) | Gatekeeper-Lite demo | 2026-10-18T15:03 | DEPENDENCY_MISSING | Unit tests | ##[error]Process completed with exit code 127. |
+| [39138728680](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/39138728680) | Gatekeeper-Lite demo | 2026-10-18T15:03 | RUNNER_INFRA | Unit tests | ##[error]Process completed with exit code 127. |
 | [38974669264](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/38974669264) | .github/workflows/p7-2-guarded-repair-scope.yml | 2026-10-16T22:15 | WORKFLOW_DID_NOT_START |  |  |
 | [38974261493](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/38974261493) | .github/workflows/p7-2-guarded-repair-scope.yml | 2026-10-16T22:11 | WORKFLOW_DID_NOT_START |  |  |
 | [38974160360](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/38974160360) | .github/workflows/p7-2-guarded-repair-scope.yml | 2026-10-16T22:10 | WORKFLOW_DID_NOT_START |  |  |
