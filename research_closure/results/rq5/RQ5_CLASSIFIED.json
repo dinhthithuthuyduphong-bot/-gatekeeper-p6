@@ -1,0 +1,1267 @@
+{
+ "targets": 29,
+ "rescored": 29,
+ "reproduced": 19,
+ "not_reproduced_or_missing": [
+  "cadquery_pr1477",
+  "chembench_pr484",
+  "ephemeraldaddy_pr1491",
+  "free_proxy_pr34",
+  "litellm_pr12108",
+  "litellm_pr15728",
+  "mpmath_pr717",
+  "parse_emails_pr44",
+  "prowler_pr8302",
+  "pypdf_pr1968"
+ ],
+ "category_totals": {
+  "C1a": 17,
+  "C1b": 2,
+  "C2a": 315,
+  "C2b": 63,
+  "C2c": 370,
+  "C3": 0
+ },
+ "revised_primary": {
+  "lower": {
+   "in_band": 1,
+   "share": 0.004878048780487805,
+   "wilson95": [
+    0.0008615928370303422,
+    0.02710984580354701
+   ]
+  },
+  "upper": {
+   "in_band": 4,
+   "share": 0.01951219512195122,
+   "wilson95": [
+    0.007613308587699281,
+    0.049088038270397955
+   ]
+  },
+  "registered": {
+   "in_band": 16,
+   "share": 0.07804878048780488
+  }
+ },
+ "patches": [
+  {
+   "name": "anomalib_pr2437",
+   "repo": "https://github.com/open-edge-platform/anomalib.git",
+   "reproduced": true,
+   "original": {
+    "complete": 400,
+    "harm": 200,
+    "help": 45,
+    "divergent": 200,
+    "by_source": {
+     "G0": {
+      "complete": 200,
+      "harm": 200
+     },
+     "G2": {
+      "complete": 200,
+      "harm": 0
+     }
+    },
+    "h_hat": 0.5,
+    "in_band": false
+   },
+   "categories": {
+    "C2c": 200
+   },
+   "theta_c1": 0.0,
+   "in_band_c1": false,
+   "c1_examples": [],
+   "diff": "--- a/src/anomalib/metrics/threshold/f1_adaptive_threshold.py\n+++ b/src/anomalib/metrics/threshold/f1_adaptive_threshold.py\n@@ -118,6 +118,9 @@\n                 \"adaptive threshold computation, please add some anomalous \"\n                 \"images to the validation set.\"\n             )\n+            if isinstance(self.preds, list):\n+                return torch.cat(self.preds).max()\n+            return self.preds.max()\n             logging.warning(msg)\n \n         with handle_mac(self):\n"
+  },
+  {
+   "name": "cadquery_pr1477",
+   "repo": "https://github.com/CadQuery/cadquery.git",
+   "reproduced": false,
+   "original": {
+    "complete": 400,
+    "harm": 39,
+    "help": 41,
+    "divergent": 98,
+    "by_source": {
+     "G0": {
+      "complete": 200,
+      "harm": 0
+     },
+     "G2": {
+      "complete": 200,
+      "harm": 39
+     }
+    },
+    "h_hat": 0.0975,
+    "in_band": true
+   },
+   "categories": {
+    "C1a": 39
+   },
+   "theta_c1": 0.0975,
+   "in_band_c1": true,
+   "c1_examples": [
+    {
+     "source": "G2",
+     "i": 41,
+     "reference": [
+      "ok",
+      "Vector",
+      "Vector: (-0.48789041430680413, 8.455394565566802, 0.0)"
+     ],
+     "patch": [
+      "exc",
+      "ValueError",
+      "No free edges available"
+     ]
+    },
+    {
+     "source": "G2",
+     "i": 75,
+     "reference": [
+      "ok",
+      "Vector",
+      "Vector: (5.642282127145883, -1.108407918873187, 0.0)"
+     ],
+     "patch": [
+      "exc",
+      "ValueError",
+      "No free edges available"
+     ]
+    },
+    {
+     "source": "G2",
+     "i": 37,
+     "reference": [
+      "ok",
+      "Vector",
+      "Vector: (-1.9636635557491289, 3.570300104839365, 0.0)"
+     ],
+     "patch": [
+      "exc",
+      "ValueError",
+      "No free edges available"
+     ]
+    },
+    {
+     "source": "G2",
+     "i": 60,
+     "reference": [
+      "ok",
+      "Vector",
+      "Vector: (7.373910197032043, -0.7852980541291448, 0.0)"
+     ],
+     "patch": [
+      "exc",
+      "ValueError",
+      "No free edges available"
+     ]
+    },
+    {
+     "source": "G2",
+     "i": 59,
+     "reference": [
+      "ok",
+      "Vector",
+      "Vector: (5.998916489577759, 0.33055601550568703, 0.0)"
+     ],
+     "patch": [
+      "exc",
+      "ValueError",
+      "No free edges available"
+     ]
+    }
+   ],
+   "diff": "--- a/cadquery/sketch.py\n+++ b/cadquery/sketch.py\n@@ -770,11 +770,14 @@\n \n     # edge based interface\n \n-    def _startPoint(self) -> Vector:\n-\n-        if not self._edges:\n+    def _startPoint(self, forConstruction: bool = False) -> Vector:\n+\n+        edges = [e for e in self._edges if e.forConstruction == forConstruction]\n+\n+        if not edges:\n             raise ValueError(\"No free edges available\")\n \n+        e = edges[0]\n         e = self._edges[0]\n \n         return e.startPoint()\n@@ -950,7 +953,9 @@\n         Connect last edge to the first one.\n         \"\"\"\n \n-        self.segment(self._endPoint(), self._startPoint(), tag)\n+        target_mode = self._edges[-1].forConstruction if self._edges else False\n+        start_edges = [e for e in self._edges if e.forConstruction == target_mode]\n+        self.segment(self._endPoint(), start_edges[0].startPoint(), tag)\n \n         return self\n \n"
+  },
+  {
+   "name": "ceci_pr85",
+   "repo": "https://github.com/LSSTDESC/ceci.git",
+   "reproduced": true,
+   "original": {
+    "complete": 400,
+    "harm": 14,
+    "help": 86,
+    "divergent": 14,
+    "by_source": {
+     "G0": {
+      "complete": 200,
+      "harm": 0
+     },
+     "G2": {
+      "complete": 200,
+      "harm": 14
+     }
+    },
+    "h_hat": 0.035,
+    "in_band": true
+   },
+   "categories": {
+    "C2a": 14
+   },
+   "theta_c1": 0.0,
+   "in_band_c1": false,
+   "c1_examples": [],
+   "diff": "--- a/ceci/stage.py\n+++ b/ceci/stage.py\n@@ -498,9 +498,15 @@\n                     f\"--no-{conf}\", dest=conf, action=\"store_const\", const=False\n                 )\n             elif opt_type == list:\n-                out_type = (\n-                    def_val[0] if isinstance(def_val[0], type) else type(def_val[0])\n-                )\n+                list_val = def_val.default if isinstance(def_val, StageParameter) else def_val\n+                if isinstance(list_val, list) and len(list_val) > 0:\n+                    item = list_val[0]\n+                    out_type = item if isinstance(item, type) else type(item)\n+                elif getattr(def_val, \"dtype\", None) not in [None, list]:\n+                    out_type = def_val.dtype\n+                else:\n+                    out_type = str\n+\n                 if out_type is str:  # pragma: no cover\n                     parser.add_argument(\n                         f\"--{conf}\", type=lambda string: string.split(\",\")\n"
+  },
+  {
+   "name": "chembench_pr484",
+   "repo": "https://github.com/lamalab-org/chembench.git",
+   "reproduced": false,
+   "original": {
+    "complete": 400,
+    "harm": 34,
+    "help": 20,
+    "divergent": 276,
+    "by_source": {
+     "G0": {
+      "complete": 200,
+      "harm": 0
+     },
+     "G2": {
+      "complete": 200,
+      "harm": 34
+     }
+    },
+    "h_hat": 0.085,
+    "in_band": true
+   },
+   "categories": {
+    "C1b": 17
+   },
+   "theta_c1": 0.0425,
+   "in_band_c1": true,
+   "c1_examples": [
+    {
+     "source": "G2",
+     "i": 57,
+     "reference": [
+      "ok",
+      "bool",
+      "False"
+     ],
+     "patch": [
+      "ok",
+      "bool",
+      "True"
+     ]
+    },
+    {
+     "source": "G2",
+     "i": 149,
+     "reference": [
+      "ok",
+      "bool",
+      "False"
+     ],
+     "patch": [
+      "ok",
+      "bool",
+      "True"
+     ]
+    },
+    {
+     "source": "G2",
+     "i": 43,
+     "reference": [
+      "ok",
+      "bool",
+      "False"
+     ],
+     "patch": [
+      "ok",
+      "bool",
+      "True"
+     ]
+    },
+    {
+     "source": "G2",
+     "i": 165,
+     "reference": [
+      "ok",
+      "bool",
+      "False"
+     ],
+     "patch": [
+      "ok",
+      "bool",
+      "True"
+     ]
+    },
+    {
+     "source": "G2",
+     "i": 63,
+     "reference": [
+      "ok",
+      "bool",
+      "False"
+     ],
+     "patch": [
+      "ok",
+      "bool",
+      "True"
+     ]
+    }
+   ],
+   "diff": "--- a/src/chembench/analysis.py\n+++ b/src/chembench/analysis.py\n@@ -85,7 +85,15 @@\n         logger.debug(\"Exception in are_parsed_values_syntactically_correct\", e, report)\n         parsed = report[\"parsed_output\"]\n     # if not iterable make it iterable\n-    if not isinstance(parsed, list):\n+    if isinstance(parsed, dict):\n+        values = []\n+        for v in parsed.values():\n+            if isinstance(v, list):\n+                values.extend(v)\n+            else:\n+                values.append(v)\n+        parsed = values\n+    elif not isinstance(parsed, list):\n         parsed = [parsed]\n \n     # if none or nan, return false, or list that only contains none or nan\n"
+  },
+  {
+   "name": "ephemeraldaddy_pr1491",
+   "repo": "https://github.com/croweykid/ephemeraldaddy.git",
+   "reproduced": false,
+   "original": {
+    "complete": 400,
+    "harm": 1,
+    "help": 2,
+    "divergent": 25,
+    "by_source": {
+     "G0": {
+      "complete": 200,
+      "harm": 0
+     },
+     "G2": {
+      "complete": 200,
+      "harm": 1
+     }
+    },
+    "h_hat": 0.0025,
+    "in_band": false
+   },
+   "categories": {
+    "C1b": 1
+   },
+   "theta_c1": 0.0025,
+   "in_band_c1": false,
+   "c1_examples": [
+    {
+     "source": "G2",
+     "i": 141,
+     "reference": [
+      "ok",
+      "str",
+      "'Lead line N: General description of the line.\\nSaturn in detriment.\\nSome Saturn text.'"
+     ],
+     "patch": [
+      "ok",
+      "str",
+      "'Lead line N: General description of the line.\\nJupiter in exaltation.\\nSaturn in detriment.\\nSome Saturn text.'"
+     ]
+    }
+   ],
+   "diff": "--- a/ephemeraldaddy/analysis/human_design_plugins.py\n+++ b/ephemeraldaddy/analysis/human_design_plugins.py\n@@ -150,8 +150,15 @@\n         det_index = generic_det.start() if generic_det else -1\n     if det_index == -1:\n         return clean\n-    lead_end = clean.find(\"\\n\")\n-    lead = clean[:lead_end].strip() if lead_end != -1 else \"\"\n+    exalt_match = re.search(r\"\\n[^\\n]+\\s+exalted\", clean[:det_index], flags=re.IGNORECASE)\n+    if exalt_match:\n+        lead = clean[: exalt_match.start()].strip()\n+    else:\n+        parts = clean[:det_index].split(\"\\n\")\n+        if len(parts) >= 2:\n+            lead = \"\\n\".join(p.strip() for p in parts[:2] if p.strip()).strip()\n+        else:\n+            lead = parts[0].strip() if parts else \"\"\n     detriment = clean[det_index:].strip()\n     return f\"{lead}\\n{detriment}\".strip() if lead else detriment\n \n"
+  },
+  {
+   "name": "eva_common_pyutils_pr23",
+   "repo": "https://github.com/EBIvariation/eva-common-pyutils.git",
+   "reproduced": true,
+   "original": {
+    "complete": 400,
+    "harm": 63,
+    "help": 73,
+    "divergent": 63,
+    "by_source": {
+     "G0": {
+      "complete": 200,
+      "harm": 0
+     },
+     "G2": {
+      "complete": 200,
+      "harm": 63
+     }
+    },
+    "h_hat": 0.1575,
+    "in_band": false
+   },
+   "categories": {
+    "C2b": 63
+   },
+   "theta_c1": 0.0,
+   "in_band_c1": false,
+   "c1_examples": [],
+   "diff": "--- a/ebi_eva_common_pyutils/metadata_utils.py\n+++ b/ebi_eva_common_pyutils/metadata_utils.py\n@@ -70,23 +70,23 @@\n     if len(rows) == 0:\n         return None\n     elif len(rows) > 1:\n-        options = ', '.join(rows)\n+        options = ', '.join([r[0] for r in rows])\n         raise ValueError(f'More than one possible code for taxonomy {taxonomy} found: {options}')\n-    return rows[0]\n+    return rows[0][0]\n \n \n def get_assembly_code_from_assembly(metadata_connection_handle, assembly):\n     \"\"\"\n     Retrieve an existing assembly code registered in the metadata database.\n     \"\"\"\n-    query = f\"select distinct assembly_code from assembly where assembly_accession={assembly};\"\n+    query = f\"select distinct assembly_code from assembly where assembly_accession='{assembly}';\"\n     rows = get_all_results_for_query(metadata_connection_handle, query)\n     if len(rows) == 0:\n         return None\n     elif len(rows) > 1:\n-        options = ', '.join(rows)\n+        options = ', '.join([r[0] for r in rows])\n         raise ValueError(f'More than one possible code for assembly {assembly} found: {options}')\n-    return rows[0]\n+    return rows[0][0]\n \n \n def build_variant_warehouse_database_name(taxonomy_code, assembly_code):\n"
+  },
+  {
+   "name": "fomtools_pr23",
+   "repo": "https://github.com/stellatogrp/fomtools.git",
+   "reproduced": true,
+   "original": {
+    "complete": 200,
+    "harm": 6,
+    "help": 42,
+    "divergent": 60,
+    "by_source": {
+     "G2": {
+      "complete": 200,
+      "harm": 6
+     }
+    },
+    "h_hat": 0.03,
+    "in_band": true
+   },
+   "categories": {
+    "C2a": 6
+   },
+   "theta_c1": 0.0,
+   "in_band_c1": false,
+   "c1_examples": [],
+   "diff": "--- a/algoverify/linearexpression.py\n+++ b/algoverify/linearexpression.py\n@@ -90,7 +90,6 @@\n                 self.ndim = const.shape[0]\n \n         self.const = np.zeros(self.ndim) if const is None else const\n-        self.const = const\n         self.decomposition_dict = decomposition_dict\n         # TODO: Use a number rather than a None\n         self.counter = LinearExpression.counter\n@@ -394,7 +393,7 @@\n             `np.ndarray`, or `list`.\n \n         \"\"\"\n-        return self + (-other)\n+        return (-self) + other\n \n     def __matmul__(self, other):\n         # TODO\n"
+  },
+  {
+   "name": "free_proxy_pr34",
+   "repo": "https://github.com/jundymek/free-proxy.git",
+   "reproduced": false,
+   "original": {
+    "complete": 221,
+    "harm": 75,
+    "help": 3,
+    "divergent": 136,
+    "by_source": {
+     "G0": {
+      "complete": 79,
+      "harm": 74
+     },
+     "G2": {
+      "complete": 142,
+      "harm": 1
+     }
+    },
+    "h_hat": 0.3393665158371041,
+    "in_band": false
+   },
+   "categories": {
+    "C2a": 4
+   },
+   "theta_c1": 0.0,
+   "in_band_c1": false,
+   "c1_examples": [],
+   "diff": "--- a/fp/fp.py\n+++ b/fp/fp.py\n@@ -61,7 +61,8 @@\n         switch = {'yes': True, 'no': False}\n         google_criteria = True if self.google is None else self.google == switch.get(\n             row_elements[5].text_content())\n-        return country_criteria and elite_criteria and anonym_criteria and google_criteria\n+        https_criteria = True if self.schema == 'http' else 'yes' == row_elements[6].text_content()\n+        return country_criteria and elite_criteria and anonym_criteria and google_criteria and https_criteria\n \n     def get(self, repeat=False):\n         '''Returns a working proxy that matches the specified parameters.'''\n"
+  },
+  {
+   "name": "homework122_pr2",
+   "repo": "https://github.com/okomarda/Homework122.git",
+   "reproduced": true,
+   "original": {
+    "complete": 400,
+    "harm": 116,
+    "help": 101,
+    "divergent": 117,
+    "by_source": {
+     "G0": {
+      "complete": 200,
+      "harm": 83
+     },
+     "G2": {
+      "complete": 200,
+      "harm": 33
+     }
+    },
+    "h_hat": 0.29,
+    "in_band": false
+   },
+   "categories": {
+    "C2c": 65,
+    "C2a": 51
+   },
+   "theta_c1": 0.0,
+   "in_band_c1": false,
+   "c1_examples": [],
+   "diff": "--- a/utils/arrs.py\n+++ b/utils/arrs.py\n@@ -11,7 +11,7 @@\n     :param default: \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 \u043f\u043e-\u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e.\n     :return: \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 \u043f\u043e \u0438\u043d\u0434\u0435\u043a\u0441\u0443 \u0438\u043b\u0438 \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 \u043f\u043e-\u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e.\n     \"\"\"\n-    if index < 0:\n+    if index < 0 or index >= len(array):\n         return default\n \n     return array[index]\n"
+  },
+  {
+   "name": "hw_12_2_1_2_pr1",
+   "repo": "https://github.com/Bato1401/HW_12.2_1-2.git",
+   "reproduced": true,
+   "original": {
+    "complete": 400,
+    "harm": 5,
+    "help": 47,
+    "divergent": 301,
+    "by_source": {
+     "G0": {
+      "complete": 200,
+      "harm": 0
+     },
+     "G2": {
+      "complete": 200,
+      "harm": 5
+     }
+    },
+    "h_hat": 0.0125,
+    "in_band": true
+   },
+   "categories": {
+    "C2a": 5
+   },
+   "theta_c1": 0.0,
+   "in_band_c1": false,
+   "c1_examples": [],
+   "diff": "--- a/utils/arrs.py\n+++ b/utils/arrs.py\n@@ -11,7 +11,7 @@\n     :param default: \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 \u043f\u043e-\u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e.\n     :return: \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 \u043f\u043e \u0438\u043d\u0434\u0435\u043a\u0441\u0443 \u0438\u043b\u0438 \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 \u043f\u043e-\u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e.\n     \"\"\"\n-    if index < 0:\n+    if index < 0 or index >= len(array):\n         return default\n \n     return array[index]\n"
+  },
+  {
+   "name": "hw_12_2_3_4_pr1",
+   "repo": "https://github.com/Bato1401/HW_12.2_3-4.git",
+   "reproduced": true,
+   "original": {
+    "complete": 400,
+    "harm": 3,
+    "help": 54,
+    "divergent": 271,
+    "by_source": {
+     "G0": {
+      "complete": 200,
+      "harm": 0
+     },
+     "G2": {
+      "complete": 200,
+      "harm": 3
+     }
+    },
+    "h_hat": 0.0075,
+    "in_band": true
+   },
+   "categories": {
+    "C2a": 3
+   },
+   "theta_c1": 0.0,
+   "in_band_c1": false,
+   "c1_examples": [],
+   "diff": "--- a/utils/arrs.py\n+++ b/utils/arrs.py\n@@ -11,7 +11,7 @@\n     :param default: \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 \u043f\u043e-\u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e.\n     :return: \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 \u043f\u043e \u0438\u043d\u0434\u0435\u043a\u0441\u0443 \u0438\u043b\u0438 \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 \u043f\u043e-\u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e.\n     \"\"\"\n-    if index < 0:\n+    if index < 0 or index >= len(array):\n         return default\n \n     return array[index]\n"
+  },
+  {
+   "name": "hw_12_2_pytest_pr1",
+   "repo": "https://github.com/dipnoe/hw_12.2_pytest.git",
+   "reproduced": true,
+   "original": {
+    "complete": 400,
+    "harm": 43,
+    "help": 137,
+    "divergent": 44,
+    "by_source": {
+     "G0": {
+      "complete": 200,
+      "harm": 21
+     },
+     "G2": {
+      "complete": 200,
+      "harm": 22
+     }
+    },
+    "h_hat": 0.1075,
+    "in_band": true
+   },
+   "categories": {
+    "C2a": 43
+   },
+   "theta_c1": 0.0,
+   "in_band_c1": false,
+   "c1_examples": [],
+   "diff": "--- a/utils/arrs.py\n+++ b/utils/arrs.py\n@@ -11,7 +11,7 @@\n     :param default: \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 \u043f\u043e-\u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e.\n     :return: \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 \u043f\u043e \u0438\u043d\u0434\u0435\u043a\u0441\u0443 \u0438\u043b\u0438 \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 \u043f\u043e-\u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e.\n     \"\"\"\n-    if index < 0:\n+    if index < 0 or index >= len(array):\n         return default\n \n     return array[index]\n"
+  },
+  {
+   "name": "hw_12_2_pytest_pr3",
+   "repo": "https://github.com/dipnoe/hw_12.2_pytest.git",
+   "reproduced": true,
+   "original": {
+    "complete": 400,
+    "harm": 50,
+    "help": 130,
+    "divergent": 50,
+    "by_source": {
+     "G0": {
+      "complete": 200,
+      "harm": 15
+     },
+     "G2": {
+      "complete": 200,
+      "harm": 35
+     }
+    },
+    "h_hat": 0.125,
+    "in_band": false
+   },
+   "categories": {
+    "C2a": 50
+   },
+   "theta_c1": 0.0,
+   "in_band_c1": false,
+   "c1_examples": [],
+   "diff": "--- a/utils/arrs.py\n+++ b/utils/arrs.py\n@@ -11,7 +11,7 @@\n     :param default: \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 \u043f\u043e-\u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e.\n     :return: \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 \u043f\u043e \u0438\u043d\u0434\u0435\u043a\u0441\u0443 \u0438\u043b\u0438 \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 \u043f\u043e-\u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e.\n     \"\"\"\n-    if index < 0:\n+    if index < 0 or index >= len(array):\n         return default\n \n     return array[index]\n"
+  },
+  {
+   "name": "lesson_12_2_pytest_pr1",
+   "repo": "https://github.com/svetashlegel/lesson_12.2_pytest.git",
+   "reproduced": true,
+   "original": {
+    "complete": 400,
+    "harm": 52,
+    "help": 103,
+    "divergent": 72,
+    "by_source": {
+     "G0": {
+      "complete": 200,
+      "harm": 52
+     },
+     "G2": {
+      "complete": 200,
+      "harm": 0
+     }
+    },
+    "h_hat": 0.13,
+    "in_band": false
+   },
+   "categories": {
+    "C2c": 42,
+    "C2a": 10
+   },
+   "theta_c1": 0.0,
+   "in_band_c1": false,
+   "c1_examples": [],
+   "diff": "--- a/utils/arrs.py\n+++ b/utils/arrs.py\n@@ -11,7 +11,7 @@\n     :param default: \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 \u043f\u043e-\u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e.\n     :return: \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 \u043f\u043e \u0438\u043d\u0434\u0435\u043a\u0441\u0443 \u0438\u043b\u0438 \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 \u043f\u043e-\u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e.\n     \"\"\"\n-    if index < 0:\n+    if index < 0 or index >= len(array):\n         return default\n \n     return array[index]\n"
+  },
+  {
+   "name": "litellm_pr12108",
+   "repo": "https://github.com/BerriAI/litellm.git",
+   "reproduced": false,
+   "original": {
+    "complete": 400,
+    "harm": 15,
+    "help": 100,
+    "divergent": 15,
+    "by_source": {
+     "G0": {
+      "complete": 200,
+      "harm": 6
+     },
+     "G2": {
+      "complete": 200,
+      "harm": 9
+     }
+    },
+    "h_hat": 0.0375,
+    "in_band": true
+   },
+   "categories": {},
+   "theta_c1": 0.0,
+   "in_band_c1": false,
+   "c1_examples": [],
+   "diff": "--- a/litellm/router_utils/cooldown_handlers.py\n+++ b/litellm/router_utils/cooldown_handlers.py\n@@ -96,6 +96,7 @@\n     deployment: Optional[str],\n     exception_status: Union[str, int],\n     original_exception: Any,\n+    time_to_cooldown: Optional[float] = None,\n ) -> bool:\n     \"\"\"\n     Helper that decides if cooldown logic should be run\n@@ -107,6 +108,7 @@\n     - _is_cooldown_required() returns False\n     - deployment is in litellm_router_instance.provider_default_deployment_ids\n     - exception_status is not one that should be immediately retried (e.g. 401)\n+    - time_to_cooldown is effectively 0\n     \"\"\"\n     if (\n         deployment is None\n@@ -114,6 +116,12 @@\n     ):\n         verbose_router_logger.debug(\n             \"Should Not Run Cooldown Logic: deployment id is none or model group can't be found.\"\n+        )\n+        return False\n+\n+    if time_to_cooldown is not None and time_to_cooldown <= 1e-9:\n+        verbose_router_logger.debug(\n+            \"Should Not Run Cooldown Logic: time_to_cooldown is 0 or effectively 0\"\n         )\n         return False\n \n@@ -261,7 +269,11 @@\n \n     if (\n         _should_run_cooldown_logic(\n-            litellm_router_instance, deployment, exception_status, original_exception\n+            litellm_router_instance=litellm_router_instance,\n+            deployment=deployment,\n+            exception_status=exception_status,\n+            original_exception=original_exception,\n+            time_to_cooldown=time_to_cooldown,\n         )\n         is False\n         or deployment is None\n"
+  },
+  {
+   "name": "litellm_pr13466",
+   "repo": "https://github.com/BerriAI/litellm.git",
+   "reproduced": true,
+   "original": {
+    "complete": 400,
+    "harm": 17,
+    "help": 83,
+    "divergent": 17,
+    "by_source": {
+     "G0": {
+      "complete": 200,
+      "harm": 0
+     },
+     "G2": {
+      "complete": 200,
+      "harm": 17
+     }
+    },
+    "h_hat": 0.0425,
+    "in_band": true
+   },
+   "categories": {
+    "C1a": 17
+   },
+   "theta_c1": 0.0425,
+   "in_band_c1": true,
+   "c1_examples": [
+    {
+     "source": "G2",
+     "i": 57,
+     "reference": [
+      "ok",
+      "list",
+      "[{'path': '/mounted/service', 'methods': ['GET', 'POST'], 'name': None, 'endpoint': None, 'mounted_app': True}]"
+     ],
+     "patch": [
+      "exc",
+      "RuntimeError",
+      "Property error"
+     ]
+    },
+    {
+     "source": "G2",
+     "i": 131,
+     "reference": [
+      "ok",
+      "list",
+      "[{'path': '/mounted/service/items/', 'methods': ['GET', 'POST'], 'name': None, 'endpoint': None, 'mounted_app': True}]"
+     ],
+     "patch": [
+      "exc",
+      "RuntimeError",
+      "Property error"
+     ]
+    },
+    {
+     "source": "G2",
+     "i": 195,
+     "reference": [
+      "ok",
+      "list",
+      "[{'path': '/test', 'methods': ['GET', 'POST'], 'name': None, 'endpoint': None, 'mounted_app': True}]"
+     ],
+     "patch": [
+      "exc",
+      "RuntimeError",
+      "Property error"
+     ]
+    },
+    {
+     "source": "G2",
+     "i": 17,
+     "reference": [
+      "ok",
+      "list",
+      "[{'path': '/test', 'methods': ['GET', 'POST'], 'name': None, 'endpoint': None, 'mounted_app': True}]"
+     ],
+     "patch": [
+      "exc",
+      "RuntimeError",
+      "Property error"
+     ]
+    },
+    {
+     "source": "G2",
+     "i": 121,
+     "reference": [
+      "ok",
+      "list",
+      "[{'path': '/v1', 'methods': ['GET', 'POST'], 'name': None, 'endpoint': None, 'mounted_app': True}]"
+     ],
+     "patch": [
+      "exc",
+      "RuntimeError",
+      "Property error"
+     ]
+    }
+   ],
+   "diff": "--- a/litellm/proxy/common_utils/get_routes.py\n+++ b/litellm/proxy/common_utils/get_routes.py\n@@ -8,6 +8,14 @@\n \n \n class GetRoutes:\n+    @staticmethod\n+    def _safe_get_endpoint_name(endpoint_func: Any) -> str:\n+        if hasattr(endpoint_func, \"__name__\"):\n+            return endpoint_func.__name__\n+        if hasattr(endpoint_func, \"__class__\"):\n+            return endpoint_func.__class__.__name__\n+        return str(endpoint_func)\n+\n     @staticmethod\n     def get_app_routes(\n         route: BaseRoute,\n@@ -53,7 +61,7 @@\n                         \"path\": full_path,\n                         \"methods\": getattr(sub_route, \"methods\", [\"GET\", \"POST\"]),\n                         \"name\": getattr(sub_route, \"name\", None),\n-                        \"endpoint\": endpoint_func.__name__ if callable(endpoint_func) else None,\n+                        \"endpoint\": GetRoutes._safe_get_endpoint_name(endpoint_func),\n                         \"mounted_app\": True,\n                     }\n                     routes.append(route_info)\n"
+  },
+  {
+   "name": "litellm_pr15728",
+   "repo": "https://github.com/BerriAI/litellm.git",
+   "reproduced": false,
+   "original": {
+    "complete": 400,
+    "harm": 65,
+    "help": 39,
+    "divergent": 65,
+    "by_source": {
+     "G0": {
+      "complete": 200,
+      "harm": 0
+     },
+     "G2": {
+      "complete": 200,
+      "harm": 65
+     }
+    },
+    "h_hat": 0.1625,
+    "in_band": false
+   },
+   "categories": {
+    "C1b": 61
+   },
+   "theta_c1": 0.1525,
+   "in_band_c1": false,
+   "c1_examples": [
+    {
+     "source": "G2",
+     "i": 155,
+     "reference": [
+      "ok",
+      "dict",
+      "{'litellm_parent_otel_span': <object object at 0x?>}"
+     ],
+     "patch": [
+      "ok",
+      "dict",
+      "{}"
+     ]
+    },
+    {
+     "source": "G2",
+     "i": 173,
+     "reference": [
+      "ok",
+      "dict",
+      "{'litellm_parent_otel_span': {'trace_id': '12345', 'span_id': '67890'}, 'helicone_test': 'val', 'user_id': 'dev', 'tags': 'dev'}"
+     ],
+     "patch": [
+      "ok",
+      "dict",
+      "{'helicone_test': 'val', 'user_id': 'dev', 'tags': 'dev'}"
+     ]
+    },
+    {
+     "source": "G2",
+     "i": 139,
+     "reference": [
+      "ok",
+      "dict",
+      "{'litellm_parent_otel_span': <object object at 0x?>, 'env': 'val', 'user_id': 'dev'}"
+     ],
+     "patch": [
+      "ok",
+      "dict",
+      "{'env': 'val', 'user_id': 'dev'}"
+     ]
+    },
+    {
+     "source": "G2",
+     "i": 193,
+     "reference": [
+      "ok",
+      "dict",
+      "{'litellm_parent_otel_span': None, 'user_id': 'stage'}"
+     ],
+     "patch": [
+      "ok",
+      "dict",
+      "{'user_id': 'stage'}"
+     ]
+    },
+    {
+     "source": "G2",
+     "i": 149,
+     "reference": [
+      "ok",
+      "dict",
+      "{'litellm_parent_otel_span': '<Span object>'}"
+     ],
+     "patch": [
+      "ok",
+      "dict",
+      "{}"
+     ]
+    }
+   ],
+   "diff": "--- a/litellm/integrations/helicone.py\n+++ b/litellm/integrations/helicone.py\n@@ -84,6 +84,9 @@\n         For example if you want to add custom property to your request, send\n         `headers: { ..., helicone-property-something: 1234 }` via proxy request.\n         \"\"\"\n+        if metadata is not None and \"litellm_parent_otel_span\" in metadata:\n+            metadata.pop(\"litellm_parent_otel_span\", None)\n+\n         if litellm_params is None:\n             return metadata\n \n@@ -114,6 +117,8 @@\n             litellm_params = kwargs.get(\"litellm_params\", {})\n             kwargs.get(\"litellm_call_id\", None)\n             metadata = litellm_params.get(\"metadata\", {}) or {}\n+            if isinstance(metadata, dict) and \"litellm_parent_otel_span\" in metadata:\n+                metadata.pop(\"litellm_parent_otel_span\", None)\n             metadata = self.add_metadata_from_header(litellm_params, metadata)\n             model = (\n                 model\n"
+  },
+  {
+   "name": "more_itertools_pr1088",
+   "repo": "https://github.com/more-itertools/more-itertools.git",
+   "reproduced": true,
+   "original": {
+    "complete": 400,
+    "harm": 61,
+    "help": 66,
+    "divergent": 108,
+    "by_source": {
+     "G0": {
+      "complete": 200,
+      "harm": 61
+     },
+     "G2": {
+      "complete": 200,
+      "harm": 0
+     }
+    },
+    "h_hat": 0.1525,
+    "in_band": false
+   },
+   "categories": {
+    "C2c": 50,
+    "C2a": 11
+   },
+   "theta_c1": 0.0,
+   "in_band_c1": false,
+   "c1_examples": [],
+   "diff": "--- a/more_itertools/more.py\n+++ b/more_itertools/more.py\n@@ -3077,6 +3077,8 @@\n     so avoid calling it on infinite iterables.\n \n     \"\"\"\n+    if n < 0:\n+        return False\n     return ilen(islice(filter(predicate, iterable), n + 1)) == n\n \n \n"
+  },
+  {
+   "name": "mpmath_pr717",
+   "repo": "https://github.com/mpmath/mpmath.git",
+   "reproduced": false,
+   "original": {
+    "complete": 168,
+    "harm": 1,
+    "help": 1,
+    "divergent": 4,
+    "by_source": {
+     "G2": {
+      "complete": 168,
+      "harm": 1
+     }
+    },
+    "h_hat": 0.005952380952380952,
+    "in_band": false
+   },
+   "categories": {
+    "C1b": 1
+   },
+   "theta_c1": 0.006097560975609756,
+   "in_band_c1": false,
+   "c1_examples": [
+    {
+     "source": "G2",
+     "i": 179,
+     "reference": [
+      "ok",
+      "list",
+      "[(matrix(\n[['-0.917629025474881806'],\n ['-0.917629025478352221']]), mpf('0.684086056794331672784')), (matrix(\n[['-0.731255764103502545'],\n ['-0.731255764103502545']]), mpf('0.0694699850691947222653')), (matrix(\n[['-0.707505529062267874'],\n ['-0.707505529062267874']]), mpf('0.00112814730735914206961'"
+     ],
+     "patch": [
+      "ok",
+      "list",
+      "[(matrix(\n[['-0.917629025474881806'],\n ['-0.917629025478352221']]), mpf('0.684086056797802087549')), (matrix(\n[['-0.731255764103502545'],\n ['-0.731255764103502545']]), mpf('0.0694699850691947222653')), (matrix(\n[['-0.707505529062267874'],\n ['-0.707505529062267874']]), mpf('0.00112814730735914206961'"
+     ]
+    }
+   ],
+   "diff": "--- a/mpmath/calculus/optimization.py\n+++ b/mpmath/calculus/optimization.py\n@@ -665,7 +665,7 @@\n             while True:\n                 if x1 == x0:\n                     if self.verbose:\n-                        print(\"canceled, won't get more excact\")\n+                        print(\"canceled, won't get more exact\")\n                     cancel = True\n                     break\n                 fx = self.ctx.matrix(f(*x1))\n"
+  },
+  {
+   "name": "new_homework_hard_pr1",
+   "repo": "https://github.com/kokshiro/new_homework_hard.git",
+   "reproduced": true,
+   "original": {
+    "complete": 400,
+    "harm": 12,
+    "help": 160,
+    "divergent": 14,
+    "by_source": {
+     "G0": {
+      "complete": 200,
+      "harm": 12
+     },
+     "G2": {
+      "complete": 200,
+      "harm": 0
+     }
+    },
+    "h_hat": 0.03,
+    "in_band": true
+   },
+   "categories": {
+    "C2c": 12
+   },
+   "theta_c1": 0.0,
+   "in_band_c1": false,
+   "c1_examples": [],
+   "diff": "--- a/utils/arrs.py\n+++ b/utils/arrs.py\n@@ -11,10 +11,11 @@\n     :param default: \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 \u043f\u043e-\u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e.\n     :return: \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 \u043f\u043e \u0438\u043d\u0434\u0435\u043a\u0441\u0443 \u0438\u043b\u0438 \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 \u043f\u043e-\u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e.\n     \"\"\"\n-    if index < 0:\n+    if index < 0 or index >= len(array):\n         return default\n \n     return array[index]\n+\n \n \n def my_slice(coll, start=0, end=None):\n"
+  },
+  {
+   "name": "parse_emails_pr44",
+   "repo": "https://github.com/demisto/parse-emails.git",
+   "reproduced": false,
+   "original": {
+    "complete": 400,
+    "harm": 45,
+    "help": 42,
+    "divergent": 358,
+    "by_source": {
+     "G0": {
+      "complete": 200,
+      "harm": 0
+     },
+     "G2": {
+      "complete": 200,
+      "harm": 45
+     }
+    },
+    "h_hat": 0.1125,
+    "in_band": false
+   },
+   "categories": {},
+   "theta_c1": 0.0,
+   "in_band_c1": false,
+   "c1_examples": [],
+   "diff": "--- a/parse_emails/handle_msg.py\n+++ b/parse_emails/handle_msg.py\n@@ -307,11 +307,11 @@\n \n     @staticmethod\n     def PtypInteger16(data_value):\n-        return int(data_value.encode('hex'), 16)\n+        return int(data_value.hex(), 16)\n \n     @staticmethod\n     def PtypInteger32(data_value):\n-        return int(data_value.encode('hex'), 32)\n+        return int(data_value.hex(), 16)\n \n     @staticmethod\n     def PtypFloating32(data_value):\n"
+  },
+  {
+   "name": "prowler_pr8302",
+   "repo": "https://github.com/prowler-cloud/prowler.git",
+   "reproduced": false,
+   "original": {
+    "complete": 399,
+    "harm": 1,
+    "help": 91,
+    "divergent": 10,
+    "by_source": {
+     "G0": {
+      "complete": 199,
+      "harm": 0
+     },
+     "G2": {
+      "complete": 200,
+      "harm": 1
+     }
+    },
+    "h_hat": 0.002506265664160401,
+    "in_band": false
+   },
+   "categories": {
+    "C1b": 1
+   },
+   "theta_c1": 0.0025,
+   "in_band_c1": false,
+   "c1_examples": [
+    {
+     "source": "G2",
+     "i": 61,
+     "reference": [
+      "ok",
+      "set",
+      "{'rds_critical_logging_63', 'rds_critical_encryption_61', 'rds_critical_secrets_60'}"
+     ],
+     "patch": [
+      "ok",
+      "set",
+      "{'rds_critical_logging_63', 'rds_critical_secrets_60', 'rds_critical_encryption_61'}"
+     ]
+    }
+   ],
+   "diff": "--- a/prowler/lib/check/checks_loader.py\n+++ b/prowler/lib/check/checks_loader.py\n@@ -66,16 +66,15 @@\n                 checks_to_execute.update(check_severities[severity])\n \n             if service_list:\n+                service_checks = set()\n                 for service in service_list:\n-                    checks_to_execute = (\n-                        set(\n-                            CheckMetadata.list(\n-                                bulk_checks_metadata=bulk_checks_metadata,\n-                                service=service,\n-                            )\n+                    service_checks.update(\n+                        CheckMetadata.list(\n+                            bulk_checks_metadata=bulk_checks_metadata,\n+                            service=service,\n                         )\n-                        & checks_to_execute\n                     )\n+                checks_to_execute &= service_checks\n         # Handle if there are checks passed using -C/--checks-file\n         elif checks_file:\n             checks_to_execute = parse_checks_from_file(checks_file, provider)\n"
+  },
+  {
+   "name": "pypdf_pr1968",
+   "repo": "https://github.com/py-pdf/pypdf.git",
+   "reproduced": false,
+   "original": {
+    "complete": 400,
+    "harm": 93,
+    "help": 62,
+    "divergent": 196,
+    "by_source": {
+     "G0": {
+      "complete": 200,
+      "harm": 73
+     },
+     "G2": {
+      "complete": 200,
+      "harm": 20
+     }
+    },
+    "h_hat": 0.2325,
+    "in_band": false
+   },
+   "categories": {},
+   "theta_c1": 0.0,
+   "in_band_c1": false,
+   "c1_examples": [],
+   "diff": "--- a/pypdf/filters.py\n+++ b/pypdf/filters.py\n@@ -672,7 +672,10 @@\n     elif color_space[0] == \"/DeviceN\":\n         color_space = color_space[2]\n         color_components = len(color_space[1])\n-\n+    elif color_space[0] == \"/CalRGB\":\n+        color_space = \"/DeviceRGB\"\n+    elif color_space[0] == \"/CalGray\":\n+        color_space = \"/DeviceGray\"\n     mode_map = {\n         \"1bit\": \"1\",  # 0 will be used for 1 bit\n         \"2bit\": \"2bits\",  # 2 bits images\n"
+  },
+  {
+   "name": "pytest_proj_pr1_325ec0",
+   "repo": "https://github.com/AlexandrKhasmatulin/pytest_proj.git",
+   "reproduced": true,
+   "original": {
+    "complete": 400,
+    "harm": 21,
+    "help": 73,
+    "divergent": 262,
+    "by_source": {
+     "G0": {
+      "complete": 200,
+      "harm": 0
+     },
+     "G2": {
+      "complete": 200,
+      "harm": 21
+     }
+    },
+    "h_hat": 0.0525,
+    "in_band": true
+   },
+   "categories": {
+    "C2a": 21
+   },
+   "theta_c1": 0.0,
+   "in_band_c1": false,
+   "c1_examples": [],
+   "diff": "--- a/utils/arrs.py\n+++ b/utils/arrs.py\n@@ -11,7 +11,7 @@\n     :param default: \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 \u043f\u043e-\u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e.\n     :return: \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 \u043f\u043e \u0438\u043d\u0434\u0435\u043a\u0441\u0443 \u0438\u043b\u0438 \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 \u043f\u043e-\u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e.\n     \"\"\"\n-    if index < 0:\n+    if index < 0 or index >= len(array):\n         return default\n \n     return array[index]\n"
+  },
+  {
+   "name": "splunk_ansible_pr896",
+   "repo": "https://github.com/splunk/splunk-ansible.git",
+   "reproduced": true,
+   "original": {
+    "complete": 400,
+    "harm": 3,
+    "help": 79,
+    "divergent": 31,
+    "by_source": {
+     "G0": {
+      "complete": 200,
+      "harm": 1
+     },
+     "G2": {
+      "complete": 200,
+      "harm": 2
+     }
+    },
+    "h_hat": 0.0075,
+    "in_band": true
+   },
+   "categories": {
+    "C1b": 2,
+    "C2c": 1
+   },
+   "theta_c1": 0.005,
+   "in_band_c1": false,
+   "c1_examples": [
+    {
+     "source": "G2",
+     "i": 60,
+     "reference": [
+      "ok",
+      "dict",
+      "{'host': ['val2', 36], 'port': None, 'secret': None, 'idxc': {'list_key': -82}, 'shc': False, 'enabled': [-6, None, False]}"
+     ],
+     "patch": [
+      "ok",
+      "dict",
+      "{'host': ['val2', 36], 'port': None, 'secret': True, 'idxc': {'list_key': -82}, 'shc': False, 'enabled': [-6, None, False]}"
+     ]
+    },
+    {
+     "source": "G2",
+     "i": 41,
+     "reference": [
+      "ok",
+      "dict",
+      "{'enabled': None, 'host': 'val1', 'port': {'idxc': 67, 'secret': [None, False], 'list_key': 'localhost'}, 'idxc': ['secret', 'secret', True], 'shc': {'list_key': None}}"
+     ],
+     "patch": [
+      "ok",
+      "dict",
+      "{'enabled': False, 'host': 'val1', 'port': {'idxc': 67, 'secret': [None, False], 'list_key': 'localhost'}, 'idxc': ['secret', 'secret', True], 'shc': {'list_key': None}}"
+     ]
+    }
+   ],
+   "diff": "--- a/inventory/environ.py\n+++ b/inventory/environ.py\n@@ -705,6 +705,12 @@\n     if path is None: path = []\n     for key in dict2:\n         if key in dict1:\n+            if dict2[key] is None:\n+                continue\n+            if isinstance(dict1[key], dict) and isinstance(dict2[key], list) and all(isinstance(item, dict) for item in dict2[key]):\n+                for item in dict2[key]:\n+                    merge_dict(dict1[key], item, path + [str(key)])\n+                continue\n             if isinstance(dict1[key], dict) and isinstance(dict2[key], dict):\n                 merge_dict(dict1[key], dict2[key], path + [str(key)])\n             elif isinstance(dict1[key], list) and isinstance(dict2[key], list):\n"
+  },
+  {
+   "name": "swmmanywhere_pr177",
+   "repo": "https://github.com/ImperialCollegeLondon/SWMManywhere.git",
+   "reproduced": true,
+   "original": {
+    "complete": 394,
+    "harm": 32,
+    "help": 86,
+    "divergent": 32,
+    "by_source": {
+     "G0": {
+      "complete": 194,
+      "harm": 18
+     },
+     "G2": {
+      "complete": 200,
+      "harm": 14
+     }
+    },
+    "h_hat": 0.08121827411167512,
+    "in_band": true
+   },
+   "categories": {
+    "C2a": 32
+   },
+   "theta_c1": 0.0,
+   "in_band_c1": false,
+   "c1_examples": [],
+   "diff": "--- a/swmmanywhere/prepare_data.py\n+++ b/swmmanywhere/prepare_data.py\n@@ -123,11 +123,14 @@\n             ``truncate_by_edge set`` to True.\n     \"\"\"\n     west, south, east, north = bbox\n-    graph = ox.graph_from_bbox(\n-        bbox = (north, south, east, west),\n-        truncate_by_edge=True, \n-        custom_filter='[\"waterway\"]')\n-    \n+    try:\n+        graph = ox.graph_from_bbox(\n+            bbox = (north, south, east, west),\n+            truncate_by_edge=True, \n+            custom_filter='[\"waterway\"]')\n+    except ValueError:\n+        graph = nx.MultiDiGraph()\n+\n     return cast(\"nx.MultiDiGraph\", graph)\n \n def download_elevation(fid: Path, \n"
+  },
+  {
+   "name": "unittest_proj_pr1_41e72b",
+   "repo": "https://github.com/Mikhail-Kupriianov/unittest_proj.git",
+   "reproduced": true,
+   "original": {
+    "complete": 400,
+    "harm": 16,
+    "help": 130,
+    "divergent": 16,
+    "by_source": {
+     "G0": {
+      "complete": 200,
+      "harm": 16
+     },
+     "G2": {
+      "complete": 200,
+      "harm": 0
+     }
+    },
+    "h_hat": 0.04,
+    "in_band": true
+   },
+   "categories": {
+    "C2a": 16
+   },
+   "theta_c1": 0.0,
+   "in_band_c1": false,
+   "c1_examples": [],
+   "diff": "--- a/utils/arrs.py\n+++ b/utils/arrs.py\n@@ -11,7 +11,7 @@\n     :param default: \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 \u043f\u043e-\u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e.\n     :return: \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 \u043f\u043e \u0438\u043d\u0434\u0435\u043a\u0441\u0443 \u0438\u043b\u0438 \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 \u043f\u043e-\u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e.\n     \"\"\"\n-    if index < 0:\n+    if index < 0 or index >= len(array):\n         return default\n \n     return array[index]\n"
+  },
+  {
+   "name": "unittest_proj_pr1_55ce30",
+   "repo": "https://github.com/DaryaAgafonova/unittest_proj.git",
+   "reproduced": true,
+   "original": {
+    "complete": 400,
+    "harm": 37,
+    "help": 88,
+    "divergent": 156,
+    "by_source": {
+     "G0": {
+      "complete": 200,
+      "harm": 0
+     },
+     "G2": {
+      "complete": 200,
+      "harm": 37
+     }
+    },
+    "h_hat": 0.0925,
+    "in_band": true
+   },
+   "categories": {
+    "C2a": 37
+   },
+   "theta_c1": 0.0,
+   "in_band_c1": false,
+   "c1_examples": [],
+   "diff": "--- a/utils/arrs.py\n+++ b/utils/arrs.py\n@@ -11,7 +11,7 @@\n     :param default: \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 \u043f\u043e-\u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e.\n     :return: \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 \u043f\u043e \u0438\u043d\u0434\u0435\u043a\u0441\u0443 \u0438\u043b\u0438 \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 \u043f\u043e-\u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e.\n     \"\"\"\n-    if index < 0:\n+    if index < 0 or index >= len(array):\n         return default\n \n     return array[index]\n"
+  },
+  {
+   "name": "unittest_proj_pr1",
+   "repo": "https://github.com/AlexandrKhasmatulin/unittest_proj.git",
+   "reproduced": true,
+   "original": {
+    "complete": 400,
+    "harm": 16,
+    "help": 76,
+    "divergent": 266,
+    "by_source": {
+     "G0": {
+      "complete": 200,
+      "harm": 2
+     },
+     "G2": {
+      "complete": 200,
+      "harm": 14
+     }
+    },
+    "h_hat": 0.04,
+    "in_band": true
+   },
+   "categories": {
+    "C2a": 16
+   },
+   "theta_c1": 0.0,
+   "in_band_c1": false,
+   "c1_examples": [],
+   "diff": "--- a/utils/arrs.py\n+++ b/utils/arrs.py\n@@ -11,7 +11,7 @@\n     :param default: \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 \u043f\u043e-\u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e.\n     :return: \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 \u043f\u043e \u0438\u043d\u0434\u0435\u043a\u0441\u0443 \u0438\u043b\u0438 \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 \u043f\u043e-\u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e.\n     \"\"\"\n-    if index < 0:\n+    if index < 0 or index >= len(array):\n         return default\n \n     return array[index]\n"
+  }
+ ]
+}

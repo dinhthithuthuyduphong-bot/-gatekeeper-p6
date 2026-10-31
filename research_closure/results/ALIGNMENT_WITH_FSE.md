@@ -65,3 +65,11 @@ Theo quy tắc đã ghi sau PP2: **cận dưới của khoảng tin cậy > 0 (4
 **Hai điều kiện trước khi viết khẳng định đó vào bài:** (1) RQ5 xác nhận rằng các chênh lệch là hồi quy thật, không phải khác biệt về loại lỗi trên đầu vào không hợp lệ; (2) bài nêu rõ rằng một nửa số ca đến từ bài tập của sinh viên, và tỉ lệ ở dự án thật có lẽ gần 4%.
 
 **Đối chiếu với bài gốc:** Gatekeeper không vượt kiểm định cỡ mẫu cố định (quyết định gần như trùng nhau), đúng như lý thuyết dự đoán; giá trị thực tiễn nằm ở **so với census và smoke 20**: census admit cả 16 patch có θ̂ > 5%, smoke 20 admit 2, còn cả hai cổng thống kê và zero-tolerance đều chặn được hết. RQ3 (D2_cerberus) cho thấy oracle viết theo ý đồ tác giả bỏ sót tác dụng phụ ngoài phạm vi: cầu nối trực tiếp về vấn đề "phạm vi trước khi tái sử dụng".
+
+## Sau RQ5 (3/11/2026): khẳng định "khoảng 8%" không đứng được
+
+Điều kiện (1) ở mục trước **không thoả**: 97,5% đầu vào "hồi quy" là đầu vào mà bản fix cũng từ chối. Tỉ lệ hồi quy thật trên đầu vào hợp lệ chỉ khoảng 0,5% đến 3%. Theo bảng kịch bản đã nêu trước RQ5, đây là nhánh **"phần lớn là khác biệt trên đầu vào không hợp lệ"**.
+
+**Khẳng định mới mà dữ liệu ủng hộ:** (a) patch LLM plausible **hiếm khi** hồi quy trên đầu vào hợp lệ (cận trên khoảng 5 đến 6%); (b) oracle so sai khác ngây thơ phóng đại tỉ lệ hồi quy nhiều lần; phải đánh giá theo hợp đồng của hàm. Hướng (b) là đóng góp phương pháp mới, và có thể kiểm định trên SWE-bench Verified, nơi PatchDiff báo cáo khoảng 30% chênh lệch hành vi.
+
+**Đối chiếu với bài gốc:** cổng chấp nhận có kiểm soát rủi ro vẫn đúng về nguyên lý, nhưng trên patch thật, tác hại một phần thật quá hiếm để cổng thống kê tạo khác biệt thực tiễn lớn so với census; vấn đề lớn hơn là **định nghĩa tác hại**, và RQ3 (`D2_cerberus`) cho thấy định nghĩa theo ý đồ tác giả lại bỏ sót tác dụng phụ. Cả hai cùng chỉ về một câu hỏi: tác hại phải được định nghĩa theo hợp đồng của mã, không theo mọi khác biệt, cũng không theo ý đồ.
