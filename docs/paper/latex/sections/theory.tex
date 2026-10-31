@@ -117,7 +117,8 @@ implementation checks.  (c) If $e_c\ge K/\alpha$, every $I\ni c$ has mean at lea
 \begin{remark}[Data-dependent budgets]
 The ledger above is fixed in advance, which is what makes the union bound free of any independence assumption.  A budget that
 depends on data (for example, $\alpha_c$ proportional to an estimated reuse frequency) remains valid if (i) the total is at most
-$\alpha$ almost surely and (ii) the trial sequence of cell $c$ is independent of the information used to set $\alpha_c$: then
+$\alpha$ almost surely and (ii) for every cell and epoch $(c,k)$ the trial sequence of that epoch is independent of the information used to set
+$\alpha_{c,k}$: then
 $\Pr[A_{c,k}\mid\alpha_{c,k}]\le\alpha_{c,k}$ by Lemma~\ref{lem:eprocess} applied conditionally, so
 $\Pr[\bigcup A_{c,k}]\le\sum\mathbb{E}[\Pr[A_{c,k}\mid\alpha_{c,k}]]\le\mathbb{E}\sum\alpha_{c,k}\le\alpha$.  Without (ii), for instance when two
 cells share tasks, a data-dependent budget can break the guarantee.
@@ -129,7 +130,8 @@ $Z\in[-1,1]$, $|\mathrm{STR}_Q(c)-\mathrm{STR}_P(c)|\le2\,\mathrm{TV}(P_s,Q_s)\l
 \end{lemma}
 
 \begin{proof}
-Centre $f$ so that $|g|\le b/2$; then $|\mathbb{E}_Qg-\mathbb{E}_Pg|\le(b/2)\sum_x|Q(x)-P(x)|=b\,\mathrm{TV}(P,Q)$.  For
+Centre $f$ so that $|g|\le b/2$; then $|\mathbb{E}_Qg-\mathbb{E}_Pg|=|\int g\,d(Q-P)|\le(b/2)\,|Q-P|(\mathcal{X})=b\,\mathrm{TV}(P,Q)$,
+since the total variation norm of the signed measure $Q-P$ is $2\,\mathrm{TV}(P,Q)$.  For
 attainment, take task types $u$ with $Z=1$ and $d$ with $Z=-1$, $P(u)=0.1$, $Q(u)=0.2$: then $\mathrm{TV}=0.1$ and the risks
 differ by $0.2$.
 \end{proof}
@@ -161,7 +163,8 @@ $\mathrm{STR}_Q(c)=\mathrm{STR}_P(c)+2\xi$, whose admission probability does not
 of $\mathcal{R}_{\mathrm{obs}}$ and the target's own fingerprints and predicates) and has $\ell(x,\pi)=1$, $\ell(x,\varnothing)=0$
 for every task.  The procedure's input, hence its admission probability, is unchanged, and $Z\equiv1$ on $R^\dagger$.
 (b) Take task types $u$ ($Z=1$) and $d$ ($Z=-1$), both realizable with $\ell\in\{0,1\}$ ($u$: the run passes without the
-skill and fails with it; $d$: the reverse), with $P(d)=(1+\theta+\delta)/2\ge\xi$, and obtain $Q$ by moving mass $\xi$ from
+skill and fails with it; $d$: the reverse), with $P(d)=(1+\theta+\delta)/2\ge\xi$ and $P(u)=(1-\theta-\delta)/2>0$, so that
+$\mathrm{STR}_P=P(u)-P(d)=-\theta-\delta$, and obtain $Q$ by moving mass $\xi$ from
 $d$ to $u$.  The procedure only reads tasks drawn from $P$.
 \end{proof}
 
@@ -181,10 +184,13 @@ $1-\theta>0$, and no bound on the composite risk improves on the trivial one imp
 \end{theorem}
 
 \begin{proof}
-Upper bound, for any skills: $\mathrm{STR}(S_1\circ S_2)\le1-\mathbb{E}\ell(\varnothing)$, and $\mathbb{E}\ell(\varnothing)\ge-a$ because
-$\mathbb{E}\ell(\pi_1)=\mathbb{E}\ell(\varnothing)+a\ge0$; likewise $\ge-b$.  Attainment, with losses realizable by Assumption~\ref{ass:rich}: constant losses
-$\ell(\varnothing)=-\min(a,b)$, $\ell(\pi_1)=\ell(\varnothing)+a$, $\ell(\pi_2)=\ell(\varnothing)+b$,
-$\ell(\pi_1\circ\pi_2)=1$.
+Upper bound, for any skills: $\mathrm{STR}(S_1\circ S_2)=\mathbb{E}\ell(\pi_1\circ\pi_2)-\mathbb{E}\ell(\varnothing)\le1-\mathbb{E}\ell(\varnothing)$;
+since $\mathbb{E}\ell(\pi_1)=\mathbb{E}\ell(\varnothing)+a\ge0$ and likewise for $b$, $\mathbb{E}\ell(\varnothing)\ge\max(-a,-b)=-\min(a,b)$, so
+$\mathrm{STR}(S_1\circ S_2)\le1+\min(a,b)$.  Attainment, with losses realizable by Assumption~\ref{ass:rich}: constant losses
+$\ell(\varnothing)=-\min(a,b)$, $\ell(\pi_1)=\ell(\varnothing)+a$, $\ell(\pi_2)=\ell(\varnothing)+b$, $\ell(\pi_1\circ\pi_2)=1$.  With losses in
+$\{0,1\}$ (as in the experiments), say $a\le b$: let $\ell(\varnothing)=1$ on a set of tasks of mass $-a$ and $0$ elsewhere, $\ell(\pi_1)=0$
+everywhere, $\ell(\pi_2)=1$ on a part of mass $b-a\le-a$ of that set and $0$ elsewhere, and $\ell(\pi_1\circ\pi_2)=1$ everywhere; then the
+risks are $a$, $b$ and $1+a$.
 \end{proof}
 
 Theorem~\ref{thm:composition} says nothing about footprints.  Screening only pairs whose footprints overlap is therefore sound
@@ -229,8 +235,9 @@ Let $V_\pi=\mathrm{Var}\,\ell(x,\pi)$, $V_\varnothing=\mathrm{Var}\,\ell(x,\varn
 $C=\mathrm{Cov}(\ell(x,\pi),\ell(x,\varnothing))$ on the same task.  Estimating $\mathrm{STR}$ from $n$ paired tasks has
 variance $(V_\pi+V_\varnothing-2C)/n$; from two independent arms of $n$ tasks each it has variance $(V_\pi+V_\varnothing)/n$.
 Both designs cost $2n$ runs, so pairing reduces the number of tasks needed for a given precision by
-$R=(V_\pi+V_\varnothing)/(V_\pi+V_\varnothing-2C)$.  Under the additive model $\ell(\varnothing)=T$, $\ell(\pi)=T+S$ with
-independent $T,S$, $R=1+2\sigma_T^2/\sigma_S^2$.
+$R=(V_\pi+V_\varnothing)/(V_\pi+V_\varnothing-2C)$.  Under the additive variance model $\ell(\varnothing)=T$, $\ell(\pi)=T+S$ with
+independent $T,S$ (an illustration of the variance structure, which ignores the clipping of losses to $[0,1]$),
+$R=1+2\sigma_T^2/\sigma_S^2$.
 \end{proposition}
 
 \begin{proof}
