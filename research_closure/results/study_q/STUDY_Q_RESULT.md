@@ -79,3 +79,55 @@ HQ1 không được ủng hộ, nên theo bảng đã ghi trước, kết luận
 - kết quả phụ thuộc mạnh vào nguồn đầu vào (G0 so với G2).
 
 Chọn hướng viết bài là quyết định của người hướng dẫn.
+
+---
+
+## Amendment Q-A1: chấm tay các hồi quy theo hợp đồng của HQ1 (BỔ SUNG, SAU KHI THẤY KẾT QUẢ)
+
+Kế hoạch: `study_q/AMENDMENTS.md` (Q-A1), commit `f275126`, viết trước khi xem bất kỳ ví dụ nào. Dữ liệu: `qa1/` (`REPRO.json`, `ITEMS.json`, `KEY.json`, `RATINGS_ASSISTANT.json`, `RATINGS_SECOND.json`, `QA1_RESULT.json`, `CAPTURE.tar.gz`).
+
+**Chạy lại và tái tạo** ([run 41192489807](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41192489807), 55/55 job thành công):
+
+| | Số |
+|---|---|
+| Đơn vị HQ1 | 55 |
+| Tái tạo đúng hệt (cùng patch, cùng hàm, cùng tóm tắt phân loại) | **36** (65%; RQ5 của Study P: 66%) |
+| Không tái tạo | 19, gần như đều do chương trình sinh G2 được model viết lại khác lần cohort |
+| Đơn vị tái tạo được có hồi quy theo hợp đồng → mục chấm | 31 đơn vị, 154 mục |
+
+**Hai người chấm**, cùng bộ mã R / B / U của RQ5:
+
+| | Trợ lý (chấm trước, commit `827b404`) | `gemini-4-argon` (mù, 0,38 USD) |
+|---|---|---|
+| R | 135 | 154 |
+| B | 19 | 0 |
+
+- **Đồng thuận:** 135/154 = 87,7%.
+- **Kappa = 0,0.** Người chấm thứ hai mã R cho mọi mục, nên không có biến thiên. Kappa không mang thông tin; chỉ báo cáo kèm cho đủ.
+- **Toàn bộ 19 mục bất đồng** là trợ lý mã B, người chấm thứ hai mã R, ở bốn hàm của sympy:
+  - `MatrixDeterminant._eval_det_bareiss`: biểu thức khai triển ra đúng 0 (trợ lý đã kiểm bằng sympy), so với `0`;
+  - `tensor_product_simp` và `IdentityOperator.__mul__`: cùng giá trị, khác dạng rút gọn;
+  - `StrPrinter._print_Mul`: chỉ thừa dấu ngoặc.
+- Bộ mã của RQ5 không liệt kê "biểu thức tương đương về toán" trong nhóm B. Mã B của trợ lý là một cách hiểu rộng hơn bộ mã, và người chấm thứ hai không được thấy phép kiểm bằng sympy.
+
+**Kết quả** (`tools/q_review_agreement.py`):
+
+| | Giá trị |
+|---|---|
+| Đơn vị có hồi quy đã xác nhận (≥ 1 mục được cả hai mã R) | 28/31 |
+| Đơn vị tái tạo được **không** có hồi quy đã xác nhận | **8/36 = 22,2%** (Wilson 11,7% – 38,1%) |
+| Hai cận trên cả 55 đơn vị (19 không tái tạo tính là có / không có hồi quy) | 14,5% – 49,1% |
+| Nếu coi biểu thức tương đương là R (theo người chấm thứ hai) | 5/36 = 13,9% |
+| Tham chiếu: HQ1 đã đăng ký | 6/55 = 10,9% |
+
+**Diễn giải:**
+1. Sau khi chấm tay, phần lớn khác biệt ngây thơ trên SWE-bench Verified vẫn là **khác biệt hành vi quan sát được** so với bản fix. Kết luận "HQ1 không được ủng hộ" **đứng vững**: mọi ước lượng ở bảng trên đều dưới 0,5, kể cả cận trên của Wilson (38,1%).
+2. Kết luận ngược của RQ5 (Study P) không lặp lại được.
+3. **"R" không có nghĩa là patch sai.** R là khác biệt mà người gọi hàm thấy được. Nhiều ca, patch có thể đúng hơn hoặc ngang bản fix, ví dụ `'1/(1/x)'` so với `'1/1/x'`, hay patch từ chối `exp` của một đại lượng có thứ nguyên. Bộ mã không phân xử ai đúng.
+4. **Nhận xét định tính, sau khi thấy dữ liệu:** ở ít nhất ba hàm (`modify_field_list`, `apply_limit_choices_to_to_formfield`, `Field.__eq__`), đầu vào là đối tượng giả do G2 dựng (danh sách thay cho node docutils, model giả không có `_meta`, field chưa gắn model). Bản fix tình cờ trả giá trị, còn patch ném lỗi. Quy tắc "bản fix trả giá trị = đầu vào hợp lệ" xếp các ca này vào C1, dù đầu vào có thể nằm ngoài hợp đồng thật của hàm. Đây là giới hạn của cách phân loại, nên ghi trong bài.
+
+**Giới hạn:**
+- Người chấm thứ hai cùng họ model với model sinh G2 và không thấy đầu vào (giống RQ5).
+- Trợ lý chấm theo từng hàm, vì các mục của cùng một hàm giống nhau.
+- 19/55 đơn vị không tái tạo được.
+- Lần chạy đầu của người chấm thứ hai ([run 41193552100](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41193552100)) thất bại vì token hết hạn và không lưu gì. Lần chạy được dùng là [run 41197881665](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41197881665), chia 6 job, công cụ chấm không đổi.

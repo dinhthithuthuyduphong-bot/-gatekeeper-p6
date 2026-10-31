@@ -45,7 +45,7 @@ Giao thức: [STUDY_Q_PROTOCOL](../study_q/STUDY_Q_PROTOCOL.md). Amendment: chư
 | Smoke 3 instance ([run #3](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41184775725)) | ✅ | 3/3 thành công, `FINISHED`. Lưu ý: mỗi instance khoảng 1 phút, artifact khoảng 1 KB, cần mở ra kiểm tra |
 | Stream part 0, 235 instance ([run #4](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41185100083)) | ✅ | 08:33 đến 09:11 UTC; 235/235 job thành công, 0 lỗi |
 | Stream part 1, 234 instance ([run #5](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41187862326)) | ✅ | 09:14 đến 09:59 UTC; 234/234 job thành công |
-| ⚠️ Lệch giao thức: không lưu đầu ra từng đầu vào | ⏳ quyết định | `q_instance.py` chỉ lưu tóm tắt C1/C2/C3, trong khi giao thức mục 3 nói lưu mọi đầu ra. Cần amendment hoặc chạy lại có lưu (xem PROCESS_LOG) |
+| ⚠️ Lệch giao thức: không lưu đầu ra từng đầu vào | ✅ xử lý bằng Q-A1 | `q_instance.py` chỉ lưu tóm tắt C1/C2/C3, trong khi giao thức mục 3 nói lưu mọi đầu ra. Cần amendment hoặc chạy lại có lưu (xem PROCESS_LOG) |
 | Chạy lại instance lỗi hạ tầng (`only=...`) | ✅ không cần | 0 job lỗi; 4 bản ghi `ERROR` là lỗi công cụ (patch tạo tệp mới), tính là không dùng được |
 | Workflow tổng hợp `Gatekeeper Study Q analyze` | ✅ | Commit `79ba306`; kết quả commit `9a8ab44`: đủ 469/469 bản ghi |
 | Cổng Q-G1: có ≥ 18 instance có patch có khác biệt | ✅ đạt | 55 instance |
@@ -53,7 +53,7 @@ Giao thức: [STUDY_Q_PROTOCOL](../study_q/STUDY_Q_PROTOCOL.md). Amendment: chư
 | Q1 phễu; Q2, Q4 tỉ lệ (Wilson, bootstrap gom cụm); Q5 hệ số phóng đại | ✅ | Dùng được 245/469; Q2 = 43,1%; Q4 = 11,1%; Q5 = 3,88 theo giao thức (công cụ ghi 1,16 theo định nghĩa khác) |
 | Phân tích độ nhạy (a) đến (d) | ✅ | Cùng kết luận; G0 1,2% so với G2 10,4% |
 | Viết `STUDY_Q_RESULT.md` | ✅ | ALIGNMENT_WITH_FSE không sửa (thuộc freeze của Study P) |
-| Chấm tay các ca C1 (như RQ5) | ⏳ cần quyết định | Không làm được vì không lưu đầu ra; cần amendment + chạy lại có lưu cho 55 instance |
+| Amendment Q-A1: chạy lại 55 đơn vị HQ1 có lưu đầu ra + chấm tay (bổ sung sau khi thấy kết quả) | ✅ | 36/55 tái tạo được; 154 mục; đồng thuận 87,7%; 8/36 = 22,2% (Wilson 11,7% – 38,1%) không có hồi quy đã xác nhận. HQ1 "không ủng hộ" đứng vững |
 
 **Ngân sách:** model chỉ dùng để sinh chương trình G2, khoảng 0,01 USD mỗi instance, dưới 10 USD tổng.
 
@@ -110,3 +110,4 @@ PDF gốc: [`paper/source/`](paper/source/), đã đối chiếu toàn văn ngà
 | 31/10/2026 | Đưa 3 PDF lên `docs/paper/source/`; kiểm tra toàn bài (PAPER_AUDIT.md); sắp xếp lại repo (`docs/`, `archive/`); part 0 vẫn đang chạy |
 | 31/10/2026 09:59 | Part 1 xong: 234/234 thành công |
 | 31/10/2026 ~10:05 | Tổng hợp: HQ1 không được ủng hộ; Q4 = 11,1%; viết STUDY_Q_RESULT.md |
+| 31/10/2026 ~10:15–12:30 | Amendment Q-A1: chạy lại 55 đơn vị, chấm tay hai người; kết luận HQ1 giữ nguyên |

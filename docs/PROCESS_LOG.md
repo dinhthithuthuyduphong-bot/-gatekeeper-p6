@@ -114,3 +114,21 @@ Mẫu cho mỗi mục:
   1. Có chạy lại 55 instance của HQ1 với đầu ra được lưu để chấm tay C1 không. Việc này cần amendment, vì là bổ sung sau khi thấy kết quả.
   2. Hướng viết bài theo nhánh "không bác bỏ" (TRACKING_FSE mục 4).
   3. ALIGNMENT_WITH_FSE.md (thuộc freeze Study P) không được sửa; kết luận mới nằm ở STUDY_Q_RESULT.md và TRACKING_FSE.md.
+
+### ~10:10 — Người nghiên cứu chọn hướng 1: chấm tay các đơn vị HQ1
+- Đã làm:
+  - **Amendment Q-A1** (`study_q/AMENDMENTS.md`, commit `f275126`), ghi rõ là bổ sung sau khi thấy kết quả. Quy tắc tái tạo, cách chọn mục, bộ mã và người chấm được ghi trước khi xem ví dụ. Áp bằng `tools/amend_study.py`: seed vẫn gắn hash đóng băng gốc, freeze làm lại, `verify` OK.
+  - Công cụ mới, kèm test:
+    - `tools/q_review_capture.py`: bọc `q_instance.run`, không sửa nó; lưu đầu ra, đầu vào và patch;
+    - `tools/q_review_items.py`: kiểm tái tạo, dựng mục chấm mù;
+    - `tools/q_review_agreement.py`: tính đồng thuận và kết quả.
+  - Workflow mới: `study-q-review-capture.yml`, `study-q-review-items.yml`, `study-q-review-rate.yml`.
+  - Push tag `study_q-q-a1` bị proxy chặn (403); mốc của amendment là commit `f275126`.
+- Smoke 2 instance (run 41192194052): cả hai tái tạo đúng hệt.
+- Chạy đủ 55 instance (run 41192489807): 55/55 thành công. Dựng mục (run 41193394796): 36/55 tái tạo, 154 mục từ 31 đơn vị.
+- Trợ lý chấm 154 mục (R 135, B 19) và commit `827b404` trước người chấm thứ hai, không mở `KEY.json`. Các output sympy được kiểm tương đương bằng sympy.
+- **Người chấm thứ hai, lần 1** (run 41193552100): thất bại sau khoảng 60 phút với `ACCESS_TOKEN_EXPIRED`, không lưu gì. Nguyên nhân: `gcloud auth print-access-token` trả token còn trong bộ nhớ đệm, nên lần làm mới mỗi 25 phút của client không lấy được token mới.
+  - Sửa: chia mục thành nhiều job (commit `5871c3f`); `tools/rq5_rate_llm.py` không đổi.
+  - Lần 2 (run 41197881665, 6 job): thành công, 0,38 USD.
+- Kết quả: đồng thuận 87,7%, kappa 0 (người chấm thứ hai mã R mọi mục); 28/31 đơn vị có hồi quy đã xác nhận; **8/36 = 22,2%** đơn vị tái tạo được không có hồi quy đã xác nhận (Wilson 11,7% – 38,1%). Kết luận HQ1 giữ nguyên. Chi tiết trong `STUDY_Q_RESULT.md`, mục Q-A1.
+- Còn mở: viết lại khẳng định trong bài theo nhánh "không bác bỏ"; nêu giới hạn "bản fix trả giá trị ≠ đầu vào hợp lệ" (đối tượng giả do G2 dựng).
