@@ -33,6 +33,7 @@ S_A1 = False         # --s-a1: amendment S-A1 (post hoc): receivers built from t
 #                      manifest Python version, install log recorded (study_s/AMENDMENTS.md)
 S_A2 = False         # --s-a2: amendment S-A2 (S-A1 plus subtype substitution and a Python 3.11 install fallback)
 S_A3 = False         # --s-a3: S-A2 plus every variant run twice; only inputs stable in O and every variant count
+S_A3_FIXED_HASH = "--fixed-hash" in sys.argv   # for runs after S-A3; the reported S-A3 run did not fix it
 INSTALL_LOG = {}
 
 
@@ -47,8 +48,9 @@ def inner(py, root, pp, rel, qualname, mode, calls, out, n, seed=0):
         with FP.at_common_path(root) as common:
             args["root"] = str(common)
             ap.write_text(json.dumps(args))
+            # fixed hash seed: S-A3 traced a non-replicated difference to per-process hash randomisation (study_s/AMENDMENTS.md)
             p = subprocess.run([str(py), str(ROOT / "tools" / "composition_inner.py"), str(ap)], capture_output=True, text=True,
-                               timeout=120 + n * 2)
+                               timeout=120 + n * 2, env=dict(os.environ, PYTHONHASHSEED="0") if S_A3_FIXED_HASH else None)
     except subprocess.TimeoutExpired:
         return {"status": "PROCESS_TIMEOUT"}
     if not Path(out).exists():
