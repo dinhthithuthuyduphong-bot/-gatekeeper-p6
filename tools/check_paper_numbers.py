@@ -66,6 +66,8 @@ CLAIMS = [
      lambda: "family-wise\nfalse admission rate of our e-process is $%.2f$, against $%.2f$" % (TH()["C2_budget_per_cell_vs_per_scope"]["familywise_shared"],
                                                                                          TH()["C2_budget_per_cell_vs_per_scope"]["familywise_split"])),
     ("theory C9 draws", "=110$ clean draws", lambda: "=%d$ clean draws" % TH()["C9_harm_certificate"]["clean_draws_family16"]),
+    ("loss-weight sensitivity draws", "Recomputing all $7{,}200$ recorded draws",
+     lambda: "Recomputing all $%s$ recorded draws" % "{:,}".format(J("research_closure/results/sensitivity/LOSS_WEIGHT_SENSITIVITY.json")["A_recorded_draws"]["draws"]).replace(",", "{,}")),
     # abstract (main.tex)
     ("abstract: plausible patches", "in $205$ plausible LLM patches", lambda: "in $%d$ plausible LLM patches" % PA()["PRIMARY"]["plausible"]),
     ("abstract: census admits", "the census admitted all $16$ with high partial harm",

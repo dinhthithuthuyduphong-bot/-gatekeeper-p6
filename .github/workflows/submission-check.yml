@@ -22,6 +22,8 @@ jobs:
           python tools/theory_checks.py out_theory --reps 2000
           python -c "import json,sys;a=json.load(open('out_theory/THEORY_CHECKS.json'));b=json.load(open('research_closure/results/theory/THEORY_CHECKS.json'));sys.exit(0 if a==b else 'theory checks differ from the committed results')"
       - run: python tools/check_paper_numbers.py | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Loss-weight sensitivity (no decision depends on the regression penalty)
+        run: python tools/loss_weight_sensitivity.py out_lws
       - name: Freeze of every cited study
         shell: bash
         run: |

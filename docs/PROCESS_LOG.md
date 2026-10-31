@@ -208,3 +208,12 @@ Mẫu cho mỗi mục:
 - **6.1:** `tools/snapshot_submission.py` (có test) và workflow `Gatekeeper submission snapshot` (đầu vào: venue, mã bài, link artifact). Workflow kiểm lại số, dựng lại artifact ẩn danh, lưu `docs/paper/submitted/<venue>-<mã>/` gồm PDF, `SUBMISSION.json` (commit, SHA-256 của PDF, zip và manifest của artifact), commit, rồi gắn tag `submitted-<venue>-<mã>`. Tag được đẩy từ GitHub Actions; phiên của trợ lý bị proxy chặn đẩy tag.
 - **6.2:** `docs/paper/REVIEW_RESPONSE.md`: quy tắc trả lời cho người mới, bảng ý kiến, khung bản trả lời. `docs/paper/ANTICIPATED_REVIEWS.md`: 16 ý kiến có thể gặp (A1–A16), mỗi ý có câu trả lời tiếng Anh soạn sẵn, bằng chứng trong repo, và việc có thể làm thêm.
 - **Ghi nhận trung thực (A14):** bài chưa chạy phân tích độ nhạy cho hệ số phạt regression. Con số "sweep [0,2; 2,0]" của bản nháp là projected và đã bị bỏ.
+
+### ~18:15 — A14: độ nhạy của hệ số phạt regression (0,5)
+- **Phát hiện khi đọc mã:** hệ số 0,5 chỉ có trong `PairedRun.suite_loss`. Quyết định dùng z theo từng test (`PairedRun.z`, ∈ {−1, 0, 1}); nhãn đúng sai dùng tập test fail mới; `suite_loss` chỉ được ghi vào báo cáo (`Z_suite`).
+- **Chứng minh:** với bộ một test (mỗi lần rút của Study D–H), loss chặn tại 1 không phụ thuộc λ ≥ 0. Nếu nhánh có kỹ năng fail thì loss đã bằng 1; nếu pass thì không có regression.
+- **Kiểm** (`tools/loss_weight_sensitivity.py`, có test):
+  - (A) 7.200 lần rút đã ghi (12 tệp, 24 phạm vi) với λ ∈ {0; 0,2; 0,5; 1; 2; 5}: 0 lần rút đổi z;
+  - (B) chạy lại demo nhiều test (9 ô): không quyết định hay nhãn nào đổi; `Z_suite` chỉ đổi ở 3 ô khi λ = 0.
+  - Kết quả: `research_closure/results/sensitivity/LOSS_WEIGHT_SENSITIVITY.json`.
+- **Bài:** thêm một câu vào mục Implementation; bộ kiểm số lên 20 con số; bước kiểm thêm vào workflow `Gatekeeper submission check`; A14 trong ANTICIPATED_REVIEWS chuyển thành "đã làm".
