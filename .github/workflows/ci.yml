@@ -1,0 +1,38 @@
+# Continuous integration: runs on every push to main and every pull request (all other workflows are manual).
+# Fast and free: unit tests, workflow lint, the paper's quoted numbers, and the freeze of every study the paper cites.
+name: Gatekeeper CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  ci:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Unit tests
+        run: python -m unittest discover -s tests
+      - name: Workflow lint (actionlint)
+        run: |
+          pip install -q actionlint-py
+          actionlint -oneline
+      - name: Numbers quoted in the paper
+        run: python tools/check_paper_numbers.py
+      - name: Freeze of every cited study
+        shell: bash
+        run: |
+          set -euo pipefail
+          for s in study_d study_e study_g study_h study_q; do python tools/freeze_study.py verify $s; done
+          git worktree add -q /tmp/p_freeze 6437ecf
+          (cd /tmp/p_freeze && python tools/freeze_study.py verify study_p)

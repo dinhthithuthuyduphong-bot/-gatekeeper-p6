@@ -2,7 +2,6 @@
 (the lesson of Study M, whose gates were not hashed).  Refuses if a listed tool is missing.  study_p must be DRAFT.
 python tools/p_prepare_freeze.py"""
 import json
-import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent

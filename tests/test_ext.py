@@ -27,7 +27,7 @@ class NoneIdentitySkillTests(unittest.TestCase):
         e = Expr()
         self.assertEqual(e == None, "IS NULL")               # noqa: E711  intended semantics
         self.assertIs(e is None, False)                      # what the rewrite would produce
-        self.assertEqual((5 == None), (5 is None))           # noqa: E711  ordinary objects: unchanged
+        self.assertEqual((5 == None), (5 is None))           # noqa: E711,F632  ordinary objects: unchanged (intended)
 
 
 class NoneIdentityPrecedenceTests(unittest.TestCase):
@@ -125,7 +125,7 @@ class PatchRuleTests(unittest.TestCase):
 
 class FreezeExtraTrackedTests(unittest.TestCase):
     def test_extra_tracked_only_affects_its_own_study(self):
-        import importlib, json, tempfile, shutil
+        import importlib, json, tempfile
         sys.path.insert(0, str(ROOT / "tools"))
         fz = importlib.import_module("freeze_study")
         d_files = {p.name for p in fz.tracked((ROOT / "study_d").resolve())}

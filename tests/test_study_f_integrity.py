@@ -9,7 +9,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from gatekeeper_ext.study_f_validation import (ProviderReplayClient, digest, validate_heldout,
-                                               validate_record, compare_replay)
+                                               compare_replay)
 from gatekeeper_lite.b9 import Budget, RepairResult, SpendGuard, repair
 from tools import aggregate_study_f, score_heldout
 

@@ -270,7 +270,7 @@ class P73WrapperTests(unittest.TestCase):
 
 class ReachPluginTests(unittest.TestCase):
     def test_junit_id_and_tracer(self):
-        import importlib, os, sys
+        import importlib, os
         os.environ["GK_REACH_FUNCS"] = "target_fn"
         os.environ["GK_REACH_FILE"] = "test_core.py"
         import gatekeeper_lite.pytest_reach as reach

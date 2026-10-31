@@ -5,7 +5,6 @@ an exploratory cost microbenchmark, not new target evidence or a model trial.
 Dependency installation/source download are separately excluded from warm evaluation.
 """
 import argparse
-import hashlib
 import importlib.metadata
 import json
 import os

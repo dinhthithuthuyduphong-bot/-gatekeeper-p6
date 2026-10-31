@@ -1,6 +1,5 @@
 """Reproduce the zero-paid-cost closure checks; preserve stdout/stderr and exit codes."""
 import argparse
-import hashlib
 import json
 from pathlib import Path
 import subprocess

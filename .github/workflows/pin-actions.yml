@@ -1,0 +1,25 @@
+# Resolve every action tag used by the workflows to a commit SHA and print the mapping (tools/pin_actions.py --resolve-only).
+# GITHUB_TOKEN may not modify workflow files, so this run only resolves; the mapping is applied with
+# `python tools/pin_actions.py --mapping mapping.json` and committed by a person.  Also reports whether
+# google-github-actions/auth@v3 (Node 24) exists.  No model calls.
+name: Gatekeeper pin actions (resolve SHAs)
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  resolve:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh api repos/google-github-actions/auth/git/ref/tags/v3 >/dev/null 2>&1; then UP=(--upgrade google-github-actions/auth=v3); echo "auth v3: exists"; else UP=(); echo "auth v3: not found"; fi
+          python tools/pin_actions.py --resolve-only "${UP[@]}" | tee mapping.txt
+          { echo '```'; cat mapping.txt; echo '```'; } >> "$GITHUB_STEP_SUMMARY"

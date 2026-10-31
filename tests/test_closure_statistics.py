@@ -1,5 +1,4 @@
 import itertools
-import math
 import unittest
 from gatekeeper_ext.robust_cert import AdaptiveHarmCert,BalancedHarmCert,binomial_cdf,fixed_iut_pvalue,holm
 
