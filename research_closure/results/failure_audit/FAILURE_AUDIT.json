@@ -1,0 +1,1311 @@
+[
+ {
+  "run_id": 41193552100,
+  "workflow": "Gatekeeper Study Q second rater (amendment Q-A1)",
+  "created": "2026-10-31T10:38:03Z",
+  "sha": "827b404",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41193552100",
+  "jobs_total": 1,
+  "failed_jobs": [
+   {
+    "job": "rate",
+    "failed_steps": [
+     "Run D=research_closure/results/study_q/qa1"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 41182723003,
+  "workflow": "Gatekeeper Study Q stream",
+  "created": "2026-10-31T07:59:07Z",
+  "sha": "94c87bc",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41182723003",
+  "jobs_total": 2,
+  "failed_jobs": [
+   {
+    "job": "plan",
+    "failed_steps": [
+     "Run python - <<'PY'"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 41178191261,
+  "workflow": "Gatekeeper Study Q stream",
+  "created": "2026-10-31T06:50:10Z",
+  "sha": "94c87bc",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41178191261",
+  "jobs_total": 2,
+  "failed_jobs": [
+   {
+    "job": "plan",
+    "failed_steps": [
+     "Run python - <<'PY'"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 41176885851,
+  "workflow": "Gatekeeper Study Q freeze",
+  "created": "2026-10-31T06:30:25Z",
+  "sha": "d7160c0",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41176885851",
+  "jobs_total": 1,
+  "failed_jobs": [
+   {
+    "job": "freeze",
+    "failed_steps": [
+     "Run python tools/q_prepare_freeze.py"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 41175551823,
+  "workflow": "Gatekeeper Study Q freeze",
+  "created": "2026-10-31T06:11:15Z",
+  "sha": "4df6445",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41175551823",
+  "jobs_total": 1,
+  "failed_jobs": [
+   {
+    "job": "freeze",
+    "failed_steps": [
+     "Run python -m unittest discover -s tests"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 41174696114,
+  "workflow": "Gatekeeper Study Q pool",
+  "created": "2026-10-31T05:58:51Z",
+  "sha": "200c16e",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41174696114",
+  "jobs_total": 1,
+  "failed_jobs": [
+   {
+    "job": "pool",
+    "failed_steps": [
+     "Run mkdir -p out_pool"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 41173700753,
+  "workflow": "Gatekeeper Study Q pool",
+  "created": "2026-10-31T05:43:04Z",
+  "sha": "66c7483",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41173700753",
+  "jobs_total": 1,
+  "failed_jobs": [
+   {
+    "job": "pool",
+    "failed_steps": [
+     "Run mkdir -p out_pool"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 41150030282,
+  "workflow": "Gatekeeper Study P stream isolate (amendment P-A3)",
+  "created": "2026-10-31T00:24:55Z",
+  "sha": "b566b2d",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41150030282",
+  "jobs_total": 19,
+  "failed_jobs": [
+   {
+    "job": "one (cs340_s26_repo_pr76)",
+    "failed_steps": [
+     "Process one candidate"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 41143189760,
+  "workflow": "Gatekeeper Study P stream resume (amendment P-A2)",
+  "created": "2026-10-30T23:13:49Z",
+  "sha": "4b58f82",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41143189760",
+  "jobs_total": 2,
+  "failed_jobs": [
+   {
+    "job": "stream (151)",
+    "failed_steps": [
+     "Stream one shard"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 41142934629,
+  "workflow": "Gatekeeper study amend",
+  "created": "2026-10-30T23:11:23Z",
+  "sha": "4b58f82",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41142934629",
+  "jobs_total": 1,
+  "failed_jobs": [
+   {
+    "job": "amend",
+    "failed_steps": [
+     "Run set -euo pipefail"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 41115845403,
+  "workflow": "Gatekeeper Study P stream resume (amendment P-A2)",
+  "created": "2026-10-30T19:30:46Z",
+  "sha": "4b58f82",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41115845403",
+  "jobs_total": 3,
+  "failed_jobs": [
+   {
+    "job": "stream (151)",
+    "failed_steps": [
+     "Stream one shard"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 41036085344,
+  "workflow": "Gatekeeper Study P stream (confirmatory cohort)",
+  "created": "2026-10-30T09:48:15Z",
+  "sha": "9f003e7",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41036085344",
+  "jobs_total": 100,
+  "failed_jobs": [],
+  "failed_job_count": 0,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 41034373636,
+  "workflow": "Gatekeeper Study P freeze",
+  "created": "2026-10-30T09:34:05Z",
+  "sha": "f19e455",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41034373636",
+  "jobs_total": 1,
+  "failed_jobs": [
+   {
+    "job": "freeze",
+    "failed_steps": [
+     "Run python -m unittest discover -s tests"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 41034302581,
+  "workflow": "Gatekeeper RQ3 (generator agreement)",
+  "created": "2026-10-30T09:33:30Z",
+  "sha": "f19e455",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41034302581",
+  "jobs_total": 2,
+  "failed_jobs": [
+   {
+    "job": "plan",
+    "failed_steps": [
+     "Run [ -f research_closure/results/RQ3_PLAN.md ] || { echo \"::error::the RQ3 plan is not committed\"; exit 1; }"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 41033970565,
+  "workflow": "Gatekeeper Study P freeze",
+  "created": "2026-10-30T09:30:46Z",
+  "sha": "cba8776",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41033970565",
+  "jobs_total": 1,
+  "failed_jobs": [
+   {
+    "job": "freeze",
+    "failed_steps": [
+     "Run python -m unittest discover -s tests"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 41033811601,
+  "workflow": "Gatekeeper RQ3 (generator agreement)",
+  "created": "2026-10-30T09:29:32Z",
+  "sha": "cba8776",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41033811601",
+  "jobs_total": 2,
+  "failed_jobs": [
+   {
+    "job": "plan",
+    "failed_steps": [
+     "Run [ -f research_closure/results/RQ3_PLAN.md ] || { echo \"::error::the RQ3 plan is not committed\"; exit 1; }"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 40998288220,
+  "workflow": "Gatekeeper Study P extend frame (part B)",
+  "created": "2026-10-30T03:36:04Z",
+  "sha": "c387c73",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40998288220",
+  "jobs_total": 1,
+  "failed_jobs": [
+   {
+    "job": "extend",
+    "failed_steps": [
+     "Discover part B"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 40970807135,
+  "workflow": "Gatekeeper Study P extend frame (part B)",
+  "created": "2026-10-29T23:06:33Z",
+  "sha": "07316b9",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40970807135",
+  "jobs_total": 1,
+  "failed_jobs": [
+   {
+    "job": "extend",
+    "failed_steps": [
+     "Append part B to the frames and commit"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 40922607378,
+  "workflow": "Gatekeeper package check",
+  "created": "2026-10-29T17:34:24Z",
+  "sha": "41344ce",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40922607378",
+  "jobs_total": 1,
+  "failed_jobs": [
+   {
+    "job": "check",
+    "failed_steps": [
+     "Run python tools/package_check.py \"research_closure/manifests/study_p_feasibility.json\" --out out_pkg"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 40922457671,
+  "workflow": "Gatekeeper package check",
+  "created": "2026-10-29T17:33:28Z",
+  "sha": "26ebac9",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40922457671",
+  "jobs_total": 1,
+  "failed_jobs": [
+   {
+    "job": "check",
+    "failed_steps": [
+     "Run python tools/package_check.py \"research_closure/manifests/study_p_feasibility.json\" --out out_pkg"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 40922252255,
+  "workflow": "Gatekeeper package check",
+  "created": "2026-10-29T17:32:11Z",
+  "sha": "6c7a31c",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40922252255",
+  "jobs_total": 1,
+  "failed_jobs": [
+   {
+    "job": "check",
+    "failed_steps": [
+     "Run python tools/package_check.py \"research_closure/manifests/study_p_feasibility.json\" --out out_pkg"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 40922173813,
+  "workflow": "Gatekeeper package check",
+  "created": "2026-10-29T17:31:41Z",
+  "sha": "6c7a31c",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40922173813",
+  "jobs_total": 1,
+  "failed_jobs": [
+   {
+    "job": "check",
+    "failed_steps": [
+     "Run python tools/package_check.py \"research_closure/manifests/study_p_feasibility.json\" --out out_pkg"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 40478521741,
+  "workflow": "Gatekeeper Study N freeze",
+  "created": "2026-10-27T09:08:26Z",
+  "sha": "2ea7495",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40478521741",
+  "jobs_total": 1,
+  "failed_jobs": [
+   {
+    "job": "freeze",
+    "failed_steps": [
+     "Run python -m unittest discover -s tests"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 40478008306,
+  "workflow": "Gatekeeper Study N freeze",
+  "created": "2026-10-27T09:04:16Z",
+  "sha": "2ea7495",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40478008306",
+  "jobs_total": 1,
+  "failed_jobs": [
+   {
+    "job": "freeze",
+    "failed_steps": [
+     "Run python -m unittest discover -s tests"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 40399062737,
+  "workflow": "Gatekeeper provisioning dev vet (A-star half)",
+  "created": "2026-10-26T20:49:31Z",
+  "sha": "a10e833",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40399062737",
+  "jobs_total": 26,
+  "failed_jobs": [
+   {
+    "job": "vet (18)",
+    "failed_steps": [
+     "Vet shard (version 2 provisioning)"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 40326417115,
+  "workflow": "Gatekeeper provisioning dev vet (A-star half)",
+  "created": "2026-10-26T12:56:27Z",
+  "sha": "114e6d9",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40326417115",
+  "jobs_total": 26,
+  "failed_jobs": [
+   {
+    "job": "vet (9)",
+    "failed_steps": [
+     "Vet shard (version 2 provisioning)"
+    ],
+    "evidence": []
+   },
+   {
+    "job": "vet (1)",
+    "failed_steps": [
+     "Vet shard (version 2 provisioning)"
+    ],
+    "evidence": []
+   },
+   {
+    "job": "vet (7)",
+    "failed_steps": [
+     "Vet shard (version 2 provisioning)"
+    ],
+    "evidence": []
+   },
+   {
+    "job": "vet (22)",
+    "failed_steps": [
+     "Vet shard (version 2 provisioning)"
+    ],
+    "evidence": []
+   },
+   {
+    "job": "vet (5)",
+    "failed_steps": [
+     "Vet shard (version 2 provisioning)"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 25,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 40302719672,
+  "workflow": "Gatekeeper study amend",
+  "created": "2026-10-26T09:50:47Z",
+  "sha": "65d304d",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40302719672",
+  "jobs_total": 1,
+  "failed_jobs": [
+   {
+    "job": "amend",
+    "failed_steps": [
+     "Run set -euo pipefail"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 40301594894,
+  "workflow": "Gatekeeper study amend",
+  "created": "2026-10-26T09:42:13Z",
+  "sha": "74a8723",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40301594894",
+  "jobs_total": 1,
+  "failed_jobs": [
+   {
+    "job": "amend",
+    "failed_steps": [
+     "Run set -euo pipefail"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 40300865755,
+  "workflow": "Gatekeeper study amend",
+  "created": "2026-10-26T09:36:31Z",
+  "sha": "74a8723",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40300865755",
+  "jobs_total": 1,
+  "failed_jobs": [
+   {
+    "job": "amend",
+    "failed_steps": [
+     "Run set -euo pipefail"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 40296709754,
+  "workflow": "Gatekeeper Study M A-star vet",
+  "created": "2026-10-26T09:03:56Z",
+  "sha": "036f9ee",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40296709754",
+  "jobs_total": 2,
+  "failed_jobs": [
+   {
+    "job": "plan",
+    "failed_steps": [
+     "Freeze check"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 40223310552,
+  "workflow": "Gatekeeper test-mutation development check",
+  "created": "2026-10-25T18:52:25Z",
+  "sha": "616a67f",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40223310552",
+  "jobs_total": 6,
+  "failed_jobs": [
+   {
+    "job": "tm (D1_py_ecc, 3.12, ubuntu-24.04)",
+    "failed_steps": [
+     "Run set -euo pipefail"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 40176250681,
+  "workflow": "Gatekeeper next evidence - zero-cost",
+  "created": "2026-10-25T08:20:51Z",
+  "sha": "87f55fb",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40176250681",
+  "jobs_total": 5,
+  "failed_jobs": [
+   {
+    "job": "audit",
+    "failed_steps": [
+     "Run regression and evidence audits on GitHub"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 40175830437,
+  "workflow": "Gatekeeper next evidence - zero-cost",
+  "created": "2026-10-25T08:14:22Z",
+  "sha": "32d5155",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40175830437",
+  "jobs_total": 5,
+  "failed_jobs": [
+   {
+    "job": "audit",
+    "failed_steps": [
+     "Run regression and evidence audits on GitHub"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 40174906235,
+  "workflow": "Gatekeeper next evidence - zero-cost",
+  "created": "2026-10-25T08:00:12Z",
+  "sha": "75b7e02",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40174906235",
+  "jobs_total": 5,
+  "failed_jobs": [
+   {
+    "job": "audit",
+    "failed_steps": [
+     "Run regression and evidence audits on GitHub"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 40173786064,
+  "workflow": "Gatekeeper next evidence - zero-cost",
+  "created": "2026-10-25T07:42:28Z",
+  "sha": "a8026c9",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40173786064",
+  "jobs_total": 5,
+  "failed_jobs": [
+   {
+    "job": "audit",
+    "failed_steps": [
+     "Run regression and evidence audits on GitHub"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 40081924050,
+  "workflow": "Gatekeeper Study I - zero-cost target validation",
+  "created": "2026-10-24T09:25:57Z",
+  "sha": "92af600",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/40081924050",
+  "jobs_total": 3,
+  "failed_jobs": [
+   {
+    "job": "reproduce (networkx, 3.8.20, ubuntu-22.04)",
+    "failed_steps": [
+     "Run actions/setup-python@v6",
+     "Preserve raw evidence, including failed attempts"
+    ],
+    "evidence": [
+     "##[error]The version '3.8.20' with architecture 'x64' was not found for Ubuntu 22.04.",
+     "##[error]No files were found with the provided path: evidence/"
+    ]
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 39892359008,
+  "workflow": "Gatekeeper Study H run",
+  "created": "2026-10-23T02:57:10Z",
+  "sha": "b49b5ed",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/39892359008",
+  "jobs_total": 1,
+  "failed_jobs": [
+   {
+    "job": "run",
+    "failed_steps": [
+     "Run and analyse"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 39751249581,
+  "workflow": "Gatekeeper study amend",
+  "created": "2026-10-22T08:54:10Z",
+  "sha": "2a352a5",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/39751249581",
+  "jobs_total": 1,
+  "failed_jobs": [
+   {
+    "job": "amend",
+    "failed_steps": [
+     "Run set -euo pipefail"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 39751158239,
+  "workflow": "Gatekeeper study amend",
+  "created": "2026-10-22T08:53:27Z",
+  "sha": "2a352a5",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/39751158239",
+  "jobs_total": 1,
+  "failed_jobs": [
+   {
+    "job": "amend",
+    "failed_steps": [
+     "Run set -euo pipefail"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 39653618837,
+  "workflow": "Gatekeeper Phase 2 audit (no model API)",
+  "created": "2026-10-21T18:32:18Z",
+  "sha": "d9479e5",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/39653618837",
+  "jobs_total": 1,
+  "failed_jobs": [
+   {
+    "job": "audit",
+    "failed_steps": [
+     "Verify frozen Studies D E F"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 39646607726,
+  "workflow": "Gatekeeper clean-room check",
+  "created": "2026-10-21T17:45:22Z",
+  "sha": "fc4213b",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/39646607726",
+  "jobs_total": 1,
+  "failed_jobs": [
+   {
+    "job": "check",
+    "failed_steps": [
+     "Verify Study F freeze"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 39419852803,
+  "workflow": ".github/workflows/study-d-run.yml",
+  "created": "2026-10-20T12:07:07Z",
+  "sha": "71e12ca",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/39419852803",
+  "jobs_total": 0,
+  "failed_jobs": [],
+  "category": "WORKFLOW_DID_NOT_START",
+  "why": "no job was created (invalid workflow file or startup failure)"
+ },
+ {
+  "run_id": 39419442837,
+  "workflow": ".github/workflows/study-d-run.yml",
+  "created": "2026-10-20T12:03:49Z",
+  "sha": "088f57f",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/39419442837",
+  "jobs_total": 0,
+  "failed_jobs": [],
+  "category": "WORKFLOW_DID_NOT_START",
+  "why": "no job was created (invalid workflow file or startup failure)"
+ },
+ {
+  "run_id": 39419404461,
+  "workflow": ".github/workflows/study-d-run.yml",
+  "created": "2026-10-20T12:03:30Z",
+  "sha": "71e1c20",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/39419404461",
+  "jobs_total": 0,
+  "failed_jobs": [],
+  "category": "WORKFLOW_DID_NOT_START",
+  "why": "no job was created (invalid workflow file or startup failure)"
+ },
+ {
+  "run_id": 39413219181,
+  "workflow": "Gatekeeper Study D run",
+  "created": "2026-10-20T11:11:47Z",
+  "sha": "cd40240",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/39413219181",
+  "jobs_total": 8,
+  "failed_jobs": [
+   {
+    "job": "target (C1_jsonschema, 3.12, ubuntu-24.04)",
+    "failed_steps": [
+     "Run"
+    ],
+    "evidence": []
+   },
+   {
+    "job": "target (D2_cerberus, 3.8, ubuntu-22.04)",
+    "failed_steps": [
+     "Run"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 2,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 39383887559,
+  "workflow": "Gatekeeper Study D smoke",
+  "created": "2026-10-20T07:01:43Z",
+  "sha": "3e5e073",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/39383887559",
+  "jobs_total": 1,
+  "failed_jobs": [
+   {
+    "job": "smoke",
+    "failed_steps": [
+     "Smoke run"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 39218891370,
+  "workflow": "Gatekeeper Study B run",
+  "created": "2026-10-19T07:53:10Z",
+  "sha": "518e55e",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/39218891370",
+  "jobs_total": 1,
+  "failed_jobs": [
+   {
+    "job": "study-b",
+    "failed_steps": [
+     "Run (refuses while DRAFT)"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 39218140976,
+  "workflow": "Gatekeeper Study B run",
+  "created": "2026-10-19T07:46:18Z",
+  "sha": "c571174",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/39218140976",
+  "jobs_total": 1,
+  "failed_jobs": [
+   {
+    "job": "study-b",
+    "failed_steps": [
+     "Run (refuses while DRAFT)"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 39217073114,
+  "workflow": "Gatekeeper Study B run",
+  "created": "2026-10-19T07:36:24Z",
+  "sha": "af9760e",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/39217073114",
+  "jobs_total": 1,
+  "failed_jobs": [
+   {
+    "job": "study-b",
+    "failed_steps": [
+     "Check protocol freeze (fails closed while DRAFT)"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 39215136600,
+  "workflow": "Gatekeeper Study B run",
+  "created": "2026-10-19T07:18:25Z",
+  "sha": "af682d2",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/39215136600",
+  "jobs_total": 1,
+  "failed_jobs": [
+   {
+    "job": "study-b",
+    "failed_steps": [
+     "Check protocol freeze (fails closed while DRAFT)"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 39213668935,
+  "workflow": "Gatekeeper Study B run",
+  "created": "2026-10-19T07:04:39Z",
+  "sha": "fceb5e6",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/39213668935",
+  "jobs_total": 1,
+  "failed_jobs": [
+   {
+    "job": "study-b",
+    "failed_steps": [
+     "Fetch source files and frozen Study B targets"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 39144743457,
+  "workflow": "Gatekeeper-Lite demo",
+  "created": "2026-10-18T16:23:01Z",
+  "sha": "5ef293d",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/39144743457",
+  "jobs_total": 2,
+  "failed_jobs": [
+   {
+    "job": "real-click",
+    "failed_steps": [
+     "Fetch frozen real targets"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 39138728680,
+  "workflow": "Gatekeeper-Lite demo",
+  "created": "2026-10-18T15:03:11Z",
+  "sha": "514a1bc",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/39138728680",
+  "jobs_total": 1,
+  "failed_jobs": [
+   {
+    "job": "demo",
+    "failed_steps": [
+     "Unit tests"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ },
+ {
+  "run_id": 38974669264,
+  "workflow": ".github/workflows/p7-2-guarded-repair-scope.yml",
+  "created": "2026-10-16T22:15:41Z",
+  "sha": "3b99cd2",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/38974669264",
+  "jobs_total": 0,
+  "failed_jobs": [],
+  "category": "WORKFLOW_DID_NOT_START",
+  "why": "no job was created (invalid workflow file or startup failure)"
+ },
+ {
+  "run_id": 38974261493,
+  "workflow": ".github/workflows/p7-2-guarded-repair-scope.yml",
+  "created": "2026-10-16T22:11:45Z",
+  "sha": "0c636f0",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/38974261493",
+  "jobs_total": 0,
+  "failed_jobs": [],
+  "category": "WORKFLOW_DID_NOT_START",
+  "why": "no job was created (invalid workflow file or startup failure)"
+ },
+ {
+  "run_id": 38974160360,
+  "workflow": ".github/workflows/p7-2-guarded-repair-scope.yml",
+  "created": "2026-10-16T22:10:46Z",
+  "sha": "a059780",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/38974160360",
+  "jobs_total": 0,
+  "failed_jobs": [],
+  "category": "WORKFLOW_DID_NOT_START",
+  "why": "no job was created (invalid workflow file or startup failure)"
+ },
+ {
+  "run_id": 38973631178,
+  "workflow": ".github/workflows/p7-2-guarded-repair-scope.yml",
+  "created": "2026-10-16T22:05:37Z",
+  "sha": "d5d2e54",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/38973631178",
+  "jobs_total": 0,
+  "failed_jobs": [],
+  "category": "WORKFLOW_DID_NOT_START",
+  "why": "no job was created (invalid workflow file or startup failure)"
+ },
+ {
+  "run_id": 38973550199,
+  "workflow": ".github/workflows/p7-2-guarded-repair-scope.yml",
+  "created": "2026-10-16T22:04:52Z",
+  "sha": "89829b6",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/38973550199",
+  "jobs_total": 0,
+  "failed_jobs": [],
+  "category": "WORKFLOW_DID_NOT_START",
+  "why": "no job was created (invalid workflow file or startup failure)"
+ },
+ {
+  "run_id": 38973292338,
+  "workflow": "Gatekeeper P7.2 guarded repair and scope",
+  "created": "2026-10-16T22:02:27Z",
+  "sha": "c30cf97",
+  "conclusion": "startup_failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/38973292338",
+  "jobs_total": 0,
+  "failed_jobs": [],
+  "category": "WORKFLOW_DID_NOT_START",
+  "why": "no job was created (invalid workflow file or startup failure)"
+ },
+ {
+  "run_id": 38973168813,
+  "workflow": ".github/workflows/p7-2-guarded-repair-scope.yml",
+  "created": "2026-10-16T22:01:16Z",
+  "sha": "c30cf97",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/38973168813",
+  "jobs_total": 0,
+  "failed_jobs": [],
+  "category": "WORKFLOW_DID_NOT_START",
+  "why": "no job was created (invalid workflow file or startup failure)"
+ },
+ {
+  "run_id": 38973167682,
+  "workflow": ".github/workflows/p7-2-guarded-repair-scope 1.yml",
+  "created": "2026-10-16T22:01:16Z",
+  "sha": "c30cf97",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/38973167682",
+  "jobs_total": 0,
+  "failed_jobs": [],
+  "category": "WORKFLOW_DID_NOT_START",
+  "why": "no job was created (invalid workflow file or startup failure)"
+ },
+ {
+  "run_id": 38972259786,
+  "workflow": "Gatekeeper P7.2 guarded repair and scope",
+  "created": "2026-10-16T21:52:36Z",
+  "sha": "70d7954",
+  "conclusion": "startup_failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/38972259786",
+  "jobs_total": 0,
+  "failed_jobs": [],
+  "category": "WORKFLOW_DID_NOT_START",
+  "why": "no job was created (invalid workflow file or startup failure)"
+ },
+ {
+  "run_id": 38972189136,
+  "workflow": ".github/workflows/p7-2-guarded-repair-scope.yml",
+  "created": "2026-10-16T21:51:57Z",
+  "sha": "70d7954",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/38972189136",
+  "jobs_total": 0,
+  "failed_jobs": [],
+  "category": "WORKFLOW_DID_NOT_START",
+  "why": "no job was created (invalid workflow file or startup failure)"
+ },
+ {
+  "run_id": 38362127729,
+  "workflow": "Gatekeeper P6.3 OCR source replay",
+  "created": "2026-10-13T07:21:20Z",
+  "sha": "152cf94",
+  "conclusion": "failure",
+  "url": "https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/38362127729",
+  "jobs_total": 1,
+  "failed_jobs": [
+   {
+    "job": "ocr-source-replay",
+    "failed_steps": [
+     "Run six isolated containers and compare exact P4 test outcomes"
+    ],
+    "evidence": []
+   }
+  ],
+  "failed_job_count": 1,
+  "category": "OTHER",
+  "why": "no rule matched; read the evidence",
+  "rule": null
+ }
+]
