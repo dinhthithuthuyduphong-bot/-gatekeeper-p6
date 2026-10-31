@@ -13,8 +13,11 @@ We call a pair $c=(S,s)$ a \emph{cell}; for a set of skills whose footprints for
 
 \paragraph{Loss and selective transfer risk.}
 For a task $x$, $\ell(x,\pi)\in[0,1]$ is its functional loss with the skill applied and $\ell(x,\varnothing)$ the loss
-without it.  We use one minus the held-out pass rate plus $0.5$ per regression, \emph{clipped at $1$}, so that the range
-assumption below holds.  The paired difference is $Z=\ell(x,\pi)-\ell(x,\varnothing)\in[-1,1]$.
+without it.  In the experiments a task is one \emph{draw}: an input from a generator that the scope's oracle owns, and
+$\ell\in\{0,1\}$ records whether the oracle judges the run on that input a failure, so $Z\in\{-1,0,1\}$; this is the only
+quantity the e-processes consume.  For whole test-suite runs we also report one minus the pass rate plus $0.5$ per regression,
+clipped at $1$, which never enters a decision (Section~\ref{sec:impl}).  In general $\ell\in[0,1]$ and the paired difference is
+$Z=\ell(x,\pi)-\ell(x,\varnothing)\in[-1,1]$.
 
 \begin{definition}[Selective transfer risk]
 For a cell $c=(S,s)$ and a distribution $D$ over the contexts of scope $s$,
@@ -44,8 +47,8 @@ $\mathrm{TV}(P,Q)=\sup_A|P(A)-Q(A)|$.
 \paragraph{Execution rule.}
 Skills that are executed together form a set $E$.  Split $E$ into the connected components of its footprint-overlap graph
 (two skills are adjacent when their footprints intersect, or when applying one creates or removes sites of the other, which
-we detect by applying both in either order).  We execute $E$ only if every component with two or more skills
-is itself an admitted cell; a skill whose composite with an already admitted skill is still undecided is not executed together
+we detect by applying both in either order).  We execute $E$ only if every component is an admitted cell: a single admitted
+skill, or the admitted composite of exactly that component; a skill whose composite with an already admitted skill is still undecided is not executed together
 with it.  This closes the gap between per-cell certificates and what actually runs.
 
 \paragraph{Admission problem.}

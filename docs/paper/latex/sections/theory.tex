@@ -45,10 +45,13 @@ $\alpha=0.1$ takes $\lceil\log(160)/\log(1+\lambda\eta)\rceil=110$ clean draws.
 Let $\mathcal{C}$ be the countable set of all cells that could ever be formed, compositions included, and let a ledger
 $\alpha_{c,k}\ge0$ be fixed in advance, as a function of the cell's identity, for every cell $c$ and epoch $k\ge0$ (epoch
 $k\ge1$ is the $k$-th re-admission after retirement), with $\sum_{c\in\mathcal{C}}\sum_{k\ge0}\alpha_{c,k}\le\alpha$; for
-instance $\alpha_{c,k}=\alpha_c\cdot 6/(\pi^2(k+1)^2)$ with $\sum_c\alpha_c\le\alpha$.  Our implementation fixes $\alpha_c$ by the
-cell's size alone for a declared library capacity $N$: $\alpha s/N$ for a single skill and
-$\alpha(1-s)\,6/(\pi^2(m-1)^2)/\binom{N}{m}$ for a composite of $m\ge2$ skills, which sums to at most $\alpha$ and does not change
-as skills are added.  A library that grows is covered as long
+instance $\alpha_{c,k}=\alpha_c\cdot 6/(\pi^2(k+1)^2)$ with $\sum_c\alpha_c\le\alpha$.  Our implementation splits $\alpha$ into
+per-scope budgets $\alpha_s$ with $\sum_s\alpha_s\le\alpha$ and, within scope $s$ with a declared library capacity $N$, fixes
+$\alpha_c$ by the cell's size alone: $\alpha_s\,\sigma/N$ for a single skill and $\alpha_s(1-\sigma)\,6/(\pi^2(m-1)^2)/\binom{N}{m}$ for a
+composite of $m\ge2$ skills ($\sigma$ the singles' share), which sums to at most $\alpha_s$ and does not change as skills are added.
+The factor $1/\binom{N}{m}$ makes large composites expensive to certify (the threshold grows with $\log\binom{N}{m}$); this is
+acceptable because the execution rule only creates composites for footprint-connected components, which Study R2 found to be
+rare and small (Section~\ref{sec:eval-library}).  A library that grows is covered as long
 as the share of every future cell is fixed by the same rule.  Suppose each epoch uses fresh tasks and admits $c$ only when its e-process
 (Lemma~\ref{lem:eprocess}) reaches $1/\alpha_{c,k}$, while the choice of cells, their order and the stopping times may depend
 on all data.  Under Assumptions~\ref{ass:trials} and~\ref{ass:shift},
@@ -72,7 +75,8 @@ $\mathrm{STR}_{Q}(c)>-\theta+2\xi_s$.
 \begin{remark}[Fixed families: e-Holm, as used in the experiments]\label{rem:eholm}
 For a fixed family of $K$ cells at epoch $0$ the experiments use, instead of thresholding each cell at $1/\alpha_c$, the closed
 e-Bonferroni (e-Holm) procedure~\cite{vovk2021evalues} at level $\alpha$ over $e_c=\min(K^{\mathrm{ben}}_{c,\tau_c},K^{\mathrm{cert}}_{c,\tau_c})$,
-the benefit e-process and the harm certificate read at the cell's bounded stopping time $\tau_c$.  Each $K_{\tau}$ is an e-value
+the benefit e-process and the harm certificate read at the cell's stopping time $\tau_c$: the first draw at which this minimum
+reaches $K/\alpha$ or the harm alarm fires, and otherwise the end of the budget, so $\tau_c$ is bounded.  Each $K_{\tau}$ is an e-value
 by optional stopping ($\mathbb{E}K_\tau\le K_0=1$), the minimum is an e-value under the union null ``not admissible or harm rate at
 least $\eta$'', and e-Holm controls the family-wise error under arbitrary dependence while admitting every cell that the ledger with
 $\alpha_c=\alpha/K$ would.  Note that $e_c$ is the value \emph{at} $\tau_c$, not the running maximum, which is not an e-value.
@@ -123,7 +127,8 @@ $\mathrm{STR}_Q(c)=\mathrm{STR}_P(c)+2\xi$, whose admission probability does not
 (a) By Assumption~\ref{ass:rich}, take $R^\dagger$ that has the same values of every feature the procedure reads (the data
 of $\mathcal{R}_{\mathrm{obs}}$ and the target's own fingerprints and predicates) and has $\ell(x,\pi)=1$, $\ell(x,\varnothing)=0$
 for every task.  The procedure's input, hence its admission probability, is unchanged, and $Z\equiv1$ on $R^\dagger$.
-(b) Take task types $u$ ($Z=1$) and $d$ ($Z=-1$) with $P(d)=(1+\theta+\delta)/2\ge\xi$, and obtain $Q$ by moving mass $\xi$ from
+(b) Take task types $u$ ($Z=1$) and $d$ ($Z=-1$), both realizable with $\ell\in\{0,1\}$ ($u$: the run passes without the
+skill and fails with it; $d$: the reverse), with $P(d)=(1+\theta+\delta)/2\ge\xi$, and obtain $Q$ by moving mass $\xi$ from
 $d$ to $u$.  The procedure only reads tasks drawn from $P$.
 \end{proof}
 
@@ -134,7 +139,7 @@ family and why coarse scopes make it weak.
 \subsection{Composition}
 
 \begin{theorem}[Composition risk is not controlled by individual risks]\label{thm:composition}
-For $a,b\in[-1,0)$,
+Under Assumption~\ref{ass:rich}, for $a,b\in[-1,0)$,
 \[
   \sup\bigl\{\mathrm{STR}(S_1\circ S_2):\ \mathrm{STR}(S_1)=a,\ \mathrm{STR}(S_2)=b\bigr\}=1+\min(a,b),
 \]

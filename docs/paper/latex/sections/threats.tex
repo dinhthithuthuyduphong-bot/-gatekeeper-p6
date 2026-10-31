@@ -28,8 +28,11 @@ count as unusable.  The Study Q analysis script defined the inflation ratio diff
 The library-level results (Section~\ref{sec:eval-library}) come from synthetic libraries whose interaction model satisfies
 Assumption~\ref{ass:noninteract} by construction; they show what the design guarantees and costs under that model, not how often real
 skills interact.  The library census (Study R2) covers twelve rule-based families on $16$ repositories and detects interaction only
-syntactically (order dependence and created or removed sites); larger or learned libraries concentrate on popular code and may
-overlap and interact more.  The enabling-edge rule was added after the census had found the case (amendment R2-A1).  Study S observes real compositions only
+syntactically (order dependence and created or removed sites), pairwise only (an interaction of three rewrites that no pair shows would be
+missed), at a cost quadratic in the number of families that bind in a file; larger or learned libraries concentrate on popular code
+and may overlap and interact more.  Skills mined by an agent from its trajectories would enter the same formulation: $\pi$ is
+their edit program, $\mathcal{K}$ the sites the binder reports, and a procedure that does not bind by AST (a prompt or a script)
+has to declare its footprint, for which our binder offers no check.  The enabling-edge rule was added after the census had found the case (amendment R2-A1).  Study S observes real compositions only
 on $12$ callable functions with signature-generated inputs, after three post hoc amendments of the harness and inputs
 (S-A1 to S-A3, each written before its run); the registered run had $2$ usable functions.
 

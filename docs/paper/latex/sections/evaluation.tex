@@ -10,9 +10,34 @@ always-retest? (Section~\ref{sec:eval-skills})  \textbf{RQ3} Does partial harm o
 it? (Section~\ref{sec:eval-patches})  \textbf{RQ4} How much of the measured harm depends on how harm is defined?
 (Sections~\ref{sec:eval-swebench} and~\ref{sec:eval-oracle})
 
-All studies were pre-registered: protocol, configuration and tools were hashed before any outcome was seen, seeds were drawn
-from the public drand beacon after the freeze, and amendments are recorded and labelled.  Results that were analysed after
-seeing data are marked as such.  Every number below is produced by a workflow in the artifact.
+All studies were pre-registered.  For the trial studies (D, E, G, H, P, Q) protocol, configuration and tools were hashed before
+any outcome was seen and seeds were drawn from the public drand beacon after the freeze; the census and composition studies
+(R2, S) are deterministic, and their protocols were committed before they ran.  Amendments are recorded and labelled, and results
+analysed after seeing data are marked as such.  Every number below is produced by a workflow in the artifact.
+Table~\ref{tab:studies} summarises the studies.  The baselines are \emph{unrestricted reuse} (B2: admit whenever the skill
+binds), \emph{replay plus fingerprints} (B6-R: the skill reproduces its recorded fix on its source and the target's environment
+fingerprints match, the guard of GSE-style skill libraries), and \emph{always-retest} (B8: admit only if no draw and no test of the
+target's suite regresses, at full cost).  Studies P and Q apply the same certificate to single patches: a patch is a one-cell
+library whose scope is the edited function, and a draw is one generated input on which the patch and the developers' fix are run.
+
+\begin{table}[t]
+\centering\footnotesize
+\caption{Studies, in the order of the research questions.  ``Draw'': one input from a generator owned by the scope's oracle.}
+\label{tab:studies}
+\begin{tabular}{@{}lllp{4.3cm}@{}}
+\toprule
+Study & RQ & Subjects & Trials, oracle and main result \\
+\midrule
+H & 1 & constructed rare-harm target, $6$ harm rates & draws, hand-written oracle; the certificate controls admission of rare harm, a smoke test does not \\
+Simulation & 1 & $1{,}000$ synthetic libraries per setting & synthetic paired trials; one-by-one admission runs harmful compositions, the rule does not \\
+R2 & 1 & $12$ rewrite families, $16$ repositories & AST census; overlap is rare; one real enabling interaction \\
+S & 1 & real functions touched by two families & generated inputs, difference from the original; compositions additive \\
+D, E, G & 2 & $2$ frozen families, $14$ targets & $300$ draws plus the target's test suite; B6-R admits every harmful cell, the certificate none \\
+P & 3 & $205$ plausible LLM patches & function-level draws against the developers' fix; partial harm \\
+Q (Q-A1) & 4 & $694$ resolved SWE-bench Verified patches & function-level draws against the fix; harm rate depends on its definition \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \subsection{Where simple gates fail: the phase diagram}
 \label{sec:eval-phase}
@@ -176,13 +201,18 @@ added (after seeing data), and at most $6$ when non-reproducible patches are cou
 \subsection{Naive differences versus contract regressions on SWE-bench Verified}
 \label{sec:eval-swebench}
 % source: research_closure/results/study_q/STUDY_Q_RESULT.md; qa1/QA1_RESULT.json
-Study Q tested the RQ5 finding on an independent, widely used benchmark.  For $469$ SWE-bench Verified instances with at least one
+Study Q tested the RQ5 finding on an independent, widely used benchmark.  Its unit of the confirmatory hypothesis HQ1 is an
+\emph{instance} whose patches show a naive difference (some input on which a patch and the fix behave differently); HQ1 predicted
+that in most such instances none of the differences is a contract regression.  For $469$ SWE-bench Verified instances with at least one
 public resolved patch, up to three distinct resolved patches were scored in the official Docker images ($245$ instances usable,
 $694$ patches).  $43.1\%$ of patches behaved differently from the developers' fix on some input; $11.1\%$ (Wilson $9.0$--$13.6\%$)
 had a \emph{contract regression}, an input on which the fix returns a value and the patch does not, or the fix rejects on purpose
 and the patch accepts.  The confirmatory hypothesis, that most naive differences are not contract regressions, was \emph{not}
-supported: $6/55$ ($10.9\%$, Wilson $5.1$--$21.8\%$; one-sided $p\approx1$).
-A manual review added after the result (labelled as such) re-ran the $55$ units with outputs kept: $36$ reproduced exactly, and two
+supported: only $6/55$ ($10.9\%$, Wilson $5.1$--$21.8\%$; one-sided $p\approx1$) of these instances had no contract regression.  (The
+patch-level shares above and this instance-level share answer different questions: one instance with several differing patches
+counts once.)
+A manual review added after the result (labelled as such) re-ran the $55$ units with outputs kept: $36$ reproduced exactly (the cohort run had not stored its model-written input generator;
+re-generating it gave a different program for $17$ of the other $19$ units), and two
 independent raters agreed on $87.7\%$ of $154$ items.  $8/36$ ($22.2\%$, Wilson $11.7$--$38.1\%$) units had no regression confirmed by
 both raters; excluding three units whose inputs are model-built stand-in objects gives $11/36$ ($18.0$--$46.9\%$).  The result does not hinge on one repository (post hoc): leaving out any one of the twelve repositories keeps the HQ1 share between
 $8.2\%$ and $16.7\%$ (largest Wilson upper bound $31.9\%$, without \texttt{sympy}) and the contract-regression share between $8.2\%$ and

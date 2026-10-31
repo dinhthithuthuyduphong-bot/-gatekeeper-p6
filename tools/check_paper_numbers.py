@@ -144,6 +144,10 @@ CLAIMS = [
     ("S-A3 gate", "over all $48$ cells, the gate rejected\nexactly the $3$ cells",
      lambda: "over all $%d$ cells, the gate rejected\nexactly the $%d$ cells" % (J(S3)["total"]["cells"], J(S3)["total"]["cells"] - J(S3)["total"]["cells_admitted"])),
     ("S-A3 admitted", "admitted the other $45$", lambda: "admitted the other $%d$" % J(S3)["total"]["cells_admitted"]),
+    ("Q-A1 generator changed", "re-generating it gave a different program for $17$ of the other $19$ units",
+     lambda: "re-generating it gave a different program for $%d$ of the other $%d$ units" % (
+         sum(1 for x in J("research_closure/results/study_q/qa1/REPRO.json")["units"] if not x["reproduced"] and not x["same_generator"]),
+         sum(1 for x in J("research_closure/results/study_q/qa1/REPRO.json")["units"] if not x["reproduced"]))),
     # abstract (main.tex)
     ("abstract: plausible patches", "in $205$ plausible LLM patches", lambda: "in $%d$ plausible LLM patches" % PA()["PRIMARY"]["plausible"]),
     ("abstract: census admits", "the test census admitted all $16$ with partial\nbehavioural differences",
