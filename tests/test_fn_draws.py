@@ -45,6 +45,18 @@ class FnDraws(unittest.TestCase):
         self.assertEqual((sum(sc["harm"]), sc["divergent"]), (0, 0))
         self.assertEqual(sc["help"], b["info"]["bug_trigger_inputs"])
 
+    def test_capture_keeps_every_outcome_and_changes_nothing_else(self):
+        partial = "def clip(x: int, hi: int = 10):\n    if x < 0:\n        return 0\n    if x == hi:\n        return -1\n    return x if x < hi else hi\n"
+        with tempfile.TemporaryDirectory() as tmp:
+            o, b = self.base(tmp)
+            a, _ = D.score_fn_patch(sys.executable, b, o, {"k.py": partial}, [], Path(tmp) / "w", "p1", env=ENV)
+            c, _ = D.score_fn_patch(sys.executable, b, o, {"k.py": partial}, [], Path(tmp) / "w", "p2", env=ENV, capture=True)
+        self.assertNotIn("outcomes", a)
+        self.assertEqual({k: c[k] for k in a}, a)                                 # identical result with capture on
+        self.assertEqual(len(c["outcomes"]), len(b["order"]))
+        harm = [x for x in c["outcomes"] if x["patch_stable"] and x["orig"] == x["gold"] and x["patch"] != x["gold"]]
+        self.assertEqual(len(harm), sum(a["harm"]))
+
     def test_a_patch_with_a_partial_regression_is_measured_as_a_rate(self):
         # fixes negatives, but breaks the upper clip for x == hi (a narrow region of the inputs)
         partial = "def clip(x: int, hi: int = 10):\n    if x < 0:\n        return 0\n    return x if x <= hi else hi + 0 if x != hi else -1\n"

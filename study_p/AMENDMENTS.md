@@ -37,3 +37,13 @@ Nếu văn bản này đã có mặt lúc đóng băng, bản sửa có trước
 **Thay đổi:** `in_band_rate` trả về False cho patch không có đầu vào nào được chấm, **trước** khi tính cận (sha256 mới `5c5ff441a91b6f7e387d6d0d1d609cab3cc0fafbd0fd8a353bb460c3980c1ae1`); thêm test.
 
 **Ảnh hưởng:** 251 lần sinh có 0 đầu vào được chấm đều không có patch (`NO_PATCH` 220, `GENERATION_ERROR` 31) và **không lần nào plausible**; phân tích chính chỉ dùng patch plausible, nên bản sửa không đổi con số nào, chỉ ngăn chương trình sập.
+
+## P-A5 (3/11/2026): RQ5, chế độ ghi lại và kế hoạch kiểm tra tính hợp lệ
+
+**Lý do:** kết quả chính đã có (7,8%); kiểm tra sau khi thấy kết quả cho thấy một phần "hồi quy" có thể là khác biệt trên đầu vào mà bản fix cũng từ chối. RQ5 đã có trong giao thức (mục 1) nhưng chưa có kế hoạch chi tiết; bản ghi cohort không lưu nội dung patch.
+
+**Thay đổi:**
+- `gatekeeper_ext/fn_draws.py` (sha256 `b78b1fee034524fd9ecce3fc16e8865163fbceb19b0c722c47eb4c19ced88b0a`), `tools/cohort_inner.py` (`b660ce40eebb2fefbef0551adcb9bd3515891b256e7ee1ad1e4aa0f81fe339f9`), `tools/cohort_instance.py` (`c7e465eae7afabd6e4d9f8b12c41bb55a5d5228eafa3f2765bd66f640831fbe3`): thêm **chế độ ghi lại, mặc định tắt**, lưu diff của patch và đầu ra trên từng đầu vào. Khi tắt, mọi kết quả giống hệt (có test).
+- Kế hoạch `research_closure/results/rq5/RQ5_PLAN.md` (`c541196f2417210e1648adde93300b6294b3f1d9bd17adc94f6cde4d8498cc88`), danh sách 29 mục tiêu `RQ5_TARGETS.json` (`072b1003a5fce07ef357a87abbaec3707611d41a72afd1d3448f62c2b98125c6`), công cụ `tools/rq5_classify.py` (`dcf9179d68a6166b476782a98290f06d52a5ac297a154f61e93938b81d99c75b`), workflow `rq5.yml` (`83f255589cf6c57d826513b8c5d6cb7919d8e840ba077e040b2b26394da4ce15`), **commit trước khi xem bất kỳ ví dụ chênh lệch nào**.
+
+**Không thay đổi:** kết quả đã đăng ký (7,8%) giữ nguyên; RQ5 chỉ bổ sung.

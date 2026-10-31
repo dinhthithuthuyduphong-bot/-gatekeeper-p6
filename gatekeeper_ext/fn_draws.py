@@ -63,7 +63,7 @@ def prepare_fn_base(py, orig, gold, pythonpath, fn, work, n=200, seed=0, env=Non
     return base, None
 
 
-def score_fn_patch(py, base, orig, treated, pythonpath, work, tag, env=None):
+def score_fn_patch(py, base, orig, treated, pythonpath, work, tag, env=None, capture=False):
     """Run the patched snapshot twice on the same inputs; per input in the frozen order: harm = original agrees with the
     fix and the patch does not; help = original differs and the patch agrees; divergence = patch differs from the fix."""
     work = Path(work)
@@ -90,5 +90,10 @@ def score_fn_patch(py, base, orig, treated, pythonpath, work, tag, env=None):
         by_source[s]["harm"] += o == g and p != g
         helps += o != g and p == g
         div += p != g
-    return {"complete": len(harm), "missing": missing, "harm": harm, "help": helps, "divergent": div, "by_source": by_source,
-            "deterministic": all(p1[s].get("status") == "RAN" for s in p1)}, None
+    out = {"complete": len(harm), "missing": missing, "harm": harm, "help": helps, "divergent": div, "by_source": by_source,
+            "deterministic": all(p1[s].get("status") == "RAN" for s in p1)}
+    if capture:                                                   # amendment P-A5 (RQ5): keep every outcome; off by default
+        out["outcomes"] = [{"source": s, "i": i, "orig": base["orig"][s][i], "gold": base["gold"][s][i],
+                            "patch": p1[s]["outcomes"][i] if i < len(p1[s].get("outcomes", [])) else None,
+                            "patch_stable": i in stable.get(s, set())} for s, i in base["order"]]
+    return out, None

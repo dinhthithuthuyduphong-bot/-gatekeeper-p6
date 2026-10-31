@@ -102,6 +102,20 @@ class FunctionOracle(unittest.TestCase):
             bad = self.run_fn(tmp, [DIFF_BAD])
         b = bad["attempts"][0]
         self.assertGreater(b["draws"]["harm"], 0)                                 # is_int(1) == False is a regression
+        self.assertNotIn("diff", b)                                               # capture is off by default
+
+    def test_capture_keeps_the_patch_and_the_outcomes(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            o, g = G.make(tmp, "o", G.ORIG), G.make(tmp, "g", G.GOLD)
+            args = {"orig": str(o), "gold": str(g), "work": str(Path(tmp) / "w"), "out": str(Path(tmp) / "r.json"), "vet": VET, "issue": None,
+                    "pr_title": "t", "models": [CFG], "reps": 1, "seed": 3, "cap_usd": 5.0, "runner": "unittest", "n_draws": 120,
+                    "scripted": {"fake": [DIFF_BAD], "generator": [GEN_CODE]}, "oracle": "function", "capture": True,
+                    "fn_target": {"file": "m.py", "qualname": "is_int"}, "generator_model": dict(CFG, name="generator"),
+                    "visible_override": {"kind": "python", "code": "import m,sys; sys.exit(0 if m.is_int(True) is False else 1)"}}
+            r = CI.run(args)
+        a = r["attempts"][0]
+        self.assertIn("+++ b/m.py", a["diff"])
+        self.assertEqual(len(a["draws"]["outcomes"]), r["harness"]["stable_inputs"])
 
 
 class Fixes(unittest.TestCase):

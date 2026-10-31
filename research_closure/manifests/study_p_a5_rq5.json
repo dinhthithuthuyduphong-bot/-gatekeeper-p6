@@ -1,0 +1,16 @@
+{
+ "name": "study_p_a5_rq5 (patch_study_p_a5_rq5.zip)",
+ "files": {
+  ".github/workflows/rq5.yml": "83f255589cf6c57d826513b8c5d6cb7919d8e840ba077e040b2b26394da4ce15",
+  "gatekeeper_ext/fn_draws.py": "b78b1fee034524fd9ecce3fc16e8865163fbceb19b0c722c47eb4c19ced88b0a",
+  "research_closure/results/rq5/RQ5_PLAN.md": "c541196f2417210e1648adde93300b6294b3f1d9bd17adc94f6cde4d8498cc88",
+  "research_closure/results/rq5/RQ5_TARGETS.json": "072b1003a5fce07ef357a87abbaec3707611d41a72afd1d3448f62c2b98125c6",
+  "study_p/AMENDMENTS.md": "b7ad5e572fdfb58718e6063c3b6bccd09fb08390c430c97ee5efbb72a8523508",
+  "tests/test_cohort_inner.py": "81909607b8818b372a270698685859291923134b566ca655ec1e87411462053d",
+  "tests/test_fn_draws.py": "14c7a7ac39bcdbb5d300af47595987c18976514ca642b72d95f5ba7329229dc3",
+  "tests/test_rq5.py": "5b8402cf6d50bfacd25dfdd1a1ae36295f55530953cd3be408f6cac76da33843",
+  "tools/cohort_inner.py": "b660ce40eebb2fefbef0551adcb9bd3515891b256e7ee1ad1e4aa0f81fe339f9",
+  "tools/cohort_instance.py": "c7e465eae7afabd6e4d9f8b12c41bb55a5d5228eafa3f2765bd66f640831fbe3",
+  "tools/rq5_classify.py": "dcf9179d68a6166b476782a98290f06d52a5ac297a154f61e93938b81d99c75b"
+ }
+}

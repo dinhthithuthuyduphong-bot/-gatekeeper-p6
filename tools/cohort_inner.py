@@ -185,10 +185,16 @@ def run(a):
                            usage_missing=r.usage_missing, finish_reasons=finish, seconds=r.seconds, spent_usd_total=round(guard.spent_usd, 6))
                 if r.status == "SUBMITTED":
                     att["files"] = sorted(r.treated)
+                    if a.get("capture"):                          # amendment P-A5: keep the patch itself as a unified diff
+                        import difflib
+                        att["diff"] = "".join("".join(difflib.unified_diff((orig / rel).read_text(encoding="utf-8", errors="replace").splitlines(True),
+                                                                   src.splitlines(True), "a/" + rel, "b/" + rel))
+                                              for rel, src in sorted(r.treated.items()))
                     lab = hidden_labels(orig, r.treated, test_files, a["vet"].get("classification") or {}, manifest["pythonpath"], runner, work, tag)
                     att["labels"] = lab
                     if oracle == "function":
-                        sc, err = fn_draws.score_fn_patch(sys.executable, base, orig, r.treated, manifest["pythonpath"], work / "fnbase", tag, fenv)
+                        sc, err = fn_draws.score_fn_patch(sys.executable, base, orig, r.treated, manifest["pythonpath"], work / "fnbase", tag, fenv,
+                                                          capture=bool(a.get("capture")))
                     else:
                         sc, err = draws.score_patch(base, orig, r.treated, manifest["pythonpath"], runner, work / "base", tag)
                     if sc is None:
@@ -198,6 +204,7 @@ def run(a):
                         att["draws"] = {"complete": sc["complete"], "missing": sc["missing"], "deterministic": sc["deterministic"], "harm": sum(flags),
                                         "help": sc["help"], "still_wrong": sc.get("still_wrong"), "divergent": sc.get("divergent"),
                                         "by_source": sc.get("by_source"),
+                                        "outcomes": sc.get("outcomes"),
                                         "h_hat": gates.h_hat(flags), "in_band": gates.band(flags),
                                         "acceptable": gates.acceptable(flags)}
                         att["gates"] = gates.decisions(flags, bool(lab.get("plausible")), sc["help"])
