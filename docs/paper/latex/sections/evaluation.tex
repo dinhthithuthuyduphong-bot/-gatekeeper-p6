@@ -66,7 +66,7 @@ To see what the library-level rules meet on real code, we built a library of twe
 families of Section~\ref{sec:eval-skills} and ten linter-style rewrites (Table~\ref{tab:library}), each behaviour-preserving on
 ordinary inputs and behaviour-changing on some (every family has a unit test with such a witness input).  A pre-registered census
 (AST analysis only) over all $16$ target repositories at their pinned revisions ($655$ non-test files) found $59$ single-skill cells,
-$3.7$ per repository, touching $456$ functions, of which $21$ are touched by two or more families.  Of the $136$ family pairs that
+$3.7$ per repository, touching $467$ functions, of which $21$ are touched by two or more families.  Of the $136$ family pairs that
 meet in some repository, $18$ overlap, and the execution rule requires $6$ composite cells.
 Applying every two families that bind in the same file in both orders, all $21$ such pairs that share a function commute.  Two pairs
 with \emph{disjoint} footprints do not: rewriting \texttt{type(x) is not int} to \texttt{not isinstance(x, int)} admits \texttt{bool}

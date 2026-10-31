@@ -6,6 +6,60 @@ Trạng thái tổng hợp: [TRACKING_FSE](TRACKING_FSE.md). Lý thuyết: [THEO
 
 ---
 
+## A. Bảng điểm: bài đã đạt chuẩn A* (FSE/ICSE) hoặc tạp chí Q1 (TOSEM/TSE/EMSE) chưa?
+
+Cập nhật sau **mỗi** lần chạy. Mỗi tiêu chí có trạng thái **THẮNG** (đã đạt, có bằng chứng trong repo) hoặc **THUA** (chưa đạt). Mục nào THUA thì phải có việc tiếp theo.
+
+| # | Tiêu chí mà phản biện A*/Q1 thường dùng | Trạng thái | Bằng chứng / việc còn thiếu |
+|---|---|---|---|
+| S1 | Lý thuyết đúng, có chứng minh, mọi mệnh đề được kiểm bằng số | **THẮNG** | THEORY.md; C1–C11 `held` (C7 cố ý False: số của bản nháp sai) |
+| S2 | Mã thực thi đúng lý thuyết đã chứng minh | **THẮNG** (31/10) | [THEORY_CODE_AUDIT](paper/THEORY_CODE_AUDIT.md) TC1–TC11; C10 chạy đúng luật của D–H |
+| S3 | Đóng góp mới, nói rõ cái gì không mới | **THẮNG** | Mục 5 đoạn đầu; Intro "What we do not claim" |
+| S4 | Đánh giá trên dữ liệu thật, có đăng ký trước, có kết quả âm | **THẮNG** | Study D, E, G, H, P, Q, R2; FREEZE + submission check |
+| S5 | So sánh với baseline mạnh và với công trình gần nhất | **THẮNG một phần** | B2, B6-R (kiểu GSE), B8; PatchDiff. **Thiếu:** chạy chính GSE (A12) |
+| S6 | Kỹ năng đa dạng, quy mô thư viện thực tế | **THẮNG một phần** | R2: 12 họ trên 16 repo, chỉ đo footprint và tương tác. **Thiếu:** admit thật với 12 họ (cần oracle) |
+| S7 | Tác hại của tổ hợp đo trên dữ liệu thật | **THUA** | Mới có mô phỏng (rủi ro tổng hợp) và một tương tác cú pháp thật. Việc 7.4 |
+| S8 | Người chấm độc lập là con người | **THUA** | Người chấm thứ hai là LLM (A9). Việc 1.9 và 7.6 |
+| S9 | Tái lập được, có artifact ẩn danh | **THẮNG** (chờ upload) | submission check pass; `make_anonymous_artifact.py`. Người làm: upload |
+| S10 | Đúng định dạng và hạn của venue | **THUA** (chưa xác minh) | Việc 0.3, 5.4 (người làm) |
+| S11 | Thầy và một người đọc độc lập đã duyệt | **THUA** | Việc 1.9, 5.5 (người làm) |
+
+**Kết luận hiện tại:** bài đạt S1–S4 và S9; bài **chưa** chắc thắng vì S7 và S8 (phần phản biện hay tấn công nhất), và S10, S11 là việc của người. Không thể bảo đảm bài được nhận. Việc làm được là đóng từng ô THUA.
+
+## B. Nhật ký từng lần chạy (cập nhật sau MỖI lần chạy)
+
+Mỗi dòng gồm:
+- **Thuật toán / mã đổi gì:** đã cập nhật gì trong thuật toán hoặc mã.
+- **Đối chiếu bài gốc:** tìm ra lỗi so với bản FSE gốc (AI sinh), hay áp dụng nguyên bài gốc.
+- **Kết quả:** THẮNG nếu đạt tiêu chí đặt trước khi chạy, THUA nếu không.
+- **Nếu THUA:** debug lý thuyết lại ở đâu. Một dòng THUA chỉ đóng khi có một dòng THẮNG sau nó.
+
+| # | Ngày | Run / commit | Việc | Thuật toán / mã đổi gì | Đối chiếu bài gốc | Kết quả | Nếu THUA: debug tiếp ở đâu |
+|---|---|---|---|---|---|---|---|
+| R1 | 30/10 | Study Q stream 0–1 | Đo "harm" trên SWE-bench Verified | Không đổi (áp dụng giao thức đã freeze) | Bài gốc dự đoán harm cao (projected); đo thật: HQ1 6/55 | **THẮNG** (chạy đúng giao thức; HQ1 không ủng hộ là kết quả âm hợp lệ) | — |
+| R2 | 30/10 | Q-A1 rate, lần 1 (41193552100) | Người chấm thứ hai | — | — | **THUA**: ACCESS_TOKEN_EXPIRED sau khoảng 60 phút | Không phải lỗi lý thuyết: token gcloud cache 1 giờ. Sửa: chia shard + `fresh_gcp_token.py` |
+| R3 | 30/10 | Q-A1 rate, chia shard | Người chấm thứ hai | Chia shard, token mới cho mỗi lần gọi | — | **THẮNG**: đồng thuận 87,7%, 8/36 | — |
+| R4 | 31/10 | Theory checks | Kiểm lý thuyết | Thêm FastBetting (giống hệt e-process, chạy O(n)) | **Lỗi bài gốc:** Định lý 4 (α theo scope) sai, hằng số TV phải là 2ξ, cận tổ hợp sai, công thức pairing sai, số d̄ sai | **THẮNG**: C1–C6, C8, C9 held; C7 False đúng như dự đoán | — |
+| R5 | 31/10 | Library simulation | Kiểm soát tổ hợp | Ô tổ hợp + sổ cái + luật thực thi (`execution.py`, TD7) | **Lỗi bài gốc:** chứng nhận theo từng kỹ năng không bảo vệ tập kỹ năng chạy chung | **THẮNG**: P1 27,9% so với P2 0/1.000 | — |
+| R6 | 31/10 | Study R (41218737641) | Footprint 2 họ trên 16 repo | Không đổi | Bài gốc d̄ = 0,34 (bịa); đo thật: 1 hàm chung | **THẮNG** | — |
+| R7 | 31/10 | Study R2, push đầu (29e2284) | Thư viện 12 họ | — | — | **THUA**: workflow không có `workflow_dispatch` | Không phải lỗi lý thuyết: tên step có `: `, YAML không parse. Sửa bằng ngoặc kép, có actionlint |
+| R8 | 31/10 | Study R2 (41223600552) | Census 12 họ | 10 họ mới (`skill_library.py`) | **Lỗi Giả định 4 trên dữ liệu thật:** `type(x) is not int` → `isinstance` tạo site mới cho guard bool ở hàm khác (pydal, pycubrid) | **THUA về lý thuyết**: luật thực thi tĩnh bỏ sót tương tác | Debug: footprint lấy trên mã gốc là chưa đủ, cần thêm quan hệ "kích hoạt" |
+| R9 | 31/10 | Study R2-A1 (re-run, 7da8592) | Cạnh enabling | `components(..., edges)`, census `with_enabling_edges`, mô phỏng đồ thị thật | Sửa Giả định 4: chỉ cần cho cặp giao hoán | **THẮNG**: luật bắt được cặp pydal; mô phỏng P1 7,1% so với P2 0/1.000 | — |
+| R10 | 31/10 | Paper build (41224364294) | PDF | — | — | **THUA**: LaTeX lỗi | Không phải lỗi lý thuyết: `_` chưa escape trong `\texttt{yaml.safe_load}`. Đã sửa |
+| R11 | 31/10 | Rà lý thuyết ↔ mã (6b44846) | Kiểm mã có đúng lý thuyết | `ledger.py` (TC2), `conformance.py` (TC7), `site_footprint` (TC5), C10, C11 | **Lỗi:** (TC5) mã cấp module bị coi là rời nhau, sai với Hệ quả 2.6; (TC3/TC4) bài không nói luật e-Holm mà D–H dùng | **THUA → sửa**: TC5 là lỗi không chặt thật | Debug: census R2 lần trước cũng bỏ `<module>`, phải chạy lại (R2-A2) |
+| R12 | 31/10 | Theory checks (00fe817) | C10, C11 | — | Luật D–H khớp Nhận xét e-Holm | **THẮNG**: FWER 2,4% / 7,3% ≤ 10%; ledger ≤ α | — |
+| R13 | 31/10 | Study R2-A2 (193b136, 2d2cac8) | Census có mã cấp module | Census giữ `file::<module>` | — | **THẮNG**: 467 hàm/vùng (trước 456), các số khác không đổi; kết luận giữ nguyên | — |
+
+## C. Vòng debug khi THUA (làm theo thứ tự)
+
+1. **Lỗi hạ tầng** (YAML, token, LaTeX, proxy)? Chạy `Gatekeeper failure audit` và sửa. Đây không phải lỗi lý thuyết.
+2. **Mã có làm đúng điều bài chứng minh không?** Đối chiếu với [THEORY_CODE_AUDIT](paper/THEORY_CODE_AUDIT.md) và thêm dòng TC nếu thấy chỗ mới.
+3. **Giả định có đúng trên dữ liệu thật không?** (i.i.d., TV ≤ ξ, Giả định 4.) Nếu sai trên dữ liệu thì đổi thuật toán, như cạnh enabling ở R8 → R9, không đổi dữ liệu.
+4. **Chứng minh có lỗ hổng không?** Viết phản ví dụ bằng số; thêm một phép kiểm C mới vào `tools/theory_checks.py`.
+5. **Sửa xong:** viết amendment nếu study đã freeze, chạy lại bằng workflow, rồi thêm một dòng mới vào bảng B.
+
+---
+
 ## Quy tắc chung (đọc trước khi bắt đầu)
 
 1. **Không viết con số nào vào bài nếu nó không có trong một tệp kết quả của repo.** Mỗi con số phải trỏ được tới một tệp JSON hoặc MD trong `research_closure/results/` và một run trên GitHub Actions.
@@ -13,6 +67,7 @@ Trạng thái tổng hợp: [TRACKING_FSE](TRACKING_FSE.md). Lý thuyết: [THEO
 3. **Kết quả âm vẫn báo cáo.** HQ1 không được ủng hộ là một kết quả, không phải thất bại.
 4. **Mỗi lần chạy trên GitHub Actions:** ghi run id vào PROCESS_LOG. Nếu thất bại, chạy workflow `Gatekeeper failure audit` để xem nguyên nhân gốc trước khi chạy lại.
 5. **Không sửa tệp đã đóng băng** (có trong `study_*/FREEZE.json`). Muốn đổi thì viết amendment.
+6. **Sau MỖI lần chạy:** thêm một dòng vào bảng B (mục trên), cập nhật bảng điểm A, và nếu kết quả là THUA thì làm vòng debug C.
 
 ---
 
@@ -125,6 +180,16 @@ Thứ tự viết nên đi từ phần chắc nhất tới phần khó nhất:
 
 - [ ] **6.1 Lưu bản nộp** (PDF, commit hash của artifact) vào `docs/paper/submitted/`.
 - [ ] **6.2 Khi có phản biện:** mỗi ý kiến một dòng trong `docs/paper/REVIEW_RESPONSE.md`: ý kiến, đồng ý hay không, đã sửa ở đâu.
+
+## Giai đoạn 7: tăng sức cho bài tới chuẩn A* (đang làm)
+
+- [x] **7.1 Thư viện kỹ năng đa dạng:** 12 họ, Study R2 (giao thức trước, amendment R2-A1, R2-A2).
+- [x] **7.2 Rà lý thuyết ↔ mã:** [THEORY_CODE_AUDIT](paper/THEORY_CODE_AUDIT.md), TC1–TC11; C10, C11.
+- [x] **7.3 Luật thực thi chặt hơn:** cạnh enabling, footprint có tên module.
+- [ ] **7.4 (S7) Đo tác hại thật của tổ hợp:** chọn các cặp chồng lấn trong R2 (6 ô tổ hợp) và các cặp enabling; viết oracle hàm (như Study D) cho từng cặp; chạy e-process cho ô đơn và ô tổ hợp. Cần giao thức trước. Chi phí 0 USD, chỉ tốn thời gian CI.
+- [ ] **7.5 (S6) Admit thật với 12 họ** trên các target có oracle sẵn (Study D/E/G): dùng `drawharness` với skill R2. Cần giao thức trước.
+- [ ] **7.6 (S8) Người chấm thứ hai là con người** cho Q-A1 (154 mục): việc của người.
+- [ ] **7.7 (S5) Chạy GSE gốc** nếu có mã công khai (A12).
 
 ---
 
