@@ -217,3 +217,9 @@ Mẫu cho mỗi mục:
   - (B) chạy lại demo nhiều test (9 ô): không quyết định hay nhãn nào đổi; `Z_suite` chỉ đổi ở 3 ô khi λ = 0.
   - Kết quả: `research_closure/results/sensitivity/LOSS_WEIGHT_SENSITIVITY.json`.
 - **Bài:** thêm một câu vào mục Implementation; bộ kiểm số lên 20 con số; bước kiểm thêm vào workflow `Gatekeeper submission check`; A14 trong ANTICIPATED_REVIEWS chuyển thành "đã làm".
+
+### ~18:40 — Bổ sung đủ tác giả MemCoder và MemGovern
+- Phiên không vào được arxiv.org và huggingface.co; tra bằng tìm kiếm web, đối chiếu nhiều nguồn.
+- **MemCoder** (arXiv:2603.13258): Yi-Xuan Deng, Xiaoqin Liu, Yi Zhang, Guo-Wei Yang, Shuojin Yang. Listing arXiv khớp với ResearchGate và Papers with Code.
+- **MemGovern** (arXiv:2601.06789): 15 tác giả (listing arXiv khớp với papers.cool); bài đã được nhận ở Findings of EMNLP 2026, nên `refs.bib` trích bản hội nghị.
+- `refs.bib` không còn mục "and others"; PAPER_TODO 4.4 xong.

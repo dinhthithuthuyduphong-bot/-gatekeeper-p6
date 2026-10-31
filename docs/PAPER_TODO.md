@@ -84,7 +84,7 @@ Mọi bản sửa đã có sẵn câu chữ trong [THEORY](paper/THEORY.md); vi�
 
 > **Trạng thái 31/10/2026:** bản bài đầy đủ theo khung A ở [`paper/latex/main.tex`](paper/latex/main.tex), PDF 6 trang ở [`paper/latex/build/paper.pdf`](paper/latex/build/paper.pdf) (workflow `Gatekeeper paper LaTeX build`; mỗi lần build kiểm 16 con số).
 > - 4.1, 4.2, 4.3, 4.5, 4.6 xong.
-> - 4.4: 7 trích dẫn placeholder đều có thật nhưng sai tên ([`paper/CITATIONS_AUDIT.md`](paper/CITATIONS_AUDIT.md)); đã sửa trong `refs.bib`. **Còn:** chép đủ tác giả của MemCoder và MemGovern từ PDF.
+> - 4.4: 7 trích dẫn placeholder đều có thật nhưng sai tên ([`paper/CITATIONS_AUDIT.md`](paper/CITATIONS_AUDIT.md)); đã sửa trong `refs.bib`. Tác giả MemCoder và MemGovern đã bổ sung đủ.
 > - **Còn lại của giai đoạn 4:** một người đọc độc lập (1.9); thầy đọc toàn bài; cân số trang theo venue (FSE: 10 trang + tài liệu tham khảo, nên còn chỗ để mở rộng Evaluation nếu thầy muốn).
 
 Thứ tự viết nên đi từ phần chắc nhất tới phần khó nhất:
@@ -98,7 +98,7 @@ Thứ tự viết nên đi từ phần chắc nhất tới phần khó nhất:
   - khung là các bản nộp công khai lấy được;
   - Giả định D chưa kiểm;
   - ξ_s không đo được.
-- [ ] **4.4 Related work:** đọc lại reading list. **Kiểm từng trích dẫn** qua DBLP, arXiv hoặc DOI; bảy mục có tác giả "Authors" (PAPER_AUDIT, N4) phải được thay bằng tác giả thật hoặc bỏ.
+- [x] **4.4 Related work:** đọc lại reading list. **Kiểm từng trích dẫn** qua DBLP, arXiv hoặc DOI; bảy mục có tác giả "Authors" (PAPER_AUDIT, N4) phải được thay bằng tác giả thật hoặc bỏ.
   *Xong khi:* không còn mục nào có tác giả placeholder.
 - [x] **4.5 Introduction và Abstract viết sau cùng**, chỉ dùng số đã có ở 4.2.
 - [x] **4.6 Bỏ banner "projected"** chỉ khi giai đoạn 2.1 đã xong.
