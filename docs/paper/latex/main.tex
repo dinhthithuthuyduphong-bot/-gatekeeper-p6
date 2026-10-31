@@ -1,6 +1,8 @@
 % Full paper, frame A (PAPER_TODO 0.2, phase 4).  Built by workflow "Gatekeeper paper LaTeX build" -> build/paper.pdf.
 % Numbers in sections/evaluation.tex are recomputed from the result files by tools/check_paper_numbers.py at every build.
-\documentclass[sigconf,review,anonymous]{acmart}
+% FSE 2027 requires the ACM acmsmall template (single column) with review,anonymous (PACMSE format).
+\documentclass[acmsmall,screen,review,anonymous]{acmart}
+\acmJournal{PACMSE}
 \settopmatter{printacmref=false}
 \setcopyright{none}
 \renewcommand\footnotetextcopyrightpermission[1]{}
