@@ -30,17 +30,19 @@ Trạng thái tổng hợp: [TRACKING_FSE](TRACKING_FSE.md). Lý thuyết: [THEO
 
 ## Giai đoạn 1: sửa lý thuyết trong bài (1 đến 2 tuần)
 
+> **Trạng thái 31/10/2026:** 1.1–1.8 xong. Câu chữ LaTeX ở [`paper/latex/sections/`](paper/latex/sections/), PDF ở [`paper/latex/build/theory_sections.pdf`](paper/latex/build/theory_sections.pdf), bảng thay thế ở [`paper/latex/CHANGES.md`](paper/latex/CHANGES.md). Còn **1.9** (người đọc độc lập) và việc dán vào bản bài chính khi có.
+
 Mọi bản sửa đã có sẵn câu chữ trong [THEORY](paper/THEORY.md); việc ở đây là **đưa vào bài và kiểm lại**.
 
-- [ ] **1.1 Mục Problem formulation:** thêm Giả định A (rút task có hoàn lại, i.i.d.), Giả định B (TV ≤ ξ), nói rõ loss chặn tại 1.
-- [ ] **1.2 Thay Định lý 4 bằng Định lý 4′:** sổ cái α theo ô, gồm admit lại (6/(π²(k+1)²)) và ô tổ hợp; hằng số 2ξ; câu "bảo đảm có nghĩa khi 2ξ < θ". Chép chứng minh mục 2 của THEORY.
+- [x] **1.1 Mục Problem formulation:** thêm Giả định A (rút task có hoàn lại, i.i.d.), Giả định B (TV ≤ ξ), nói rõ loss chặn tại 1.
+- [x] **1.2 Thay Định lý 4 bằng Định lý 4′:** sổ cái α theo ô, gồm admit lại (6/(π²(k+1)²)) và ô tổ hợp; hằng số 2ξ; câu "bảo đảm có nghĩa khi 2ξ < θ". Chép chứng minh mục 2 của THEORY.
   *Xong khi:* có thêm câu "Corollary: if 2ξ_s < θ for all s, Pr[∃ harmful admission] ≤ α".
-- [ ] **1.3 Thay Mệnh đề 6 bằng 6′(a) và 6′(b);** viết lại Remark 5 thành "the 2ξ term is necessary and tight (Prop. 6′b)".
-- [ ] **1.4 Thay Định lý 7 bằng Định lý 7′** (cận chặt 1 + min(a, b)) và chứng minh; bỏ câu "no g".
-- [ ] **1.5 Hệ quả 8:** thêm Giả định D (không tương tác khi footprint rời nhau), sửa số d̄ (10,6, không phải 0,34), hoặc bỏ số nếu không có dữ liệu thật.
-- [ ] **1.6 Mệnh đề 9:** công thức R = (V_π + V_∅)/(V_π + V_∅ − 2C), mô hình cộng tính cho 1 + 2σ_T²/σ_S²; bỏ "1,55×".
-- [ ] **1.7 Mục 3.3 Related work:** sửa câu về BH, vì BH là FDR còn bài dùng FWER và hợp cận; thêm trích dẫn Ville 1939, Wang & Ramdas 2022, Ramdas et al. 2023.
-- [ ] **1.8 Chạy lại phép kiểm bằng số:** workflow `Gatekeeper theory checks` (0 USD).
+- [x] **1.3 Thay Mệnh đề 6 bằng 6′(a) và 6′(b);** viết lại Remark 5 thành "the 2ξ term is necessary and tight (Prop. 6′b)".
+- [x] **1.4 Thay Định lý 7 bằng Định lý 7′** (cận chặt 1 + min(a, b)) và chứng minh; bỏ câu "no g".
+- [x] **1.5 Hệ quả 8:** thêm Giả định D (không tương tác khi footprint rời nhau), sửa số d̄ (10,6, không phải 0,34), hoặc bỏ số nếu không có dữ liệu thật.
+- [x] **1.6 Mệnh đề 9:** công thức R = (V_π + V_∅)/(V_π + V_∅ − 2C), mô hình cộng tính cho 1 + 2σ_T²/σ_S²; bỏ "1,55×".
+- [x] **1.7 Mục 3.3 Related work:** sửa câu về BH, vì BH là FDR còn bài dùng FWER và hợp cận; thêm trích dẫn Ville 1939, Wang & Ramdas 2022, Ramdas et al. 2023.
+- [x] **1.8 Chạy lại phép kiểm bằng số:** workflow `Gatekeeper theory checks` (0 USD).
   *Xong khi:* C1 đến C6 `held = True`, C7 `held = False` (số của bản nháp không khớp), và `research_closure/results/theory/THEORY_CHECKS.md` được commit.
 - [ ] **1.9 Nhờ một người khác đọc từng chứng minh** (bạn cùng lab hoặc thầy). Ghi lại mọi câu hỏi họ đặt ra và câu trả lời.
 

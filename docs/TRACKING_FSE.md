@@ -74,13 +74,13 @@ PDF gốc: [`paper/source/`](paper/source/), đã đối chiếu toàn văn ngà
 
 | Nhóm | Mục | Kết luận | Trạng thái |
 |---|---|---|---|
-| Toán | T1 Định lý 4: hằng số | Đúng là 2ξ_s | ✅ có câu sửa · ⏳ sửa bài |
-| Toán | T2 Định lý 4: ngân sách α | Phải cấp theo ô (kỹ năng, phạm vi), kể cả tổ hợp | ✅ có câu sửa · ⏳ sửa bài |
+| Toán | T1 Định lý 4: hằng số | Đúng là 2ξ_s | ✅ đã viết vào LaTeX (giai đoạn 1) |
+| Toán | T2 Định lý 4: ngân sách α | Phải cấp theo ô (kỹ năng, phạm vi), kể cả tổ hợp | ✅ đã viết vào LaTeX (giai đoạn 1) |
 | Toán | T3 Retirement / admit lại | Cần sổ cái 6/(π²(k+1)²) (đã cài trong repo) | ✅ |
-| Toán | T4, T5 Định lý 7 | Cận chặt 1 + min(a, b); "không có g" sai | ✅ có phát biểu thay thế · ⏳ sửa bài |
-| Toán | T6 Mệnh đề 9 | Tỉ lệ 1 + 2σ_T²/σ_S² (tổng quát: (V_π+V_∅)/(V_π+V_∅−2C)); "lợi ròng 1,55×" đếm sai | ✅ có chứng minh · ⏳ sửa bài |
-| Toán | T7 Mệnh đề 6 | Viết lại thành 6′(a) và 6′(b); 6′(b) chứng minh số hạng 2ξ là cần thiết và chặt (mới) | ✅ có chứng minh · ⏳ sửa bài |
-| Toán | T8 Hệ quả 8 | d̄ = 0,34 mâu thuẫn với 11,4% (d̄ ≈ 10,6); cần Giả định D (không tương tác khi footprint rời nhau) | ✅ có chứng minh · ⏳ sửa bài, đo Giả định D |
+| Toán | T4, T5 Định lý 7 | Cận chặt 1 + min(a, b); "không có g" sai | ✅ đã viết vào LaTeX (giai đoạn 1) |
+| Toán | T6 Mệnh đề 9 | Tỉ lệ 1 + 2σ_T²/σ_S² (tổng quát: (V_π+V_∅)/(V_π+V_∅−2C)); "lợi ròng 1,55×" đếm sai | ✅ đã viết vào LaTeX (giai đoạn 1) |
+| Toán | T7 Mệnh đề 6 | Viết lại thành 6′(a) và 6′(b); 6′(b) chứng minh số hạng 2ξ là cần thiết và chặt (mới) | ✅ đã viết vào LaTeX (giai đoạn 1) |
+| Toán | T8 Hệ quả 8 | d̄ = 0,34 mâu thuẫn với 11,4% (d̄ ≈ 10,6); cần Giả định D (không tương tác khi footprint rời nhau) | ✅ đã viết vào LaTeX · ⏳ đo Giả định D |
 | Toán | T9 Giả định 3 | i.i.d. với tập task hữu hạn; loss phải chặn tại 1 | ⏳ sửa bài |
 | Số liệu | S1 CI so với biên 5 điểm | Cận dưới 3,1 < 5: không vượt cổng go/no-go | ⏳ sửa bài |
 | Số liệu | S2 Mẫu số | 5,1%, 11,5%, 22,7% không nguyên trên 63 cặp | ⏳ sinh lại số |
@@ -114,3 +114,4 @@ PDF gốc: [`paper/source/`](paper/source/), đã đối chiếu toàn văn ngà
 | 31/10/2026 ~10:05 | Tổng hợp: HQ1 không được ủng hộ; Q4 = 11,1%; viết STUDY_Q_RESULT.md |
 | 31/10/2026 ~10:15–12:30 | Amendment Q-A1: chạy lại 55 đơn vị, chấm tay hai người; kết luận HQ1 giữ nguyên |
 | 31/10/2026 ~13:00 | Lý thuyết: THEORY.md (chứng minh), theory checks; PAPER_TODO.md; API_AND_FAILURES.md + failure audit (64 run thất bại, đã phân nhóm) |
+| 31/10/2026 ~14:05 | Giai đoạn 1: LaTeX các mục Problem formulation, Theory, Related work (thống kê); build PDF trên Actions (run 41208218636) |

@@ -147,3 +147,12 @@ Mẫu cho mỗi mục:
   - Công cụ `tools/failure_audit.py` và workflow `Gatekeeper failure audit` đọc log của bước thất bại, phân nhóm, và commit `research_closure/results/failure_audit/`.
   - Lần 1 và 2 (run 41206526780, 41206699066) xếp sai: đọc cả log, bắt nhầm một tiêu đề bảng "HTTP 429", và chưa đọc đủ job của run có hơn 100 job. Lần 3 (run 41207250040) sửa cả hai và khớp với đối chiếu tay: 64 run thất bại, 14 nhóm.
 - Còn mở: đưa các phát biểu đã sửa vào bài (PAPER_TODO giai đoạn 1); thiết kế phép đo cho Giả định D (giai đoạn 2.3).
+
+### ~14:05 — Giai đoạn 1 của PAPER_TODO: đưa lý thuyết đã sửa vào bài
+- Vì sao: repo không có bản LaTeX của bài, nên câu chữ sửa được viết thành các mục độc lập, dán thẳng vào bài được.
+- Đã làm:
+  - `docs/paper/latex/sections/problem.tex` (1.1), `theory.tex` (1.2–1.6), `related_stats.tex` (1.7), `refs.bib` (chỉ các tài liệu thống kê đã kiểm thông tin xuất bản), `main.tex` (chỉ để biên dịch thử).
+  - `docs/paper/latex/CHANGES.md`: bảng "đoạn nào của bản nháp thay bằng đoạn nào", kèm các câu ở chỗ khác trong bài phải sửa theo (Abstract, §5.4, §7, §10.3, Threats, Keywords).
+  - Workflow `Gatekeeper paper LaTeX build` (`paper-latex.yml`): biên dịch bằng TeX Live, dừng nếu còn tham chiếu hoặc trích dẫn không xác định, commit `build/theory_sections.pdf`. Run 41208218636 thành công.
+  - PAPER_TODO: 1.1–1.8 đánh dấu xong.
+- Còn mở: 1.9 (một người đọc độc lập kiểm từng chứng minh); dán vào bản bài chính khi có.
