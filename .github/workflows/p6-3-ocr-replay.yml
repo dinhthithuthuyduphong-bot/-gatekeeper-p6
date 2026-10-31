@@ -258,7 +258,7 @@ jobs:
           docker ps -aq --filter label=gk-phase=p63 | xargs -r docker rm -f
       - name: Preserve reports and setup failure logs
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: P6_3_REMOTE_OUTPUT
           path: P6_3_REMOTE_OUTPUT/
