@@ -1,12 +1,36 @@
 # Study Q amendment Q-A1, step 3: the second, BLIND rater (strong model) codes the review items R / B / U with the RQ5
-# codebook and tools/rq5_rate_llm.py unchanged.  Refuses unless the first rater's codes are committed.  Under 1 USD.
+# codebook and tools/rq5_rate_llm.py unchanged.  Refuses unless the first rater's codes are committed.
+# The items are split into shards, one job each, so that no job outlives its Vertex access token (about an hour; the
+# first single-job attempt, run 41193552100, failed with ACCESS_TOKEN_EXPIRED after ~60 min and saved nothing).
+# Every item is still one independent call at temperature 0, so sharding does not change what the model sees.
 name: Gatekeeper Study Q second rater (amendment Q-A1)
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      shards: {description: "number of shards (jobs)", default: "4"}
 permissions:
   contents: write
 jobs:
-  rate:
+  plan:
     runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.m.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v6
+      - id: m
+        env:
+          SHARDS: ${{ inputs.shards }}
+        run: |
+          D=research_closure/results/study_q/qa1
+          [ -f $D/RATINGS_ASSISTANT.json ] || { echo "::error::the first rater's codes must be committed before the second rater runs"; exit 1; }
+          python3 -c "import json,os;k=int(os.environ['SHARDS']);print('matrix='+json.dumps({'shard':list(range(k))}))" >> "$GITHUB_OUTPUT"
+  rate:
+    needs: plan
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 50
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v6
@@ -21,22 +45,48 @@ jobs:
           t="$(gcloud auth print-access-token)"; echo "::add-mask::$t"; echo "GOOGLE_OAUTH_TOKEN=$t" >> "$GITHUB_ENV"
           echo "GCP_PROJECT=${{ secrets.GCP_PROJECT }}" >> "$GITHUB_ENV"
           echo "GK_TOKEN_CMD=gcloud auth print-access-token" >> "$GITHUB_ENV"
-      - run: |
-          D=research_closure/results/study_q/qa1
-          [ -f $D/RATINGS_ASSISTANT.json ] || { echo "::error::the first rater's codes must be committed before the second rater runs"; exit 1; }
-          python tools/rq5_rate_llm.py $D/ITEMS.json $D/RATINGS_SECOND.json research_closure/pilot/models.json vertex-gemini-argon 2
+      - env:
+          SHARD: ${{ matrix.shard }}
+          SHARDS: ${{ inputs.shards }}
+        run: |
+          mkdir -p out_rate
+          python -c "import json,os;it=json.load(open('research_closure/results/study_q/qa1/ITEMS.json'));k=int(os.environ['SHARDS']);s=int(os.environ['SHARD']);json.dump(it[s::k],open('out_rate/items.json','w'))"
+          python tools/rq5_rate_llm.py out_rate/items.json "out_rate/RATINGS_SECOND_${SHARD}.json" research_closure/pilot/models.json vertex-gemini-argon 2
       - uses: actions/upload-artifact@v7
         if: always()
         with:
-          name: QA1_RATINGS_SECOND
-          path: research_closure/results/study_q/qa1/RATINGS_SECOND.json
-      - name: Commit
+          name: QA1_RATE_${{ matrix.shard }}
+          path: out_rate/RATINGS_SECOND_*.json
+  merge:
+    needs: rate
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/download-artifact@v7
+        with:
+          pattern: QA1_RATE_*
+          path: shards
+          merge-multiple: true
+      - name: Merge and commit
         shell: bash
         run: |
           set -euo pipefail
+          D=research_closure/results/study_q/qa1
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          parts = [json.loads(p.read_text()) for p in sorted(Path('shards').glob('RATINGS_SECOND_*.json'))]
+          ratings = [r for p in parts for r in p['ratings']]
+          ids = {it['id'] for it in json.load(open('research_closure/results/study_q/qa1/ITEMS.json'))}
+          assert {r['id'] for r in ratings} == ids, 'missing or extra ratings'
+          out = {'model': parts[0]['model'], 'spent_usd': sum(p['spent_usd'] for p in parts), 'shards': len(parts),
+                 'ratings': sorted(ratings, key=lambda r: r['id'])}
+          Path('research_closure/results/study_q/qa1/RATINGS_SECOND.json').write_text(json.dumps(out, indent=1))
+          print(len(ratings), 'ratings, USD', round(out['spent_usd'], 4))
+          PY
           git config user.name "gatekeeper-freeze-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add research_closure/results/study_q/qa1/RATINGS_SECOND.json
+          git add $D/RATINGS_SECOND.json
           git commit -m "Study Q Q-A1 second rater"
           git pull --rebase origin "${GITHUB_REF_NAME}"
           git push origin HEAD:"${GITHUB_REF_NAME}"
