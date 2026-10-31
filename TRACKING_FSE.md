@@ -1,0 +1,82 @@
+# Theo dõi tiến độ, đối chiếu với bài FSE-2027-13
+
+**Bài gốc:** *Scope before Reuse: Risk-Controlled Admission of Learned Coding Skills* (FSE-2027-13). Mọi số headline trong bài là **projected** ([PAPER_EXPECTATION_AUDIT](research_closure/PAPER_EXPECTATION_AUDIT.md)). File này chỉ ghi những gì đã **đo** trong repo, kèm đường dẫn tới bằng chứng.
+
+Cập nhật lần cuối: **31/10/2026**. Quy ước trạng thái: ✅ xong · 🔄 đang chạy · ⏳ chưa làm · ❌ kết quả âm (đã báo cáo) · ⛔ bị khoá.
+
+---
+
+## 1. Khung hiện tại (đã chốt)
+
+Đối tượng nghiên cứu đã chuyển từ "kỹ năng học được" sang **chấp nhận một thay đổi mã vào một phạm vi**. Luận văn giữ tựa "Scope before Reuse" ([ALIGNMENT_WITH_FSE](research_closure/results/ALIGNMENT_WITH_FSE.md)).
+
+- **Phần 1, kỹ năng** (Study D đến H): kết quả âm.
+- **Phần 2, thay đổi mã** (Study M đến Q): Study P đo trên patch LLM; RQ5 cho thấy oracle so khác biệt "ngây thơ" phóng đại tỉ lệ hồi quy; **Study Q** kiểm định lại kết luận này trên SWE-bench Verified.
+- **Cầu nối:** RQ3 (bộ sinh tự động so với bộ sinh viết tay, chạy trên các target của bài gốc).
+
+## 2. Đối chiếu từng kỳ vọng của bài FSE
+
+| # | Kỳ vọng / khẳng định của bài FSE | Study | Trạng thái | Bằng chứng hiện có |
+|---|---|---|---|---|
+| E1 | Tác hại một phần phổ biến khi tái sử dụng kỹ năng | D đến H | ❌ | 12 target thật, 0/2.400 khác biệt; cổng đơn giản là đủ |
+| E2 | Gatekeeper mạnh hơn cổng đơn giản | Đồ thị pha, PP0, Study P (H3) | ❌ về công suất | Kiểm định cỡ mẫu cố định an toàn như Gatekeeper và mạnh hơn; ở Study P hai cổng có cùng tỉ lệ admit (0,898); H3 không kiểm định được vì P4 không đạt ([P_RESULT](research_closure/results/study_p/P_RESULT.md)). Giữ lại như một **tính chất**: hợp lệ khi dừng tuỳ ý, dừng sớm |
+| E3 | Cổng có kiểm soát rủi ro hơn census / smoke test | Study P | ✅ | Census admit 16/16 patch có θ̂ > 5%, smoke 20 admit 2/16; cổng thống kê admit 0/16 |
+| E4 | Oracle hành vi đo được tác hại | N, P | ✅ (mức hàm) | Oracle mức test dùng được 8/107; oracle mức hàm dùng được 54,3% số ELIGIBLE (Study P) |
+| E5 | Tác hại một phần tồn tại trong thay đổi mã thật | P, RQ5 | ⚠️ thu hẹp | Kết quả đăng ký 16/205 = 7,8%; sau RQ5, hồi quy theo hợp đồng chỉ 0,5% đến 2,9% ([RQ5_RESULT](research_closure/results/rq5/RQ5_RESULT.md)) |
+| E6 | "Phạm vi trước khi tái sử dụng": oracle phải nhìn ra ngoài ý đồ của tác giả | RQ3 | ✅ | `D2_cerberus`: oracle viết tay không thấy gì, G2 thấy 24 đến 56/200 đầu vào đổi hành vi ([RQ3_RESULT](research_closure/results/rq3/RQ3_RESULT.md)) |
+| E7 | Tác hại phải định nghĩa theo hợp đồng, không theo mọi khác biệt (đóng góp mới, không có trong bài gốc) | **Q** | 🔄 | HQ1 đang được đo trên SWE-bench Verified, mục 3 |
+| E8 | So sánh với B9 (sửa trực tiếp) | F / B9 | ⛔ HOLD | `pre_b9/RELEASE_GATE.json` |
+| E9 | Composition, retirement | (không có study) | ⏳ | Chưa có bằng chứng thực nghiệm mới; có hai lưu ý toán (Định lý 4 và 7) trong [PAPER_EXPECTATION_AUDIT](research_closure/PAPER_EXPECTATION_AUDIT.md) |
+| E10 | Tổng quát hoá trên cohort mới đã đóng băng trước khi có kết quả | J, P, Q | 🔄 | P đã xong; Q đã đóng băng, đang chạy |
+
+## 3. Study Q: tiến độ chi tiết
+
+Giao thức: [STUDY_Q_PROTOCOL](study_q/STUDY_Q_PROTOCOL.md). Amendment: chưa có ([AMENDMENTS](study_q/AMENDMENTS.md)).
+
+| Bước | Trạng thái | Ghi chú |
+|---|---|---|
+| Q-F0 khả thi, chỉ G0 | ✅ | 33/33 instance chạy được; dùng được 3/33 |
+| Q-F1, G2 | ✅ đạt quy tắc | 18/33 = 54,5%; cận dưới Wilson × 500 = 190 ≥ 180 |
+| Q-F2 kiểm kê kho patch | ✅ | 125/182 bản nộp; 31.205 patch resolved; 469 instance |
+| Đóng băng (`Freeze Study Q`, commit `94c87bc`) | ✅ | `freeze_study.py verify study_q`: 68 tệp không đổi |
+| Seed drand sau đóng băng | ✅ | `460798324973423911` (thời điểm seed 2026-10-31T07:47:53Z) |
+| Sửa workflow stream (patch `study_q_stream_msg`) | ✅ | Ô `only` nhận nhiều định dạng hơn, báo lỗi rõ ràng; run #1 và #2 lỗi vì `only=3` không phải id |
+| Che token Vertex trong log (commit `206da51`) | ✅ | Thêm `::add-mask::` cho 13 workflow |
+| Smoke 3 instance ([run #3](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41184775725)) | ✅ | 3/3 thành công, `FINISHED`. Lưu ý: mỗi instance khoảng 1 phút, artifact khoảng 1 KB, cần mở ra kiểm tra |
+| **Stream part 0**, 235 instance ([run #4](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41185100083)) | 🔄 | Bắt đầu 31/10 08:33 UTC |
+| Stream part 1, 234 instance | ⏳ | Chạy sau khi part 0 xong |
+| Chạy lại instance lỗi hạ tầng (`only=...`) | ⏳ | Theo quy tắc P-A3: mỗi instance là một job |
+| Workflow tổng hợp chạy `tools/q_analyze.py` | ⏳ | **Chưa có workflow nào gọi `q_analyze.py`**, cần thêm |
+| Cổng Q-G1: có ≥ 18 instance có patch có khác biệt | ⏳ | Nếu < 18 thì không kiểm định HQ1, chỉ báo cáo mô tả |
+| HQ1 (Q3 > 0,5, nhị thức chính xác một phía) | ⏳ | |
+| Q1 phễu; Q2, Q4 tỉ lệ (Wilson, bootstrap gom cụm); Q5 hệ số phóng đại | ⏳ | |
+| Phân tích độ nhạy (a) đến (d) | ⏳ | Mục 6.5 của giao thức |
+| Viết `STUDY_Q_RESULT.md` và cập nhật ALIGNMENT_WITH_FSE | ⏳ | |
+
+**Ngân sách:** model chỉ dùng để sinh chương trình G2, khoảng 0,01 USD mỗi instance, dưới 10 USD tổng.
+
+## 4. Kết quả Q sẽ quyết định khẳng định nào trong bài
+
+Bảng này được suy ra từ ALIGNMENT_WITH_FSE (mục sau RQ5) và giao thức Q. **Chọn nhánh nào là quyết định của người hướng dẫn.**
+
+| Kết quả Study Q | Khẳng định trong bài A\* |
+|---|---|
+| Bác bỏ H0 của HQ1 (phần lớn khác biệt ngây thơ không phải hồi quy theo hợp đồng) | (a) patch plausible hiếm khi hồi quy trên đầu vào hợp lệ; (b) oracle ngây thơ phóng đại nhiều lần (Q5). Kết luận RQ5 được xác nhận trên dữ liệu độc lập |
+| Không bác bỏ, hoặc Q-G1 không đạt | Báo cáo mô tả; kết luận RQ5 chỉ là thăm dò, giới hạn ở dữ liệu của Study P |
+
+## 5. Việc còn mở ngoài Study Q
+
+- B9: **HOLD**. Study J: **BLOCKED**.
+- Hai lưu ý toán về Định lý 4 (cận 2·TV) và Định lý 7 (composition) cần trao đổi với tác giả bản nháp.
+- Các trích dẫn đánh dấu VERIFY trong reading list, và trích dẫn "OpenAI 2024" cho SWE-bench Verified, cần kiểm tra lại.
+- Giới hạn cần ghi trong bài: một nửa số ca trong vùng của Study P đến từ bài tập của sinh viên; người chấm thứ hai ở RQ5 cùng họ model với model sinh patch.
+
+## 6. Nhật ký
+
+| Ngày (UTC) | Việc |
+|---|---|
+| 31/10/2026 06:47 | Đóng băng Study Q (`94c87bc`) |
+| 31/10/2026 06:50, 07:59 | Stream run #1 và #2 lỗi ở bước plan (`only=3`) |
+| 31/10/2026 08:21 | Đưa patch `study_q_stream_msg` lên main (`4898596`) |
+| 31/10/2026 08:29 | Smoke run #3 (3 instance): thành công |
+| 31/10/2026 08:33 | Che token Vertex (`206da51`); bắt đầu part 0 (run #4) |
