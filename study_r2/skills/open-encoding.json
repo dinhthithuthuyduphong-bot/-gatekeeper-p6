@@ -1,0 +1,15 @@
+{
+  "skill_id": "open-encoding",
+  "version": "r2-1.0",
+  "scope": "text-mode open without encoding",
+  "pi": {
+    "transform": "open_encoding",
+    "params": {}
+  },
+  "D": {
+    "python": ">=3.8"
+  },
+  "I": [],
+  "P": [],
+  "K": "pylint W1514 / PEP 597. Changes behaviour on non-UTF-8 locales or for non-UTF-8 files. Study R2 library family; no replay example (census only, study_r2/PROTOCOL.md)."
+}

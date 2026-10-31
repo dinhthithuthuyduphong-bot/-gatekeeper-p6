@@ -1,0 +1,15 @@
+{
+  "skill_id": "type-eq-isinstance",
+  "version": "r2-1.0",
+  "scope": "exact type comparisons",
+  "pi": {
+    "transform": "type_eq_isinstance",
+    "params": {}
+  },
+  "D": {
+    "python": ">=3.8"
+  },
+  "I": [],
+  "P": [],
+  "K": "type(x) == T -> isinstance(x, T) (pylint C0123 unidiomatic-typecheck). Changes behaviour for instances of subclasses of T (e.g. bool for int). Study R2 library family; no replay example (census only, study_r2/PROTOCOL.md)."
+}

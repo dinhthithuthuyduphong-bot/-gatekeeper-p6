@@ -1,0 +1,15 @@
+{
+  "skill_id": "bare-except",
+  "version": "r2-1.0",
+  "scope": "bare except clauses",
+  "pi": {
+    "transform": "bare_except",
+    "params": {}
+  },
+  "D": {
+    "python": ">=3.8"
+  },
+  "I": [],
+  "P": [],
+  "K": "E722. Changes behaviour for KeyboardInterrupt, SystemExit, GeneratorExit. Study R2 library family; no replay example (census only, study_r2/PROTOCOL.md)."
+}

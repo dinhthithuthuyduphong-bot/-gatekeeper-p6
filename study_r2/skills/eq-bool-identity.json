@@ -1,0 +1,15 @@
+{
+  "skill_id": "eq-bool-identity",
+  "version": "r2-1.0",
+  "scope": "comparisons with True/False",
+  "pi": {
+    "transform": "eq_bool_identity",
+    "params": {}
+  },
+  "D": {
+    "python": ">=3.8"
+  },
+  "I": [],
+  "P": [],
+  "K": "E712. Changes behaviour when x is 1/0, a numpy bool or overrides __eq__. Study R2 library family; no replay example (census only, study_r2/PROTOCOL.md)."
+}

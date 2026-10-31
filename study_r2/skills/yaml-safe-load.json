@@ -1,0 +1,15 @@
+{
+  "skill_id": "yaml-safe-load",
+  "version": "r2-1.0",
+  "scope": "yaml.load without Loader",
+  "pi": {
+    "transform": "yaml_safe_load",
+    "params": {}
+  },
+  "D": {
+    "python": ">=3.8"
+  },
+  "I": [],
+  "P": [],
+  "K": "bandit B506. Changes behaviour for documents with Python-specific tags. Study R2 library family; no replay example (census only, study_r2/PROTOCOL.md)."
+}

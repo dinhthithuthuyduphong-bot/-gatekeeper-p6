@@ -1,0 +1,15 @@
+{
+  "skill_id": "dict-keys-membership",
+  "version": "r2-1.0",
+  "scope": "membership tests on keys()",
+  "pi": {
+    "transform": "dict_keys_membership",
+    "params": {}
+  },
+  "D": {
+    "python": ">=3.8"
+  },
+  "I": [],
+  "P": [],
+  "K": "pylint C0201. Changes behaviour for mappings whose __contains__ and keys() disagree. Study R2 library family; no replay example (census only, study_r2/PROTOCOL.md)."
+}

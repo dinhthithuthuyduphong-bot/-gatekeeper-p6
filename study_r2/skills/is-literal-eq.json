@@ -1,0 +1,15 @@
+{
+  "skill_id": "is-literal-eq",
+  "version": "r2-1.0",
+  "scope": "identity comparisons with literals",
+  "pi": {
+    "transform": "is_literal_eq",
+    "params": {}
+  },
+  "D": {
+    "python": ">=3.8"
+  },
+  "I": [],
+  "P": [],
+  "K": "F632. Changes behaviour for equal but non-identical values and overridden __eq__. Study R2 library family; no replay example (census only, study_r2/PROTOCOL.md)."
+}

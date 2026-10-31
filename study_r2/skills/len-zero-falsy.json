@@ -1,0 +1,15 @@
+{
+  "skill_id": "len-zero-falsy",
+  "version": "r2-1.0",
+  "scope": "emptiness tests by length",
+  "pi": {
+    "transform": "len_zero_falsy",
+    "params": {}
+  },
+  "D": {
+    "python": ">=3.8"
+  },
+  "I": [],
+  "P": [],
+  "K": "pylint C1802. Changes behaviour when __bool__ disagrees with __len__, or for objects without __len__ (None, numpy arrays raise). Study R2 library family; no replay example (census only, study_r2/PROTOCOL.md)."
+}

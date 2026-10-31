@@ -1,0 +1,15 @@
+{
+  "skill_id": "reraise-bare",
+  "version": "r2-1.0",
+  "scope": "re-raise of the caught exception",
+  "pi": {
+    "transform": "reraise_bare",
+    "params": {}
+  },
+  "D": {
+    "python": ">=3.8"
+  },
+  "I": [],
+  "P": [],
+  "K": "raise e -> raise. Changes the traceback and the exception's __traceback__ chain. Study R2 library family; no replay example (census only, study_r2/PROTOCOL.md)."
+}

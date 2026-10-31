@@ -1,0 +1,15 @@
+{
+  "skill_id": "mutable-default",
+  "version": "r2-1.0",
+  "scope": "mutable default arguments",
+  "pi": {
+    "transform": "mutable_default",
+    "params": {}
+  },
+  "D": {
+    "python": ">=3.8"
+  },
+  "I": [],
+  "P": [],
+  "K": "flake8-bugbear B006. Changes behaviour when callers rely on state shared across calls or pass None explicitly. Study R2 library family; no replay example (census only, study_r2/PROTOCOL.md)."
+}

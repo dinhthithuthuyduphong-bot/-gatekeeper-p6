@@ -1,0 +1,40 @@
+# Study R2 (study_r2/PROTOCOL.md): census of the twelve-family skill library on every Study D, E, G target at its pinned revision,
+# then the library simulation on the measured overlap graph.  AST analysis only: no target code runs, no model calls.
+# Commits research_closure/results/study_r2/.
+name: Gatekeeper Study R2 library census
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  census:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.12"
+      - name: Unit tests of the families (protocol: before the census)
+        run: python -m unittest tests.test_skill_library -v
+      - name: Census
+        run: python tools/library_census.py /tmp/r2_work out_r2 | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Library simulation on the measured graph
+        run: python tools/library_simulation.py out_r2 --graph out_r2/LIBRARY_CENSUS.json --reps 1000 | tee -a "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        if: always()
+        with:
+          name: STUDY_R2
+          path: out_r2
+      - name: Commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p research_closure/results/study_r2
+          cp out_r2/* research_closure/results/study_r2/
+          git config user.name "gatekeeper-freeze-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add research_closure/results/study_r2
+          git diff --cached --quiet && { echo "no change"; exit 0; }
+          git commit -m "Study R2 library census"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin HEAD:"${GITHUB_REF_NAME}"

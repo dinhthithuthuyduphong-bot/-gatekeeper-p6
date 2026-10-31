@@ -56,6 +56,20 @@ def library(rng, k, regions, q):
     return skills, risk, fp, bad
 
 
+def graph_library(rng, lib, q):
+    """Graph mode (Study R2): skills and footprints are one real target's measured library; benefit/harm stay synthetic.
+    An overlapping pair (shared function) is bad with probability q."""
+    skills = sorted(lib)
+    risk = {s: (BENEFIT if rng.random() < 0.7 else 0.0) for s in skills}
+    fp = {s: list(lib[s]) for s in skills}
+    bad = set()
+    for i, a in enumerate(skills):
+        for b in skills[i + 1:]:
+            if set(fp[a]) & set(fp[b]) and rng.random() < q:
+                bad.add(frozenset((a, b)))
+    return skills, risk, fp, bad
+
+
 def group_str(group, risk, bad):
     g = sorted(group)
     if any(frozenset((a, b)) in bad for i, a in enumerate(g) for b in g[i + 1:]):
@@ -74,12 +88,16 @@ def subset_index(group, skills):
     return sum(1 << skills.index(s) for s in group)
 
 
-def run(reps, k, regions, q, n, seed):
+def run(reps, k, regions, q, n, seed, graph=None):
     rng = random.Random(seed)
     stats = {p: {"harmful": 0, "harmful_component": 0, "beneficial_run": 0, "trials": 0} for p in ("P1", "P2")}
     libs_with_bad_pair = 0
-    for _ in range(reps):
-        skills, risk, fp, bad = library(rng, k, regions, q)
+    for rep_i in range(reps):
+        if graph:
+            skills, risk, fp, bad = graph_library(rng, graph[rep_i % len(graph)], q)
+            k = len(skills)
+        else:
+            skills, risk, fp, bad = library(rng, k, regions, q)
         libs_with_bad_pair += bool(bad)
         # P1: per-skill admission with alpha / K, everything admitted runs together
         adm1, t1 = [], 0
@@ -112,7 +130,7 @@ def run(reps, k, regions, q, n, seed):
             st["harmful_component"] += any(group_str(c, risk, bad) > 0 for c in X.components({s_: fp[s_] for s_ in ex})) if ex else False
             st["beneficial_run"] += sum(1 for s in ex if risk[s] < 0)
             st["trials"] += t
-    out = {"model": {"skills": k, "regions": regions, "bad_pair_prob": q, "trials_per_cell": n, "theta": THETA, "alpha": ALPHA,
+    out = {"model": {"skills": "per target (graph mode)" if graph else k, "regions": "measured footprints" if graph else regions, "bad_pair_prob": q, "trials_per_cell": n, "theta": THETA, "alpha": ALPHA,
                      "reps": reps, "seed": seed, "libraries_with_a_bad_pair": libs_with_bad_pair}}
     for name, st in stats.items():
         out[name] = {"harmful_component_rate": st["harmful_component"] / reps, "harmful_component_wilson95": wilson(st["harmful_component"], reps),
@@ -125,12 +143,35 @@ def run(reps, k, regions, q, n, seed):
 def main(argv):
     opt = lambda key, d: type(d)(argv[argv.index(key) + 1]) if key in argv else d   # noqa: E731
     reps, k, regions, n, seed = opt("--reps", 400), opt("--skills", 12), opt("--regions", 8), opt("--n", 300), opt("--seed", 11)
+    if "--graph" in argv:
+        return main_graph(argv, reps, n, seed, opt("--q", 0.3))
     res = {"main": run(reps, k, regions, opt("--q", 0.3), n, seed),
            "sweep_bad_pair_prob": {str(q): run(reps, k, regions, q, n, seed) for q in (0.1, 0.5)}}
     out = Path(argv[0])
     out.mkdir(parents=True, exist_ok=True)
     (out / "LIBRARY_SIMULATION.json").write_text(json.dumps(res, indent=1))
     for label, r in [("q=0.3", res["main"])] + [("q=" + q, r) for q, r in res["sweep_bad_pair_prob"].items()]:
+        print(label, {p: (round(r[p]["harmful_component_rate"], 3), round(r[p]["mean_beneficial_skills_executed"], 2)) for p in ("P1", "P2")})
+    return 0 if all(r["P2_within_alpha"] for r in [res["main"]] + list(res["sweep_bad_pair_prob"].values())) else 1
+
+
+def main_graph(argv, reps, n, seed, q):
+    """--graph CENSUS.json: one library per target with at least two cells, cycled over the repetitions."""
+    census = json.loads(Path(argv[argv.index("--graph") + 1]).read_text())
+    graph = [t["footprints"] for t in census["targets"] if not t.get("clone_error") and t.get("cells", 0) >= 2]
+    if not graph:
+        print("no target has two or more cells")
+        return 1
+    res = {"source": argv[argv.index("--graph") + 1], "libraries": len(graph),
+           "library_sizes": sorted(len(g) for g in graph),
+           "overlapping_pairs_per_library": sorted(sum(1 for i, a in enumerate(sorted(g)) for b in sorted(g)[i + 1:]
+                                                       if set(g[a]) & set(g[b])) for g in graph),
+           "main": run(reps, None, None, q, n, seed, graph),
+           "sweep_bad_pair_prob": {str(x): run(reps, None, None, x, n, seed, graph) for x in (0.1, 0.5, 1.0)}}
+    out = Path(argv[0])
+    out.mkdir(parents=True, exist_ok=True)
+    (out / "LIBRARY_SIMULATION_GRAPH.json").write_text(json.dumps(res, indent=1))
+    for label, r in [("q=%s" % q, res["main"])] + [("q=" + x, r) for x, r in res["sweep_bad_pair_prob"].items()]:
         print(label, {p: (round(r[p]["harmful_component_rate"], 3), round(r[p]["mean_beneficial_skills_executed"], 2)) for p in ("P1", "P2")})
     return 0 if all(r["P2_within_alpha"] for r in [res["main"]] + list(res["sweep_bad_pair_prob"].values())) else 1
 
