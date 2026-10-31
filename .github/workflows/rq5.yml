@@ -1,0 +1,72 @@
+# RQ5 step 1 (plan: research_closure/results/rq5/RQ5_PLAN.md, amendment P-A5): re-generate the 29 light-model patches with
+# the same seed, temperature, spend ceiling and stored generator, with capture on (patch diff and every outcome kept).
+name: Gatekeeper RQ5 (re-generate and capture)
+on:
+  workflow_dispatch:
+    inputs:
+      only: {description: "optional comma-separated names (empty = all 29)", default: ""}
+permissions:
+  contents: read
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.m.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Freeze and amendment check
+        run: |
+          python tools/freeze_study.py verify study_p
+          python -c "import json,sys;c=json.load(open('study_p/config_study_p.json'));sys.exit(0 if 'P-A5' in c.get('amendments_applied',[]) else 'amendment P-A5 is not applied')"
+      - id: m
+        env:
+          ONLY: ${{ inputs.only }}
+        run: |
+          python - <<'PY'
+          import json, os
+          t = [x['name'] for x in json.load(open('research_closure/results/rq5/RQ5_TARGETS.json'))]
+          only = [x for x in os.environ.get('ONLY', '').replace(' ', '').split(',') if x]
+          assert set(only) <= set(t), 'unknown names'
+          open(os.environ['GITHUB_OUTPUT'], 'a').write('matrix=' + json.dumps({'name': only or t}) + '\n')
+          PY
+  one:
+    needs: plan
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 200
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Google Cloud auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+      - name: Vertex access token
+        run: |
+          echo "GOOGLE_OAUTH_TOKEN=$(gcloud auth print-access-token)" >> "$GITHUB_ENV"
+          echo "GCP_PROJECT=${{ secrets.GCP_PROJECT }}" >> "$GITHUB_ENV"
+          echo "GK_TOKEN_CMD=gcloud auth print-access-token" >> "$GITHUB_ENV"
+      - name: Re-generate with capture
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ github.token }}
+          NAME: ${{ matrix.name }}
+        run: |
+          set -euo pipefail
+          mkdir -p out_r
+          python -c "import json,os;t=[x for x in json.load(open('research_closure/results/rq5/RQ5_TARGETS.json')) if x['name']==os.environ['NAME']];[x.pop('original') for x in t];json.dump(t,open('/tmp/rec.json','w'))"
+          # same as the cohort (tools/p_stream.py): seed prefix study-p-cohort:, 1 repetition, 1.0 USD ceiling, 200 inputs per source, light model only
+          python -u tools/cohort_instance.py /tmp/rec.json "$NAME" out_r research_closure/pilot/models.json vertex-gemini-flash 1 1.0 "study-p-cohort:" 200 function capture 2>&1 | tee out_r/log.txt
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: RQ5_${{ matrix.name }}
+          path: out_r
