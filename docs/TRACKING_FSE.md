@@ -24,10 +24,10 @@ Cập nhật lần cuối: **31/10/2026** (sau khi đối chiếu PDF và sắp 
 | E4 | Oracle hành vi đo được tác hại | N, P | ✅ (mức hàm) | Oracle mức test dùng được 8/107; oracle mức hàm dùng được 54,3% số ELIGIBLE (Study P) |
 | E5 | Tác hại một phần tồn tại trong thay đổi mã thật | P, RQ5 | ⚠️ thu hẹp | Kết quả đăng ký 16/205 = 7,8%; sau RQ5, hồi quy theo hợp đồng chỉ 0,5% đến 2,9% ([RQ5_RESULT](../research_closure/results/rq5/RQ5_RESULT.md)) |
 | E6 | "Phạm vi trước khi tái sử dụng": oracle phải nhìn ra ngoài ý đồ của tác giả | RQ3 | ✅ | `D2_cerberus`: oracle viết tay không thấy gì, G2 thấy 24 đến 56/200 đầu vào đổi hành vi ([RQ3_RESULT](../research_closure/results/rq3/RQ3_RESULT.md)) |
-| E7 | Tác hại phải định nghĩa theo hợp đồng, không theo mọi khác biệt (đóng góp mới, không có trong bài gốc) | **Q** | 🔄 | HQ1 đang được đo trên SWE-bench Verified, mục 3 |
+| E7 | Tác hại phải định nghĩa theo hợp đồng, không theo mọi khác biệt (đóng góp mới, không có trong bài gốc) | **Q** | ❌ không xác nhận | HQ1 không được ủng hộ: chỉ 6/55 = 10,9% khác biệt ngây thơ không phải hồi quy theo hợp đồng. Q4 = 11,1% patch có hồi quy theo hợp đồng (C1 chưa chấm tay) ([STUDY_Q_RESULT](../research_closure/results/study_q/STUDY_Q_RESULT.md)) |
 | E8 | So sánh với B9 (sửa trực tiếp) | F / B9 | ⛔ HOLD | `pre_b9/RELEASE_GATE.json` |
 | E9 | Composition, retirement | (không có study) | ⏳ | Chưa có bằng chứng thực nghiệm mới; có hai lưu ý toán (Định lý 4 và 7) trong [PAPER_EXPECTATION_AUDIT](../research_closure/PAPER_EXPECTATION_AUDIT.md) |
-| E10 | Tổng quát hoá trên cohort mới đã đóng băng trước khi có kết quả | J, P, Q | 🔄 | P đã xong; Q đã đóng băng, đang chạy |
+| E10 | Tổng quát hoá trên cohort mới đã đóng băng trước khi có kết quả | J, P, Q | ✅ | P và Q đã xong; Q cho kết quả trái với P (RQ5) |
 
 ## 3. Study Q: tiến độ chi tiết
 
@@ -44,15 +44,16 @@ Giao thức: [STUDY_Q_PROTOCOL](../study_q/STUDY_Q_PROTOCOL.md). Amendment: chư
 | Che token Vertex trong log (commit `206da51`) | ✅ | Thêm `::add-mask::` cho 13 workflow; đã xác nhận trong log của part 0 (`GOOGLE_OAUTH_TOKEN: ***`) |
 | Smoke 3 instance ([run #3](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41184775725)) | ✅ | 3/3 thành công, `FINISHED`. Lưu ý: mỗi instance khoảng 1 phút, artifact khoảng 1 KB, cần mở ra kiểm tra |
 | Stream part 0, 235 instance ([run #4](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41185100083)) | ✅ | 08:33 đến 09:11 UTC; 235/235 job thành công, 0 lỗi |
-| Stream part 1, 234 instance ([run #5](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41187862326)) | 🔄 | Bắt đầu 09:14 UTC |
+| Stream part 1, 234 instance ([run #5](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41187862326)) | ✅ | 09:14 đến 09:59 UTC; 234/234 job thành công |
 | ⚠️ Lệch giao thức: không lưu đầu ra từng đầu vào | ⏳ quyết định | `q_instance.py` chỉ lưu tóm tắt C1/C2/C3, trong khi giao thức mục 3 nói lưu mọi đầu ra. Cần amendment hoặc chạy lại có lưu (xem PROCESS_LOG) |
-| Chạy lại instance lỗi hạ tầng (`only=...`) | ⏳ | Theo quy tắc P-A3: mỗi instance là một job |
-| Workflow tổng hợp chạy `tools/q_analyze.py` | ⏳ | **Chưa có workflow nào gọi `q_analyze.py`**, cần thêm |
-| Cổng Q-G1: có ≥ 18 instance có patch có khác biệt | ⏳ | Nếu < 18 thì không kiểm định HQ1, chỉ báo cáo mô tả |
-| HQ1 (Q3 > 0,5, nhị thức chính xác một phía) | ⏳ | |
-| Q1 phễu; Q2, Q4 tỉ lệ (Wilson, bootstrap gom cụm); Q5 hệ số phóng đại | ⏳ | |
-| Phân tích độ nhạy (a) đến (d) | ⏳ | Mục 6.5 của giao thức |
-| Viết `STUDY_Q_RESULT.md` và cập nhật ALIGNMENT_WITH_FSE | ⏳ | |
+| Chạy lại instance lỗi hạ tầng (`only=...`) | ✅ không cần | 0 job lỗi; 4 bản ghi `ERROR` là lỗi công cụ (patch tạo tệp mới), tính là không dùng được |
+| Workflow tổng hợp `Gatekeeper Study Q analyze` | ✅ | Commit `79ba306`; kết quả commit `9a8ab44`: đủ 469/469 bản ghi |
+| Cổng Q-G1: có ≥ 18 instance có patch có khác biệt | ✅ đạt | 55 instance |
+| HQ1 (Q3 > 0,5, nhị thức chính xác một phía) | ❌ không ủng hộ | 6/55 = 10,9% (Wilson 5,1% – 21,8%), p ≈ 1 |
+| Q1 phễu; Q2, Q4 tỉ lệ (Wilson, bootstrap gom cụm); Q5 hệ số phóng đại | ✅ | Dùng được 245/469; Q2 = 43,1%; Q4 = 11,1%; Q5 = 3,88 theo giao thức (công cụ ghi 1,16 theo định nghĩa khác) |
+| Phân tích độ nhạy (a) đến (d) | ✅ | Cùng kết luận; G0 1,2% so với G2 10,4% |
+| Viết `STUDY_Q_RESULT.md` | ✅ | ALIGNMENT_WITH_FSE không sửa (thuộc freeze của Study P) |
+| Chấm tay các ca C1 (như RQ5) | ⏳ cần quyết định | Không làm được vì không lưu đầu ra; cần amendment + chạy lại có lưu cho 55 instance |
 
 **Ngân sách:** model chỉ dùng để sinh chương trình G2, khoảng 0,01 USD mỗi instance, dưới 10 USD tổng.
 
@@ -63,7 +64,7 @@ Bảng này được suy ra từ ALIGNMENT_WITH_FSE (mục sau RQ5) và giao th�
 | Kết quả Study Q | Khẳng định trong bài A\* |
 |---|---|
 | Bác bỏ H0 của HQ1 (phần lớn khác biệt ngây thơ không phải hồi quy theo hợp đồng) | (a) patch plausible hiếm khi hồi quy trên đầu vào hợp lệ; (b) oracle ngây thơ phóng đại nhiều lần (Q5). Kết luận RQ5 được xác nhận trên dữ liệu độc lập |
-| Không bác bỏ, hoặc Q-G1 không đạt | Báo cáo mô tả; kết luận RQ5 chỉ là thăm dò, giới hạn ở dữ liệu của Study P |
+| **← Kết quả thực tế (31/10):** không bác bỏ, Q-G1 đạt (55 instance) | Báo cáo mô tả; kết luận RQ5 chỉ là thăm dò, giới hạn ở dữ liệu của Study P. Điều dữ liệu ủng hộ: khoảng 11% patch resolved khác bản fix trên đầu vào hợp lệ (cần chấm tay); kết quả phụ thuộc nguồn đầu vào (G0 so với G2) |
 
 ## 5. Review bài FSE (song song; chi tiết ở [REVIEW_FSE](paper/REVIEW_FSE.md) và [PAPER_AUDIT](paper/PAPER_AUDIT.md))
 
@@ -107,3 +108,5 @@ PDF gốc: [`paper/source/`](paper/source/), đã đối chiếu toàn văn ngà
 | 31/10/2026 09:11 | Part 0 xong: 235/235 thành công |
 | 31/10/2026 09:14 | Bắt đầu part 1 (run #5); ghi nhận lệch giao thức về lưu đầu ra |
 | 31/10/2026 | Đưa 3 PDF lên `docs/paper/source/`; kiểm tra toàn bài (PAPER_AUDIT.md); sắp xếp lại repo (`docs/`, `archive/`); part 0 vẫn đang chạy |
+| 31/10/2026 09:59 | Part 1 xong: 234/234 thành công |
+| 31/10/2026 ~10:05 | Tổng hợp: HQ1 không được ủng hộ; Q4 = 11,1%; viết STUDY_Q_RESULT.md |

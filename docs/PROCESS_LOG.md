@@ -95,3 +95,22 @@ Mẫu cho mỗi mục:
 - Kiểm tra mẫu: artifact nhỏ (100 artifact đầu: 595 đến 1.806 byte, trung vị 734). Log cho thấy trạng thái khác nhau giữa các instance, ví dụ `django__django-13807`: `NOT_USABLE`; `astropy__astropy-13033`: `FINISHED`. Nghĩa là pipeline chạy đúng các nhánh của `tools/q_instance.py`.
 - **Phát hiện, lệch giao thức:** giao thức mục 3 ghi "Chế độ ghi lại bật: lưu patch và mọi đầu ra". `q_instance.py` có bật `capture=True`, nhưng chỉ lưu **bản tóm tắt** (`q_classify.summarise`: số đếm theo loại C1/C2/C3) vào `Q_<id>.json`. Danh sách đầu ra từng đầu vào bị xoá cùng thư mục tạm. Patch vẫn truy lại được từ `POOL.jsonl.gz` qua `sha`. **Không sửa** công cụ vì đã đóng băng và đang chạy. Cần người nghiên cứu quyết: ghi một amendment mô tả lệch này, hoặc chạy lại có lưu đầu ra cho các instance cần kiểm tra thủ công.
 - Part 1: [run 41187862326](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41187862326), 234 instance, bắt đầu 09:14 trên commit `3d8ff85`. Kiểm tra trước khi chạy: các tệp mà job dùng (`tools/q_instance.py`, `study_q/`, `research_closure/pilot/models.json`) không bị đợt sắp xếp lại đụng tới; `freeze_study.py verify study_q` vẫn verified.
+
+### 09:59 — Part 1 xong
+- [Run 41187862326](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41187862326): kết luận `success`, 0 job lỗi trên 235 job (1 plan + 234 instance). Không instance nào cần chạy lại.
+
+### ~10:00 — Viết và chạy workflow tổng hợp
+- Vì sao: chưa có workflow nào gọi `tools/q_analyze.py`; artifact sẽ hết hạn sau 90 ngày nên cần lưu bản ghi thô vào repo.
+- Đã làm: `.github/workflows/study-q-analyze.yml` (commit `79ba306`). Workflow kiểm freeze; tải `Q_*` của các run được chỉ định (run sau thắng khi trùng); kiểm mỗi instance của khung có đúng một bản ghi; chạy `q_analyze.py`; commit `Q_ANALYSIS.json`, `FRAME_CHECK.json`, `Q_RECORDS.jsonl.gz`. Đã chạy thử `q_analyze.py` cục bộ trên bản ghi giả trước khi push.
+- Bằng chứng: commit kết quả `9a8ab44` do bot đẩy lên; `FRAME_CHECK`: 469/469, không thiếu, không thừa.
+
+### ~10:05 — Kết quả Study Q
+- Chi tiết: [`research_closure/results/study_q/STUDY_Q_RESULT.md`](../research_closure/results/study_q/STUDY_Q_RESULT.md).
+- Phễu: 245 `FINISHED`, 220 `NOT_USABLE`, 4 `ERROR` (`FileNotFoundError` khi patch tạo tệp mới); 694 patch được chấm.
+- Q2 = 43,1%; Q4 = 11,1% (Wilson 9,0% – 13,6%).
+- **HQ1 không được ủng hộ:** 6/55 = 10,9% (p ≈ 1), ngược hướng dự đoán từ RQ5. Mọi phân tích độ nhạy cho cùng kết luận.
+- **Phát hiện thêm:** `q_analyze.py` tính Q5 bằng (khác biệt ngây thơ)/Q4 = 1,16, trong khi giao thức định nghĩa Q5 = Q2/Q4. Trợ lý tính lại theo giao thức từ bản ghi thô: 3,88 (bootstrap theo instance 3,08 – 5,14). Cả hai được báo cáo.
+- Còn mở (cần người nghiên cứu và người hướng dẫn quyết):
+  1. Có chạy lại 55 instance của HQ1 với đầu ra được lưu để chấm tay C1 không. Việc này cần amendment, vì là bổ sung sau khi thấy kết quả.
+  2. Hướng viết bài theo nhánh "không bác bỏ" (TRACKING_FSE mục 4).
+  3. ALIGNMENT_WITH_FSE.md (thuộc freeze Study P) không được sửa; kết luận mới nằm ở STUDY_Q_RESULT.md và TRACKING_FSE.md.
