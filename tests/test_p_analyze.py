@@ -43,6 +43,8 @@ class Analysis(unittest.TestCase):
         self.assertFalse(A.in_band_rate(0.005, 400))                            # below 3/400 = 0.75%
         self.assertTrue(A.in_band_rate(0.0075, 400))
         self.assertFalse(A.in_band_rate(0.11, 400))                             # above 10.87%
+        self.assertFalse(A.in_band_rate(0.0, 0))                                # amendment P-A4: no scored input
+        self.assertFalse(A.in_band_rate(None, 0))
 
     def test_h3_counts_discordance_only_among_acceptable_patches(self):
         recs = [cohort("a%d" % i, "r", 0.02, fs=True, gk=(i % 5 == 0)) for i in range(20)] + [cohort("b", "r", 0.08, fs=False, gk=True)]

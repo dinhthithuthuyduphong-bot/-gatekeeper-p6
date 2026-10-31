@@ -41,8 +41,10 @@ def binom_sf(k, n, p):
 
 
 def in_band_rate(theta, n):
+    if theta is None or not n:                                    # a patch with no scored input cannot be in the band
+        return False
     lo, hi = G.band_edges(n)
-    return theta is not None and n > 0 and lo <= theta <= hi
+    return lo <= theta <= hi
 
 
 def cluster_boot(rows, key, B=10000, seed=11):

@@ -29,3 +29,11 @@ Nếu văn bản này đã có mặt lúc đóng băng, bản sửa có trước
 **Quy tắc cho job bị mất:** nếu job của một ứng viên vẫn không có artifact, ứng viên đó được ghi là `JOB_LOST` trong phễu, không chạy lại thêm, và không đóng góp patch nào vào phân tích chính.
 
 **Không thay đổi:** khung, các giai đoạn, mọi ngưỡng, kế hoạch phân tích. Kết quả chính vẫn **chưa được tính**.
+
+## P-A4 (3/11/2026): sửa lỗi chia cho 0 trong công cụ phân tích
+
+**Bằng chứng:** lượt chạy đầu của `tools/p_analyze.py` trên cohort hoàn chỉnh **dừng trước khi in ra bất kỳ kết quả nào** (ZeroDivisionError trong `in_band_rate`): hàm kiểm tra `n > 0` **sau** khi đã tính cận 3/n. Khi sửa, **chưa ai thấy kết quả**.
+
+**Thay đổi:** `in_band_rate` trả về False cho patch không có đầu vào nào được chấm, **trước** khi tính cận (sha256 mới `5c5ff441a91b6f7e387d6d0d1d609cab3cc0fafbd0fd8a353bb460c3980c1ae1`); thêm test.
+
+**Ảnh hưởng:** 251 lần sinh có 0 đầu vào được chấm đều không có patch (`NO_PATCH` 220, `GENERATION_ERROR` 31) và **không lần nào plausible**; phân tích chính chỉ dùng patch plausible, nên bản sửa không đổi con số nào, chỉ ngăn chương trình sập.

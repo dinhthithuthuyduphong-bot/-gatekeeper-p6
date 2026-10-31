@@ -1,0 +1,11 @@
+{
+ "name": "study_p_a4_results (patch_study_p_a4_results.zip)",
+ "files": {
+  "research_closure/results/ALIGNMENT_WITH_FSE.md": "cb3f73f2a598946deb3462d37fd6ab00e6ecaede5aa0d0c5494f1180020ef367",
+  "research_closure/results/study_p/P_ANALYSIS.json": "4a011d848af56af23d2ad58c1b9aa03d37ecb28d1a2d1b5207097114896a181a",
+  "research_closure/results/study_p/P_RESULT.md": "ec647cf2717398a82c8a1a87d86277b0bbbd12be1b00f09eff3098936f7aa971",
+  "study_p/AMENDMENTS.md": "53a6ef37b8363dd64efb2c7531594351c5c83708820ea2b2931bbe0ab6748e86",
+  "tests/test_p_analyze.py": "9d14efa282a732c6d6f1a703b2edbafe06c2a746ef7fc01076bad19dcbb893a0",
+  "tools/p_analyze.py": "5c5ff441a91b6f7e387d6d0d1d609cab3cc0fafbd0fd8a353bb460c3980c1ae1"
+ }
+}

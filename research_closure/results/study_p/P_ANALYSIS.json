@@ -1,0 +1,142 @@
+{
+ "RQ1_funnel": {
+  "frame": 3562,
+  "streamed": 3561,
+  "eligible": 764,
+  "usable": 415,
+  "generator_failures": 0,
+  "stage_errors": 0,
+  "job_lost": 1
+ },
+ "light_patches": 410,
+ "PRIMARY": {
+  "plausible": 205,
+  "in_band": 16,
+  "share": 0.07804878048780488,
+  "wilson95": [
+   0.04860992484636982,
+   0.12301105488180696
+  ],
+  "repo_cluster_boot95": [
+   0.043478260869565216,
+   0.11731843575418995
+  ],
+  "half_width": 0.03720056501771857,
+  "P3_precision_met": true,
+  "H1_p_value": 0.8806338069372968,
+  "H1_reject_at_0.05": false,
+  "H1_critical_count": 29
+ },
+ "H3": {
+  "acceptable": 189,
+  "fixed_sample_only": 2,
+  "gatekeeper_only": 2,
+  "discordant": 4,
+  "P4_met": false,
+  "mcnemar_one_sided_p": 0.6875
+ },
+ "RQ4": {
+  "census_only": {
+   "admit_rate": 1.0,
+   "admits_inadmissible": "16/16",
+   "rejects_theta_zero": "0/176"
+  },
+  "zero_tolerance": {
+   "admit_rate": 0.8585365853658536,
+   "admits_inadmissible": "0/16",
+   "rejects_theta_zero": "0/176"
+  },
+  "b8_plus": {
+   "admit_rate": 0.7024390243902439,
+   "admits_inadmissible": "0/16",
+   "rejects_theta_zero": "32/176"
+  },
+  "smoke20": {
+   "admit_rate": 0.9073170731707317,
+   "admits_inadmissible": "2/16",
+   "rejects_theta_zero": "0/176"
+  },
+  "fixed_sample": {
+   "admit_rate": 0.8975609756097561,
+   "admits_inadmissible": "0/16",
+   "rejects_theta_zero": "0/176"
+  },
+  "gatekeeper": {
+   "admit_rate": 0.8975609756097561,
+   "admits_inadmissible": "0/16",
+   "rejects_theta_zero": "0/176"
+  }
+ },
+ "sensitivity": {
+  "without_development_repositories": {
+   "plausible": 127,
+   "in_band": 14,
+   "share": 0.11023622047244094,
+   "wilson95": [
+    0.06680938916575475,
+    0.17655052083228873
+   ],
+   "repo_cluster_boot95": [
+    0.06015037593984962,
+    0.16541353383458646
+   ],
+   "half_width": 0.054870565833266986,
+   "P3_precision_met": false,
+   "H1_p_value": 0.39213022962449684,
+   "H1_reject_at_0.05": false,
+   "H1_critical_count": 19
+  },
+  "G2_weight": [
+   {
+    "weight_G2": 0,
+    "patches": 151,
+    "share": 0.039735099337748346,
+    "wilson95": [
+     0.01833581716698187,
+     0.08397260640911136
+    ]
+   },
+   {
+    "weight_G2": 0.5,
+    "patches": 205,
+    "share": 0.07804878048780488,
+    "wilson95": [
+     0.04860992484636982,
+     0.12301105488180696
+    ]
+   },
+   {
+    "weight_G2": 1,
+    "patches": 205,
+    "share": 0.04878048780487805,
+    "wilson95": [
+     0.02670908340599352,
+     0.08745207988714347
+    ]
+   }
+  ]
+ },
+ "exploratory_strong_model": {
+  "paired_instances": 410,
+  "light_only": 18,
+  "strong_only": 42,
+  "primary_on_strong": {
+   "plausible": 229,
+   "in_band": 22,
+   "share": 0.09606986899563319,
+   "wilson95": [
+    0.06430019581313681,
+    0.14116824281638643
+   ],
+   "repo_cluster_boot95": [
+    0.05714285714285714,
+    0.13553113553113552
+   ],
+   "half_width": 0.03843402350162481,
+   "P3_precision_met": true,
+   "H1_p_value": 0.6107655336028691,
+   "H1_reject_at_0.05": false,
+   "H1_critical_count": 32
+  }
+ }
+}

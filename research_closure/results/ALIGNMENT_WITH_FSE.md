@@ -57,3 +57,11 @@ PP2 cho thấy tỉ lệ trong vùng khoảng 12% (4,7% đến 26,6%), tức nhi
 |---|---|
 | Cận dưới khoảng tin cậy của tỉ lệ trong vùng > 0, và độ chính xác đạt (nửa độ rộng ≤ 0,05) | "X% patch LLM plausible có hồi quy một phần mà test không thấy (khoảng tin cậy ...)" và hệ quả cho việc chọn cổng; H1 báo cáo kèm, mạnh hơn nếu bác bỏ được H0 |
 | Cận dưới bằng 0, hoặc không đạt độ chính xác | Bài đo đạc và kết quả âm như quy tắc cũ |
+
+## Kết quả của Study P so với quy tắc chọn khẳng định (3/11/2026)
+
+Theo quy tắc đã ghi sau PP2: **cận dưới của khoảng tin cậy > 0 (4,9%) và độ chính xác đạt (nửa độ rộng 0,037)**, nên nhánh được chọn là bài **"X% patch LLM plausible có hồi quy một phần mà test không thấy"** cùng hệ quả cho việc chọn cổng. H1 không bác bỏ, H3 không kiểm định được (P4 không đạt).
+
+**Hai điều kiện trước khi viết khẳng định đó vào bài:** (1) RQ5 xác nhận rằng các chênh lệch là hồi quy thật, không phải khác biệt về loại lỗi trên đầu vào không hợp lệ; (2) bài nêu rõ rằng một nửa số ca đến từ bài tập của sinh viên, và tỉ lệ ở dự án thật có lẽ gần 4%.
+
+**Đối chiếu với bài gốc:** Gatekeeper không vượt kiểm định cỡ mẫu cố định (quyết định gần như trùng nhau), đúng như lý thuyết dự đoán; giá trị thực tiễn nằm ở **so với census và smoke 20**: census admit cả 16 patch có θ̂ > 5%, smoke 20 admit 2, còn cả hai cổng thống kê và zero-tolerance đều chặn được hết. RQ3 (D2_cerberus) cho thấy oracle viết theo ý đồ tác giả bỏ sót tác dụng phụ ngoài phạm vi: cầu nối trực tiếp về vấn đề "phạm vi trước khi tái sử dụng".
