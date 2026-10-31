@@ -1,0 +1,124 @@
+{
+ "model": "google/gemini-3.8-flash",
+ "spent_usd": 0.009936,
+ "B": {
+  "items": 10,
+  "coded_as": {
+   "R": 0,
+   "B": 10,
+   "U": 0
+  }
+ },
+ "R": {
+  "items": 10,
+  "coded_as": {
+   "R": 10,
+   "B": 0,
+   "U": 0
+  }
+ },
+ "accuracy": 1.0,
+ "discriminates": true,
+ "ratings": [
+  {
+   "id": "cal-B-00",
+   "code": "B",
+   "reason": "Both return sets containing the same elements, differing only in the iteration/representation order of an unordered collection."
+  },
+  {
+   "id": "cal-B-01",
+   "code": "B",
+   "reason": "The difference between 0.30000000000000004 and 0.3 is floating-point representation noise far below 1e-9."
+  },
+  {
+   "id": "cal-B-02",
+   "code": "B",
+   "reason": "Both versions raise a ValueError with only a minor difference in the exception message text."
+  },
+  {
+   "id": "cal-B-03",
+   "code": "B",
+   "reason": "The outputs differ only in the iteration/repr order of elements in an unordered frozenset."
+  },
+  {
+   "id": "cal-B-04",
+   "code": "B",
+   "reason": "Both reference and candidate produced identical outputs."
+  },
+  {
+   "id": "cal-B-05",
+   "code": "B",
+   "reason": "Both versions raise a TypeError with only minor differences in the exception message text."
+  },
+  {
+   "id": "cal-B-06",
+   "code": "B",
+   "reason": "The difference between 1.0000000000000002 and 1.0 is floating-point noise well below 1e-9."
+  },
+  {
+   "id": "cal-B-07",
+   "code": "B",
+   "reason": "The returned dictionaries contain the same key-value pairs and differ only in key ordering."
+  },
+  {
+   "id": "cal-B-08",
+   "code": "B",
+   "reason": "Both versions raise a KeyError, differing only in the exception error message."
+  },
+  {
+   "id": "cal-B-09",
+   "code": "B",
+   "reason": "The returned sets contain identical elements and differ only in the display order of an unordered collection."
+  },
+  {
+   "id": "cal-R-00",
+   "code": "R",
+   "reason": "The candidate returned a different integer value than the reference."
+  },
+  {
+   "id": "cal-R-01",
+   "code": "R",
+   "reason": "The reference function returns None successfully, whereas the candidate raises an AttributeError."
+  },
+  {
+   "id": "cal-R-02",
+   "code": "R",
+   "reason": "The reference implementation raises a ValueError while the candidate returns an integer."
+  },
+  {
+   "id": "cal-R-03",
+   "code": "R",
+   "reason": "The reference function returned True while the candidate function returned False."
+  },
+  {
+   "id": "cal-R-04",
+   "code": "R",
+   "reason": "The returned list elements are in a different order, which is a meaningful difference for an ordered sequence."
+  },
+  {
+   "id": "cal-R-05",
+   "code": "R",
+   "reason": "The candidate returned a different string value ('ab' instead of 'abc')."
+  },
+  {
+   "id": "cal-R-06",
+   "code": "R",
+   "reason": "The reference raised a TypeError whereas the candidate raised a ValueError, which is a different exception type that callers can catch separately."
+  },
+  {
+   "id": "cal-R-07",
+   "code": "R",
+   "reason": "The reference function returns an integer (0) while the candidate raises a ZeroDivisionError."
+  },
+  {
+   "id": "cal-R-08",
+   "code": "R",
+   "reason": "The candidate returned an empty dictionary while the reference returned a dictionary with key-value pair {'a': 1}."
+  },
+  {
+   "id": "cal-R-09",
+   "code": "R",
+   "reason": "The reference returned 0.5 whereas the candidate returned 0.25, which is a meaningful difference in value."
+  }
+ ]
+}

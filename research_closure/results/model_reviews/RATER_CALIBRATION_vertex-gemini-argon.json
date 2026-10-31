@@ -1,0 +1,124 @@
+{
+ "model": "google/gemini-4-argon",
+ "spent_usd": 0.022616000000000004,
+ "B": {
+  "items": 10,
+  "coded_as": {
+   "R": 0,
+   "B": 10,
+   "U": 0
+  }
+ },
+ "R": {
+  "items": 10,
+  "coded_as": {
+   "R": 10,
+   "B": 0,
+   "U": 0
+  }
+ },
+ "accuracy": 1.0,
+ "discriminates": true,
+ "ratings": [
+  {
+   "id": "cal-B-00",
+   "code": "B",
+   "reason": "Both versions return a set containing the exact same elements, differing only in the iteration order of an unordered collection."
+  },
+  {
+   "id": "cal-B-01",
+   "code": "B",
+   "reason": "The outputs are floats that differ only by floating-point representation noise (approximately 4e-17, well below the 1e-9 threshold)."
+  },
+  {
+   "id": "cal-B-02",
+   "code": "B",
+   "reason": "Both versions raise the same ValueError exception type for the same conversion failure, differing only in the error message text."
+  },
+  {
+   "id": "cal-B-03",
+   "code": "B",
+   "reason": "Both outputs represent the exact same frozenset, differing only in the display order of elements in an unordered collection."
+  },
+  {
+   "id": "cal-B-04",
+   "code": "B",
+   "reason": "Both the reference and candidate versions return the exact same string value, showing no difference in behavior on this input."
+  },
+  {
+   "id": "cal-B-05",
+   "code": "B",
+   "reason": "Both versions raise the same exception type (TypeError) for the same kind of type mismatch failure, differing only in the exception message text."
+  },
+  {
+   "id": "cal-B-06",
+   "code": "B",
+   "reason": "The outputs are both floats differing only by floating-point noise (2e-16, which is well below 1e-9)."
+  },
+  {
+   "id": "cal-B-07",
+   "code": "B",
+   "reason": "Both versions return equal dictionaries with the same key-value pairs, differing only in key ordering."
+  },
+  {
+   "id": "cal-B-08",
+   "code": "B",
+   "reason": "Both versions raise the same `KeyError` exception for the missing key `'x'`, differing only in the phrasing of the error message."
+  },
+  {
+   "id": "cal-B-09",
+   "code": "B",
+   "reason": "Sets are unordered collections in Python, so {'x', 'y'} and {'y', 'x'} represent the exact same value."
+  },
+  {
+   "id": "cal-R-00",
+   "code": "R",
+   "reason": "The candidate returns a different integer value (4) compared to the reference version (3)."
+  },
+  {
+   "id": "cal-R-01",
+   "code": "R",
+   "reason": "The candidate raises an AttributeError while the reference version returns None normally."
+  },
+  {
+   "id": "cal-R-02",
+   "code": "R",
+   "reason": "The reference version raises a ValueError whereas the candidate version returns an integer (-1)."
+  },
+  {
+   "id": "cal-R-03",
+   "code": "R",
+   "reason": "The candidate returns False whereas the reference returns True, which is a meaningful difference in the boolean return value."
+  },
+  {
+   "id": "cal-R-04",
+   "code": "R",
+   "reason": "The candidate returns a list with elements in a different order ([2, 1] instead of [1, 2]), which is a meaningful difference for an ordered collection like a list."
+  },
+  {
+   "id": "cal-R-05",
+   "code": "R",
+   "reason": "The candidate returns the string 'ab' instead of 'abc', which is a meaningful difference in the returned value."
+  },
+  {
+   "id": "cal-R-06",
+   "code": "R",
+   "reason": "The candidate raises a ValueError instead of the reference's TypeError, which is a different kind of exception that callers may catch differently."
+  },
+  {
+   "id": "cal-R-07",
+   "code": "R",
+   "reason": "The candidate version raises a ZeroDivisionError whereas the reference version returns an integer value."
+  },
+  {
+   "id": "cal-R-08",
+   "code": "R",
+   "reason": "The candidate returns an empty dictionary whereas the reference returns a dictionary containing {'a': 1}."
+  },
+  {
+   "id": "cal-R-09",
+   "code": "R",
+   "reason": "The candidate returns a significantly different floating-point value (0.25 vs 0.5)."
+  }
+ ]
+}
