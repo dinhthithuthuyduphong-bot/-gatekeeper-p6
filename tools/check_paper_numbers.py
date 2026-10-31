@@ -32,6 +32,7 @@ QA = lambda: J("research_closure/results/study_q/Q_ANALYSIS.json")       # noqa:
 QA1 = lambda: J("research_closure/results/study_q/qa1/QA1_RESULT.json")  # noqa: E731
 PA = lambda: J("research_closure/results/study_p/P_ANALYSIS.json")       # noqa: E731
 RQ3 = lambda: J("research_closure/results/rq3/RQ3_SUMMARY.json")         # noqa: E731
+Q3 = lambda: J("research_closure/results/study_q/qa1/QA1_THREE_RATERS.json")  # noqa: E731
 TH = lambda: J("research_closure/results/theory/THEORY_CHECKS.json")     # noqa: E731
 LS = "research_closure/results/library_sim/LIBRARY_SIMULATION.json"
 QR = "research_closure/results/study_q/Q_ROBUSTNESS.json"
@@ -78,7 +79,7 @@ CLAIMS = [
      lambda: "family-wise false admission rate was $%s\\%%$ and $%s\\%%$" % (
          pct(TH()["C10_decision_rule_studies_DH"]["benefit_boundary"]["familywise_false_admission"]),
          pct(TH()["C10_decision_rule_studies_DH"]["harm_boundary"]["familywise_false_admission"]))),
-    ("theory C9 draws", "=110$ clean draws", lambda: "=%d$ clean draws" % TH()["C9_harm_certificate"]["clean_draws_family16"]),
+    ("theory C9 draws", "needs $110$ clean draws", lambda: "needs $%d$ clean draws" % TH()["C9_harm_certificate"]["clean_draws_family16"]),
     ("loss-weight sensitivity draws", "Recomputing all $7{,}200$ recorded draws",
      lambda: "Recomputing all $%s$ recorded draws" % "{:,}".format(J("research_closure/results/sensitivity/LOSS_WEIGHT_SENSITIVITY.json")["A_recorded_draws"]["draws"]).replace(",", "{,}")),
     ("library sim P1 q=0.3", "in $27.9\\%$ of the\nlibraries at $q=0.3$",
@@ -148,6 +149,14 @@ CLAIMS = [
      lambda: "re-generating it gave a different program for $%d$ of the other $%d$ units" % (
          sum(1 for x in J("research_closure/results/study_q/qa1/REPRO.json")["units"] if not x["reproduced"] and not x["same_generator"]),
          sum(1 for x in J("research_closure/results/study_q/qa1/REPRO.json")["units"] if not x["reproduced"]))),
+    ("Q-A1 three raters", "$5/36$ ($13.9\\%$, Wilson $6.1$--$28.7\\%$) units have no confirmed regression",
+     lambda: "$%d/%d$ ($%s\\%%$, Wilson $%s$--$%s\\%%$) units have no confirmed regression" % (
+         Q3()["without_majority_regression"]["k"], Q3()["without_majority_regression"]["n"], pct(Q3()["without_majority_regression"]["share"]),
+         pct(Q3()["without_majority_regression"]["wilson95"][0]), pct(Q3()["without_majority_regression"]["wilson95"][1]))),
+    ("rater calibration", "both model raters coded all $20$ items of a calibration set with known\ncodes correctly",
+     lambda: "both model raters coded all $%d$ items of a calibration set with known\ncodes correctly" % (
+         20 if all(J("research_closure/results/model_reviews/RATER_CALIBRATION_%s.json" % m)["accuracy"] == 1.0
+                   for m in ("vertex-gemini-argon", "vertex-gemini-flash")) else -1)),
     # abstract (main.tex)
     ("abstract: plausible patches", "in $205$ plausible LLM patches", lambda: "in $%d$ plausible LLM patches" % PA()["PRIMARY"]["plausible"]),
     ("abstract: census admits", "the test census admitted all $16$ with partial\nbehavioural differences",

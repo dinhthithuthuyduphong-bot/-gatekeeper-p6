@@ -23,6 +23,22 @@ Viết ngày 31/10/2026.
 | TC12 | Vùng footprint là một hàm cụ thể | Census R2 định danh vùng bằng (tệp, **tên** hàm), nên hai method cùng tên ở hai class khác nhau bị gộp thành một vùng (ví dụ nhiều method `map` trong trino) | **Chặt nhưng bảo thủ:** báo thừa chồng lấn, không bao giờ báo thiếu | Study S định danh đơn vị bằng tên đầy đủ (qualname). Ghi lại; số của R2 là cận trên của chồng lấn |
 | TC11 | Thẻ hành vi (`behavior:*`) dùng chung làm hai kỹ năng thành "giao nhau" | `footprint_overlap` | **Chặt nhưng bảo thủ** (chỉ tốn thêm ô tổ hợp); census dùng footprint theo (tệp, hàm) | Ghi lại |
 
+## Vòng 2 (31/10/2026): mọi mệnh đề có chứng minh, mã và baseline theo lý thuyết
+
+| # | Mệnh đề / thành phần | Mã | Kết luận | Đã làm |
+|---|---|---|---|---|
+| TC13 | Nhận xét 1 (harm certificate) chỉ có tính nhẩm | `HarmCertEProcess`, `gates.gatekeeper_path` (λ = c/(1−η), c = 0,9) | Thiếu chứng minh | Thành **Mệnh đề `prop:harm`** có chứng minh: quy về Bổ đề 1 với Y = 1−H, θ = 1−η; ngưỡng tăng h* (luật số lớn); số draw sạch. Kiểm bằng C9 |
+| TC14 | Tổng sổ cái theo kích thước ô ≤ α_s | `gatekeeper_ext/ledger.py` | Thiếu chứng minh trong bài | **Bổ đề `lem:ledger`** + chứng minh (chuỗi Basel). Kiểm bằng C11 |
+| TC15 | e-Holm trên min(e_ben, e_cert) tại τ | `drawharness` + `studyd_decisions.e_holm` | Mới là phác thảo | **Mệnh đề `rem:eholm`** (a) optional stopping, (b) closed testing + Markov, (c) e-Holm trội hơn ngưỡng K/α; nói rõ mã chỉ cần kiểm tập con có trung bình nhỏ nhất ở mỗi kích thước. Kiểm bằng C10 |
+| TC16 | Giả định 4 và Hệ quả 2.6 sau khi thêm cạnh enabling | `execution.components(..., edges)` | Giả định cũ viết cho footprint rời nhau, còn luật thực thi dùng đồ thị có cạnh enabling | Phát biểu lại cho **tập không kề nhau** (footprint hoặc enabling); chứng minh theo thành phần liên thông. Nói rõ: với loss {0,1}, giả định đòi không task nào bị cả A và B đổi kết quả |
+| TC17 | Đo cộng tính trong Study S | `composition_study.interaction` dùng `min(1, la+lb)`, lỏng hơn Giả định 4 | **Lệch nhỏ.** Không ảnh hưởng số báo cáo: ở S-A5 không đơn vị nào có cả A và B cùng đổi trên một input | Sửa thành `lab == la + lb` và thêm `both_parts_change`; có test |
+| TC18 | Định lý 1 đòi "task mới mỗi epoch" | `gatekeeper()` dùng lại input, xáo theo epoch | Lý thuyết viết chặt hơn cần | Điều kiện mới: dãy task i.i.d. P^(k) *cho trước quyết định mở epoch*; dùng lại input hợp lệ khi quyết định đó không phụ thuộc kết quả (retirement theo fingerprint) |
+| TC19 | Baseline B2 = admit khi bind | `studyd_decisions.decide`: `ADMIT if binds` | **Khớp** | — |
+| TC20 | Baseline B6-R = replay đúng trên nguồn **và** fingerprint MATCH | `studyd_decisions`: `replay_ok and fingerprint == "MATCH"`; `gatekeeper.comparators` | **Khớp** | — |
+| TC21 | Baseline B8 = không draw nào và không test nào của suite hồi quy | `studyd_decisions`: `REJECT if b8.hurt or census_bad` | **Khớp** | — |
+| TC22 | Gate tuần tự của Study P = harm certificate, ngưỡng K/α (sổ cái α/K) | `gates.gatekeeper_path`: λ = 0,9/0,95, ngưỡng log(K/α), alarm μ và 20 = 1/0,05 | **Khớp** với Mệnh đề harm và Định lý 1 | — |
+| TC23 | Người chấm model của Q-A1 có phân biệt R/B không | `rater_calibration.py` (20 mục biết trước đáp án) | **Có**: argon và flash đều 20/20 | Người chấm model hợp lệ cho S8 |
+
 ## Kết quả kiểm
 Kết quả nằm trong `research_closure/results/theory/THEORY_CHECKS.json`:
 - **C10** (luật quyết định của D–H): FWER ở cả hai biên của null ≤ α, và E[e_τ] ≤ 1 (trong khoảng 3 sai số chuẩn).

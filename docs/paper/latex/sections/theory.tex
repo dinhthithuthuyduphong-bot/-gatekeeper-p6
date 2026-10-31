@@ -28,16 +28,22 @@ The bound holds at any data-dependent stopping time, including the end of the va
 interval would not do.  Under Assumption~\ref{ass:trials} the trials are i.i.d., so the null on the conditional mean reduces to
 $\mathbb{E}[Y]\le\theta$.
 
-\begin{remark}[Harm certificate used in the experiments]
-The experiments of Section~\ref{sec:evaluation} also use a certificate against \emph{harm}: with $H_i\in\{0,1\}$ indicating a
-harmful draw and a tolerated harm rate $\eta$, the null is $\Pr[H=1]\ge\eta$.  Setting $Y_i=1-H_i\in[0,1]$ and
-$\theta=1-\eta$ gives factors $1+\lambda(\eta-H_i)$, that is, $1+\lambda\eta$ for a clean draw and $1-c$ for a harmful one
-when $\lambda=c/(1-\eta)$; the condition $\lambda<1/(\theta-y_{\min})=1/(1-\eta)$ is $c<1$.  Lemma~\ref{lem:eprocess} and
-Theorem~\ref{thm:admission} therefore apply unchanged, with ``harm rate at least $\eta$'' in place of ``not admissible''.  With
-$c=0.9$ and $\eta=5\%$ the wealth grows only when the true harm rate is below
-$\log(1+\lambda\eta)/(\log(1+\lambda\eta)-\log(1-c))\approx0.39\eta$, and certifying zero harm in a family of $16$ cells at
-$\alpha=0.1$ takes $\lceil\log(160)/\log(1+\lambda\eta)\rceil=110$ clean draws.
-\end{remark}
+\begin{proposition}[Harm certificate used in the experiments]\label{prop:harm}
+Let $H_i\in\{0,1\}$ indicate a harmful draw, $\eta\in(0,1)$ a tolerated harm rate and $c\in(0,1)$.  Under the null
+$\Pr[H_i=1\mid\mathcal{F}_{i-1}]\ge\eta$, the process $C_n=\prod_{i\le n}(1+\lambda(\eta-H_i))$ with $\lambda=c/(1-\eta)$ satisfies
+$\Pr[\exists n: C_n\ge1/\beta]\le\beta$.  If the harm rate is $h$, $\log C_n/n\to(1-h)\log(1+\lambda\eta)+h\log(1-c)$, which is positive
+iff $h<h^\star=\log(1+\lambda\eta)/(\log(1+\lambda\eta)-\log(1-c))$; and $C_n\ge1/\beta$ after $n$ clean draws iff
+$n\ge\log(1/\beta)/\log(1+\lambda\eta)$.  For $c=0.9$, $\eta=5\%$: $h^\star\approx0.39\eta$, and $\beta=0.1/16$ needs $110$ clean draws.
+\end{proposition}
+
+\begin{proof}
+Put $Y_i=1-H_i\in[0,1]$ and $\theta=1-\eta$; then $Y_i-\theta=\eta-H_i$, the null is $\mathbb{E}[Y_i\mid\mathcal{F}_{i-1}]\le\theta$,
+$y_{\min}=0$ and $\lambda=c/(1-\eta)<1/(\theta-y_{\min})$ because $c<1$, so Lemma~\ref{lem:eprocess} applies.  A clean draw multiplies
+$C$ by $1+\lambda\eta$ and a harmful one by $1-\lambda(1-\eta)=1-c$; the growth rate follows from the strong law of large numbers,
+and the clean-draw count from $(1+\lambda\eta)^n\ge1/\beta$.  With $\lambda\eta=0.9\cdot0.05/0.95$, $h^\star=0.0197$ and
+$\lceil\log 160/\log(1+\lambda\eta)\rceil=110$.  Theorem~\ref{thm:admission} applies with ``harm rate at least $\eta$'' in place of
+``not admissible''.
+\end{proof}
 
 \subsection{Library-wide admission guarantee}
 
@@ -48,11 +54,14 @@ $k\ge1$ is the $k$-th re-admission after retirement), with $\sum_{c\in\mathcal{C
 instance $\alpha_{c,k}=\alpha_c\cdot 6/(\pi^2(k+1)^2)$ with $\sum_c\alpha_c\le\alpha$.  Our implementation splits $\alpha$ into
 per-scope budgets $\alpha_s$ with $\sum_s\alpha_s\le\alpha$ and, within scope $s$ with a declared library capacity $N$, fixes
 $\alpha_c$ by the cell's size alone: $\alpha_s\,\sigma/N$ for a single skill and $\alpha_s(1-\sigma)\,6/(\pi^2(m-1)^2)/\binom{N}{m}$ for a
-composite of $m\ge2$ skills ($\sigma$ the singles' share), which sums to at most $\alpha_s$ and does not change as skills are added.
+composite of $m\ge2$ skills ($\sigma$ the singles' share), which sums to at most $\alpha_s$ (Lemma~\ref{lem:ledger}) and does not
+change as skills are added.
 The factor $1/\binom{N}{m}$ makes large composites expensive to certify (the threshold grows with $\log\binom{N}{m}$); this is
 acceptable because the execution rule only creates composites for footprint-connected components, which Study R2 found to be
 rare and small (Section~\ref{sec:eval-library}).  A library that grows is covered as long
-as the share of every future cell is fixed by the same rule.  Suppose each epoch uses fresh tasks and admits $c$ only when its e-process
+as the share of every future cell is fixed by the same rule.  Suppose that in each epoch the task sequence of every cell is
+i.i.d.\ from $P^{(k)}_s$ given the decision to open the epoch (fresh tasks suffice; re-using task inputs is allowed when, as with our
+fingerprint-triggered retirement, that decision does not depend on their outcomes), and that $c$ is admitted only when its e-process
 (Lemma~\ref{lem:eprocess}) reaches $1/\alpha_{c,k}$, while the choice of cells, their order and the stopping times may depend
 on all data.  Under Assumptions~\ref{ass:trials} and~\ref{ass:shift},
 \[
@@ -72,21 +81,45 @@ that is, $H_0^{c}$ for that epoch.  If $2\xi_s\le\theta$, then $\mathrm{STR}_{Q}
 $\mathrm{STR}_{Q}(c)>-\theta+2\xi_s$.
 \end{proof}
 
-\begin{remark}[Fixed families: e-Holm, as used in the experiments]\label{rem:eholm}
-For a fixed family of $K$ cells at epoch $0$ the experiments use, instead of thresholding each cell at $1/\alpha_c$, the closed
-e-Bonferroni (e-Holm) procedure~\cite{vovk2021evalues} at level $\alpha$ over $e_c=\min(K^{\mathrm{ben}}_{c,\tau_c},K^{\mathrm{cert}}_{c,\tau_c})$,
-the benefit e-process and the harm certificate read at the cell's stopping time $\tau_c$: the first draw at which this minimum
-reaches $K/\alpha$ or the harm alarm fires, and otherwise the end of the budget, so $\tau_c$ is bounded.  Each $K_{\tau}$ is an e-value
-by optional stopping ($\mathbb{E}K_\tau\le K_0=1$), the minimum is an e-value under the union null ``not admissible or harm rate at
-least $\eta$'', and e-Holm controls the family-wise error under arbitrary dependence while admitting every cell that the ledger with
-$\alpha_c=\alpha/K$ would.  Note that $e_c$ is the value \emph{at} $\tau_c$, not the running maximum, which is not an e-value.
-\end{remark}
+\begin{lemma}[Library ledger]\label{lem:ledger}
+For a scope with budget $\alpha_s$, capacity $N$ and singles' share $\sigma\in(0,1]$, the shares
+$\alpha_{c,k}=\alpha_c\,6/(\pi^2(k+1)^2)$ with $\alpha_c=\alpha_s\sigma/N$ for $|c|=1$ and
+$\alpha_c=\alpha_s(1-\sigma)\,6/(\pi^2(m-1)^2)/\binom{N}{m}$ for $|c|=m\ge2$ sum, over all subsets of the $N$ skills and all epochs, to at
+most $\alpha_s$.
+\end{lemma}
+
+\begin{proof}
+There are $N$ singles and $\binom{N}{m}$ composites of size $m$, so the sum over cells is
+$\alpha_s\bigl[\sigma+(1-\sigma)\sum_{m=2}^{N}6/(\pi^2(m-1)^2)\bigr]\le\alpha_s[\sigma+(1-\sigma)]=\alpha_s$, because
+$\sum_{j\ge1}6/(\pi^2j^2)=1$; the epoch factors sum to $1$ for the same reason.
+\end{proof}
+
+\begin{proposition}[Fixed families: e-Holm, as used in the experiments]\label{rem:eholm}
+For a fixed family of $K$ cells at epoch $0$, let $e_c=\min(K^{\mathrm{ben}}_{c,\tau_c},C_{c,\tau_c})$, the benefit e-process
+(Lemma~\ref{lem:eprocess}) and the harm certificate (Proposition~\ref{prop:harm}) read at the cell's stopping time $\tau_c$: the first
+draw at which this minimum reaches $K/\alpha$ or a harm alarm fires, and otherwise the end of a finite budget; set $e_c=0$ if the alarm
+fired.  Then (a) $\mathbb{E}[e_c]\le1$ under the union null ``not admissible or harm rate at least $\eta$''; (b) e-Holm, the closed
+testing procedure whose local test of an intersection $\bigcap_{i\in I}H_i$ rejects iff $|I|^{-1}\sum_{i\in I}e_i\ge1/\alpha$, has
+family-wise error at most $\alpha$ under arbitrary dependence; (c) it admits every cell with $e_c\ge K/\alpha$.  The running maximum
+of an e-process is not an e-value; $e_c$ is the value \emph{at} $\tau_c$.
+\end{proposition}
+
+\begin{proof}
+(a) $\tau_c$ is a bounded stopping time, so by optional stopping for nonnegative supermartingales
+$\mathbb{E}K^{\mathrm{ben}}_{\tau_c}\le1$ when the cell is not admissible and $\mathbb{E}C_{\tau_c}\le1$ when its harm rate is at least
+$\eta$; the minimum is at most whichever of the two is a supermartingale under the true null, and setting it to $0$ only lowers it.
+(b) Under $\bigcap_{i\in I}H_i$ the mean $|I|^{-1}\sum_{i\in I}e_i$ has expectation at most $1$, so by Markov's inequality the local test
+has level $\alpha$ whatever the dependence; closed testing~\cite{vovk2021evalues} then controls the family-wise error.  For a cell $c$
+and each size $j+1$, the intersection containing $c$ with the smallest mean adds the $j$ smallest other e-values, which is what the
+implementation checks.  (c) If $e_c\ge K/\alpha$, every $I\ni c$ has mean at least $e_c/|I|\ge K/(\alpha|I|)\ge1/\alpha$.
+\end{proof}
 
 \begin{remark}[Data-dependent budgets]
 The ledger above is fixed in advance, which is what makes the union bound free of any independence assumption.  A budget that
 depends on data (for example, $\alpha_c$ proportional to an estimated reuse frequency) remains valid if (i) the total is at most
 $\alpha$ almost surely and (ii) the trial sequence of cell $c$ is independent of the information used to set $\alpha_c$: then
-$\Pr[A_{c,k}\mid\alpha_{c,k}]\le\alpha_{c,k}$ and summing the expectations gives $\alpha$.  Without (ii), for instance when two
+$\Pr[A_{c,k}\mid\alpha_{c,k}]\le\alpha_{c,k}$ by Lemma~\ref{lem:eprocess} applied conditionally, so
+$\Pr[\bigcup A_{c,k}]\le\sum\mathbb{E}[\Pr[A_{c,k}\mid\alpha_{c,k}]]\le\mathbb{E}\sum\alpha_{c,k}\le\alpha$.  Without (ii), for instance when two
 cells share tasks, a data-dependent budget can break the guarantee.
 \end{remark}
 
@@ -157,30 +190,36 @@ $\ell(\pi_1\circ\pi_2)=1$.
 Theorem~\ref{thm:composition} says nothing about footprints.  Screening only pairs whose footprints overlap is therefore sound
 only under an additional assumption, which we state and test rather than presume.
 
-\begin{assumption}[Non-interaction of disjoint footprints]\label{ass:noninteract}
-For sets of skills $A,B$ whose footprints are disjoint ($\mathcal{K}_A\cap\mathcal{K}_B=\varnothing$, with $\mathcal{K}_A$ the
-union over $A$), and every task $x$,
+Call two skills \emph{adjacent} if their footprints intersect or if applying one creates or removes sites of the other (the
+enabling edges of the execution rule).
+
+\begin{assumption}[Non-interaction of non-adjacent skills]\label{ass:noninteract}
+For sets of skills $A,B$ with no adjacent pair $a\in A$, $b\in B$, and every task $x$,
 $\ell(x,\pi_A\circ\pi_B)-\ell(x,\varnothing)=[\ell(x,\pi_A)-\ell(x,\varnothing)]+[\ell(x,\pi_B)-\ell(x,\varnothing)]$.
 \end{assumption}
 
+With losses in $\{0,1\}$ this says in particular that no task's outcome is changed by both $A$ and $B$.
+
 \begin{corollary}[What actually runs]\label{cor:execution}
 Under Assumption~\ref{ass:noninteract} and the execution rule of Section~\ref{sec:problem}, outside the event of
-Theorem~\ref{thm:admission} (probability at most $\alpha$), every executed set $E$ with $m$ footprint-connected components
-satisfies $\mathrm{STR}_Q(E)\le m(-\theta+2\xi_s)$; in particular no executed set is harmful when $2\xi_s\le\theta$.  Only
-footprint-overlapping components need a composite cell: with mean overlap degree $\bar d$ there are
-$|\mathcal{L}_s|\,\bar d/2$ overlapping pairs per scope.
+Theorem~\ref{thm:admission} (probability at most $\alpha$), every executed set $E$ in scope $s$ whose adjacency graph has $m$
+connected components satisfies $\mathrm{STR}_Q(E)\le m(-\theta+2\xi_s)$; in particular no executed set is harmful when
+$2\xi_s\le\theta$.  Only components with two or more skills need a composite cell: with mean adjacency degree $\bar d$ there are
+$|\mathcal{L}_s|\,\bar d/2$ adjacent pairs per scope.
 \end{corollary}
 
 \begin{proof}
-Components have pairwise disjoint footprints, so applying Assumption~\ref{ass:noninteract} $m-1$ times and taking expectations
-under $Q$ gives $\mathrm{STR}_Q(E)=\sum_{j=1}^m\mathrm{STR}_Q(E_j)$.  Each $E_j$ is an admitted cell (a single skill, or a
-composite by the execution rule), so outside the event of Theorem~\ref{thm:admission} each term is at most $-\theta+2\xi_s$.
+Let $E_1,\dots,E_m$ be the components.  No skill of $E_1\cup\dots\cup E_{j}$ is adjacent to a skill of $E_{j+1}$, so
+Assumption~\ref{ass:noninteract} applied with $A=E_1\cup\dots\cup E_j$, $B=E_{j+1}$ for $j=1,\dots,m-1$ gives, for every task,
+$\ell(x,\pi_E)-\ell(x,\varnothing)=\sum_{j}[\ell(x,\pi_{E_j})-\ell(x,\varnothing)]$; taking expectations under $Q$ gives
+$\mathrm{STR}_Q(E)=\sum_j\mathrm{STR}_Q(E_j)$.  By the execution rule each $E_j$ is an admitted cell (a single skill, or the
+composite of exactly $E_j$), so outside the event of Theorem~\ref{thm:admission} each term is at most $-\theta+2\xi_s$.
 \end{proof}
 
 Assumption~\ref{ass:noninteract} is strong: two edits in different functions can still interact through shared state that no
-footprint records, and footprints read off the original code miss a change that creates sites for another: Study R2 found such
-a pair on real code (Section~\ref{sec:eval-library}), which is why the execution rule also links non-commuting pairs.  The
-assumption is then needed only for pairs that commute and share no function; among the $80$ such file pairs of Study R2 none
+footprint records.  Footprints read off the original code alone would miss a change that creates sites for another: Study R2 found
+such a pair on real code (Section~\ref{sec:eval-library}), which is why adjacency includes enabling edges.  The assumption is then
+needed only for pairs that commute and share no function; among the $80$ such file pairs of Study R2 none
 interacted syntactically, but a syntactic check cannot exclude interaction through shared state, so it remains an assumption.
 
 \subsection{The value of pairing}
@@ -205,5 +244,5 @@ Every statement above is checked numerically by a script in the artifact, using 
 per-cell validity, the failure of a per-scope budget, the attained constant $2$ in Lemma~\ref{lem:shift}, the bound of
 Theorem~\ref{thm:composition} on random instances, the pairing ratio, the convergence of the ledger, and the failure of
 re-admission without a ledger (re-testing a retired cell with the full $\alpha$ at every epoch), the harm certificate of
-Remark~1, the library ledger's total, and the exact decision rule of Studies D--H (Remark~\ref{rem:eholm}) at both null
+Proposition~\ref{prop:harm}, the library ledger's total (Lemma~\ref{lem:ledger}), and the exact decision rule of Studies D--H (Proposition~\ref{rem:eholm}) at both null
 boundaries, where its family-wise false admission rate was $2.4\%$ and $7.3\%$ ($16$ cells, $\alpha=0.1$).

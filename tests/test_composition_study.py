@@ -27,6 +27,8 @@ class CompositionStudyTest(unittest.TestCase):
         self.assertEqual(r["emergent"], 1)        # AB differs on input 1, neither single does
         self.assertEqual(r["masking"], 1)         # A differs on input 0, AB does not
         self.assertEqual(r["order_dependent"], 2)  # AB != BA on inputs 0 and 1
+        both = {"A": [1], "B": [1], "AB": [1], "BA": [1]}
+        self.assertEqual(S.interaction(both, {v: {"outcomes": [["x"]]} for v in both}, [0])["non_additive"], 1)   # 1 != 1 + 1
 
     def test_variant_sources(self):
         sk = S.load_skills()

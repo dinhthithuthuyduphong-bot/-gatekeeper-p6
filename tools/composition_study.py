@@ -199,8 +199,10 @@ def interaction(L, runs, stable):
     emergent = sum(1 for i in range(n) if (lab[i] or lba[i]) and not la[i] and not lb[i])
     masking = sum(1 for i in range(n) if (la[i] or lb[i]) and not (lab[i] and lba[i]))
     order = sum(1 for k, i in enumerate(stable) if runs["AB"]["outcomes"][i] != runs["BA"]["outcomes"][i])
-    nonadd = sum(1 for i in range(n) if lab[i] != min(1, la[i] + lb[i]) or lba[i] != min(1, la[i] + lb[i]))
-    return {"emergent": emergent, "masking": masking, "order_dependent": order, "non_additive": nonadd}
+    # Assumption 4 exactly (losses 0/1): l(AB) = l(A) + l(B); an input on which both parts change the outcome violates it
+    nonadd = sum(1 for i in range(n) if lab[i] != la[i] + lb[i] or lba[i] != la[i] + lb[i])
+    both = sum(1 for i in range(n) if la[i] and lb[i])
+    return {"emergent": emergent, "masking": masking, "order_dependent": order, "non_additive": nonadd, "both_parts_change": both}
 
 
 def harm_e(loss_seq):

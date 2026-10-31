@@ -11,7 +11,7 @@ studies and re-running the demonstration suites with penalties from $0$ to $5$ c
 The benefit e-process bets $\lambda_i=\min\bigl(\max(0,g_i/(v_i+g_i^2)),\,0.5/(1+\theta)\bigr)$, where $g_i=\bar Y_{i-1}-\theta$ uses
 the running mean of past draws shrunk towards $0.5$ by one pseudo-observation and $v_i$ their sample variance ($0.25$ before two draws; a plug-in Kelly
 bet, capped at half the bound of Lemma~\ref{lem:eprocess}); it depends only on past draws, hence is predictable.  The harm
-certificate bets the constant $\lambda=0.9/(1-\eta)$ of Remark~1, and the harm alarm the constant $\mu=\min((0.5-\eta)/(\eta(1-\eta)),\,0.95/\eta)$.
+certificate bets the constant $\lambda=0.9/(1-\eta)$ of Proposition~\ref{prop:harm}, and the harm alarm the constant $\mu=\min((0.5-\eta)/(\eta(1-\eta)),\,0.95/\eta)$.
 The execution rule uses module-qualified footprints (file and function, module-level code included) and the enabling edges of
 Section~\ref{sec:eval-library}.  A conformance check labels each configuration with the guarantee it actually has: options of the
 frozen pipeline such as consuming priority tasks first, keeping only tasks that reach the edit, a sign test on discordant pairs, or

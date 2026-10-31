@@ -155,7 +155,7 @@ were applied to $14$ real targets in three pre-registered studies ($28$ cells).
 \emph{Study D} ($8$ targets, $16$ cells): ground truth from $300$ draws plus the target's full test suite gave $3$ beneficial,
 $9$ unchanged, $4$ out-of-scope and $0$ harmful cells.  B2, replay plus fingerprints (B6-R) and always-retest (B8) each admitted
 $12$ cells, the $3$ beneficial ones and all $9$ unchanged ones; the certificate (the smaller of the benefit e-process and the harm certificate where the cell stopped, with e-Holm over the
-$16$ cells, Remark~\ref{rem:eholm}, family-wise $\alpha=0.1$) admitted $2$ cells, both
+$16$ cells, Proposition~\ref{rem:eholm}, family-wise $\alpha=0.1$) admitted $2$ cells, both
 beneficial, after $110$ draws each, and missed the third, whose mean benefit ($-0.11$) is smaller than the margin $\theta=0.2$.  It used $3{,}220$ trial runs
 against $3{,}600$ for B8.
 \emph{Studies E and G}: on the four harmful cells (\texttt{pyyaml}, \texttt{packaging}, \texttt{databricks}: harm on $87$--$100\%$ of
@@ -215,7 +215,9 @@ counts once.)
 A manual review added after the result (labelled as such) re-ran the $55$ units with outputs kept: $36$ reproduced exactly (the cohort run had not stored its model-written input generator;
 re-generating it gave a different program for $17$ of the other $19$ units), and two
 independent raters agreed on $87.7\%$ of $154$ items.  $8/36$ ($22.2\%$, Wilson $11.7$--$38.1\%$) units had no regression confirmed by
-both raters; excluding three units whose inputs are model-built stand-in objects gives $11/36$ ($18.0$--$46.9\%$).  The result does not hinge on one repository (post hoc): leaving out any one of the twelve repositories keeps the HQ1 share between
+both raters; excluding three units whose inputs are model-built stand-in objects gives $11/36$ ($18.0$--$46.9\%$).  A third rater, a different model, was added afterwards; both model raters coded all $20$ items of a calibration set with known
+codes correctly, so they do separate behaviour from representation, and both coded every review item as a behaviour difference.
+With the majority of the three raters, $5/36$ ($13.9\%$, Wilson $6.1$--$28.7\%$) units have no confirmed regression.  The result does not hinge on one repository (post hoc): leaving out any one of the twelve repositories keeps the HQ1 share between
 $8.2\%$ and $16.7\%$ (largest Wilson upper bound $31.9\%$, without \texttt{sympy}) and the contract-regression share between $8.2\%$ and
 $14.0\%$, although Django contributes $215$ of the $469$ instances.  The RQ5 conclusion
 therefore does not generalise: on SWE-bench Verified most naive differences are real, observable behaviour differences from the fix.

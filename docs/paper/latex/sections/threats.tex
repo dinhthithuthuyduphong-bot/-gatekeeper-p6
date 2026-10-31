@@ -19,8 +19,11 @@ stand-in objects (three of $31$ reviewed units); the sensitivity analysis keeps 
 author's intent and miss side effects outside it (\texttt{cerberus}).
 
 \paragraph{Internal validity.}
-The second rater shares a model family with the input generator, and sees outputs but not inputs.  $19/55$ re-run units did not
-reproduce because the model-written generator changed; they enter as bounds.  The model-written generator sees the fix's diff, so
+The second and third raters are models of the family that wrote the input generator; they were checked on a calibration set
+with known codes, but they see outputs and the patch's diff, not the inputs.  The three raters disagree on $19$ items (the first
+rater coded them as representation differences), so the Q-A1 share depends on who decides them ($8/36$ with both of the first
+two raters, $5/36$ with the majority of three).  $19/55$ re-run units did not reproduce, $17$ of them because the model-written
+generator, not stored by the cohort run, changed; they enter as bounds.  The model-written generator sees the fix's diff, so
 inputs concentrate near the changed region.  Four Study Q instances failed for a tool limitation (patches that create files) and
 count as unusable.  The Study Q analysis script defined the inflation ratio differently from the protocol; we report both.
 
