@@ -69,6 +69,10 @@ CLAIMS = [
     ("theory C2", "family-wise\nfalse admission rate of our e-process is $0.45$, against $0.05$",
      lambda: "family-wise\nfalse admission rate of our e-process is $%.2f$, against $%.2f$" % (TH()["C2_budget_per_cell_vs_per_scope"]["familywise_shared"],
                                                                                          TH()["C2_budget_per_cell_vs_per_scope"]["familywise_split"])),
+    ("theory C10 decision rule", "family-wise false admission rate was $2.4\\%$ and $7.3\\%$",
+     lambda: "family-wise false admission rate was $%s\\%%$ and $%s\\%%$" % (
+         pct(TH()["C10_decision_rule_studies_DH"]["benefit_boundary"]["familywise_false_admission"]),
+         pct(TH()["C10_decision_rule_studies_DH"]["harm_boundary"]["familywise_false_admission"]))),
     ("theory C9 draws", "=110$ clean draws", lambda: "=%d$ clean draws" % TH()["C9_harm_certificate"]["clean_draws_family16"]),
     ("loss-weight sensitivity draws", "Recomputing all $7{,}200$ recorded draws",
      lambda: "Recomputing all $%s$ recorded draws" % "{:,}".format(J("research_closure/results/sensitivity/LOSS_WEIGHT_SENSITIVITY.json")["A_recorded_draws"]["draws"]).replace(",", "{,}")),
