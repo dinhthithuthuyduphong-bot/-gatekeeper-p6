@@ -1,0 +1,11 @@
+\section{Motivating Example}
+\label{sec:motivation}
+Consider an \emph{illustrative} skill $S_1$ that wraps database calls in a bounded retry.  It was learned on a repository whose client
+has at-least-once semantics; on a target whose client is exactly-once, the retry duplicates writes under partial failure.  The skill
+is authorized (it edits application code only), its replay tests pass on the source, and the target's environment fingerprint can
+agree on every recorded variable while differing in the one that matters, delivery semantics, which nobody recorded.  Only evidence
+gathered on the target can reveal the problem.  Now add a skill $S_2$ that turns the call into a coroutine.  If $S_1$ wraps the call
+before it is awaited, its retry ``succeeds'' on the coroutine object and the real failure is never raised: each skill is beneficial
+alone, the pair is harmful.  Theorem~\ref{thm:composition} shows that nothing about the two individual risks prevents this, which is
+why compositions are cells of their own and why the execution rule refuses to run overlapping skills together until their composite is
+admitted.

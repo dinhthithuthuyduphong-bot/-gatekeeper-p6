@@ -39,11 +39,11 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p docs/paper/latex/build
-          cp docs/paper/latex/main.pdf docs/paper/latex/build/theory_sections.pdf
+          cp docs/paper/latex/main.pdf docs/paper/latex/build/paper.pdf
           git config user.name "gatekeeper-freeze-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add docs/paper/latex/build/theory_sections.pdf
+          git add docs/paper/latex/build/paper.pdf
           git diff --cached --quiet && { echo "no change"; exit 0; }
-          git commit -m "Build corrected paper sections (PDF)"
+          git commit -m "Build paper (PDF)"
           git pull --rebase origin "${GITHUB_REF_NAME}"
           git push origin HEAD:"${GITHUB_REF_NAME}"

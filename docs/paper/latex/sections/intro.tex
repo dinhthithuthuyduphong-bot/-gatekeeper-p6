@@ -1,0 +1,33 @@
+\section{Introduction}
+\label{sec:intro}
+Coding agents increasingly package what they learn as reusable procedures (skills) and apply them again elsewhere: a library of
+learned edits that fixed a bug once is replayed on the next repository~\cite{wang2024voyager,yang2026gse}.  Reuse is efficient
+until a procedure runs where it does not belong.  The failure is not a permission violation: an authorized skill that edits only
+files it may edit~\cite{metere2026formal} can still implement the wrong behaviour for this repository, this dependency version, or
+this combination with another skill.  Replay of the skill's own tests on its source repository~\cite{yang2026gse} cannot see the
+target, and re-running the target's whole test suite before every reuse removes the reason to have skills.  In our own experiments
+the target's suite missed harm that a skill caused on $87$--$100\%$ of relevant inputs (Section~\ref{sec:eval-skills}).
+
+We formulate \emph{risk-controlled admission}: a change may execute in a declared scope only when paired evidence gathered in that
+scope certifies that it helps by at least a margin, with an error budget that holds over the whole library, over adaptively
+chosen cells, over compositions and over re-admission after the environment changes.
+
+\paragraph{Contributions.}
+\begin{itemize}
+\item \textbf{Formulation.}  Selective transfer risk relative to a declared scope family, cells for single skills and for
+compositions, and an execution rule that ties per-cell certificates to what actually runs (Section~\ref{sec:problem}).
+\item \textbf{Theory.}  An anytime-valid, library-wide admission guarantee with a per-cell error ledger that covers compositions
+and re-admission (Theorem~\ref{thm:admission}); a proof that its $2\xi$ shift term is necessary and tight
+(Proposition~\ref{prop:nofree}); an exact characterisation of composition risk, $\sup\mathrm{STR}(S_1\circ S_2)=1+\min(a,b)$
+(Theorem~\ref{thm:composition}); and a bound on every executed set under a stated non-interaction assumption
+(Corollary~\ref{cor:execution}).  Every statement is checked numerically in the artifact.
+\item \textbf{Gatekeeper.}  An implementation with scope screening, an abstaining AST binder, paired trials in isolated workers,
+betting e-processes, a per-cell ledger and the execution rule (Section~\ref{sec:impl}).
+\item \textbf{Pre-registered evidence}, negative results included (Section~\ref{sec:evaluation}): where simple gates fail; skill
+reuse on $14$ real targets against replay-plus-fingerprint and always-retest baselines; partial harm in $205$ plausible LLM
+patches; and, on SWE-bench Verified, how much of the measured ``harm'' depends on its definition.
+\end{itemize}
+
+\paragraph{What we do not claim.}  We claim no new statistics, no advantage in statistical power over a fixed-sample test at the same
+number of trials (Section~\ref{sec:eval-phase}), no distribution-free guarantee on unseen repositories, and no results on large learned
+skill libraries: our skills are two hand-written rewrite families.

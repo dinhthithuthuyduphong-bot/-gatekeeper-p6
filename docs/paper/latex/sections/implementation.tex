@@ -1,0 +1,12 @@
+\section{Implementation}
+\label{sec:impl}
+Gatekeeper is about $4{,}800$ lines of Python using only the standard library: the pipeline (screen, binder, paired-trial harness,
+e-processes, ledger, baselines B2, B6-R and B8, retirement) and the extensions used in the studies (function-level oracles, gates,
+the contract classifier and the execution rule).  Paired trials run in per-draw worker processes started from a common snapshot;
+re-running $2{,}400$ recorded draws in shuffled order with fresh workers reproduced every outcome.  The loss is one minus the
+held-out pass rate plus $0.5$ per regression, clipped at $1$.
+
+Every study is pre-registered by a workflow that hashes its protocol, configuration and tools; the seed is drawn from the public drand
+beacon after the freeze; amendments re-hash the study and keep the seed.  Each result is produced by a workflow and committed with
+its raw records; a checker recomputes every number quoted in this paper from those records, and a separate script checks every
+theoretical statement numerically.  The test suite has $359$ tests.

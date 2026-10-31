@@ -1,5 +1,5 @@
-% Compile check for the corrected theory sections of FSE-2027-13 (PAPER_TODO phase 1).
-% The sections are meant to be pasted into the submission; this wrapper only proves they compile together.
+% Full paper, frame A (PAPER_TODO 0.2, phase 4).  Built by workflow "Gatekeeper paper LaTeX build" -> build/paper.pdf.
+% Numbers in sections/evaluation.tex are recomputed from the result files by tools/check_paper_numbers.py at every build.
 \documentclass[sigconf,review,anonymous]{acmart}
 \settopmatter{printacmref=false}
 \setcopyright{none}
@@ -8,18 +8,32 @@
 \theoremstyle{acmdefinition}
 \newtheorem{remark}{Remark}
 \begin{document}
-\title{Scope before Reuse: corrected theory and measured evaluation (draft for review)}
+\title{Scope before Reuse: Risk-Controlled Admission of Reusable Code Changes}
 \begin{abstract}
-Corrected problem formulation, theory and related-work paragraph for FSE-2027-13; see docs/paper/THEORY.md for the derivation
-and docs/paper/latex/CHANGES.md for what each part replaces.
+An agent that learns a code change once and reuses it everywhere is efficient until the change runs where it does not belong.  The
+failure is functional, not a permission violation: an authorized change whose replay tests pass on its source can implement the wrong
+behaviour for the target, and two changes that are each beneficial can be jointly harmful.  We formulate risk-controlled admission
+relative to a declared scope family and give Gatekeeper, which admits a change in a scope only when paired trials on that scope certify
+a benefit margin.  We prove an anytime-valid guarantee that holds over a whole library, over adaptively chosen cells, over compositions
+and over re-admission after the environment changes, through a per-cell error ledger; we show that its shift term is necessary and
+tight, characterise composition risk exactly, and bound every executed set through an execution rule.  Every statement is checked
+numerically.  Pre-registered experiments, negative results included, show where such a gate matters: on $14$ real skill-reuse targets
+harm was frequent and a simple gate with target evidence sufficed, while replay plus fingerprints admitted every harmful cell; in $205$
+plausible LLM patches the census admitted all $16$ with high partial harm, which the statistical gates rejected; and on SWE-bench
+Verified the measured harm rate changes by a factor of about four with its definition.
 \end{abstract}
+\keywords{code reuse, coding agents, e-processes, anytime-valid inference, software engineering}
 \maketitle
+\input{sections/intro}
+\input{sections/motivation}
 \input{sections/problem}
+\input{sections/approach}
 \input{sections/theory}
+\input{sections/implementation}
 \input{sections/evaluation}
 \input{sections/threats}
-\section{Related work (excerpt)}
-\input{sections/related_stats}
+\input{sections/related}
+\input{sections/conclusion}
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{refs}
 \end{document}

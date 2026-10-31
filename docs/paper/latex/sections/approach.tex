@@ -1,0 +1,20 @@
+\section{Approach: Gatekeeper}
+\label{sec:approach}
+For a skill $S$ and a target context, Gatekeeper proceeds as follows.
+\begin{enumerate}
+\item \textbf{Scope screen.}  Evaluate the input assumptions $\mathcal{I}$ and compare the fingerprints $\mathcal{D}$; missing
+information means \textsc{OutOfScope}.  A pass is necessary, not sufficient: the motivating example passes it.
+\item \textbf{Bind.}  Apply $\pi$ with an AST binder that abstains on ambiguity (no match, several matches, an existing guard, a
+shadowed built-in, a missing symbol) instead of guessing.
+\item \textbf{Paired trials.}  Draw tasks of the target scope with replacement; run each with and without the skill on the same
+snapshot and seed, in a fresh worker process; record $Z=\ell(x,\pi)-\ell(x,\varnothing)$.
+\item \textbf{Certify.}  Update the betting e-process of the cell (Lemma~\ref{lem:eprocess}); admit when it reaches $1/\alpha_{c,k}$,
+the cell's entry in the pre-allocated ledger; quarantine when the budget is spent.  A harm alarm (an e-process for a high harm rate)
+rejects early when harm is frequent.
+\item \textbf{Compositions.}  When an admitted skill's footprint overlaps another's, the composite is enqueued as its own cell; until
+it is admitted, the execution rule keeps the two from running together.
+\item \textbf{Retirement.}  When the fingerprint of an admitted scope changes, admission is revoked; re-admission draws the next entry
+of the cell's ledger ($6/(\pi^2(k+1)^2)$ of its share at epoch $k$), so revocations cannot inflate the error budget.
+\end{enumerate}
+Capability approval is consumed as a precondition and never merged into the functional decision; the two verdicts and their
+evidence are stored separately.

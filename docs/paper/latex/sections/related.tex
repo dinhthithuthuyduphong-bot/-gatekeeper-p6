@@ -1,0 +1,16 @@
+\section{Related Work}
+\label{sec:related}
+\subsection{Skill libraries and experience reuse}
+Voyager established the skill-library pattern~\cite{wang2024voyager}.  GSE learns globally reusable skills for coding agents, models
+inter-skill relations, consolidates skills and guards them with replay verification~\cite{yang2026gse}; it is the closest work and
+our replay-plus-fingerprint baseline (B6-R) is a reconstruction of that kind of guard.  Replay asks whether a skill still works on its
+source; admission asks whether it should run on this target, which only target evidence answers.  Structured experience memories for
+code agents~\cite{deng2026memcoder,wang2026memgovern} reuse development experience and face the same scope question.
+\subsection{Capability and authority}
+Formal verification of agent skills~\cite{metere2026formal} and privilege control for agents~\cite{debenedetti2025camel,shi2025progent}
+decide what a change may touch.  That predicate is different from whether the change is functionally right for the target, and we keep
+the two decisions apart.
+\subsection{Patch correctness}
+Plausible patches that pass the tests can still be wrong; we measure behaviour against the developers' fix on SWE-bench
+Verified~\cite{jimenez2024swebench} and find that how ``harm'' is defined changes the measured rate by a factor of about four.
+\input{sections/related_stats}
