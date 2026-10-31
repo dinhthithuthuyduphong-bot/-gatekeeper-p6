@@ -1,0 +1,10 @@
+% Replaces Section 3.3 "Risk control and conformal methods" of the draft (PAPER_TODO 1.7).
+\subsection{Risk control, e-processes and multiple testing}
+Conformal prediction~\cite{vovk2005alrw}, conformal risk control~\cite{angelopoulos2024crc} and Learn-Then-Test~\cite{angelopoulos2021ltt}
+give distribution-free guarantees under exchangeability.  Skill transfer violates exchangeability across repositories, so our
+guarantee is relative to a declared scope family (Proposition~\ref{prop:nofree}).
+For sequential evidence we use betting e-processes~\cite{waudbysmith2024betting} and Ville's inequality~\cite{ville1939}, which make
+an admission valid at any data-dependent stopping time~\cite{howard2021timeuniform,ramdas2023gametheoretic}.
+Simultaneous control over the library is family-wise (FWER) and comes from a union bound over cells; it requires no independence.
+A false-discovery-rate variant is available through e-BH~\cite{wang2022ebh}, at the price of a weaker, FDR-type guarantee;
+Benjamini--Hochberg~\cite{benjamini1995fdr} is used only for the secondary comparisons of the evaluation.

@@ -1,0 +1,46 @@
+% Replaces Section 4 "Problem formulation" of the draft (PAPER_TODO 1.1).  Source of truth: docs/paper/THEORY.md, Section 0.
+\section{Problem Formulation}
+\label{sec:problem}
+
+\paragraph{Skills, scopes and cells.}
+A skill is $S=\langle \pi,\mathcal{D},\mathcal{I},\mathcal{P},\mathcal{K}\rangle$: a procedure $\pi$ (a parameterised edit
+program), dependency and environment fingerprints $\mathcal{D}$, input assumptions $\mathcal{I}$ (executable predicates on the
+target), observed postconditions $\mathcal{P}$ with the contexts they were observed in, and an interaction footprint
+$\mathcal{K}$, the code regions and behavioural properties that $\pi$ reads or writes.
+A context $x$ is a (repository, revision, environment, task) tuple.
+A scope family $\mathbb{S}=\{s_1,\dots,s_L\}$ is a finite partition of contexts declared before any trial.
+We call a pair $c=(S,s)$ a \emph{cell}; for skills $S,S'$ with overlapping footprints, $(S\circ S',s)$ is a cell of its own.
+
+\paragraph{Loss and selective transfer risk.}
+For a task $x$, $\ell(x,\pi)\in[0,1]$ is its functional loss with the skill applied and $\ell(x,\varnothing)$ the loss
+without it.  We use one minus the held-out pass rate plus $0.5$ per regression, \emph{clipped at $1$}, so that the range
+assumption below holds.  The paired difference is $Z=\ell(x,\pi)-\ell(x,\varnothing)\in[-1,1]$.
+
+\begin{definition}[Selective transfer risk]
+For a cell $c=(S,s)$ and a distribution $P_s$ over the contexts of scope $s$,
+$\mathrm{STR}_{P}(c)=\mathbb{E}_{x\sim P_s}\bigl[\ell(x,\pi)-\ell(x,\varnothing)\bigr]$.
+A cell is \emph{admissible} if $\mathrm{STR}_{P}(c)\le-\theta$ for a benefit margin $\theta>0$, and \emph{harmful} if
+$\mathrm{STR}(c)>0$.
+\end{definition}
+
+The definition is an excess over the no-skill baseline, so a skill that neither helps nor harms is not admissible, and it is
+relative to a declared scope; Proposition~\ref{prop:nofree} shows why it cannot be otherwise.
+
+\paragraph{Assumptions.}
+\begin{assumption}[Paired trials]\label{ass:trials}
+For every cell $c$ there is an infinite sequence of tasks $x^c_1,x^c_2,\dots$ drawn i.i.d.\ from $P_s$ (in practice, drawn
+\emph{with replacement} from the target's task set); each task is run with and without the skill on the same snapshot and
+seed.  Different cells may depend on each other.
+\end{assumption}
+
+\begin{assumption}[Bounded shift]\label{ass:shift}
+Deployment contexts of scope $s$ follow $Q_s$ with $\mathrm{TV}(P_s,Q_s)\le\xi_s$, where
+$\mathrm{TV}(P,Q)=\sup_A|P(A)-Q(A)|$.
+\end{assumption}
+
+\paragraph{Admission problem.}
+Given a library, a validation budget and a pre-allocated error budget $\alpha$, decide which cells may execute, such that
+$\Pr[\exists\text{ an admitted cell }c:\ \mathrm{STR}_{Q}(c)>0]\le\alpha$ over the whole library, over adaptively chosen
+cells and over re-admissions after retirement.  Theorem~\ref{thm:admission} gives this guarantee whenever
+$2\xi_s<\theta$ for every scope; for coarser scopes it gives the weaker, explicit statement
+$\mathrm{STR}_{Q}(c)\le-\theta+2\xi_s$.

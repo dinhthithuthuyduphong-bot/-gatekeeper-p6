@@ -1,0 +1,146 @@
+% Replaces Section 6 "Theory" of the draft (PAPER_TODO 1.2-1.6).  Source of truth: docs/paper/THEORY.md, Sections 1-5.
+% Numerical checks: tools/theory_checks.py (workflow "Gatekeeper theory checks").
+\section{Theory}
+\label{sec:theory}
+
+We claim no new statistics: the guarantee is assembled from betting e-processes~\cite{waudbysmith2024betting},
+Ville's inequality~\cite{ville1939} and a union bound.  What is new is the estimand, the per-cell ledger that covers
+compositions and re-admission, the proof that the shift term is unavoidable, and the exact characterisation of composition
+risk.
+
+\subsection{Per-cell evidence}
+
+\begin{lemma}[Betting e-process]\label{lem:eprocess}
+Fix a cell $c$ and let $Y_i=-Z_i$.  Under $H_0^c:\ \mathbb{E}[Y]\le\theta$ (the cell is not admissible), the process
+$K_0=1$, $K_n=\prod_{i\le n}\bigl(1+\lambda_i(Y_i-\theta)\bigr)$ with predictable $\lambda_i\in[0,1/(1+\theta))$ satisfies
+$\Pr[\exists n:\ K_n\ge 1/\beta]\le\beta$ for every $\beta\in(0,1)$.
+\end{lemma}
+
+\begin{proof}
+Since $Y_i\ge-1$, every factor is at least $1-\lambda_i(1+\theta)>0$.  By Assumption~\ref{ass:trials} and predictability,
+$\mathbb{E}[K_i\mid\mathcal{F}_{i-1}]=K_{i-1}\bigl(1+\lambda_i(\mathbb{E}[Y_i]-\theta)\bigr)\le K_{i-1}$, so $(K_n)$ is a
+nonnegative supermartingale with $K_0=1$, and Ville's inequality gives the claim.
+\end{proof}
+
+The bound holds at any data-dependent stopping time, including the end of the validation budget, which is why a fixed-sample
+interval would not do.
+
+\subsection{Library-wide admission guarantee}
+
+\begin{theorem}[Admission over a declared scope family]\label{thm:admission}
+Let $\mathcal{C}$ be the set of cells, compositions included, and let a ledger $\alpha_{c,k}\ge0$ be fixed in advance for
+every cell $c$ and epoch $k\ge0$ (epoch $k\ge1$ is the $k$-th re-admission after retirement), with
+$\sum_{c\in\mathcal{C}}\sum_{k\ge0}\alpha_{c,k}\le\alpha$; for instance $\alpha_{c,k}=\alpha_c\cdot 6/(\pi^2(k+1)^2)$ with
+$\sum_c\alpha_c\le\alpha$.  Suppose each epoch uses fresh tasks and admits $c$ only when its e-process
+(Lemma~\ref{lem:eprocess}) reaches $1/\alpha_{c,k}$, while the choice of cells, their order and the stopping times may depend
+on all data.  Under Assumptions~\ref{ass:trials} and~\ref{ass:shift},
+\[
+  \Pr\bigl[\exists\text{ admitted }(c,k):\ \mathrm{STR}_{Q}(c)>-\theta+2\xi_{s(c)}\bigr]\le\alpha .
+\]
+In particular, if $2\xi_s<\theta$ for every scope, the probability of admitting any harmful cell is at most $\alpha$.
+\end{theorem}
+
+\begin{proof}
+For every $(c,k)$ let $A_{c,k}=\{\sup_n K^{c,k}_n\ge1/\alpha_{c,k}\}$, defined on the whole infinite task sequence of that
+epoch.  An admission of $(c,k)$ implies $A_{c,k}$; adaptive selection and stopping can only forgo admissions.  Hence the
+event that some cell with $H_0^c$ true is admitted is contained in $\bigcup_{(c,k):H_0^c}A_{c,k}$, whose probability is at
+most $\sum\alpha_{c,k}\le\alpha$ by Lemma~\ref{lem:eprocess} and a union bound, which needs no independence across cells.
+Finally, by Lemma~\ref{lem:shift}, $\mathrm{STR}_{Q}(c)>-\theta+2\xi_s$ implies $\mathrm{STR}_{P}(c)>-\theta$, that is,
+$H_0^c$.
+\end{proof}
+
+\begin{lemma}[Shift]\label{lem:shift}
+If $f$ takes values in an interval of length $b$, then $|\mathbb{E}_Qf-\mathbb{E}_Pf|\le b\cdot\mathrm{TV}(P,Q)$.  Since
+$Z\in[-1,1]$, $|\mathrm{STR}_Q(c)-\mathrm{STR}_P(c)|\le2\,\mathrm{TV}(P_s,Q_s)\le2\xi_s$, and the constant $2$ is attained.
+\end{lemma}
+
+\begin{proof}
+Centre $f$ so that $|g|\le b/2$; then $|\mathbb{E}_Qg-\mathbb{E}_Pg|\le(b/2)\sum_x|Q(x)-P(x)|=b\,\mathrm{TV}(P,Q)$.  For
+attainment, take task types $u$ with $Z=1$ and $d$ with $Z=-1$, $P(u)=0.1$, $Q(u)=0.2$: then $\mathrm{TV}=0.1$ and the risks
+differ by $0.2$.
+\end{proof}
+
+\paragraph{Why the budget is per cell.}
+Allocating one $\alpha_s$ per \emph{scope} and letting every skill in the scope use the threshold $1/\alpha_s$ does not
+control the family-wise error: with ten skills at the null boundary, $\theta=\alpha=0.1$ and $300$ trials, the family-wise
+false admission rate of our e-process is $0.45$, against $0.05$ with the per-cell budget $\alpha/10$
+(Section~\ref{sec:checks}).
+
+\subsection{Scope and shift are necessary}
+
+\begin{assumption}[Rich target class]\label{ass:rich}
+For every value of the features a procedure observes (fingerprints, predicates, trial outcomes on the observed
+repositories), there is a repository with those features whose task losses are arbitrary in $[0,1]$.
+\end{assumption}
+
+\begin{proposition}[No guarantee without target evidence or bounded shift]\label{prop:nofree}
+\textup{(a)} Let a procedure decide from data of observed repositories $\mathcal{R}_{\mathrm{obs}}$ only, and admit a skill
+$S$ with positive probability.  Under Assumption~\ref{ass:rich} there is a repository $R^\dagger\notin\mathcal{R}_{\mathrm{obs}}$
+with $\mathrm{STR}(S,\{R^\dagger\})=1$ on which the admission probability is unchanged.
+\textup{(b)} For every $\theta\in(0,1)$, $\delta>0$ with $\theta+\delta<1$, $\xi\in(0,1/2]$ and every procedure, there are
+$P,Q$ with $\mathrm{TV}(P,Q)=\xi$ and a cell $c$ with $\mathrm{STR}_P(c)=-\theta-\delta$ and
+$\mathrm{STR}_Q(c)=\mathrm{STR}_P(c)+2\xi$, whose admission probability does not depend on $Q$.
+\end{proposition}
+
+\begin{proof}
+(a) Take $R^\dagger$ that agrees with all observed data and has $\ell(x,\pi)=1$, $\ell(x,\varnothing)=0$ for every task.
+(b) Take task types $u$ ($Z=1$) and $d$ ($Z=-1$) with $P(d)=(1+\theta+\delta)/2\ge\xi$, and obtain $Q$ by moving mass $\xi$ from
+$d$ to $u$.  The procedure only reads tasks drawn from $P$.
+\end{proof}
+
+Part (b) shows that no procedure that learns only from $P$ can certify $Q$-risk better than $\mathrm{STR}_P+2\xi$, so the shift
+term of Theorem~\ref{thm:admission} cannot be removed or reduced; this is why the guarantee is relative to a declared scope
+family and why coarse scopes make it weak.
+
+\subsection{Composition}
+
+\begin{theorem}[Composition risk is not controlled by individual risks]\label{thm:composition}
+For $a,b\in[-1,0)$,
+\[
+  \sup\bigl\{\mathrm{STR}(S_1\circ S_2):\ \mathrm{STR}(S_1)=a,\ \mathrm{STR}(S_2)=b\bigr\}=1+\min(a,b),
+\]
+and the supremum is attained.  In particular, two skills that each meet the margin $-\theta$ can compose to excess risk
+$1-\theta>0$, and no bound on the composite risk improves on the trivial one implied by $\ell\in[0,1]$.
+\end{theorem}
+
+\begin{proof}
+Upper bound: $\mathrm{STR}(S_1\circ S_2)\le1-\mathbb{E}\ell(\varnothing)$, and $\mathbb{E}\ell(\varnothing)\ge-a$ because
+$\mathbb{E}\ell(\pi_1)=\mathbb{E}\ell(\varnothing)+a\ge0$; likewise $\ge-b$.  Attainment: constant losses
+$\ell(\varnothing)=-\min(a,b)$, $\ell(\pi_1)=\ell(\varnothing)+a$, $\ell(\pi_2)=\ell(\varnothing)+b$,
+$\ell(\pi_1\circ\pi_2)=1$.
+\end{proof}
+
+Theorem~\ref{thm:composition} says nothing about footprints.  Screening only pairs whose footprints overlap is therefore sound
+only under an additional assumption, which we state and test rather than presume.
+
+\begin{assumption}[Non-interaction of disjoint footprints]\label{ass:noninteract}
+If $\mathcal{K}\cap\mathcal{K}'=\varnothing$ then
+$\ell(x,\pi\circ\pi')-\ell(x,\varnothing)=[\ell(x,\pi)-\ell(x,\varnothing)]+[\ell(x,\pi')-\ell(x,\varnothing)]$ for all $x$.
+\end{assumption}
+
+\begin{corollary}\label{cor:screening}
+Under Assumption~\ref{ass:noninteract}, two admissible skills with disjoint footprints compose to
+$\mathrm{STR}\le-2\theta$, so only footprint-overlapping pairs need a composite cell; with mean overlap degree $\bar d$ there
+are $|\mathcal{L}_s|\,\bar d/2$ such pairs per scope.
+\end{corollary}
+
+\subsection{The value of pairing}
+
+\begin{proposition}[Pairing]\label{prop:pairing}
+Let $V_\pi=\mathrm{Var}\,\ell(x,\pi)$, $V_\varnothing=\mathrm{Var}\,\ell(x,\varnothing)$ and
+$C=\mathrm{Cov}(\ell(x,\pi),\ell(x,\varnothing))$ on the same task.  Estimating $\mathrm{STR}$ from $n$ paired tasks has
+variance $(V_\pi+V_\varnothing-2C)/n$; from two independent arms of $n$ tasks each it has variance $(V_\pi+V_\varnothing)/n$.
+Both designs cost $2n$ runs, so pairing reduces the number of tasks needed for a given precision by
+$R=(V_\pi+V_\varnothing)/(V_\pi+V_\varnothing-2C)$.  Under the additive model $\ell(\varnothing)=T$, $\ell(\pi)=T+S$ with
+independent $T,S$, $R=1+2\sigma_T^2/\sigma_S^2$.
+\end{proposition}
+
+\begin{proof}
+Direct computation of the two variances; under the additive model $V_\pi+V_\varnothing=2\sigma_T^2+\sigma_S^2$ and $C=\sigma_T^2$.
+\end{proof}
+
+\subsection{Numerical checks}
+\label{sec:checks}
+Every statement above is checked numerically by a script in the artifact, using the e-process of our implementation:
+per-cell validity, the failure of a per-scope budget, the attained constant $2$ in Lemma~\ref{lem:shift}, the bound of
+Theorem~\ref{thm:composition} on random instances, the pairing ratio, and the convergence of the ledger.

@@ -1,0 +1,44 @@
+# Compile the corrected paper sections (docs/paper/latex) to PDF and commit the PDF for review.  No model calls.
+name: Gatekeeper paper LaTeX build
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: xu-cheng/latex-action@v3
+        with:
+          root_file: main.tex
+          working_directory: docs/paper/latex
+          latexmk_use_lualatex: false
+          args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode
+      - name: Check for undefined references and citations
+        shell: bash
+        run: |
+          set -euo pipefail
+          L=docs/paper/latex/main.log
+          if grep -E "undefined (references|citations)|Citation .* undefined|Reference .* undefined" "$L"; then
+            echo "::error::undefined references or citations"; exit 1; fi
+          grep -c "Overfull" "$L" || true
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: PAPER_LATEX
+          path: |
+            docs/paper/latex/main.pdf
+            docs/paper/latex/main.log
+      - name: Commit PDF
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p docs/paper/latex/build
+          cp docs/paper/latex/main.pdf docs/paper/latex/build/theory_sections.pdf
+          git config user.name "gatekeeper-freeze-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add docs/paper/latex/build/theory_sections.pdf
+          git diff --cached --quiet && { echo "no change"; exit 0; }
+          git commit -m "Build corrected paper sections (PDF)"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin HEAD:"${GITHUB_REF_NAME}"
