@@ -20,6 +20,7 @@ Viết ngày 31/10/2026.
 | TC8 | Định lý 2.2: "mỗi epoch dùng task mới" | `gatekeeper()` dùng lại cùng bộ task, chỉ xáo thứ tự theo seed·1000 + epoch | **Vẫn hợp lệ.** Retirement kích hoạt bằng fingerprint, không bằng kết quả, nên dãy Z của epoch k vẫn i.i.d. theo P^(k); "task mới" là điều kiện đủ | Ghi lại ở đây; không cần sửa |
 | TC9 | Study P: e_patch là e-value dưới null "A hoặc B" | `patch_rule.py` | **Khớp:** trung bình các e-value (A), min các e_cert (B), min của hai cái | — |
 | TC10 | Bổ đề 2.3 / Mệnh đề 2.4 / Định lý 2.5 / Mệnh đề 2.7 | Không có trong mã quyết định | Kiểm bằng số (C3, C4, C5) | — |
+| TC12 | Vùng footprint là một hàm cụ thể | Census R2 định danh vùng bằng (tệp, **tên** hàm), nên hai method cùng tên ở hai class khác nhau bị gộp thành một vùng (ví dụ nhiều method `map` trong trino) | **Chặt nhưng bảo thủ:** báo thừa chồng lấn, không bao giờ báo thiếu | Study S định danh đơn vị bằng tên đầy đủ (qualname). Ghi lại; số của R2 là cận trên của chồng lấn |
 | TC11 | Thẻ hành vi (`behavior:*`) dùng chung làm hai kỹ năng thành "giao nhau" | `footprint_overlap` | **Chặt nhưng bảo thủ** (chỉ tốn thêm ô tổ hợp); census dùng footprint theo (tệp, hàm) | Ghi lại |
 
 ## Kết quả kiểm
