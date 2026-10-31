@@ -268,3 +268,17 @@ Mẫu cho mỗi mục:
   - số kỹ năng có lợi được chạy: 1,96 → 1,64.
 - **Cập nhật bài:** mục 7.2 (đoạn mới + Bảng 3), luật thực thi trong mục 3, nhận xét sau Giả định 4, Intro, Threats, Abstract.
 - **Bộ kiểm số:** từ 30 lên 38 con số (bỏ 2 con số của Study R, đã gộp vào R2). Cập nhật phản biện giả định A3, A4, A13, A17; thêm A20.
+
+### 31/10 tối: rà lý thuyết ↔ mã, và Study S (tổ hợp thật)
+- **Rà lý thuyết ↔ mã** (`docs/paper/THEORY_CODE_AUDIT.md`, TC1–TC12):
+  - TC5 (mã cấp module bị coi là rời nhau) là lỗi không chặt thật. Đã sửa; census chạy lại thành R2-A2 (456 → 467).
+  - TC3/TC4: bài thiếu mệnh đề về luật e-Holm mà D–H thật sự dùng. Đã thêm Nhận xét và phép kiểm C10 (FWER 2,4% / 7,3%).
+  - TC2: thêm sổ cái cho tổ hợp (C11).
+  - TC7: gắn nhãn cho các tùy chọn làm yếu bảo đảm.
+- **To-do có bảng điểm A* và nhật ký thắng/thua.** Quy tắc mới: cập nhật sau mỗi lần chạy.
+- **Study S:** giao thức `36eecff` commit trước khi chạy.
+  - Run 41227728959: 2/23 đơn vị dùng được, nên THUA.
+  - Debug: lỗi hạ tầng (method cần receiver, name mangling, import).
+  - Amendment S-A1 (post hoc), chạy lại: 12/23 dùng được. Tổ hợp cộng tính; cổng loại đúng 3 ô có thay đổi hành vi, admit 45.
+  - hera_pspec không cài được (`uvtools`).
+- **Bài:** thêm đoạn Study S trong mục 7.2 và Threats. Bộ kiểm số: 46 con số.

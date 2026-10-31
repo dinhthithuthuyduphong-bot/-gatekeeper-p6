@@ -29,7 +29,8 @@ The library-level results (Section~\ref{sec:eval-library}) come from synthetic l
 Assumption~\ref{ass:noninteract} by construction; they show what the design guarantees and costs under that model, not how often real
 skills interact.  The library census (Study R2) covers twelve rule-based families on $16$ repositories and detects interaction only
 syntactically (order dependence and created or removed sites); larger or learned libraries concentrate on popular code and may
-overlap and interact more.  The enabling-edge rule was added after the census had found the case (amendment R2-A1).
+overlap and interact more.  The enabling-edge rule was added after the census had found the case (amendment R2-A1).  Study S observes real compositions only
+on $12$ callable functions with signature-generated inputs, after a post hoc fix of the harness (S-A1).
 
 \paragraph{External validity.}
 The admission studies cover two hand-written rewrite families on $14$ targets (the library census, twelve); we make no claim about learned skill libraries at scale,

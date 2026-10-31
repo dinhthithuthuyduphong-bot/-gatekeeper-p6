@@ -18,7 +18,7 @@ Cập nhật sau **mỗi** lần chạy. Mỗi tiêu chí có trạng thái **TH
 | S4 | Đánh giá trên dữ liệu thật, có đăng ký trước, có kết quả âm | **THẮNG** | Study D, E, G, H, P, Q, R2; FREEZE + submission check |
 | S5 | So sánh với baseline mạnh và với công trình gần nhất | **THẮNG một phần** | B2, B6-R (kiểu GSE), B8; PatchDiff. **Thiếu:** chạy chính GSE (A12) |
 | S6 | Kỹ năng đa dạng, quy mô thư viện thực tế | **THẮNG một phần** | R2: 12 họ trên 16 repo, chỉ đo footprint và tương tác. **Thiếu:** admit thật với 12 họ (cần oracle) |
-| S7 | Tác hại của tổ hợp đo trên dữ liệu thật | **THUA (đang làm)** | Mới có mô phỏng và một tương tác cú pháp thật. Study S đang chạy (việc 7.4) |
+| S7 | Tác hại của tổ hợp đo trên dữ liệu thật | **THẮNG một phần** | Study S (sau S-A1): 12 hàm thật, tổ hợp cộng tính, cổng loại đúng 3 ô có hại. **Thiếu:** 11 đơn vị chưa chạy được; input G0 yếu (việc 7.8) |
 | S8 | Người chấm độc lập là con người | **THUA** | Người chấm thứ hai là LLM (A9). Việc 1.9 và 7.6 |
 | S9 | Tái lập được, có artifact ẩn danh | **THẮNG** (chờ upload) | submission check pass; `make_anonymous_artifact.py`. Người làm: upload |
 | S10 | Đúng định dạng và hạn của venue | **THUA** (chưa xác minh) | Bài hiện 14 trang `acmsmall`. Việc 0.3, 5.4 (người làm): tra giới hạn trang FSE 2027 |
@@ -51,7 +51,7 @@ Mỗi dòng gồm:
 | R13 | 31/10 | Study R2-A2 (193b136; 41226541891 không đổi số) | Census có mã cấp module | Census giữ `file::<module>` | — | **THẮNG**: 467 hàm/vùng (trước 456), các số khác không đổi; kết luận giữ nguyên | — |
 | R14 | 31/10 | Paper build (bf6c5e3) | PDF sau R2 + rà lý thuyết | — | — | **THẮNG**: 14 trang, 39/39 con số khớp; bảng 2 (thư viện 12 họ) hiển thị đúng | — |
 | R15 | 31/10 | Study S (41227728959) | Hành vi thật của tổ hợp trên 23 đơn vị (21 vùng chung + 2 cặp enabling) | `composition_study.py`: snapshot O/A/B/AB/BA, input G0, harm certificate + e-Holm | Định lý 2.5 lần đầu đo trên mã thật; phát hiện TC12 (gộp method cùng tên, bảo thủ) | **THUA**: chỉ 2/23 đơn vị chạy được, 0 thay đổi hành vi, nên không kết luận được gì | Vòng C bước 1 (hạ tầng): 14 method cần constructor có tham số; 1 method private bị name mangling; hera_pspec và cerberus import lỗi (không lưu log cài, sai phiên bản Python). Không phải lỗi lý thuyết. Sửa: amendment S-A1 |
-| R16 | 31/10 | Study S-A1 (đang chạy) | Chạy lại với receiver dựng từ chữ ký constructor | `composition_inner.py`; Python theo manifest; lưu log cài | — | *chờ kết quả* | — |
+| R16 | 31/10 | Study S-A1 (6de047c) | Chạy lại với receiver dựng từ constructor | `composition_inner.py`; Python theo manifest; lưu log cài | Giả định 4 trên tổ hợp thật: 12 đơn vị không có thay đổi "nảy sinh" khi ghép, không phụ thuộc thứ tự; 1 input masking chưa lặp lại | **THẮNG một phần**: 12/23 dùng được; cổng loại đúng 3 ô có thay đổi hành vi (pydal IS_STRONG.validate, 23/200 input), admit 45 ô | Còn THUA ở: hera_pspec không cài được (`uvtools>=0.2.0` không có bản cho Python 3.12; 9 đơn vị); G0 không sinh `bool` cho tham số `int`. Việc tiếp: 7.8 |
 
 ## C. Vòng debug khi THUA (làm theo thứ tự)
 
@@ -189,10 +189,15 @@ Thứ tự viết nên đi từ phần chắc nhất tới phần khó nhất:
 - [x] **7.1 Thư viện kỹ năng đa dạng:** 12 họ, Study R2 (giao thức trước, amendment R2-A1, R2-A2).
 - [x] **7.2 Rà lý thuyết ↔ mã:** [THEORY_CODE_AUDIT](paper/THEORY_CODE_AUDIT.md), TC1–TC11; C10, C11.
 - [x] **7.3 Luật thực thi chặt hơn:** cạnh enabling, footprint có tên module.
-- [ ] **7.4 (S7) Đo tác hại thật của tổ hợp:** chọn các cặp chồng lấn trong R2 (6 ô tổ hợp) và các cặp enabling; viết oracle hàm (như Study D) cho từng cặp; chạy e-process cho ô đơn và ô tổ hợp. Cần giao thức trước. Chi phí 0 USD, chỉ tốn thời gian CI.
+- [x] **7.4 (S7) Đo tác hại thật của tổ hợp:** Study S + S-A1 (12/23 đơn vị). Mô tả ban đầu: chọn các cặp chồng lấn trong R2 (6 ô tổ hợp) và các cặp enabling; viết oracle hàm (như Study D) cho từng cặp; chạy e-process cho ô đơn và ô tổ hợp. Cần giao thức trước. Chi phí 0 USD, chỉ tốn thời gian CI.
 - [ ] **7.5 (S6) Admit thật với 12 họ** trên các target có oracle sẵn (Study D/E/G): dùng `drawharness` với skill R2. Cần giao thức trước.
 - [ ] **7.6 (S8) Người chấm thứ hai là con người** cho Q-A1 (154 mục): việc của người.
 - [ ] **7.7 (S5) Chạy GSE gốc** nếu có mã công khai (A12).
+- [ ] **7.8 (S7, phần còn lại) Study S mở rộng:**
+  - cài hera_pspec bằng Python 3.11 hoặc từ nguồn `uvtools`;
+  - thêm bộ sinh input dựa trên kiểu thật, ví dụ sinh `bool` cho tham số `int` vì `bool` là lớp con của `int`.
+
+  Cả hai đều cần amendment S-A2 viết trước khi chạy.
 
 ---
 

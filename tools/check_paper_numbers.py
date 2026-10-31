@@ -37,6 +37,8 @@ LS = "research_closure/results/library_sim/LIBRARY_SIMULATION.json"
 QR = "research_closure/results/study_q/Q_ROBUSTNESS.json"
 R2 = "research_closure/results/study_r2/LIBRARY_CENSUS.json"
 RG = "research_closure/results/study_r2/LIBRARY_SIMULATION_GRAPH.json"
+SS = "research_closure/results/study_s/COMPOSITION_STUDY.json"
+SA = "research_closure/results/study_s/COMPOSITION_STUDY_SA1.json"
 
 CLAIMS = [
     ("Q usable instances", "$245$ instances usable", lambda: "$%d$ instances usable" % QA()["Q1_funnel"]["FINISHED"]),
@@ -122,6 +124,22 @@ CLAIMS = [
     ("R2 graph sim reuse", "$1.64$ instead of $1.96$ beneficial skills executed",
      lambda: "$%.2f$ instead of $%.2f$ beneficial skills executed" % (J(RG)["main"]["P2"]["mean_beneficial_skills_executed"],
                                                                       J(RG)["main"]["P1"]["mean_beneficial_skills_executed"])),
+    ("S registered usable", "As registered only $2$ of $23$ could be called",
+     lambda: "As registered only $%d$ of $%d$ could be called" % (J(SS)["total"]["usable"], J(SS)["total"]["units"])),
+    ("S-A1 usable", "(post hoc amendment S-A1) $12$ were usable",
+     lambda: "(post hoc amendment S-A1) $%d$ were usable" % J(SA)["total"]["usable"]),
+    ("S-A1 unusable split", "could not be installed ($9$, one repository) or called ($2$)",
+     lambda: "could not be installed ($%d$, one repository) or called ($%d$)" % (
+         sum(1 for u in J(SA)["units"] if not u.get("usable") and "import failed" in u.get("why", "")),
+         sum(1 for u in J(SA)["units"] if not u.get("usable") and "import failed" not in u.get("why", "")))),
+    ("S-A1 no emergent/order", "no composition changed behaviour where both of its parts\nkept it and none depended on the order",
+     lambda: "no composition changed behaviour where both of its parts\nkept it and none depended on the order"
+     if J(SA)["total"]["units_emergent"] == 0 and J(SA)["total"]["units_order_dependent"] == 0 else "CHANGED"),
+    ("S-A1 IS_STRONG", "on\n$23$ of $200$ inputs",
+     lambda: "on\n$%d$ of $%d$ inputs" % next((u["counts"]["B"], u["stable"]) for u in J(SA)["units"] if u.get("qualname") == "IS_STRONG.validate")),
+    ("S-A1 gate", "over all $48$ cells, the gate rejected\nexactly the $3$ cells",
+     lambda: "over all $%d$ cells, the gate rejected\nexactly the $%d$ cells" % (J(SA)["total"]["cells"], J(SA)["total"]["cells"] - J(SA)["total"]["cells_admitted"])),
+    ("S-A1 admitted", "admitted the other $45$", lambda: "admitted the other $%d$" % J(SA)["total"]["cells_admitted"]),
     # abstract (main.tex)
     ("abstract: plausible patches", "in $205$ plausible LLM patches", lambda: "in $%d$ plausible LLM patches" % PA()["PRIMARY"]["plausible"]),
     ("abstract: census admits", "the test census admitted all $16$ with partial\nbehavioural differences",
