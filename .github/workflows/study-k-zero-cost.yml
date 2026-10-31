@@ -16,7 +16,7 @@ jobs:
         run: |
           mkdir -p "$RUNNER_TEMP/study-k-envelope"
           printf 'commit=%s\nrun_id=%s\nB9=HOLD\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" > "$RUNNER_TEMP/study-k-envelope/context.txt"
-      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e
         with:
           version: "0.13.4"
