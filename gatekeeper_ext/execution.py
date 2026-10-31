@@ -103,3 +103,15 @@ def executable_subset(footprints: Mapping[str, Sequence[str]], admitted: Iterabl
 def composites_to_test(footprints: Mapping[str, Sequence[str]], admitted: Iterable[Cell], edges: Edges = ()) -> List[Cell]:
     """The composite cells that must be admitted before the whole set may run: its non-admitted components of size >= 2."""
     return [c for c in check_execution(footprints, admitted, edges).missing if len(c) >= 2]
+
+
+def canonical_order(cell: Iterable[str], registration: Sequence[str]) -> List[str]:
+    """The one order in which a composite cell is applied and certified (paper, Section "Problem formulation"): registration
+    order, fixed before any data.  A set of skills defines one composite cell; the certificate covers this order only, which
+    matters when one rewrite enables another (Study R2).  Skills not in the registration list are refused."""
+    pos = {sid: i for i, sid in enumerate(registration)}
+    missing = sorted(set(cell) - set(pos))
+    if missing:
+        raise KeyError("unregistered skills: %s" % missing)
+    return sorted(cell, key=pos.__getitem__)
+

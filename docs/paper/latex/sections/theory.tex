@@ -31,7 +31,7 @@ $\mathbb{E}[Y]\le\theta$.
 \begin{proposition}[Harm certificate used in the experiments]\label{prop:harm}
 Let $H_i\in\{0,1\}$ indicate a harmful draw, $\eta\in(0,1)$ a tolerated harm rate and $c\in(0,1)$.  Under the null
 $\Pr[H_i=1\mid\mathcal{F}_{i-1}]\ge\eta$, the process $C_n=\prod_{i\le n}(1+\lambda(\eta-H_i))$ with $\lambda=c/(1-\eta)$ satisfies
-$\Pr[\exists n: C_n\ge1/\beta]\le\beta$.  If the harm rate is $h$, $\log C_n/n\to(1-h)\log(1+\lambda\eta)+h\log(1-c)$, which is positive
+$\Pr[\exists n: C_n\ge1/\beta]\le\beta$.  If the draws are i.i.d.\ with harm rate $\Pr[H_i=1]=h$, $\log C_n/n\to(1-h)\log(1+\lambda\eta)+h\log(1-c)$, which is positive
 iff $h<h^\star=\log(1+\lambda\eta)/(\log(1+\lambda\eta)-\log(1-c))$; and $C_n\ge1/\beta$ after $n$ clean draws iff
 $n\ge\log(1/\beta)/\log(1+\lambda\eta)$.  For $c=0.9$, $\eta=5\%$: $h^\star\approx0.39\eta$, and $\beta=0.1/16$ needs $110$ clean draws.
 \end{proposition}
@@ -72,10 +72,13 @@ every scope, the probability of admitting any harmful cell is at most $\alpha$.
 \end{theorem}
 
 \begin{proof}
-For every $(c,k)$ let $A_{c,k}=\{\sup_n K^{c,k}_n\ge1/\alpha_{c,k}\}$, defined on the whole infinite task sequence of that
-epoch.  An admission of $(c,k)$ implies $A_{c,k}$; adaptive selection and stopping can only forgo admissions.  Hence the
+For every $(c,k)$ let $O_{c,k}$ be the event that epoch $k$ of cell $c$ is opened, and
+$A_{c,k}=O_{c,k}\cap\{\sup_n K^{c,k}_n\ge1/\alpha_{c,k}\}$, with the e-process run on the whole infinite task sequence of that epoch.
+Conditionally on the information at the opening, that sequence is i.i.d.\ from $P^{(k)}_s$ by assumption, so Lemma~\ref{lem:eprocess}
+applied conditionally gives $\Pr[A_{c,k}]\le\alpha_{c,k}\Pr[O_{c,k}]\le\alpha_{c,k}$ when $H_0^c$ holds in epoch $k$.  An admission of $(c,k)$
+implies $A_{c,k}$; adaptive selection and stopping can only forgo admissions.  Hence the
 event that some cell with $H_0^c$ true is admitted is contained in $\bigcup_{(c,k):H_0^c}A_{c,k}$, whose probability is at
-most $\sum\alpha_{c,k}\le\alpha$ by Lemma~\ref{lem:eprocess} and a union bound, which needs no independence across cells.
+most $\sum\alpha_{c,k}\le\alpha$ by the union bound, which needs no independence across cells.
 Finally, by Lemma~\ref{lem:shift}, $\mathrm{STR}_{Q^{(k)}}(c)>-\theta+2\xi_s$ implies $\mathrm{STR}_{P^{(k)}}(c)>-\theta$,
 that is, $H_0^{c}$ for that epoch.  If $2\xi_s\le\theta$, then $\mathrm{STR}_{Q}(c)>0$ implies
 $\mathrm{STR}_{Q}(c)>-\theta+2\xi_s$.
@@ -89,14 +92,15 @@ most $\alpha_s$.
 \end{lemma}
 
 \begin{proof}
-There are $N$ singles and $\binom{N}{m}$ composites of size $m$, so the sum over cells is
+Each subset of skills defines one composite cell (its canonical order, Section~\ref{sec:problem}), so there are $N$ singles and
+$\binom{N}{m}$ composites of size $m$, and the sum over cells is
 $\alpha_s\bigl[\sigma+(1-\sigma)\sum_{m=2}^{N}6/(\pi^2(m-1)^2)\bigr]\le\alpha_s[\sigma+(1-\sigma)]=\alpha_s$, because
 $\sum_{j\ge1}6/(\pi^2j^2)=1$; the epoch factors sum to $1$ for the same reason.
 \end{proof}
 
 \begin{proposition}[Fixed families: e-Holm, as used in the experiments]\label{rem:eholm}
 For a fixed family of $K$ cells at epoch $0$, let $e_c=\min(K^{\mathrm{ben}}_{c,\tau_c},C_{c,\tau_c})$, the benefit e-process
-(Lemma~\ref{lem:eprocess}) and the harm certificate (Proposition~\ref{prop:harm}) read at the cell's stopping time $\tau_c$: the first
+(Lemma~\ref{lem:eprocess}) and the harm certificate (Proposition~\ref{prop:harm}) read at the cell's stopping time $\tau_c$ with respect to that cell's own trial filtration: the first
 draw at which this minimum reaches $K/\alpha$ or a harm alarm fires, and otherwise the end of a finite budget; set $e_c=0$ if the alarm
 fired.  Then (a) $\mathbb{E}[e_c]\le1$ under the union null ``not admissible or harm rate at least $\eta$''; (b) e-Holm, the closed
 testing procedure whose local test of an intersection $\bigcap_{i\in I}H_i$ rejects iff $|I|^{-1}\sum_{i\in I}e_i\ge1/\alpha$, has
@@ -163,7 +167,7 @@ $\mathrm{STR}_Q(c)=\mathrm{STR}_P(c)+2\xi$, whose admission probability does not
 of $\mathcal{R}_{\mathrm{obs}}$ and the target's own fingerprints and predicates) and has $\ell(x,\pi)=1$, $\ell(x,\varnothing)=0$
 for every task.  The procedure's input, hence its admission probability, is unchanged, and $Z\equiv1$ on $R^\dagger$.
 (b) Take task types $u$ ($Z=1$) and $d$ ($Z=-1$), both realizable with $\ell\in\{0,1\}$ ($u$: the run passes without the
-skill and fails with it; $d$: the reverse), with $P(d)=(1+\theta+\delta)/2\ge\xi$ and $P(u)=(1-\theta-\delta)/2>0$, so that
+skill and fails with it; $d$: the reverse), with $P(d)=(1+\theta+\delta)/2>1/2\ge\xi$ and $P(u)=(1-\theta-\delta)/2>0$, so that
 $\mathrm{STR}_P=P(u)-P(d)=-\theta-\delta$, and obtain $Q$ by moving mass $\xi$ from
 $d$ to $u$.  The procedure only reads tasks drawn from $P$.
 \end{proof}
@@ -175,7 +179,7 @@ family and why coarse scopes make it weak.
 \subsection{Composition}
 
 \begin{theorem}[Composition risk is not controlled by individual risks]\label{thm:composition}
-Under Assumption~\ref{ass:rich}, for $a,b\in[-1,0)$,
+Under Assumption~\ref{ass:rich}, for $a,b\in[-1,0)$, with the supremum over pairs of skills and task distributions of the scope,
 \[
   \sup\bigl\{\mathrm{STR}(S_1\circ S_2):\ \mathrm{STR}(S_1)=a,\ \mathrm{STR}(S_2)=b\bigr\}=1+\min(a,b),
 \]

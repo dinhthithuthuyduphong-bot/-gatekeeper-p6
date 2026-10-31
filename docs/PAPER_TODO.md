@@ -65,6 +65,8 @@ Mỗi dòng gồm:
 | R27 | 31/10 | Paper round 5 (0d6eff1) | Sửa theo model review | Xem MODEL_REVIEW_RESPONSE.md; thêm bảng tổng quan các study; sửa câu sai "mọi study dùng seed drand" | — | **THẮNG**: 49/49 con số khớp | — |
 | R28 | 31/10 | Chứng minh mọi mệnh đề (2ce2676) | Đi từ lý thuyết đã chứng minh tới mã | Harm certificate và e-Holm thành Mệnh đề có chứng minh; Bổ đề sổ cái; Giả định 4 / Hệ quả theo đồ thị kề (gồm cạnh enabling); điều kiện epoch; đo cộng tính chính xác trong Study S | Phát hiện: Giả định 4 với loss {0,1} ngầm đòi không task nào bị cả A và B đổi; công cụ S đo lỏng hơn (TC17), không đổi số báo cáo | **THẮNG**: 51/51 con số khớp; baseline B2, B6-R, B8 và gate của P khớp lý thuyết (TC19–TC22) | — |
 | R29 | 31/10 | Sự cố push | — | — | — | **THUA do môi trường**: `git pull --rebase origin main` báo "Cannot rebase onto multiple branches", nên push không chạy và 3 workflow chạy trên commit cũ | Hủy 3 run, push lại, chạy lại trên 2ce2676 |
+| R30 | 31/10 | Model kiểm chứng minh vòng 2, 3 (a2a82df, 92d049c) | Kiểm lại sau khi sửa | Vòng 2: 5 điểm nhỏ; vòng 3: 6 điểm nhỏ, 0 lỗi lớn | Vòng 3 chỉ ra **thứ tự chuẩn của ô tổ hợp** (TC24): một tập kỹ năng phải có một thứ tự áp dụng cố định; trước đó lý thuyết đếm theo tập còn thực thi phụ thuộc thứ tự | **THẮNG**: đã sửa cả 11 điểm, kèm `canonical_order` trong mã; cách đạt cận của Định lý 2 với loss nhị phân kiểm bằng số | — |
+| R31 | 31/10 | Paper build (88f54c0) | PDF | — | — | **THẮNG**: 16 trang (giới hạn 18 + tham khảo), 51/51 con số khớp | — |
 
 ## C. Vòng debug khi THUA (làm theo thứ tự)
 

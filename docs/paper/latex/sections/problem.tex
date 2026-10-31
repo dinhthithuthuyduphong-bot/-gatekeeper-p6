@@ -9,7 +9,10 @@ target), observed postconditions $\mathcal{P}$ with the contexts they were obser
 $\mathcal{K}$, the code regions and behavioural properties that $\pi$ reads or writes.
 A context $x$ is a (repository, revision, environment, task) tuple.
 A scope family $\mathbb{S}=\{s_1,\dots,s_L\}$ is a finite partition of contexts declared before any trial.
-We call a pair $c=(S,s)$ a \emph{cell}; for a set of skills whose footprints form a connected overlap graph, their composition, applied together in scope $s$, is a cell of its own (for two skills, $(S\circ S',s)$).
+We call a pair $c=(S,s)$ a \emph{cell}; for a set of skills that form a connected component of the adjacency graph of
+Section~\ref{sec:theory}, their composition, applied together in scope $s$ in one canonical order fixed in advance (registration
+order), is a cell of its own (for two skills, $(S\circ S',s)$).  A set of skills therefore defines at most one composite cell, and
+the certificate covers that order, which matters when one rewrite enables another.
 
 \paragraph{Loss and selective transfer risk.}
 For a task $x$, $\ell(x,\pi)\in[0,1]$ is its functional loss with the skill applied and $\ell(x,\varnothing)$ the loss

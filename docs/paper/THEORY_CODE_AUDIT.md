@@ -39,6 +39,8 @@ Viết ngày 31/10/2026.
 | TC22 | Gate tuần tự của Study P = harm certificate, ngưỡng K/α (sổ cái α/K) | `gates.gatekeeper_path`: λ = 0,9/0,95, ngưỡng log(K/α), alarm μ và 20 = 1/0,05 | **Khớp** với Mệnh đề harm và Định lý 1 | — |
 | TC23 | Người chấm model của Q-A1 có phân biệt R/B không | `rater_calibration.py` (20 mục biết trước đáp án) | **Có**: argon và flash đều 20/20 | Người chấm model hợp lệ cho S8 |
 
+| TC24 | Ô tổ hợp có một thứ tự chuẩn duy nhất (do model kiểm vòng 3 chỉ ra: nếu không thì cách đếm C(N,m) sai) | `execution.canonical_order` (thứ tự đăng ký) | **Thiếu trước đó**, vì luật chưa nói áp dụng theo thứ tự nào | Thêm vào Problem, Bổ đề sổ cái và mã; có test. Study S đã đo cả hai thứ tự AB và BA |
+
 ## Kết quả kiểm
 Kết quả nằm trong `research_closure/results/theory/THEORY_CHECKS.json`:
 - **C10** (luật quyết định của D–H): FWER ở cả hai biên của null ≤ α, và E[e_τ] ≤ 1 (trong khoảng 3 sai số chuẩn).

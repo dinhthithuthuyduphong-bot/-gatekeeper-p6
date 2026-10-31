@@ -72,6 +72,11 @@ class ExecutionRuleTest(unittest.TestCase):
         self.assertEqual(X.components({"a": a, "b": b, "c": c}), [F({"a", "b"}), F({"c"})])
         self.assertEqual(len(X.components({"a": ["func:<module>"], "b": ["func:<module>"]})), 2)   # the frozen behaviour
 
+    def test_canonical_order_is_registration_order(self):
+        self.assertEqual(X.canonical_order({"b", "a", "c"}, ["c", "a", "b"]), ["c", "a", "b"])
+        with self.assertRaises(KeyError):
+            X.canonical_order({"z"}, ["a"])
+
 
 if __name__ == "__main__":
     unittest.main()
