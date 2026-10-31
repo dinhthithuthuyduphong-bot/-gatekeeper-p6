@@ -250,3 +250,21 @@ Mẫu cho mỗi mục:
   - ruff: không lỗi thật; 21 import thừa đã dọn; 16 cảnh báo B023 đều là báo động giả.
   - Sự cố nhỏ: lệnh `pkill` khớp nhầm cả shell của chính mình, chạy lại không dùng `pkill`. CI lint ban đầu mất hơn 9 phút vì shellcheck, đã tắt shellcheck trong CI.
 - **Study R:** giao thức commit trước (`d655dfd`), chạy run 41218737641: 16/16 repo, 655 tệp, 104 + 16 hàm, **1 hàm chung**. Đưa vào bài (mục 7.2, Intro, Threats); bộ kiểm số lên 30.
+
+### 31/10 chiều — "Tiếp tục tới khi thắng với số lượng skill đa dạng": Study R2
+- **Thư viện 12 họ kỹ năng:** 2 họ đã freeze + 10 họ mới trong `gatekeeper_ext/skill_library.py`. Manifest nằm ở `study_r2/skills/`. Mỗi họ có test với một input làm thay đổi hành vi (`tests/test_skill_library.py`).
+- **Giao thức commit trước khi chạy** (`6465ea4`). Chạy thử chỉ trên mã không phải target (requests, flask, thư viện chuẩn).
+- **Sự cố:** workflow không nhận `workflow_dispatch` vì tên step chứa `: ` mà không có ngoặc kép, nên YAML không parse được. Đã sửa, và kiểm bằng actionlint cục bộ.
+- **Run 41223600552:** 16/16 repo, 655 tệp.
+  - 59 ô, 456 hàm, trong đó 21 hàm bị từ 2 họ trở lên chạm vào.
+  - 18/136 cặp họ giao footprint; cần 6 ô tổ hợp.
+- **Phát hiện thật:**
+  - `type(x) is not int` → `isinstance` làm chấp nhận cả bool, và tạo site mới cho guard bool, nên kết quả phụ thuộc thứ tự áp dụng.
+  - Footprint của hai họ này trên mã gốc là rời nhau. Ở pydal, luật cũ sẽ cho hai họ chạy chung mà không cần chứng nhận tổ hợp.
+- **Amendment R2-A1 (post hoc):** luật thực thi nối thêm "cạnh enabling" giữa các cặp không giao hoán hoặc làm đổi site của nhau (`execution.py`, tham số `edges`). Workflow đã chạy lại; số liệu census giống hệt lần đầu.
+- **Mô phỏng trên 13 thư viện thật:**
+  - admit từng kỹ năng: 7,1% thư viện chạy thành phần có hại (14,5% khi q = 1);
+  - cách của bài: 0/1.000;
+  - số kỹ năng có lợi được chạy: 1,96 → 1,64.
+- **Cập nhật bài:** mục 7.2 (đoạn mới + Bảng 3), luật thực thi trong mục 3, nhận xét sau Giả định 4, Intro, Threats, Abstract.
+- **Bộ kiểm số:** từ 30 lên 38 con số (bỏ 2 con số của Study R, đã gộp vào R2). Cập nhật phản biện giả định A3, A4, A13, A17; thêm A20.

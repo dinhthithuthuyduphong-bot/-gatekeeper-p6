@@ -161,8 +161,10 @@ composite by the execution rule), so outside the event of Theorem~\ref{thm:admis
 \end{proof}
 
 Assumption~\ref{ass:noninteract} is strong: two edits in different functions can still interact through shared state that no
-footprint records.  We therefore report it as an assumption and measure how often it fails on pairs with disjoint footprints,
-rather than presume it.
+footprint records, and footprints read off the original code miss a change that creates sites for another: Study R2 found such
+a pair on real code (Section~\ref{sec:eval-library}), which is why the execution rule also links non-commuting pairs.  The
+assumption is then needed only for pairs that commute and share no function; among the $80$ such file pairs of Study R2 none
+interacted syntactically, but a syntactic check cannot exclude interaction through shared state, so it remains an assumption.
 
 \subsection{The value of pairing}
 

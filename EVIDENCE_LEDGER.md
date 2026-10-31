@@ -228,3 +228,8 @@ Các study mà bài dùng (D, E, G, H, P, Q) đều kiểm được: D, E, G, H,
 ## 31/10/2026 — Study R: footprint census (đăng ký: `study_r/PROTOCOL.md`, commit `d655dfd`, trước khi chạy)
 
 16/16 target của Study D, E, G được clone tại revision ghim; 655 tệp nguồn không phải test. Họ `bool` chạm 104 hàm, họ `None` chạm 16 hàm, **1 hàm chung** (`hera_pspec/pspecdata.py: pspec`); trên các module khai báo: 0 chồng lấn. Run 41218737641; kết quả `research_closure/results/study_r/FOOTPRINT_CENSUS.json`. Chỉ phân tích AST, không chạy mã của target, không gọi model.
+
+## Study R2 (twelve-family library census)
+- Protocol `study_r2/PROTOCOL.md` committed before running (`6465ea4`); amendment R2-A1 (post hoc, enabling edges) in `study_r2/AMENDMENTS.md`.
+- Runs: `Gatekeeper Study R2 library census` 41223600552 (first) and the re-run after R2-A1 (commit `7da8592`); census numbers identical.
+- Results: `research_closure/results/study_r2/LIBRARY_CENSUS.json`, `LIBRARY_SIMULATION_GRAPH.json` (risks synthetic, labelled).

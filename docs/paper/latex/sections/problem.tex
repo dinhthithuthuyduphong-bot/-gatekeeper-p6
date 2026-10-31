@@ -43,7 +43,8 @@ $\mathrm{TV}(P,Q)=\sup_A|P(A)-Q(A)|$.
 
 \paragraph{Execution rule.}
 Skills that are executed together form a set $E$.  Split $E$ into the connected components of its footprint-overlap graph
-(two skills are adjacent when their footprints intersect).  We execute $E$ only if every component with two or more skills
+(two skills are adjacent when their footprints intersect, or when applying one creates or removes sites of the other, which
+we detect by applying both in either order).  We execute $E$ only if every component with two or more skills
 is itself an admitted cell; a skill whose composite with an already admitted skill is still undecided is not executed together
 with it.  This closes the gap between per-cell certificates and what actually runs.
 

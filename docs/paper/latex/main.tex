@@ -24,7 +24,8 @@ tight, characterise composition risk exactly, and bound every executed set throu
 numerically.  Pre-registered experiments, negative results included, show where such a gate matters.  On $14$ real skill-reuse targets harm was
 frequent and a simple gate with target evidence sufficed, while replay plus fingerprints admitted all four harmful cells.  In a
 simulated library built on our implementation, admitting skills one by one ran a harmful composition in $28\%$ of libraries, and
-composite cells with the execution rule in none.  In $205$ plausible LLM patches, the test census admitted all $16$ with partial
+composite cells with the execution rule in none; on a twelve-family library over $16$ real repositories, footprints read off the
+original code missed a real interaction between two rewrites, which the execution rule now catches.  In $205$ plausible LLM patches, the test census admitted all $16$ with partial
 behavioural differences and the statistical gates none, yet a manual check traced most of those differences to inputs the developers'
 fix also rejects; on SWE-bench Verified the measured harm rate changes by a factor of about four with its definition.
 \end{abstract}

@@ -35,7 +35,8 @@ RQ3 = lambda: J("research_closure/results/rq3/RQ3_SUMMARY.json")         # noqa:
 TH = lambda: J("research_closure/results/theory/THEORY_CHECKS.json")     # noqa: E731
 LS = "research_closure/results/library_sim/LIBRARY_SIMULATION.json"
 QR = "research_closure/results/study_q/Q_ROBUSTNESS.json"
-RC = "research_closure/results/study_r/FOOTPRINT_CENSUS.json"
+R2 = "research_closure/results/study_r2/LIBRARY_CENSUS.json"
+RG = "research_closure/results/study_r2/LIBRARY_SIMULATION_GRAPH.json"
 
 CLAIMS = [
     ("Q usable instances", "$245$ instances usable", lambda: "$%d$ instances usable" % QA()["Q1_funnel"]["FINISHED"]),
@@ -89,10 +90,34 @@ CLAIMS = [
                                                                               pct(J(QR)["HQ1_max_upper_bound"]))),
     ("Q robustness Q4 range", "between $8.2\\%$ and\n$14.0\\%$",
      lambda: "between $%s\\%%$ and\n$%s\\%%$" % (pct(J(QR)["Q4_range"][0]), pct(J(QR)["Q4_range"][1]))),
-    ("study R census", "scanned $655$ non-test source files: the \\texttt{bool} guard touches\n$104$ functions and the \\texttt{None}-comparison rewrite $16$, and only $1$ function is touched by both",
-     lambda: "scanned $%d$ non-test source files: the \\texttt{bool} guard touches\n$%d$ functions and the \\texttt{None}-comparison rewrite $%d$, and only $%d$ function is touched by both" % (
-         J(RC)["total"]["files_scanned"], J(RC)["total"]["repo_functions_bool"], J(RC)["total"]["repo_functions_none"], J(RC)["total"]["repo_functions_both"])),
-    ("study R targets", "over all $16$ target repositories", lambda: "over all $%d$ target repositories" % J(RC)["total"]["cloned"]),
+    ("R2 census", "($655$ non-test files) found $59$ single-skill cells,\n$3.7$ per repository, touching $456$ functions, of which $21$ are touched by two or more families",
+     lambda: "($%d$ non-test files) found $%d$ single-skill cells,\n$%.1f$ per repository, touching $%d$ functions, of which $%d$ are touched by two or more families" % (
+         J(R2)["total"]["files_scanned"], J(R2)["total"]["cells"], J(R2)["total"]["mean_cells_per_target"], J(R2)["total"]["functions_touched"],
+         J(R2)["total"]["functions_touched_by_two_or_more"])),
+    ("R2 targets/families", "over all $16$ target repositories at their pinned revisions",
+     lambda: "over all $%d$ target repositories at their pinned revisions" % J(R2)["total"]["cloned"]),
+    ("R2 pairs", "Of the $136$ family pairs that\nmeet in some repository, $18$ overlap, and the execution rule requires $6$ composite cells",
+     lambda: "Of the $%d$ family pairs that\nmeet in some repository, $%d$ overlap, and the execution rule requires $%d$ composite cells" % (
+         J(R2)["total"]["family_pairs_possible"], J(R2)["total"]["family_pairs_overlapping"], J(R2)["total"]["composite_cells_required"])),
+    ("R2 shared commute", "all $21$ such pairs that share a function commute",
+     lambda: "all $%d$ such pairs that share a function commute" % (J(R2)["total"]["interaction_shared_function"]["file_pairs"]
+                                                                   if J(R2)["total"]["interaction_shared_function"]["non_commuting"] == 0 else -1)),
+    ("R2 disjoint non-commuting", "Two pairs\nwith \\emph{disjoint} footprints do not",
+     lambda: "%s pairs\nwith \\emph{disjoint} footprints do not" % {2: "Two"}.get(J(R2)["total"]["interaction_disjoint_functions"]["non_commuting"], "?")),
+    ("R2 missed by static", "In\n\\texttt{pydal} the original-code footprints",
+     lambda: "In\n\\texttt{%s} the original-code footprints" % {"G1_pydal": "pydal"}[J(R2)["with_enabling_edges"]["total"]["missed_by_static"][0][0]]),
+    ("R2 commuting disjoint", "among the $80$ such file pairs of Study R2 none",
+     lambda: "among the $%d$ such file pairs of Study R2 none" % (J(R2)["total"]["interaction_disjoint_functions"]["file_pairs"]
+                                                                  - J(R2)["total"]["interaction_disjoint_functions"]["non_commuting"])),
+    ("R2 graph sim", "Re-running the simulation on the $13$ measured libraries",
+     lambda: "Re-running the simulation on the $%d$ measured libraries" % J(RG)["libraries"]),
+    ("R2 graph sim P1", "executed a harmful component in $7.1\\%$ of libraries at $q=0.3$ ($14.5\\%$ when every\noverlapping pair is harmful), ours in $0/1{,}000$",
+     lambda: "executed a harmful component in $%s\\%%$ of libraries at $q=0.3$ ($%s\\%%$ when every\noverlapping pair is harmful), ours in $%d/1{,}000$" % (
+         pct(J(RG)["main"]["P1"]["harmful_component_rate"]), pct(J(RG)["sweep_bad_pair_prob"]["1.0"]["P1"]["harmful_component_rate"]),
+         round(1000 * J(RG)["main"]["P2"]["harmful_component_rate"]))),
+    ("R2 graph sim reuse", "$1.64$ instead of $1.96$ beneficial skills executed",
+     lambda: "$%.2f$ instead of $%.2f$ beneficial skills executed" % (J(RG)["main"]["P2"]["mean_beneficial_skills_executed"],
+                                                                      J(RG)["main"]["P1"]["mean_beneficial_skills_executed"])),
     # abstract (main.tex)
     ("abstract: plausible patches", "in $205$ plausible LLM patches", lambda: "in $%d$ plausible LLM patches" % PA()["PRIMARY"]["plausible"]),
     ("abstract: census admits", "the test census admitted all $16$ with partial\nbehavioural differences",

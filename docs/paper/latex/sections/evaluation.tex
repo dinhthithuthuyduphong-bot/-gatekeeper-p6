@@ -49,7 +49,7 @@ $h$ & smoke 20 & zero-tol.\ 300 & fixed 300 & certificate, 300 & mixture, 1000 \
 \subsection{Library-level control (simulation)}
 \label{sec:eval-library}
 % source: research_closure/results/library_sim/LIBRARY_SIMULATION.json; tools/library_simulation.py
-No real library in our studies has overlapping skills, so we test the library-level parts of the design (composite cells, the
+The libraries of Studies D--G have no overlapping skills, so we first test the library-level parts of the design (composite cells, the
 per-cell ledger and the execution rule) on synthetic libraries built with the implementation's own e-process, ledger and execution
 rule.  Each library has $12$ skills in one scope ($70\%$ beneficial, $\mathrm{STR}=-0.3$; the rest not admissible), each touching one of
 $8$ code regions; every overlapping pair is, with probability $q$, the harmful construction of Theorem~\ref{thm:composition}
@@ -60,11 +60,49 @@ happened ($0/1{,}000$ at every $q$, consistent with Corollary~\ref{cor:execution
 beneficial skills executed per library, because undecided or rejected composites keep overlapping skills apart, and $8\%$ more trials.
 Measured on the executed set as a whole, one-by-one admission looked harmful in only $5.4\%$ of libraries: benefits elsewhere masked the
 harmful component, which is why the guarantee is stated per component.
-How often would real skills need composite cells?  A footprint census of our two real skill families (Study R, AST analysis only)
-over all $16$ target repositories at their pinned revisions scanned $655$ non-test source files: the \texttt{bool} guard touches
-$104$ functions and the \texttt{None}-comparison rewrite $16$, and only $1$ function is touched by both (in \texttt{hera\_pspec}); none of
-the modules the studies declared overlap.  Overlap is rare on real code, so the reuse cost of the execution rule in the simulation,
-where $12$ skills share $8$ regions, is a pessimistic bound.
+\paragraph{A twelve-family library on real code (Study R2).}
+% source: research_closure/results/study_r2/LIBRARY_CENSUS.json, LIBRARY_SIMULATION_GRAPH.json; study_r2/PROTOCOL.md, AMENDMENTS.md
+To see what the library-level rules meet on real code, we built a library of twelve families of reusable code changes: the two frozen
+families of Section~\ref{sec:eval-skills} and ten linter-style rewrites (Table~\ref{tab:library}), each behaviour-preserving on
+ordinary inputs and behaviour-changing on some (every family has a unit test with such a witness input).  A pre-registered census
+(AST analysis only) over all $16$ target repositories at their pinned revisions ($655$ non-test files) found $59$ single-skill cells,
+$3.7$ per repository, touching $456$ functions, of which $21$ are touched by two or more families.  Of the $136$ family pairs that
+meet in some repository, $18$ overlap, and the execution rule requires $6$ composite cells.
+Applying every two families that bind in the same file in both orders, all $21$ such pairs that share a function commute.  Two pairs
+with \emph{disjoint} footprints do not: rewriting \texttt{type(x) is not int} to \texttt{not isinstance(x, int)} admits \texttt{bool}
+and creates a site for the \texttt{bool} guard in a function the guard did not touch, so the result depends on the order.  In
+\texttt{pydal} the original-code footprints put the two families in different components, and the execution rule would have run them
+together without a composite certificate.  Footprints taken from the original code therefore miss \emph{enabling} interactions; the
+implementation now also links every non-commuting or site-changing pair (post hoc amendment R2-A1), which merges the two
+components.  Re-running the simulation on the $13$ measured libraries with two or more cells (enabling edges included; benefits and
+harms synthetic as above), one-by-one admission executed a harmful component in $7.1\%$ of libraries at $q=0.3$ ($14.5\%$ when every
+overlapping pair is harmful), ours in $0/1{,}000$, at the cost of $1.64$ instead of $1.96$ beneficial skills executed.  Real libraries
+overlap less than the synthetic ones, so both the risk of one-by-one admission and the cost of the rule are smaller; neither vanishes.
+
+\begin{table}[t]
+\caption{The Study R2 library: families, the inputs on which each rewrite changes behaviour, and the number of the $16$ target
+repositories where it binds.  The first two are the frozen families of Studies D--G.}
+\label{tab:library}
+\footnotesize
+\begin{tabular}{@{}llr@{}}
+\toprule
+Rewrite & Changes behaviour when & Repos \\
+\midrule
+\texttt{isinstance(x, int)} $\to$ \dots\ \texttt{and not isinstance(x, bool)} & $x$ is a \texttt{bool} & 15 \\
+\texttt{x == None} $\to$ \texttt{x is None} & \texttt{\_\_eq\_\_} overridden & 3 \\
+\texttt{type(x) == T} $\to$ \texttt{isinstance(x, T)} & $x$ is an instance of a subclass & 4 \\
+\texttt{x == True} $\to$ \texttt{x is True} & $x$ is \texttt{1}, a numpy bool & 2 \\
+\texttt{x is 1000} $\to$ \texttt{x == 1000} & equal, non-identical values & 0 \\
+\texttt{len(x) == 0} $\to$ \texttt{not x} & \texttt{\_\_bool\_\_} and \texttt{\_\_len\_\_} disagree & 8 \\
+\texttt{k in d.keys()} $\to$ \texttt{k in d} & \texttt{\_\_contains\_\_} and \texttt{keys()} disagree & 3 \\
+\texttt{def f(a=[])} $\to$ \texttt{a=None} + guard & callers rely on shared state & 5 \\
+\texttt{except:} $\to$ \texttt{except Exception:} & \texttt{KeyboardInterrupt}, \texttt{SystemExit} & 5 \\
+\texttt{raise e} $\to$ \texttt{raise} (in its handler) & the traceback is inspected & 4 \\
+\texttt{open(p)} $\to$ \texttt{open(p, encoding="utf-8")} & non-UTF-8 locale or file & 10 \\
+\texttt{yaml.load(s)} $\to$ \texttt{yaml.safe_load(s)} & Python-specific tags & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \subsection{Skill reuse on real targets}
 \label{sec:eval-skills}
