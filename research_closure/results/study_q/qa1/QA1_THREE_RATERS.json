@@ -1,0 +1,45 @@
+{
+ "items": 154,
+ "raters": {
+  "assistant": {
+   "R": 135,
+   "B": 19
+  },
+  "argon": {
+   "R": 154
+  },
+  "flash": {
+   "R": 154
+  }
+ },
+ "pairwise": {
+  "assistant~argon": {
+   "agreement": 0.8766233766233766,
+   "kappa": 0.0
+  },
+  "assistant~flash": {
+   "agreement": 0.8766233766233766,
+   "kappa": 0.0
+  },
+  "argon~flash": {
+   "agreement": 1.0,
+   "kappa": null
+  }
+ },
+ "fleiss_kappa": -0.04288939051918821,
+ "unanimous": 135,
+ "majority_codes": {
+  "R": 154
+ },
+ "units_with_majority_regression": 31,
+ "without_majority_regression": {
+  "k": 5,
+  "n": 36,
+  "share": 0.1388888888888889,
+  "wilson95": [
+   0.060817253631150966,
+   0.2865985128039319
+  ]
+ },
+ "note": "post hoc; the third rater is a model (gemini-3.8-flash), not a human"
+}
