@@ -1,0 +1,1132 @@
+{
+ "stats": {
+  "hq1_units": 55,
+  "captured": 2,
+  "reproduced": 2,
+  "items": 5,
+  "units_with_items": 1
+ },
+ "units": [
+  {
+   "instance_id": "astropy__astropy-13453",
+   "sha": "541545af0d26b0049a5c5d5c1a0f0ef19b78d1b547a516259354993ef86b699c",
+   "cohort_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 15
+    },
+    "divergent": 16,
+    "naive_harm": 15,
+    "contract_harm": 15
+   },
+   "cohort_contract_regression": true,
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 15
+    },
+    "divergent": 16,
+    "naive_harm": 15,
+    "contract_harm": 15
+   },
+   "same_generator": true,
+   "reproduced": true
+  },
+  {
+   "instance_id": "astropy__astropy-14096",
+   "sha": "bdb1d023f6aff9133249eb4699bae6895f743609c862393f11ce52c1f9e34ba3",
+   "cohort_summary": {
+    "scored": 200,
+    "categories": {
+     "C1": 19
+    },
+    "divergent": 19,
+    "naive_harm": 19,
+    "contract_harm": 19
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "astropy__astropy-14309",
+   "sha": "e7cd25b52162decad573ebf72a1bfde3f4906e5e5df7c10d67fb176928fb53d6",
+   "cohort_summary": {
+    "scored": 400,
+    "categories": {
+     "C2-O": 3
+    },
+    "divergent": 3,
+    "naive_harm": 3,
+    "contract_harm": 0
+   },
+   "cohort_contract_regression": false,
+   "captured": true,
+   "rerun_status": "FINISHED",
+   "same_target": true,
+   "rerun_summary": {
+    "scored": 400,
+    "categories": {
+     "C2-O": 3
+    },
+    "divergent": 3,
+    "naive_harm": 3,
+    "contract_harm": 0
+   },
+   "same_generator": true,
+   "reproduced": true
+  },
+  {
+   "instance_id": "astropy__astropy-14508",
+   "sha": "19de1a1016f6cb15f336b07fa857c4e57a670f00e9f26b855a26d4544ed8559a",
+   "cohort_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 4
+    },
+    "divergent": 220,
+    "naive_harm": 4,
+    "contract_harm": 4
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "astropy__astropy-14995",
+   "sha": "9fbfbbd622cb9a793a8980e3dbaa839003a3a213f2bcb372ace3d463af509555",
+   "cohort_summary": {
+    "scored": 400,
+    "categories": {
+     "C2-O": 14
+    },
+    "divergent": 14,
+    "naive_harm": 14,
+    "contract_harm": 0
+   },
+   "cohort_contract_regression": false,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "astropy__astropy-7671",
+   "sha": "8f382d13f501ffc31d32bedfd435f33fb2fb880d0983ddd08996213caf6c342f",
+   "cohort_summary": {
+    "scored": 200,
+    "categories": {
+     "C1": 6
+    },
+    "divergent": 8,
+    "naive_harm": 6,
+    "contract_harm": 6
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "django__django-11141",
+   "sha": "541d1bea348e3c5b3c6517ecd5f4e621768b1911f1f5fd1f45a2004a24e283c0",
+   "cohort_summary": {
+    "scored": 200,
+    "categories": {
+     "C2-O": 76
+    },
+    "divergent": 131,
+    "naive_harm": 76,
+    "contract_harm": 0
+   },
+   "cohort_contract_regression": false,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "django__django-12209",
+   "sha": "c80c5f5779756de929d7bca5fac19371e2a639a3659b408ea5cd245488238291",
+   "cohort_summary": {
+    "scored": 200,
+    "categories": {
+     "C1": 11
+    },
+    "divergent": 11,
+    "naive_harm": 11,
+    "contract_harm": 11
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "django__django-12308",
+   "sha": "07d4cbdf26c0e8be559ca9d0e5f63290e33eec795e1e9a835a7c6ea87088bcf7",
+   "cohort_summary": {
+    "scored": 200,
+    "categories": {
+     "C1": 20
+    },
+    "divergent": 25,
+    "naive_harm": 20,
+    "contract_harm": 20
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "django__django-12774",
+   "sha": "95dd6971abbbefddefc3ecb95ad1c2a894d7f4b10007f2d7d79945b9c12a1817",
+   "cohort_summary": {
+    "scored": 200,
+    "categories": {
+     "C1": 78,
+     "C2-O": 53
+    },
+    "divergent": 200,
+    "naive_harm": 131,
+    "contract_harm": 78
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "django__django-13028",
+   "sha": "9612b4ecee392f176713171b08546d2355a9db939140bd12f2bbbc9e85d044be",
+   "cohort_summary": {
+    "scored": 200,
+    "categories": {
+     "C2-O": 39
+    },
+    "divergent": 39,
+    "naive_harm": 39,
+    "contract_harm": 0
+   },
+   "cohort_contract_regression": false,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "django__django-13315",
+   "sha": "56c79624bac092556986ffd3f1cbf8d22c636c12aea04ad8010b4376cc8886e4",
+   "cohort_summary": {
+    "scored": 200,
+    "categories": {
+     "C1": 40
+    },
+    "divergent": 134,
+    "naive_harm": 40,
+    "contract_harm": 40
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "django__django-13343",
+   "sha": "760399b8f077857bd929556a66234c2470ce955db08daf0c3814863504a76223",
+   "cohort_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 20
+    },
+    "divergent": 20,
+    "naive_harm": 20,
+    "contract_harm": 20
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "django__django-13401",
+   "sha": "45a6f4b524dfcad4c14e030fa32f6e7605e15e2eb4869bb70eaa44ec2dedc8af",
+   "cohort_summary": {
+    "scored": 200,
+    "categories": {
+     "C1": 16
+    },
+    "divergent": 40,
+    "naive_harm": 16,
+    "contract_harm": 16
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "django__django-14007",
+   "sha": "344ad72556a50ac13d7b40377c622309484b7539ed048ac8ae17d4b1cb551ab9",
+   "cohort_summary": {
+    "scored": 200,
+    "categories": {
+     "C1": 43
+    },
+    "divergent": 143,
+    "naive_harm": 43,
+    "contract_harm": 43
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "django__django-14311",
+   "sha": "d96bd575933ea3d32d69e166acfd3ba3afca115b28cde4b6cc7cbf8e2c2886fc",
+   "cohort_summary": {
+    "scored": 200,
+    "categories": {
+     "C1": 36
+    },
+    "divergent": 36,
+    "naive_harm": 36,
+    "contract_harm": 36
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "django__django-15268",
+   "sha": "74876f31c02f1b7042b26edba4b1b75c2e54159bd0c245c2f6cc455dca35deee",
+   "cohort_summary": {
+    "scored": 200,
+    "categories": {
+     "C1": 8
+    },
+    "divergent": 10,
+    "naive_harm": 8,
+    "contract_harm": 8
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "django__django-15732",
+   "sha": "5ddaa4bc8d0e08e50a03c6d7bf9794d10ea6fbe5a43d5e6ff782d10155fd8ffe",
+   "cohort_summary": {
+    "scored": 200,
+    "categories": {
+     "C2-D": 52
+    },
+    "divergent": 52,
+    "naive_harm": 52,
+    "contract_harm": 52
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "django__django-16493",
+   "sha": "df925ff3bf32f3cbbbc7a384160005fc29e5554ce90d92871f0c2e3962bc56b5",
+   "cohort_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 33
+    },
+    "divergent": 33,
+    "naive_harm": 33,
+    "contract_harm": 33
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "django__django-16661",
+   "sha": "fc8540a35e1fe9c44b044822f6381968d176e8897fdb5c23632d9a0f4c9a2d32",
+   "cohort_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 4
+    },
+    "divergent": 4,
+    "naive_harm": 4,
+    "contract_harm": 4
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "matplotlib__matplotlib-24970",
+   "sha": "6e1ef0c28f70ff6112759f35877b0d742d74fc4a32de33df13bdd104a771d910",
+   "cohort_summary": {
+    "scored": 200,
+    "categories": {
+     "C1": 15
+    },
+    "divergent": 28,
+    "naive_harm": 15,
+    "contract_harm": 15
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "psf__requests-1921",
+   "sha": "1a11b0a11894c56457d82d786e6b67f51a63f1c09fb2d6f22376c4750ef8021e",
+   "cohort_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 1
+    },
+    "divergent": 140,
+    "naive_harm": 1,
+    "contract_harm": 1
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "psf__requests-5414",
+   "sha": "70ca9b5d35c731dfd0878868f59951a2e34729310e46690ce48c5e9814facc8c",
+   "cohort_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 4
+    },
+    "divergent": 4,
+    "naive_harm": 4,
+    "contract_harm": 4
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "pydata__xarray-3993",
+   "sha": "18cf005de043003b2870f36bbdc0dcaddefedfd7720719d001929c9889a32f04",
+   "cohort_summary": {
+    "scored": 400,
+    "categories": {
+     "C2-O": 99,
+     "C1": 5
+    },
+    "divergent": 159,
+    "naive_harm": 104,
+    "contract_harm": 5
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "pydata__xarray-4356",
+   "sha": "d3c1dc2debd35c493cf0660c6e0d87cdefff74bdf6fffbb36e1539bd26eb3010",
+   "cohort_summary": {
+    "scored": 400,
+    "categories": {
+     "C2-O": 124
+    },
+    "divergent": 211,
+    "naive_harm": 124,
+    "contract_harm": 0
+   },
+   "cohort_contract_regression": false,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "pydata__xarray-4687",
+   "sha": "91c2e187d6440cb1a530fee121700770c04b3dbddaf4249b6db2a13461a1b40f",
+   "cohort_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 19
+    },
+    "divergent": 55,
+    "naive_harm": 19,
+    "contract_harm": 19
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "pylint-dev__pylint-7080",
+   "sha": "a6bf041c89e2ec4ceee8b6fe36e0c36e3b7dcc39ae2417d736cc87fd60096de6",
+   "cohort_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 189,
+     "C2-O": 170
+    },
+    "divergent": 400,
+    "naive_harm": 359,
+    "contract_harm": 189
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "pylint-dev__pylint-8898",
+   "sha": "efa93612704107e9f1d452de4f7f1a3a6d6dc85fa8b2df6d706ee95a28a3a910",
+   "cohort_summary": {
+    "scored": 400,
+    "categories": {
+     "C2-D": 32
+    },
+    "divergent": 57,
+    "naive_harm": 32,
+    "contract_harm": 32
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "scikit-learn__scikit-learn-14087",
+   "sha": "5a1a6a64922ca934f32f54b9d06cfbfcd9de6dbeb20237739a97ecb9f61578d1",
+   "cohort_summary": {
+    "scored": 200,
+    "categories": {
+     "C2-O": 11
+    },
+    "divergent": 13,
+    "naive_harm": 11,
+    "contract_harm": 0
+   },
+   "cohort_contract_regression": false,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "scikit-learn__scikit-learn-14894",
+   "sha": "e33eae1d12daac8f457385214a318175d8ee14896c7353aeec1d9d987e129988",
+   "cohort_summary": {
+    "scored": 200,
+    "categories": {
+     "C1": 100
+    },
+    "divergent": 100,
+    "naive_harm": 100,
+    "contract_harm": 100
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "sphinx-doc__sphinx-10449",
+   "sha": "75f88cbb3305fb7471d4ca30480a526f573654625a87270e1a47f11d8749ee33",
+   "cohort_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 8
+    },
+    "divergent": 83,
+    "naive_harm": 8,
+    "contract_harm": 8
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "sphinx-doc__sphinx-7462",
+   "sha": "f29824c5ec30005155525abeadc08388dd17f53e494f7fe9055f9660d274065c",
+   "cohort_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 10
+    },
+    "divergent": 10,
+    "naive_harm": 10,
+    "contract_harm": 10
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "sphinx-doc__sphinx-7889",
+   "sha": "1a69592df71ac31d43ff6eaa5f080306e08331e825baf48bcae820881cddfce9",
+   "cohort_summary": {
+    "scored": 395,
+    "categories": {
+     "C1": 22
+    },
+    "divergent": 55,
+    "naive_harm": 22,
+    "contract_harm": 22
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "sphinx-doc__sphinx-8265",
+   "sha": "24c21d7252500b1c276451d736cbddd98a3fa928f347a1ccd6c3e4028e887a76",
+   "cohort_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 8
+    },
+    "divergent": 8,
+    "naive_harm": 8,
+    "contract_harm": 8
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "sphinx-doc__sphinx-8721",
+   "sha": "8f1ee2f8c4b7b4a4a938529fccb730ef558b6c2e2122c64032955129f6771667",
+   "cohort_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 71
+    },
+    "divergent": 119,
+    "naive_harm": 71,
+    "contract_harm": 71
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "sphinx-doc__sphinx-9711",
+   "sha": "9d9687ec0951f5529697879c6eb1fd98d7002c56581cb0791afcf29b7dd1de4d",
+   "cohort_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 17,
+     "C2-O": 14
+    },
+    "divergent": 31,
+    "naive_harm": 31,
+    "contract_harm": 17
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "sympy__sympy-11618",
+   "sha": "38550187b11c3512e2caf89808dbee667fe14809c509cdc05d2e184856a806eb",
+   "cohort_summary": {
+    "scored": 200,
+    "categories": {
+     "C1": 28
+    },
+    "divergent": 28,
+    "naive_harm": 28,
+    "contract_harm": 28
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "sympy__sympy-12096",
+   "sha": "d33db78c31cef3f6a3a2cd1752d9e8ab1da43b940cc0cfcb36276ff32e6a6a0d",
+   "cohort_summary": {
+    "scored": 200,
+    "categories": {
+     "C1": 79
+    },
+    "divergent": 80,
+    "naive_harm": 79,
+    "contract_harm": 79
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "sympy__sympy-13091",
+   "sha": "c34b682ccf2ac058e50e9bbd99bfb24cc996316568f111bed4ab26054ace84d5",
+   "cohort_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 22
+    },
+    "divergent": 22,
+    "naive_harm": 22,
+    "contract_harm": 22
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "sympy__sympy-13615",
+   "sha": "0dc83b7975026409784dde524583787d00ad96c267f95833128c5c32a0803361",
+   "cohort_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 50
+    },
+    "divergent": 92,
+    "naive_harm": 50,
+    "contract_harm": 50
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "sympy__sympy-13877",
+   "sha": "10e282ce3cf3c4799fa4071049a04191869af9921a13d92964c3a00b7f30fa6c",
+   "cohort_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 6
+    },
+    "divergent": 29,
+    "naive_harm": 6,
+    "contract_harm": 6
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "sympy__sympy-13974",
+   "sha": "8069f38b7af71986fb5d46218d679367bde4945568e55d8c35a7a6ae903481a3",
+   "cohort_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 5
+    },
+    "divergent": 16,
+    "naive_harm": 5,
+    "contract_harm": 5
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "sympy__sympy-15599",
+   "sha": "d14aee3a2084cadc7bdadd763dbf0d161c1c91a7d24badc51cd4e29029998d97",
+   "cohort_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 5
+    },
+    "divergent": 42,
+    "naive_harm": 5,
+    "contract_harm": 5
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "sympy__sympy-15875",
+   "sha": "5c8ce232089bce22fb667baf28ef8bbd216ff0d1d72c92a2d81d044d2846f0c0",
+   "cohort_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 11
+    },
+    "divergent": 11,
+    "naive_harm": 11,
+    "contract_harm": 11
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "sympy__sympy-16450",
+   "sha": "32d66a2c166212becb6b4a5857a70cc20d092d213b238d1113063d7ae69148e7",
+   "cohort_summary": {
+    "scored": 363,
+    "categories": {
+     "C1": 1
+    },
+    "divergent": 4,
+    "naive_harm": 1,
+    "contract_harm": 1
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "sympy__sympy-17139",
+   "sha": "534c399de0aea915b071b4cbcc6dc88d23907c22d5e72b20d469da66a44d25c5",
+   "cohort_summary": {
+    "scored": 400,
+    "categories": {
+     "C2-D": 10
+    },
+    "divergent": 10,
+    "naive_harm": 10,
+    "contract_harm": 10
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "sympy__sympy-17318",
+   "sha": "85449b012d46c8499785838e51bc4b5d461abe5114070a0facec34afb11f696c",
+   "cohort_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 24
+    },
+    "divergent": 42,
+    "naive_harm": 24,
+    "contract_harm": 24
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "sympy__sympy-18189",
+   "sha": "8c5791c024a205ede65e556f66354eec82f701cede171a3e2d70fa237165fc12",
+   "cohort_summary": {
+    "scored": 370,
+    "categories": {
+     "C1": 19
+    },
+    "divergent": 49,
+    "naive_harm": 19,
+    "contract_harm": 19
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "sympy__sympy-19783",
+   "sha": "0b2992eaabcb9c16ca3899830f4b4ba66c57844260ab482caa37ba0fb07e7226",
+   "cohort_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 19
+    },
+    "divergent": 19,
+    "naive_harm": 19,
+    "contract_harm": 19
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "sympy__sympy-21612",
+   "sha": "ee69fbd55442ff0e549a7b6201dd774f28fa4b79af4bb190ddc230e871175e52",
+   "cohort_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 15
+    },
+    "divergent": 52,
+    "naive_harm": 15,
+    "contract_harm": 15
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "sympy__sympy-22080",
+   "sha": "720e73ee73edf1fafc065d68e419343f4a51aa87835117b4561056a24caf78e6",
+   "cohort_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 22
+    },
+    "divergent": 22,
+    "naive_harm": 22,
+    "contract_harm": 22
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "sympy__sympy-23534",
+   "sha": "89058f8df3433a13547b0fc06a0f5448a46696263b0742aa2eeef5a421b9ad43",
+   "cohort_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 6
+    },
+    "divergent": 6,
+    "naive_harm": 6,
+    "contract_harm": 6
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "sympy__sympy-24066",
+   "sha": "d7a414c86503017f9202d97d992f540fc49944de1389a46e596e0ce1644e0959",
+   "cohort_summary": {
+    "scored": 200,
+    "categories": {
+     "C1": 17
+    },
+    "divergent": 17,
+    "naive_harm": 17,
+    "contract_harm": 17
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "sympy__sympy-24443",
+   "sha": "23dee654510a1ae019510622a38719baeed6b6fcb320c0dbf2fdb654875e7f5a",
+   "cohort_summary": {
+    "scored": 400,
+    "categories": {
+     "C1": 21
+    },
+    "divergent": 22,
+    "naive_harm": 21,
+    "contract_harm": 21
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  },
+  {
+   "instance_id": "sympy__sympy-24562",
+   "sha": "4bdcf6c19c09fb69bb68927fb6387d4daefe807436cb028c11b97f814c3e3b8c",
+   "cohort_summary": {
+    "scored": 400,
+    "categories": {
+     "C2-O": 6,
+     "C1": 13
+    },
+    "divergent": 29,
+    "naive_harm": 19,
+    "contract_harm": 13
+   },
+   "cohort_contract_regression": true,
+   "captured": false,
+   "rerun_status": null,
+   "same_target": false,
+   "rerun_summary": null,
+   "same_generator": false,
+   "reproduced": false
+  }
+ ]
+}

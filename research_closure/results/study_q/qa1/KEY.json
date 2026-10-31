@@ -1,0 +1,42 @@
+[
+ {
+  "id": "e421286ecba6",
+  "instance_id": "astropy__astropy-13453",
+  "sha": "541545af0d26b0049a5c5d5c1a0f0ef19b78d1b547a516259354993ef86b699c",
+  "source": "G2",
+  "i": 65,
+  "category": "C1"
+ },
+ {
+  "id": "76c4dcc1578c",
+  "instance_id": "astropy__astropy-13453",
+  "sha": "541545af0d26b0049a5c5d5c1a0f0ef19b78d1b547a516259354993ef86b699c",
+  "source": "G2",
+  "i": 75,
+  "category": "C1"
+ },
+ {
+  "id": "89b654df43aa",
+  "instance_id": "astropy__astropy-13453",
+  "sha": "541545af0d26b0049a5c5d5c1a0f0ef19b78d1b547a516259354993ef86b699c",
+  "source": "G2",
+  "i": 133,
+  "category": "C1"
+ },
+ {
+  "id": "9d9bddbf54ea",
+  "instance_id": "astropy__astropy-13453",
+  "sha": "541545af0d26b0049a5c5d5c1a0f0ef19b78d1b547a516259354993ef86b699c",
+  "source": "G2",
+  "i": 145,
+  "category": "C1"
+ },
+ {
+  "id": "b2af876cab66",
+  "instance_id": "astropy__astropy-13453",
+  "sha": "541545af0d26b0049a5c5d5c1a0f0ef19b78d1b547a516259354993ef86b699c",
+  "source": "G2",
+  "i": 79,
+  "category": "C1"
+ }
+]

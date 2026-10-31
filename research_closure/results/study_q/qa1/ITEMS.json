@@ -1,0 +1,92 @@
+[
+ {
+  "id": "76c4dcc1578c",
+  "function": "HTML.write",
+  "file": "astropy/io/ascii/html.py",
+  "diff": "diff --git a/astropy/io/ascii/html.py b/astropy/io/ascii/html.py\nindex 266cf229c..3ddf38a79 100644\n--- a/astropy/io/ascii/html.py\n+++ b/astropy/io/ascii/html.py\n@@ -349,6 +349,8 @@ class HTML(core.BaseReader):\n         cols = list(table.columns.values())\n \n         self.data.header.cols = cols\n+        self.data.cols = cols\n+        self.data._set_col_formats()\n \n         if isinstance(self.data.fill_values, tuple):\n             self.data.fill_values = [self.data.fill_values]\n@@ -429,6 +431,8 @@ class HTML(core.BaseReader):\n                                 for i in range(span):\n                                     # Split up multicolumns into separate columns\n                                     new_col = Column([el[i] for el in col])\n+                                    if col.info.format is not None:\n+                                        new_col.info.format = col.info.format\n \n                                     new_col_iter_str_vals = self.fill_values(\n                                         col, new_col.info.iter_str_vals())\n",
+  "reference_output": [
+   "ok",
+   "list",
+   "['<html>\\n <head>\\n  <meta charset=\"utf-8\"/>\\n  <meta content=\"text/html;charset=UTF-8\" http-equiv=\"Content-type\"/>\\n </head>\\n <body>\\n  <table class=\"class_7\" id=\"table_29\">\\n   <thead>\\n    <tr>\\n     <th colspan=\"2\">a</th>\\n    </tr>\\n   </thead>\\n   <tr>\\n    <td>5.649184865561083</td>\\n    <td"
+  ],
+  "patch_output": [
+   "ok",
+   "list",
+   "['<html>\\n <head>\\n  <meta charset=\"utf-8\"/>\\n  <meta content=\"text/html;charset=UTF-8\" http-equiv=\"Content-type\"/>\\n </head>\\n <body>\\n  <table class=\"class_7\" id=\"table_29\">\\n   <thead>\\n    <tr>\\n     <th colspan=\"2\">a</th>\\n    </tr>\\n   </thead>\\n   <tr>\\n    <td>5.65</td>\\n    <td>0.13</td>\\n "
+  ],
+  "input": "item #75 of the model-written input generator (inputs/g2.make_inputs.py)",
+  "reference_diff": "diff --git a/astropy/io/ascii/html.py b/astropy/io/ascii/html.py\n--- a/astropy/io/ascii/html.py\n+++ b/astropy/io/ascii/html.py\n@@ -349,11 +349,13 @@ def write(self, table):\n         cols = list(table.columns.values())\n \n         self.data.header.cols = cols\n+        self.data.cols = cols\n \n         if isinstance(self.data.fill_values, tuple):\n             self.data.fill_values = [self.data.fill_values]\n \n         self.data._set_fill_values(cols)\n+        self.data._set_col_formats()\n \n         lines = []\n \n"
+ },
+ {
+  "id": "89b654df43aa",
+  "function": "HTML.write",
+  "file": "astropy/io/ascii/html.py",
+  "diff": "diff --git a/astropy/io/ascii/html.py b/astropy/io/ascii/html.py\nindex 266cf229c..3ddf38a79 100644\n--- a/astropy/io/ascii/html.py\n+++ b/astropy/io/ascii/html.py\n@@ -349,6 +349,8 @@ class HTML(core.BaseReader):\n         cols = list(table.columns.values())\n \n         self.data.header.cols = cols\n+        self.data.cols = cols\n+        self.data._set_col_formats()\n \n         if isinstance(self.data.fill_values, tuple):\n             self.data.fill_values = [self.data.fill_values]\n@@ -429,6 +431,8 @@ class HTML(core.BaseReader):\n                                 for i in range(span):\n                                     # Split up multicolumns into separate columns\n                                     new_col = Column([el[i] for el in col])\n+                                    if col.info.format is not None:\n+                                        new_col.info.format = col.info.format\n \n                                     new_col_iter_str_vals = self.fill_values(\n                                         col, new_col.info.iter_str_vals())\n",
+  "reference_output": [
+   "ok",
+   "list",
+   "['<html>\\n <head>\\n  <meta charset=\"utf-8\"/>\\n  <meta content=\"text/html;charset=UTF-8\" http-equiv=\"Content-type\"/>\\n </head>\\n <body>\\n  <table>\\n   <thead>\\n    <tr>\\n     <th colspan=\"2\">a</th>\\n    </tr>\\n   </thead>\\n   <tr>\\n    <td>5.2591889842226704</td>\\n    <td>9.978655049817808</td>\\n   <"
+  ],
+  "patch_output": [
+   "ok",
+   "list",
+   "['<html>\\n <head>\\n  <meta charset=\"utf-8\"/>\\n  <meta content=\"text/html;charset=UTF-8\" http-equiv=\"Content-type\"/>\\n </head>\\n <body>\\n  <table>\\n   <thead>\\n    <tr>\\n     <th colspan=\"2\">a</th>\\n    </tr>\\n   </thead>\\n   <tr>\\n    <td>5.26e+00</td>\\n    <td>9.98e+00</td>\\n   </tr>\\n   <tr>\\n    "
+  ],
+  "input": "item #133 of the model-written input generator (inputs/g2.make_inputs.py)",
+  "reference_diff": "diff --git a/astropy/io/ascii/html.py b/astropy/io/ascii/html.py\n--- a/astropy/io/ascii/html.py\n+++ b/astropy/io/ascii/html.py\n@@ -349,11 +349,13 @@ def write(self, table):\n         cols = list(table.columns.values())\n \n         self.data.header.cols = cols\n+        self.data.cols = cols\n \n         if isinstance(self.data.fill_values, tuple):\n             self.data.fill_values = [self.data.fill_values]\n \n         self.data._set_fill_values(cols)\n+        self.data._set_col_formats()\n \n         lines = []\n \n"
+ },
+ {
+  "id": "9d9bddbf54ea",
+  "function": "HTML.write",
+  "file": "astropy/io/ascii/html.py",
+  "diff": "diff --git a/astropy/io/ascii/html.py b/astropy/io/ascii/html.py\nindex 266cf229c..3ddf38a79 100644\n--- a/astropy/io/ascii/html.py\n+++ b/astropy/io/ascii/html.py\n@@ -349,6 +349,8 @@ class HTML(core.BaseReader):\n         cols = list(table.columns.values())\n \n         self.data.header.cols = cols\n+        self.data.cols = cols\n+        self.data._set_col_formats()\n \n         if isinstance(self.data.fill_values, tuple):\n             self.data.fill_values = [self.data.fill_values]\n@@ -429,6 +431,8 @@ class HTML(core.BaseReader):\n                                 for i in range(span):\n                                     # Split up multicolumns into separate columns\n                                     new_col = Column([el[i] for el in col])\n+                                    if col.info.format is not None:\n+                                        new_col.info.format = col.info.format\n \n                                     new_col_iter_str_vals = self.fill_values(\n                                         col, new_col.info.iter_str_vals())\n",
+  "reference_output": [
+   "ok",
+   "list",
+   "['<html>\\n <head>\\n  <meta charset=\"utf-8\"/>\\n  <meta content=\"text/html;charset=UTF-8\" http-equiv=\"Content-type\"/>\\n </head>\\n <body>\\n  <table class=\"class_4\">\\n   <thead>\\n    <tr>\\n     <th colspan=\"2\">a</th>\\n     <th>b</th>\\n     <th>c</th>\\n    </tr>\\n   </thead>\\n   <tr>\\n    <td>4.064925839"
+  ],
+  "patch_output": [
+   "ok",
+   "list",
+   "['<html>\\n <head>\\n  <meta charset=\"utf-8\"/>\\n  <meta content=\"text/html;charset=UTF-8\" http-equiv=\"Content-type\"/>\\n </head>\\n <body>\\n  <table class=\"class_4\">\\n   <thead>\\n    <tr>\\n     <th colspan=\"2\">a</th>\\n     <th>b</th>\\n     <th>c</th>\\n    </tr>\\n   </thead>\\n   <tr>\\n    <td>4.1</td>\\n "
+  ],
+  "input": "item #145 of the model-written input generator (inputs/g2.make_inputs.py)",
+  "reference_diff": "diff --git a/astropy/io/ascii/html.py b/astropy/io/ascii/html.py\n--- a/astropy/io/ascii/html.py\n+++ b/astropy/io/ascii/html.py\n@@ -349,11 +349,13 @@ def write(self, table):\n         cols = list(table.columns.values())\n \n         self.data.header.cols = cols\n+        self.data.cols = cols\n \n         if isinstance(self.data.fill_values, tuple):\n             self.data.fill_values = [self.data.fill_values]\n \n         self.data._set_fill_values(cols)\n+        self.data._set_col_formats()\n \n         lines = []\n \n"
+ },
+ {
+  "id": "b2af876cab66",
+  "function": "HTML.write",
+  "file": "astropy/io/ascii/html.py",
+  "diff": "diff --git a/astropy/io/ascii/html.py b/astropy/io/ascii/html.py\nindex 266cf229c..3ddf38a79 100644\n--- a/astropy/io/ascii/html.py\n+++ b/astropy/io/ascii/html.py\n@@ -349,6 +349,8 @@ class HTML(core.BaseReader):\n         cols = list(table.columns.values())\n \n         self.data.header.cols = cols\n+        self.data.cols = cols\n+        self.data._set_col_formats()\n \n         if isinstance(self.data.fill_values, tuple):\n             self.data.fill_values = [self.data.fill_values]\n@@ -429,6 +431,8 @@ class HTML(core.BaseReader):\n                                 for i in range(span):\n                                     # Split up multicolumns into separate columns\n                                     new_col = Column([el[i] for el in col])\n+                                    if col.info.format is not None:\n+                                        new_col.info.format = col.info.format\n \n                                     new_col_iter_str_vals = self.fill_values(\n                                         col, new_col.info.iter_str_vals())\n",
+  "reference_output": [
+   "ok",
+   "list",
+   "['<html>\\n <head>\\n  <meta charset=\"utf-8\"/>\\n  <meta content=\"text/html;charset=UTF-8\" http-equiv=\"Content-type\"/>\\n </head>\\n <body>\\n  <table>\\n   <thead>\\n    <tr>\\n     <th colspan=\"2\">a</th>\\n     <th>b</th>\\n     <th colspan=\"2\">c</th>\\n    </tr>\\n   </thead>\\n   <tr>\\n    <td>1.6137904800183"
+  ],
+  "patch_output": [
+   "ok",
+   "list",
+   "['<html>\\n <head>\\n  <meta charset=\"utf-8\"/>\\n  <meta content=\"text/html;charset=UTF-8\" http-equiv=\"Content-type\"/>\\n </head>\\n <body>\\n  <table>\\n   <thead>\\n    <tr>\\n     <th colspan=\"2\">a</th>\\n     <th>b</th>\\n     <th colspan=\"2\">c</th>\\n    </tr>\\n   </thead>\\n   <tr>\\n    <td>fmt_1.613790480"
+  ],
+  "input": "item #79 of the model-written input generator (inputs/g2.make_inputs.py)",
+  "reference_diff": "diff --git a/astropy/io/ascii/html.py b/astropy/io/ascii/html.py\n--- a/astropy/io/ascii/html.py\n+++ b/astropy/io/ascii/html.py\n@@ -349,11 +349,13 @@ def write(self, table):\n         cols = list(table.columns.values())\n \n         self.data.header.cols = cols\n+        self.data.cols = cols\n \n         if isinstance(self.data.fill_values, tuple):\n             self.data.fill_values = [self.data.fill_values]\n \n         self.data._set_fill_values(cols)\n+        self.data._set_col_formats()\n \n         lines = []\n \n"
+ },
+ {
+  "id": "e421286ecba6",
+  "function": "HTML.write",
+  "file": "astropy/io/ascii/html.py",
+  "diff": "diff --git a/astropy/io/ascii/html.py b/astropy/io/ascii/html.py\nindex 266cf229c..3ddf38a79 100644\n--- a/astropy/io/ascii/html.py\n+++ b/astropy/io/ascii/html.py\n@@ -349,6 +349,8 @@ class HTML(core.BaseReader):\n         cols = list(table.columns.values())\n \n         self.data.header.cols = cols\n+        self.data.cols = cols\n+        self.data._set_col_formats()\n \n         if isinstance(self.data.fill_values, tuple):\n             self.data.fill_values = [self.data.fill_values]\n@@ -429,6 +431,8 @@ class HTML(core.BaseReader):\n                                 for i in range(span):\n                                     # Split up multicolumns into separate columns\n                                     new_col = Column([el[i] for el in col])\n+                                    if col.info.format is not None:\n+                                        new_col.info.format = col.info.format\n \n                                     new_col_iter_str_vals = self.fill_values(\n                                         col, new_col.info.iter_str_vals())\n",
+  "reference_output": [
+   "ok",
+   "list",
+   "['<html>\\n <head>\\n  <meta charset=\"utf-8\"/>\\n  <meta content=\"text/html;charset=UTF-8\" http-equiv=\"Content-type\"/>\\n </head>\\n <body>\\n  <table class=\"class_5\">\\n   <thead>\\n    <tr>\\n     <th colspan=\"2\">a</th>\\n     <th>b</th>\\n    </tr>\\n   </thead>\\n   <tr>\\n    <td>9.20920338643288</td>\\n    <"
+  ],
+  "patch_output": [
+   "ok",
+   "list",
+   "['<html>\\n <head>\\n  <meta charset=\"utf-8\"/>\\n  <meta content=\"text/html;charset=UTF-8\" http-equiv=\"Content-type\"/>\\n </head>\\n <body>\\n  <table class=\"class_5\">\\n   <thead>\\n    <tr>\\n     <th colspan=\"2\">a</th>\\n     <th>b</th>\\n    </tr>\\n   </thead>\\n   <tr>\\n    <td>9.2</td>\\n    <td>1.4</td>\\n"
+  ],
+  "input": "item #65 of the model-written input generator (inputs/g2.make_inputs.py)",
+  "reference_diff": "diff --git a/astropy/io/ascii/html.py b/astropy/io/ascii/html.py\n--- a/astropy/io/ascii/html.py\n+++ b/astropy/io/ascii/html.py\n@@ -349,11 +349,13 @@ def write(self, table):\n         cols = list(table.columns.values())\n \n         self.data.header.cols = cols\n+        self.data.cols = cols\n \n         if isinstance(self.data.fill_values, tuple):\n             self.data.fill_values = [self.data.fill_values]\n \n         self.data._set_fill_values(cols)\n+        self.data._set_col_formats()\n \n         lines = []\n \n"
+ }
+]
