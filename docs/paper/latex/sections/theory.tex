@@ -204,11 +204,13 @@ Call two skills \emph{adjacent} if their footprints intersect or if applying one
 enabling edges of the execution rule).
 
 \begin{assumption}[Non-interaction of non-adjacent skills]\label{ass:noninteract}
-For sets of skills $A,B$ with no adjacent pair $a\in A$, $b\in B$, and every task $x$,
+For sets of skills $A,B$ with no adjacent pair $a\in A$, $b\in B$, and every task $x$: (i) swapping two consecutive skills
+$a\in A$, $b\in B$ in any application order does not change the loss on $x$; and (ii)
 $\ell(x,\pi_A\circ\pi_B)-\ell(x,\varnothing)=[\ell(x,\pi_A)-\ell(x,\varnothing)]+[\ell(x,\pi_B)-\ell(x,\varnothing)]$.
 \end{assumption}
 
-With losses in $\{0,1\}$ this says in particular that no task's outcome is changed by both $A$ and $B$.
+Part (i) is the semantic counterpart of the enabling edges, which link every pair that does not commute syntactically; with
+losses in $\{0,1\}$, part (ii) says in particular that no task's outcome is changed by both $A$ and $B$.
 
 \begin{corollary}[What actually runs]\label{cor:execution}
 Under Assumption~\ref{ass:noninteract} and the execution rule of Section~\ref{sec:problem}, outside the event of
@@ -219,8 +221,10 @@ $|\mathcal{L}_s|\,\bar d/2$ adjacent pairs per scope.
 \end{corollary}
 
 \begin{proof}
-Let $E_1,\dots,E_m$ be the components.  No skill of $E_1\cup\dots\cup E_{j}$ is adjacent to a skill of $E_{j+1}$, so
-Assumption~\ref{ass:noninteract} applied with $A=E_1\cup\dots\cup E_j$, $B=E_{j+1}$ for $j=1,\dots,m-1$ gives, for every task,
+Let $E_1,\dots,E_m$ be the components.  The canonical order of $E$ may interleave components, but any two consecutive skills
+from different components are non-adjacent, so by part (i) a finite sequence of such swaps, none of which changes the loss,
+reorders it into $E_1,\dots,E_m$, each in its own canonical order.  No skill of $E_1\cup\dots\cup E_{j}$ is adjacent to a skill of
+$E_{j+1}$, so part (ii) of Assumption~\ref{ass:noninteract} applied with $A=E_1\cup\dots\cup E_j$, $B=E_{j+1}$ for $j=1,\dots,m-1$ gives, for every task,
 $\ell(x,\pi_E)-\ell(x,\varnothing)=\sum_{j}[\ell(x,\pi_{E_j})-\ell(x,\varnothing)]$; taking expectations under $Q$ gives
 $\mathrm{STR}_Q(E)=\sum_j\mathrm{STR}_Q(E_j)$.  By the execution rule each $E_j$ is an admitted cell (a single skill, or the
 composite of exactly $E_j$), so outside the event of Theorem~\ref{thm:admission} each term is at most $-\theta+2\xi_s$.

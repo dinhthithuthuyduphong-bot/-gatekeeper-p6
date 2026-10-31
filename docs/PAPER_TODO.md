@@ -67,6 +67,7 @@ Mỗi dòng gồm:
 | R29 | 31/10 | Sự cố push | — | — | — | **THUA do môi trường**: `git pull --rebase origin main` báo "Cannot rebase onto multiple branches", nên push không chạy và 3 workflow chạy trên commit cũ | Hủy 3 run, push lại, chạy lại trên 2ce2676 |
 | R30 | 31/10 | Model kiểm chứng minh vòng 2, 3 (a2a82df, 92d049c) | Kiểm lại sau khi sửa | Vòng 2: 5 điểm nhỏ; vòng 3: 6 điểm nhỏ, 0 lỗi lớn | Vòng 3 chỉ ra **thứ tự chuẩn của ô tổ hợp** (TC24): một tập kỹ năng phải có một thứ tự áp dụng cố định; trước đó lý thuyết đếm theo tập còn thực thi phụ thuộc thứ tự | **THẮNG**: đã sửa cả 11 điểm, kèm `canonical_order` trong mã; cách đạt cận của Định lý 2 với loss nhị phân kiểm bằng số | — |
 | R31 | 31/10 | Paper build (88f54c0) | PDF | — | — | **THẮNG**: 16 trang (giới hạn 18 + tham khảo), 51/51 con số khớp | — |
+| R32 | 31/10 | Model kiểm chứng minh vòng 4 (ddfe12f) | Kiểm sau vòng 3 | — | 10/11 mệnh đề "correct"; còn 1: chứng minh Hệ quả 1 ngầm dùng tính giao hoán khi gom các thành phần bị xen kẽ trong thứ tự chuẩn | **THẮNG**: thêm phần (i) giao hoán vào Giả định 4 (phiên bản ngữ nghĩa của cạnh enabling) và bước hoán vị vào chứng minh | — |
 
 ## C. Vòng debug khi THUA (làm theo thứ tự)
 
