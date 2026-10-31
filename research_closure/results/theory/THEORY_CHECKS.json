@@ -71,5 +71,14 @@
   "draft_dbar": 0.34,
   "held": false,
   "note": "held=False means the draft's numbers are inconsistent (expected)"
+ },
+ "C8_readmission_ledger": {
+  "statement": "re-admission: full alpha per epoch can exceed alpha; the ledger does not",
+  "epochs": 10,
+  "reps": 500,
+  "error_full_alpha_each_epoch": 0.452,
+  "error_ledger": 0.04,
+  "held": true,
+  "no_ledger_exceeded_alpha": true
  }
 }
