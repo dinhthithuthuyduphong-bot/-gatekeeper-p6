@@ -14,7 +14,7 @@ jobs:
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: "3.12"
-      - name: Unit tests of the families (protocol: before the census)
+      - name: "Unit tests of the families (protocol: before the census)"
         run: python -m unittest tests.test_skill_library -v
       - name: Census
         run: python tools/library_census.py /tmp/r2_work out_r2 | tee -a "$GITHUB_STEP_SUMMARY"
