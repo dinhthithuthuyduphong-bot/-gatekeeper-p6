@@ -86,7 +86,9 @@ def scan(root, skills):
 
 def summarise_target(funcs):
     """Cells, overlapping pairs and footprint components of one target's library (footprint = set of (file, function))."""
-    lib = {k: sorted("%s::%s" % t for t in v if t[1] != "<module>") for k, v in funcs.items() if v}
+    # module-level code counts as a region of its own file (theory/code audit TC5, amendment R2-A2): dropping it, as the
+    # first run did, would treat two module-level edits of the same file as disjoint
+    lib = {k: sorted("%s::%s" % t for t in v) for k, v in funcs.items() if v}
     overl = [[a, b] for a, b in itertools.combinations(sorted(lib), 2) if set(lib[a]) & set(lib[b])]
     comps = [sorted(c) for c in X.components({k: v for k, v in lib.items()})]
     return {"cells": len(lib), "families": sorted(lib), "functions": {k: len(funcs[k]) for k in funcs if funcs[k]},

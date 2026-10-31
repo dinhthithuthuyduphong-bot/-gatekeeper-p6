@@ -23,8 +23,10 @@ class LibraryCensusTest(unittest.TestCase):
     def test_components_and_composites(self):
         t = C.summarise_target({"a": {("m.py", "f")}, "b": {("m.py", "f"), ("m.py", "g")}, "c": {("n.py", "h")},
                                 "d": {("m.py", "<module>")}, "e": set()})
-        self.assertEqual(t["cells"], 4)          # e binds nowhere; d binds only at module level (no function footprint)
+        self.assertEqual(t["cells"], 4)          # e binds nowhere
         self.assertEqual(t["overlapping_pairs"], [["a", "b"]])
+        t2 = C.summarise_target({"a": {("m.py", "<module>")}, "b": {("m.py", "<module>")}, "c": {("n.py", "<module>")}})
+        self.assertEqual(t2["overlapping_pairs"], [["a", "b"]])   # module-level edits of one file overlap (TC5)
         self.assertEqual(t["composite_cells_required"], 1)
         self.assertEqual(t["largest_component"], 2)
 

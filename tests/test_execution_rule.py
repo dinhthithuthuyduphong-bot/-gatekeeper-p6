@@ -64,6 +64,14 @@ class ExecutionRuleTest(unittest.TestCase):
         self.assertEqual(X.composites_to_test(fp, singles, edges=[("guard", "typeeq")]), [F({"guard", "typeeq"})])
         self.assertEqual(len(X.executable_subset(fp, singles, edges=[("guard", "typeeq")])), 1)
 
+    def test_module_level_edits_of_one_file_overlap(self):
+        # TC5: the frozen tag func:<module> is dropped; qualified site footprints keep module-level regions per file
+        a = X.site_footprint([{"module": "m.py", "function": "<module>"}])
+        b = X.site_footprint([{"module": "m.py", "function": "<module>"}, {"module": "m.py", "function": "f"}])
+        c = X.site_footprint([{"module": "n.py", "function": "<module>"}])
+        self.assertEqual(X.components({"a": a, "b": b, "c": c}), [F({"a", "b"}), F({"c"})])
+        self.assertEqual(len(X.components({"a": ["func:<module>"], "b": ["func:<module>"]})), 2)   # the frozen behaviour
+
 
 if __name__ == "__main__":
     unittest.main()

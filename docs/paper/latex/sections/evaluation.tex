@@ -99,7 +99,7 @@ Rewrite & Changes behaviour when & Repos \\
 \texttt{except:} $\to$ \texttt{except Exception:} & \texttt{KeyboardInterrupt}, \texttt{SystemExit} & 5 \\
 \texttt{raise e} $\to$ \texttt{raise} (in its handler) & the traceback is inspected & 4 \\
 \texttt{open(p)} $\to$ \texttt{open(p, encoding="utf-8")} & non-UTF-8 locale or file & 10 \\
-\texttt{yaml.load(s)} $\to$ \texttt{yaml.safe_load(s)} & Python-specific tags & 0 \\
+\texttt{yaml.load(s)} $\to$ \texttt{yaml.safe\_load(s)} & Python-specific tags & 0 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -113,7 +113,8 @@ Two skill families, both frozen AST rewrites (excluding \texttt{bool} from \text
 were applied to $14$ real targets in three pre-registered studies ($28$ cells).
 \emph{Study D} ($8$ targets, $16$ cells): ground truth from $300$ draws plus the target's full test suite gave $3$ beneficial,
 $9$ unchanged, $4$ out-of-scope and $0$ harmful cells.  B2, replay plus fingerprints (B6-R) and always-retest (B8) each admitted
-$12$ cells, the $3$ beneficial ones and all $9$ unchanged ones; the certificate (benefit e-process with an e-value Holm procedure over the $16$ cells~\cite{vovk2021evalues}, family-wise $\alpha=0.1$) admitted $2$ cells, both
+$12$ cells, the $3$ beneficial ones and all $9$ unchanged ones; the certificate (the smaller of the benefit e-process and the harm certificate where the cell stopped, with e-Holm over the
+$16$ cells, Remark~\ref{rem:eholm}, family-wise $\alpha=0.1$) admitted $2$ cells, both
 beneficial, after $110$ draws each, and missed the third, whose mean benefit ($-0.11$) is smaller than the margin $\theta=0.2$.  It used $3{,}220$ trial runs
 against $3{,}600$ for B8.
 \emph{Studies E and G}: on the four harmful cells (\texttt{pyyaml}, \texttt{packaging}, \texttt{databricks}: harm on $87$--$100\%$ of

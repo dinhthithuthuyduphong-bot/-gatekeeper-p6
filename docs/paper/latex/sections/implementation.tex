@@ -8,6 +8,12 @@ held-out pass rate plus $0.5$ per regression, clipped at $1$.  Decisions consume
 of new failures; the regression penalty only enters the reported suite loss.  Recomputing all $7{,}200$ recorded draws of the skill
 studies and re-running the demonstration suites with penalties from $0$ to $5$ changed no decision and no label
 (a one-test suite's clipped loss does not depend on the penalty at all).
+The execution rule uses module-qualified footprints (file and function, module-level code included) and the enabling edges of
+Section~\ref{sec:eval-library}.  A conformance check labels each configuration with the guarantee it actually has: options of the
+frozen pipeline such as consuming priority tasks first, keeping only tasks that reach the edit, a sign test on discordant pairs, or
+e-BH give a weaker guarantee than Theorem~\ref{thm:admission} (no guarantee, sign only, sign only, FDR), and no reported study
+uses them.  Every theorem and remark is checked numerically on the code that the studies ran (Section~\ref{sec:checks}),
+including the exact decision rule of Studies D--H.
 
 Every study is pre-registered by a workflow that hashes its protocol, configuration and tools; the seed is drawn from the public drand
 beacon after the freeze; amendments re-hash the study and keep the seed.  Each result is produced by a workflow and committed with

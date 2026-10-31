@@ -45,7 +45,10 @@ $\alpha=0.1$ takes $\lceil\log(160)/\log(1+\lambda\eta)\rceil=110$ clean draws.
 Let $\mathcal{C}$ be the countable set of all cells that could ever be formed, compositions included, and let a ledger
 $\alpha_{c,k}\ge0$ be fixed in advance, as a function of the cell's identity, for every cell $c$ and epoch $k\ge0$ (epoch
 $k\ge1$ is the $k$-th re-admission after retirement), with $\sum_{c\in\mathcal{C}}\sum_{k\ge0}\alpha_{c,k}\le\alpha$; for
-instance $\alpha_{c,k}=\alpha_c\cdot 6/(\pi^2(k+1)^2)$ with $\sum_c\alpha_c\le\alpha$.  A library that grows is covered as long
+instance $\alpha_{c,k}=\alpha_c\cdot 6/(\pi^2(k+1)^2)$ with $\sum_c\alpha_c\le\alpha$.  Our implementation fixes $\alpha_c$ by the
+cell's size alone for a declared library capacity $N$: $\alpha s/N$ for a single skill and
+$\alpha(1-s)\,6/(\pi^2(m-1)^2)/\binom{N}{m}$ for a composite of $m\ge2$ skills, which sums to at most $\alpha$ and does not change
+as skills are added.  A library that grows is covered as long
 as the share of every future cell is fixed by the same rule.  Suppose each epoch uses fresh tasks and admits $c$ only when its e-process
 (Lemma~\ref{lem:eprocess}) reaches $1/\alpha_{c,k}$, while the choice of cells, their order and the stopping times may depend
 on all data.  Under Assumptions~\ref{ass:trials} and~\ref{ass:shift},
@@ -65,6 +68,15 @@ Finally, by Lemma~\ref{lem:shift}, $\mathrm{STR}_{Q^{(k)}}(c)>-\theta+2\xi_s$ im
 that is, $H_0^{c}$ for that epoch.  If $2\xi_s\le\theta$, then $\mathrm{STR}_{Q}(c)>0$ implies
 $\mathrm{STR}_{Q}(c)>-\theta+2\xi_s$.
 \end{proof}
+
+\begin{remark}[Fixed families: e-Holm, as used in the experiments]\label{rem:eholm}
+For a fixed family of $K$ cells at epoch $0$ the experiments use, instead of thresholding each cell at $1/\alpha_c$, the closed
+e-Bonferroni (e-Holm) procedure~\cite{vovk2021evalues} at level $\alpha$ over $e_c=\min(K^{\mathrm{ben}}_{c,\tau_c},K^{\mathrm{cert}}_{c,\tau_c})$,
+the benefit e-process and the harm certificate read at the cell's bounded stopping time $\tau_c$.  Each $K_{\tau}$ is an e-value
+by optional stopping ($\mathbb{E}K_\tau\le K_0=1$), the minimum is an e-value under the union null ``not admissible or harm rate at
+least $\eta$'', and e-Holm controls the family-wise error under arbitrary dependence while admitting every cell that the ledger with
+$\alpha_c=\alpha/K$ would.  Note that $e_c$ is the value \emph{at} $\tau_c$, not the running maximum, which is not an e-value.
+\end{remark}
 
 \begin{remark}[Data-dependent budgets]
 The ledger above is fixed in advance, which is what makes the union bound free of any independence assumption.  A budget that
@@ -187,4 +199,6 @@ shared task component enters $C$.  Under the additive model $V_\pi+V_\varnothing
 Every statement above is checked numerically by a script in the artifact, using the e-process of our implementation:
 per-cell validity, the failure of a per-scope budget, the attained constant $2$ in Lemma~\ref{lem:shift}, the bound of
 Theorem~\ref{thm:composition} on random instances, the pairing ratio, the convergence of the ledger, and the failure of
-re-admission without a ledger (re-testing a retired cell with the full $\alpha$ at every epoch).
+re-admission without a ledger (re-testing a retired cell with the full $\alpha$ at every epoch), the harm certificate of
+Remark~1, the library ledger's total, and the exact decision rule of Studies D--H (Remark~\ref{rem:eholm}) at both null
+boundaries, where its family-wise false admission rate was $FWB$ and $FWH$ ($16$ cells, $\alpha=0.1$).

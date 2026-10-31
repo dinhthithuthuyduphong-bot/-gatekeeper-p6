@@ -15,3 +15,12 @@ the two families in different components, so it would let them run together with
 
 **Labelled post hoc** in the paper. The census and simulation are re-run by the same workflow so that every reported number
 comes from it.
+
+## R2-A2 (post hoc, theory/code audit TC5)
+
+**What was found.** The census, like the frozen `footprint_overlap`, dropped module-level sites (`<module>`), so two families that
+edit module-level code of the same file were counted as disjoint, which Corollary "What actually runs" does not allow.
+
+**Change (analysis only).** Module-level sites count as a region of their own file (`file::<module>`); `gatekeeper_ext.execution`
+gains `site_footprint` (module-qualified, module level included). The census and simulation are re-run by the same workflow; the
+paper reports the re-run.

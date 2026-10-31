@@ -24,6 +24,16 @@ from gatekeeper_lite.gatekeeper import footprint_overlap
 Cell = FrozenSet[str]          # the skill ids applied together in one scope; a singleton is a single-skill cell
 
 
+def site_footprint(sites: Iterable[Mapping[str, str]]) -> List[str]:
+    """Module-qualified footprint from binding sites ({"module", "function"}), module-level code INCLUDED.
+
+    The frozen `footprint_overlap` drops the generic tag `func:<module>`, because a transform's own footprint does not say which
+    file it came from; two skills editing module-level code of the same file would then look disjoint, which Corollary
+    "What actually runs" does not allow (theory/code audit TC5).  Qualified ids `site:<module>::<function>` keep module-level
+    regions apart per file and are never dropped."""
+    return sorted({"site:%s::%s" % (s["module"], s["function"]) for s in sites})
+
+
 Edges = Collection[Collection[str]]   # extra adjacencies (enabling pairs), each a pair of skill ids
 
 

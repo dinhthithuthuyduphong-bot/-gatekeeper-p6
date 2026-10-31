@@ -12,6 +12,9 @@ Each check is a falsifiable statement; the script records the numbers and whethe
   C6  alpha ledger: sum_k 6/(pi^2 (k+1)^2) <= 1
   C8  re-admission after retirement: full alpha at every epoch vs the 6/(pi^2 (k+1)^2) ledger
   C9  harm certificate of the experiments (gatekeeper_ext.gates) at h = eta: certification <= alpha; 0.39 eta; 110 draws
+  C10 decision rule of Studies D-H (drawharness stop rule + studyd_decisions): e-Holm over min(benefit e-process, harm
+      certificate) read at the stopping time, at both null boundaries: family-wise false admission <= alpha, E[e_tau] <= 1
+  C11 library ledger (gatekeeper_ext.ledger) and the simulation's allocation: total over all cells and epochs <= alpha
   C7  Corollary 8 consistency: mean overlapping partners implied by 11.4% overlapping pairs of 94 skills
 """
 import json
@@ -62,6 +65,10 @@ class FastBetting:
         self.n += 1
         self.s += y
         self.ss += y * y
+        return math.exp(self.log_wealth)
+
+    @property
+    def value(self):
         return math.exp(self.log_wealth)
 
 
@@ -246,6 +253,59 @@ def check_corollary8(skills=94, overlap_share=0.114, draft_dbar=0.34):
             "note": "held=False means the draft's numbers are inconsistent (expected)"}
 
 
+def check_decision_rule(reps, seed, k=16, alpha=0.1, theta=0.2, eta=0.05, alpha_alarm=0.05, n_max=300):
+    """Exact rule of gatekeeper_lite.drawharness / studyd_decisions with the configs of Studies D-H (theta 0.2, eta 5%)."""
+    from gatekeeper_lite.eprocess import HarmAlarmEProcess, HarmCertEProcess, e_holm
+    # boundary A: not admissible (E[Y] = theta, no harm); boundary B: harm rate exactly eta, otherwise always helps
+    nulls = {"benefit_boundary": (theta, 0.0), "harm_boundary": (1 - eta, eta)}     # (P(Z=-1), P(Z=+1))
+    rng, out = random.Random(seed), {}
+    for name, (p_help, p_hurt) in nulls.items():
+        fw, e_sum, e_sq, e_cnt = 0, 0.0, 0.0, 0
+        for _ in range(reps):
+            evals = {}
+            for c in range(k):
+                ben, cert, alarm = FastBetting(theta), HarmCertEProcess(eta), HarmAlarmEProcess(eta)
+                decision = "UNDECIDED"
+                for _n in range(n_max):
+                    u = rng.random()
+                    z = -1.0 if u < p_help else (1.0 if u < p_help + p_hurt else 0.0)
+                    ben.update(z)
+                    cert.update(z > 0)
+                    alarm.update(z > 0)
+                    if alarm.value >= 1 / alpha_alarm:
+                        decision = "REJECT_HARM"
+                    elif min(ben.value, cert.value) >= k / alpha:
+                        decision = "ADMIT"
+                    if decision != "UNDECIDED":
+                        break
+                e_tau = min(ben.value, cert.value)
+                e_sum, e_sq, e_cnt = e_sum + e_tau, e_sq + e_tau * e_tau, e_cnt + 1
+                evals[c] = 0.0 if decision == "REJECT_HARM" else e_tau
+            fw += bool(e_holm(evals, alpha))
+        mean = e_sum / e_cnt
+        se = math.sqrt(max(0.0, e_sq / e_cnt - mean * mean) / e_cnt)
+        out[name] = {"familywise_false_admission": fw / reps, "wilson95": wilson(fw, reps), "mean_e_at_stop": mean,
+                     "mean_e_se": se}
+    return {"statement": "Studies D-H rule: FWER <= alpha and E[min(e_ben, e_cert) at the stopping time] <= 1 at both null boundaries",
+            "cells": k, "reps": reps, "theta": theta, "eta": eta, "alpha": alpha, **out,
+            "held": all(v["wilson95"][0] <= alpha and v["mean_e_at_stop"] <= 1.0 + 3 * v["mean_e_se"] for v in out.values())}
+
+
+def check_library_ledger():
+    from gatekeeper_ext.ledger import LibraryLedger
+    worst = max(LibraryLedger(0.1, n).total_bound() for n in range(1, 201))
+    # exhaustive sum for a small library, epochs 0..199 (tail <= 6/(pi^2 * 200))
+    led = LibraryLedger(0.1, 6, skills="abcdef")
+    import itertools
+    exhaustive = sum(led.share(c, ep) for m in range(1, 7) for c in itertools.combinations("abcdef", m) for ep in range(200))
+    # the library simulation (tools/library_simulation.py): singles (alpha/2)/K, composites (alpha/2) 6/(pi^2 j^2), j = bitmask
+    k = 12
+    sim = 0.1 / 2 + 0.1 / 2 * sum(6 / (math.pi ** 2 * j * j) for j in range(1, 2 ** k))
+    return {"statement": "library ledger and simulation allocation: total over all cells and epochs <= alpha",
+            "max_total_capacity_1_to_200": worst, "exhaustive_6_skills": exhaustive, "simulation_total_12_skills": sim,
+            "held": worst <= 0.1 + 1e-12 and exhaustive <= 0.1 + 1e-12 and sim <= 0.1 + 1e-12}
+
+
 def main(argv):
     out = Path(argv[0])
     opt = lambda k, d: type(d)(argv[argv.index(k) + 1]) if k in argv else d   # noqa: E731
@@ -255,7 +315,9 @@ def main(argv):
            "C4_composition": check_composition(), "C5_pairing": check_pairing(seed), "C6_alpha_ledger": check_ledger(),
            "C7_corollary8_consistency": check_corollary8(),
            "C8_readmission_ledger": check_readmission(max(100, reps // 4), 10, n, seed),
-           "C9_harm_certificate": check_harm_certificate(reps, n, seed)}
+           "C9_harm_certificate": check_harm_certificate(reps, n, seed),
+           "C10_decision_rule_studies_DH": check_decision_rule(max(200, reps // 5), seed),
+           "C11_library_ledger": check_library_ledger()}
     out.mkdir(parents=True, exist_ok=True)
     (out / "THEORY_CHECKS.json").write_text(json.dumps(res, indent=1))
     lines = ["| Check | Statement | Held | Key numbers |", "|---|---|---|---|"]
@@ -264,7 +326,9 @@ def main(argv):
             "C5_pairing": ("measured_ratio", "corrected_formula"), "C6_alpha_ledger": ("partial_sum_1e6",),
             "C7_corollary8_consistency": ("implied_mean_partners", "draft_dbar"),
             "C8_readmission_ledger": ("error_full_alpha_each_epoch", "error_ledger"),
-            "C9_harm_certificate": ("certification_rate_at_boundary", "growth_threshold_over_eta", "clean_draws_family16")}
+            "C9_harm_certificate": ("certification_rate_at_boundary", "growth_threshold_over_eta", "clean_draws_family16"),
+            "C10_decision_rule_studies_DH": ("benefit_boundary", "harm_boundary"),
+            "C11_library_ledger": ("max_total_capacity_1_to_200", "simulation_total_12_skills")}
     for k, v in res.items():
         nums = ", ".join("%s=%s" % (x, json.dumps(v[x]) if not isinstance(v[x], float) else round(v[x], 4)) for x in keys[k])
         lines.append("| %s | %s | %s | %s |" % (k, v["statement"], v["held"], nums))
