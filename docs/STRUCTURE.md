@@ -44,6 +44,9 @@ Repo được chia theo **lớp**, mỗi lớp chỉ phụ thuộc vào lớp �
 | Biết dự án đang ở đâu so với bài FSE | [`docs/TRACKING_FSE.md`](TRACKING_FSE.md) |
 | Biết bài FSE sai ở đâu và sửa thế nào | [`docs/paper/PAPER_AUDIT.md`](paper/PAPER_AUDIT.md) |
 | Ôn kiến thức, công thức | [`docs/paper/REVIEW_FSE.md`](paper/REVIEW_FSE.md) |
+| Phát biểu đúng và chứng minh của lý thuyết | [`docs/paper/THEORY.md`](paper/THEORY.md) |
+| Việc phải làm để hoàn thành bài, từng bước | [`docs/PAPER_TODO.md`](PAPER_TODO.md) |
+| API (input, output, body) và lý do từng lần chạy thất bại | [`docs/API_AND_FAILURES.md`](API_AND_FAILURES.md) |
 | Xem đã làm gì, khi nào, vì sao | [`docs/PROCESS_LOG.md`](PROCESS_LOG.md) |
 | Run ID, commit, digest của từng bằng chứng | [`EVIDENCE_LEDGER.md`](../EVIDENCE_LEDGER.md) |
 

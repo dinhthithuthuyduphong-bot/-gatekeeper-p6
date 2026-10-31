@@ -70,15 +70,17 @@ Bảng này được suy ra từ ALIGNMENT_WITH_FSE (mục sau RQ5) và giao th�
 
 PDF gốc: [`paper/source/`](paper/source/), đã đối chiếu toàn văn ngày 31/10/2026. Bài do AI sinh, mọi số là projected.
 
+**Chứng minh đầy đủ và phát biểu đã sửa:** [THEORY](paper/THEORY.md). Kiểm bằng số: workflow `Gatekeeper theory checks` ([kết quả](../research_closure/results/theory/THEORY_CHECKS.md)): C1–C6 đúng, C7 xác nhận số của bản nháp không khớp. Ngân sách α theo phạm vi như bản nháp cho tỉ lệ admit sai cả họ **45%** khi α = 10%; chia theo ô: 5%. **Kế hoạch từng bước để hoàn thành bài:** [PAPER_TODO](PAPER_TODO.md).
+
 | Nhóm | Mục | Kết luận | Trạng thái |
 |---|---|---|---|
 | Toán | T1 Định lý 4: hằng số | Đúng là 2ξ_s | ✅ có câu sửa · ⏳ sửa bài |
 | Toán | T2 Định lý 4: ngân sách α | Phải cấp theo ô (kỹ năng, phạm vi), kể cả tổ hợp | ✅ có câu sửa · ⏳ sửa bài |
 | Toán | T3 Retirement / admit lại | Cần sổ cái 6/(π²(k+1)²) (đã cài trong repo) | ✅ |
 | Toán | T4, T5 Định lý 7 | Cận chặt 1 + min(a, b); "không có g" sai | ✅ có phát biểu thay thế · ⏳ sửa bài |
-| Toán | T6 Mệnh đề 9 | Tỉ lệ 1 + 2σ_T²/σ_S²; "lợi ròng 1,55×" đếm sai | ⏳ sửa bài |
-| Toán | T7 Mệnh đề 6 | Lượng từ thừa; phạm vi áp dụng | ⏳ sửa bài |
-| Toán | T8 Hệ quả 8 | d̄ = 0,34 mâu thuẫn với 11,4% cặp giao nhau | ⏳ sửa bài |
+| Toán | T6 Mệnh đề 9 | Tỉ lệ 1 + 2σ_T²/σ_S² (tổng quát: (V_π+V_∅)/(V_π+V_∅−2C)); "lợi ròng 1,55×" đếm sai | ✅ có chứng minh · ⏳ sửa bài |
+| Toán | T7 Mệnh đề 6 | Viết lại thành 6′(a) và 6′(b); 6′(b) chứng minh số hạng 2ξ là cần thiết và chặt (mới) | ✅ có chứng minh · ⏳ sửa bài |
+| Toán | T8 Hệ quả 8 | d̄ = 0,34 mâu thuẫn với 11,4% (d̄ ≈ 10,6); cần Giả định D (không tương tác khi footprint rời nhau) | ✅ có chứng minh · ⏳ sửa bài, đo Giả định D |
 | Toán | T9 Giả định 3 | i.i.d. với tập task hữu hạn; loss phải chặn tại 1 | ⏳ sửa bài |
 | Số liệu | S1 CI so với biên 5 điểm | Cận dưới 3,1 < 5: không vượt cổng go/no-go | ⏳ sửa bài |
 | Số liệu | S2 Mẫu số | 5,1%, 11,5%, 22,7% không nguyên trên 63 cặp | ⏳ sinh lại số |
@@ -111,3 +113,4 @@ PDF gốc: [`paper/source/`](paper/source/), đã đối chiếu toàn văn ngà
 | 31/10/2026 09:59 | Part 1 xong: 234/234 thành công |
 | 31/10/2026 ~10:05 | Tổng hợp: HQ1 không được ủng hộ; Q4 = 11,1%; viết STUDY_Q_RESULT.md |
 | 31/10/2026 ~10:15–12:30 | Amendment Q-A1: chạy lại 55 đơn vị, chấm tay hai người; kết luận HQ1 giữ nguyên |
+| 31/10/2026 ~13:00 | Lý thuyết: THEORY.md (chứng minh), theory checks; PAPER_TODO.md; API_AND_FAILURES.md + failure audit (64 run thất bại, đã phân nhóm) |

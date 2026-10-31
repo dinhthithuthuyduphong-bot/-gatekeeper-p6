@@ -6,6 +6,8 @@
 
 **Cách làm:** đọc toàn văn bằng `pdftotext`, tính lại mọi phép tính có thể tính lại (mục 9), đối chiếu với mã của repo (`gatekeeper_lite/`). Không sửa các PDF. Mỗi lỗi có đề xuất sửa, nhiều chỗ kèm câu chữ dán được vào LaTeX.
 
+**Bản chi tiết có chứng minh đầy đủ:** [THEORY.md](THEORY.md) (kèm phép kiểm bằng số, workflow `Gatekeeper theory checks`).
+
 **Mức độ:** 🔴 sai, phải sửa trước khi nộp · 🟠 thiếu hoặc mơ hồ, có thể bị phản biện bắt · 🟡 trình bày.
 
 ---

@@ -132,3 +132,18 @@ Mẫu cho mỗi mục:
   - Lần 2 (run 41197881665, 6 job): thành công, 0,38 USD.
 - Kết quả: đồng thuận 87,7%, kappa 0 (người chấm thứ hai mã R mọi mục); 28/31 đơn vị có hồi quy đã xác nhận; **8/36 = 22,2%** đơn vị tái tạo được không có hồi quy đã xác nhận (Wilson 11,7% – 38,1%). Kết luận HQ1 giữ nguyên. Chi tiết trong `STUDY_Q_RESULT.md`, mục Q-A1.
 - Còn mở: viết lại khẳng định trong bài theo nhánh "không bác bỏ"; nêu giới hạn "bản fix trả giá trị ≠ đầu vào hợp lệ" (đối tượng giả do G2 dựng).
+
+### ~12:30 — Rà lại lý thuyết, kế hoạch hoàn thành bài, API và lỗi khi chạy
+- Vì sao: người nghiên cứu yêu cầu chứng minh lại các ý trong bản nháp (do AI sinh), sửa cho đứng vững, có to-do list chi tiết, và tài liệu API cùng nguyên nhân gốc của các lần chạy thất bại, kiểm lại được trên GitHub Actions.
+- **Lý thuyết:** [`docs/paper/THEORY.md`](paper/THEORY.md). Với mỗi ý: bài viết gì, sai ở đâu, phát biểu đúng, chứng minh đầy đủ.
+  - Định lý 4′: sổ cái α theo ô, gồm admit lại và tổ hợp; hằng số 2ξ.
+  - Mệnh đề 6′(a), 6′(b): 2ξ là cần thiết và chặt, mới so với bản nháp.
+  - Định lý 7′: cận chặt 1 + min(a, b).
+  - Hệ quả 8′: cần Giả định D.
+  - Mệnh đề 9′: công thức tổng quát.
+- **Kiểm bằng số:** `tools/theory_checks.py` (dùng đúng e-process của repo; bản tính dồn được test là trùng với bản gốc), workflow `Gatekeeper theory checks`, run 41206524576. Kết quả trong `research_closure/results/theory/`. Ngân sách theo phạm vi cho tỉ lệ admit sai cả họ 45,4% (α = 10%), theo ô 5,1%.
+- **To-do:** [`docs/PAPER_TODO.md`](PAPER_TODO.md), 6 giai đoạn, mỗi việc có tiêu chí "xong khi".
+- **API và lỗi:** [`docs/API_AND_FAILURES.md`](API_AND_FAILURES.md).
+  - Công cụ `tools/failure_audit.py` và workflow `Gatekeeper failure audit` đọc log của bước thất bại, phân nhóm, và commit `research_closure/results/failure_audit/`.
+  - Lần 1 và 2 (run 41206526780, 41206699066) xếp sai: đọc cả log, bắt nhầm một tiêu đề bảng "HTTP 429", và chưa đọc đủ job của run có hơn 100 job. Lần 3 (run 41207250040) sửa cả hai và khớp với đối chiếu tay: 64 run thất bại, 14 nhóm.
+- Còn mở: đưa các phát biểu đã sửa vào bài (PAPER_TODO giai đoạn 1); thiết kế phép đo cho Giả định D (giai đoạn 2.3).
