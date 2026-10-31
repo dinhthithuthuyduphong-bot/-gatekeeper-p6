@@ -40,6 +40,20 @@ class LlmStandInTest(unittest.TestCase):
         self.assertIn("W1 (major)", LR.to_markdown(r2))
         self.assertIn("parse_error", LR.parse_json("not json"))
 
+    def test_calibration_items_and_score(self):
+        import rater_calibration as RC
+        its = RC.items()
+        self.assertEqual((sum(i["known"] == "B" for i in its), sum(i["known"] == "R" for i in its)), (10, 10))
+        all_r = [{"id": i["id"], "code": "R"} for i in its]
+        s = RC.score(its, all_r)
+        self.assertEqual(s["accuracy"], 0.5)
+        self.assertFalse(s["discriminates"])
+
+    def test_inputs_are_inlined_in_review_text(self):
+        t = LR.paper_text()
+        self.assertNotIn("\\input{", t)
+        self.assertLess(t.index("Risk control"), t.index("section{Conclusion}"))
+
     def test_majority_and_fleiss(self):
         self.assertEqual(Q3.majority(["R", "R", "B"]), "R")
         self.assertEqual(Q3.majority(["R", "B", "U"]), "U")

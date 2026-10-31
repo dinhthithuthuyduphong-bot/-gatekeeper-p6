@@ -51,12 +51,20 @@ def paper_text(sections=None):
     for name in (sections or ORDER):
         p = LATEX / "sections" / (name + ".tex")
         if p.is_file():
-            parts.append(p.read_text())
+            parts.append(inline_inputs(p.read_text()))
     if sections is None:
-        rs = LATEX / "sections" / "related_stats.tex"
-        if rs.is_file():
-            parts.append(rs.read_text())
+        dm = re.search(r"\\section\*\{Data Availability\}.*?(?=\\bibliography|\\end\{document\})", main, re.S)
+        if dm:
+            parts.append(dm.group(0))
     return "\n\n".join(parts)
+
+
+def inline_inputs(text):
+    """Replace \\input{sections/x} by the file's content, in place (the first review run appended it at the end instead)."""
+    def rep(m):
+        p = LATEX / (m.group(1) if m.group(1).endswith(".tex") else m.group(1) + ".tex")
+        return p.read_text() if p.is_file() else m.group(0)
+    return re.sub(r"\\input\{([^}]+)\}", rep, text)
 
 
 def parse_json(text):

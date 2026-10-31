@@ -5,7 +5,7 @@ name: Gatekeeper model stand-ins
 on:
   workflow_dispatch:
     inputs:
-      which: {description: "all | third | proofs | mock", default: "all"}
+      which: {description: "all | third | proofs | mock | calibration", default: "all"}
 permissions:
   contents: write
 jobs:
@@ -34,6 +34,12 @@ jobs:
           D=research_closure/results/study_q/qa1
           python tools/rq5_rate_llm.py $D/ITEMS.json $D/RATINGS_THIRD.json research_closure/pilot/models.json vertex-gemini-flash 2
           python tools/qa1_three_raters.py $D | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Rater calibration (known B and R items)
+        if: inputs.which == 'all' || inputs.which == 'calibration'
+        run: |
+          for m in vertex-gemini-argon vertex-gemini-flash; do
+            python tools/rater_calibration.py research_closure/results/model_reviews research_closure/pilot/models.json $m 0.5 | tee -a "$GITHUB_STEP_SUMMARY"
+          done
       - name: Proof check
         if: inputs.which == 'all' || inputs.which == 'proofs'
         run: |
