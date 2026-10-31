@@ -6,25 +6,120 @@ Trạng thái tổng hợp: [TRACKING_FSE](TRACKING_FSE.md). Lý thuyết: [THEO
 
 ---
 
-## A. Bảng điểm: bài đã đạt chuẩn A* (FSE/ICSE) hoặc tạp chí Q1 (TOSEM/TSE/EMSE) chưa?
+## A. Bảng điểm: bài đã đạt chuẩn A* (ISSTA/FSE/ICSE) hoặc Q1 (TOSEM/TSE/EMSE) chưa?
 
-Cập nhật sau **mỗi** lần chạy. Mỗi tiêu chí có trạng thái **THẮNG** (đã đạt, có bằng chứng trong repo) hoặc **THUA** (chưa đạt). Mục nào THUA thì phải có việc tiếp theo.
+Cập nhật sau **mỗi** lần chạy. **THẮNG** = đạt, có bằng chứng trong repo. **THUA** = chưa đạt; mỗi ô THUA phải có một việc trong lộ trình D.
 
-| # | Tiêu chí mà phản biện A*/Q1 thường dùng | Trạng thái | Bằng chứng / việc còn thiếu |
+| # | Tiêu chí | Trạng thái | Bằng chứng / việc |
 |---|---|---|---|
-| S1 | Lý thuyết đúng, có chứng minh, mọi mệnh đề được kiểm bằng số | **THẮNG** | THEORY.md; C1–C11 `held` (C7 cố ý False: số của bản nháp sai) |
-| S2 | Mã thực thi đúng lý thuyết đã chứng minh | **THẮNG** (31/10) | [THEORY_CODE_AUDIT](paper/THEORY_CODE_AUDIT.md) TC1–TC11; C10 chạy đúng luật của D–H |
-| S3 | Đóng góp mới, nói rõ cái gì không mới | **THẮNG** | Mục 5 đoạn đầu; Intro "What we do not claim" |
-| S4 | Đánh giá trên dữ liệu thật, có đăng ký trước, có kết quả âm | **THẮNG** | Study D, E, G, H, P, Q, R2; FREEZE + submission check |
-| S5 | So sánh với baseline mạnh và với công trình gần nhất | **THẮNG một phần** | B2, B6-R (kiểu GSE), B8; PatchDiff. **Thiếu:** chạy chính GSE (A12) |
-| S6 | Kỹ năng đa dạng, quy mô thư viện thực tế | **THẮNG một phần** | R2: 12 họ trên 16 repo (footprint, tương tác). Study S: cổng ra quyết định thật cho 8 họ trên 12 hàm thật (48 ô). **Thiếu:** admit với oracle của chuyên gia cho các họ mới (hiện "tác hại" = khác bản gốc) |
-| S7 | Tác hại của tổ hợp đo trên dữ liệu thật | **THẮNG một phần** | Study S (S-A5, kết quả cuối): 16/23 hàm thật, tổ hợp cộng tính, cổng loại đúng 3/64 ô. **Thiếu:** chưa có tổ hợp thật nào gây hại "nảy sinh" để minh hoạ Định lý 2.5 (bài nói rõ) |
-| S8 | Người chấm độc lập (không cần người, theo yêu cầu 31/10) | **THẮNG** | 3 người chấm (assistant, argon, flash); cả hai model đúng 20/20 mục hiệu chuẩn; bất đồng ở 19 mục; Q-A1: 8/36 (2 người chấm) và 5/36 (đa số), kết luận HQ1 giữ nguyên |
-| S9 | Tái lập được, có artifact ẩn danh | **THẮNG** (chờ upload) | submission check pass; `make_anonymous_artifact.py`. Người làm: upload |
-| S10 | Đúng định dạng và hạn của venue | **THẮNG** (cần xem lại khi có call for papers chính thức) | FSE 2027 đã hết hạn → **ISSTA 2027**, hạn bài 11/1/2027, 18 trang + tham khảo (quy định 2026); bài 14 trang; đã thêm mục Data Availability bắt buộc |
-| S11 | Mọi mệnh đề có chứng minh; được kiểm độc lập (không cần người, theo yêu cầu 31/10) | **THẮNG** (5 vòng kiểm, vòng cuối chỉ còn một điểm ký hiệu, đã sửa) | Mọi Bổ đề, Mệnh đề, Định lý, Hệ quả đều có chứng minh trong bài; C1–C11 kiểm bằng số; model kiểm chứng minh vòng 1 tìm 5 điểm, đã sửa hết; vòng 2 đang chạy |
+| S1 | Lý thuyết đúng, mọi mệnh đề có chứng minh, kiểm bằng số | **THẮNG** | 5 vòng kiểm chứng minh; C1–C11 |
+| S2 | Mã làm đúng lý thuyết đã chứng minh | **THẮNG** | THEORY_CODE_AUDIT TC1–TC24 |
+| S3 | Đóng góp mới, nói rõ cái gì không mới | **THẮNG** | Mục 5, Intro |
+| S4 | Thực nghiệm thật, đăng ký trước, có kết quả âm | **THẮNG** | D, E, G, H, P, Q, R2, S |
+| S5 | **Tiêu chí chính của bài FSE gốc:** thắng replay + fingerprint (B6-R) **ở cùng mức giữ lợi ích** | **THUA** | Tác hại: B6-R admit 4/4 ô có hại, mình 0/4 (thắng). Lợi ích: mình giữ 2/3, B6-R giữ 3/3 (thua). → **D1, D2** |
+| S6 | Thắng các baseline thống kê (fixed-sample, smoke) và always-retest (B8) | **THUA một phần** | Smoke: thắng ở tác hại hiếm (H). Fixed-sample: chứng nhận 0 tác hại cần 99 draw, mình 110, nên thua nhẹ. B8: chỉ rẻ hơn 11% (3.220 so với 3.600). → **D2, D3** |
+| S7 | Nguồn thực nghiệm đa dạng, đủ lớn | **THUA một phần** | 14 target (D–G), 16 repo (R2, S), SWE-bench (Q). Số ô có quyết định thật còn nhỏ (28 + 64). → **D3** |
+| S8 | Người chấm độc lập (model đã hiệu chuẩn) | **THẮNG** | 20/20 mỗi model; Q-A1 5/36 – 8/36 |
+| S9 | Tái lập, artifact ẩn danh | **THẮNG** (chờ upload) | submission check |
+| S10 | Venue, định dạng | **THẮNG** | ISSTA 2027, 11/1/2027, 16/18 trang |
+| S11 | Chứng minh được kiểm độc lập | **THẮNG** | 5 vòng; vòng cuối chỉ còn ký hiệu |
+| S12 | Câu hỏi B9 của bài gốc: so với để LLM sửa trực tiếp | **THUA** (chưa làm) | → **D4** |
+| S13 | Retirement trên thay đổi môi trường thật | **THUA** (chỉ có demo) | → **D5** |
+| S14 | Tổ hợp thật gây hại "nảy sinh" (minh hoạ Định lý 2) | **THUA** (chưa thấy) | → **D6** |
+| S15 | Chi phí và điểm hoà vốn (RQ4 của bài gốc) | **THUA** (chưa đo) | → **D2** |
 
-**Kết luận hiện tại:** bài đạt S1–S4 và S9; bài **chưa** chắc thắng vì S7 và S8 (phần phản biện hay tấn công nhất), và S10, S11 là việc của người. Không thể bảo đảm bài được nhận. Việc làm được là đóng từng ô THUA.
+**Kết luận hiện tại:**
+- **Phần lý thuyết và tính trung thực đã đạt.**
+- **Phần "thắng baseline" chưa đạt**, vì tiêu chí chính của bài gốc (S5) đang thua.
+- Bài **chưa** đủ mạnh cho A*. Lộ trình D bên dưới nhắm đúng vào các ô thua.
+
+## D. Lộ trình research (đọc kỹ nếu chưa có kinh nghiệm)
+
+### D0. Nguyên tắc (không được vi phạm)
+1. **Viết tiêu chí thắng trước khi chạy.** Mỗi study có `PROTOCOL.md` commit trước; ghi rõ "thắng" là gì và "thua" là gì.
+2. **Thua thì báo thua.** Không đổi tiêu chí sau khi thấy dữ liệu. Phân tích làm sau khi thấy dữ liệu phải gắn nhãn *post hoc*.
+3. **Mọi kết quả lên `main`.** Workflow chạy trên `main`; tệp kết quả nằm ở `research_closure/results/<study>/`; thêm một dòng vào bảng B.
+4. **Đa dạng và minh bạch:** nhiều repo, nhiều loại thay đổi, dữ liệu công khai, ghi rõ license và cách chọn mẫu (không chọn tay).
+5. **Hữu ích:** công bố bộ dữ liệu, công cụ và quy trình để người khác chạy lại.
+
+### D1. Giữ lợi ích ngang B6-R mà vẫn chặn tác hại (đóng S5, quan trọng nhất)
+- **Vấn đề của bài gốc:** tiêu chí chính "thắng B6-R ở cùng mức giữ lợi ích".
+- **Chẩn đoán từ dữ liệu:**
+  - Ô bị bỏ sót có lợi ích −0,11, nhỏ hơn biên θ = 0,2. Gate đòi "có lợi rõ" trong khi B6-R chỉ đòi "không lỗi khi replay".
+  - Vậy hai bên so khác câu hỏi. So công bằng là: **"admit khi không có hại"** (chỉ dùng harm certificate) so với B6-R, rồi tách riêng câu hỏi "có lợi".
+- **Việc:**
+  - **D1.1** Viết giao thức `study_d2/PROTOCOL.md`. Luật hai tầng: *admit an toàn* = harm certificate (tác hại < η); *chứng nhận có lợi* = e-process lợi ích (như cũ).
+  - **D1.2** Phân tích lại trace đã ghi của D, E, G, H (có sẵn, 0 USD). Gắn nhãn *post hoc*, vì dữ liệu đã thấy.
+  - **D1.3** Kiểm xác nhận trên **dữ liệu mới** (D3), không dùng lại D–G.
+- **Tiêu chí thắng (viết trước):** ở cùng số ô có lợi hoặc vô hại được giữ (≥ mức của B6-R), số ô có hại được admit **nhỏ hơn hẳn** B6-R; tỉ lệ admit sai ≤ α.
+- **Nếu thua:** báo cáo, rồi chạy vòng debug C. Câu hỏi đầu tiên: η, c có hợp lý không? Ngân sách draw có đủ không?
+
+### D2. Chi phí: thắng B8 và fixed-sample về số lần chạy (đóng S6, S15)
+- **Vấn đề của bài gốc:** RQ4, chi phí và điểm hoà vốn (bài gốc dùng số chưa đo).
+- **Chẩn đoán:**
+  - Ở trường hợp không có tác hại, gate tuần tự cần 110 draw, fixed-sample cần 99. Giới hạn khi c → 1 cũng là 99, nên **không thể thắng fixed-sample** ở trường hợp này.
+  - Lợi thế thật nằm ở **ô có hại: dừng sau khoảng 2 draw**, trong khi fixed-sample luôn chạy đủ n.
+- **Việc:**
+  - **D2.1** Định nghĩa chi phí = số lượt chạy tới quyết định (ASN), tính trên **tập ô thực tế**, gồm cả ô hại lẫn ô không hại.
+  - **D2.2** So gate tuần tự, fixed-sample (n = 99), B8 (300 draw + suite) và smoke test trên cùng ô của D3. Tính điểm hoà vốn: sau bao nhiêu lần tái sử dụng thì chi phí chứng nhận được bù lại.
+  - **D2.3 (tối ưu):** gate lai. Chạy tuần tự, nhưng tới n = 99 thì dùng thêm kiểm định cố định, với α chia đôi (hợp lệ theo phép hợp cận; viết chứng minh trước).
+- **Tiêu chí thắng:** ASN của gate (hoặc gate lai) < ASN của fixed-sample **trên tập ô thực tế** ở cùng mức lỗi; chi phí < B8 ít nhất 30%.
+- **Nếu thua:** báo cáo và giữ lập luận "hợp lệ khi dừng tuỳ ý", không khẳng định về chi phí.
+
+### D3. Bộ dữ liệu đa dạng, đủ lớn: Study T (đóng S7; là dữ liệu xác nhận cho D1, D2)
+- **Nguồn:**
+  - 12 họ kỹ năng (R2) trên **mọi** site của 16 repo hiện có (467 hàm);
+  - thêm khoảng 50 gói PyPI phổ biến, chọn theo thứ hạng tải về công khai (không chọn tay), cố định danh sách trước khi chạy.
+- **Oracle không cần người:**
+  - **Tác hại:** hành vi khác bản gốc trên input sinh từ chữ ký hàm, có thay `bool` cho `int` (đã kiểm ở S), mỗi phiên bản chạy hai lần.
+  - **Bộ test của repo:** dùng làm ground truth phụ.
+- **Ô:** (họ kỹ năng, repo); dự kiến hàng trăm ô.
+- **Việc chuẩn bị:** các manifest R2 hiện có `"P": []` (chưa có ví dụ nguồn để replay). Trước khi chạy, mỗi họ cần **một ví dụ before/after thật** lấy từ một commit sửa lỗi công khai (như hera_pspec PR #485 của `none_identity`), từ repo **không** nằm trong danh sách target, ghi nguồn rõ ràng.
+- **Baseline trên cùng ô:**
+  - B2 (bind);
+  - B6-R (replay trên ví dụ nguồn + fingerprint);
+  - B8 (mọi input + suite);
+  - smoke 20 draw;
+  - fixed-sample;
+  - gate của mình.
+- **Tiêu chí thắng (viết trước):** như D1 và D2, cộng với tỉ lệ admit sai thực tế ≤ α.
+- **Chi phí:** 0 USD (GitHub Actions).
+- **Kết quả:** `research_closure/results/study_t/`, cộng một *datasheet* (nguồn, license, cách chọn, giới hạn).
+
+### D4. B9: so với để LLM sửa trực tiếp (đóng S12)
+- **Vấn đề của bài gốc:** B9 là mục tiêu đồng-chính; hiện đang HOLD.
+- **Việc:**
+  - Chọn ngẫu nhiên khoảng 30 ô của D3.
+  - Cho model sửa trực tiếp với cùng ngân sách lượt chạy.
+  - So tỉ lệ tác hại và chi phí.
+- **Chi phí ước tính:** 2–5 USD (Gemini). Có giới hạn tiền cứng (`SpendGuard`).
+- **Tiêu chí thắng:** gate có tỉ lệ tác hại thấp hơn ở chi phí không cao hơn.
+
+### D5. Retirement trên thay đổi môi trường thật (đóng S13)
+- **Việc:**
+  - Chạy lại các ô của D3 trên phiên bản phụ thuộc hoặc Python khác (ví dụ 3.11 → 3.12, bản phụ thuộc mới hơn).
+  - Đo: fingerprint đổi có trùng với hành vi đổi không, và chứng nhận cũ còn đúng không.
+- **Tiêu chí thắng:** retirement theo fingerprint bắt được mọi ô mà hành vi đổi, kèm chi phí kiểm lại (sổ cái epoch).
+
+### D6. Tìm tổ hợp thật gây hại "nảy sinh" (đóng S14)
+- **Việc:** chạy Study S trên mọi cặp kề nhau của D3 (gồm khoảng 50 gói mới).
+- **Tiêu chí:** ghi nhận mọi trường hợp nảy sinh, masking hoặc phụ thuộc thứ tự, kèm ví dụ cụ thể.
+- **Nếu không thấy:** báo cáo là trên mã thật các tổ hợp này cộng tính. Đó là kết quả hữu ích: thiết kế "chỉ kiểm thành phần liên thông" là đủ và rẻ.
+
+### D7. Viết lại và nộp
+- Cập nhật mục Evaluation theo D1–D6 (bảng mới: thắng hay thua với từng baseline).
+- Kiểm chứng minh mọi mệnh đề mới (gate lai D2.3) bằng `Gatekeeper model stand-ins`.
+- Submission check, rồi nộp ISSTA 2027: tóm tắt **8/1/2027**, bài **11/1/2027**.
+
+### Thứ tự làm và thời gian dự kiến
+1. **D1.2** (vài giờ, dùng dữ liệu cũ, chỉ để định hướng).
+2. **D3** (giao thức trước; 1–2 tuần CI).
+3. **D1.3 và D2** (phân tích trên D3).
+4. **D6, D5** (dùng lại hạ tầng của D3).
+5. **D4** (cần tiền).
+6. **D7.**
+
+Chậm nhất ngày **20/12/2026** phải xong D1–D3, để còn 3 tuần viết.
 
 ## B. Nhật ký từng lần chạy (cập nhật sau MỖI lần chạy)
 
@@ -79,6 +174,8 @@ Mỗi dòng gồm:
 5. **Sửa xong:** viết amendment nếu study đã freeze, chạy lại bằng workflow, rồi thêm một dòng mới vào bảng B.
 
 ---
+
+## E. Lịch sử: các giai đoạn 0–7 đã làm (giữ để tra cứu; việc mới nằm ở D)
 
 ## Quy tắc chung (đọc trước khi bắt đầu)
 
