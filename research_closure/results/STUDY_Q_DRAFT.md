@@ -46,3 +46,15 @@ HQ1 (nhị thức chính xác, α = 0,05, công suất 0,8, H0: 0,5, thay thế 
 ## Q-F1 (G2, khoảng 1 USD): quy tắc ghi trước
 
 Chạy G2 (model nhẹ viết chương trình sinh, xem mô tả issue và diff) trên **đúng 33 instance** của Q-F0. **Đi tiếp với thiết kế một patch mỗi instance** khi cận dưới Wilson 95% của tỉ lệ dùng được, nhân 500, **≥ 180**. Nếu không đạt, xét thiết kế nhiều patch mỗi instance (các bản nộp khác nhau) với hiệu chỉnh hiệu ứng thiết kế [Kish 1965], dùng hệ số tương quan ước lượng từ dữ liệu, trước khi đăng ký.
+
+## Kết quả Q-F1 (G2, 0,26 USD): ĐẠT quy tắc đã ghi trước
+
+**18/33 = 54,5%** instance dùng được (Wilson 95%: 38,0% đến 70,2%). Cận dưới × 500 = **190 ≥ 180**. Gần như trùng Study P bước 2 (55%). Dùng được ở 11/12 repo (sphinx-doc 0/3). Lý do thất bại chính còn lại: bản gốc không bao giờ khác bản fix (20 hàm).
+
+**Quyết định theo quy tắc:** đi tiếp với thiết kế **một patch mỗi instance**.
+
+## Q-F2 (0 USD): kiểm kê kho patch, trước khi viết giao thức
+
+Quy tắc chọn patch phải cố định trước khi đo; ngưỡng phụ thuộc số instance có ít nhất một patch resolved công khai. Q-F2 đếm, cho 182 bản nộp: dự đoán, danh sách resolved, số patch resolved và số patch khác nhau theo nội dung ở mỗi instance. Đây là siêu dữ liệu của các bản nộp, không phụ thuộc phép đo nào của nghiên cứu này.
+
+**Quy tắc chọn dự kiến (sẽ ghi trong giao thức):** khung = các instance có ít nhất một patch resolved; với mỗi instance, chọn **một** patch resolved bằng hash có seed (seed drand lúc đóng băng) trong số các patch khác nhau theo nội dung, để các instance độc lập và hiệu ứng thiết kế bằng 1 [Kish 1965].

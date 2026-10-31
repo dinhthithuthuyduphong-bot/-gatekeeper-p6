@@ -1,0 +1,2592 @@
+{
+ "generator": "G2",
+ "usable": 18,
+ "sample": 33,
+ "spent_usd": 0.264,
+ "records": [
+  {
+   "instance_id": "pydata__xarray-6461",
+   "repo": "pydata/xarray",
+   "image": "swebench/sweb.eval.x86_64.pydata_1776_xarray-6461:latest",
+   "modules": [
+    "xarray/core/computation.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.10.15",
+   "generator": "G2",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "xarray/core/computation.py",
+     "qualname": "where",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.005771,
+       "usage": {
+        "input": 2320,
+        "output": 1075,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "import numpy as np\nimport xarray as xr\n\n\ndef make_inputs(rng, n):\n    items = []\n\n    def make_da(shape, attrs=None):\n        data = np.array(\n            [rng.uniform(-10, 10) for _ in range(np.prod(shape))]\n        ).reshape(shape)\n        dims = [f\"dim_{i}\" for i in range(len(shape))]\n        coords = {f\"dim_{i}\": np.arange(s) for i, s in enumerate(shape)}\n        return xr.DataArray(data, dims=dims, coords=coords, attrs=attrs or {})\n\n    def make_var(shape, attrs=None):\n        data = np.array(\n            [rng.uniform(-10, 10) for _ in range(np.prod(shape))]\n        ).reshape(shape)\n        dims = [f\"dim_{i}\" for i in range(len(shape))]\n        return xr.Variable(dims, data, attrs=attrs or {})\n\n    for i in range(n):\n        # Around half the cases should trigger the bug:\n        # cond is an xarray object, x is a scalar (int/float/np.scalar) or numpy array without attrs,\n        # and keep_attrs=True (or set via options/explicitly)\n        is_bug_case = i < (n // 2)\n\n        shape = (rng.choice([2, 3, 4]), rng.choice([2, 3, 4]))\n        cond_raw = make_da(shape) > 0\n\n        if is_bug_case:\n            keep_attrs = True\n            cond = rng.choice(\n                [\n                    cond_raw,\n                    cond_raw.variable,\n                    xr.Dataset({\"a\": cond_raw}),\n                ]\n            )\n            # x is scalar or ndarray (not an xarray object with attrs passed to apply_ufunc)\n            x_choice = rng.choice([\"int\", \"float\", \"np_scalar\", \"ndarray\"])\n            if x_choice == \"int\":\n                x = rng.randint(-10, 10)\n            elif x_choice == \"float\":\n                x = rng.uniform(-10, 10)\n            elif x_choice == \"np_scalar\":\n                x = np.float64(rng.uniform(-10, 10))\n            else:\n                x = np.ones(shape) * rng.uniform(-5, 5)\n\n            # y can be scalar or DataArray or Dataset\n            y_choice = rng.choice([\"scalar\", \"da\"])\n            if y_choice == \"scalar\":\n                y = rng.randint(-10, 10)\n            else:\n                if isinstance(cond, xr.Dataset):\n                    y = xr.Dataset({\"a\": make_da(shape)})\n                else:\n                    y = make_da(shape)\n\n            items.append((None, (cond, x, y), {\"keep_attrs\": keep_attrs}))\n        else:\n            # Ordinary cases: x is a DataArray or Variable with attrs, or keep_attrs=False\n            cond = rng.choice(\n                [\n                    cond_raw,\n                    cond_raw.variable,\n                    rng.choice([True, False]),\n                    (np.zeros(shape) == 0),\n                ]\n            )\n            keep_attrs = rng.choice([None, False, True, \"drop\"])\n\n            attrs_x = {\"units\": \"m\", \"desc\": \"test\"} if rng.random() < 0.7 else {}\n            attrs_y = {\"units\": \"s\"} if rng.random() < 0.5 else {}\n\n            x = rng.choice(\n                [\n                    make_da(shape, attrs=attrs_x),\n                    make_var(shape, attrs=attrs_x),\n                    rng.randint(-5, 5),\n                ]\n            )\n            # If x is scalar and keep_attrs=True, it falls into bug territory,\n            # so for ordinary cases keep_attrs is False or None if x is scalar.\n            if not hasattr(x, \"attrs\") and keep_attrs is True:\n                keep_attrs = False\n\n            y = rng.choice(\n                [\n                    make_da(shape, attrs=attrs_y),\n                    rng.uniform(-5, 5),\n                    np.zeros(shape),\n                ]\n            )\n\n            kwargs = {}\n            if keep_attrs is not None:\n                kwargs[\"keep_attrs\"] = keep_attrs\n\n            items.append((None, (cond, x, y), kwargs))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 80,
+     "trigger_rate": 0.4,
+     "both_raise": 0,
+     "examples": [
+      {
+       "orig": [
+        "exc",
+        "IndexError",
+        "list index out of range"
+       ],
+       "fix": [
+        "ok",
+        "DataArray",
+        "<xarray.DataArray (dim_0: 3, dim_1: 3)>\narray([[ 9.       , -7.2050843,  9.       ],\n       [-7.2050843, -7.2050843, -7.2050843],\n       [ 9.       , -7.2050843,  9.       ]])\nCoordinates:\n  * dim_0    (dim_0) int64 0 1 2\n  * dim_1    (dim_1) int64 0 1 2"
+       ]
+      },
+      {
+       "orig": [
+        "exc",
+        "IndexError",
+        "list index out of range"
+       ],
+       "fix": [
+        "ok",
+        "Dataset",
+        "<xarray.Dataset>\nDimensions:  (dim_0: 3, dim_1: 4)\nCoordinates:\n  * dim_0    (dim_0) int64 0 1 2\n  * dim_1    (dim_1) int64 0 1 2 3\nData variables:\n    a        (dim_0, dim_1) float64 -10.0 -9.095 -10.0 ... -10.0 -10.0 -9.095"
+       ]
+      },
+      {
+       "orig": [
+        "exc",
+        "IndexError",
+        "list index out of range"
+       ],
+       "fix": [
+        "ok",
+        "DataArray",
+        "<xarray.DataArray (dim_0: 2, dim_1: 4)>\narray([[-9,  5, -9, -9],\n       [ 5, -9,  5, -9]])\nCoordinates:\n  * dim_0    (dim_0) int64 0 1\n  * dim_1    (dim_1) int64 0 1 2 3"
+       ]
+      }
+     ],
+     "usable": true,
+     "why": "usable"
+    }
+   ],
+   "verdict": "usable",
+   "spent_usd": 0.005771,
+   "model_calls": 1,
+   "seconds": 84
+  },
+  {
+   "instance_id": "scikit-learn__scikit-learn-25102",
+   "repo": "scikit-learn/scikit-learn",
+   "image": "swebench/sweb.eval.x86_64.scikit-learn_1776_scikit-learn-25102:latest",
+   "modules": [
+    "sklearn/base.py",
+    "sklearn/feature_selection/_base.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.21",
+   "generator": "G2",
+   "edited_functions": 3,
+   "functions": [
+    {
+     "file": "sklearn/base.py",
+     "qualname": "BaseEstimator._validate_data",
+     "calls": [
+      {
+       "verdict": "GENERATOR_FAILED",
+       "cost_usd": 0.006422,
+       "usage": {
+        "input": 3122,
+        "output": 1088,
+        "usage_missing": false
+       },
+       "finish_reason": "stop",
+       "error": "ValueError: The truth value of a DataFrame is ambiguous. Use a.empty, a.bool(), a.item(), a.any() or a.all().\n"
+      },
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.006893,
+       "usage": {
+        "input": 4281,
+        "output": 982,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 1,
+     "generator_code": "def make_inputs(rng, n):\n    import numpy as np\n    import pandas as pd\n\n    items = []\n    estimator_class = getattr(module, \"BaseEstimator\", target_class)\n\n    dtypes_list = [\n        np.float32,\n        np.float64,\n        np.int32,\n        np.int64,\n        \"category\",\n    ]\n\n    for i in range(n):\n        receiver = estimator_class()\n\n        # Decide whether to test the new cast_to_ndarray parameter\n        is_cast_case = i % 2 == 1\n\n        n_samples = rng.randint(5, 20)\n        n_features = rng.randint(1, 5)\n\n        use_df = rng.choice([True, False])\n        if use_df:\n            data = {}\n            for col_idx in range(n_features):\n                col_name = f\"col_{col_idx}\"\n                dt = rng.choice(dtypes_list)\n                if dt == \"category\":\n                    cats = [\"a\", \"b\", \"c\"]\n                    vals = [rng.choice(cats) for _ in range(n_samples)]\n                    data[col_name] = pd.Categorical(vals)\n                elif np.issubdtype(dt, np.integer):\n                    data[col_name] = np.array(\n                        [rng.randint(0, 100) for _ in range(n_samples)], dtype=dt\n                    )\n                else:\n                    data[col_name] = np.array(\n                        [rng.uniform(-10.0, 10.0) for _ in range(n_samples)], dtype=dt\n                    )\n            X = pd.DataFrame(data)\n        else:\n            dt = rng.choice([np.float32, np.float64, np.int32, np.int64])\n            X = np.array(\n                [[rng.uniform(-10.0, 10.0) for _ in range(n_features)] for _ in range(n_samples)],\n                dtype=dt,\n            )\n\n        kwargs = {}\n        if is_cast_case:\n            kwargs[\"cast_to_ndarray\"] = rng.choice([True, False])\n\n        reset = rng.choice([True, False])\n        kwargs[\"reset\"] = reset\n\n        mode = rng.choice([\"X_only\", \"y_only\", \"both\"])\n        y_val = np.array([rng.randint(0, 2) for _ in range(n_samples)], dtype=np.int32)\n\n        if mode == \"X_only\":\n            X_arg = X\n            # Note: y must be None or 'no_validation', never a DataFrame\n            y_arg = rng.choice([None, \"no_validation\"])\n        elif mode == \"y_only\":\n            X_arg = \"no_validation\"\n            y_arg = y_val\n        else:\n            X_arg = X\n            y_arg = y_val\n            if rng.choice([True, False]):\n                kwargs[\"validate_separately\"] = ({}, {})\n\n        # If reset=False and testing X, receiver needs n_features_in_ set\n        if not reset and not (isinstance(X_arg, str) and X_arg == \"no_validation\"):\n            receiver.n_features_in_ = n_features\n            if hasattr(X_arg, \"columns\"):\n                receiver.feature_names_in_ = np.array(X_arg.columns, dtype=object)\n\n        # In check_array / check_X_y, categorical features will raise unless cast_to_ndarray=False\n        if (not is_cast_case or kwargs.get(\"cast_to_ndarray\", True)) and use_df:\n            for col in X.columns:\n                if X[col].dtype.name == \"category\":\n                    X[col] = np.array(\n                        [rng.uniform(0.0, 1.0) for _ in range(n_samples)], dtype=np.float64\n                    )\n\n        items.append((receiver, (X_arg, y_arg), kwargs))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 94,
+     "trigger_rate": 0.47,
+     "both_raise": 19,
+     "examples": [
+      {
+       "orig": [
+        "exc",
+        "TypeError",
+        "check_array() got an unexpected keyword argument 'cast_to_ndarray'"
+       ],
+       "fix": [
+        "ok",
+        "ndarray",
+        "array([[ 7.80000000e+01,  7.10645239e+00,  8.73938274e+00],\n       [ 1.40000000e+01, -5.62452882e+00, -9.54434872e+00],\n       [ 6.20000000e+01,  6.34240606e+00, -1.48762333e+00],\n       [ 7.50000000e+01,  2.68412827e+00, -7.96999550e+00],\n       [ 8.00000000e+01,  8.73039432e+00, -4.80160236e+00],\n"
+       ]
+      },
+      {
+       "orig": [
+        "exc",
+        "TypeError",
+        "check_array() got an unexpected keyword argument 'cast_to_ndarray'"
+       ],
+       "fix": [
+        "ok",
+        "ndarray",
+        "array([[89.        , 41.        ,  9.7364296 ,  2.1671927 ],\n       [20.        , 39.        , -1.96366356, -6.02967262],\n       [57.        , 59.        ,  3.5703001 , -3.95167923],\n       [67.        ,  6.        , -3.67645726,  3.77080011],\n       [62.        , 53.        , -5.72950676, -6.355576"
+       ]
+      },
+      {
+       "orig": [
+        "exc",
+        "TypeError",
+        "_check_y() got an unexpected keyword argument 'cast_to_ndarray'"
+       ],
+       "fix": [
+        "ok",
+        "ndarray",
+        "array([1, 0, 2, 0, 0, 2, 0, 0], dtype=int32)"
+       ]
+      }
+     ],
+     "usable": true,
+     "why": "usable"
+    },
+    {
+     "file": "sklearn/feature_selection/_base.py",
+     "qualname": "SelectorMixin._transform",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.005502,
+       "usage": {
+        "input": 2021,
+        "output": 1063,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "import numpy as np\nimport pandas as pd\nfrom scipy import sparse\n\n\nclass DummySelector(module.SelectorMixin):\n    def __init__(self, mask):\n        self.mask = np.asarray(mask, dtype=bool)\n\n    def _get_support_mask(self):\n        return self.mask\n\n\ndef make_inputs(rng, n):\n    items = []\n\n    dtypes_pool = [\n        np.float32,\n        np.float64,\n        np.int32,\n        np.int64,\n        \"category\",\n        \"object\",\n        \"string\",\n    ]\n\n    for i in range(n):\n        # Choose number of samples and features\n        n_samples = rng.randint(1, 15)\n        n_features = rng.randint(1, 8)\n\n        # Decide input type: DataFrame vs ndarray vs sparse matrix\n        # Focus about half on DataFrames (where upstream behavior changed significantly)\n        is_df = (i % 2 == 1) or rng.random() < 0.2\n        is_sparse = (not is_df) and (rng.random() < 0.25)\n\n        # Decide mask behavior\n        mask_scenario = rng.choice([\"all_true\", \"all_false\", \"random\", \"mismatched_len\"])\n        if mask_scenario == \"all_false\":\n            mask = np.zeros(n_features, dtype=bool)\n        elif mask_scenario == \"all_true\":\n            mask = np.ones(n_features, dtype=bool)\n        elif mask_scenario == \"mismatched_len\":\n            mismatched_features = n_features + rng.choice([-1, 1, 2])\n            if mismatched_features <= 0:\n                mismatched_features = n_features + 2\n            mask = np.array([rng.choice([True, False]) for _ in range(mismatched_features)])\n            if not mask.any():\n                mask[0] = True\n        else:\n            mask = np.array([rng.choice([True, False]) for _ in range(n_features)])\n\n        receiver = DummySelector(mask=mask)\n\n        if is_df:\n            # Generate pandas DataFrame with various column dtypes\n            data_dict = {}\n            for col_idx in range(n_features):\n                col_dtype = rng.choice(dtypes_pool)\n                col_name = f\"col_{col_idx}\"\n                if col_dtype in [np.float32, np.float64]:\n                    vals = np.array(\n                        [rng.gauss(0, 1) for _ in range(n_samples)], dtype=col_dtype\n                    )\n                elif col_dtype in [np.int32, np.int64]:\n                    vals = np.array(\n                        [rng.randint(-10, 10) for _ in range(n_samples)], dtype=col_dtype\n                    )\n                elif col_dtype == \"category\":\n                    cats = [\"a\", \"b\", \"c\", \"d\"]\n                    vals = pd.Categorical([rng.choice(cats) for _ in range(n_samples)])\n                elif col_dtype == \"string\":\n                    vals = [rng.choice([\"apple\", \"banana\", \"cherry\"]) for _ in range(n_samples)]\n                    vals = pd.Series(vals, dtype=\"string\")\n                else:  # object\n                    vals = [rng.choice([\"cat\", 1, 2.5, None]) for _ in range(n_samples)]\n                data_dict[col_name] = vals\n\n            X = pd.DataFrame(data_dict)\n        elif is_sparse:\n            dense_data = np.array(\n                [[rng.choice([0, 0, rng.random()]) for _ in range(n_features)] for _ in range(n_samples)],\n                dtype=rng.choice([np.float32, np.float64]),\n            )\n            sparse_type = rng.choice([sparse.csr_matrix, sparse.csc_matrix])\n            X = sparse_type(dense_data)\n        else:\n            dtype = rng.choice([np.float32, np.float64, np.int32, np.int64])\n            X = np.array(\n                [[rng.gauss(0, 1) for _ in range(n_features)] for _ in range(n_samples)],\n                dtype=dtype,\n            )\n\n        items.append((receiver, (X,), {}))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 146,
+     "trigger_rate": 0.73,
+     "both_raise": 42,
+     "examples": [
+      {
+       "orig": [
+        "exc",
+        "InvalidIndexError",
+        "(slice(None, None, None), array([ True,  True,  True,  True]))"
+       ],
+       "fix": [
+        "ok",
+        "DataFrame",
+        "     col_0     col_1     col_2     col_3\n0   cherry -1.922973  0.761318  0.338233\n1   cherry  2.044154  0.369837 -0.072155\n2   cherry  0.203716 -0.326671 -0.864262\n3   cherry  0.047410  0.138766 -1.728351\n4   cherry  0.620506 -1.318621 -0.416364\n5    apple -0.155040  0.276261  0.635483\n6    apple  0"
+       ]
+      },
+      {
+       "orig": [
+        "exc",
+        "AttributeError",
+        "'DataFrame' object has no attribute 'dtype'"
+       ],
+       "fix": [
+        "ok",
+        "DataFrame",
+        "Empty DataFrame\nColumns: []\nIndex: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]"
+       ]
+      },
+      {
+       "orig": [
+        "exc",
+        "AttributeError",
+        "'DataFrame' object has no attribute 'dtype'"
+       ],
+       "fix": [
+        "ok",
+        "DataFrame",
+        "Empty DataFrame\nColumns: []\nIndex: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]"
+       ]
+      }
+     ],
+     "usable": true,
+     "why": "usable"
+    },
+    {
+     "file": "sklearn/feature_selection/_base.py",
+     "qualname": "SelectorMixin.transform",
+     "calls": [
+      {
+       "verdict": "GENERATOR_FAILED",
+       "cost_usd": 0.005418,
+       "usage": {
+        "input": 2059,
+        "output": 1033,
+        "usage_missing": false
+       },
+       "finish_reason": "stop",
+       "error": "ValueError: Cannot cast object dtype to float64\n"
+      },
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.005884,
+       "usage": {
+        "input": 3140,
+        "output": 941,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 1,
+     "generator_code": "import numpy as np\nimport pandas as pd\nfrom scipy import sparse\nfrom sklearn.base import BaseEstimator\n\n\nclass DummySelector(module.SelectorMixin, BaseEstimator):\n    def __init__(self, mask=None):\n        self.mask = mask\n\n    def fit(self, X, y=None):\n        X = self._validate_data(X, accept_sparse=[\"csr\", \"csc\"], dtype=None)\n        if self.mask is None:\n            self.mask_ = np.ones(X.shape[1], dtype=bool)\n        else:\n            self.mask_ = np.array(self.mask, dtype=bool)\n        return self\n\n    def _get_support_mask(self):\n        return self.mask_\n\n\ndef make_inputs(rng, n):\n    items = []\n\n    for i in range(n):\n        n_samples = rng.randint(2, 20)\n        n_features = rng.randint(1, 6)\n\n        # Support mask types: all True, all False, mixed, or single feature\n        mask_type = rng.choice([\"all_true\", \"all_false\", \"mixed\", \"single\"])\n        if mask_type == \"all_true\":\n            mask = np.ones(n_features, dtype=bool)\n        elif mask_type == \"all_false\":\n            mask = np.zeros(n_features, dtype=bool)\n        elif mask_type == \"single\":\n            mask = np.zeros(n_features, dtype=bool)\n            mask[rng.randint(0, n_features - 1)] = True\n        else:\n            mask = np.array([rng.choice([True, False]) for _ in range(n_features)])\n\n        # Target the pandas dataframe preservation behavior about half the time\n        use_pandas = (i % 2 == 1)\n\n        if use_pandas:\n            # Construct DataFrame with varied numeric / float / int types\n            # (which _validate_data can validate even when converted to ndarray)\n            cols = [f\"col_{j}\" for j in range(n_features)]\n            data_dict = {}\n            for col_name in cols:\n                dtype_choice = rng.choice(\n                    [\"float16\", \"float32\", \"float64\", \"int16\", \"int32\", \"int64\"]\n                )\n                if \"float\" in dtype_choice:\n                    arr = np.array(\n                        [rng.uniform(-10.0, 10.0) for _ in range(n_samples)],\n                        dtype=dtype_choice,\n                    )\n                else:\n                    arr = np.array(\n                        [rng.randint(-50, 50) for _ in range(n_samples)],\n                        dtype=dtype_choice,\n                    )\n                data_dict[col_name] = arr\n\n            X = pd.DataFrame(data_dict)\n            selector = DummySelector(mask=mask)\n            selector.fit(X)\n\n            if hasattr(selector, \"set_output\"):\n                out_config = rng.choice([\"pandas\", \"pandas\", \"default\"])\n                selector.set_output(transform=out_config)\n\n            items.append((selector, (X,), {}))\n        else:\n            # Ordinary numpy arrays or sparse CSR matrices\n            data_type = rng.choice([\"float64\", \"float32\", \"int32\", \"int64\"])\n            X_arr = np.array(\n                [\n                    [rng.uniform(-10.0, 10.0) for _ in range(n_features)]\n                    for _ in range(n_samples)\n                ],\n                dtype=data_type,\n            )\n            if rng.choice([False, True]):\n                X_in = sparse.csr_matrix(X_arr)\n            else:\n                X_in = X_arr\n\n            selector = DummySelector(mask=mask)\n            selector.fit(X_in)\n            items.append((selector, (X_in,), {}))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 24,
+     "trigger_rate": 0.12,
+     "both_raise": 0,
+     "examples": [
+      {
+       "orig": [
+        "ok",
+        "DataFrame",
+        "    col_0     col_1\n0   -50.0 -4.258233\n1    44.0  6.598814\n2   -27.0 -8.889459\n3   -12.0 -9.281323\n4    14.0 -1.642679\n5    22.0 -0.163381\n6   -18.0  7.266504\n7    -8.0  4.343775\n8   -42.0  3.470876\n9    13.0 -6.972525\n10  -17.0  9.734118\n11  -12.0 -1.777196\n12   48.0  2.235417\n13    2.0 -2.266340\n"
+       ],
+       "fix": [
+        "ok",
+        "DataFrame",
+        "    col_0     col_1\n0     -50 -4.258233\n1      44  6.598814\n2     -27 -8.889459\n3     -12 -9.281323\n4      14 -1.642679\n5      22 -0.163381\n6     -18  7.266504\n7      -8  4.343775\n8     -42  3.470876\n9      13 -6.972525\n10    -17  9.734118\n11    -12 -1.777196\n12     48  2.235417\n13      2 -2.266340\n"
+       ]
+      },
+      {
+       "orig": [
+        "ok",
+        "DataFrame",
+        "      col_1  col_2  col_3\n0 -4.154917  -35.0  -33.0\n1 -2.563914   -2.0   21.0\n2  2.576218    1.0   35.0\n3 -6.858601   25.0  -12.0"
+       ],
+       "fix": [
+        "ok",
+        "DataFrame",
+        "      col_1  col_2  col_3\n0 -4.154917    -35    -33\n1 -2.563914     -2     21\n2  2.576218      1     35\n3 -6.858601     25    -12"
+       ]
+      },
+      {
+       "orig": [
+        "ok",
+        "DataFrame",
+        "    col_0\n0   -16.0\n1   -47.0\n2    24.0\n3    -6.0\n4    40.0\n5    -3.0\n6    -7.0\n7    36.0\n8     8.0\n9    32.0\n10  -33.0\n11   26.0\n12   16.0\n13  -39.0\n14  -18.0"
+       ],
+       "fix": [
+        "ok",
+        "DataFrame",
+        "    col_0\n0     -16\n1     -47\n2      24\n3      -6\n4      40\n5      -3\n6      -7\n7      36\n8       8\n9      32\n10    -33\n11     26\n12     16\n13    -39\n14    -18"
+       ]
+      }
+     ],
+     "usable": true,
+     "why": "usable"
+    }
+   ],
+   "verdict": "usable",
+   "spent_usd": 0.030118,
+   "model_calls": 5,
+   "seconds": 114
+  },
+  {
+   "instance_id": "matplotlib__matplotlib-26342",
+   "repo": "matplotlib/matplotlib",
+   "image": "swebench/sweb.eval.x86_64.matplotlib_1776_matplotlib-26342:latest",
+   "modules": [
+    "lib/matplotlib/collections.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.11.11",
+   "generator": "G2",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "lib/matplotlib/collections.py",
+     "qualname": "Collection.set_paths",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.003709,
+       "usage": {
+        "input": 1870,
+        "output": 615,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "def make_inputs(rng, n):\n    import numpy as np\n    from matplotlib import path as mpath\n    from matplotlib import collections as mcollections\n\n    def make_random_path():\n        num_vertices = rng.randint(2, 6)\n        vertices = np.array([[rng.uniform(-10, 10), rng.uniform(-10, 10)] for _ in range(num_vertices)])\n        return mpath.Path(vertices)\n\n    items = []\n    classes = [\n        mcollections.Collection,\n        mcollections.PathCollection,\n        mcollections.LineCollection,\n        mcollections.PolyCollection,\n    ]\n\n    for i in range(n):\n        # Choose class to instantiate\n        cls = rng.choice(classes)\n        if cls is mcollections.Collection:\n            inst = mcollections.Collection()\n        elif cls is mcollections.PathCollection:\n            init_paths = [make_random_path() for _ in range(rng.randint(0, 3))]\n            inst = mcollections.PathCollection(paths=init_paths)\n        elif cls is mcollections.LineCollection:\n            segments = [[[rng.uniform(0, 1), rng.uniform(0, 1)], [rng.uniform(0, 1), rng.uniform(0, 1)]]\n                        for _ in range(rng.randint(0, 3))]\n            inst = mcollections.LineCollection(segments=segments)\n        elif cls is mcollections.PolyCollection:\n            verts = [[[rng.uniform(0, 1), rng.uniform(0, 1)] for _ in range(3)]]\n            inst = mcollections.PolyCollection(verts=verts)\n\n        # Generate paths argument\n        path_count = rng.choice([0, 1, 2, 4])\n        paths = [make_random_path() for _ in range(path_count)]\n        \n        # Variations in paths container type\n        container_type = rng.choice([\"list\", \"tuple\", \"generator\", \"array\"])\n        if container_type == \"list\":\n            arg_paths = paths\n        elif container_type == \"tuple\":\n            arg_paths = tuple(paths)\n        elif container_type == \"generator\":\n            arg_paths = (p for p in paths)\n        else:\n            arg_paths = np.array(paths, dtype=object)\n\n        if rng.random() < 0.2:\n            kwargs = {'paths': arg_paths}\n            args = ()\n        else:\n            kwargs = {}\n            args = (arg_paths,)\n\n        items.append((inst, args, kwargs))\n\n    return items\n",
+     "usable": false,
+     "why": "did not run: UNCALLABLE import failed: KeyError / ImportError"
+    }
+   ],
+   "verdict": "no edited function could be imported or called",
+   "spent_usd": 0.003709,
+   "model_calls": 1,
+   "seconds": 110
+  },
+  {
+   "instance_id": "astropy__astropy-13977",
+   "repo": "astropy/astropy",
+   "image": "swebench/sweb.eval.x86_64.astropy_1776_astropy-13977:latest",
+   "modules": [
+    "astropy/units/quantity.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "generator": "G2",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "astropy/units/quantity.py",
+     "qualname": "Quantity.__array_ufunc__",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.007993,
+       "usage": {
+        "input": 3227,
+        "output": 1486,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "import numpy as np\nimport astropy.units as u\n\n\nclass DuckQuantity(np.lib.mixins.NDArrayOperatorsMixin):\n    def __init__(self, quantity):\n        self.ndarray = quantity\n\n    @property\n    def unit(self):\n        return self.ndarray.unit\n\n    def __array_ufunc__(self, function, method, *inputs, **kwargs):\n        unwrapped = [\n            inp.ndarray if isinstance(inp, DuckQuantity) else inp for inp in inputs\n        ]\n        for inp in unwrapped:\n            if isinstance(inp, np.ndarray):\n                res = inp.__array_ufunc__(function, method, *unwrapped, **kwargs)\n                if res is not NotImplemented:\n                    return DuckQuantity(res)\n        return NotImplemented\n\n\nclass IncompatibleDuck(np.lib.mixins.NDArrayOperatorsMixin):\n    def __init__(self, unit):\n        self._unit = unit\n\n    @property\n    def unit(self):\n        return self._unit\n\n    def __array_ufunc__(self, function, method, *inputs, **kwargs):\n        return NotImplemented\n\n\ndef make_inputs(rng, n):\n    Quantity = module.Quantity\n    units_list = [\n        u.m,\n        u.mm,\n        u.km,\n        u.s,\n        u.deg,\n        u.rad,\n        u.kg,\n        u.m / u.s,\n        u.dimensionless_unscaled,\n    ]\n    ufuncs_binary = [np.add, np.subtract, np.multiply, np.divide, np.greater]\n    ufuncs_unary = [np.sin, np.cos, np.exp, np.negative, np.abs]\n\n    items = []\n    for i in range(n):\n        # Half standard calls, half duck-type / incompatible unit conversion cases\n        is_issue_case = i % 2 == 1\n\n        if is_issue_case:\n            # Trigger conversion or handling on duck-types where converter fails on the duck object\n            # or converters_and_unit fails/raises TypeError/ValueError\n            q_val = rng.uniform(0.1, 10.0)\n            u1 = rng.choice(units_list)\n            q = Quantity(q_val, u1)\n\n            # Variant 1: Duck with compatible unit (like m and mm) where converter(DuckArray) raises ValueError in _condition_arg\n            # Variant 2: Duck with incompatible unit\n            # Variant 3: Duck with custom __array_ufunc__ returning NotImplemented\n            duck_type_choice = rng.choice([1, 2, 3])\n            func = rng.choice(ufuncs_binary)\n            method = \"__call__\"\n\n            if duck_type_choice == 1:\n                # Same physical dimension, different scale (needs converter!)\n                equiv_units = [\n                    (u.m, u.mm),\n                    (u.m, u.km),\n                    (u.deg, u.rad),\n                    (u.s, u.hour),\n                    (u.kg, u.g),\n                ]\n                base_u1, base_u2 = rng.choice(equiv_units)\n                if rng.random() < 0.5:\n                    q = Quantity(rng.uniform(1.0, 5.0), base_u1)\n                    duck_val = Quantity(rng.uniform(1.0, 5.0), base_u2)\n                else:\n                    q = Quantity(rng.uniform(1.0, 5.0), base_u2)\n                    duck_val = Quantity(rng.uniform(1.0, 5.0), base_u1)\n                duck = DuckQuantity(duck_val)\n                args = (func, method, q, duck)\n            elif duck_type_choice == 2:\n                # Incompatible unit duck\n                u2 = u.s if u1.is_equivalent(u.m) else u.m\n                duck = IncompatibleDuck(u2)\n                args = (func, method, q, duck)\n            else:\n                # Non-unit custom duck\n                duck = DuckQuantity(\n                    Quantity(rng.uniform(1.0, 5.0), rng.choice(units_list))\n                )\n                args = (func, method, q, duck)\n\n            kwargs = {}\n            items.append((q, args, kwargs))\n        else:\n            # Ordinary cases: simple valid or standard numpy Quantity ufunc operations\n            u1 = rng.choice(units_list)\n            shape_choice = rng.choice([(), (3,), (2, 2)])\n            if shape_choice == ():\n                val = rng.uniform(-10, 10)\n            else:\n                val = np.array([rng.uniform(-10, 10) for _ in range(np.prod(shape_choice))]).reshape(\n                    shape_choice\n                )\n\n            q = Quantity(val, u1)\n            ufunc_type = rng.choice([\"unary\", \"binary\"])\n            method = rng.choice([\"__call__\", \"reduce\"] if shape_choice != () else [\"__call__\"])\n\n            if ufunc_type == \"unary\" or method == \"reduce\":\n                if method == \"reduce\":\n                    func = np.add\n                    args = (func, method, q)\n                else:\n                    func = rng.choice(ufuncs_unary)\n                    args = (func, method, q)\n            else:\n                func = rng.choice(ufuncs_binary)\n                # Second operand can be scalar, array, or another Quantity\n                op2_kind = rng.choice([\"quantity\", \"scalar\", \"array\"])\n                if op2_kind == \"quantity\":\n                    # either same or compatible unit\n                    u2 = u1 if rng.random() < 0.7 else rng.choice(units_list)\n                    op2 = Quantity(rng.uniform(1, 5), u2)\n                elif op2_kind == \"scalar\":\n                    op2 = rng.uniform(1, 5)\n                else:\n                    op2 = np.ones(shape_choice) if shape_choice else np.array([2.0])\n\n                args = (func, method, q, op2)\n\n            kwargs = {}\n            items.append((q, args, kwargs))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 51,
+     "trigger_rate": 0.255,
+     "both_raise": 27,
+     "examples": [
+      {
+       "orig": [
+        "exc",
+        "UnitConversionError",
+        "Can only apply 'subtract' function to quantities with compatible dimensions"
+       ],
+       "fix": [
+        "ok",
+        "NotImplementedType",
+        "NotImplemented"
+       ]
+      },
+      {
+       "orig": [
+        "exc",
+        "UnitConversionError",
+        "Can only apply 'greater' function to quantities with compatible dimensions"
+       ],
+       "fix": [
+        "ok",
+        "NotImplementedType",
+        "NotImplemented"
+       ]
+      },
+      {
+       "orig": [
+        "exc",
+        "ValueError",
+        "Value not scalar compatible or convertible to an int, float, or complex array"
+       ],
+       "fix": [
+        "ok",
+        "NotImplementedType",
+        "NotImplemented"
+       ]
+      }
+     ],
+     "usable": true,
+     "why": "usable"
+    }
+   ],
+   "verdict": "usable",
+   "spent_usd": 0.007993,
+   "model_calls": 1,
+   "seconds": 49
+  },
+  {
+   "instance_id": "astropy__astropy-14309",
+   "repo": "astropy/astropy",
+   "image": "swebench/sweb.eval.x86_64.astropy_1776_astropy-14309:latest",
+   "modules": [
+    "astropy/io/fits/connect.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "generator": "G2",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "astropy/io/fits/connect.py",
+     "qualname": "is_fits",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.004584,
+       "usage": {
+        "input": 2007,
+        "output": 821,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "import io\nfrom astropy.io.fits import HDUList, TableHDU, BinTableHDU, GroupsHDU\nfrom astropy.io.fits.hdu.hdulist import FITS_SIGNATURE\n\n\ndef make_inputs(rng, n):\n    items = []\n\n    fits_exts = [\".fits\", \".fits.gz\", \".fit\", \".fit.gz\", \".fts\", \".fts.gz\"]\n    non_fits_exts = [\".ecsv\", \".csv\", \".txt\", \".hdf5\", \".json\", \".xml\", \"\", \".dat\"]\n\n    hdu_classes = [HDUList, TableHDU, BinTableHDU, GroupsHDU]\n\n    for i in range(n):\n        # Around half the inputs focus on the bug: filepath is given, non-FITS extension,\n        # and args may be empty (triggering IndexError) or non-empty\n        if i % 2 == 0:\n            origin = rng.choice([\"read\", \"write\"])\n            ext = rng.choice(non_fits_exts)\n            base = rng.choice([\"data\", \"table\", \"bububu\", \"file_123\", \"test\"])\n            filepath = f\"{base}{ext}\"\n            fileobj = None\n\n            # args can be empty (the exact bug triggering IndexError in original) or have items\n            if rng.random() < 0.7:\n                extra_args = ()\n            else:\n                extra_args = (rng.choice([\"some_arg\", 123, None, object()]),)\n\n            items.append((None, (origin, filepath, fileobj, *extra_args), {}))\n        else:\n            # Ordinary cases:\n            # 1. filepath with FITS extension (with or without args)\n            # 2. fileobj provided (matching FITS signature or not)\n            # 3. filepath and fileobj are None, but args[0] is an HDU or not\n            scenario = rng.choice([\"fits_filepath\", \"fileobj\", \"hdu_in_args\"])\n\n            if scenario == \"fits_filepath\":\n                origin = rng.choice([\"read\", \"write\"])\n                ext = rng.choice(fits_exts)\n                if rng.random() < 0.3:\n                    ext = ext.upper()\n                filepath = f\"my_catalog{ext}\"\n                fileobj = None\n                extra_args = () if rng.random() < 0.5 else (rng.choice([\"dummy\", 42]),)\n                items.append((None, (origin, filepath, fileobj, *extra_args), {}))\n\n            elif scenario == \"fileobj\":\n                origin = \"read\"\n                filepath = rng.choice([None, \"test.fits\", \"test.txt\"])\n                if rng.random() < 0.5:\n                    bio = io.BytesIO(FITS_SIGNATURE + b\"extra padding\")\n                else:\n                    bio = io.BytesIO(b\"SIMPLE  =                    T NOT REALLY FITS\")\n                items.append((None, (origin, filepath, bio), {}))\n\n            else:  # hdu_in_args\n                origin = rng.choice([\"read\", \"write\"])\n                filepath = None\n                fileobj = None\n                if rng.random() < 0.6:\n                    cls = rng.choice(hdu_classes)\n                    arg0 = cls()\n                else:\n                    arg0 = rng.choice([\"not_an_hdu\", 12345, [], {}])\n                items.append((None, (origin, filepath, fileobj, arg0), {}))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 69,
+     "trigger_rate": 0.345,
+     "both_raise": 0,
+     "examples": [
+      {
+       "orig": [
+        "exc",
+        "IndexError",
+        "tuple index out of range"
+       ],
+       "fix": [
+        "ok",
+        "bool",
+        "False"
+       ]
+      },
+      {
+       "orig": [
+        "exc",
+        "IndexError",
+        "tuple index out of range"
+       ],
+       "fix": [
+        "ok",
+        "bool",
+        "False"
+       ]
+      },
+      {
+       "orig": [
+        "exc",
+        "IndexError",
+        "tuple index out of range"
+       ],
+       "fix": [
+        "ok",
+        "bool",
+        "False"
+       ]
+      }
+     ],
+     "usable": true,
+     "why": "usable"
+    }
+   ],
+   "verdict": "usable",
+   "spent_usd": 0.004584,
+   "model_calls": 1,
+   "seconds": 45
+  },
+  {
+   "instance_id": "mwaskom__seaborn-3069",
+   "repo": "mwaskom/seaborn",
+   "image": "swebench/sweb.eval.x86_64.mwaskom_1776_seaborn-3069:latest",
+   "modules": [
+    "seaborn/_core/plot.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "generator": "G2",
+   "edited_functions": 2,
+   "functions": [
+    {
+     "file": "seaborn/_core/plot.py",
+     "qualname": "Plotter._finalize_figure",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.004046,
+       "usage": {
+        "input": 1885,
+        "output": 702,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "import matplotlib.pyplot as plt\nfrom seaborn._core.scales import Continuous, Nominal\n\n\ndef make_inputs(rng, n):\n    items = []\n    plot_cls = getattr(module, \"Plot\")\n\n    for i in range(n):\n        # Create a fresh figure and Plotter instance\n        fig = plt.figure()\n        plotter = target_class(pyplot=False, theme={})\n        plotter._figure = fig\n\n        # Create one or two subplots\n        num_subplots = rng.choice([1, 2])\n        subplots_list = []\n        for s_idx in range(num_subplots):\n            ax = fig.add_subplot(1, num_subplots, s_idx + 1)\n            # Enable grid to test grid disabling\n            ax.grid(True)\n            subplots_list.append(\n                {\n                    \"ax\": ax,\n                    \"x\": f\"x{s_idx}\",\n                    \"y\": f\"y{s_idx}\",\n                }\n            )\n        plotter._subplots = subplots_list\n\n        # Dummy Plot object\n        p = plot_cls()\n        # Ensure layout engine defaults work\n        p._target = None if rng.random() > 0.3 else fig\n        p._layout_spec = (\n            {\"engine\": rng.choice([\"tight\", \"constrained\", None])}\n            if rng.random() > 0.5\n            else {}\n        )\n        p._limits = {}\n\n        # Decide whether this is an ordinary case or nominal scale case\n        is_nominal_case = i >= n // 2\n\n        for sub in subplots_list:\n            for axis in \"xy\":\n                axis_key = sub[axis]\n                ax = sub[\"ax\"]\n\n                # Populate ticks on the axis so get_major_ticks() has elements\n                tick_count = rng.randint(2, 6)\n                getattr(ax, f\"set_{axis}ticks\")(list(range(tick_count)))\n\n                if is_nominal_case:\n                    # In nominal case, assign Nominal scale to some/all axes\n                    use_nominal = rng.random() > 0.2\n                    if use_nominal:\n                        plotter._scales[axis_key] = Nominal()\n                    else:\n                        plotter._scales[axis_key] = Continuous()\n\n                    # Test whether explicit limits interact with nominal scaling\n                    if rng.random() < 0.3:\n                        if rng.random() < 0.5:\n                            p._limits[axis_key] = (0, tick_count - 1)\n                        else:\n                            p._limits[axis_key] = (None, tick_count)\n                else:\n                    # Ordinary continuous scale case\n                    plotter._scales[axis_key] = Continuous()\n                    if rng.random() < 0.5:\n                        p._limits[axis_key] = (rng.uniform(-1, 0), rng.uniform(1, 5))\n\n        items.append((plotter, (p,), {}))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 0,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    },
+    {
+     "file": "seaborn/_core/plot.py",
+     "qualname": "Plotter._setup_scales",
+     "calls": [
+      {
+       "verdict": "GENERATOR_FAILED",
+       "cost_usd": 0.005489,
+       "usage": {
+        "input": 3024,
+        "output": 859,
+        "usage_missing": false
+       },
+       "finish_reason": "stop",
+       "error": "AttributeError: 'Figure' object has no attribute 'get'\n"
+      },
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.006108,
+       "usage": {
+        "input": 3934,
+        "output": 842,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 1,
+     "generator_code": "import string\nimport pandas as pd\nfrom seaborn._core.plot import Plot, Plotter\nfrom seaborn._core.data import PlotData\nfrom seaborn._core.subplots import Subplots\nfrom seaborn._core.scales import Nominal\n\n\ndef make_inputs(rng, n):\n    items = []\n\n    for _ in range(n):\n        # Create a Plotter receiver\n        plotter = Plotter(pyplot=False, theme={})\n\n        # Generate sample data\n        num_rows = rng.randint(3, 15)\n        categories_x = [f\"cat_{c}\" for c in string.ascii_lowercase[: rng.randint(2, 5)]]\n        categories_y = [f\"grp_{c}\" for c in string.ascii_uppercase[: rng.randint(2, 5)]]\n\n        # Sometimes categorical, sometimes numeric, sometimes explicit Nominal\n        data_choice = rng.choice([\"cat_x\", \"cat_y\", \"both_cat\", \"numeric\", \"nominal_scale\"])\n\n        df = pd.DataFrame({\n            \"x\": (\n                [rng.choice(categories_x) for _ in range(num_rows)]\n                if data_choice in [\"cat_x\", \"both_cat\"]\n                else [rng.gauss(0, 1) for _ in range(num_rows)]\n            ),\n            \"y\": (\n                [rng.choice(categories_y) for _ in range(num_rows)]\n                if data_choice in [\"cat_y\", \"both_cat\"]\n                else [rng.gauss(10, 5) for _ in range(num_rows)]\n            ),\n            \"color\": [rng.choice([\"A\", \"B\", \"C\"]) for _ in range(num_rows)],\n        })\n\n        # Set up Plot object\n        p = Plot(df, x=\"x\", y=\"y\")\n\n        if data_choice == \"nominal_scale\":\n            which_nom = rng.choice([\"x\", \"y\", \"both\"])\n            if which_nom in [\"x\", \"both\"]:\n                p = p.scale(x=Nominal())\n            if which_nom in [\"y\", \"both\"]:\n                p = p.scale(y=Nominal())\n\n        # Subplots configuration\n        sharex = rng.choice([True, False, \"col\"])\n        sharey = rng.choice([True, False, \"row\"])\n        plotter._subplots = Subplots(\n            p._subplot_spec,\n            {\"x\": None, \"y\": None},\n            {\"sharex\": sharex, \"sharey\": sharey},\n        )\n        # init_figure signature: (pair_spec, layout_spec, target)\n        plotter._figure = plotter._subplots.init_figure(\n            p._pair_spec, p._layout_spec, p._target\n        )\n\n        common = PlotData(df, {\"x\": \"x\", \"y\": \"y\"})\n        layer_df = df.copy()\n        layer = {\n            \"mark\": None,\n            \"stat\": None,\n            \"move\": None,\n            \"data\": PlotData(layer_df, {\"x\": \"x\", \"y\": \"y\"}),\n            \"vars\": {\"x\": \"x\", \"y\": \"y\"},\n        }\n\n        # Optionally pass variables explicitly or let it default to None\n        variables = None\n        if rng.random() < 0.3:\n            variables = rng.choice([[\"x\"], [\"y\"], [\"x\", \"y\"]])\n\n        args = (p, common, [layer], variables)\n        kwargs = {}\n\n        items.append((plotter, args, kwargs))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 0,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    }
+   ],
+   "verdict": "the original never differs from the fix on generated inputs",
+   "spent_usd": 0.015643,
+   "model_calls": 3,
+   "seconds": 97
+  },
+  {
+   "instance_id": "pylint-dev__pylint-6528",
+   "repo": "pylint-dev/pylint",
+   "image": "swebench/sweb.eval.x86_64.pylint-dev_1776_pylint-6528:latest",
+   "modules": [
+    "pylint/lint/expand_modules.py",
+    "pylint/lint/pylinter.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "generator": "G2",
+   "edited_functions": 2,
+   "functions": [
+    {
+     "file": "pylint/lint/expand_modules.py",
+     "qualname": "expand_modules",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.006628,
+       "usage": {
+        "input": 2878,
+        "output": 1192,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "import os\nimport re\nimport sys\nimport tempfile\n\n\ndef make_inputs(rng, n):\n    items = []\n\n    # Prepare some existing files and directories in a local directory to test path handling\n    tmpdir = tempfile.mkdtemp(prefix=\"_pylint_test_exp_mod_\")\n\n    try:\n        # Create a small tree structure\n        # tmpdir/\n        #   bar.py\n        #   .a/\n        #     foo.py\n        #   pkg/\n        #     __init__.py\n        #     sub.py\n        #     ignored_file.py\n        #     ign_dir/\n        #       __init__.py\n        #       mod.py\n        dot_a = os.path.join(tmpdir, \".a\")\n        os.makedirs(dot_a, exist_ok=True)\n        pkg = os.path.join(tmpdir, \"pkg\")\n        ign_dir = os.path.join(pkg, \"ign_dir\")\n        os.makedirs(ign_dir, exist_ok=True)\n\n        bar_py = os.path.join(tmpdir, \"bar.py\")\n        with open(bar_py, \"w\") as f:\n            f.write(\"import os\\n\")\n\n        dot_a_foo = os.path.join(dot_a, \"foo.py\")\n        with open(dot_a_foo, \"w\") as f:\n            f.write(\"import sys\\n\")\n\n        with open(os.path.join(pkg, \"__init__.py\"), \"w\") as f:\n            f.write(\"\")\n\n        with open(os.path.join(pkg, \"sub.py\"), \"w\") as f:\n            f.write(\"x = 1\\n\")\n\n        with open(os.path.join(pkg, \"ignored_file.py\"), \"w\") as f:\n            f.write(\"y = 2\\n\")\n\n        with open(os.path.join(ign_dir, \"__init__.py\"), \"w\") as f:\n            f.write(\"\")\n\n        with open(os.path.join(ign_dir, \"mod.py\"), \"w\") as f:\n            f.write(\"z = 3\\n\")\n\n        candidate_files = [\n            bar_py,\n            dot_a_foo,\n            os.path.join(pkg, \"sub.py\"),\n            os.path.join(pkg, \"ignored_file.py\"),\n            pkg,\n            dot_a,\n            \"os\",\n            \"sys\",\n            \"unittest\",\n            \"nonexistent_mod_xyz\",\n            os.path.join(tmpdir, \"nonexistent.py\"),\n        ]\n\n        candidate_ignore_list = [\n            \"CVS\",\n            \".a\",\n            \"ignored_file.py\",\n            \"ign_dir\",\n            \"sub.py\",\n            \"bar.py\",\n        ]\n\n        candidate_patterns = [\n            r\"^\\.\",\n            r\"^\\.#\",\n            r\"^ign_\",\n            r\".*foo.*\",\n            r\"sub\\.py$\",\n            r\"bar.*\",\n        ]\n\n        candidate_path_patterns = [\n            r\".*\\.a.*\",\n            r\".*ign_dir.*\",\n            r\".*ignored_file.*\",\n            r\".*pkg.*\",\n            re.escape(dot_a),\n            re.escape(bar_py),\n        ]\n\n        for i in range(n):\n            # Decide mode: half standard/ordinary, half focused on ignores (paths, patterns, dot-files)\n            focused = (i % 2 == 1)\n\n            num_files = rng.randint(1, 4)\n            chosen_files = rng.sample(candidate_files, k=min(num_files, len(candidate_files)))\n\n            if focused:\n                # Use ignore lists and patterns matching directory paths or prefixes\n                num_ig = rng.randint(1, 3)\n                ig_list = rng.sample(candidate_ignore_list, k=min(num_ig, len(candidate_ignore_list)))\n\n                num_pats = rng.randint(1, 3)\n                pats = [re.compile(p) for p in rng.sample(candidate_patterns, k=min(num_pats, len(candidate_patterns)))]\n\n                num_path_pats = rng.randint(1, 3)\n                path_pats = [re.compile(p) for p in rng.sample(candidate_path_patterns, k=min(num_path_pats, len(candidate_path_patterns)))]\n            else:\n                # Ordinary use: often default/empty or simple ignores\n                ig_list = [\"CVS\"] if rng.random() > 0.5 else []\n                pats = [re.compile(r\"^\\.#\")] if rng.random() > 0.5 else []\n                path_pats = []\n\n            items.append((None, (chosen_files, ig_list, pats, path_pats), {}))\n\n    finally:\n        pass\n\n    return items\n",
+     "inputs": 200,
+     "stable": 76,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 0,
+     "examples": [],
+     "usable": false,
+     "why": "only 76 stable inputs"
+    },
+    {
+     "file": "pylint/lint/pylinter.py",
+     "qualname": "PyLinter._discover_files",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.005925,
+       "usage": {
+        "input": 2825,
+        "output": 1015,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "import os\nimport re\nimport tempfile\n\n\ndef make_inputs(rng, n):\n    items = []\n\n    # Prepare temporary directories with diverse structures\n    base_tmp = tempfile.mkdtemp(prefix=\"pylint_test_discover_\")\n\n    structures = [\n        # Normal files and packages\n        [\"pkg1/__init__.py\", \"pkg1/sub.py\", \"mod1.py\", \"dir1/file1.py\"],\n        # Ignored base names (e.g., .a, CVS, test_ign)\n        [\n            \".a/foo.py\",\n            \"bar.py\",\n            \"CVS/entries.py\",\n            \"test_ign/a.py\",\n            \"test_ign/sub/b.py\",\n        ],\n        # Regex patterns / path patterns matching dirs\n        [\n            \"skip_dir/mod.py\",\n            \"keep_dir/mod.py\",\n            \"sub/skip_nested/mod.py\",\n            \"sub/nested_pkg/__init__.py\",\n            \"sub/nested_pkg/m.py\",\n        ],\n        # Edge cases: empty dirs, non-python files\n        [\"empty_py_dir/readme.txt\", \"some_dir/code.py\", \"some_dir/not_py.cpp\"],\n    ]\n\n    created_dirs = []\n    for idx, struct in enumerate(structures):\n        d = os.path.join(base_tmp, f\"case_{idx}\")\n        os.makedirs(d, exist_ok=True)\n        for filepath in struct:\n            full_path = os.path.join(d, filepath)\n            os.makedirs(os.path.dirname(full_path), exist_ok=True)\n            with open(full_path, \"w\", encoding=\"utf-8\") as f:\n                f.write(\"# dummy content\\n\")\n        created_dirs.append(d)\n\n    for i in range(n):\n        linter = target_class()\n\n        # Decide whether to test ignore logic or normal discovery\n        is_ignore_case = i % 2 == 1\n\n        selected_dir = rng.choice(created_dirs)\n\n        if is_ignore_case:\n            ignores = rng.choice(\n                [\n                    [\".a\"],\n                    [\"CVS\"],\n                    [\"skip_dir\"],\n                    [\"test_ign\"],\n                    [\".a\", \"test_ign\"],\n                ]\n            )\n            ignore_patterns = rng.choice(\n                [\n                    [re.compile(r\"^\\..*\")],\n                    [re.compile(r\"^skip_.*\")],\n                    [re.compile(r\".*_ign$\")],\n                    [],\n                ]\n            )\n            ignore_paths = rng.choice(\n                [\n                    [re.compile(r\".*[/\\\\]\\.a.*\")],\n                    [re.compile(r\".*[/\\\\]skip_dir.*\")],\n                    [re.compile(r\".*[/\\\\]test_ign.*\")],\n                    [],\n                ]\n            )\n        else:\n            ignores = []\n            ignore_patterns = []\n            ignore_paths = []\n\n        linter.config.ignore = tuple(ignores)\n        linter.config.ignore_patterns = tuple(ignore_patterns)\n        linter.config.ignore_paths = tuple(ignore_paths)\n\n        # Vary files_or_modules input: directory, specific file, or mixed\n        choice_type = rng.choice([\"dir\", \"files\", \"mixed\", \"nonexistent\"])\n        if choice_type == \"dir\":\n            files_or_modules = [selected_dir]\n        elif choice_type == \"files\":\n            files_or_modules = [\n                os.path.join(selected_dir, \"bar.py\"),\n                os.path.join(selected_dir, \"mod1.py\"),\n            ]\n        elif choice_type == \"mixed\":\n            files_or_modules = [\n                selected_dir,\n                os.path.join(selected_dir, \"outside.py\"),\n            ]\n        else:\n            files_or_modules = [os.path.join(selected_dir, \"does_not_exist\")]\n\n        # Receiver is linter instance (in original it was staticmethod so calling with instance receiver works in both)\n        items.append((linter, (files_or_modules,), {}))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 0,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 0,
+     "examples": [],
+     "usable": false,
+     "why": "only 0 stable inputs"
+    }
+   ],
+   "verdict": "unstable outcomes",
+   "spent_usd": 0.012553,
+   "model_calls": 2,
+   "seconds": 55
+  },
+  {
+   "instance_id": "psf__requests-5414",
+   "repo": "psf/requests",
+   "image": "swebench/sweb.eval.x86_64.psf_1776_requests-5414:latest",
+   "modules": [
+    "requests/models.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "generator": "G2",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "requests/models.py",
+     "qualname": "PreparedRequest.prepare_url",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.004706,
+       "usage": {
+        "input": 2355,
+        "output": 784,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "def make_inputs(rng, n):\n    items = []\n\n    valid_schemes = [\"http://\", \"https://\"]\n    valid_hosts = [\n        \"example.com\",\n        \"google.com\",\n        \"sub.domain.org\",\n        \"localhost\",\n        \"127.0.0.1\",\n        \"foo-bar.baz\",\n        \"a.b.c.d.com\",\n        \"test.co.uk\",\n        \"\u00fc\u00f1\u00ee\u00e7\u00f8d\u00e9.com\",\n        \"xn--fsq.com\",\n    ]\n    dot_leading_hosts = [\n        \".example.com\",\n        \".com\",\n        \".org\",\n        \".sub.example.com\",\n        \"..example.com\",\n        \".\",\n        \"..\",\n        \".localhost\",\n        \".127.0.0.1\",\n        \".foo.bar.baz\",\n        \".invalid\",\n    ]\n    wildcard_hosts = [\n        \"*.example.com\",\n        \"*.org\",\n        \"*foo.com\",\n    ]\n    paths = [\"\", \"/\", \"/path\", \"/path/to/resource\", \"/test/\"]\n\n    for _ in range(n):\n        req = target_class()\n        # Half ordinary, half edge cases / bug repro\n        is_bug_case = rng.random() < 0.5\n\n        scheme = rng.choice(valid_schemes)\n        path = rng.choice(paths)\n\n        if is_bug_case:\n            host_choice = rng.choice(dot_leading_hosts)\n            # occasionally include port or auth\n            port = rng.choice([\"\", \":80\", \":8080\", \":443\"]) if rng.random() < 0.3 else \"\"\n            auth = rng.choice([\"user:pass@\", \"admin@\"]) if rng.random() < 0.2 else \"\"\n            url = f\"{scheme}{auth}{host_choice}{port}{path}\"\n        else:\n            host_choice = rng.choice(valid_hosts + wildcard_hosts)\n            port = rng.choice([\"\", \":80\", \":443\", \":8000\"]) if rng.random() < 0.2 else \"\"\n            auth = rng.choice([\"user:pass@\", \"user@\"]) if rng.random() < 0.1 else \"\"\n            url = f\"{scheme}{auth}{host_choice}{port}{path}\"\n\n        # Params variations\n        param_type = rng.choice([\"none\", \"dict\", \"tuple_list\", \"str\"])\n        if param_type == \"none\":\n            params = None\n        elif param_type == \"dict\":\n            params = {f\"k{i}\": f\"v{i}\" for i in range(rng.randint(1, 3))}\n        elif param_type == \"tuple_list\":\n            params = [(f\"k{i}\", f\"v{i}\") for i in range(rng.randint(1, 3))]\n        else:\n            params = f\"q={rng.randint(1, 100)}\"\n\n        # Sometimes pass url as bytes\n        if rng.random() < 0.1:\n            try:\n                url = url.encode(\"utf-8\")\n            except (UnicodeEncodeError, AttributeError):\n                pass\n\n        items.append((req, (url, params), {}))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 91,
+     "trigger_rate": 0.455,
+     "both_raise": 26,
+     "examples": [
+      {
+       "orig": [
+        "ok",
+        "NoneType",
+        "None"
+       ],
+       "fix": [
+        "exc",
+        "InvalidURL",
+        "URL has an invalid label."
+       ]
+      },
+      {
+       "orig": [
+        "ok",
+        "NoneType",
+        "None"
+       ],
+       "fix": [
+        "exc",
+        "InvalidURL",
+        "URL has an invalid label."
+       ]
+      },
+      {
+       "orig": [
+        "ok",
+        "NoneType",
+        "None"
+       ],
+       "fix": [
+        "exc",
+        "InvalidURL",
+        "URL has an invalid label."
+       ]
+      }
+     ],
+     "usable": true,
+     "why": "usable"
+    }
+   ],
+   "verdict": "usable",
+   "spent_usd": 0.004706,
+   "model_calls": 1,
+   "seconds": 46
+  },
+  {
+   "instance_id": "scikit-learn__scikit-learn-25931",
+   "repo": "scikit-learn/scikit-learn",
+   "image": "swebench/sweb.eval.x86_64.scikit-learn_1776_scikit-learn-25931:latest",
+   "modules": [
+    "sklearn/ensemble/_iforest.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.21",
+   "generator": "G2",
+   "edited_functions": 2,
+   "functions": [
+    {
+     "file": "sklearn/ensemble/_iforest.py",
+     "qualname": "IsolationForest.fit",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.004495,
+       "usage": {
+        "input": 3119,
+        "output": 575,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "import numpy as np\nimport pandas as pd\n\n\ndef make_inputs(rng, n):\n    items = []\n\n    for i in range(n):\n        # Determine whether this is a target-bug scenario (DataFrame + float contamination)\n        is_bug_case = (i % 2 == 1)\n\n        n_samples = rng.randint(10, 30)\n        n_features = rng.randint(1, 5)\n\n        # Generate data\n        data = np.array(\n            [[rng.uniform(-10.0, 10.0) for _ in range(n_features)] for _ in range(n_samples)],\n            dtype=np.float32,\n        )\n\n        n_estimators = rng.randint(2, 5)\n        seed = rng.randint(0, 10000)\n\n        if is_bug_case:\n            # Bug occurs when X is a pandas DataFrame and contamination is a float\n            col_names = [f\"col_{j}\" for j in range(n_features)]\n            X = pd.DataFrame(data, columns=col_names)\n            contamination = rng.choice([0.05, 0.1, 0.2, 0.35])\n        else:\n            # Ordinary cases: numpy array or contamination='auto' or sparse/list\n            use_df = rng.choice([True, False])\n            if use_df:\n                col_names = [f\"feat_{j}\" for j in range(n_features)]\n                X = pd.DataFrame(data, columns=col_names)\n                contamination = \"auto\"\n            else:\n                X = data\n                contamination = rng.choice([\"auto\", 0.05, 0.1, 0.25])\n\n        clf = target_class(\n            n_estimators=n_estimators,\n            contamination=contamination,\n            random_state=seed,\n            max_samples=rng.choice([\"auto\", 0.8, min(10, n_samples)]),\n        )\n\n        # Optionally add sample_weight\n        if rng.random() < 0.2:\n            sample_weight = np.array([rng.uniform(0.5, 1.5) for _ in range(n_samples)])\n        else:\n            sample_weight = None\n\n        args = (X,)\n        kwargs = {\"sample_weight\": sample_weight}\n        items.append((clf, args, kwargs))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 0,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    },
+    {
+     "file": "sklearn/ensemble/_iforest.py",
+     "qualname": "IsolationForest.score_samples",
+     "calls": [
+      {
+       "verdict": "GENERATOR_FAILED",
+       "cost_usd": 0.004154,
+       "usage": {
+        "input": 2659,
+        "output": 576,
+        "usage_missing": false
+       },
+       "finish_reason": "stop",
+       "error": "AttributeError: 'Random' object has no attribute 'normal'\n"
+      },
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.004726,
+       "usage": {
+        "input": 3286,
+        "output": 603,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 1,
+     "generator_code": "import numpy as np\nimport pandas as pd\n\n\ndef make_inputs(rng, n):\n    items = []\n    IsolationForest = getattr(module, \"IsolationForest\")\n\n    for i in range(n):\n        n_samples = rng.randint(10, 40)\n        n_features = rng.randint(1, 5)\n        seed = rng.randint(0, 10000)\n\n        # Generate base data using python's rng (random.Random)\n        raw_data = np.array(\n            [[rng.gauss(0, 1) for _ in range(n_features)] for _ in range(n_samples)],\n            dtype=np.float32,\n        )\n\n        # Half ordinary (e.g. numpy array or default contamination),\n        # half DataFrame with non-auto contamination (the issue scenario)\n        if i % 2 == 0:\n            contamination = rng.choice([0.05, 0.1, 0.2])\n            feature_names = [f\"feat_{j}\" for j in range(n_features)]\n            X_fit = pd.DataFrame(raw_data, columns=feature_names)\n            n_eval = rng.randint(5, 20)\n            eval_data = np.array(\n                [[rng.gauss(0, 1) for _ in range(n_features)] for _ in range(n_eval)],\n                dtype=np.float32,\n            )\n            if rng.random() < 0.5:\n                X_score = pd.DataFrame(eval_data, columns=feature_names)\n            else:\n                X_score = eval_data\n        else:\n            contamination = \"auto\" if rng.random() < 0.5 else rng.uniform(0.01, 0.4)\n            X_fit = raw_data\n            n_eval = rng.randint(5, 20)\n            X_score = np.array(\n                [[rng.gauss(0, 1) for _ in range(n_features)] for _ in range(n_eval)],\n                dtype=np.float32,\n            )\n\n        n_estimators = rng.randint(5, 15)  # keep small for fast differential testing\n        clf = IsolationForest(\n            n_estimators=n_estimators,\n            contamination=contamination,\n            random_state=seed,\n            max_samples=\"auto\",\n        )\n        clf.fit(X_fit)\n\n        items.append((clf, (X_score,), {}))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 0,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    }
+   ],
+   "verdict": "the original never differs from the fix on generated inputs",
+   "spent_usd": 0.013375,
+   "model_calls": 3,
+   "seconds": 77
+  },
+  {
+   "instance_id": "pallets__flask-5014",
+   "repo": "pallets/flask",
+   "image": "swebench/sweb.eval.x86_64.pallets_1776_flask-5014:latest",
+   "modules": [
+    "src/flask/blueprints.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.11.10",
+   "generator": "G2",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "src/flask/blueprints.py",
+     "qualname": "Blueprint.__init__",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.003052,
+       "usage": {
+        "input": 1739,
+        "output": 466,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "def make_inputs(rng, n):\n    items = []\n    Blueprint = target_class if target_class is not None else getattr(module, \"Blueprint\")\n\n    valid_names = [\n        \"auth\",\n        \"api\",\n        \"admin\",\n        \"frontend\",\n        \"v1\",\n        \"users_blueprint\",\n        \"test_app\",\n        \"bp\",\n        \"x\",\n    ]\n\n    empty_or_edge_names = [\n        \"\",\n        \"\",\n        \"\",\n    ]\n\n    for i in range(n):\n        # Create uninitialized instance\n        receiver = Blueprint.__new__(Blueprint)\n\n        # About half empty/falsy names, half ordinary or other edge cases\n        is_empty_case = (i % 2 == 0)\n\n        if is_empty_case:\n            name = rng.choice(empty_or_edge_names)\n        else:\n            if rng.random() < 0.1:\n                # Dot in name to test other ValueError\n                name = rng.choice([\"auth.v1\", \"api.user\", \"test.bp\", \".\"])\n            else:\n                name = rng.choice(valid_names)\n\n        import_name = rng.choice([\"__main__\", \"flask\", \"tests\", \"app\"])\n        url_prefix = rng.choice([None, f\"/{name}\", \"/api\", \"/v1\"]) if name else None\n        subdomain = rng.choice([None, \"api\", \"admin\"])\n\n        args = (name, import_name)\n        kwargs = {}\n\n        if rng.random() < 0.5:\n            kwargs[\"url_prefix\"] = url_prefix\n        if rng.random() < 0.3:\n            kwargs[\"subdomain\"] = subdomain\n        if rng.random() < 0.3:\n            kwargs[\"url_defaults\"] = {\"version\": \"v1\"} if rng.random() < 0.5 else None\n\n        items.append((receiver, args, kwargs))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 100,
+     "trigger_rate": 0.5,
+     "both_raise": 8,
+     "examples": [
+      {
+       "orig": [
+        "ok",
+        "NoneType",
+        "None"
+       ],
+       "fix": [
+        "exc",
+        "ValueError",
+        "'name' may not be empty."
+       ]
+      },
+      {
+       "orig": [
+        "ok",
+        "NoneType",
+        "None"
+       ],
+       "fix": [
+        "exc",
+        "ValueError",
+        "'name' may not be empty."
+       ]
+      },
+      {
+       "orig": [
+        "ok",
+        "NoneType",
+        "None"
+       ],
+       "fix": [
+        "exc",
+        "ValueError",
+        "'name' may not be empty."
+       ]
+      }
+     ],
+     "usable": true,
+     "why": "usable"
+    }
+   ],
+   "verdict": "usable",
+   "spent_usd": 0.003052,
+   "model_calls": 1,
+   "seconds": 49
+  },
+  {
+   "instance_id": "sphinx-doc__sphinx-10614",
+   "repo": "sphinx-doc/sphinx",
+   "image": "swebench/sweb.eval.x86_64.sphinx-doc_1776_sphinx-10614:latest",
+   "modules": [
+    "sphinx/ext/inheritance_diagram.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "generator": "G2",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "sphinx/ext/inheritance_diagram.py",
+     "qualname": "html_visit_inheritance_diagram",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.004371,
+       "usage": {
+        "input": 2313,
+        "output": 703,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "from unittest.mock import MagicMock\nfrom docutils import nodes\nfrom sphinx import addnodes\n\ndef make_inputs(rng, n):\n    items = []\n    formats = ['SVG', 'PNG', 'svg', 'png']\n\n    for i in range(n):\n        # Configure format: alternate or pick randomly, with SVG emphasized for issue coverage\n        if i % 2 == 0:\n            fmt = rng.choice(['SVG', 'svg'])\n        else:\n            fmt = rng.choice(formats)\n\n        is_nested = rng.choice([True, False])\n        if is_nested:\n            current_docname = rng.choice(['my_package/index', 'sub/dir/doc', 'a/b/c'])\n        else:\n            current_docname = rng.choice(['index', 'intro', 'classes'])\n\n        out_suffix = '.html'\n\n        # Mock builder and translator (self)\n        builder = MagicMock()\n        builder.env.config.graphviz_output_format = fmt\n        builder.current_docname = current_docname\n        builder.out_suffix = out_suffix\n        builder.env.graphviz_dot = 'dot'\n        builder.env.graphviz_dot_args = []\n        builder.imgpath = '_images'\n\n        translator = MagicMock()\n        translator.builder = builder\n        translator.body = []\n\n        # Create inheritance diagram node\n        node = module.inheritance_diagram()\n        node['content'] = f'test_content_{i}'\n\n        graph_mock = MagicMock()\n        # Record generate_dot call arguments to ensure differential testing can see the urls dict\n        graph_mock.generate_dot.side_effect = lambda name, urls, env=None: f'/* dotcode {name} {urls} */'\n        node['graph'] = graph_mock\n\n        # Add child pending_xref nodes\n        num_children = rng.randint(1, 4)\n        for c in range(num_children):\n            xref = addnodes.pending_xref()\n            class_name = f'pkg.mod.Class{c}'\n            xref['reftitle'] = class_name\n\n            # Exercise internal vs external, refuri vs refid\n            has_refuri = rng.choice([True, False])\n            if has_refuri:\n                is_internal = rng.choice([True, False])\n                if not is_internal:\n                    xref['internal'] = False\n                    xref['refuri'] = f'https://docs.python.org/3/library/stdtypes.html#{class_name}'\n                else:\n                    xref['internal'] = True\n                    target_doc = rng.choice(['my_class_1.html', '../other/doc.html', 'mod.html'])\n                    xref['refuri'] = f'{target_doc}#{class_name}'\n            else:\n                xref['refid'] = f'id-class-{c}'\n\n            node.append(xref)\n\n        items.append((None, (translator, node), {}))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 200,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    }
+   ],
+   "verdict": "the original never differs from the fix on generated inputs",
+   "spent_usd": 0.004371,
+   "model_calls": 1,
+   "seconds": 57
+  },
+  {
+   "instance_id": "django__django-14765",
+   "repo": "django/django",
+   "image": "swebench/sweb.eval.x86_64.django_1776_django-14765:latest",
+   "modules": [
+    "django/db/migrations/state.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.8.20",
+   "generator": "G2",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "django/db/migrations/state.py",
+     "qualname": "ProjectState.__init__",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.003868,
+       "usage": {
+        "input": 1443,
+        "output": 743,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "def make_inputs(rng, n):\n    items = []\n    app_names = ['auth', 'contenttypes', 'admin', 'sessions', 'myapp', 'users', 'blog']\n\n    for i in range(n):\n        # Create uninitialized instance\n        receiver = target_class.__new__(target_class)\n\n        # Generate models arg\n        if rng.random() < 0.2:\n            models_arg = None\n        elif rng.random() < 0.2:\n            models_arg = {}\n        else:\n            models_arg = {\n                (rng.choice(app_names), f\"model_{j}\"): None\n                for j in range(rng.randint(1, 3))\n            }\n\n        # Half ordinary (None or set), half non-set real_apps (triggering the assert in the fix)\n        is_ordinary = (i % 2 == 0)\n\n        if is_ordinary:\n            # None or a set\n            choice = rng.choice(['none', 'empty_set', 'set_of_apps'])\n            if choice == 'none':\n                real_apps = None\n            elif choice == 'empty_set':\n                real_apps = set()\n            else:\n                k = rng.randint(1, 4)\n                real_apps = set(rng.sample(app_names, k))\n        else:\n            # Non-set iterables or falsy non-None / truthy non-set values\n            choice = rng.choice([\n                'list', 'tuple', 'dict', 'dict_keys', 'str', 'falsy_list', 'falsy_tuple'\n            ])\n            sample_apps = rng.sample(app_names, rng.randint(1, 3))\n            if choice == 'list':\n                real_apps = list(sample_apps)\n            elif choice == 'tuple':\n                real_apps = tuple(sample_apps)\n            elif choice == 'dict':\n                real_apps = {app: True for app in sample_apps}\n            elif choice == 'dict_keys':\n                real_apps = {app: True for app in sample_apps}.keys()\n            elif choice == 'str':\n                real_apps = rng.choice(app_names)\n            elif choice == 'falsy_list':\n                real_apps = []\n            elif choice == 'falsy_tuple':\n                real_apps = ()\n\n        # Randomize calling via args or kwargs\n        call_style = rng.choice(['args', 'kwargs', 'mixed'])\n        if call_style == 'args':\n            args = (models_arg, real_apps)\n            kwargs = {}\n        elif call_style == 'kwargs':\n            args = ()\n            kwargs = {}\n            if models_arg is not None or rng.random() < 0.5:\n                kwargs['models'] = models_arg\n            if real_apps is not None or rng.random() < 0.5:\n                kwargs['real_apps'] = real_apps\n        else:\n            args = (models_arg,)\n            kwargs = {'real_apps': real_apps}\n\n        items.append((receiver, args, kwargs))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 100,
+     "trigger_rate": 0.5,
+     "both_raise": 0,
+     "examples": [
+      {
+       "orig": [
+        "ok",
+        "NoneType",
+        "None"
+       ],
+       "fix": [
+        "exc",
+        "AssertionError",
+        ""
+       ]
+      },
+      {
+       "orig": [
+        "ok",
+        "NoneType",
+        "None"
+       ],
+       "fix": [
+        "exc",
+        "AssertionError",
+        ""
+       ]
+      },
+      {
+       "orig": [
+        "ok",
+        "NoneType",
+        "None"
+       ],
+       "fix": [
+        "exc",
+        "AssertionError",
+        ""
+       ]
+      }
+     ],
+     "usable": true,
+     "why": "usable"
+    }
+   ],
+   "verdict": "usable",
+   "spent_usd": 0.003868,
+   "model_calls": 1,
+   "seconds": 44
+  },
+  {
+   "instance_id": "sympy__sympy-15875",
+   "repo": "sympy/sympy",
+   "image": "swebench/sweb.eval.x86_64.sympy_1776_sympy-15875:latest",
+   "modules": [
+    "sympy/core/add.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "generator": "G2",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "sympy/core/add.py",
+     "qualname": "Add._eval_is_zero",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.004738,
+       "usage": {
+        "input": 1278,
+        "output": 1008,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "def make_inputs(rng, n):\n    import sympy\n    from sympy import S, I, Symbol, Add\n\n    items = []\n\n    # Helper to generate an Add receiver using evaluate=False if needed\n    def make_add(*args):\n        return Add(*args, evaluate=False)\n\n    for i in range(n):\n        # Half targeted towards the issue:\n        # The bug occurs when len(nz) == 0 (no nonzero real terms among the args).\n        # In the original code, when len(nz) == 0:\n        # b = self.func(*nz) -> Add() -> S.Zero\n        # So b.is_zero is True!\n        # Then:\n        # if im and not im_or_z: return False\n        # which incorrectly concluded False for expressions like -2*I + (1 + I)**2\n        # where the real part might actually be 0 (or sum of unexpanded real parts),\n        # but nz had no real terms!\n        if i % 2 == 0:\n            choice = rng.randint(0, 5)\n            if choice == 0:\n                # Direct reproducer: -2*I + (1 + I)**2\n                # In evaluated form it's an Add: -2*I + (1 + I)**2\n                expr = -2 * I + (1 + I) ** 2\n            elif choice == 1:\n                # Pure imaginary terms and complex non-real powers\n                c = rng.choice([-3, -2, -1, 1, 2, 3])\n                expr = make_add(c * I, (1 + I) ** 2)\n            elif choice == 2:\n                # Terms with imaginary units and complex terms whose real part cancels or is unexpanded\n                k = rng.choice([-2, -1, 1, 2])\n                expr = make_add(k * I, (rng.choice([1, 2]) + I) ** 2)\n            elif choice == 3:\n                # Only imaginary terms (nz is empty)\n                terms = [rng.choice([-2, -1, 1, 2]) * I for _ in range(rng.randint(2, 4))]\n                expr = make_add(*terms)\n            elif choice == 4:\n                # Imaginary term + (a + b*I)**3\n                a = rng.choice([-1, 1])\n                b = rng.choice([-1, 1])\n                expr = make_add(rng.choice([-2, 2]) * I, (a + b * I) ** 3)\n            else:\n                # Imaginary unit plus an unevaluated imaginary expression\n                x = Symbol('x', imaginary=True)\n                expr = make_add(I, x)\n        else:\n            # Ordinary cases: real terms, zero terms, mixtures\n            choice = rng.randint(0, 5)\n            if choice == 0:\n                # Ordinary all-real\n                r1 = rng.choice([-3, -2, -1, 1, 2, 3])\n                r2 = rng.choice([-3, -2, -1, 1, 2, 3])\n                expr = make_add(S(r1), S(r2))\n            elif choice == 1:\n                # Zero terms and real terms\n                expr = make_add(S(0), S(rng.choice([-2, -1, 1, 2])))\n            elif choice == 2:\n                # Symbolic real terms\n                x = Symbol('x', real=True)\n                expr = make_add(x, S(1))\n            elif choice == 3:\n                # Non-commutative symbol\n                nc = Symbol('A', commutative=False)\n                expr = make_add(nc, S(1))\n            elif choice == 4:\n                # Real + imaginary\n                expr = make_add(S(rng.choice([1, 2])), rng.choice([-1, 1]) * I)\n            else:\n                # Real cancellation\n                c = rng.choice([1, 2, 3])\n                expr = make_add(S(c), S(-c))\n\n        if not isinstance(expr, Add):\n            expr = make_add(expr)\n\n        items.append((expr, (), {}))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 80,
+     "trigger_rate": 0.4,
+     "both_raise": 0,
+     "examples": [
+      {
+       "orig": [
+        "ok",
+        "bool",
+        "False"
+       ],
+       "fix": [
+        "ok",
+        "NoneType",
+        "None"
+       ]
+      },
+      {
+       "orig": [
+        "ok",
+        "bool",
+        "False"
+       ],
+       "fix": [
+        "ok",
+        "NoneType",
+        "None"
+       ]
+      },
+      {
+       "orig": [
+        "ok",
+        "bool",
+        "False"
+       ],
+       "fix": [
+        "ok",
+        "NoneType",
+        "None"
+       ]
+      }
+     ],
+     "usable": true,
+     "why": "usable"
+    }
+   ],
+   "verdict": "usable",
+   "spent_usd": 0.004738,
+   "model_calls": 1,
+   "seconds": 44
+  },
+  {
+   "instance_id": "pydata__xarray-3677",
+   "repo": "pydata/xarray",
+   "image": "swebench/sweb.eval.x86_64.pydata_1776_xarray-3677:latest",
+   "modules": [
+    "xarray/core/dataset.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.10.15",
+   "generator": "G2",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "xarray/core/dataset.py",
+     "qualname": "Dataset.merge",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.004907,
+       "usage": {
+        "input": 2458,
+        "output": 817,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "import numpy as np\nimport xarray as xr\n\n\ndef make_inputs(rng, n):\n    items = []\n    compats = [\"broadcast_equals\", \"equals\", \"identical\", \"no_conflicts\"]\n    joins = [\"outer\", \"inner\", \"left\", \"right\", \"exact\"]\n\n    def rand_str(length=3):\n        return \"\".join(rng.choices(\"abcdefghijklmnopqrstuvwxyz\", k=length))\n\n    for i in range(n):\n        compat = rng.choice(compats)\n        join = rng.choice(joins)\n\n        # Create self dataset\n        dim_len = rng.randint(1, 5)\n        coords = {\"x\": np.arange(dim_len)}\n        var_name = rng.choice([\"a\", \"b\", \"c\", \"var1\", \"var2\"])\n        data_vars = {\n            var_name: ([\"x\"], rng.sample(range(100), dim_len))\n            if rng.random() > 0.3\n            else rng.randint(0, 10)\n        }\n        ds = xr.Dataset(data_vars=data_vars, coords=coords if rng.random() > 0.3 else None)\n\n        # Half of the cases: test DataArray as `other`\n        if i % 2 == 0:\n            other_name = rng.choice([\"b\", \"c\", \"d\", \"var2\", \"var3\", None])\n            if rng.random() > 0.4:\n                # 1D or 2D DataArray\n                da_len = dim_len if join == \"exact\" or rng.random() > 0.5 else rng.randint(1, 5)\n                da_coords = {\"x\": np.arange(da_len)} if rng.random() > 0.3 else None\n                da = xr.DataArray(\n                    data=np.array(rng.sample(range(100), da_len)),\n                    dims=[\"x\"],\n                    coords=da_coords,\n                    name=other_name,\n                )\n            else:\n                # Scalar DataArray\n                da = xr.DataArray(rng.randint(0, 50), name=other_name)\n\n            kwargs = {}\n            if rng.random() > 0.5:\n                kwargs[\"compat\"] = compat\n            if rng.random() > 0.5:\n                kwargs[\"join\"] = join\n\n            items.append((ds, (da,), kwargs))\n        else:\n            # Ordinary cases: other is Dataset or dict mapping\n            other_kind = rng.choice([\"dataset\", \"dict\"])\n            other_var = rng.choice([\"c\", \"d\", \"e\", \"var3\"])\n\n            if other_kind == \"dataset\":\n                o_len = dim_len if join == \"exact\" or rng.random() > 0.5 else rng.randint(1, 5)\n                other = xr.Dataset(\n                    data_vars={other_var: ([\"x\"], rng.sample(range(100), o_len))},\n                    coords={\"x\": np.arange(o_len)},\n                )\n            else:\n                other = {other_var: rng.randint(0, 100)}\n\n            kwargs = {}\n            if rng.random() > 0.5:\n                kwargs[\"compat\"] = compat\n            if rng.random() > 0.5:\n                kwargs[\"join\"] = join\n\n            items.append((ds, (other,), kwargs))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 100,
+     "trigger_rate": 0.5,
+     "both_raise": 41,
+     "examples": [
+      {
+       "orig": [
+        "exc",
+        "AttributeError",
+        "'DataArray' object has no attribute 'items'"
+       ],
+       "fix": [
+        "ok",
+        "Dataset",
+        "<xarray.Dataset>\nDimensions:  (x: 2)\nCoordinates:\n  * x        (x) int64 0 1\nData variables:\n    c        (x) float64 62.0 nan\n    d        (x) int64 36 17"
+       ]
+      },
+      {
+       "orig": [
+        "exc",
+        "AttributeError",
+        "'DataArray' object has no attribute 'items'"
+       ],
+       "fix": [
+        "ok",
+        "Dataset",
+        "<xarray.Dataset>\nDimensions:  (x: 5)\nCoordinates:\n  * x        (x) int64 0 1 2 3 4\nData variables:\n    c        int64 8\n    b        (x) float64 42.0 nan nan nan nan"
+       ]
+      },
+      {
+       "orig": [
+        "exc",
+        "AttributeError",
+        "'DataArray' object has no attribute 'items'"
+       ],
+       "fix": [
+        "ok",
+        "Dataset",
+        "<xarray.Dataset>\nDimensions:  (x: 3)\nCoordinates:\n  * x        (x) int64 0 1 2\nData variables:\n    var2     int64 1\n    var3     int64 38"
+       ]
+      }
+     ],
+     "usable": true,
+     "why": "usable"
+    }
+   ],
+   "verdict": "usable",
+   "spent_usd": 0.004907,
+   "model_calls": 1,
+   "seconds": 80
+  },
+  {
+   "instance_id": "sphinx-doc__sphinx-9658",
+   "repo": "sphinx-doc/sphinx",
+   "image": "swebench/sweb.eval.x86_64.sphinx-doc_1776_sphinx-9658:latest",
+   "modules": [
+    "sphinx/ext/autodoc/mock.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "generator": "G2",
+   "edited_functions": 2,
+   "functions": [
+    {
+     "file": "sphinx/ext/autodoc/mock.py",
+     "qualname": "_MockObject.__init__",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.003172,
+       "usage": {
+        "input": 2015,
+        "output": 443,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "def make_inputs(rng, n):\n    _MockObject = getattr(module, \"_MockObject\")\n    _make_subclass = getattr(module, \"_make_subclass\")\n\n    items = []\n    for i in range(n):\n        # Determine whether to test normal _MockObject or a subclassed mock object\n        # (where __name__ might be set on the class by _make_subclass or manually)\n        kind = rng.choice([\"plain\", \"subclass\", \"named_instance\"])\n\n        if kind == \"plain\":\n            receiver = _MockObject.__new__(_MockObject)\n        elif kind == \"subclass\":\n            mod_name = rng.choice([\"torch.nn\", \"tensorflow.keras\", \"numpy\", \"mypackage.sub\"])\n            cls_name = rng.choice([\"Module\", \"Layer\", \"ndarray\", \"CustomBase\", \"\"])\n            subcls = _make_subclass(cls_name, mod_name, superclass=_MockObject)\n            receiver = subcls.__new__(subcls)\n        else:\n            receiver = _MockObject.__new__(_MockObject)\n            # simulate an object that already has __name__ set on it or class\n            name_val = rng.choice([\"SomeClass\", \"Kernel\", \"DeepKernel\", \"\", \"Foo\"])\n            receiver.__name__ = name_val\n\n        # Generate variable args and kwargs to pass into __init__\n        num_args = rng.randint(0, 3)\n        args = tuple(rng.choice([1, \"foo\", None, (1, 2), {\"a\": 1}]) for _ in range(num_args))\n        kwargs = {}\n        if rng.random() < 0.3:\n            kwargs[rng.choice([\"x\", \"name\", \"target\", \"value\"])] = rng.choice([10, \"test\", None])\n\n        items.append((receiver, args, kwargs))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 0,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    },
+    {
+     "file": "sphinx/ext/autodoc/mock.py",
+     "qualname": "_make_subclass",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.003706,
+       "usage": {
+        "input": 2046,
+        "output": 579,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "def make_inputs(rng, n):\n    names = [\n        \"Module\", \"Linear\", \"Conv2d\", \"BaseModel\", \"Dataset\",\n        \"Optimizer\", \"Tensor\", \"Functional\", \"ClassA\", \"ClassB\",\n        \"foo\", \"bar\", \"_PrivateClass\", \"\", \"Custom123\"\n    ]\n    modules = [\n        \"torch.nn\", \"torch.utils.data\", \"tensorflow.keras.layers\",\n        \"numpy\", \"alibi_detect.utils\", \"os.path\", \"sys\",\n        \"\", \"mymodule\", \"pkg.subpkg.mod\"\n    ]\n\n    superclasses = [\n        module._MockObject,\n        object,\n        type(\"CustomMock\", (module._MockObject,), {\"__display_name__\": \"pkg.CustomMock\"}),\n    ]\n\n    items = []\n    for i in range(n):\n        name = rng.choice(names)\n        mod_name = rng.choice(modules)\n\n        # Vary between standard calls and calls with kwargs\n        use_kwargs = rng.choice([False, True])\n\n        # Attributes dictionary\n        if rng.random() < 0.3:\n            attrs = None\n        elif rng.random() < 0.6:\n            attrs = {}\n        else:\n            attrs = {\n                \"custom_attr\": rng.randint(0, 100),\n                \"__doc__\": \"Sample docstring\" if rng.random() < 0.5 else None,\n            }\n            # Occasionally include or omit __name__ to test collision/overriding\n            if rng.random() < 0.2:\n                attrs[\"__name__\"] = \"explicit_name\"\n\n        superclass = rng.choice(superclasses)\n        decorator_args = () if rng.random() < 0.7 else (rng.randint(0, 10), \"arg\")\n\n        if use_kwargs:\n            args = (name, mod_name)\n            kwargs = {}\n            if rng.random() < 0.5:\n                kwargs[\"superclass\"] = superclass\n            if rng.random() < 0.5 or attrs is not None:\n                kwargs[\"attributes\"] = attrs\n            if rng.random() < 0.5 or decorator_args != ():\n                kwargs[\"decorator_args\"] = decorator_args\n        else:\n            args = (name, mod_name, superclass, attrs, decorator_args)\n            kwargs = {}\n\n        items.append((None, args, kwargs))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 0,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    }
+   ],
+   "verdict": "the original never differs from the fix on generated inputs",
+   "spent_usd": 0.006878,
+   "model_calls": 2,
+   "seconds": 49
+  },
+  {
+   "instance_id": "pytest-dev__pytest-7205",
+   "repo": "pytest-dev/pytest",
+   "image": "swebench/sweb.eval.x86_64.pytest-dev_1776_pytest-7205:latest",
+   "modules": [
+    "src/_pytest/setuponly.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "generator": "G2",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "src/_pytest/setuponly.py",
+     "qualname": "_show_fixture_action",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.004568,
+       "usage": {
+        "input": 2216,
+        "output": 775,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "def make_inputs(rng, n):\n    class DummyWriter:\n        def __init__(self):\n            self.lines = []\n\n        def line(self, s=\"\"):\n            self.lines.append(s)\n\n        def write(self, s):\n            self.lines.append(s)\n\n        def flush(self):\n            pass\n\n    class DummyPluginManager:\n        def getplugin(self, name):\n            return None\n\n    class DummyConfig:\n        def __init__(self):\n            self.pluginmanager = DummyPluginManager()\n            self._tw = DummyWriter()\n\n        def get_terminal_writer(self):\n            return self._tw\n\n    class DummyFixtureManager:\n        def __init__(self):\n            self.config = DummyConfig()\n\n    class DummyFixtureDef:\n        def __init__(self, argname, scope, scopenum, argnames):\n            self.argname = argname\n            self.scope = scope\n            self.scopenum = scopenum\n            self.argnames = argnames\n            self._fixturemanager = DummyFixtureManager()\n\n    scopes = [(\"function\", 0), (\"class\", 1), (\"module\", 2), (\"package\", 3), (\"session\", 4)]\n    messages = [\"SETUP\", \"TEARDOWN\", \"FINISH\"]\n\n    bytes_samples = [\n        b\"Hello World\",\n        b\"\",\n        b\"\\x00\\xff\\xfe\",\n        b\"short\",\n        b\"a\" * 50,\n        b\"special\\n\\r\\tcharacters\",\n        bytearray(b\"bytearray_value\"),\n        memoryview(b\"memoryview_bytes\"),\n    ]\n\n    other_samples = [\n        \"regular_string\",\n        \"a\" * 100,\n        123,\n        0,\n        -999999,\n        3.14159,\n        True,\n        False,\n        None,\n        [1, 2, 3],\n        {\"key\": \"value\", \"long\": \"x\" * 60},\n        (1, 2, (3, 4)),\n        set([1, 2, 3]),\n    ]\n\n    items = []\n    for i in range(n):\n        scope_name, scopenum = rng.choice(scopes)\n        argname = f\"fixture_{rng.randint(0, 100)}\"\n        deps_count = rng.randint(0, 3)\n        argnames = [f\"dep_{j}\" for j in range(deps_count)]\n        if rng.random() < 0.5:\n            argnames.append(\"request\")\n\n        fixturedef = DummyFixtureDef(argname, scope_name, scopenum, tuple(argnames))\n        msg = rng.choice(messages)\n\n        # ~50% bytes / byte-like representations that trigger the issue / saferepr change\n        if i % 2 == 0:\n            fixturedef.cached_param = rng.choice(bytes_samples)\n        else:\n            has_param = rng.random() < 0.8\n            if has_param:\n                fixturedef.cached_param = rng.choice(other_samples)\n\n        items.append((None, (fixturedef, msg), {}))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 0,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    }
+   ],
+   "verdict": "the original never differs from the fix on generated inputs",
+   "spent_usd": 0.004568,
+   "model_calls": 1,
+   "seconds": 40
+  },
+  {
+   "instance_id": "scikit-learn__scikit-learn-13328",
+   "repo": "scikit-learn/scikit-learn",
+   "image": "swebench/sweb.eval.x86_64.scikit-learn_1776_scikit-learn-13328:latest",
+   "modules": [
+    "sklearn/linear_model/huber.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.6.13",
+   "generator": "G2",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "sklearn/linear_model/huber.py",
+     "qualname": "HuberRegressor.fit",
+     "calls": [
+      {
+       "verdict": "GENERATOR_FAILED",
+       "cost_usd": 0.005134,
+       "usage": {
+        "input": 2760,
+        "output": 817,
+        "usage_missing": false
+       },
+       "finish_reason": "stop",
+       "error": "TypeError: choice() got an unexpected keyword argument 'size'\n"
+      },
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.005851,
+       "usage": {
+        "input": 3627,
+        "output": 835,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 1,
+     "generator_code": "import numpy as np\nimport scipy.sparse as sp\n\ndef make_inputs(rng, n):\n    items = []\n    HuberRegressor = getattr(module, \"HuberRegressor\", target_class)\n    \n    for i in range(n):\n        epsilon = rng.choice([1.1, 1.35, 1.5, 2.0])\n        max_iter = rng.choice([20, 50, 100])\n        alpha = rng.choice([1e-4, 1e-2, 1.0])\n        fit_intercept = rng.choice([True, False])\n        tol = 1e-4\n        \n        regressor = HuberRegressor(\n            epsilon=epsilon,\n            max_iter=max_iter,\n            alpha=alpha,\n            fit_intercept=fit_intercept,\n            tol=tol\n        )\n        \n        n_samples = rng.randint(20, 50)\n        n_features = rng.randint(1, 5)\n        \n        # Determine whether to use boolean/int input (affected by bug) or float input\n        is_bug_case = (i % 2 == 1)\n        \n        if is_bug_case:\n            case_variant = rng.choice([\"bool_dense\", \"bool_list\", \"bool_sparse\", \"int_dense\"])\n            if case_variant == \"bool_dense\":\n                X = np.array([[rng.choice([True, False]) for _ in range(n_features)] for _ in range(n_samples)], dtype=bool)\n            elif case_variant == \"bool_list\":\n                X = [[rng.choice([True, False]) for _ in range(n_features)] for _ in range(n_samples)]\n            elif case_variant == \"bool_sparse\":\n                data = np.array([[rng.choice([True, False]) for _ in range(n_features)] for _ in range(n_samples)], dtype=bool)\n                X = sp.csr_matrix(data, dtype=bool)\n            else:  # int_dense\n                X = np.array([[rng.randint(0, 10) for _ in range(n_features)] for _ in range(n_samples)], dtype=np.int32)\n        else:\n            case_variant = rng.choice([\"float64\", \"float32\", \"sparse_float\"])\n            raw = [[rng.gauss(0, 1) for _ in range(n_features)] for _ in range(n_samples)]\n            if case_variant == \"float64\":\n                X = np.array(raw, dtype=np.float64)\n            elif case_variant == \"float32\":\n                X = np.array(raw, dtype=np.float32)\n            else:\n                X = sp.csr_matrix(np.array(raw, dtype=np.float64))\n        \n        y = np.array([rng.gauss(0, 2) for _ in range(n_samples)], dtype=np.float64)\n        \n        has_weights = rng.choice([True, False])\n        if has_weights:\n            sample_weight = np.array([rng.uniform(0.5, 1.5) for _ in range(n_samples)], dtype=np.float64)\n        else:\n            sample_weight = None\n            \n        args = (X, y)\n        kwargs = {\"sample_weight\": sample_weight}\n        items.append((regressor, args, kwargs))\n        \n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 70,
+     "trigger_rate": 0.35,
+     "both_raise": 0,
+     "examples": [
+      {
+       "orig": [
+        "exc",
+        "TypeError",
+        "The numpy boolean negative, the `-` operator, is not supported, use the `~` operator or the logical_not function instead"
+       ],
+       "fix": [
+        "ok",
+        "HuberRegressor",
+        "HuberRegressor(alpha=1.0, epsilon=1.5, fit_intercept=False, max_iter=100,\n               tol=0.0001, warm_start=False)"
+       ]
+      },
+      {
+       "orig": [
+        "exc",
+        "TypeError",
+        "The numpy boolean negative, the `-` operator, is not supported, use the `~` operator or the logical_not function instead"
+       ],
+       "fix": [
+        "ok",
+        "HuberRegressor",
+        "HuberRegressor(alpha=0.01, epsilon=2.0, fit_intercept=False, max_iter=20,\n               tol=0.0001, warm_start=False)"
+       ]
+      },
+      {
+       "orig": [
+        "exc",
+        "NotImplementedError",
+        "negating a sparse boolean matrix is not supported"
+       ],
+       "fix": [
+        "ok",
+        "HuberRegressor",
+        "HuberRegressor(alpha=0.0001, epsilon=1.35, fit_intercept=True, max_iter=100,\n               tol=0.0001, warm_start=False)"
+       ]
+      }
+     ],
+     "usable": true,
+     "why": "usable"
+    }
+   ],
+   "verdict": "usable",
+   "spent_usd": 0.010985,
+   "model_calls": 2,
+   "seconds": 65
+  },
+  {
+   "instance_id": "pylint-dev__pylint-7080",
+   "repo": "pylint-dev/pylint",
+   "image": "swebench/sweb.eval.x86_64.pylint-dev_1776_pylint-7080:latest",
+   "modules": [
+    "pylint/lint/expand_modules.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "generator": "G2",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "pylint/lint/expand_modules.py",
+     "qualname": "_is_ignored_file",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.004863,
+       "usage": {
+        "input": 2184,
+        "output": 860,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "import os\nimport re\n\n\ndef make_inputs(rng, n):\n    items = []\n\n    file_names = [\"a.py\", \"test_file.py\", \"about.py\", \"design.py\", \"main.py\", \"util.py\"]\n    dir_names = [\"src\", \"gen\", \"tests\", \"sub\", \"pkg\", \"lib\", \"my_project\"]\n\n    for i in range(n):\n        # Decide whether to test normalized path behavior (issue-specific)\n        is_issue_test = i >= n // 2\n\n        fname = rng.choice(file_names)\n        dirs = [rng.choice(dir_names) for _ in range(rng.randint(1, 3))]\n\n        if is_issue_test:\n            # Create paths with redundancy: './', 'dir/../dir', '//', trailing slashes/dots, or mixed slashes\n            sep = os.sep\n            path_parts = []\n            if rng.random() < 0.4:\n                path_parts.append(\".\" + sep)\n            for d in dirs:\n                path_parts.append(d)\n                if rng.random() < 0.3:\n                    path_parts.append(\"..\" + sep + d)\n            path_parts.append(fname)\n            element = sep.join(path_parts)\n            if rng.random() < 0.3:\n                element = element.replace(sep, sep + sep)\n            if rng.random() < 0.2:\n                element = \"./\" + element\n\n            # Construct regex patterns that might match the normalized path or unnormalized path\n            norm_element = os.path.normpath(element)\n            clean_element = norm_element.replace(\"\\\\\", \"/\")\n\n            ignore_paths_patterns = []\n            if rng.random() < 0.7:\n                # Pattern targeting normalized path format\n                prefix = clean_element[: rng.randint(3, max(4, len(clean_element)))]\n                escaped_prefix = re.escape(prefix)\n                # Could be strict start of string anchor '^'\n                pattern_str = f\"^{escaped_prefix}.*\"\n                ignore_paths_patterns.append(re.compile(pattern_str))\n            else:\n                ignore_paths_patterns.append(re.compile(r\"^src/gen/.*$\"))\n\n            if rng.random() < 0.3:\n                ignore_paths_patterns.append(re.compile(r\".*test.*\"))\n\n            ignore_list = [rng.choice(file_names)] if rng.random() < 0.3 else []\n            ignore_list_re = [re.compile(r\"^test_.*\")] if rng.random() < 0.3 else []\n            ignore_list_paths_re = ignore_paths_patterns\n\n        else:\n            # Ordinary cases: simple clean paths\n            element = os.path.join(*dirs, fname)\n            ignore_list = [rng.choice(file_names)] if rng.random() < 0.5 else []\n            ignore_list_re = (\n                [re.compile(r\"^test_.*\"), re.compile(r\".*\\.py$\")]\n                if rng.random() < 0.4\n                else []\n            )\n            ignore_list_paths_re = (\n                [re.compile(r\"^tests/.*\"), re.compile(r\"^src/gen/.*\")]\n                if rng.random() < 0.4\n                else []\n            )\n\n        items.append(\n            (\n                None,\n                (element, ignore_list, ignore_list_re, ignore_list_paths_re),\n                {},\n            )\n        )\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 44,
+     "trigger_rate": 0.22,
+     "both_raise": 0,
+     "examples": [
+      {
+       "orig": [
+        "ok",
+        "bool",
+        "False"
+       ],
+       "fix": [
+        "ok",
+        "bool",
+        "True"
+       ]
+      },
+      {
+       "orig": [
+        "ok",
+        "bool",
+        "False"
+       ],
+       "fix": [
+        "ok",
+        "bool",
+        "True"
+       ]
+      },
+      {
+       "orig": [
+        "ok",
+        "bool",
+        "False"
+       ],
+       "fix": [
+        "ok",
+        "bool",
+        "True"
+       ]
+      }
+     ],
+     "usable": true,
+     "why": "usable"
+    }
+   ],
+   "verdict": "usable",
+   "spent_usd": 0.004863,
+   "model_calls": 1,
+   "seconds": 54
+  },
+  {
+   "instance_id": "django__django-13551",
+   "repo": "django/django",
+   "image": "swebench/sweb.eval.x86_64.django_1776_django-13551:latest",
+   "modules": [
+    "django/contrib/auth/tokens.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.6.13",
+   "generator": "G2",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "django/contrib/auth/tokens.py",
+     "qualname": "PasswordResetTokenGenerator._make_hash_value",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.004574,
+       "usage": {
+        "input": 1634,
+        "output": 893,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "from datetime import datetime, timezone\n\n\nclass MockUser:\n    def __init__(self, pk=1, password=\"pbkdf2_sha256$test_password_hash\", last_login=None, email=\"test@example.com\", email_field_name=\"email\"):\n        self.pk = pk\n        self.password = password\n        self.last_login = last_login\n        self._email_field_name = email_field_name\n        if email_field_name is not None:\n            setattr(self, email_field_name, email)\n\n    def get_email_field_name(self):\n        return self._email_field_name if self._email_field_name is not None else \"email\"\n\n\ndef make_inputs(rng, n):\n    items = []\n    generator = target_class()\n\n    domains = [\"example.com\", \"test.org\", \"company.io\", \"mail.net\"]\n    sample_passwords = [\n        \"pbkdf2_sha256$260000$salt$hash123\",\n        \"argon2$argon2id$v=19$m=102400,t=2,p=8$salt$hash\",\n        \"bcrypt$$2b$12$e8O9M7P.somehashhere\",\n        \"\",\n    ]\n\n    for i in range(n):\n        pk = rng.choice([1, 42, 1000, \"uuid-1234-abcd\", 999999])\n        password = rng.choice(sample_passwords)\n        \n        has_login = rng.choice([True, False])\n        if has_login:\n            last_login = datetime(\n                rng.randint(2015, 2025),\n                rng.randint(1, 12),\n                rng.randint(1, 28),\n                rng.randint(0, 23),\n                rng.randint(0, 59),\n                rng.randint(0, 59),\n                rng.choice([0, 123456, 999999]),\n                tzinfo=rng.choice([None, timezone.utc]),\n            )\n        else:\n            last_login = None\n\n        timestamp = rng.randint(100000, 99999999)\n\n        # Roughly half ordinary (e.g. empty or None email, or missing email attribute)\n        # and roughly half with realistic or edge-case email values\n        if i % 2 == 0:\n            # Inputs where email is empty, None, or absent, so hash behaves like original or tests default fallbacks\n            email_val = rng.choice([\"\", None])\n            email_field = rng.choice([\"email\", \"user_email\", \"non_existent_field\"])\n            user = MockUser(pk=pk, password=password, last_login=last_login, email=email_val, email_field_name=email_field)\n            if email_field == \"non_existent_field\" and hasattr(user, \"non_existent_field\"):\n                delattr(user, \"non_existent_field\")\n        else:\n            # Inputs with distinct email values triggering divergence between original and fixed\n            user_name = f\"user_{rng.randint(1, 10000)}\"\n            domain = rng.choice(domains)\n            email_val = f\"{user_name}@{domain}\"\n            email_field = rng.choice([\"email\", \"contact_email\"])\n            user = MockUser(pk=pk, password=password, last_login=last_login, email=email_val, email_field_name=email_field)\n\n        items.append((generator, (user, timestamp), {}))\n\n    return items\n",
+     "usable": false,
+     "why": "did not run: UNCALLABLE import failed: ImproperlyConfigured / ImproperlyConfigured"
+    }
+   ],
+   "verdict": "no edited function could be imported or called",
+   "spent_usd": 0.004574,
+   "model_calls": 1,
+   "seconds": 52
+  },
+  {
+   "instance_id": "pydata__xarray-6938",
+   "repo": "pydata/xarray",
+   "image": "swebench/sweb.eval.x86_64.pydata_1776_xarray-6938:latest",
+   "modules": [
+    "xarray/core/dataset.py",
+    "xarray/core/variable.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.10.15",
+   "generator": "G2",
+   "edited_functions": 8,
+   "functions": [
+    {
+     "file": "xarray/core/dataset.py",
+     "qualname": "Dataset.swap_dims",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.005663,
+       "usage": {
+        "input": 3121,
+        "output": 886,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "import numpy as np\n\n\ndef make_inputs(rng, n):\n    items = []\n    Dataset = target_class\n\n    for i in range(n):\n        # Decide whether to test the mutation bug scenario or ordinary usage\n        bug_scenario = i % 2 == 1\n\n        if bug_scenario:\n            # Bug occurs when a variable is converted or reused such that\n            # v.to_index_variable() returns the same object or shares state\n            # (e.g. after rename_dims, reset_index, reset_coords, or IndexVariable).\n            dim_size = rng.randint(2, 6)\n            orig_dim = rng.choice([\"z\", \"dim0\", \"x\", \"time\"])\n            new_dim = rng.choice([\"lev\", \"dim1\", \"y\", \"depth\"])\n            if orig_dim == new_dim:\n                new_dim = orig_dim + \"_new\"\n\n            ds = Dataset(\n                data_vars={\n                    \"data\": (orig_dim, np.arange(dim_size, dtype=float)),\n                    new_dim: (orig_dim, np.arange(dim_size) * 10),\n                }\n            )\n\n            # In the issue: ds.swap_dims -> rename_dims -> reset_index -> reset_coords\n            pipeline_choice = rng.choice([0, 1, 2])\n            if pipeline_choice == 0:\n                ds2 = (\n                    ds.swap_dims({orig_dim: new_dim})\n                    .rename_dims({new_dim: orig_dim})\n                    .reset_index(new_dim)\n                    .reset_coords()\n                )\n            elif pipeline_choice == 1:\n                # Direct construction with IndexVariable or similar\n                ds2 = ds.swap_dims({orig_dim: new_dim}).rename_dims({new_dim: orig_dim})\n                if new_dim in ds2.indexes:\n                    ds2 = ds2.reset_index(new_dim)\n            else:\n                ds2 = ds.copy(deep=False)\n\n            kwargs_form = rng.choice([True, False])\n            if kwargs_form:\n                kwargs = {orig_dim: new_dim}\n                args = ()\n            else:\n                kwargs = {}\n                args = ({orig_dim: new_dim},)\n\n            items.append((ds2, args, kwargs))\n\n        else:\n            # Ordinary usage\n            dim_name = rng.choice([\"x\", \"y\", \"t\", \"space\"])\n            coord_name = rng.choice([\"c1\", \"c2\", \"lat\", \"lon\"])\n            if coord_name == dim_name:\n                coord_name = coord_name + \"_coord\"\n\n            size = rng.randint(1, 5)\n            has_coord_var = rng.choice([True, False])\n\n            data_vars = {\n                \"v1\": (dim_name, np.arange(size)),\n                \"v2\": (dim_name, np.linspace(0, 1, size)),\n            }\n            if has_coord_var:\n                coords = {coord_name: (dim_name, np.arange(size) + 10)}\n            else:\n                coords = None\n\n            ds = Dataset(data_vars=data_vars, coords=coords)\n\n            target_new_dim = coord_name if has_coord_var else rng.choice([\"new_dim\", \"w\"])\n            kwargs_form = rng.choice([True, False])\n\n            if kwargs_form:\n                kwargs = {dim_name: target_new_dim}\n                args = ()\n            else:\n                kwargs = {}\n                args = ({dim_name: target_new_dim},)\n\n            items.append((ds, args, kwargs))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 0,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    },
+    {
+     "file": "xarray/core/variable.py",
+     "qualname": "IndexVariable.level_names",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.005171,
+       "usage": {
+        "input": 2700,
+        "output": 839,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "import numpy as np\nimport pandas as pd\n\n\ndef make_inputs(rng, n):\n    IndexVariable = target_class\n    items = []\n\n    for _ in range(n):\n        choice = rng.choice([\"standard\", \"multiindex\", \"empty\", \"from_variable\", \"modified\"])\n\n        if choice == \"standard\":\n            # Ordinary 1D index with simple types (int, float, string)\n            dim_name = rng.choice([\"x\", \"y\", \"dim_0\", \"time\", \"z\"])\n            length = rng.randint(1, 10)\n            kind = rng.choice([\"int\", \"float\", \"str\"])\n            if kind == \"int\":\n                data = [rng.randint(-100, 100) for _ in range(length)]\n            elif kind == \"float\":\n                data = [rng.uniform(-10.0, 10.0) for _ in range(length)]\n            else:\n                data = [f\"item_{i}\" for i in range(length)]\n            idx_var = IndexVariable(dim_name, data)\n\n        elif choice == \"multiindex\":\n            # MultiIndex variable\n            dim_name = rng.choice([\"m_dim\", \"coords\", \"multi\"])\n            length = rng.randint(2, 8)\n            num_levels = rng.choice([2, 3])\n            names = [f\"lvl_{i}\" for i in range(num_levels)]\n            arrays = []\n            for lvl in range(num_levels):\n                arrays.append([rng.choice([\"a\", \"b\", \"c\", 1, 2, 3]) for _ in range(length)])\n            m_idx = pd.MultiIndex.from_arrays(arrays, names=names)\n            idx_var = IndexVariable(dim_name, m_idx)\n\n        elif choice == \"empty\":\n            # Empty index or single element\n            dim_name = rng.choice([\"empty_dim\", \"zero_dim\"])\n            is_multi = rng.choice([True, False])\n            if is_multi:\n                m_idx = pd.MultiIndex.from_tuples([], names=[\"a\", \"b\"])\n                idx_var = IndexVariable(dim_name, m_idx)\n            else:\n                idx_var = IndexVariable(dim_name, np.array([], dtype=float))\n\n        elif choice == \"from_variable\":\n            # Related to the issue: converting a base Variable to an IndexVariable\n            dim_name = rng.choice([\"z\", \"lev\", \"dim_swap\"])\n            length = rng.randint(1, 5)\n            base_var = module.Variable((dim_name,), np.arange(length) * 10)\n            idx_var = base_var.to_index_variable()\n\n        elif choice == \"modified\":\n            # Subsetting or copying IndexVariable before calling level_names\n            dim_name = rng.choice([\"x\", \"z\"])\n            length = rng.randint(3, 8)\n            idx = pd.Index(range(length), name=dim_name)\n            idx_var = IndexVariable(dim_name, idx)\n            # Maybe slice it or copy it\n            if rng.random() > 0.5:\n                idx_var = idx_var[:2]\n            else:\n                idx_var = idx_var.to_index_variable()\n\n        # level_names is a property, but differential testing framework calls it\n        # as target_class.level_names(receiver, *args, **kwargs)\n        items.append((idx_var, (), {}))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 200,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    },
+    {
+     "file": "xarray/core/variable.py",
+     "qualname": "IndexVariable.name",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.004223,
+       "usage": {
+        "input": 2651,
+        "output": 596,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "import numpy as np\nimport pandas as pd\n\n\ndef make_inputs(rng, n):\n    IndexVariable = target_class\n\n    dim_names = [\n        \"x\",\n        \"y\",\n        \"z\",\n        \"time\",\n        \"lat\",\n        \"lon\",\n        \"level\",\n        0,\n        1,\n        (\"multi\", \"dim\"),\n        \"a_very_long_dimension_name_for_testing\",\n    ]\n\n    items = []\n    for i in range(n):\n        dim = rng.choice(dim_names)\n        length = rng.randint(0, 20)\n\n        data_choice = rng.choice([\"range\", \"random\", \"strings\", \"timestamps\"])\n        if data_choice == \"range\":\n            data = np.arange(length)\n        elif data_choice == \"random\":\n            data = rng.sample(range(100), length)\n        elif data_choice == \"strings\":\n            data = [f\"item_{j}\" for j in range(length)]\n        else:\n            data = pd.date_range(\"2000-01-01\", periods=length)\n\n        # Mix between single dim name as string or tuple\n        dims = (dim,)\n\n        attrs = None\n        if rng.random() < 0.3:\n            attrs = {\"units\": \"meters\", \"standard_name\": str(dim)}\n\n        encoding = None\n        if rng.random() < 0.2:\n            encoding = {\"dtype\": np.dtype(\"int32\")}\n\n        idx_var = IndexVariable(dims, data, attrs=attrs, encoding=encoding)\n\n        # Around half the inputs test IndexVariable.name directly (getter)\n        # Some test the setter (which raises AttributeError)\n        if rng.random() < 0.8:\n            # Calling getter via property fget or directly\n            # For differential testing of target_name=\"name\", target is property fget or fset\n            # Depending on how target is fetched:\n            # module.IndexVariable.name could be a property object.\n            # Usually differential testing calls func(receiver, *args, **kwargs).\n            # If target is the property itself or property.fget:\n            items.append((idx_var, (), {}))\n        else:\n            # Test setter: property.fset(receiver, new_value)\n            new_val = rng.choice([\"new_name\", 123, (\"a\", \"b\"), None])\n            items.append((idx_var, (new_val,), {}))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 200,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    }
+   ],
+   "verdict": "the original never differs from the fix on generated inputs",
+   "spent_usd": 0.015058,
+   "model_calls": 3,
+   "seconds": 106
+  },
+  {
+   "instance_id": "psf__requests-1766",
+   "repo": "psf/requests",
+   "image": "swebench/sweb.eval.x86_64.psf_1776_requests-1766:latest",
+   "modules": [
+    "requests/auth.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "generator": "G2",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "requests/auth.py",
+     "qualname": "HTTPDigestAuth.build_digest_header",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.003659,
+       "usage": {
+        "input": 2003,
+        "output": 575,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "def make_inputs(rng, n):\n    items = []\n    methods = ['GET', 'POST', 'PUT', 'DELETE', 'HEAD']\n    urls = [\n        'http://example.com/digest-auth',\n        'http://example.com/api/v1/resource?id=123&test=1',\n        'http://localhost:8080/path',\n        'https://secure.example.com/',\n        'http://example.com/deep/nested/path/to/resource.json?query=something'\n    ]\n    usernames = ['user', 'admin', 'alice', 'bob_smith', 'test_user_42']\n    passwords = ['passwd', 'secret123', 'p@ssw0rd!', 'hunter2', '']\n    realms = ['testrealm@host.com', 'Me & My Friends', 'restricted area', 'default']\n    algorithms = [None, 'MD5', 'MD5-SESS', 'SHA']\n    opaques = [None, 'opaque-token-12345', 'some_opaque_data']\n\n    for i in range(n):\n        username = rng.choice(usernames)\n        password = rng.choice(passwords)\n        receiver = target_class(username, password)\n\n        chal = {\n            'realm': rng.choice(realms),\n            'nonce': '%032x' % rng.getrandbits(128),\n        }\n\n        algo = rng.choice(algorithms)\n        if algo is not None:\n            chal['algorithm'] = algo\n\n        opaque = rng.choice(opaques)\n        if opaque is not None:\n            chal['opaque'] = opaque\n\n        # About half with qop (where fix quotes qop=\"auth\"), about half without qop\n        if i % 2 == 0:\n            qop_options = ['auth', 'auth,auth-int', 'auth-int,auth', 'auth, something']\n            chal['qop'] = rng.choice(qop_options)\n        else:\n            chal['qop'] = None\n\n        receiver.chal = chal\n        receiver.last_nonce = rng.choice(['', chal['nonce']])\n        receiver.nonce_count = rng.randint(0, 100)\n\n        method = rng.choice(methods)\n        url = rng.choice(urls)\n\n        items.append((receiver, (method, url), {}))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 73,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 0,
+     "examples": [],
+     "usable": false,
+     "why": "only 73 stable inputs"
+    }
+   ],
+   "verdict": "unstable outcomes",
+   "spent_usd": 0.003659,
+   "model_calls": 1,
+   "seconds": 39
+  },
+  {
+   "instance_id": "sympy__sympy-15345",
+   "repo": "sympy/sympy",
+   "image": "swebench/sweb.eval.x86_64.sympy_1776_sympy-15345:latest",
+   "modules": [
+    "sympy/printing/mathematica.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "generator": "G2",
+   "edited_functions": 0,
+   "functions": [],
+   "verdict": "no edited function present in both versions",
+   "spent_usd": 0.0,
+   "model_calls": 0,
+   "seconds": 38
+  },
+  {
+   "instance_id": "psf__requests-1921",
+   "repo": "psf/requests",
+   "image": "swebench/sweb.eval.x86_64.psf_1776_requests-1921:latest",
+   "modules": [
+    "requests/sessions.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "generator": "G2",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "requests/sessions.py",
+     "qualname": "merge_setting",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.004391,
+       "usage": {
+        "input": 1240,
+        "output": 923,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "def make_inputs(rng, n):\n    items = []\n    keys = [\"User-Agent\", \"Accept\", \"Accept-Encoding\", \"Content-Type\", \"Authorization\", \"Custom-Header\", \"X-Key\"]\n    vals = [\"gzip\", \"test-val\", \"application/json\", \"Bearer token\", \"custom\", None]\n\n    for i in range(n):\n        # Decide between ordinary cases and the bug case (session_setting having None values)\n        is_bug_case = (i % 2 == 1)\n\n        dict_class = rng.choice([module.OrderedDict, module.CaseInsensitiveDict, dict])\n\n        if is_bug_case:\n            # session_setting has some None values, request_setting is either a dict (with or without None)\n            num_session_keys = rng.randint(1, 4)\n            chosen_keys = rng.sample(keys, num_session_keys)\n            session_setting = {}\n            for k in chosen_keys:\n                session_setting[k] = rng.choice(vals)\n            # Ensure at least one None in session_setting\n            session_setting[rng.choice(chosen_keys)] = None\n\n            # request_setting could be None or a dict\n            if rng.random() < 0.2:\n                # Note: if request_setting is None, merge_setting returns session_setting directly in original code\n                request_setting = None\n            else:\n                num_req_keys = rng.randint(0, 3)\n                req_keys = rng.sample(keys, num_req_keys)\n                request_setting = {}\n                for k in req_keys:\n                    request_setting[k] = rng.choice(vals)\n\n            if isinstance(session_setting, dict) and rng.random() < 0.5:\n                session_setting = dict_class(session_setting)\n            if isinstance(request_setting, dict) and rng.random() < 0.5:\n                request_setting = dict_class(request_setting)\n\n        else:\n            # Ordinary cases: non-mappings, None values on request_setting only, None inputs, etc.\n            case_type = rng.choice([\"non_mapping\", \"none_request\", \"none_session\", \"normal_merge\", \"req_none_override\"])\n            if case_type == \"non_mapping\":\n                request_setting = rng.choice([True, False, \"/path/to/cert\", 123, [1, 2, 3]])\n                session_setting = rng.choice([True, False, \"/path/to/session_cert\", 456, None])\n            elif case_type == \"none_request\":\n                request_setting = None\n                session_setting = {k: \"val\" for k in rng.sample(keys, rng.randint(0, 3))}\n            elif case_type == \"none_session\":\n                request_setting = {k: \"val\" for k in rng.sample(keys, rng.randint(0, 3))}\n                session_setting = None\n            elif case_type == \"req_none_override\":\n                session_setting = {k: \"val\" for k in rng.sample(keys, rng.randint(1, 4))}\n                req_keys = rng.sample(list(session_setting.keys()), rng.randint(1, len(session_setting)))\n                request_setting = {k: None for k in req_keys}\n            else:\n                session_setting = {k: \"sess_\" + k for k in rng.sample(keys, rng.randint(1, 3))}\n                request_setting = {k: \"req_\" + k for k in rng.sample(keys, rng.randint(1, 3))}\n\n        kwargs = {}\n        if rng.random() < 0.5:\n            kwargs[\"dict_class\"] = dict_class\n\n        items.append((None, (request_setting, session_setting), kwargs))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 108,
+     "trigger_rate": 0.54,
+     "both_raise": 0,
+     "examples": [
+      {
+       "orig": [
+        "ok",
+        "OrderedDict",
+        "OrderedDict([('Accept-Encoding', 'req_Accept-Encoding'), ('Content-Type', 'req_Content-Type'), ('X-Key', 'req_X-Key')])"
+       ],
+       "fix": [
+        "ok",
+        "dict",
+        "{'Accept-Encoding': 'req_Accept-Encoding', 'Content-Type': 'req_Content-Type', 'X-Key': 'req_X-Key'}"
+       ]
+      },
+      {
+       "orig": [
+        "ok",
+        "OrderedDict",
+        "OrderedDict([('Authorization', 'custom'), ('Accept', 'test-val'), ('Custom-Header', 'test-val')])"
+       ],
+       "fix": [
+        "ok",
+        "dict",
+        "{'Authorization': 'custom', 'Accept': 'test-val', 'Custom-Header': 'test-val'}"
+       ]
+      },
+      {
+       "orig": [
+        "ok",
+        "OrderedDict",
+        "OrderedDict([('X-Key', 'sess_X-Key'), ('Custom-Header', 'sess_Custom-Header'), ('User-Agent', 'sess_User-Agent'), ('Content-Type', 'req_Content-Type'), ('Accept-Encoding', 'req_Accept-Encoding'), ('Accept', 'req_Accept')])"
+       ],
+       "fix": [
+        "ok",
+        "dict",
+        "{'X-Key': 'sess_X-Key', 'Custom-Header': 'sess_Custom-Header', 'User-Agent': 'sess_User-Agent', 'Content-Type': 'req_Content-Type', 'Accept-Encoding': 'req_Accept-Encoding', 'Accept': 'req_Accept'}"
+       ]
+      }
+     ],
+     "usable": true,
+     "why": "usable"
+    }
+   ],
+   "verdict": "usable",
+   "spent_usd": 0.004391,
+   "model_calls": 1,
+   "seconds": 53
+  },
+  {
+   "instance_id": "astropy__astropy-13033",
+   "repo": "astropy/astropy",
+   "image": "swebench/sweb.eval.x86_64.astropy_1776_astropy-13033:latest",
+   "modules": [
+    "astropy/timeseries/core.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "generator": "G2",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "astropy/timeseries/core.py",
+     "qualname": "BaseTimeSeries._check_required_columns",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.005413,
+       "usage": {
+        "input": 2112,
+        "output": 1021,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "def make_inputs(rng, n):\n    BaseTimeSeries = getattr(module, \"BaseTimeSeries\")\n    items = []\n\n    for _ in range(n):\n        # Create an instance of BaseTimeSeries\n        # BaseTimeSeries inherits from QTable\n        ts = BaseTimeSeries()\n\n        # Decide whether to test the bug/mismatch case (where required columns mismatch)\n        is_bug_case = rng.random() < 0.5\n\n        ts._required_columns_enabled = rng.choice([True, True, True, False])\n        ts._required_columns_relax = rng.choice([False, False, True])\n\n        if not ts._required_columns_enabled or not is_bug_case:\n            # Ordinary / valid cases\n            col_choice = rng.choice([\"none\", \"empty_req\", \"match_single\", \"match_multi\"])\n            if col_choice == \"none\":\n                ts._required_columns = None\n            elif col_choice == \"empty_req\":\n                ts._required_columns = []\n            elif col_choice == \"match_single\":\n                ts._required_columns = [\"time\"]\n                ts[\"time\"] = [1, 2, 3]\n                if rng.random() < 0.5:\n                    ts[\"flux\"] = [10.0, 20.0, 30.0]\n            elif col_choice == \"match_multi\":\n                req = [\"time\", \"flux\", \"error\"][: rng.randint(2, 3)]\n                ts._required_columns = req\n                for col in req:\n                    ts[col] = [1, 2]\n                if rng.random() < 0.5:\n                    ts[\"extra\"] = [3, 4]\n        else:\n            # Edge and mismatch cases triggering the modified exception branch\n            ts._required_columns_enabled = True\n            scenario = rng.choice(\n                [\n                    \"first_col_matches_second_missing_or_wrong\",  # Key issue scenario: ['time', 'flux'] vs ['time', 'other'] or ['time']\n                    \"single_col_wrong_name\",                      # ['time'] vs ['not_time']\n                    \"multi_col_wrong_start\",                      # ['time', 'flux'] vs ['flux', 'time']\n                    \"multi_col_length_mismatch\",                  # ['time', 'flux', 'err'] vs ['time', 'flux']\n                    \"empty_table_mismatch\",                       # relax=True with empty table vs nonempty req\n                ]\n            )\n\n            if scenario == \"first_col_matches_second_missing_or_wrong\":\n                ts._required_columns = [\"time\", \"flux\"]\n                ts._required_columns_relax = False\n                if rng.random() < 0.5:\n                    ts[\"time\"] = [1, 2]\n                    ts[\"not_flux\"] = [10, 20]\n                else:\n                    ts[\"time\"] = [1, 2]\n            elif scenario == \"single_col_wrong_name\":\n                ts._required_columns = [\"time\"]\n                ts[\"a\"] = [1, 2]\n            elif scenario == \"multi_col_wrong_start\":\n                req_num = rng.choice([2, 3])\n                cols = [\"time\", \"flux\", \"err\"][:req_num]\n                ts._required_columns = list(cols)\n                rng.shuffle(cols)\n                if cols == ts._required_columns:\n                    cols.reverse()\n                for c in cols:\n                    ts[c] = [1, 2]\n            elif scenario == \"multi_col_length_mismatch\":\n                ts._required_columns = [\"time\", \"flux\", \"err\"]\n                ts._required_columns_relax = False\n                ts[\"time\"] = [1, 2]\n                ts[\"flux\"] = [3, 4]\n            elif scenario == \"empty_table_mismatch\":\n                ts._required_columns = [\"time\", \"flux\"]\n                # If relax is False and len is 0, it hits the len==0 branch.\n                # If relax is True, len(req) = 0, so no error.\n                # Let's test with len(colnames) == 0 and relax == False to hit that other branch\n                ts._required_columns_relax = False\n\n        items.append((ts, (), {}))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 57,
+     "trigger_rate": 0.285,
+     "both_raise": 95,
+     "examples": [
+      {
+       "orig": [
+        "exc",
+        "ValueError",
+        "BaseTimeSeries object is invalid - expected 'time' as the first columns but found 'flux'"
+       ],
+       "fix": [
+        "exc",
+        "ValueError",
+        "BaseTimeSeries object is invalid - expected ['time', 'flux'] as the first columns but found ['flux', 'time']"
+       ]
+      },
+      {
+       "orig": [
+        "exc",
+        "ValueError",
+        "BaseTimeSeries object is invalid - expected 'time' as the first columns but found 'flux'"
+       ],
+       "fix": [
+        "exc",
+        "ValueError",
+        "BaseTimeSeries object is invalid - expected ['time', 'flux'] as the first columns but found ['flux', 'time']"
+       ]
+      },
+      {
+       "orig": [
+        "exc",
+        "ValueError",
+        "BaseTimeSeries object is invalid - expected 'time' as the first columns but found 'flux'"
+       ],
+       "fix": [
+        "exc",
+        "ValueError",
+        "BaseTimeSeries object is invalid - expected ['time', 'flux', 'err'] as the first columns but found ['flux', 'time', 'err"
+       ]
+      }
+     ],
+     "usable": true,
+     "why": "usable"
+    }
+   ],
+   "verdict": "usable",
+   "spent_usd": 0.005413,
+   "model_calls": 1,
+   "seconds": 45
+  },
+  {
+   "instance_id": "sphinx-doc__sphinx-7910",
+   "repo": "sphinx-doc/sphinx",
+   "image": "swebench/sweb.eval.x86_64.sphinx-doc_1776_sphinx-7910:latest",
+   "modules": [
+    "sphinx/ext/napoleon/__init__.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "generator": "G2",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "sphinx/ext/napoleon/__init__.py",
+     "qualname": "_skip_member",
+     "calls": [
+      {
+       "verdict": "GENERATOR_FAILED",
+       "cost_usd": 0.005635,
+       "usage": {
+        "input": 2183,
+        "output": 1066,
+        "usage_missing": false
+       },
+       "finish_reason": "stop",
+       "error": "AttributeError: attribute '__doc__' of 'getset_descriptor' objects is not writable\n"
+      },
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.006383,
+       "usage": {
+        "input": 3305,
+        "output": 1041,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 1,
+     "generator_code": "import functools\nfrom unittest.mock import Mock\n\n\ndef make_inputs(rng, n):\n    # Decorator created inside a helper function so its wrapper.__globals__\n    # does NOT contain DecoratedClass (which will be defined in another scope/namespace).\n    def make_decorator():\n        def ext_dec(fn):\n            @functools.wraps(fn)\n            def wrapper(*args, **kwargs):\n                return fn(*args, **kwargs)\n\n            return wrapper\n\n        return ext_dec\n\n    external_decorator = make_decorator()\n\n    class SampleClass:\n        \"\"\"Sample docstring.\"\"\"\n\n        def __init__(self):\n            \"\"\"Init docstring.\"\"\"\n            pass\n\n        def _private_method(self):\n            \"\"\"Private method docstring.\"\"\"\n            pass\n\n        def __special_method__(self):\n            \"\"\"Special method docstring.\"\"\"\n            pass\n\n        def public_method(self):\n            \"\"\"Public method docstring.\"\"\"\n            pass\n\n    class DecoratedClass:\n        \"\"\"Decorated class docstring.\"\"\"\n\n        @external_decorator\n        def __init__(self):\n            \"\"\"Decorated init docstring.\"\"\"\n            pass\n\n        @external_decorator\n        def _private_method(self):\n            \"\"\"Decorated private method docstring.\"\"\"\n            pass\n\n        @external_decorator\n        def __special_method__(self):\n            \"\"\"Decorated special method docstring.\"\"\"\n            pass\n\n        @external_decorator\n        def public_method(self):\n            \"\"\"Decorated public method docstring.\"\"\"\n            pass\n\n    class MultipleDecoratedClass:\n        \"\"\"Multiple decorated class docstring.\"\"\"\n\n        @external_decorator\n        @external_decorator\n        def __init__(self):\n            \"\"\"Multi-decorated init docstring.\"\"\"\n            pass\n\n    def make_mock_app(inc_init=True, inc_special=True, inc_private=True):\n        app = Mock()\n        app.config = Mock()\n        app.config.napoleon_include_init_with_doc = inc_init\n        app.config.napoleon_include_special_with_doc = inc_special\n        app.config.napoleon_include_private_with_doc = inc_private\n        return app\n\n    items = []\n\n    for i in range(n):\n        test_decorated = (i % 2 == 0)\n\n        inc_init = rng.choice([True, False])\n        inc_special = rng.choice([True, False])\n        inc_private = rng.choice([True, False])\n        app = make_mock_app(inc_init, inc_special, inc_private)\n\n        skip = rng.choice([True, False])\n        options = Mock()\n\n        if test_decorated:\n            target_cls = rng.choice([DecoratedClass, MultipleDecoratedClass])\n            member_name = rng.choice([\n                '__init__',\n                '_private_method',\n                '__special_method__',\n                'public_method',\n            ])\n            if target_cls is MultipleDecoratedClass:\n                member_name = '__init__'\n\n            obj = getattr(target_cls, member_name)\n            what = rng.choice(['class', 'exception'])\n            name = member_name\n        else:\n            what = rng.choice(['class', 'exception', 'module', 'function', 'method', 'attribute'])\n            if what in ('class', 'exception'):\n                member_name = rng.choice([\n                    '__init__',\n                    '_private_method',\n                    '__special_method__',\n                    'public_method',\n                    '__weakref__',\n                    'non_existent',\n                ])\n                if hasattr(SampleClass, member_name):\n                    obj = getattr(SampleClass, member_name)\n                else:\n                    def dummy_fn():\n                        \"\"\"Some doc\"\"\"\n                        pass\n                    obj = dummy_fn\n                name = member_name\n            elif what == 'module':\n                name = rng.choice(['__init__', '_internal', '__all__', 'func'])\n                def mod_fn():\n                    \"\"\"Module member doc\"\"\"\n                    pass\n                obj = mod_fn\n            else:\n                name = rng.choice(['foo', '_bar', '__baz__'])\n                if rng.choice([True, False]):\n                    def attr_fn():\n                        \"\"\"Docstring\"\"\"\n                        pass\n                    obj = attr_fn\n                else:\n                    obj = 42\n\n        items.append((None, (app, what, name, obj, skip, options), {}))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 0,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    }
+   ],
+   "verdict": "the original never differs from the fix on generated inputs",
+   "spent_usd": 0.012017,
+   "model_calls": 2,
+   "seconds": 52
+  },
+  {
+   "instance_id": "pytest-dev__pytest-8399",
+   "repo": "pytest-dev/pytest",
+   "image": "swebench/sweb.eval.x86_64.pytest-dev_1776_pytest-8399:latest",
+   "modules": [
+    "src/_pytest/python.py",
+    "src/_pytest/unittest.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "generator": "G2",
+   "edited_functions": 5,
+   "functions": [
+    {
+     "file": "src/_pytest/python.py",
+     "qualname": "Class._inject_setup_class_fixture",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.002817,
+       "usage": {
+        "input": 1806,
+        "output": 390,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "def make_inputs(rng, n):\n    items = []\n\n    for i in range(n):\n        # Create a receiver Class instance or mock-like object\n        # Class inherits from PyCollector -> Collector -> Node\n        # But _inject_setup_class_fixture only accesses self.obj\n        inst = module.Class.__new__(module.Class)\n\n        # Decide whether to have setup_class, teardown_class, both, or neither\n        has_setup = rng.choice([True, False])\n        has_teardown = rng.choice([True, False])\n\n        class_name = f\"TestClass_{i}_{rng.randint(0, 10000)}\"\n\n        # Sometimes nested / qualified names\n        if rng.random() < 0.3:\n            class_name = f\"Outer_{i}.{class_name}\"\n\n        attrs = {}\n        if has_setup:\n            if rng.random() < 0.5:\n                attrs[\"setup_class\"] = classmethod(lambda cls: None)\n            else:\n                attrs[\"setup_class\"] = staticmethod(lambda: None)\n        if has_teardown:\n            if rng.random() < 0.5:\n                attrs[\"teardown_class\"] = classmethod(lambda cls: None)\n            else:\n                attrs[\"teardown_class\"] = staticmethod(lambda: None)\n\n        # Create a dummy class object\n        dummy_class = type(class_name.split(\".\")[-1], (object,), attrs)\n        dummy_class.__qualname__ = class_name\n\n        inst.obj = dummy_class\n        items.append((inst, (), {}))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 0,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    },
+    {
+     "file": "src/_pytest/python.py",
+     "qualname": "Class._inject_setup_method_fixture",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.003711,
+       "usage": {
+        "input": 1813,
+        "output": 627,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "def make_inputs(rng, n):\n    items = []\n\n    class DummyClassNode:\n        def __init__(self, cls_obj):\n            self.obj = cls_obj\n\n    for i in range(n):\n        # Determine whether to include setup_method, teardown_method, or neither\n        # About half or slightly more should have at least one method to trigger fixture injection\n        has_setup = rng.choice([True, False])\n        has_teardown = rng.choice([True, False])\n\n        if i % 2 == 0:\n            # Ensure at least one is present to trigger the fixture creation and name setting\n            if not has_setup and not has_teardown:\n                has_setup = True\n\n        name_suffix = f\"{rng.randint(1000, 999999)}_{i}\"\n        class_name = f\"TestClass_{name_suffix}\"\n\n        class_dict = {}\n\n        if has_setup:\n            setup_type = rng.choice([\"none_arg\", \"method_arg\", \"fixture_decorated\"])\n            if setup_type == \"none_arg\":\n                def setup_method(self):\n                    pass\n                class_dict[\"setup_method\"] = setup_method\n            elif setup_type == \"method_arg\":\n                def setup_method(self, method):\n                    pass\n                class_dict[\"setup_method\"] = setup_method\n            elif setup_type == \"fixture_decorated\":\n                # If decorated with @pytest.fixture, _get_first_non_fixture_func will ignore it\n                def setup_method(self):\n                    pass\n                setup_method._pytestfixturefunction = True\n                class_dict[\"setup_method\"] = setup_method\n\n        if has_teardown:\n            teardown_type = rng.choice([\"none_arg\", \"method_arg\"])\n            if teardown_type == \"none_arg\":\n                def teardown_method(self):\n                    pass\n                class_dict[\"teardown_method\"] = teardown_method\n            else:\n                def teardown_method(self, method):\n                    pass\n                class_dict[\"teardown_method\"] = teardown_method\n\n        # Optional inner nesting or qualname manipulation\n        if rng.random() < 0.3:\n            outer_name = f\"Outer_{name_suffix}\"\n            cls = type(class_name, (), class_dict)\n            cls.__qualname__ = f\"{outer_name}.{class_name}\"\n        else:\n            cls = type(class_name, (), class_dict)\n\n        node = DummyClassNode(cls)\n        items.append((node, (), {}))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 200,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    },
+    {
+     "file": "src/_pytest/python.py",
+     "qualname": "Module._inject_setup_function_fixture",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.00279,
+       "usage": {
+        "input": 1840,
+        "output": 376,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "import types\n\ndef make_inputs(rng, n):\n    items = []\n    names = [\n        \"test_mod\",\n        \"test_pkg.test_mod\",\n        \"custom_name\",\n        \"_private_mod\",\n        \"__dunder__\",\n        \"mod123\",\n        \"a\",\n    ]\n\n    for i in range(n):\n        # Create a dummy Module receiver instance\n        # target_class is Module\n        rec = target_class.__new__(target_class)\n\n        # Mod object\n        mod_name = rng.choice(names) + (f\"_{i}\" if rng.random() < 0.5 else \"\")\n        mod_obj = types.ModuleType(mod_name)\n\n        # Randomly configure setup_function and teardown_function\n        # Half cases should have at least one defined to trigger fixture creation\n        has_setup = rng.choice([True, False])\n        has_teardown = rng.choice([True, False])\n        \n        # Ensure about half or more have at least one defined\n        if i % 2 == 0 and not (has_setup or has_teardown):\n            has_setup = True\n\n        if has_setup:\n            def setup_function(fn=None):\n                pass\n            mod_obj.setup_function = setup_function\n\n        if has_teardown:\n            def teardown_function(fn=None):\n                pass\n            mod_obj.teardown_function = teardown_function\n\n        rec.obj = mod_obj\n        items.append((rec, (), {}))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 0,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    }
+   ],
+   "verdict": "the original never differs from the fix on generated inputs",
+   "spent_usd": 0.009318,
+   "model_calls": 3,
+   "seconds": 49
+  },
+  {
+   "instance_id": "mwaskom__seaborn-3187",
+   "repo": "mwaskom/seaborn",
+   "image": "swebench/sweb.eval.x86_64.mwaskom_1776_seaborn-3187:latest",
+   "modules": [
+    "seaborn/_core/scales.py",
+    "seaborn/utils.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "generator": "G2",
+   "edited_functions": 2,
+   "functions": [
+    {
+     "file": "seaborn/_core/scales.py",
+     "qualname": "ContinuousBase._setup",
+     "calls": [
+      {
+       "verdict": "GENERATOR_FAILED",
+       "cost_usd": 0.004507,
+       "usage": {
+        "input": 1869,
+        "output": 828,
+        "usage_missing": false
+       },
+       "finish_reason": "stop",
+       "error": "TypeError: label() got an unexpected keyword argument 'like'\n"
+      },
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.00461,
+       "usage": {
+        "input": 2747,
+        "output": 680,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 1,
+     "generator_code": "def make_inputs(rng, n):\n    import pandas as pd\n    from seaborn._core.properties import PointSize, Color, Alpha, LineWidth\n\n    scale_classes = [module.Continuous]\n    prop_classes = [PointSize, Color, Alpha, LineWidth]\n\n    items = []\n    for i in range(n):\n        cls = rng.choice(scale_classes)\n        scale_inst = cls()\n\n        is_offset_case = (i % 2 == 1)\n\n        prop_cls = rng.choice(prop_classes)\n        prop = prop_cls()\n\n        if is_offset_case:\n            # Generate values where ScalarFormatter sets offset or scientific notation\n            scenario = rng.choice([\"large_values\", \"large_offset\", \"tiny_scientific\"])\n            if scenario == \"large_values\":\n                # e.g., body mass in mg: 1e5 to 1e8\n                base = 10 ** rng.uniform(5, 8)\n                vals = [base + rng.uniform(0, base) for _ in range(rng.randint(5, 20))]\n            elif scenario == \"large_offset\":\n                # e.g. 10000000 to 10000005 where an additive offset is subtracted\n                base = 10 ** rng.randint(5, 8)\n                vals = [base + rng.uniform(0, 10) for _ in range(rng.randint(5, 20))]\n            else:\n                # tiny scientific values: e.g. 1e-7 to 1e-5\n                base = 10 ** rng.uniform(-7, -5)\n                vals = [base + rng.uniform(0, base) for _ in range(rng.randint(5, 20))]\n        else:\n            # Ordinary cases without offset/scientific formatting\n            scenario = rng.choice([\"standard\", \"small\", \"negative\"])\n            if scenario == \"standard\":\n                vals = [rng.uniform(0, 100) for _ in range(rng.randint(5, 20))]\n            elif scenario == \"small\":\n                vals = [rng.uniform(0, 1) for _ in range(rng.randint(5, 20))]\n            else:\n                vals = [rng.uniform(-50, 50) for _ in range(rng.randint(5, 20))]\n\n            if rng.random() < 0.3:\n                scale_inst = scale_inst.tick(every=rng.choice([1, 2, 5, 10]))\n\n        col_name = rng.choice([\"x\", \"y\", \"val\", \"body_mass_mg\", \"mass\"])\n        data = pd.Series(vals, name=col_name)\n        axis = None\n\n        items.append((scale_inst, (data, prop, axis), {}))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 0,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    },
+    {
+     "file": "seaborn/utils.py",
+     "qualname": "locator_to_legend_entries",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.004946,
+       "usage": {
+        "input": 1494,
+        "output": 1020,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "import numpy as np\nimport matplotlib.ticker as ticker\n\n\ndef make_inputs(rng, n):\n    items = []\n\n    # Locator options to test\n    def make_locators():\n        return [\n            ticker.MaxNLocator(nbins=5),\n            ticker.LinearLocator(numticks=5),\n            ticker.AutoLocator(),\n            ticker.LogLocator(base=10.0),\n        ]\n\n    dtypes = [int, float, np.float32, np.float64, np.int64]\n\n    for i in range(n):\n        # Decide whether to test the issue-specific case (large numbers / offsets / scientific notation)\n        # or ordinary standard ranges.\n        is_issue_case = (i % 2 == 1)\n\n        if is_issue_case:\n            # ScalarFormatter triggers offset or scientific notation with large values,\n            # tiny values, or values with small ranges at large offsets.\n            case_type = rng.choice([\"large\", \"tiny\", \"offset\", \"extreme\"])\n            if case_type == \"large\":\n                # Values like 1e5 to 1e7 (e.g. body_mass in mg)\n                low = rng.uniform(1e5, 5e6)\n                high = low + rng.uniform(1e5, 5e6)\n                dtype = rng.choice([float, int, np.int64, np.float64])\n                limits = (low, high)\n                locator = rng.choice([\n                    ticker.MaxNLocator(nbins=rng.randint(3, 8)),\n                    ticker.AutoLocator(),\n                    ticker.LinearLocator(numticks=rng.randint(3, 7))\n                ])\n            elif case_type == \"tiny\":\n                # Values < 1e-4 triggering scientific notation\n                low = rng.uniform(1e-6, 5e-5)\n                high = low + rng.uniform(1e-5, 5e-4)\n                dtype = rng.choice([float, np.float32, np.float64])\n                limits = (low, high)\n                locator = rng.choice([\n                    ticker.MaxNLocator(nbins=rng.randint(3, 6)),\n                    ticker.AutoLocator()\n                ])\n            elif case_type == \"offset\":\n                # A narrow window centered at a large offset, e.g., [1000000.1, 1000001.0]\n                base = rng.choice([1e5, 1e6, 2e6, 1e7])\n                low = base + rng.uniform(0, 10)\n                high = low + rng.uniform(1, 15)\n                dtype = rng.choice([float, np.float64])\n                limits = (low, high)\n                locator = rng.choice([\n                    ticker.MaxNLocator(nbins=rng.randint(3, 6)),\n                    ticker.AutoLocator()\n                ])\n            else:  # extreme\n                low = 1e8 * rng.uniform(1, 5)\n                high = low * rng.uniform(1.5, 3.0)\n                dtype = np.float64\n                limits = (low, high)\n                locator = ticker.MaxNLocator(nbins=5)\n        else:\n            # Ordinary cases: modest values, integers, or LogLocator\n            use_log = (rng.random() < 0.25)\n            if use_log:\n                low = 10 ** rng.uniform(0, 2)\n                high = 10 ** rng.uniform(3, 5)\n                limits = (low, high)\n                locator = ticker.LogLocator(base=10.0)\n                dtype = float\n            else:\n                low = rng.uniform(0, 50)\n                high = low + rng.uniform(10, 100)\n                limits = (low, high)\n                locator = rng.choice([\n                    ticker.MaxNLocator(nbins=rng.randint(3, 7)),\n                    ticker.LinearLocator(numticks=rng.randint(3, 6)),\n                    ticker.AutoLocator(),\n                ])\n                dtype = rng.choice(dtypes)\n\n        items.append((None, (locator, limits, dtype), {}))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 82,
+     "trigger_rate": 0.41,
+     "both_raise": 0,
+     "examples": [
+      {
+       "orig": [
+        "ok",
+        "tuple",
+        "([300000000.0, 400000000.0, 500000000.0, 600000000.0], ['3', '4', '5', '6'])"
+       ],
+       "fix": [
+        "ok",
+        "tuple",
+        "([300000000.0, 400000000.0, 500000000.0, 600000000.0], ['300000000', '400000000', '500000000', '600000000'])"
+       ]
+      },
+      {
+       "orig": [
+        "ok",
+        "tuple",
+        "([3793748, 4457489], ['3.7937', '4.4575'])"
+       ],
+       "fix": [
+        "ok",
+        "tuple",
+        "([3793748, 4457489], ['3793748', '4457489'])"
+       ]
+      },
+      {
+       "orig": [
+        "ok",
+        "tuple",
+        "([2000000, 2200000, 2400000, 2600000, 2800000, 3000000, 3200000, 3400000], ['2.0', '2.2', '2.4', '2.6', '2.8', '3.0', '3.2', '3.4'])"
+       ],
+       "fix": [
+        "ok",
+        "tuple",
+        "([2000000, 2200000, 2400000, 2600000, 2800000, 3000000, 3200000, 3400000], ['2000000', '2200000', '2400000', '2600000', '2800000', '3000000', '3200000', '3400000'])"
+       ]
+      }
+     ],
+     "usable": true,
+     "why": "usable"
+    }
+   ],
+   "verdict": "usable",
+   "spent_usd": 0.014063,
+   "model_calls": 3,
+   "seconds": 83
+  },
+  {
+   "instance_id": "matplotlib__matplotlib-20859",
+   "repo": "matplotlib/matplotlib",
+   "image": "swebench/sweb.eval.x86_64.matplotlib_1776_matplotlib-20859:latest",
+   "modules": [
+    "lib/matplotlib/legend.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.8.20",
+   "generator": "G2",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "lib/matplotlib/legend.py",
+     "qualname": "Legend.__init__",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.005823,
+       "usage": {
+        "input": 3869,
+        "output": 779,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "import matplotlib.pyplot as plt\nfrom matplotlib.figure import Figure, SubFigure\nfrom matplotlib.lines import Line2D\nfrom matplotlib.patches import Patch\n\ndef make_inputs(rng, n):\n    items = []\n    \n    # Pre-create sample handles and labels\n    def create_handles_labels(count):\n        handles = []\n        labels = []\n        for i in range(count):\n            if i % 2 == 0:\n                h = Line2D([0, 1], [0, 1], color=rng.choice(['red', 'blue', 'green']))\n            else:\n                h = Patch(facecolor=rng.choice(['yellow', 'cyan', 'magenta']))\n            handles.append(h)\n            labels.append(f\"item_{i}\")\n        return handles, labels\n\n    locs = [\n        'best', 'upper right', 'upper left', 'lower left', 'lower right',\n        'right', 'center left', 'center right', 'lower center', 'upper center', 'center',\n        (0.5, 0.5)\n    ]\n\n    for i in range(n):\n        # Instantiate receiver\n        receiver = target_class.__new__(target_class)\n\n        # Decide whether this test case targets SubFigure (the bug fix) or standard/ordinary usage\n        is_subfig_test = (i % 2 == 1)\n\n        num_items = rng.randint(0, 4)\n        handles, labels = create_handles_labels(num_items)\n\n        kwargs = {}\n        if rng.random() > 0.5:\n            kwargs['loc'] = rng.choice(locs)\n        if rng.random() > 0.7:\n            kwargs['ncol'] = rng.randint(1, 3)\n        if rng.random() > 0.7:\n            kwargs['title'] = rng.choice([\"Legend\", \"My Title\", None])\n        if rng.random() > 0.8:\n            kwargs['fontsize'] = rng.choice([8, 10, 12])\n\n        if is_subfig_test:\n            # SubFigure or derived / edge case\n            fig = plt.figure()\n            subfigs = fig.subfigures(1, 2)\n            subfig = subfigs[rng.randint(0, 1)]\n            \n            # Occasionally nest further to test nested SubFigures\n            if rng.random() > 0.7:\n                nested_subfigs = subfig.subfigures(1, 2)\n                parent = nested_subfigs[0]\n            else:\n                parent = subfig\n        else:\n            # Ordinary cases: Figure, Axes, or invalid parents (None, str, etc.)\n            choice = rng.random()\n            if choice < 0.45:\n                # Axes\n                fig = plt.figure()\n                parent = fig.add_subplot(111)\n            elif choice < 0.9:\n                # Figure\n                parent = plt.figure()\n            else:\n                # Invalid parent types to test error raising\n                parent = rng.choice([None, \"invalid_parent\", 123, []])\n\n        args = (parent, handles, labels)\n        items.append((receiver, args, kwargs))\n\n    # Close figures to avoid memory leaks during batch testing\n    plt.close('all')\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 114,
+     "trigger_rate": 0.57,
+     "both_raise": 20,
+     "examples": [
+      {
+       "orig": [
+        "exc",
+        "TypeError",
+        "Legend needs either Axes or Figure as parent"
+       ],
+       "fix": [
+        "ok",
+        "NoneType",
+        "None"
+       ]
+      },
+      {
+       "orig": [
+        "exc",
+        "TypeError",
+        "Legend needs either Axes or Figure as parent"
+       ],
+       "fix": [
+        "ok",
+        "NoneType",
+        "None"
+       ]
+      },
+      {
+       "orig": [
+        "exc",
+        "TypeError",
+        "Legend needs either Axes or Figure as parent"
+       ],
+       "fix": [
+        "ok",
+        "NoneType",
+        "None"
+       ]
+      }
+     ],
+     "usable": true,
+     "why": "usable"
+    }
+   ],
+   "verdict": "usable",
+   "spent_usd": 0.005823,
+   "model_calls": 1,
+   "seconds": 70
+  },
+  {
+   "instance_id": "matplotlib__matplotlib-26208",
+   "repo": "matplotlib/matplotlib",
+   "image": "swebench/sweb.eval.x86_64.matplotlib_1776_matplotlib-26208:latest",
+   "modules": [
+    "lib/matplotlib/axes/_base.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.11.11",
+   "generator": "G2",
+   "edited_functions": 2,
+   "functions": [
+    {
+     "file": "lib/matplotlib/axes/_base.py",
+     "qualname": "_AxesBase.twinx",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.005542,
+       "usage": {
+        "input": 2664,
+        "output": 945,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "import datetime\nfrom matplotlib.figure import Figure\n\ndef make_inputs(rng, n):\n    items = []\n    \n    # Pre-generate some categories/dates for unit conversions on xaxis\n    date_starts = [\n        datetime.date(2020, 1, 1),\n        datetime.date(2021, 5, 10),\n        datetime.date(2022, 11, 20)\n    ]\n    str_cats = [\n        ['cat', 'dog', 'bird'],\n        ['16 May', '17 May'],\n        ['alpha', 'beta', 'gamma', 'delta'],\n        ['Q1', 'Q2', 'Q3']\n    ]\n\n    for i in range(n):\n        fig = Figure()\n        ax = fig.add_subplot(111)\n\n        # Roughly half ordinary / empty or numeric axes, half with units on xaxis (dates/strings/stackplot)\n        is_unit_case = (i % 2 == 1)\n\n        if is_unit_case:\n            unit_kind = rng.choice(['category_stackplot', 'category_plot', 'date_plot', 'manual_units'])\n            if unit_kind == 'category_stackplot':\n                cats = rng.choice(str_cats)\n                y1 = [rng.uniform(-30, 30) for _ in cats]\n                y2 = [rng.uniform(0, 20) for _ in cats]\n                if rng.random() < 0.5:\n                    ax.stackplot(cats, y1)\n                else:\n                    ax.stackplot(cats, y1, y2)\n            elif unit_kind == 'category_plot':\n                cats = rng.choice(str_cats)\n                y = [rng.uniform(-10, 10) for _ in cats]\n                ax.plot(cats, y)\n            elif unit_kind == 'date_plot':\n                start = rng.choice(date_starts)\n                num_days = rng.randint(2, 6)\n                dates = [start + datetime.timedelta(days=d) for d in range(num_days)]\n                y = [rng.uniform(0, 100) for _ in dates]\n                ax.plot(dates, y)\n            elif unit_kind == 'manual_units':\n                # Explicitly set units or converter\n                cats = ['A', 'B', 'C']\n                ax.plot(cats, [1, 2, 3])\n                if rng.random() < 0.5:\n                    ax.xaxis.units = \"test_units\"\n        else:\n            # Ordinary cases: empty axes, simple numeric plots, scatter, bar, etc.\n            action = rng.choice(['empty', 'plot', 'scatter', 'bar', 'hist'])\n            if action == 'empty':\n                pass\n            elif action == 'plot':\n                x = [rng.uniform(-10, 10) for _ in range(5)]\n                y = [rng.uniform(-10, 10) for _ in range(5)]\n                ax.plot(x, y)\n            elif action == 'scatter':\n                x = [rng.gauss(0, 1) for _ in range(10)]\n                y = [rng.gauss(0, 1) for _ in range(10)]\n                ax.scatter(x, y)\n            elif action == 'bar':\n                x = list(range(rng.randint(3, 7)))\n                h = [rng.uniform(1, 10) for _ in x]\n                ax.bar(x, h)\n            elif action == 'hist':\n                data = [rng.gauss(0, 2) for _ in range(20)]\n                ax.hist(data)\n\n            if rng.random() < 0.3:\n                ax.set_autoscalex_on(rng.choice([True, False]))\n\n        items.append((ax, (), {}))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 0,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    },
+    {
+     "file": "lib/matplotlib/axes/_base.py",
+     "qualname": "_AxesBase.twiny",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.004465,
+       "usage": {
+        "input": 2649,
+        "output": 661,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "import matplotlib.pyplot as plt\nimport datetime\n\n\ndef make_inputs(rng, n):\n    items = []\n    for i in range(n):\n        fig, ax = plt.subplots()\n\n        # In half of the cases, test units-related behaviors on the shared y-axis\n        if i % 2 == 1:\n            choice = rng.randint(0, 3)\n            if choice == 0:\n                # String categories as y-values (sets units on yaxis)\n                cats = [\"A\", \"B\", \"C\", \"D\"]\n                y_data = [rng.choice(cats) for _ in range(rng.randint(2, 5))]\n                x_data = [rng.uniform(-10, 10) for _ in range(len(y_data))]\n                ax.plot(x_data, y_data)\n            elif choice == 1:\n                # Dates as y-values (sets units converter on yaxis)\n                base = datetime.date(2020, 1, 1)\n                y_data = [\n                    base + datetime.timedelta(days=rng.randint(0, 100))\n                    for _ in range(rng.randint(2, 5))\n                ]\n                x_data = [rng.uniform(-10, 10) for _ in range(len(y_data))]\n                ax.plot(x_data, y_data)\n            elif choice == 2:\n                # Explicitly set yaxis.units\n                ax.yaxis.units = rng.choice([\"m\", \"s\", \"degC\", \"arbitrary_unit\"])\n                ax.plot([0, 1], [1, 2])\n            else:\n                # Stackplot-like scenario with categories on y\n                cats = [f\"cat_{k}\" for k in range(3)]\n                ax.plot([1, 2, 3], [cats[0], cats[1], cats[2]])\n        else:\n            # Ordinary numeric plotting or empty axes\n            sub_choice = rng.randint(0, 2)\n            if sub_choice == 0:\n                pass  # Empty axes\n            elif sub_choice == 1:\n                x = [rng.uniform(-5, 5) for _ in range(5)]\n                y = [rng.uniform(-5, 5) for _ in range(5)]\n                ax.plot(x, y)\n            else:\n                x = [rng.uniform(1, 10) for _ in range(5)]\n                y = [rng.uniform(1, 10) for _ in range(5)]\n                ax.scatter(x, y)\n                if rng.random() > 0.5:\n                    ax.set_yscale(\"log\")\n\n        items.append((ax, (), {}))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 0,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    }
+   ],
+   "verdict": "the original never differs from the fix on generated inputs",
+   "spent_usd": 0.010007,
+   "model_calls": 2,
+   "seconds": 152
+  },
+  {
+   "instance_id": "pylint-dev__pylint-6903",
+   "repo": "pylint-dev/pylint",
+   "image": "swebench/sweb.eval.x86_64.pylint-dev_1776_pylint-6903:latest",
+   "modules": [
+    "pylint/lint/run.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "generator": "G2",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "pylint/lint/run.py",
+     "qualname": "_query_cpu",
+     "calls": [
+      {
+       "verdict": "GENERATOR_FAILED",
+       "cost_usd": 0.006195,
+       "usage": {
+        "input": 2400,
+        "output": 1172,
+        "usage_missing": false
+       },
+       "finish_reason": "stop",
+       "error": "make_inputs returned no input"
+      },
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.005607,
+       "usage": {
+        "input": 3616,
+        "output": 772,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 1,
+     "generator_code": "import builtins\nimport io\nfrom pathlib import Path\nfrom unittest.mock import patch\n\n\nclass _MockContext:\n    def __init__(self, files):\n        self.files = files\n        self.orig_open = builtins.open\n\n    def _mock_path(self, path_str):\n        p = Path(path_str)\n        p.is_file = lambda: str(path_str) in self.files\n        return p\n\n    def _mock_open(self, file, *args, **kwargs):\n        if str(file) in self.files:\n            return io.StringIO(self.files[str(file)])\n        return self.orig_open(file, *args, **kwargs)\n\n    def _query_cpu(self):\n        with patch(\"pylint.lint.run.Path\", side_effect=self._mock_path):\n            with patch(\"builtins.open\", side_effect=self._mock_open):\n                return module._query_cpu()\n\n\ndef make_inputs(rng, n):\n    items = []\n\n    quota_path = \"/sys/fs/cgroup/cpu/cpu.cfs_quota_us\"\n    period_path = \"/sys/fs/cgroup/cpu/cpu.cfs_period_us\"\n    shares_path = \"/sys/fs/cgroup/cpu/cpu.shares\"\n\n    for i in range(n):\n        if i % 2 == 0:\n            # Cases where avail_cpu would evaluate to 0 in original version\n            choice = rng.choice([\"shares_small\", \"quota_small\"])\n            if choice == \"shares_small\":\n                shares = rng.randint(1, 1023)\n                if rng.random() < 0.5:\n                    files = {\n                        quota_path: \"-1\\n\",\n                        period_path: \"100000\\n\",\n                        shares_path: f\"{shares}\\n\",\n                    }\n                else:\n                    files = {shares_path: f\"{shares}\\n\"}\n            else:\n                period = rng.choice([100000, 50000, 20000])\n                quota = rng.randint(1, period - 1)\n                files = {\n                    quota_path: f\"{quota}\\n\",\n                    period_path: f\"{period}\\n\",\n                }\n        else:\n            # Normal cases: no cgroups, quota >= period, shares >= 1024\n            choice = rng.choice([\"none\", \"quota_normal\", \"shares_normal\"])\n            if choice == \"none\":\n                files = {}\n            elif choice == \"quota_normal\":\n                period = rng.choice([100000, 50000])\n                cores = rng.randint(1, 16)\n                files = {\n                    quota_path: f\"{period * cores}\\n\",\n                    period_path: f\"{period}\\n\",\n                }\n            else:\n                cores = rng.randint(1, 16)\n                files = {\n                    quota_path: \"-1\\n\",\n                    shares_path: f\"{1024 * cores}\\n\",\n                }\n\n        receiver = _MockContext(files)\n        items.append((receiver, (), {}))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 200,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    }
+   ],
+   "verdict": "the original never differs from the fix on generated inputs",
+   "spent_usd": 0.011802,
+   "model_calls": 2,
+   "seconds": 58
+  },
+  {
+   "instance_id": "sympy__sympy-18211",
+   "repo": "sympy/sympy",
+   "image": "swebench/sweb.eval.x86_64.sympy_1776_sympy-18211:latest",
+   "modules": [
+    "sympy/core/relational.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "generator": "G2",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "sympy/core/relational.py",
+     "qualname": "Relational._eval_as_set",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.003319,
+       "usage": {
+        "input": 1301,
+        "output": 625,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "def make_inputs(rng, n):\n    import sympy\n    from sympy import Symbol, Eq, Ne, Lt, Le, Gt, Ge, sin, cos, exp, log, tan\n\n    x = Symbol('x', real=True)\n    y = Symbol('y', real=True)\n    z = Symbol('z')\n    symbols = [x, y, z]\n\n    # Solvable / ordinary expressions\n    solvable_exprs = [\n        lambda s: s - 1,\n        lambda s: s**2 - 4,\n        lambda s: s**3 - 8,\n        lambda s: 2*s + 3,\n        lambda s: s**2 + 1,\n        lambda s: exp(s) - 2,\n        lambda s: log(s) - 1,\n        lambda s: s*(s - 2),\n    ]\n\n    # Expressions likely to cause NotImplementedError in solve_univariate_inequality\n    unsolvable_exprs = [\n        lambda s: s*cos(s) - 3*sin(s),\n        lambda s: s + sin(s) - 1,\n        lambda s: exp(s) - s - 2,\n        lambda s: s*exp(s) - 1,\n        lambda s: cos(s) - s,\n        lambda s: s**5 - s**3 + s - 1 + sin(s),\n        lambda s: s*tan(s) - 1,\n        lambda s: log(s) + s**2 - 3*cos(s),\n        lambda s: 2**s - s**3 + sin(s),\n        lambda s: sin(s) + cos(s*2) + s,\n    ]\n\n    rel_classes = [Eq, Ne, Lt, Le, Gt, Ge]\n\n    items = []\n    for i in range(n):\n        s = rng.choice(symbols)\n        rel_cls = rng.choice(rel_classes)\n\n        # About half unsolvable (raising NotImplementedError in original) and half solvable\n        if i % 2 == 0:\n            expr_fn = rng.choice(unsolvable_exprs)\n            expr = expr_fn(s)\n            rhs = rng.choice([0, 1, -1])\n            rel = rel_cls(expr, rhs)\n        else:\n            expr_fn = rng.choice(solvable_exprs)\n            expr = expr_fn(s)\n            rhs = rng.choice([0, 1, 2, -1])\n            rel = rel_cls(expr, rhs)\n\n        items.append((rel, (), {}))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 95,
+     "trigger_rate": 0.475,
+     "both_raise": 9,
+     "examples": [
+      {
+       "orig": [
+        "exc",
+        "NotImplementedError",
+        "\nThe inequality, x*cos(x) - 3*sin(x) <= 1, cannot be solved using\nsolve_univariate_inequality."
+       ],
+       "fix": [
+        "ok",
+        "ConditionSet",
+        "ConditionSet(y, y*cos(y) - 3*sin(y) <= 1, Reals)"
+       ]
+      },
+      {
+       "orig": [
+        "exc",
+        "NotImplementedError",
+        "\nThe inequality, x + sin(x) + cos(2*x) < 0, cannot be solved using\nsolve_univariate_inequality."
+       ],
+       "fix": [
+        "ok",
+        "ConditionSet",
+        "ConditionSet(y, y + sin(y) + cos(2*y) < 0, Reals)"
+       ]
+      },
+      {
+       "orig": [
+        "exc",
+        "NotImplementedError",
+        "\nThe inequality, -x + cos(x) > -1, cannot be solved using\nsolve_univariate_inequality."
+       ],
+       "fix": [
+        "ok",
+        "ConditionSet",
+        "ConditionSet(x, -x + cos(x) > -1, Reals)"
+       ]
+      }
+     ],
+     "usable": true,
+     "why": "usable"
+    }
+   ],
+   "verdict": "usable",
+   "spent_usd": 0.003319,
+   "model_calls": 1,
+   "seconds": 67
+  },
+  {
+   "instance_id": "django__django-17084",
+   "repo": "django/django",
+   "image": "swebench/sweb.eval.x86_64.django_1776_django-17084:latest",
+   "modules": [
+    "django/db/models/sql/query.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.11.10",
+   "generator": "G2",
+   "edited_functions": 1,
+   "functions": [
+    {
+     "file": "django/db/models/sql/query.py",
+     "qualname": "Query.get_aggregation",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.006819,
+       "usage": {
+        "input": 2902,
+        "output": 1238,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "import django\nfrom django.conf import settings\nfrom django.db import connection, connections, DEFAULT_DB_ALIAS\nfrom django.db.models import F, Sum, Count, Avg, Min, Max, Window\nfrom django.db.models.expressions import Value, Col, Ref\nfrom django.db.models.functions import Coalesce, RowNumber\nfrom django.db.models.sql import Query\n\nif not settings.configured:\n    settings.configure(\n        DATABASES={\n            DEFAULT_DB_ALIAS: {\n                \"ENGINE\": \"django.db.backends.sqlite3\",\n                \"NAME\": \":memory:\",\n            }\n        },\n        INSTALLED_APPS=[\n            \"django.contrib.contenttypes\",\n            \"django.contrib.auth\",\n        ],\n    )\n    django.setup()\n\nfrom django.contrib.auth.models import User\n\n# Pre-create tables for User in :memory: sqlite database\nwith connection.schema_editor() as editor:\n    editor.create_model(User)\n\n\ndef make_inputs(rng, n):\n    items = []\n\n    aggregates_pool = [Sum, Count, Avg, Min, Max]\n\n    for i in range(n):\n        query = Query(model=User)\n\n        # ~50% standard queries without window functions, ~50% involving window functions\n        is_window_case = (i % 2 == 1)\n\n        if not is_window_case:\n            # Standard query test cases\n            case_type = rng.choice([\"simple\", \"subquery\", \"group_by\", \"empty_exprs\", \"annotation_ref\"])\n            if case_type == \"empty_exprs\":\n                items.append((query, (DEFAULT_DB_ALIAS, {}), {}))\n                continue\n            elif case_type == \"simple\":\n                agg_cls = rng.choice(aggregates_pool)\n                exprs = {\"agg_id\": agg_cls(\"id\")}\n                items.append((query, (DEFAULT_DB_ALIAS, exprs), {}))\n            elif case_type == \"annotation_ref\":\n                query.add_annotation(F(\"id\") + Value(1), \"id_plus_one\")\n                agg_cls = rng.choice(aggregates_pool)\n                exprs = {\"agg_annot\": agg_cls(\"id_plus_one\")}\n                items.append((query, (DEFAULT_DB_ALIAS, exprs), {}))\n            elif case_type == \"subquery\":\n                subq = Query(model=User)\n                subq.add_annotation(F(\"id\"), \"sub_id\")\n                query.add_annotation(subq, \"subq_field\")\n                exprs = {\"agg_val\": Count(\"id\")}\n                items.append((query, (DEFAULT_DB_ALIAS, exprs), {}))\n            elif case_type == \"group_by\":\n                query.set_group_by()\n                exprs = {\"agg_val\": Sum(\"id\")}\n                items.append((query, (DEFAULT_DB_ALIAS, exprs), {}))\n        else:\n            # Cases targeting refs_window / aggregates over window functions\n            window_style = rng.choice([\n                \"direct_window\",\n                \"window_in_coalesce\",\n                \"multiple_windows\",\n                \"window_and_normal\",\n            ])\n\n            if window_style == \"direct_window\":\n                w = Window(expression=Sum(\"id\"), order_by=F(\"id\").asc())\n                query.add_annotation(w, \"cumul_id\")\n                agg_cls = rng.choice(aggregates_pool)\n                exprs = {\"agg_window\": agg_cls(\"cumul_id\")}\n            elif window_style == \"window_in_coalesce\":\n                w = Window(expression=RowNumber(), order_by=F(\"id\").asc())\n                cw = Coalesce(w, Value(0))\n                query.add_annotation(cw, \"row_num\")\n                agg_cls = rng.choice(aggregates_pool)\n                exprs = {\"agg_window\": agg_cls(\"row_num\")}\n            elif window_style == \"multiple_windows\":\n                w1 = Window(expression=Sum(\"id\"), order_by=F(\"id\").asc())\n                w2 = Window(expression=RowNumber(), order_by=F(\"id\").desc())\n                query.add_annotation(w1, \"win1\")\n                query.add_annotation(w2, \"win2\")\n                agg1 = rng.choice(aggregates_pool)\n                agg2 = rng.choice(aggregates_pool)\n                exprs = {\n                    \"agg1\": agg1(\"win1\"),\n                    \"agg2\": agg2(\"win2\"),\n                }\n            elif window_style == \"window_and_normal\":\n                w = Window(expression=Sum(\"id\"), order_by=F(\"id\").asc())\n                query.add_annotation(w, \"win_val\")\n                agg1 = rng.choice(aggregates_pool)\n                agg2 = rng.choice(aggregates_pool)\n                exprs = {\n                    \"normal_agg\": agg1(\"id\"),\n                    \"window_agg\": agg2(\"win_val\"),\n                }\n\n            items.append((query, (DEFAULT_DB_ALIAS, exprs), {}))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 100,
+     "trigger_rate": 0.5,
+     "both_raise": 0,
+     "examples": [
+      {
+       "orig": [
+        "exc",
+        "OperationalError",
+        "misuse of window function SUM()"
+       ],
+       "fix": [
+        "ok",
+        "dict",
+        "{'normal_agg': None, 'window_agg': None}"
+       ]
+      },
+      {
+       "orig": [
+        "exc",
+        "OperationalError",
+        "misuse of window function SUM()"
+       ],
+       "fix": [
+        "ok",
+        "dict",
+        "{'normal_agg': None, 'window_agg': None}"
+       ]
+      },
+      {
+       "orig": [
+        "exc",
+        "OperationalError",
+        "misuse of window function ROW_NUMBER()"
+       ],
+       "fix": [
+        "ok",
+        "dict",
+        "{'agg_window': None}"
+       ]
+      }
+     ],
+     "usable": true,
+     "why": "usable"
+    }
+   ],
+   "verdict": "usable",
+   "spent_usd": 0.006819,
+   "model_calls": 1,
+   "seconds": 52
+  },
+  {
+   "instance_id": "pytest-dev__pytest-10356",
+   "repo": "pytest-dev/pytest",
+   "image": "swebench/sweb.eval.x86_64.pytest-dev_1776_pytest-10356:latest",
+   "modules": [
+    "src/_pytest/mark/structures.py"
+   ],
+   "status": "FINISHED",
+   "python": "3.9.20",
+   "generator": "G2",
+   "edited_functions": 2,
+   "functions": [
+    {
+     "file": "src/_pytest/mark/structures.py",
+     "qualname": "get_unpacked_marks",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.006067,
+       "usage": {
+        "input": 2069,
+        "output": 1204,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "def make_inputs(rng, n):\n    Mark = module.Mark\n    MarkDecorator = module.MarkDecorator\n\n    mark_names = [\"foo\", \"bar\", \"baz\", \"skip\", \"xfail\", \"custom_mark\"]\n\n    def make_mark():\n        name = rng.choice(mark_names)\n        args = tuple(rng.randint(0, 10) for _ in range(rng.randint(0, 2)))\n        kwargs = {f\"k{i}\": rng.choice([\"a\", \"b\", 1, None]) for i in range(rng.randint(0, 2))}\n        m = Mark(name, args, kwargs)\n        if rng.random() < 0.3:\n            return MarkDecorator(m)\n        return m\n\n    items = []\n\n    # First half: ordinary uses (functions, instances, simple objects, simple classes without inheritance)\n    # Note: caller will test without passing consider_mro kwargs unless supported, so we provide args/kwargs carefully.\n    # To be compatible with original version, args is (obj,), kwargs is {}\n    n_issue = n // 2\n    n_ord = n - n_issue\n\n    for _ in range(n_ord):\n        kind = rng.choice([\"func\", \"object\", \"single_class\", \"no_mark\"])\n        if kind == \"no_mark\":\n            def dummy():\n                pass\n            items.append((None, (dummy,), {}))\n        elif kind == \"func\":\n            def func():\n                pass\n            num_marks = rng.randint(1, 3)\n            marks = [make_mark() for _ in range(num_marks)]\n            func.pytestmark = marks if rng.random() < 0.8 else marks[0]\n            items.append((None, (func,), {}))\n        elif kind == \"object\":\n            class PlainObj:\n                pass\n            inst = PlainObj()\n            num_marks = rng.randint(0, 3)\n            if num_marks > 0:\n                marks = [make_mark() for _ in range(num_marks)]\n                inst.pytestmark = marks if rng.random() < 0.8 else marks[0]\n            items.append((None, (inst,), {}))\n        elif kind == \"single_class\":\n            class SingleClass:\n                pass\n            num_marks = rng.randint(1, 3)\n            marks = [make_mark() for _ in range(num_marks)]\n            SingleClass.pytestmark = marks if rng.random() < 0.8 else marks[0]\n            items.append((None, (SingleClass,), {}))\n\n    # Second half: class hierarchies (multiple inheritance, deep inheritance) where MRO matters\n    for _ in range(n_issue):\n        hierarchy_type = rng.choice([\"diamond\", \"multiple_bases\", \"chain\", \"empty_child\"])\n\n        if hierarchy_type == \"multiple_bases\":\n            class Base1:\n                pass\n            class Base2:\n                pass\n            class Derived(Base1, Base2):\n                pass\n\n            Base1.pytestmark = [make_mark() for _ in range(rng.randint(1, 2))]\n            Base2.pytestmark = [make_mark() for _ in range(rng.randint(1, 2))]\n            if rng.random() < 0.5:\n                Derived.pytestmark = [make_mark() for _ in range(rng.randint(1, 2))]\n\n            items.append((None, (Derived,), {}))\n\n        elif hierarchy_type == \"diamond\":\n            class Root:\n                pass\n            class Left(Root):\n                pass\n            class Right(Root):\n                pass\n            class Bottom(Left, Right):\n                pass\n\n            if rng.random() < 0.5:\n                Root.pytestmark = [make_mark()]\n            Left.pytestmark = [make_mark() for _ in range(rng.randint(1, 2))]\n            Right.pytestmark = [make_mark() for _ in range(rng.randint(1, 2))]\n            if rng.random() < 0.5:\n                Bottom.pytestmark = [make_mark()]\n\n            items.append((None, (Bottom,), {}))\n\n        elif hierarchy_type == \"chain\":\n            class GrandParent:\n                pass\n            class Parent(GrandParent):\n                pass\n            class Child(Parent):\n                pass\n\n            GrandParent.pytestmark = [make_mark()]\n            if rng.random() < 0.7:\n                Parent.pytestmark = [make_mark()]\n            if rng.random() < 0.7:\n                Child.pytestmark = [make_mark()]\n\n            target = rng.choice([Child, Parent])\n            items.append((None, (target,), {}))\n\n        elif hierarchy_type == \"empty_child\":\n            class BaseA:\n                pass\n            class BaseB:\n                pass\n            class EmptyChild(BaseA, BaseB):\n                pass\n\n            BaseA.pytestmark = [make_mark()]\n            BaseB.pytestmark = [make_mark()]\n\n            items.append((None, (EmptyChild,), {}))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 98,
+     "trigger_rate": 0.49,
+     "both_raise": 0,
+     "examples": [
+      {
+       "orig": [
+        "ok",
+        "list",
+        "[Mark(name='baz', args=(3, 5), kwargs={'k0': 'b'})]"
+       ],
+       "fix": [
+        "ok",
+        "list",
+        "[Mark(name='baz', args=(3, 5), kwargs={'k0': 'b'}), Mark(name='foo', args=(0, 8), kwargs={'k0': 1, 'k1': None}), Mark(name='foo', args=(), kwargs={'k0': 'b', 'k1': None}), Mark(name='xfail', args=(1,), kwargs={'k0': 'b'}), Mark(name='custom_mark', args=(), kwargs={'k0': 1})]"
+       ]
+      },
+      {
+       "orig": [
+        "ok",
+        "list",
+        "[Mark(name='foo', args=(9,), kwargs={'k0': 'a', 'k1': 'b'}), Mark(name='skip', args=(0, 0), kwargs={})]"
+       ],
+       "fix": [
+        "ok",
+        "list",
+        "[Mark(name='foo', args=(9,), kwargs={'k0': 'a', 'k1': 'b'}), Mark(name='skip', args=(0, 0), kwargs={}), Mark(name='custom_mark', args=(1,), kwargs={})]"
+       ]
+      },
+      {
+       "orig": [
+        "ok",
+        "list",
+        "[Mark(name='bar', args=(), kwargs={'k0': 'b', 'k1': 'b'}), Mark(name='bar', args=(), kwargs={})]"
+       ],
+       "fix": [
+        "ok",
+        "list",
+        "[Mark(name='bar', args=(), kwargs={'k0': 'b', 'k1': 'b'}), Mark(name='bar', args=(), kwargs={}), Mark(name='skip', args=(2,), kwargs={'k0': 1}), Mark(name='custom_mark', args=(6, 6), kwargs={}), Mark(name='baz', args=(8, 10), kwargs={'k0': None, 'k1': 'a'})]"
+       ]
+      }
+     ],
+     "usable": true,
+     "why": "usable"
+    },
+    {
+     "file": "src/_pytest/mark/structures.py",
+     "qualname": "store_mark",
+     "calls": [
+      {
+       "verdict": "REPLY",
+       "cost_usd": 0.005061,
+       "usage": {
+        "input": 2073,
+        "output": 935,
+        "usage_missing": false
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "generator_attempt": 0,
+     "generator_code": "def make_inputs(rng, n):\n    Mark = module.Mark\n\n    def create_mark(name_suffix=\"\"):\n        name = rng.choice([\"skip\", \"xfail\", \"slow\", \"custom\", \"foo\", \"bar\"]) + name_suffix\n        args = tuple(rng.choice([1, \"a\", (1, 2), None]) for _ in range(rng.randint(0, 2)))\n        kwargs = {f\"k{i}\": rng.randint(0, 10) for i in range(rng.randint(0, 2))}\n        return Mark(name, args, kwargs)\n\n    items = []\n    for i in range(n):\n        mark_to_store = create_mark(str(i))\n\n        # Half ordinary (functions, simple objects, classes with no inheritance)\n        # Half inheritance cases (classes inheriting from classes that have pytestmark)\n        if rng.random() < 0.5:\n            obj_type = rng.choice([\"func\", \"class\", \"instance\"])\n            if obj_type == \"func\":\n                def func():\n                    pass\n                if rng.random() < 0.5:\n                    func.pytestmark = [create_mark(\"prev\") for _ in range(rng.randint(1, 3))]\n                elif rng.random() < 0.2:\n                    func.pytestmark = create_mark(\"single\")\n                target = func\n            elif obj_type == \"instance\":\n                class SimpleObj:\n                    pass\n                target = SimpleObj()\n                if rng.random() < 0.5:\n                    target.pytestmark = [create_mark(\"prev\") for _ in range(rng.randint(1, 3))]\n            else:\n                class StandaloneClass:\n                    pass\n                if rng.random() < 0.5:\n                    StandaloneClass.pytestmark = [create_mark(\"prev\") for _ in range(rng.randint(1, 3))]\n                elif rng.random() < 0.2:\n                    StandaloneClass.pytestmark = create_mark(\"single\")\n                target = StandaloneClass\n        else:\n            # Inheritance cases where consider_mro makes a difference\n            # In original code, store_mark(SubClass, mark) called get_unpacked_marks(SubClass)\n            # which looked up getattr(SubClass, \"pytestmark\"), inheriting parent's marks!\n            # With the fix, store_mark uses consider_mro=False, so parent marks aren't copied onto SubClass.\n            case = rng.choice([\"single_inheritance\", \"multiple_inheritance\", \"deep_inheritance\"])\n            if case == \"single_inheritance\":\n                class Parent:\n                    pytestmark = [create_mark(\"parent\") for _ in range(rng.randint(1, 3))]\n\n                class Child(Parent):\n                    pass\n\n                if rng.random() < 0.4:\n                    # Child already has its own marks directly\n                    Child.pytestmark = [create_mark(\"child\") for _ in range(rng.randint(1, 2))]\n                target = Child\n\n            elif case == \"multiple_inheritance\":\n                class BaseA:\n                    pytestmark = [create_mark(\"baseA\")]\n\n                class BaseB:\n                    pytestmark = [create_mark(\"baseB\")]\n\n                class MultiChild(BaseA, BaseB):\n                    pass\n\n                if rng.random() < 0.4:\n                    MultiChild.pytestmark = [create_mark(\"child\")]\n                target = MultiChild\n\n            else:\n                class GrandParent:\n                    pytestmark = [create_mark(\"gp\")]\n\n                class Intermediate(GrandParent):\n                    pass\n\n                class DeepChild(Intermediate):\n                    pass\n\n                if rng.random() < 0.3:\n                    Intermediate.pytestmark = [create_mark(\"inter\")]\n                if rng.random() < 0.3:\n                    DeepChild.pytestmark = [create_mark(\"child\")]\n                target = DeepChild\n\n        items.append((None, (target, mark_to_store), {}))\n\n    return items\n",
+     "inputs": 200,
+     "stable": 200,
+     "divergent": 0,
+     "trigger_rate": 0.0,
+     "both_raise": 0,
+     "examples": [],
+     "usable": false,
+     "why": "the original never differs from the fix on generated inputs"
+    }
+   ],
+   "verdict": "usable",
+   "spent_usd": 0.011128,
+   "model_calls": 2,
+   "seconds": 55
+  }
+ ]
+}
