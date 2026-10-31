@@ -22,7 +22,7 @@ Cập nhật sau **mỗi** lần chạy. Mỗi tiêu chí có trạng thái **TH
 | S8 | Người chấm độc lập (không cần người, theo yêu cầu 31/10) | **THẮNG** | 3 người chấm (assistant, argon, flash); cả hai model đúng 20/20 mục hiệu chuẩn; bất đồng ở 19 mục; Q-A1: 8/36 (2 người chấm) và 5/36 (đa số), kết luận HQ1 giữ nguyên |
 | S9 | Tái lập được, có artifact ẩn danh | **THẮNG** (chờ upload) | submission check pass; `make_anonymous_artifact.py`. Người làm: upload |
 | S10 | Đúng định dạng và hạn của venue | **THẮNG** (cần xem lại khi có call for papers chính thức) | FSE 2027 đã hết hạn → **ISSTA 2027**, hạn bài 11/1/2027, 18 trang + tham khảo (quy định 2026); bài 14 trang; đã thêm mục Data Availability bắt buộc |
-| S11 | Mọi mệnh đề có chứng minh; được kiểm độc lập (không cần người, theo yêu cầu 31/10) | **THẮNG (chờ model kiểm vòng 2)** | Mọi Bổ đề, Mệnh đề, Định lý, Hệ quả đều có chứng minh trong bài; C1–C11 kiểm bằng số; model kiểm chứng minh vòng 1 tìm 5 điểm, đã sửa hết; vòng 2 đang chạy |
+| S11 | Mọi mệnh đề có chứng minh; được kiểm độc lập (không cần người, theo yêu cầu 31/10) | **THẮNG** (5 vòng kiểm, vòng cuối chỉ còn một điểm ký hiệu, đã sửa) | Mọi Bổ đề, Mệnh đề, Định lý, Hệ quả đều có chứng minh trong bài; C1–C11 kiểm bằng số; model kiểm chứng minh vòng 1 tìm 5 điểm, đã sửa hết; vòng 2 đang chạy |
 
 **Kết luận hiện tại:** bài đạt S1–S4 và S9; bài **chưa** chắc thắng vì S7 và S8 (phần phản biện hay tấn công nhất), và S10, S11 là việc của người. Không thể bảo đảm bài được nhận. Việc làm được là đóng từng ô THUA.
 
@@ -68,6 +68,7 @@ Mỗi dòng gồm:
 | R30 | 31/10 | Model kiểm chứng minh vòng 2, 3 (a2a82df, 92d049c) | Kiểm lại sau khi sửa | Vòng 2: 5 điểm nhỏ; vòng 3: 6 điểm nhỏ, 0 lỗi lớn | Vòng 3 chỉ ra **thứ tự chuẩn của ô tổ hợp** (TC24): một tập kỹ năng phải có một thứ tự áp dụng cố định; trước đó lý thuyết đếm theo tập còn thực thi phụ thuộc thứ tự | **THẮNG**: đã sửa cả 11 điểm, kèm `canonical_order` trong mã; cách đạt cận của Định lý 2 với loss nhị phân kiểm bằng số | — |
 | R31 | 31/10 | Paper build (88f54c0) | PDF | — | — | **THẮNG**: 16 trang (giới hạn 18 + tham khảo), 51/51 con số khớp | — |
 | R32 | 31/10 | Model kiểm chứng minh vòng 4 (ddfe12f) | Kiểm sau vòng 3 | — | 10/11 mệnh đề "correct"; còn 1: chứng minh Hệ quả 1 ngầm dùng tính giao hoán khi gom các thành phần bị xen kẽ trong thứ tự chuẩn | **THẮNG**: thêm phần (i) giao hoán vào Giả định 4 (phiên bản ngữ nghĩa của cạnh enabling) và bước hoán vị vào chứng minh | — |
+| R33 | 31/10 | Model kiểm chứng minh vòng 5 (101db84); PDF (6fb8605) | Kiểm sau vòng 4 | — | 10/11 "correct"; điểm còn lại chỉ là ký hiệu ở Mệnh đề 3(a) | **THẮNG**: đã sửa ký hiệu. Phần lý thuyết hội tụ (lỗi lớn qua 5 vòng: 0; điểm nhỏ: 5 → 5 → 6 → 1 → 1 về ký hiệu); PDF 16 trang | — |
 
 ## C. Vòng debug khi THUA (làm theo thứ tự)
 

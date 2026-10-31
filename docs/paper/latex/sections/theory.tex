@@ -156,7 +156,7 @@ repositories), there is a repository with those features whose task losses are a
 \begin{proposition}[No guarantee without target evidence or bounded shift]\label{prop:nofree}
 \textup{(a)} Let a procedure decide from data of observed repositories $\mathcal{R}_{\mathrm{obs}}$ only, and admit a skill
 $S$ with positive probability.  Under Assumption~\ref{ass:rich} there is a repository $R^\dagger\notin\mathcal{R}_{\mathrm{obs}}$
-with $\mathrm{STR}(S,\{R^\dagger\})=1$ on which the admission probability is unchanged.
+with $\mathrm{STR}_{D^\dagger}((S,s))=1$ for every distribution $D^\dagger$ over the contexts of $R^\dagger$ on which the admission probability is unchanged.
 \textup{(b)} For every $\theta\in(0,1)$, $\delta>0$ with $\theta+\delta<1$, $\xi\in(0,1/2]$ and every procedure, there are
 $P,Q$ with $\mathrm{TV}(P,Q)=\xi$ and a cell $c$ with $\mathrm{STR}_P(c)=-\theta-\delta$ and
 $\mathrm{STR}_Q(c)=\mathrm{STR}_P(c)+2\xi$, whose admission probability does not depend on $Q$.
