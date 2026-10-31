@@ -42,7 +42,23 @@ def edited_modules(patch):
     return sorted({f for f in files if f.endswith(".py") and not re.search(r"(^|/)(tests?|testing)/|(^|/)test_[^/]*\.py$|_test\.py$|conftest\.py$", f)})
 
 
-def fetch_rows(get=lambda u: json.loads(urllib.request.urlopen(u, timeout=60).read())):
+TRANSIENT = (429, 500, 502, 503, 504)
+
+
+def get_json(url, tries=6, sleep=time.sleep, opener=urllib.request.urlopen):
+    """GET with retries on transient server errors (truncated exponential backoff: 10, 30, 60, 120, 240 s)."""
+    waits = (10, 30, 60, 120, 240)
+    for k in range(tries):
+        try:
+            return json.loads(opener(url, timeout=60).read())
+        except Exception as exc:
+            code = getattr(exc, "code", None)
+            if (code is not None and code not in TRANSIENT) or k == tries - 1:
+                raise
+            sleep(waits[min(k, len(waits) - 1)])
+
+
+def fetch_rows(get=get_json):
     rows, o = [], 0
     while True:
         page = get(ROWS.format(o=o))

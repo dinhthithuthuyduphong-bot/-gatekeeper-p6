@@ -14,6 +14,29 @@ class QF0(unittest.TestCase):
     def test_image_name(self):
         self.assertEqual(Q.image_name("django__django-11099"), "swebench/sweb.eval.x86_64.django_1776_django-11099:latest")
 
+    def test_transient_errors_are_retried_and_final_ones_are_not(self):
+        import io
+        import urllib.error
+        calls, waits = {"n": 0}, []
+
+        class R:
+            def read(self):
+                return b'{"rows": []}'
+
+        def flaky(url, timeout=0):
+            calls["n"] += 1
+            if calls["n"] < 3:
+                raise urllib.error.HTTPError(url, 502, "Bad Gateway", {}, io.BytesIO(b""))
+            return R()
+        self.assertEqual(Q.get_json("u", sleep=waits.append, opener=flaky), {"rows": []})
+        self.assertEqual(waits, [10, 30])
+
+        def gone(url, timeout=0):
+            raise urllib.error.HTTPError(url, 404, "Not Found", {}, io.BytesIO(b""))
+        with self.assertRaises(urllib.error.HTTPError):
+            Q.get_json("u", sleep=waits.append, opener=gone)
+        self.assertEqual(waits, [10, 30])                                     # no wait for a 404
+
     def test_file_diffs(self):
         d = Q.file_diffs(PATCH)
         self.assertEqual(sorted(d), ["django/db/models/x.py", "tests/test_x.py"])

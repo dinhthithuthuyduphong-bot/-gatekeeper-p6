@@ -1,0 +1,7 @@
+{
+ "name": "study_q_retry (patch_study_q_retry.zip)",
+ "files": {
+  "tests/test_q_f0.py": "493eb443d5477cbbbadd1ce26bf57eb633076370da94ffe9b210b853ec42b4bd",
+  "tools/q_f0.py": "257965d597ed52a45d984280c31e1287538d7d766409df0e295069457508def0"
+ }
+}
