@@ -39,3 +39,10 @@ Các tệp LaTeX trong `sections/` là **câu chữ tiếng Anh để dán thẳ
 | 2.2 | `sections/evaluation.tex` | §9–§10 của bản nháp (Bảng 1, 2, 3, Hình 3, RQ1–RQ4): toàn bộ số projected thay bằng 5 tiểu mục số đo được: đồ thị pha + Study H; kỹ năng trên target thật (D, E, G); patch LLM (P, RQ5); SWE-bench Verified (Q, Q-A1); oracle (RQ3). Bảng đối chiếu từng số: [`../NUMBERS_MAP.md`](../NUMBERS_MAP.md) |
 | 2.3 | `sections/threats.tex` | Threats của bản nháp: thêm các giả định của định lý, Assumption 4 chưa kiểm, luật thực thi, đối tượng giả do G2 dựng, người chấm cùng họ model, 19/55 không tái tạo |
 | Theory | Remark "Harm certificate" | Nối lý thuyết với chứng chỉ tác hại mà thí nghiệm dùng (0,39η; 110 lần rút) |
+
+## Giai đoạn 4 (31/10/2026): bản bài đầy đủ, khung A
+
+`main.tex` giờ là bản bài đầy đủ (tên mới: *Scope before Reuse: Risk-Controlled Admission of Reusable Code Changes*). Thứ tự các mục:
+Abstract → `intro` → `motivation` (ví dụ **minh hoạ**, đã sửa chỗ tự mâu thuẫn retry/async) → `problem` → `approach` → `theory` → `implementation` (số thật: khoảng 4.800 dòng, 359 test) → `evaluation` (RQ1–RQ4) → `threats` → `related` (trích dẫn đã kiểm) → `conclusion` + Data availability.
+
+Bỏ khỏi bản nháp: banner "projected", benchmark SkillShift-SE, Bảng 1–3, Hình 3, RQ về tổ hợp, B9 và hoà vốn (không có dữ liệu thật).

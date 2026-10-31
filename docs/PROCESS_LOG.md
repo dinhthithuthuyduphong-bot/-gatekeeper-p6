@@ -181,3 +181,14 @@ Mẫu cho mỗi mục:
 - **3.2** Q5: đã ghi trong Threats. **3.3** `FileNotFoundError`: tệp đã đóng băng nên chưa sửa mã; cách sửa cho study sau ghi ở `docs/TECH_DEBT.md`.
 - **3.4 Token Vertex, sửa tận gốc:** `tools/fresh_gcp_token.py` tạo token mới bằng google-auth thay cho token cũ trong bộ nhớ đệm của `gcloud`; 13 workflow gọi model dùng nó làm `GK_TOKEN_CMD`. Workflow `Gatekeeper Vertex token check` (run 41210471245): hai token cách nhau một phút **khác nhau**, mỗi token còn hạn 60,0 phút. Có test.
 - **3.5** Failure audit chạy lại (run 41210473427): vẫn 64 run thất bại, đều đã có nguyên nhân trong API_AND_FAILURES.
+
+### ~16:00 — TD7: cài luật thực thi
+- `gatekeeper_ext/execution.py`: tách tập kỹ năng sắp chạy thành các thành phần liên thông của đồ thị giao footprint; chỉ cho chạy khi mọi thành phần là một ô đã admit; có chọn tập con tham lam và danh sách tổ hợp còn phải kiểm.
+- Đặt ở `gatekeeper_ext`, vì `freeze_study.py` so **cả tập** tệp của `gatekeeper_lite` (thêm một tệp ở đó sẽ làm mọi freeze báo lệch). Freeze của D, E, G, H, Q vẫn verified.
+- 8 test, gồm test thuộc tính trên 300 thư viện ngẫu nhiên.
+
+### ~16:30 — Giai đoạn 4: viết bài theo khung A
+- **4.4 Kiểm trích dẫn** (`docs/paper/CITATIONS_AUDIT.md`): 7 mục placeholder đều là bài có thật ở đúng mã arXiv, nhưng **mọi tên bài trong bản nháp đều sai**. Ví dụ, GSE thật là "Learning Globally Reusable Skills for Coding Agents" (Yang và cộng sự); "Formal Skill Verification" là bài của Alfredo Metere. Phiên không vào được arxiv.org; đã tra qua tìm kiếm web.
+- **Bản bài đầy đủ**, `docs/paper/latex/main.tex`: intro, motivation, approach, implementation, related, conclusion (mới); evaluation có RQ1–RQ4; abstract chỉ dùng số đo được.
+- Build (run 41211396873): thành công, 6 trang, không còn tham chiếu thiếu; 16/16 con số khớp.
+- Còn mở: chép đủ tác giả MemCoder và MemGovern; mục 1.9 (người đọc độc lập); thầy đọc toàn bài; số trang theo venue.

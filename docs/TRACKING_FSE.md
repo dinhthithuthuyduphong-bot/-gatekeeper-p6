@@ -119,3 +119,4 @@ PDF gốc: [`paper/source/`](paper/source/), đã đối chiếu toàn văn ngà
 | 31/10/2026 ~14:05 | Giai đoạn 1: LaTeX các mục Problem formulation, Theory, Related work (thống kê); build PDF trên Actions (run 41208218636) |
 | 31/10/2026 ~15:00 | Rà soát giai đoạn 1 (PHASE1_REVIEW: G1–G9, C8, C9); giai đoạn 2: NUMBERS_MAP, evaluation.tex, threats.tex, check_paper_numbers |
 | 31/10/2026 ~15:30 | Chọn khung A; giai đoạn 3: freeze lệch giải thích (P sạch tại commit đóng băng), token Vertex sửa tận gốc (fresh_gcp_token), TECH_DEBT.md |
+| 31/10/2026 ~16:30 | TD7 (luật thực thi) cài trong gatekeeper_ext/execution.py; giai đoạn 4: bản bài đầy đủ khung A (paper.pdf, 6 trang); kiểm trích dẫn |
