@@ -41,9 +41,9 @@ Giao thức: [STUDY_Q_PROTOCOL](../study_q/STUDY_Q_PROTOCOL.md). Amendment: chư
 | Đóng băng (`Freeze Study Q`, commit `94c87bc`) | ✅ | `freeze_study.py verify study_q`: 68 tệp không đổi |
 | Seed drand sau đóng băng | ✅ | `460798324973423911` (thời điểm seed 2026-10-31T07:47:53Z) |
 | Sửa workflow stream (patch `study_q_stream_msg`) | ✅ | Ô `only` nhận nhiều định dạng hơn, báo lỗi rõ ràng; run #1 và #2 lỗi vì `only=3` không phải id |
-| Che token Vertex trong log (commit `206da51`) | ✅ | Thêm `::add-mask::` cho 13 workflow |
+| Che token Vertex trong log (commit `206da51`) | ✅ | Thêm `::add-mask::` cho 13 workflow; đã xác nhận trong log của part 0 (`GOOGLE_OAUTH_TOKEN: ***`) |
 | Smoke 3 instance ([run #3](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41184775725)) | ✅ | 3/3 thành công, `FINISHED`. Lưu ý: mỗi instance khoảng 1 phút, artifact khoảng 1 KB, cần mở ra kiểm tra |
-| **Stream part 0**, 235 instance ([run #4](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41185100083)) | 🔄 | Bắt đầu 31/10 08:33 UTC |
+| **Stream part 0**, 235 instance ([run #4](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41185100083)) | 🔄 | Bắt đầu 31/10 08:33 UTC; lúc 09:05: đang chạy, 0 job lỗi |
 | Stream part 1, 234 instance | ⏳ | Chạy sau khi part 0 xong |
 | Chạy lại instance lỗi hạ tầng (`only=...`) | ⏳ | Theo quy tắc P-A3: mỗi instance là một job |
 | Workflow tổng hợp chạy `tools/q_analyze.py` | ⏳ | **Chưa có workflow nào gọi `q_analyze.py`**, cần thêm |

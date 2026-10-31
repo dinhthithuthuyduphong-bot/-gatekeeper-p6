@@ -84,3 +84,8 @@ Mẫu cho mỗi mục:
   - 339 unit test pass trước và sau khi sắp xếp; `tools/repo_hygiene.py`: 0 tệp trùng.
   - `freeze_study.py verify` trên 13 study có `FREEZE.json`, chạy ở commit trước (git worktree) và sau khi sắp xếp: **kết quả giống hệt nhau**. D, E, F, G, H, L, M, M-A\*, Q: verified.
   - **Phát hiện (đã có từ trước, không do đợt này):** B, C báo đổi `tools/run_study_d.py`; N báo đổi `tools/repo_hygiene.py`; P báo đổi `research_closure/results/ALIGNMENT_WITH_FSE.md`. Các study này đã xong. Cần ghi nhận như amendment, hoặc giải thích trong EVIDENCE_LEDGER, trước khi dùng làm bằng chứng đóng băng.
+
+### 09:05 — Kiểm tra part 0 (lần 1)
+- Bằng chứng: [run 41185100083](https://github.com/dinhthithuthuyduphong-bot/-gatekeeper-p6/actions/runs/41185100083), trạng thái `in_progress` sau khoảng 32 phút; `get_job_logs failed_only`: **0 job lỗi**.
+- **Xác nhận bản sửa che token:** log job `Q_astropy__astropy-12907` (job 124490360875) in `GOOGLE_OAUTH_TOKEN: ***`.
+- Còn mở: chưa chạy part 1 (chờ part 0 xong). Artifact mỗi instance vẫn khoảng 1 KB, cần mở ra kiểm tra trước khi phân tích.
