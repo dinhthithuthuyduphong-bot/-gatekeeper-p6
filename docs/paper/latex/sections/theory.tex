@@ -28,16 +28,18 @@ interval would not do.
 \subsection{Library-wide admission guarantee}
 
 \begin{theorem}[Admission over a declared scope family]\label{thm:admission}
-Let $\mathcal{C}$ be the set of cells, compositions included, and let a ledger $\alpha_{c,k}\ge0$ be fixed in advance for
-every cell $c$ and epoch $k\ge0$ (epoch $k\ge1$ is the $k$-th re-admission after retirement), with
-$\sum_{c\in\mathcal{C}}\sum_{k\ge0}\alpha_{c,k}\le\alpha$; for instance $\alpha_{c,k}=\alpha_c\cdot 6/(\pi^2(k+1)^2)$ with
-$\sum_c\alpha_c\le\alpha$.  Suppose each epoch uses fresh tasks and admits $c$ only when its e-process
+Let $\mathcal{C}$ be the countable set of all cells that could ever be formed, compositions included, and let a ledger
+$\alpha_{c,k}\ge0$ be fixed in advance, as a function of the cell's identity, for every cell $c$ and epoch $k\ge0$ (epoch
+$k\ge1$ is the $k$-th re-admission after retirement), with $\sum_{c\in\mathcal{C}}\sum_{k\ge0}\alpha_{c,k}\le\alpha$; for
+instance $\alpha_{c,k}=\alpha_c\cdot 6/(\pi^2(k+1)^2)$ with $\sum_c\alpha_c\le\alpha$.  A library that grows is covered as long
+as the share of every future cell is fixed by the same rule.  Suppose each epoch uses fresh tasks and admits $c$ only when its e-process
 (Lemma~\ref{lem:eprocess}) reaches $1/\alpha_{c,k}$, while the choice of cells, their order and the stopping times may depend
 on all data.  Under Assumptions~\ref{ass:trials} and~\ref{ass:shift},
 \[
-  \Pr\bigl[\exists\text{ admitted }(c,k):\ \mathrm{STR}_{Q}(c)>-\theta+2\xi_{s(c)}\bigr]\le\alpha .
+  \Pr\bigl[\exists\text{ admitted }(c,k):\ \mathrm{STR}_{Q^{(k)}}(c)>-\theta+2\xi_{s(c)}\bigr]\le\alpha ,
 \]
-In particular, if $2\xi_s<\theta$ for every scope, the probability of admitting any harmful cell is at most $\alpha$.
+where $P^{(k)},Q^{(k)}$ are the trial and deployment distributions of epoch $k$.  In particular, if $2\xi_s\le\theta$ for
+every scope, the probability of admitting any harmful cell is at most $\alpha$.
 \end{theorem}
 
 \begin{proof}
@@ -45,9 +47,18 @@ For every $(c,k)$ let $A_{c,k}=\{\sup_n K^{c,k}_n\ge1/\alpha_{c,k}\}$, defined o
 epoch.  An admission of $(c,k)$ implies $A_{c,k}$; adaptive selection and stopping can only forgo admissions.  Hence the
 event that some cell with $H_0^c$ true is admitted is contained in $\bigcup_{(c,k):H_0^c}A_{c,k}$, whose probability is at
 most $\sum\alpha_{c,k}\le\alpha$ by Lemma~\ref{lem:eprocess} and a union bound, which needs no independence across cells.
-Finally, by Lemma~\ref{lem:shift}, $\mathrm{STR}_{Q}(c)>-\theta+2\xi_s$ implies $\mathrm{STR}_{P}(c)>-\theta$, that is,
-$H_0^c$.
+Finally, by Lemma~\ref{lem:shift}, $\mathrm{STR}_{Q^{(k)}}(c)>-\theta+2\xi_s$ implies $\mathrm{STR}_{P^{(k)}}(c)>-\theta$,
+that is, $H_0^{c}$ for that epoch.  If $2\xi_s\le\theta$, then $\mathrm{STR}_{Q}(c)>0$ implies
+$\mathrm{STR}_{Q}(c)>-\theta+2\xi_s$.
 \end{proof}
+
+\begin{remark}[Data-dependent budgets]
+The ledger above is fixed in advance, which is what makes the union bound free of any independence assumption.  A budget that
+depends on data (for example, $\alpha_c$ proportional to an estimated reuse frequency) remains valid if (i) the total is at most
+$\alpha$ almost surely and (ii) the trial sequence of cell $c$ is independent of the information used to set $\alpha_c$: then
+$\Pr[A_{c,k}\mid\alpha_{c,k}]\le\alpha_{c,k}$ and summing the expectations gives $\alpha$.  Without (ii), for instance when two
+cells share tasks, a data-dependent budget can break the guarantee.
+\end{remark}
 
 \begin{lemma}[Shift]\label{lem:shift}
 If $f$ takes values in an interval of length $b$, then $|\mathbb{E}_Qf-\mathbb{E}_Pf|\le b\cdot\mathrm{TV}(P,Q)$.  Since
@@ -83,7 +94,9 @@ $\mathrm{STR}_Q(c)=\mathrm{STR}_P(c)+2\xi$, whose admission probability does not
 \end{proposition}
 
 \begin{proof}
-(a) Take $R^\dagger$ that agrees with all observed data and has $\ell(x,\pi)=1$, $\ell(x,\varnothing)=0$ for every task.
+(a) By Assumption~\ref{ass:rich}, take $R^\dagger$ that has the same values of every feature the procedure reads (the data
+of $\mathcal{R}_{\mathrm{obs}}$ and the target's own fingerprints and predicates) and has $\ell(x,\pi)=1$, $\ell(x,\varnothing)=0$
+for every task.  The procedure's input, hence its admission probability, is unchanged, and $Z\equiv1$ on $R^\dagger$.
 (b) Take task types $u$ ($Z=1$) and $d$ ($Z=-1$) with $P(d)=(1+\theta+\delta)/2\ge\xi$, and obtain $Q$ by moving mass $\xi$ from
 $d$ to $u$.  The procedure only reads tasks drawn from $P$.
 \end{proof}
@@ -104,8 +117,8 @@ $1-\theta>0$, and no bound on the composite risk improves on the trivial one imp
 \end{theorem}
 
 \begin{proof}
-Upper bound: $\mathrm{STR}(S_1\circ S_2)\le1-\mathbb{E}\ell(\varnothing)$, and $\mathbb{E}\ell(\varnothing)\ge-a$ because
-$\mathbb{E}\ell(\pi_1)=\mathbb{E}\ell(\varnothing)+a\ge0$; likewise $\ge-b$.  Attainment: constant losses
+Upper bound, for any skills: $\mathrm{STR}(S_1\circ S_2)\le1-\mathbb{E}\ell(\varnothing)$, and $\mathbb{E}\ell(\varnothing)\ge-a$ because
+$\mathbb{E}\ell(\pi_1)=\mathbb{E}\ell(\varnothing)+a\ge0$; likewise $\ge-b$.  Attainment, with losses realizable by Assumption~\ref{ass:rich}: constant losses
 $\ell(\varnothing)=-\min(a,b)$, $\ell(\pi_1)=\ell(\varnothing)+a$, $\ell(\pi_2)=\ell(\varnothing)+b$,
 $\ell(\pi_1\circ\pi_2)=1$.
 \end{proof}
@@ -114,15 +127,28 @@ Theorem~\ref{thm:composition} says nothing about footprints.  Screening only pai
 only under an additional assumption, which we state and test rather than presume.
 
 \begin{assumption}[Non-interaction of disjoint footprints]\label{ass:noninteract}
-If $\mathcal{K}\cap\mathcal{K}'=\varnothing$ then
-$\ell(x,\pi\circ\pi')-\ell(x,\varnothing)=[\ell(x,\pi)-\ell(x,\varnothing)]+[\ell(x,\pi')-\ell(x,\varnothing)]$ for all $x$.
+For sets of skills $A,B$ whose footprints are disjoint ($\mathcal{K}_A\cap\mathcal{K}_B=\varnothing$, with $\mathcal{K}_A$ the
+union over $A$), and every task $x$,
+$\ell(x,\pi_A\circ\pi_B)-\ell(x,\varnothing)=[\ell(x,\pi_A)-\ell(x,\varnothing)]+[\ell(x,\pi_B)-\ell(x,\varnothing)]$.
 \end{assumption}
 
-\begin{corollary}\label{cor:screening}
-Under Assumption~\ref{ass:noninteract}, two admissible skills with disjoint footprints compose to
-$\mathrm{STR}\le-2\theta$, so only footprint-overlapping pairs need a composite cell; with mean overlap degree $\bar d$ there
-are $|\mathcal{L}_s|\,\bar d/2$ such pairs per scope.
+\begin{corollary}[What actually runs]\label{cor:execution}
+Under Assumption~\ref{ass:noninteract} and the execution rule of Section~\ref{sec:problem}, outside the event of
+Theorem~\ref{thm:admission} (probability at most $\alpha$), every executed set $E$ with $m$ footprint-connected components
+satisfies $\mathrm{STR}_Q(E)\le m(-\theta+2\xi_s)$; in particular no executed set is harmful when $2\xi_s\le\theta$.  Only
+footprint-overlapping components need a composite cell: with mean overlap degree $\bar d$ there are
+$|\mathcal{L}_s|\,\bar d/2$ overlapping pairs per scope.
 \end{corollary}
+
+\begin{proof}
+Components have pairwise disjoint footprints, so applying Assumption~\ref{ass:noninteract} $m-1$ times and taking expectations
+under $Q$ gives $\mathrm{STR}_Q(E)=\sum_{j=1}^m\mathrm{STR}_Q(E_j)$.  Each $E_j$ is an admitted cell (a single skill, or a
+composite by the execution rule), so outside the event of Theorem~\ref{thm:admission} each term is at most $-\theta+2\xi_s$.
+\end{proof}
+
+Assumption~\ref{ass:noninteract} is strong: two edits in different functions can still interact through shared state that no
+footprint records.  We therefore report it as an assumption and measure how often it fails on pairs with disjoint footprints,
+rather than presume it.
 
 \subsection{The value of pairing}
 
@@ -136,11 +162,13 @@ independent $T,S$, $R=1+2\sigma_T^2/\sigma_S^2$.
 \end{proposition}
 
 \begin{proof}
-Direct computation of the two variances; under the additive model $V_\pi+V_\varnothing=2\sigma_T^2+\sigma_S^2$ and $C=\sigma_T^2$.
+Direct computation of the two variances; $V_\pi,V_\varnothing$ include any run-to-run noise, and only the
+shared task component enters $C$.  Under the additive model $V_\pi+V_\varnothing=2\sigma_T^2+\sigma_S^2$ and $C=\sigma_T^2$.
 \end{proof}
 
 \subsection{Numerical checks}
 \label{sec:checks}
 Every statement above is checked numerically by a script in the artifact, using the e-process of our implementation:
 per-cell validity, the failure of a per-scope budget, the attained constant $2$ in Lemma~\ref{lem:shift}, the bound of
-Theorem~\ref{thm:composition} on random instances, the pairing ratio, and the convergence of the ledger.
+Theorem~\ref{thm:composition} on random instances, the pairing ratio, the convergence of the ledger, and the failure of
+re-admission without a ledger (re-testing a retired cell with the full $\alpha$ at every epoch).

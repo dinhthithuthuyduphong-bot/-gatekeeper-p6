@@ -228,3 +228,19 @@ Chạy: `python tools/theory_checks.py OUT --reps 2000` (workflow `Gatekeeper th
 - Wang, R., & Ramdas, A. (2022). False discovery rate control with e-values. *JRSS-B*, 84(3), 822–852.
 - Waudby-Smith, I., & Ramdas, A. (2024). Estimating means of bounded random variables by betting. *JRSS-B*, 86(1), 1–27 (đã có).
 - Ramdas, A., Grünwald, P., Vovk, V., & Shafer, G. (2023). Game-theoretic statistics and safe anytime-valid inference. *Statistical Science*, 38(4), 576–601.
+
+---
+
+## 9. Bổ sung sau rà soát giai đoạn 1 (31/10/2026)
+
+Chi tiết từng bước ở [PHASE1_REVIEW](PHASE1_REVIEW.md). Tóm tắt các thay đổi so với các mục 0–5 ở trên:
+
+- **Luật thực thi (G1).** Chỉ chạy một tập kỹ năng E khi mọi thành phần liên thông của đồ thị giao footprint có từ hai kỹ năng là một ô đã admit.
+  - Giả định D tổng quát cho **tập**: footprint của A và B rời nhau thì hiệu loss cộng được.
+  - **Hệ quả (thứ thực sự chạy):** ngoài biến cố của Định lý 4′, STR_Q(E) ≤ m(−θ + 2ξ_s), với m là số thành phần.
+  - *Chứng minh:* các thành phần rời nhau, áp Giả định D m−1 lần rồi lấy kỳ vọng; mỗi thành phần là một ô đã admit nên ≤ −θ + 2ξ_s.
+- **Epoch (G2).** P^{(k)}, Q^{(k)} theo epoch; Định lý 4′ phát biểu theo epoch.
+- **Sổ cái (G3).** α là hàm của danh tính ô trên tập đếm được mọi ô có thể có, nên thư viện tăng thêm vẫn được bao. Ngân sách phụ thuộc dữ liệu vẫn đúng nếu tổng ≤ α hầu chắc chắn và dãy thử của ô độc lập với thông tin dùng để cấp α, vì khi đó Pr[A_{c,k} | α_{c,k}] ≤ α_{c,k}.
+- **Điều kiện (G4).** 2ξ_s ≤ θ là đủ.
+- **G5–G8:** thêm điều kiện thực hiện được (Giả định C); đặc trưng của đích trong Mệnh đề 6′(a); yêu cầu rút có hoàn lại; nhiễu chạy lại trong Mệnh đề 9.
+- **C8 (G9):** admit lại 10 epoch với đủ α mỗi lần cho tỉ lệ admit sai 0,45; có sổ cái 0,05.

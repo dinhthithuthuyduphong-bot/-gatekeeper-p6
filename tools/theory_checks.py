@@ -10,6 +10,7 @@ Each check is a falsifiable statement; the script records the numbers and whethe
   C4  composition: STR(S1 o S2) <= 1 + min(STR(S1), STR(S2)) on random instances, and the bound is attained
   C5  pairing: variance ratio unpaired/paired = 1 + 2 sT^2/sS^2 (draft: 1 + sT^2/sS^2)
   C6  alpha ledger: sum_k 6/(pi^2 (k+1)^2) <= 1
+  C8  re-admission after retirement: full alpha at every epoch vs the 6/(pi^2 (k+1)^2) ledger
   C7  Corollary 8 consistency: mean overlapping partners implied by 11.4% overlapping pairs of 94 skills
 """
 import json
@@ -109,6 +110,34 @@ def check_alpha(reps, cells, n, seed, theta=0.1, alpha=0.1):
     return c1, c2
 
 
+def check_readmission(reps, epochs, n, seed, theta=0.1, alpha=0.1):
+    """One cell at the null boundary, retired and re-tested `epochs` times on fresh tasks: full alpha at every epoch vs the
+    ledger alpha * 6 / (pi^2 (k+1)^2)."""
+    rng = random.Random(seed + 1)
+    full = ledger = 0
+    for _ in range(reps):
+        hit_full = hit_ledger = False
+        for k in range(epochs):
+            draws = [rng.random() for _i in range(n)]
+            for name, thr in (("full", 1 / alpha), ("ledger", 1 / (alpha * 6 / (math.pi ** 2 * (k + 1) ** 2)))):
+                ep, p_up, hit = FastBetting(theta), (1 + theta) / 2, False
+                for u in draws:
+                    if ep.update(-(1.0 if u < p_up else -1.0)) >= thr:
+                        hit = True
+                        break
+                if name == "full":
+                    hit_full |= hit
+                else:
+                    hit_ledger |= hit
+        full += hit_full
+        ledger += hit_ledger
+    res = {"statement": "re-admission: full alpha per epoch can exceed alpha; the ledger does not", "epochs": epochs, "reps": reps,
+           "error_full_alpha_each_epoch": full / reps, "error_ledger": ledger / reps}
+    res["held"] = res["error_ledger"] <= alpha
+    res["no_ledger_exceeded_alpha"] = res["error_full_alpha_each_epoch"] > alpha
+    return res
+
+
 def check_tv():
     # two task types: a (loss with skill 1, without 0: Z=+1) and b (Z=-1)
     p = {"a": 0.1, "b": 0.9}
@@ -204,14 +233,16 @@ def main(argv):
     c1, c2 = check_alpha(reps, cells, n, seed)
     res = {"C1_per_cell_validity": c1, "C2_budget_per_cell_vs_per_scope": c2, "C3_bounded_shift": check_tv(),
            "C4_composition": check_composition(), "C5_pairing": check_pairing(seed), "C6_alpha_ledger": check_ledger(),
-           "C7_corollary8_consistency": check_corollary8()}
+           "C7_corollary8_consistency": check_corollary8(),
+           "C8_readmission_ledger": check_readmission(max(100, reps // 4), 10, n, seed)}
     out.mkdir(parents=True, exist_ok=True)
     (out / "THEORY_CHECKS.json").write_text(json.dumps(res, indent=1))
     lines = ["| Check | Statement | Held | Key numbers |", "|---|---|---|---|"]
     keys = {"C1_per_cell_validity": ("rate", "wilson95"), "C2_budget_per_cell_vs_per_scope": ("familywise_shared", "familywise_split"),
             "C3_bounded_shift": ("ratio_gap_over_tv", "max_ratio_random"), "C4_composition": ("violations", "construction_str_composite"),
             "C5_pairing": ("measured_ratio", "corrected_formula"), "C6_alpha_ledger": ("partial_sum_1e6",),
-            "C7_corollary8_consistency": ("implied_mean_partners", "draft_dbar")}
+            "C7_corollary8_consistency": ("implied_mean_partners", "draft_dbar"),
+            "C8_readmission_ledger": ("error_full_alpha_each_epoch", "error_ledger")}
     for k, v in res.items():
         nums = ", ".join("%s=%s" % (x, json.dumps(v[x]) if not isinstance(v[x], float) else round(v[x], 4)) for x in keys[k])
         lines.append("| %s | %s | %s | %s |" % (k, v["statement"], v["held"], nums))

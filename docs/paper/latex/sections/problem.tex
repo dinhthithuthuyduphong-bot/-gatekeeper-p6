@@ -9,7 +9,7 @@ target), observed postconditions $\mathcal{P}$ with the contexts they were obser
 $\mathcal{K}$, the code regions and behavioural properties that $\pi$ reads or writes.
 A context $x$ is a (repository, revision, environment, task) tuple.
 A scope family $\mathbb{S}=\{s_1,\dots,s_L\}$ is a finite partition of contexts declared before any trial.
-We call a pair $c=(S,s)$ a \emph{cell}; for skills $S,S'$ with overlapping footprints, $(S\circ S',s)$ is a cell of its own.
+We call a pair $c=(S,s)$ a \emph{cell}; for a set of skills whose footprints form a connected overlap graph, their composition, applied together in scope $s$, is a cell of its own (for two skills, $(S\circ S',s)$).
 
 \paragraph{Loss and selective transfer risk.}
 For a task $x$, $\ell(x,\pi)\in[0,1]$ is its functional loss with the skill applied and $\ell(x,\varnothing)$ the loss
@@ -17,10 +17,12 @@ without it.  We use one minus the held-out pass rate plus $0.5$ per regression, 
 assumption below holds.  The paired difference is $Z=\ell(x,\pi)-\ell(x,\varnothing)\in[-1,1]$.
 
 \begin{definition}[Selective transfer risk]
-For a cell $c=(S,s)$ and a distribution $P_s$ over the contexts of scope $s$,
-$\mathrm{STR}_{P}(c)=\mathbb{E}_{x\sim P_s}\bigl[\ell(x,\pi)-\ell(x,\varnothing)\bigr]$.
-A cell is \emph{admissible} if $\mathrm{STR}_{P}(c)\le-\theta$ for a benefit margin $\theta>0$, and \emph{harmful} if
-$\mathrm{STR}(c)>0$.
+For a cell $c=(S,s)$ and a distribution $D$ over the contexts of scope $s$,
+$\mathrm{STR}_{D}(c)=\mathbb{E}_{x\sim D}\bigl[\ell(x,\pi)-\ell(x,\varnothing)\bigr]$.
+With $P_s$ the distribution trials are drawn from and $Q_s$ the deployment distribution, a cell is \emph{admissible} if
+$\mathrm{STR}_{P}(c)\le-\theta$ for a benefit margin $\theta>0$, and \emph{harmful} if $\mathrm{STR}_{Q}(c)>0$.
+After a retirement (Section~\ref{sec:theory}) the environment may have changed; epoch $k$ of a cell then has its own
+$P^{(k)}_s,Q^{(k)}_s$, and every statement below is per epoch.
 \end{definition}
 
 The definition is an excess over the no-skill baseline, so a skill that neither helps nor harms is not admissible, and it is
@@ -29,7 +31,8 @@ relative to a declared scope; Proposition~\ref{prop:nofree} shows why it cannot 
 \paragraph{Assumptions.}
 \begin{assumption}[Paired trials]\label{ass:trials}
 For every cell $c$ there is an infinite sequence of tasks $x^c_1,x^c_2,\dots$ drawn i.i.d.\ from $P_s$ (in practice, drawn
-\emph{with replacement} from the target's task set); each task is run with and without the skill on the same snapshot and
+\emph{with replacement} from the target's task set; without replacement the conditional mean of the next draw drifts and
+Lemma~\ref{lem:eprocess} needs a finite-population e-process instead); each task is run with and without the skill on the same snapshot and
 seed.  Different cells may depend on each other.
 \end{assumption}
 
@@ -38,9 +41,15 @@ Deployment contexts of scope $s$ follow $Q_s$ with $\mathrm{TV}(P_s,Q_s)\le\xi_s
 $\mathrm{TV}(P,Q)=\sup_A|P(A)-Q(A)|$.
 \end{assumption}
 
+\paragraph{Execution rule.}
+Skills that are executed together form a set $E$.  Split $E$ into the connected components of its footprint-overlap graph
+(two skills are adjacent when their footprints intersect).  We execute $E$ only if every component with two or more skills
+is itself an admitted cell; a skill whose composite with an already admitted skill is still undecided is not executed together
+with it.  This closes the gap between per-cell certificates and what actually runs.
+
 \paragraph{Admission problem.}
 Given a library, a validation budget and a pre-allocated error budget $\alpha$, decide which cells may execute, such that
 $\Pr[\exists\text{ an admitted cell }c:\ \mathrm{STR}_{Q}(c)>0]\le\alpha$ over the whole library, over adaptively chosen
-cells and over re-admissions after retirement.  Theorem~\ref{thm:admission} gives this guarantee whenever
-$2\xi_s<\theta$ for every scope; for coarser scopes it gives the weaker, explicit statement
-$\mathrm{STR}_{Q}(c)\le-\theta+2\xi_s$.
+cells and over re-admissions after retirement, and such that, under the execution rule, no executed set is harmful except on
+that event.  Theorem~\ref{thm:admission} and Corollary~\ref{cor:execution} give this whenever $2\xi_s\le\theta$ for every
+scope; for coarser scopes they give the weaker, explicit statement $\mathrm{STR}_{Q}(c)\le-\theta+2\xi_s$.
