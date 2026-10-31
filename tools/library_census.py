@@ -95,6 +95,32 @@ def summarise_target(funcs):
             "largest_component": max((len(c) for c in comps), default=0), "footprints": lib}
 
 
+def enabling_edges(pairs):
+    """Family pairs that do not commute or where one changes the other's sites, on any file of the target."""
+    return sorted({tuple(sorted((p["a"], p["b"]))) for p in pairs
+                   if not p["commute"] or p["a_changes_b_sites"] or p["b_changes_a_sites"]})
+
+
+def dynamic(res):
+    """Execution rule with enabling edges (gatekeeper_ext.execution, edges=): components and composite cells per target,
+    derived from the census' own measures 2 and 3 (no re-scan)."""
+    out, tot = {}, {"composite_cells_required": 0, "targets_changed": 0, "largest_component": 0, "missed_by_static": []}
+    for t in res["targets"]:
+        if t.get("clone_error"):
+            continue
+        edges = enabling_edges([p for p in res["pairs"] if p["target"] == t["target"]])
+        comps = [sorted(c) for c in X.components(t["footprints"], edges)]
+        missed = [list(e) for e in edges if not any(set(e) <= set(c) for c in t["components"])]
+        row = {"edges": [list(e) for e in edges], "components": comps, "composite_cells_required": sum(1 for c in comps if len(c) > 1),
+               "largest_component": max((len(c) for c in comps), default=0), "edges_missed_by_static_rule": missed}
+        out[t["target"]] = row
+        tot["composite_cells_required"] += row["composite_cells_required"]
+        tot["targets_changed"] += comps != t["components"]
+        tot["largest_component"] = max(tot["largest_component"], row["largest_component"])
+        tot["missed_by_static"] += [[t["target"]] + e for e in missed]
+    return {"total": tot, "targets": out}
+
+
 def census(work, targets):
     skills = load_skills()
     rows, all_pairs = [], []
@@ -134,10 +160,18 @@ def census(work, targets):
              "non_commuting_family_pairs": sorted({"%s+%s" % (p["a"], p["b"]) for p in all_pairs if not p["commute"]}),
              "site_changing_family_pairs": sorted({"%s+%s" % (p["a"], p["b"]) for p in all_pairs
                                                    if p["a_changes_b_sites"] or p["b_changes_a_sites"]})}
-    return {"total": total, "targets": rows, "pairs": all_pairs}
+    res = {"total": total, "targets": rows, "pairs": all_pairs}
+    res["with_enabling_edges"] = dynamic(res)
+    return res
 
 
 def main(argv):
+    if argv and argv[0] == "--dynamic":   # recompute the enabling-edge analysis on a committed census (no re-scan)
+        res = json.loads(Path(argv[1]).read_text())
+        res["with_enabling_edges"] = dynamic(res)
+        Path(argv[1]).write_text(json.dumps(res, indent=1, default=list))
+        print(json.dumps(res["with_enabling_edges"]["total"], indent=1))
+        return 0
     work, out = Path(argv[0]), Path(argv[1])
     targets = (argv[argv.index("--targets") + 1] if "--targets" in argv else "d,e,g").split(",")
     work.mkdir(parents=True, exist_ok=True)

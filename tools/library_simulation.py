@@ -158,11 +158,20 @@ def main(argv):
 def main_graph(argv, reps, n, seed, q):
     """--graph CENSUS.json: one library per target with at least two cells, cycled over the repetitions."""
     census = json.loads(Path(argv[argv.index("--graph") + 1]).read_text())
-    graph = [t["footprints"] for t in census["targets"] if not t.get("clone_error") and t.get("cells", 0) >= 2]
+    edges = {k: v["edges"] for k, v in census.get("with_enabling_edges", {}).get("targets", {}).items()}
+
+    def with_edges(t):
+        """Enabling edges (Study R2) become a shared footprint token, so they count as overlap everywhere."""
+        fp = {k: list(v) for k, v in t["footprints"].items()}
+        for a, b in edges.get(t["target"], []):
+            for x in (a, b):
+                fp[x].append("enables:%s+%s" % (a, b))
+        return fp
+    graph = [with_edges(t) for t in census["targets"] if not t.get("clone_error") and t.get("cells", 0) >= 2]
     if not graph:
         print("no target has two or more cells")
         return 1
-    res = {"source": argv[argv.index("--graph") + 1], "libraries": len(graph),
+    res = {"source": argv[argv.index("--graph") + 1], "libraries": len(graph), "enabling_edges": sum(map(len, edges.values())),
            "library_sizes": sorted(len(g) for g in graph),
            "overlapping_pairs_per_library": sorted(sum(1 for i, a in enumerate(sorted(g)) for b in sorted(g)[i + 1:]
                                                        if set(g[a]) & set(g[b])) for g in graph),

@@ -2432,5 +2432,304 @@
    "file": "src/hera_pspec/uvwindow.py",
    "target": "K1_hera_pspec"
   }
- ]
+ ],
+ "with_enabling_edges": {
+  "total": {
+   "composite_cells_required": 6,
+   "targets_changed": 1,
+   "largest_component": 8,
+   "missed_by_static": [
+    [
+     "G1_pydal",
+     "negative_type_guard",
+     "type_eq_isinstance"
+    ]
+   ]
+  },
+  "targets": {
+   "A1_speckit_catalog": {
+    "edges": [],
+    "components": [
+     [
+      "negative_type_guard"
+     ],
+     [
+      "open_encoding"
+     ]
+    ],
+    "composite_cells_required": 0,
+    "largest_component": 1,
+    "edges_missed_by_static_rule": []
+   },
+   "C1_jsonschema": {
+    "edges": [],
+    "components": [
+     [
+      "negative_type_guard"
+     ],
+     [
+      "open_encoding"
+     ]
+    ],
+    "composite_cells_required": 0,
+    "largest_component": 1,
+    "edges_missed_by_static_rule": []
+   },
+   "C2_voluptuous": {
+    "edges": [],
+    "components": [
+     [
+      "bare_except"
+     ],
+     [
+      "len_zero_falsy"
+     ],
+     [
+      "negative_type_guard"
+     ],
+     [
+      "reraise_bare"
+     ]
+    ],
+    "composite_cells_required": 0,
+    "largest_component": 1,
+    "edges_missed_by_static_rule": []
+   },
+   "D1_py_ecc": {
+    "edges": [],
+    "components": [
+     [
+      "negative_type_guard"
+     ],
+     [
+      "open_encoding"
+     ]
+    ],
+    "composite_cells_required": 0,
+    "largest_component": 1,
+    "edges_missed_by_static_rule": []
+   },
+   "D2_cerberus": {
+    "edges": [],
+    "components": [
+     [
+      "bare_except",
+      "mutable_default"
+     ],
+     [
+      "len_zero_falsy"
+     ],
+     [
+      "negative_type_guard"
+     ],
+     [
+      "open_encoding"
+     ]
+    ],
+    "composite_cells_required": 1,
+    "largest_component": 2,
+    "edges_missed_by_static_rule": []
+   },
+   "D3_speckit": {
+    "edges": [],
+    "components": [
+     [
+      "negative_type_guard"
+     ],
+     [
+      "open_encoding"
+     ]
+    ],
+    "composite_cells_required": 0,
+    "largest_component": 1,
+    "edges_missed_by_static_rule": []
+   },
+   "D4_openfeature": {
+    "edges": [],
+    "components": [],
+    "composite_cells_required": 0,
+    "largest_component": 0,
+    "edges_missed_by_static_rule": []
+   },
+   "D5_pycubrid": {
+    "edges": [
+     [
+      "negative_type_guard",
+      "type_eq_isinstance"
+     ]
+    ],
+    "components": [
+     [
+      "len_zero_falsy"
+     ],
+     [
+      "negative_type_guard",
+      "type_eq_isinstance"
+     ],
+     [
+      "open_encoding"
+     ]
+    ],
+    "composite_cells_required": 1,
+    "largest_component": 2,
+    "edges_missed_by_static_rule": []
+   },
+   "E1_pyyaml": {
+    "edges": [],
+    "components": [
+     [
+      "negative_type_guard"
+     ]
+    ],
+    "composite_cells_required": 0,
+    "largest_component": 1,
+    "edges_missed_by_static_rule": []
+   },
+   "E2_packaging": {
+    "edges": [],
+    "components": [
+     [
+      "len_zero_falsy"
+     ],
+     [
+      "negative_type_guard"
+     ],
+     [
+      "open_encoding"
+     ],
+     [
+      "type_eq_isinstance"
+     ]
+    ],
+    "composite_cells_required": 0,
+    "largest_component": 1,
+    "edges_missed_by_static_rule": []
+   },
+   "E3_databricks": {
+    "edges": [],
+    "components": [
+     [
+      "bare_except"
+     ],
+     [
+      "mutable_default"
+     ],
+     [
+      "negative_type_guard"
+     ],
+     [
+      "open_encoding"
+     ],
+     [
+      "reraise_bare"
+     ]
+    ],
+    "composite_cells_required": 0,
+    "largest_component": 1,
+    "edges_missed_by_static_rule": []
+   },
+   "K1_trino": {
+    "edges": [],
+    "components": [
+     [
+      "dict_keys_membership",
+      "len_zero_falsy",
+      "negative_type_guard"
+     ]
+    ],
+    "composite_cells_required": 1,
+    "largest_component": 3,
+    "edges_missed_by_static_rule": []
+   },
+   "K2_tomlkit": {
+    "edges": [],
+    "components": [
+     [
+      "negative_type_guard"
+     ]
+    ],
+    "composite_cells_required": 0,
+    "largest_component": 1,
+    "edges_missed_by_static_rule": []
+   },
+   "G1_pydal": {
+    "edges": [
+     [
+      "negative_type_guard",
+      "type_eq_isinstance"
+     ]
+    ],
+    "components": [
+     [
+      "bare_except",
+      "dict_keys_membership",
+      "eq_bool_identity",
+      "len_zero_falsy",
+      "mutable_default",
+      "negative_type_guard",
+      "none_identity",
+      "type_eq_isinstance"
+     ],
+     [
+      "reraise_bare"
+     ]
+    ],
+    "composite_cells_required": 1,
+    "largest_component": 8,
+    "edges_missed_by_static_rule": [
+     [
+      "negative_type_guard",
+      "type_eq_isinstance"
+     ]
+    ]
+   },
+   "G2_emmett": {
+    "edges": [],
+    "components": [
+     [
+      "len_zero_falsy"
+     ],
+     [
+      "mutable_default"
+     ],
+     [
+      "negative_type_guard"
+     ],
+     [
+      "none_identity"
+     ],
+     [
+      "open_encoding"
+     ]
+    ],
+    "composite_cells_required": 0,
+    "largest_component": 1,
+    "edges_missed_by_static_rule": []
+   },
+   "K1_hera_pspec": {
+    "edges": [],
+    "components": [
+     [
+      "bare_except",
+      "dict_keys_membership",
+      "eq_bool_identity",
+      "len_zero_falsy",
+      "mutable_default",
+      "negative_type_guard",
+      "none_identity"
+     ],
+     [
+      "open_encoding",
+      "reraise_bare"
+     ],
+     [
+      "type_eq_isinstance"
+     ]
+    ],
+    "composite_cells_required": 2,
+    "largest_component": 7,
+    "edges_missed_by_static_rule": []
+   }
+  }
+ }
 }

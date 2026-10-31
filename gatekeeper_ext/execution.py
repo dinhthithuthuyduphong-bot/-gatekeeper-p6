@@ -6,21 +6,29 @@ the connected components of its footprint-overlap graph (two skills are adjacent
 only if every component is an admitted cell (a single admitted skill, or an admitted composite of exactly that component).
 Under the non-interaction assumption for disjoint footprints, this bounds the risk of E by the sum over its components.
 
+Enabling edges (Study R2): a footprint computed on the ORIGINAL code misses a skill that creates or removes another skill's
+sites (on pydal, `type(x) is not int` -> `not isinstance(x, int)` creates a site for the bool-exclusion guard in a function the
+guard did not touch before).  `edges` adds such pairs, measured by applying the two skills in both orders
+(tools/library_census.py: non-commuting or site-changing pairs), to the overlap graph.
+
 Lives in gatekeeper_ext (not gatekeeper_lite) on purpose: every frozen study hashes every module of gatekeeper_lite, so a
 new module there would break their freeze verification.  It reuses gatekeeper_lite.gatekeeper.footprint_overlap unchanged.
 """
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Dict, FrozenSet, Iterable, List, Mapping, Optional, Sequence, Set
+from typing import Collection, Dict, FrozenSet, Iterable, List, Mapping, Optional, Sequence, Set
 
 from gatekeeper_lite.gatekeeper import footprint_overlap
 
 Cell = FrozenSet[str]          # the skill ids applied together in one scope; a singleton is a single-skill cell
 
 
-def components(footprints: Mapping[str, Sequence[str]]) -> List[Cell]:
-    """Connected components of the footprint-overlap graph, each as a frozenset of skill ids (sorted for determinism)."""
+Edges = Collection[Collection[str]]   # extra adjacencies (enabling pairs), each a pair of skill ids
+
+
+def components(footprints: Mapping[str, Sequence[str]], edges: Edges = ()) -> List[Cell]:
+    """Connected components of the footprint-overlap graph plus `edges`, each a frozenset of skill ids (sorted)."""
     ids = sorted(footprints)
     parent = {i: i for i in ids}
 
@@ -36,6 +44,12 @@ def components(footprints: Mapping[str, Sequence[str]]) -> List[Cell]:
                 ra, rb = find(a), find(b)
                 if ra != rb:
                     parent[rb] = ra
+    for e in edges:
+        a, b = sorted(e)
+        if a in parent and b in parent:
+            ra, rb = find(a), find(b)
+            if ra != rb:
+                parent[rb] = ra
     groups: Dict[str, Set[str]] = {}
     for i in ids:
         groups.setdefault(find(i), set()).add(i)
@@ -54,28 +68,28 @@ class ExecutionDecision:
         return "refused: not admitted as a cell: %s" % ", ".join("{%s}" % ", ".join(sorted(c)) for c in self.missing)
 
 
-def check_execution(footprints: Mapping[str, Sequence[str]], admitted: Iterable[Cell]) -> ExecutionDecision:
+def check_execution(footprints: Mapping[str, Sequence[str]], admitted: Iterable[Cell], edges: Edges = ()) -> ExecutionDecision:
     """Decide whether the skills in `footprints` (skill id -> footprint) may run together in one scope, given the admitted
     cells of that scope.  A component of size 1 needs the single skill admitted; a larger one needs exactly its composite."""
     adm = {frozenset(c) for c in admitted}
-    comps = components(footprints)
+    comps = components(footprints, edges)
     missing = [c for c in comps if c not in adm]
     return ExecutionDecision(allowed=not missing, components=comps, missing=missing)
 
 
 def executable_subset(footprints: Mapping[str, Sequence[str]], admitted: Iterable[Cell],
-                      priority: Optional[Sequence[str]] = None) -> List[str]:
+                      priority: Optional[Sequence[str]] = None, edges: Edges = ()) -> List[str]:
     """Greedy selection in priority order (default: sorted ids): add a skill only if the enlarged set still satisfies the
     execution rule.  The result always satisfies the rule; it is maximal for the order, not necessarily maximum."""
     adm = {frozenset(c) for c in admitted}
     chosen: List[str] = []
     for sid in (priority or sorted(footprints)):
         trial = chosen + [sid]
-        if check_execution({k: footprints[k] for k in trial}, adm).allowed:
+        if check_execution({k: footprints[k] for k in trial}, adm, edges).allowed:
             chosen = trial
     return chosen
 
 
-def composites_to_test(footprints: Mapping[str, Sequence[str]], admitted: Iterable[Cell]) -> List[Cell]:
+def composites_to_test(footprints: Mapping[str, Sequence[str]], admitted: Iterable[Cell], edges: Edges = ()) -> List[Cell]:
     """The composite cells that must be admitted before the whole set may run: its non-admitted components of size >= 2."""
-    return [c for c in check_execution(footprints, admitted).missing if len(c) >= 2]
+    return [c for c in check_execution(footprints, admitted, edges).missing if len(c) >= 2]

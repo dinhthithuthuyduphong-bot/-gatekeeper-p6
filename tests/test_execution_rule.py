@@ -53,6 +53,17 @@ class ExecutionRuleTest(unittest.TestCase):
             for comp in d.components:                                    # and every component is literally admitted
                 self.assertIn(comp, {F(c) for c in admitted})
 
+    def test_enabling_edge_joins_disjoint_footprints(self):
+        # Study R2, pydal: type_eq_isinstance creates a site for the bool guard in a function the guard did not touch
+        fp = {"guard": ["func:a"], "typeeq": ["func:b"]}
+        self.assertEqual(len(X.components(fp)), 2)
+        self.assertEqual(X.components(fp, edges=[("typeeq", "guard")]), [F({"guard", "typeeq"})])
+        singles = [F({"guard"}), F({"typeeq"})]
+        self.assertTrue(X.check_execution(fp, singles).allowed)
+        self.assertFalse(X.check_execution(fp, singles, edges=[("guard", "typeeq")]).allowed)
+        self.assertEqual(X.composites_to_test(fp, singles, edges=[("guard", "typeeq")]), [F({"guard", "typeeq"})])
+        self.assertEqual(len(X.executable_subset(fp, singles, edges=[("guard", "typeeq")])), 1)
+
 
 if __name__ == "__main__":
     unittest.main()
