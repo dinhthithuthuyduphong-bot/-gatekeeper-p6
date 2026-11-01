@@ -1,0 +1,51 @@
+# Recover the trial records of an earlier "Gatekeeper Study T trials" run whose commit step failed (for example a rebase
+# conflict), from its artifacts, then analyse and commit them.  No trial is re-run; no model calls.
+name: Gatekeeper Study T collect trial artifacts
+on:
+  workflow_dispatch:
+    inputs:
+      run_id: {description: "id of the trials run whose T_TRIALS_* artifacts are collected", required: true}
+      results: {description: "results directory (study_t, or study_t2)", default: "study_t2"}
+      n: {description: "inputs per stream (T: 200; T2: 240)", default: "240"}
+permissions:
+  contents: write
+  actions: read
+jobs:
+  collect:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.12"
+      - run: pip install -q "ruff==0.17.3"
+      - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        with:
+          pattern: T_TRIALS_*
+          path: research_closure/results/${{ inputs.results }}
+          merge-multiple: true
+          run-id: ${{ inputs.run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - env:
+          RESULTS: ${{ inputs.results }}
+          GK_N_MAX: ${{ inputs.n }}
+        run: |
+          d="research_closure/results/$RESULTS"
+          git status --short "$d" | tee -a "$GITHUB_STEP_SUMMARY"
+          python tools/market_analyze.py --replay "$d"
+          if [ "$RESULTS" != "study_t" ]; then export GK_EXTRA_SOURCES=research_closure/results/study_t/STUDY_T_RESULT.json; fi
+          python tools/market_analyze.py "$d" | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "gatekeeper-freeze-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add "research_closure/results/${{ inputs.results }}"
+          git diff --cached --quiet && { echo "no change"; exit 0; }
+          git commit -m "Study T trials collected from run ${{ inputs.run_id }} (${{ inputs.results }})"
+          git fetch origin "${GITHUB_REF_NAME}"
+          git rebase origin/"${GITHUB_REF_NAME}"
+          git push origin HEAD:"${GITHUB_REF_NAME}"

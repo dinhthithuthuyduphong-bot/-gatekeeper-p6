@@ -75,5 +75,6 @@ jobs:
           git add "research_closure/results/${{ inputs.results }}"
           git diff --cached --quiet && { echo "no change"; exit 0; }
           git commit -m "Study T trials and analysis (${{ inputs.results }})"
-          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git fetch origin "${GITHUB_REF_NAME}"
+          git rebase origin/"${GITHUB_REF_NAME}" || { git rebase --abort; echo "::error::rebase conflict: recover with study-t-collect.yml (run_id ${{ github.run_id }})"; exit 1; }
           git push origin HEAD:"${GITHUB_REF_NAME}"
