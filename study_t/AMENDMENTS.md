@@ -65,3 +65,23 @@ re-run. A call that would allocate between 2 GB and the runner's memory was poss
 packages are labelled by run in the results.
 
 *(T-A3 was originally reserved for test suites; the test-suite baseline becomes T-A4.)*
+
+## T-A5 (post hoc, written before it is computed): a strong B6, faithful to the original paper
+**Why.** The original paper's decisive baseline B6 is GSE replay verification (B5: the skill's recorded tests replayed on the
+**source repositories** where it was learned and used) plus environment fingerprints. Our B6-R replayed only a hand-built fixture
+(Studies D/E) or the rule's documentation example (Study T); it is weaker than B6 on the replay side
+(`study_d/PROVENANCE_B6R.md`). This amendment adds **B6-strong**, computed from the existing Study T records. It is post hoc
+(Study T's outcomes have been seen), but it is written down before it is computed.
+
+**Definition.**
+- **Sources** of cell (rule R, package p): every *other* package of Study T with a usable cell for R.
+- **Replay on sources passes** iff R changed behaviour on **no** draw of **any** source (gate and reference streams of the source
+  cell; this is source evidence, never target evidence).
+- **Fingerprint:** interpreter version, operating system and Ruff version of the source and target environments. In Study T these
+  are identical by construction (one runner image, Python 3.12, Ruff 0.17.3), so the fingerprint matches. This is the
+  environment-level check of B6; repository content is not an environment fingerprint.
+- **Admit** iff replay on sources passes. If R has no other usable source, fall back to B6-R (the documented example).
+- **Variant B6-majority:** admit iff R changed behaviour on fewer than half of its sources (a lenient version, for retention).
+
+**Reported:** harmful and safe admissions of B6-strong and B6-majority next to Table `tab:market`; W1, W2 and W4 recomputed with
+B6-strong replacing B6-R. A loss is reported as such.
