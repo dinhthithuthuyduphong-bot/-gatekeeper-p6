@@ -15,8 +15,8 @@ certificate bets the constant $\lambda=0.9/(1-\eta)$ of Proposition~\ref{prop:ha
 The execution rule uses module-qualified footprints (file and function, module-level code included) and the enabling edges of
 Section~\ref{sec:eval-library}.  A conformance check labels each configuration with the guarantee it actually has: options of the
 frozen pipeline such as consuming priority tasks first, keeping only tasks that reach the edit, a sign test on discordant pairs, or
-e-BH give a weaker guarantee than Theorem~\ref{thm:admission} (no guarantee, sign only, sign only, FDR), and no reported study
-uses them.  Every theorem and remark is checked numerically on the code that the studies ran (Section~\ref{sec:checks}),
+e-BH give a weaker guarantee than Theorem~\ref{thm:admission} (no guarantee, sign only, sign only, FDR); the only one a reported study
+uses is e-BH (G-FDR in Studies U and T2), always labelled with its false-discovery guarantee.  Every theorem and remark is checked numerically on the code that the studies ran (Section~\ref{sec:checks}),
 including the exact decision rule of Studies D--H.
 
 Every study is pre-registered by a workflow that hashes its protocol, configuration and tools; the seed is drawn from the public drand

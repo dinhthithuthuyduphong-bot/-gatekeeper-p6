@@ -284,6 +284,9 @@ CLAIMS = [
     ("T2 cells", "$3{,}426$ usable cells, $29$ were harmful ($20$ of them Ruff cells).  Gatekeeper admitted none, in both variants", lambda: t2_par()[1]),
     ("T2 baselines", "Ruff's \\emph{safe} label admitted $3$, B6-strong $4$, the LLM judge $10$, replay of the documented example $17$ and the smoke test\n$1$", lambda: t2_par()[2]),
     ("T2 retention", "Gatekeeper kept $3{,}309$ safe Ruff cells, always-retest $3{,}312$;\nG-FDR kept $3{,}320$", lambda: t2_par()[3]),
+    ("T2 cost", "certification used almost the whole budget ($238.0$ of $240$ draws per cell), so W3 is lost again",
+     lambda: "certification used almost the whole budget ($%.1f$ of $240$ draws per cell), so W3 is %s again" % (
+         T2()["mean_draws"]["G"], "lost" if not T2()["W3"]["won"] else "won")),
     ("T2 pooled", "Gatekeeper admitted none of $41$ harmful cells (Wilson 95\\% upper bound $8.6\\%$)", lambda: t2_par()[4]),
     ("abstract: B9 tiers", "was $26$ to $87$ times as expensive and changed\nbehaviour in $9$ to $11$ cells",
      lambda: "was $%d$ to $%d$ times as expensive and changed\nbehaviour in $%d$ to $%d$ cells" % (
