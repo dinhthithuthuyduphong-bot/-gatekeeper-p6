@@ -26,11 +26,13 @@ betting e-processes, a per-cell ledger and the execution rule (Section~\ref{sec:
 \item \textbf{Evidence}, pre-registered and including negative results (Section~\ref{sec:evaluation}): where simple gates fail;
 library-level control of compositions in a simulation built on the implementation, and a census of a twelve-family skill library on
 $16$ real repositories that found an interaction footprints from the original code miss; skill reuse on $14$ real targets against
-replay-plus-fingerprint and always-retest baselines; partial harm in $205$ plausible LLM patches; and, on SWE-bench Verified, how
+replay-plus-fingerprint and always-retest baselines; market skills (every Ruff autofix rule) on the $60$ most-downloaded PyPI
+projects against the practitioners' rules: Ruff's own safety label, replay of the documented example, an LLM judge, smoke,
+fixed-sample and always-retest gates; partial harm in $205$ plausible LLM patches; and, on SWE-bench Verified, how
 much of the measured ``harm'' depends on its definition.
 \end{itemize}
 
 \paragraph{What we do not claim.}  We claim no new statistics, no advantage in statistical power over a fixed-sample test at the same
 number of trials (Section~\ref{sec:eval-phase}), no distribution-free guarantee on unseen repositories, and no results on large learned
-skill libraries: the admission studies use two hand-written rewrite families, and the twelve-family library is measured for overlap
-and interaction, not admitted.
+skill libraries: our skills are rule-based rewrites (two hand-written families, twelve library families and Ruff's autofix rules),
+not changes an agent learned from its own trajectories.

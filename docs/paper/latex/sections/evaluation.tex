@@ -6,7 +6,7 @@
 
 We ask four questions.  \textbf{RQ1} Does the certificate behave as the theory predicts, where do simple gates fail, and does the library-level
 guarantee hold for what actually runs? (Sections~\ref{sec:eval-phase} and~\ref{sec:eval-library})  \textbf{RQ2} On real skill reuse, how does admission compare with replay plus fingerprints and with
-always-retest? (Section~\ref{sec:eval-skills})  \textbf{RQ3} Does partial harm occur in plausible LLM patches, and which gates catch
+always-retest, and with the rules practitioners use on market skills? (Sections~\ref{sec:eval-skills} and~\ref{sec:eval-market})  \textbf{RQ3} Does partial harm occur in plausible LLM patches, and which gates catch
 it? (Section~\ref{sec:eval-patches})  \textbf{RQ4} How much of the measured harm depends on how harm is defined?
 (Sections~\ref{sec:eval-swebench} and~\ref{sec:eval-oracle})
 
@@ -184,6 +184,55 @@ Gatekeeper (certificate)       & 2 & 0 & 0 & 0 \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\subsection{Market skills at scale (Study T)}
+\label{sec:eval-market}
+% source: research_closure/results/study_t/STUDY_T_RESULT.json, MARKET_CENSUS.json, TARGETS.json, JUDGE_*.json; study_t/PROTOCOL.md, AMENDMENTS.md
+To compare admission with the rules practitioners use, on skills that are on the market and targets nobody picked by hand, Study T
+takes every stable autofix rule of the Ruff linter (version 0.17.3), whose fixes Ruff itself labels \emph{safe} or \emph{unsafe},
+plus the twelve families of Study R2, and applies each to the $60$ most-downloaded pure-Python PyPI projects (boto3, requests,
+pydantic, pytest, jinja2, \dots; selected by a rule fixed in advance).  The census found $2{,}578$ cells ($235$ skills).  Each cell was
+tried on the functions it changes with two independent streams of signature-generated inputs: $200$ \emph{gate} draws that the
+decision rules see, and $200$ \emph{reference} draws that only the ground truth sees (a cell is harmful if the change alters
+behaviour on at least $\eta=5\%$ of reference draws); $1{,}559$ cells were usable ($1{,}531$ Ruff cells) and $12$ were harmful.  Two
+fairness corrections were written before any trial ran: the fixed-sample test uses $199$ draws, the smallest number at which any
+method can certify zero harm for $2{,}578$ cells; and Gatekeeper uses e-Holm over all census cells.  Table~\ref{tab:market} gives the
+decisions on the Ruff cells.
+
+\begin{table}[t]
+\centering\footnotesize
+\caption{Study T: decisions on $1{,}531$ Ruff autofix cells of $60$ PyPI projects ($11$ harmful, $1{,}520$ safe by the reference
+draws).  Pre-registered criteria: W1 fewer harmful admissions than every rule that does not run trials; W2 at least as many
+safe admissions as Ruff's own label; W3 cost at most $70\%$ of always-retest; W4 no rule better on both columns.}
+\label{tab:market}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Decision rule & harmful admitted & safe admitted & draws per cell \\
+\midrule
+Apply every fix (\texttt{--unsafe-fixes}) & 11 & 1{,}520 & 0 \\
+Ruff's \emph{safe} label (\texttt{ruff --fix}) & 0 & 677 & 0 \\
+Replay of the rule's documented example (B6-R) & 9 & 996 & 0 \\
+LLM judge reading the diff & 6 & 1{,}128 & 0 \\
+Smoke test, $20$ draws & 0 & 1{,}518 & 20 \\
+Fixed-sample test, $199$ draws & 0 & 1{,}492 & 199 \\
+Always-retest (B8), $200$ draws & 0 & 1{,}506 & 200 \\
+Gatekeeper & 0 & 1{,}512 & 198.5 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Gatekeeper admitted no harmful cell; unrestricted reuse admitted all $11$, replay of the documented example $9$ and the LLM judge
+$6$, so Gatekeeper beat both on both columns, which is the criterion of the original proposal (B6-R at equal retention).  Ruff's own
+label also admitted no harmful cell, so W1 is \emph{lost} as stated, but the label is conservative: Gatekeeper kept $1{,}512$ safe fixes
+against $677$, and admitted $771$ of the $788$ cells Ruff labels unsafe, at zero harm (W2 won).  Among the rules that run
+trials, Gatekeeper kept more safe fixes than the fixed-sample test and always-retest at the same zero harm.  Two criteria are
+lost and we report them as such: W3, because harm was so rare ($11$ of $1{,}531$) that certification used almost the whole budget
+($198.5$ draws per cell against $200$); and, although no rule beat Gatekeeper on both columns (W4 won), a $20$-draw smoke test matched
+its harm count, kept $1{,}518$ safe fixes and cost a tenth.  On these lint fixes harm, when present, was blatant (at least $5\%$ of
+inputs, and above $30\%$ in $8$ of the $11$ cells), the situation in which Section~\ref{sec:eval-phase} already showed that a simple
+gate suffices; the certificate pays off for rare partial harm (Study H), not here.  $1{,}019$ cells were unusable (no callable
+function, or too few stable inputs), and one shard of three projects needed a memory cap after the runner was shut down twice
+(amendment T-A3).
 
 \emph{Reading.} On these targets harm was frequent and deterministic, so a simple gate with target evidence suffices; the
 certificate's distinctive behaviour is refusing changes that are not beneficial, not catching rare harm.

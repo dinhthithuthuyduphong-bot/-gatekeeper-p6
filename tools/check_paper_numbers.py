@@ -44,6 +44,39 @@ S2 = "research_closure/results/study_s/COMPOSITION_STUDY_SA2.json"
 S3 = "research_closure/results/study_s/COMPOSITION_STUDY_SA3.json"
 S5 = "research_closure/results/study_s/COMPOSITION_STUDY_SA5.json"
 
+TC = "research_closure/results/study_t/MARKET_CENSUS.json"
+TR = "research_closure/results/study_t/STUDY_T_RESULT.json"
+
+
+def K(n):
+    return "{:,}".format(n).replace(",", "{,}")
+
+
+def t_g_draws():
+    rows = [x for x in J(TR)["rows"] if not x["r2"]]
+    return sum(x["g_draws"] for x in rows) / len(rows)
+
+
+MARKET_ROWS = [("U", "Apply every fix (\\texttt{--unsafe-fixes})", "0"), ("RS", "Ruff's \\emph{safe} label (\\texttt{ruff --fix})", "0"),
+               ("B6R", "Replay of the rule's documented example (B6-R)", "0"), ("LJ", "LLM judge reading the diff", "0"),
+               ("S20", "Smoke test, $20$ draws", "20"), ("FS", "Fixed-sample test, $199$ draws", "199"),
+               ("B8", "Always-retest (B8), $200$ draws", "200"), ("G", "Gatekeeper", None)]
+MARKET_TABLE = """Apply every fix (\\texttt{--unsafe-fixes}) & 11 & 1{,}520 & 0 \\\\
+Ruff's \\emph{safe} label (\\texttt{ruff --fix}) & 0 & 677 & 0 \\\\
+Replay of the rule's documented example (B6-R) & 9 & 996 & 0 \\\\
+LLM judge reading the diff & 6 & 1{,}128 & 0 \\\\
+Smoke test, $20$ draws & 0 & 1{,}518 & 20 \\\\
+Fixed-sample test, $199$ draws & 0 & 1{,}492 & 199 \\\\
+Always-retest (B8), $200$ draws & 0 & 1{,}506 & 200 \\\\
+Gatekeeper & 0 & 1{,}512 & 198.5 \\\\"""
+
+
+def market_table():
+    rc = J(TR)["ruff_cells"]
+    return "\n".join("%s & %s & %s & %s \\\\" % (label, K(rc[k]["harmful_admitted"]), K(rc[k]["safe_admitted"]), d or "%.1f" % t_g_draws())
+                     for k, label, d in MARKET_ROWS)
+
+
 CLAIMS = [
     ("Q usable instances", "$245$ instances usable", lambda: "$%d$ instances usable" % QA()["Q1_funnel"]["FINISHED"]),
     ("Q scored patches", "$694$ patches", lambda: "$%d$ patches" % QA()["patches_scored"]),
@@ -157,6 +190,29 @@ CLAIMS = [
      lambda: "both model raters coded all $%d$ items of a calibration set with known\ncodes correctly" % (
          20 if all(J("research_closure/results/model_reviews/RATER_CALIBRATION_%s.json" % m)["accuracy"] == 1.0
                    for m in ("vertex-gemini-argon", "vertex-gemini-flash")) else -1)),
+    ("T census", "The census found $2{,}578$ cells ($235$ skills)",
+     lambda: "The census found $%s$ cells ($%d$ skills)" % (K(J(TC)["total"]["cells"]), J(TC)["total"]["skills_with_a_cell"])),
+    ("T usable", "$1{,}559$ cells were usable ($1{,}531$ Ruff cells) and $12$ were harmful",
+     lambda: "$%s$ cells were usable ($%s$ Ruff cells) and $%d$ were harmful" % (
+         K(J(TR)["usable_cells"]), K(J(TR)["ruff_cells"]["G"]["cells"]), J(TR)["harmful_cells"])),
+    ("T table body", MARKET_TABLE, market_table),
+    ("T G vs RS", "Gatekeeper kept $1{,}512$ safe fixes\nagainst $677$, and admitted $771$ of the $788$ cells Ruff labels unsafe",
+     lambda: "Gatekeeper kept $%s$ safe fixes\nagainst $%s$, and admitted $%s$ of the $%s$ cells Ruff labels unsafe" % (
+         K(J(TR)["ruff_cells"]["G"]["safe_admitted"]), K(J(TR)["ruff_cells"]["RS"]["safe_admitted"]),
+         K(sum(1 for x in J(TR)["rows"] if not x["r2"] and x["applicability"] == "unsafe" and x["G"])),
+         K(sum(1 for x in J(TR)["rows"] if not x["r2"] and x["applicability"] == "unsafe")))),
+    ("T draws", "($198.5$ draws per cell against $200$)", lambda: "($%.1f$ draws per cell against $200$)" % t_g_draws()),
+    ("T smoke", "kept $1{,}518$ safe fixes and cost a tenth", lambda: "kept $%s$ safe fixes and cost a tenth" % K(J(TR)["ruff_cells"]["S20"]["safe_admitted"])),
+    ("T unusable", "$1{,}019$ cells were unusable", lambda: "$%s$ cells were unusable" % K(J(TR)["K"] - J(TR)["usable_cells"])),
+    ("T blatant", "above $30\\%$ in $8$ of the $11$ cells",
+     lambda: "above $30\\%%$ in $%d$ of the $%d$ cells" % (sum(1 for x in J(TR)["rows"] if x["harmful"] and not x["r2"] and x["pooled"] > 0.3),
+                                                         sum(1 for x in J(TR)["rows"] if x["harmful"] and not x["r2"]))),
+    ("abstract: market", "admitted $9$ and $6$ of $11$, and it kept $2.2$ times as many safe fixes",
+     lambda: "admitted $%d$ and $%d$ of $%d$, and it kept $%.1f$ times as many safe fixes" % (
+         J(TR)["ruff_cells"]["B6R"]["harmful_admitted"], J(TR)["ruff_cells"]["LJ"]["harmful_admitted"], J(TR)["ruff_cells"]["G"]["harmful_total"],
+         J(TR)["ruff_cells"]["G"]["safe_admitted"] / J(TR)["ruff_cells"]["RS"]["safe_admitted"])),
+    ("T untestable share", "and $40\\%$ of the cells could not be\ntested",
+     lambda: "and $%d\\%%$ of the cells could not be\ntested" % round(100 * (J(TR)["K"] - J(TR)["usable_cells"]) / J(TR)["K"])),
     # abstract (main.tex)
     ("abstract: plausible patches", "in $205$ plausible LLM patches", lambda: "in $%d$ plausible LLM patches" % PA()["PRIMARY"]["plausible"]),
     ("abstract: census admits", "the test census admitted all $16$ with partial\nbehavioural differences",

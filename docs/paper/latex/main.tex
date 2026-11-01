@@ -22,7 +22,10 @@ a benefit margin.  We prove an anytime-valid guarantee that holds over a whole l
 and over re-admission after the environment changes, through a per-cell error ledger; we show that its shift term is necessary and
 tight, characterise composition risk exactly, and bound every executed set through an execution rule.  Every statement is checked
 numerically.  Pre-registered experiments, negative results included, show where such a gate matters.  On $14$ real skill-reuse targets harm was
-frequent and a simple gate with target evidence sufficed, while replay plus fingerprints admitted all four harmful cells.  In a
+frequent and a simple gate with target evidence sufficed, while replay plus fingerprints admitted all four harmful cells.  On
+$1{,}531$ autofix cells of the Ruff linter over the $60$ most-downloaded PyPI projects, Gatekeeper admitted no harmful fix while replay
+of the documented example and an LLM judge admitted $9$ and $6$ of $11$, and it kept $2.2$ times as many safe fixes as Ruff's own
+\emph{safe} label; a $20$-draw smoke test did as well at a tenth of the cost, because harm there was blatant.  In a
 simulated library built on our implementation, admitting skills one by one ran a harmful composition in $28\%$ of libraries, and
 composite cells with the execution rule in none; on a twelve-family library over $16$ real repositories, footprints read off the
 original code missed a real interaction between two rewrites, which the execution rule now catches.  In $205$ plausible LLM patches, the test census admitted all $16$ with partial
