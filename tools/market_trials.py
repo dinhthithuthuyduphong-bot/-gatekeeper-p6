@@ -1,7 +1,7 @@
 """Study T phase 2 (study_t/AMENDMENTS.md, T-A1): trials of every census cell of one shard of packages.  Records raw per-input
 change flags of the gate and reference streams; decisions and ground truth are computed by tools/market_analyze.py.
 
-python tools/market_trials.py WORK_DIR OUT_DIR --shard I --shards K [--n 200] [--max-funcs 5]
+python tools/market_trials.py WORK_DIR OUT_DIR --shard I --shards K [--n 200] [--max-funcs 5] [--only PKG[,PKG]]
 """
 import hashlib
 import io
@@ -166,6 +166,16 @@ def run_package(pkg, census_pkg, work, n, k, skills):
     return {"project": pkg["project"], "version": pkg["version"], "env": log, "cells": cells}
 
 
+def _free_mem_gb():
+    try:
+        for line in Path("/proc/meminfo").read_text().splitlines():
+            if line.startswith("MemAvailable:"):
+                return "%.1f" % (int(line.split()[1]) / 1e6)
+    except OSError:
+        pass
+    return "?"
+
+
 def main(argv):
     work, out = Path(argv[0]), Path(argv[1])
     opt = lambda key, d: type(d)(argv[argv.index(key) + 1]) if key in argv else d   # noqa: E731
@@ -175,8 +185,10 @@ def main(argv):
     census = {p["project"]: p for p in json.loads((RES / "MARKET_CENSUS.json").read_text())["packages"]}
     skills = load_skills()
     out.mkdir(parents=True, exist_ok=True)
-    for pkg in targets[shard::shards]:
-        print("package", pkg["project"], flush=True)
+    only = set(argv[argv.index("--only") + 1].split(",")) if "--only" in argv else None   # T2-A2: one package per runner
+    for pkg in (targets[shard::shards] if only is None else [t for t in targets if t["project"] in only]):
+        du = shutil.disk_usage("/tmp")
+        print("package", pkg["project"], "free_disk_gb %.1f" % (du.free / 1e9), "free_mem_gb %s" % _free_mem_gb(), flush=True)
         try:
             res = run_package(pkg, census[pkg["project"]], work / pkg["project"], n, k, skills)
         except Exception as exc:  # noqa: BLE001 - recorded, never silently dropped

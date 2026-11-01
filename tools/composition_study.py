@@ -48,6 +48,26 @@ def _memcap():
     resource.setrlimit(resource.RLIMIT_AS, (MEMCAP_BYTES, MEMCAP_BYTES))
 
 
+def _run_group(cmd, timeout, env):
+    """subprocess.run in its own process group; the whole group is killed afterwards (T2-A2).  Without this, processes the target
+    code starts (worker pools, daemons) outlive the inner process and accumulate over hundreds of calls; Study T2 shard 19 was shut
+    down by the runner while trying joblib.  A leftover process that holds the output pipes also makes the call last until the
+    timeout (as subprocess.run did); that behaviour, and so every outcome, is kept: only the clean-up is new."""
+    import signal
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, env=env, start_new_session=True,
+                         preexec_fn=_memcap if MEMCAP_BYTES else None)
+    try:
+        out, err = p.communicate(timeout=timeout)
+    finally:
+        try:
+            os.killpg(p.pid, signal.SIGKILL)
+        except (ProcessLookupError, PermissionError):
+            pass
+        if p.poll() is None:
+            p.wait()
+    return subprocess.CompletedProcess(cmd, p.returncode, out, err)
+
+
 def inner(py, root, pp, rel, qualname, mode, calls, out, n, seed=0):
     """FP.inner (frozen) as registered; under S-A1 the same call through tools/composition_inner.py."""
     if not S_A1:
@@ -60,9 +80,8 @@ def inner(py, root, pp, rel, qualname, mode, calls, out, n, seed=0):
             args["root"] = str(common)
             ap.write_text(json.dumps(args))
             # fixed hash seed: S-A3 traced a non-replicated difference to per-process hash randomisation (study_s/AMENDMENTS.md)
-            p = subprocess.run([str(py), str(ROOT / "tools" / "composition_inner.py"), str(ap)], capture_output=True, text=True,
-                               timeout=120 + n * 2, env=dict(os.environ, PYTHONHASHSEED="0") if S_A3_FIXED_HASH else None,
-                               preexec_fn=_memcap if MEMCAP_BYTES else None)
+            p = _run_group([str(py), str(ROOT / "tools" / "composition_inner.py"), str(ap)], 120 + n * 2,
+                           dict(os.environ, PYTHONHASHSEED="0") if S_A3_FIXED_HASH else None)
     except subprocess.TimeoutExpired:
         return {"status": "PROCESS_TIMEOUT"}
     if not Path(out).exists():

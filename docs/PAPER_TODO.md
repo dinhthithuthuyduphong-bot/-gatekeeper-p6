@@ -198,6 +198,7 @@ Mỗi dòng gồm:
 | R47 | 1/11 | T2 census (ee0d57d) + T2-A1 | 140 gói mới, 6.839 ô | Ngân sách 240 draw mỗi luồng (FS cần 218 với K = 6.839) | — | **THẮNG** (công bằng trước trial); trial và judge đang chạy | — |
 | R48 | 1/11 | B9 tiers chạy lại (41268301738, b0d813c) | B9 với model vừa và mạnh | — | Model mạnh hơn không thay được bằng chứng trên đích | **THẮNG ở cả 3 mức:** hại 10/148 (rẻ), 9/123 (vừa), 11/148 (mạnh: argon), G 0. Chi phí ×26, ×87, ×49 so với G | Mức vừa có 52 trả lời không parse được (nhiều khả năng token suy luận ăn hết giới hạn đầu ra 4.000): vấn đề cấu hình, ghi trong bài |
 | R49 | 1/11 | Quy trình | Mọi tính toán trên Actions; branch trước, `main` sau | `Gatekeeper analyses`, CI chặn sửa tệp kết quả ngoài bot, workflow bằng chứng | — | **THẮNG**: bằng chứng 5/5 PASS (41271189650); CI xanh; `bb65d89` vào `main` | — |
+| R50 | 1/11 | T2 trials (41265721814) | Shard 19 chết khi chạy joblib dù có giới hạn 2 GB | Tiến trình con của mã đích sống sót, giữ pipe nên mỗi lệnh gọi chờ hết timeout, rồi tích tụ: **lỗi môi trường** (test `test_run_group` tái hiện) | T2-A2: kill cả process group, ngữ nghĩa timeout giữ nguyên; chạy lại shard 19 mỗi gói một runner | Đang chạy lại | Không phải thua thật: chưa thấy kết quả nào của shard 19 |
 
 ## C. Vòng debug khi THUA (làm theo thứ tự)
 

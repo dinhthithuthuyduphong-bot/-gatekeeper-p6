@@ -35,3 +35,17 @@ looked at, with those analyses **pre-registered**.
 more than the 200 draws per stream of Study T, so FS could never admit. Both streams therefore get **240** inputs per function
 (gate and reference). B8 = no change in all gate draws (up to 240). Gatekeeper's budget is 240 draws. Everything else is as in the
 protocol.
+
+## T2-A2 (after the trials of shards 0–18 were recorded, before shard 19 was re-run; no outcome of shard 19 was seen)
+
+**Incident.** Shard 19 (colorama, docstring-parser, joblib, anthropic, deprecated, sqlparse, python-docx) was shut down by the
+runner after 70 minutes inside joblib, despite the T-A3 memory cap; no artifact was uploaded, so no outcome of this shard exists.
+
+**Cause (environmental, found by a unit test, `tests/test_run_group.py`).** Processes started by the target code (joblib starts
+worker pools) outlived the inner process. They held its output pipes, so each such call lasted until the timeout (120 + 2n s), and
+they were never killed, so they accumulated over hundreds of calls until the runner died.
+
+**Change.** The inner process runs in its own process group, and the whole group is killed when the call ends or times out
+(`composition_study._run_group`). The timeout behaviour, and therefore every outcome, is exactly that of `subprocess.run`: a call
+whose leftover processes hold the pipes still ends as PROCESS_TIMEOUT. Only the clean-up is new. Shard 19 is re-run with one
+package per runner (`--only`), so a runner failure can lose at most one package, and each package's free disk and memory are logged.
