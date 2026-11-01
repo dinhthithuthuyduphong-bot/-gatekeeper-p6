@@ -239,6 +239,18 @@ gate suffices; the certificate pays off for rare partial harm (Study H), not her
 function, or too few stable inputs), and one shard of three projects needed a memory cap after the runner was shut down twice
 (amendment T-A3).
 
+\paragraph{Replication on the next $140$ projects (Study T2).}
+% source: research_closure/results/study_t2/STUDY_T_RESULT.json; study_t2/PROTOCOL.md (T2-A1..T2-A3)
+Study T2, registered after Study T and before any of its trials, repeats it unchanged on the projects ranked after Study T's
+(download ranks $61$--$200$), with $240$ draws per stream so that the fixed-sample test can certify ($218$ draws for $6{,}839$
+cells), and with e-BH (G-FDR) registered as a second Gatekeeper variant.  Trial records exist for $131$ of the $140$ projects; the
+others are being re-run after their runners were shut down by processes the target code started (amendments T2-A2, T2-A3).  Of
+$3{,}426$ usable cells, $29$ were harmful ($20$ of them Ruff cells).  Gatekeeper admitted none, in both variants.  On the Ruff cells,
+Ruff's \emph{safe} label admitted $3$, B6-strong $4$, the LLM judge $10$, replay of the documented example $17$ and the smoke test
+$1$, so W1, lost in Study T because of Ruff's label, holds here.  Gatekeeper kept $3{,}309$ safe Ruff cells, always-retest $3{,}312$;
+G-FDR kept $3{,}320$, more than always-retest at zero harm, which confirms on a pre-registered study what Study U found post hoc.
+Pooling Studies T and T2, Gatekeeper admitted none of $41$ harmful cells (Wilson 95\% upper bound $8.6\%$).
+
 \paragraph{Rare partial harm in agent patches (Study U).}
 % source: research_closure/results/study_u/STUDY_U_RESULT.json; study_u/PROTOCOL.md
 Where harm is rare the picture changes.  Study U reuses the function-level records of the $693$ resolved SWE-bench Verified

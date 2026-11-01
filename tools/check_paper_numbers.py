@@ -84,6 +84,29 @@ def market_table():
                      for k, label, d in MARKET_ROWS)
 
 
+def T2():
+    return J("research_closure/results/study_t2/STUDY_T_RESULT.json")
+
+
+def t2_par():
+    r, t = T2(), J(TR)
+    rc, ac = r["ruff_cells"], r["all_cells"]
+    have = 140 - len(r["package_errors"])
+    pooled = t["all_cells"]["G"]["harmful_total"] + ac["G"]["harmful_total"]
+    g_adm = t["all_cells"]["G"]["harmful_admitted"] + ac["G"]["harmful_admitted"]
+    return ("Trial records exist for $%d$ of the $140$ projects" % have,
+            "$%s$ usable cells, $%d$ were harmful ($%d$ of them Ruff cells).  Gatekeeper admitted %s, in both variants" % (
+                K(r["usable_cells"]), r["harmful_cells"], rc["G"]["harmful_total"],
+                "none" if ac["G"]["harmful_admitted"] == ac["G_FDR"]["harmful_admitted"] == 0 else "some"),
+            "Ruff's \\emph{safe} label admitted $%d$, B6-strong $%d$, the LLM judge $%d$, replay of the documented example $%d$ and the smoke test\n$%d$" % (
+                rc["RS"]["harmful_admitted"], rc["B6S"]["harmful_admitted"], rc["LJ"]["harmful_admitted"], rc["B6R"]["harmful_admitted"],
+                rc["S20"]["harmful_admitted"]),
+            "Gatekeeper kept $%s$ safe Ruff cells, always-retest $%s$;\nG-FDR kept $%s$" % (
+                K(rc["G"]["safe_admitted"]), K(rc["B8"]["safe_admitted"]), K(rc["G_FDR"]["safe_admitted"])),
+            "Gatekeeper admitted %s of $%d$ harmful cells (Wilson 95\\%% upper bound $%.1f\\%%$)" % (
+                "none" if g_adm == 0 else "%d" % g_adm, pooled, 100 * wilson(g_adm, pooled)[1]))
+
+
 CLAIMS = [
     ("Q usable instances", "$245$ instances usable", lambda: "$%d$ instances usable" % QA()["Q1_funnel"]["FINISHED"]),
     ("Q scored patches", "$694$ patches", lambda: "$%d$ patches" % QA()["patches_scored"]),
@@ -253,6 +276,15 @@ CLAIMS = [
     ("B9 cost", "$0.0080$ USD and $16.9$ seconds per cell, Gatekeeper's trials $2.3$ seconds of a hosted\nrunner ($0.0003$ USD)",
      lambda: "$%.4f$ USD and $%.1f$ seconds per cell, Gatekeeper's trials $%.1f$ seconds of a hosted\nrunner ($%.4f$ USD)" % (
          B9()["cost_per_cell"]["b9_usd"], B9()["cost_per_cell"]["b9_seconds"], B9()["cost_per_cell"]["g_seconds"], B9()["cost_per_cell"]["g_usd_runner"])),
+    ("abstract: T2", "a pre-registered replication with $29$ harmful cells, it again admitted none, while every rule that runs no trials\nadmitted at least $3$",
+     lambda: "a pre-registered replication with $%d$ harmful cells, it again admitted %s, while every rule that runs no trials\nadmitted at least $%d$" % (
+         T2()["harmful_cells"], "none" if T2()["all_cells"]["G"]["harmful_admitted"] == 0 else "some",
+         min(T2()["ruff_cells"][b]["harmful_admitted"] for b in ("U", "RS", "B6R", "B6S", "B6M", "LJ")))),
+    ("T2 records", "Trial records exist for $131$ of the $140$ projects", lambda: t2_par()[0]),
+    ("T2 cells", "$3{,}426$ usable cells, $29$ were harmful ($20$ of them Ruff cells).  Gatekeeper admitted none, in both variants", lambda: t2_par()[1]),
+    ("T2 baselines", "Ruff's \\emph{safe} label admitted $3$, B6-strong $4$, the LLM judge $10$, replay of the documented example $17$ and the smoke test\n$1$", lambda: t2_par()[2]),
+    ("T2 retention", "Gatekeeper kept $3{,}309$ safe Ruff cells, always-retest $3{,}312$;\nG-FDR kept $3{,}320$", lambda: t2_par()[3]),
+    ("T2 pooled", "Gatekeeper admitted none of $41$ harmful cells (Wilson 95\\% upper bound $8.6\\%$)", lambda: t2_par()[4]),
     ("abstract: B9 tiers", "was $26$ to $87$ times as expensive and changed\nbehaviour in $9$ to $11$ cells",
      lambda: "was $%d$ to $%d$ times as expensive and changed\nbehaviour in $%d$ to $%d$ cells" % (
          min(round(t["cost_per_cell"]["b9_usd"] / t["cost_per_cell"]["g_usd_runner"]) for t in B9T()),

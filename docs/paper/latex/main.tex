@@ -25,7 +25,9 @@ numerically.  Pre-registered experiments, negative results included, show where 
 frequent and a simple gate with target evidence sufficed, while replay plus fingerprints admitted all four harmful cells.  On
 $1{,}531$ autofix cells of the Ruff linter over the $60$ most-downloaded PyPI projects, Gatekeeper admitted no harmful fix while replay
 of the documented example and an LLM judge admitted $9$ and $6$ of $11$, and it kept $2.2$ times as many safe fixes as Ruff's own
-\emph{safe} label; replay on every other package where the rule was used (a strong B6) still admitted $2$.  A $20$-draw smoke
+\emph{safe} label; replay on every other package where the rule was used (a strong B6) still admitted $2$.  On the next $140$
+projects, a pre-registered replication with $29$ harmful cells, it again admitted none, while every rule that runs no trials
+admitted at least $3$.  A $20$-draw smoke
 test did as well there, because that harm was blatant, but not on $693$ resolved SWE-bench agent patches with rare partial harm:
 passing the tests admitted all $44$ harmful patches, the smoke test $10$, Gatekeeper none, at the price of keeping fewer harmless
 patches than an unguaranteed always-retest gate.  Letting a model apply the change directly was $26$ to $87$ times as expensive and changed
