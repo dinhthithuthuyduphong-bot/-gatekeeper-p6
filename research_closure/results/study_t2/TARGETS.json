@@ -1,0 +1,1715 @@
+{
+ "selected": [
+  {
+   "rank": 61,
+   "download_rank": 80,
+   "project": "wheel",
+   "version": "0.48.0",
+   "sdist": "wheel-0.48.0.tar.gz",
+   "sha256": "94800765601e9171bf5d58d066e640662842bcedcbab982b2c90787a2c987322",
+   "py_files": 16,
+   "root": "/tmp/t_work/wheel"
+  },
+  {
+   "rank": 62,
+   "download_rank": 81,
+   "project": "tenacity",
+   "version": "9.2.1",
+   "sdist": "tenacity-9.2.1.tar.gz",
+   "sha256": "a606b5c808d0cded4a359d5b9932d867ff2a6a6b64d37350260fd01bbdf83839",
+   "py_files": 14,
+   "root": "/tmp/t_work/tenacity"
+  },
+  {
+   "rank": 63,
+   "download_rank": 83,
+   "project": "python-multipart",
+   "version": "0.0.33",
+   "sdist": "python_multipart-0.0.33.tar.gz",
+   "sha256": "b8112424a6abd162ec08d390565dd113ad699f2fe6fef3c987b8bbcbfe9e390d",
+   "py_files": 8,
+   "root": "/tmp/t_work/python-multipart"
+  },
+  {
+   "rank": 64,
+   "download_rank": 84,
+   "project": "pyasn1-modules",
+   "version": "0.4.2",
+   "sdist": "pyasn1_modules-0.4.2.tar.gz",
+   "sha256": "677091de870a80aae844b1ca6134f54652fa2c8c5a52aa396440ac3106e941e6",
+   "py_files": 147,
+   "root": "/tmp/t_work/pyasn1-modules"
+  },
+  {
+   "rank": 65,
+   "download_rank": 85,
+   "project": "grpcio-status",
+   "version": "1.85.1",
+   "sdist": "grpcio_status-1.85.1.tar.gz",
+   "sha256": "3f6ba6090d794b7148b23f03355addd56bee2b78174a12784c4d9b4e28c8928e",
+   "py_files": 7,
+   "root": "/tmp/t_work/grpcio-status"
+  },
+  {
+   "rank": 66,
+   "download_rank": 87,
+   "project": "sqlalchemy",
+   "version": "2.1.6",
+   "sdist": "sqlalchemy-2.1.6.tar.gz",
+   "sha256": "499eae5c9051efe96cb9a73ec2fbde8ffa4186f102b9094ebab8fcc9d3b99f52",
+   "py_files": 305,
+   "root": "/tmp/t_work/sqlalchemy"
+  },
+  {
+   "rank": 67,
+   "download_rank": 88,
+   "project": "hatchling",
+   "version": "1.33.0",
+   "sdist": "hatchling-1.33.0.tar.gz",
+   "sha256": "4c422bd4d554fcff5de5b73e9596f85e41e9f97f7e553d8f7595ecb31a627bef",
+   "py_files": 67,
+   "root": "/tmp/t_work/hatchling"
+  },
+  {
+   "rank": 68,
+   "download_rank": 90,
+   "project": "pyparsing",
+   "version": "3.3.3",
+   "sdist": "pyparsing-3.3.3.tar.gz",
+   "sha256": "928ae7e20211f3b6f3915a72f06a0cfd29ab9d24279dd6346b6b1a7146397d36",
+   "py_files": 135,
+   "root": "/tmp/t_work/pyparsing"
+  },
+  {
+   "rank": 69,
+   "download_rank": 95,
+   "project": "s3fs",
+   "version": "2026.9.0",
+   "sdist": "s3fs-2026.9.0.tar.gz",
+   "sha256": "ec078ff0122d28fd21d36ea4987794e4f42ecd6e8785eeaa083208771c1464e5",
+   "py_files": 8,
+   "root": "/tmp/t_work/s3fs"
+  },
+  {
+   "rank": 70,
+   "download_rank": 98,
+   "project": "soupsieve",
+   "version": "3.0.4",
+   "sdist": "soupsieve-3.0.4.tar.gz",
+   "sha256": "924fab84ae21604c19e175e1f39815eb6fa83ba23836e09e9de180925e5bc4c0",
+   "py_files": 9,
+   "root": "/tmp/t_work/soupsieve"
+  },
+  {
+   "rank": 71,
+   "download_rank": 99,
+   "project": "beautifulsoup4",
+   "version": "4.15.0",
+   "sdist": "beautifulsoup4-4.15.0.tar.gz",
+   "sha256": "288e3ca7d54b06f2ac191970bc275c1939cb46d450b255bf6718b04aa37ab4f7",
+   "py_files": 21,
+   "root": "/tmp/t_work/beautifulsoup4"
+  },
+  {
+   "rank": 72,
+   "download_rank": 100,
+   "project": "openai",
+   "version": "3.42.0",
+   "sdist": "openai-3.42.0.tar.gz",
+   "sha256": "deffe27f9e20e4f1d9d471978d12f23aa119382494c0a9860795e66943d0fe42",
+   "py_files": 2134,
+   "root": "/tmp/t_work/openai"
+  },
+  {
+   "rank": 73,
+   "download_rank": 101,
+   "project": "google-api-core",
+   "version": "2.43.2",
+   "sdist": "google_api_core-2.43.2.tar.gz",
+   "sha256": "5dfc5e9d52982bcc03bd6af380a893365b5fdf907dc527f63d3a372833c33329",
+   "py_files": 72,
+   "root": "/tmp/t_work/google-api-core"
+  },
+  {
+   "rank": 74,
+   "download_rank": 102,
+   "project": "opentelemetry-semantic-conventions",
+   "version": "0.66b2",
+   "sdist": "opentelemetry_semantic_conventions-0.66b2.tar.gz",
+   "sha256": "7da5f1a5dc4383eb66711d4d3d3e71824d9403ac1559fea021cc103c1a4c4976",
+   "py_files": 126,
+   "root": "/tmp/t_work/opentelemetry-semantic-conventions"
+  },
+  {
+   "rank": 75,
+   "download_rank": 104,
+   "project": "coverage",
+   "version": "7.17.0",
+   "sdist": "coverage-7.17.0.tar.gz",
+   "sha256": "cc010a0a7fbdd9bb8bdfd0d3f04a5151275860213cbd7e2b876b29778489c712",
+   "py_files": 67,
+   "root": "/tmp/t_work/coverage"
+  },
+  {
+   "rank": 76,
+   "download_rank": 105,
+   "project": "openpyxl",
+   "version": "3.1.5",
+   "sdist": "openpyxl-3.1.5.tar.gz",
+   "sha256": "cf0e3cf56142039133628b5acffe8ef0c12bc902d2aadd3e0fe5878dc08d1050",
+   "py_files": 191,
+   "root": "/tmp/t_work/openpyxl"
+  },
+  {
+   "rank": 77,
+   "download_rank": 108,
+   "project": "distro",
+   "version": "1.9.0",
+   "sdist": "distro-1.9.0.tar.gz",
+   "sha256": "2fa77c6fd8940f116ee1d6b94a2f90b13b5ea8d019b98bc8bafdcabcdd9bdbed",
+   "py_files": 5,
+   "root": "/tmp/t_work/distro"
+  },
+  {
+   "rank": 78,
+   "download_rank": 109,
+   "project": "opentelemetry-sdk",
+   "version": "1.45.2",
+   "sdist": "opentelemetry_sdk-1.45.2.tar.gz",
+   "sha256": "7eec4de13dd21ff3a1670dcb0e02079e692736f94d733dfdce5af461d884248d",
+   "py_files": 61,
+   "root": "/tmp/t_work/opentelemetry-sdk"
+  },
+  {
+   "rank": 79,
+   "download_rank": 110,
+   "project": "shellingham",
+   "version": "1.5.4",
+   "sdist": "shellingham-1.5.4.tar.gz",
+   "sha256": "8dbca0739d487e5bd35ab3ca4b36e11c4078f3a234bfce294b0a0291363404de",
+   "py_files": 8,
+   "root": "/tmp/t_work/shellingham"
+  },
+  {
+   "rank": 80,
+   "download_rank": 112,
+   "project": "colorama",
+   "version": "0.4.6",
+   "sdist": "colorama-0.4.6.tar.gz",
+   "sha256": "08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44",
+   "py_files": 16,
+   "root": "/tmp/t_work/colorama"
+  },
+  {
+   "rank": 81,
+   "download_rank": 113,
+   "project": "proto-plus",
+   "version": "1.29.0",
+   "sdist": "proto_plus-1.29.0.tar.gz",
+   "sha256": "cfb4e62ad7e13dd18f346cabbda00cab39930d36a05791fd81ddb074d6ee884f",
+   "py_files": 27,
+   "root": "/tmp/t_work/proto-plus"
+  },
+  {
+   "rank": 82,
+   "download_rank": 114,
+   "project": "typer",
+   "version": "0.27.3",
+   "sdist": "typer-0.27.3.tar.gz",
+   "sha256": "d0396f770a560ab1b0a8504e13b5f254b728cedb05c61cf0359e944e50ce8901",
+   "py_files": 327,
+   "root": "/tmp/t_work/typer"
+  },
+  {
+   "rank": 83,
+   "download_rank": 115,
+   "project": "requests-oauthlib",
+   "version": "2.0.0",
+   "sdist": "requests-oauthlib-2.0.0.tar.gz",
+   "sha256": "b3dffaebd884d8cd778494369603a9e7b58d29111bf6b41bdc2dcd87203af4e9",
+   "py_files": 18,
+   "root": "/tmp/t_work/requests-oauthlib"
+  },
+  {
+   "rank": 84,
+   "download_rank": 116,
+   "project": "virtualenv",
+   "version": "21.15.2",
+   "sdist": "virtualenv-21.15.2.tar.gz",
+   "sha256": "dbd886e6e5689eb4dde6a9bbc478ad14b4fc8ed0852690d8273ccfb8c467f635",
+   "py_files": 114,
+   "root": "/tmp/t_work/virtualenv"
+  },
+  {
+   "rank": 85,
+   "download_rank": 117,
+   "project": "ghapi",
+   "version": "2.1.5",
+   "sdist": "ghapi-2.1.5.tar.gz",
+   "sha256": "39f8828d632da6604797a564d8397dce721b5030b10c201c2d22256c0c58e484",
+   "py_files": 15,
+   "root": "/tmp/t_work/ghapi"
+  },
+  {
+   "rank": 86,
+   "download_rank": 118,
+   "project": "wcwidth",
+   "version": "0.9.4",
+   "sdist": "wcwidth-0.9.4.tar.gz",
+   "sha256": "fd8d57d3cdfe570e3265c8fab1885c24e34ef40889c0759c0c304a19e9835954",
+   "py_files": 56,
+   "root": "/tmp/t_work/wcwidth"
+  },
+  {
+   "rank": 87,
+   "download_rank": 119,
+   "project": "cachetools",
+   "version": "7.2.8",
+   "sdist": "cachetools-7.2.8.tar.gz",
+   "sha256": "3f9b146b2160975da273e7c23ec882f3996b65df608150d52083c07de0682075",
+   "py_files": 7,
+   "root": "/tmp/t_work/cachetools"
+  },
+  {
+   "rank": 88,
+   "download_rank": 120,
+   "project": "exceptiongroup",
+   "version": "1.3.1",
+   "sdist": "exceptiongroup-1.3.1.tar.gz",
+   "sha256": "8b412432c6055b0b7d14c310000ae93352ed6754f70fa8f7c34141f91c4e3219",
+   "py_files": 6,
+   "root": "/tmp/t_work/exceptiongroup"
+  },
+  {
+   "rank": 89,
+   "download_rank": 121,
+   "project": "mcp",
+   "version": "2.3.0",
+   "sdist": "mcp-2.3.0.tar.gz",
+   "sha256": "8b147a50441cf059dc88c684e0aeed3687f0aa0f39c6cde7b90330effd2b34d8",
+   "py_files": 578,
+   "root": "/tmp/t_work/mcp"
+  },
+  {
+   "rank": 90,
+   "download_rank": 122,
+   "project": "huggingface-hub",
+   "version": "2.4.0",
+   "sdist": "huggingface_hub-2.4.0.tar.gz",
+   "sha256": "13a6158b9e3393d9d3f248ce99074d50c2a0a1449fb9d8e2f710751e2084c188",
+   "py_files": 183,
+   "root": "/tmp/t_work/huggingface-hub"
+  },
+  {
+   "rank": 91,
+   "download_rank": 124,
+   "project": "truststore",
+   "version": "0.10.5",
+   "sdist": "truststore-0.10.5.tar.gz",
+   "sha256": "30d36967ccaded5cbb38d602c433f53600036c79d502f4533a49b60a03bbefcd",
+   "py_files": 7,
+   "root": "/tmp/t_work/truststore"
+  },
+  {
+   "rank": 92,
+   "download_rank": 126,
+   "project": "dnspython",
+   "version": "2.9.1",
+   "sdist": "dnspython-2.9.1.tar.gz",
+   "sha256": "9a6d30e55f8dc63e6052597666112bff0586b95a2474a9deda03afbbf820d37a",
+   "py_files": 188,
+   "root": "/tmp/t_work/dnspython"
+  },
+  {
+   "rank": 93,
+   "download_rank": 127,
+   "project": "oauthlib",
+   "version": "4.0.1",
+   "sdist": "oauthlib-4.0.1.tar.gz",
+   "sha256": "3d73febdb6faa00f277c81fb04be7b7586fb96fc3b7f0b9c772dada69a25ede7",
+   "py_files": 76,
+   "root": "/tmp/t_work/oauthlib"
+  },
+  {
+   "rank": 94,
+   "download_rank": 128,
+   "project": "pytest-asyncio",
+   "version": "1.4.1",
+   "sdist": "pytest_asyncio-1.4.1.tar.gz",
+   "sha256": "e8266eb094e5ee9ffdb2068c9836f33e209ea77a970eb846933d416b5602669b",
+   "py_files": 23,
+   "root": "/tmp/t_work/pytest-asyncio"
+  },
+  {
+   "rank": 95,
+   "download_rank": 129,
+   "project": "httpx2",
+   "version": "2.16.0",
+   "sdist": "httpx2-2.16.0.tar.gz",
+   "sha256": "0d54c98128e8f2ff7fbbde0fca8c359e5f032edeaaaac443cdb7f31f685bcd7f",
+   "py_files": 31,
+   "root": "/tmp/t_work/httpx2"
+  },
+  {
+   "rank": 96,
+   "download_rank": 130,
+   "project": "httpcore2",
+   "version": "2.16.0",
+   "sdist": "httpcore2-2.16.0.tar.gz",
+   "sha256": "c72cd0413563b17e1cd8354677dff887466f8ec2551679759e93126534428643",
+   "py_files": 31,
+   "root": "/tmp/t_work/httpcore2"
+  },
+  {
+   "rank": 97,
+   "download_rank": 131,
+   "project": "distlib",
+   "version": "0.4.4",
+   "sdist": "distlib-0.4.4.tar.gz",
+   "sha256": "ca4175b4ac7f71223cc30ed7248c45d2b38c2439d8ee6e498ab67ed63cf3508d",
+   "py_files": 13,
+   "root": "/tmp/t_work/distlib"
+  },
+  {
+   "rank": 98,
+   "download_rank": 133,
+   "project": "opentelemetry-proto",
+   "version": "1.45.2",
+   "sdist": "opentelemetry_proto-1.45.2.tar.gz",
+   "sha256": "bd8d23cf770605b0af9b7be2071d26a464fea289d35429abfd2a66226114ad64",
+   "py_files": 29,
+   "root": "/tmp/t_work/opentelemetry-proto"
+  },
+  {
+   "rank": 99,
+   "download_rank": 135,
+   "project": "sortedcontainers",
+   "version": "2.4.0",
+   "sdist": "sortedcontainers-2.4.0.tar.gz",
+   "sha256": "25caa5a06cc30b6b83d11423433f65d1f9d76c4c6a0c90e3379eaa43b9bfdb88",
+   "py_files": 5,
+   "root": "/tmp/t_work/sortedcontainers"
+  },
+  {
+   "rank": 100,
+   "download_rank": 137,
+   "project": "docstring-parser",
+   "version": "0.18.0",
+   "sdist": "docstring_parser-0.18.0.tar.gz",
+   "sha256": "292510982205c12b1248696f44959db3cdd1740237a968ea1e2e7a900eeb2015",
+   "py_files": 9,
+   "root": "/tmp/t_work/docstring-parser"
+  },
+  {
+   "rank": 101,
+   "download_rank": 139,
+   "project": "pytest-cov",
+   "version": "7.1.0",
+   "sdist": "pytest_cov-7.1.0.tar.gz",
+   "sha256": "30674f2b5f6351aa09702a9c8c364f6a01c27aae0c1366ae8016160d1efc56b2",
+   "py_files": 9,
+   "root": "/tmp/t_work/pytest-cov"
+  },
+  {
+   "rank": 102,
+   "download_rank": 140,
+   "project": "redis",
+   "version": "8.1.0",
+   "sdist": "redis-8.1.0.tar.gz",
+   "sha256": "6e1a19beef9225c83efd689c7e6b7da2d5215b1f42cd13b7fc3714d0a09c7b25",
+   "py_files": 120,
+   "root": "/tmp/t_work/redis"
+  },
+  {
+   "rank": 103,
+   "download_rank": 141,
+   "project": "networkx",
+   "version": "3.7",
+   "sdist": "networkx-3.7.tar.gz",
+   "sha256": "fd77a511bd90f39f3d016351345b52cf5319b813bdca01de3f755d3cca62e96a",
+   "py_files": 289,
+   "root": "/tmp/t_work/networkx"
+  },
+  {
+   "rank": 104,
+   "download_rank": 142,
+   "project": "opentelemetry-exporter-otlp-proto-common",
+   "version": "1.45.2",
+   "sdist": "opentelemetry_exporter_otlp_proto_common-1.45.2.tar.gz",
+   "sha256": "f1f2806f3f28ce7938033823e50934fcd91595a39de38e69a28a51e19f40fc6d",
+   "py_files": 9,
+   "root": "/tmp/t_work/opentelemetry-exporter-otlp-proto-common"
+  },
+  {
+   "rank": 105,
+   "download_rank": 143,
+   "project": "defusedxml",
+   "version": "0.7.1",
+   "sdist": "defusedxml-0.7.1.tar.gz",
+   "sha256": "1bb3032db185915b62d7c6209c5a8792be6a32ab2fedacc84e01b52c51aa3e69",
+   "py_files": 17,
+   "root": "/tmp/t_work/defusedxml"
+  },
+  {
+   "rank": 106,
+   "download_rank": 144,
+   "project": "requests-toolbelt",
+   "version": "1.0.0",
+   "sdist": "requests-toolbelt-1.0.0.tar.gz",
+   "sha256": "7681a0a3d047012b5bdc0ee37d7f8f07ebe76ab08caeccfc3921ce23c88d5bc6",
+   "py_files": 35,
+   "root": "/tmp/t_work/requests-toolbelt"
+  },
+  {
+   "rank": 107,
+   "download_rank": 146,
+   "project": "fonttools",
+   "version": "4.68.0",
+   "sdist": "fonttools-4.68.0.tar.gz",
+   "sha256": "73294e233070f71e2b3653b6bd8564af676d57f26d075761fb06d1ab2e4a7a5d",
+   "py_files": 389,
+   "root": "/tmp/t_work/fonttools"
+  },
+  {
+   "rank": 108,
+   "download_rank": 147,
+   "project": "rsa",
+   "version": "4.9.1",
+   "sdist": "rsa-4.9.1.tar.gz",
+   "sha256": "e7bdbfdb5497da4c07dfd35530e1a902659db6ff241e39d9953cad06ebd0ae75",
+   "py_files": 14,
+   "root": "/tmp/t_work/rsa"
+  },
+  {
+   "rank": 109,
+   "download_rank": 149,
+   "project": "werkzeug",
+   "version": "3.1.9",
+   "sdist": "werkzeug-3.1.9.tar.gz",
+   "sha256": "55ca7c70a75689be937aa27f8ff4b018f06ff4838fc73045560bf0f5a1291060",
+   "py_files": 106,
+   "root": "/tmp/t_work/werkzeug"
+  },
+  {
+   "rank": 110,
+   "download_rank": 151,
+   "project": "prompt-toolkit",
+   "version": "3.0.53",
+   "sdist": "prompt_toolkit-3.0.53.tar.gz",
+   "sha256": "9ec8a0ad96d5c56148b3f914aa79c1564c3fde5d2e6b876e7bc327e353cf8fa6",
+   "py_files": 274,
+   "root": "/tmp/t_work/prompt-toolkit"
+  },
+  {
+   "rank": 111,
+   "download_rank": 152,
+   "project": "mako",
+   "version": "1.4.3",
+   "sdist": "mako-1.4.3.tar.gz",
+   "sha256": "cd6537fe88d5fec315c55c2f8529bc4ce7a9a352ad7db3eeaa6a66e2dd4ec37a",
+   "py_files": 32,
+   "root": "/tmp/t_work/mako"
+  },
+  {
+   "rank": 112,
+   "download_rank": 154,
+   "project": "alembic",
+   "version": "1.20.1",
+   "sdist": "alembic-1.20.1.tar.gz",
+   "sha256": "83490def1f723413db5096591f7609ac52544805be93849170088ed04f5a2e0b",
+   "py_files": 64,
+   "root": "/tmp/t_work/alembic"
+  },
+  {
+   "rank": 113,
+   "download_rank": 156,
+   "project": "pyopenssl",
+   "version": "26.4.0",
+   "sdist": "pyopenssl-26.4.0.tar.gz",
+   "sha256": "28dfcce0162b9211413e26dfbfdf1d24317fbeba18fc93c12400a1856b2a0bc7",
+   "py_files": 10,
+   "root": "/tmp/t_work/pyopenssl"
+  },
+  {
+   "rank": 114,
+   "download_rank": 157,
+   "project": "opentelemetry-exporter-otlp-proto-http",
+   "version": "1.45.2",
+   "sdist": "opentelemetry_exporter_otlp_proto_http-1.45.2.tar.gz",
+   "sha256": "5984a3fb46bc4628e4e2b85d4a6e72637e03962aae6cf372791137768a4ad939",
+   "py_files": 7,
+   "root": "/tmp/t_work/opentelemetry-exporter-otlp-proto-http"
+  },
+  {
+   "rank": 115,
+   "download_rank": 160,
+   "project": "isodate",
+   "version": "0.7.2",
+   "sdist": "isodate-0.7.2.tar.gz",
+   "sha256": "4cd1aa0f43ca76f4a6c6c0292a85f40b35ec2e43e315b59f06e6d32171a953e6",
+   "py_files": 11,
+   "root": "/tmp/t_work/isodate"
+  },
+  {
+   "rank": 116,
+   "download_rank": 161,
+   "project": "langchain",
+   "version": "1.4.7",
+   "sdist": "langchain-1.4.7.tar.gz",
+   "sha256": "818275348cd707f7fbbe92ece0a725c25823140a054cf29865f420e0200fa2af",
+   "py_files": 57,
+   "root": "/tmp/t_work/langchain"
+  },
+  {
+   "rank": 117,
+   "download_rank": 162,
+   "project": "python-discovery",
+   "version": "1.9.0",
+   "sdist": "python_discovery-1.9.0.tar.gz",
+   "sha256": "88beb57e51b919c30f303b053ec41359298ca349192035b0a802c76347ae96d7",
+   "py_files": 14,
+   "root": "/tmp/t_work/python-discovery"
+  },
+  {
+   "rank": 118,
+   "download_rank": 166,
+   "project": "chardet",
+   "version": "7.7.0",
+   "sdist": "chardet-7.7.0.tar.gz",
+   "sha256": "0ba38a05201b0abf7570c12d8af45c30b2af835bd5cc52bfc7105082eda82c1e",
+   "py_files": 55,
+   "root": "/tmp/t_work/chardet"
+  },
+  {
+   "rank": 119,
+   "download_rank": 167,
+   "project": "websocket-client",
+   "version": "1.9.2",
+   "sdist": "websocket_client-1.9.2.tar.gz",
+   "sha256": "0fcb57545848be86992e128218fd96dd87a6769ffdb1a968dff79632b85604d0",
+   "py_files": 19,
+   "root": "/tmp/t_work/websocket-client"
+  },
+  {
+   "rank": 120,
+   "download_rank": 168,
+   "project": "joblib",
+   "version": "1.6.0",
+   "sdist": "joblib-1.6.0.tar.gz",
+   "sha256": "2ccc96785b12046c08fd6d55839c12857831b54a3c1673ffadd2f04bfc4eda03",
+   "py_files": 48,
+   "root": "/tmp/t_work/joblib"
+  },
+  {
+   "rank": 121,
+   "download_rank": 170,
+   "project": "tzlocal",
+   "version": "5.4.5",
+   "sdist": "tzlocal-5.4.5.tar.gz",
+   "sha256": "ba976898bad27945178c9ca25c222c19e322b30c10342b9f40b46714f70d2d5f",
+   "py_files": 6,
+   "root": "/tmp/t_work/tzlocal"
+  },
+  {
+   "rank": 122,
+   "download_rank": 171,
+   "project": "email-validator",
+   "version": "2.3.0",
+   "sdist": "email_validator-2.3.0.tar.gz",
+   "sha256": "9fc05c37f2f6cf439ff414f8fc46d917929974a82244c20eb10231ba60c54426",
+   "py_files": 10,
+   "root": "/tmp/t_work/email-validator"
+  },
+  {
+   "rank": 123,
+   "download_rank": 172,
+   "project": "gitpython",
+   "version": "3.2.1",
+   "sdist": "gitpython-3.2.1.tar.gz",
+   "sha256": "0f1229ec5c057bdabdeeda8bda4f17bda679ab33dbccc00f24e6a480553c8613",
+   "py_files": 39,
+   "root": "/tmp/t_work/gitpython"
+  },
+  {
+   "rank": 124,
+   "download_rank": 173,
+   "project": "azure-core",
+   "version": "1.41.0",
+   "sdist": "azure_core-1.41.0.tar.gz",
+   "sha256": "f46ff5dfcd230f25cf1c19e8a34b8dc08a337b2503e268bb600a16c00db8ad5a",
+   "py_files": 81,
+   "root": "/tmp/t_work/azure-core"
+  },
+  {
+   "rank": 125,
+   "download_rank": 174,
+   "project": "mypy",
+   "version": "2.4.1",
+   "sdist": "mypy-2.4.1.tar.gz",
+   "sha256": "63b590965691e540a335fa74dadf31a7069142f6b72e234689bbd244edf55623",
+   "py_files": 338,
+   "root": "/tmp/t_work/mypy"
+  },
+  {
+   "rank": 126,
+   "download_rank": 175,
+   "project": "itsdangerous",
+   "version": "2.2.0",
+   "sdist": "itsdangerous-2.2.0.tar.gz",
+   "sha256": "e0050c0b7da1eea53ffaf149c0cfbb5c6e2e2b69c4bef22c81fa6eb73e5f6173",
+   "py_files": 9,
+   "root": "/tmp/t_work/itsdangerous"
+  },
+  {
+   "rank": 127,
+   "download_rank": 176,
+   "project": "google-cloud-core",
+   "version": "2.8.0",
+   "sdist": "google_cloud_core-2.8.0.tar.gz",
+   "sha256": "365f8e4518ae81c8101b8dea5fc1c32a960badedb8b511f19db2843cbbd285d2",
+   "py_files": 10,
+   "root": "/tmp/t_work/google-cloud-core"
+  },
+  {
+   "rank": 128,
+   "download_rank": 178,
+   "project": "httpx-sse",
+   "version": "0.4.3",
+   "sdist": "httpx_sse-0.4.3.tar.gz",
+   "sha256": "9b1ed0127459a66014aec3c56bebd93da3c1bc8bb6618c8082039a44889a755d",
+   "py_files": 6,
+   "root": "/tmp/t_work/httpx-sse"
+  },
+  {
+   "rank": 129,
+   "download_rank": 180,
+   "project": "dill",
+   "version": "0.4.1",
+   "sdist": "dill-0.4.1.tar.gz",
+   "sha256": "423092df4182177d4d8ba8290c8a5b640c66ab35ec7da59ccfa00f6fa3eea5fa",
+   "py_files": 17,
+   "root": "/tmp/t_work/dill"
+  },
+  {
+   "rank": 130,
+   "download_rank": 181,
+   "project": "ruamel-yaml",
+   "version": "0.19.1",
+   "sdist": "ruamel_yaml-0.19.1.tar.gz",
+   "sha256": "53eb66cd27849eff968ebf8f0bf61f46cdac2da1d1f3576dd4ccee9b25c31993",
+   "py_files": 34,
+   "root": "/tmp/t_work/ruamel-yaml"
+  },
+  {
+   "rank": 131,
+   "download_rank": 183,
+   "project": "identify",
+   "version": "2.6.20",
+   "sdist": "identify-2.6.20.tar.gz",
+   "sha256": "ad729860a923858d26917c2f4fb0a1d83d27a75b1e090c06440c573f048f3285",
+   "py_files": 8,
+   "root": "/tmp/t_work/identify"
+  },
+  {
+   "rank": 132,
+   "download_rank": 185,
+   "project": "opentelemetry-instrumentation",
+   "version": "0.66b2",
+   "sdist": "opentelemetry_instrumentation-0.66b2.tar.gz",
+   "sha256": "02b094150e53b76f5906d75e628dbb3833bbc6e62fa109b5c7ba0c081865e923",
+   "py_files": 18,
+   "root": "/tmp/t_work/opentelemetry-instrumentation"
+  },
+  {
+   "rank": 133,
+   "download_rank": 186,
+   "project": "pre-commit",
+   "version": "4.7.0",
+   "sdist": "pre_commit-4.7.0.tar.gz",
+   "sha256": "1f3deee12b914c8fa184bd2b5953391c2e4f36763e403d4a23dc9983fa7c6e86",
+   "py_files": 68,
+   "root": "/tmp/t_work/pre-commit"
+  },
+  {
+   "rank": 134,
+   "download_rank": 187,
+   "project": "smmap",
+   "version": "5.0.3",
+   "sdist": "smmap-5.0.3.tar.gz",
+   "sha256": "4d9debb8b99007ae47165abc08670bd74cb74b5227dda7f643eccc4e9eb5642c",
+   "py_files": 5,
+   "root": "/tmp/t_work/smmap"
+  },
+  {
+   "rank": 135,
+   "download_rank": 188,
+   "project": "msal",
+   "version": "1.39.0",
+   "sdist": "msal-1.39.0.tar.gz",
+   "sha256": "6ab7de335e6d7f5717e2c7e1dbf86e4dda2f6acf3c56773b78dc53ebc6395b5f",
+   "py_files": 25,
+   "root": "/tmp/t_work/msal"
+  },
+  {
+   "rank": 136,
+   "download_rank": 190,
+   "project": "google-cloud-storage",
+   "version": "3.17.1",
+   "sdist": "google_cloud_storage-3.17.1.tar.gz",
+   "sha256": "b24df37900f5e0a93518bd7d3a2a7b7b48d8a1e72add8eb57d53a38b8b2b0640",
+   "py_files": 77,
+   "root": "/tmp/t_work/google-cloud-storage"
+  },
+  {
+   "rank": 137,
+   "download_rank": 191,
+   "project": "keyring",
+   "version": "25.7.0",
+   "sdist": "keyring-25.7.0.tar.gz",
+   "sha256": "fe01bd85eb3f8fb3dd0405defdeac9a5b4f6f0439edbb3149577f244a2e8245b",
+   "py_files": 28,
+   "root": "/tmp/t_work/keyring"
+  },
+  {
+   "rank": 138,
+   "download_rank": 192,
+   "project": "h2",
+   "version": "4.4.1",
+   "sdist": "h2-4.4.1.tar.gz",
+   "sha256": "4e866ffb1a869ae14dd9b5e6beb5c24a13da0495ad72b65925ded182521c1516",
+   "py_files": 28,
+   "root": "/tmp/t_work/h2"
+  },
+  {
+   "rank": 139,
+   "download_rank": 193,
+   "project": "hpack",
+   "version": "4.2.0",
+   "sdist": "hpack-4.2.0.tar.gz",
+   "sha256": "0895cfa3b5531fc65fe439c05eb65144f123bf7a394fcaa56aa423548d8e45c0",
+   "py_files": 9,
+   "root": "/tmp/t_work/hpack"
+  },
+  {
+   "rank": 140,
+   "download_rank": 194,
+   "project": "anthropic",
+   "version": "2.3.0",
+   "sdist": "anthropic-2.3.0.tar.gz",
+   "sha256": "edfdea1e3fa7b3ce25df1511953408b2f03bfa61eb6f6268f766101a9e18ad53",
+   "py_files": 2534,
+   "root": "/tmp/t_work/anthropic"
+  },
+  {
+   "rank": 141,
+   "download_rank": 195,
+   "project": "langchain-core",
+   "version": "1.7.3",
+   "sdist": "langchain_core-1.7.3.tar.gz",
+   "sha256": "77f70b81e238c981bfd8405840b03fdf143735ac93c0729c2bdb39d6f0648024",
+   "py_files": 185,
+   "root": "/tmp/t_work/langchain-core"
+  },
+  {
+   "rank": 142,
+   "download_rank": 196,
+   "project": "gitdb",
+   "version": "4.0.12",
+   "sdist": "gitdb-4.0.12.tar.gz",
+   "sha256": "5ef71f855d191a3326fcfbc0d5da835f26b13fbcba60c32c21091c349ffdb571",
+   "py_files": 19,
+   "root": "/tmp/t_work/gitdb"
+  },
+  {
+   "rank": 143,
+   "download_rank": 198,
+   "project": "hyperframe",
+   "version": "6.1.0",
+   "sdist": "hyperframe-6.1.0.tar.gz",
+   "sha256": "f630908a00854a7adeabd6382b43923a4c4cd4b821fcb527e6ab9e15382a3b08",
+   "py_files": 5,
+   "root": "/tmp/t_work/hyperframe"
+  },
+  {
+   "rank": 144,
+   "download_rank": 199,
+   "project": "jaraco-classes",
+   "version": "3.4.0",
+   "sdist": "jaraco.classes-3.4.0.tar.gz",
+   "sha256": "47a024b51d0239c0dd8c8540c6c7f484be3b8fcf0b2d85c13825780d3b3f3acd",
+   "py_files": 5,
+   "root": "/tmp/t_work/jaraco-classes"
+  },
+  {
+   "rank": 145,
+   "download_rank": 200,
+   "project": "google-cloud-bigquery",
+   "version": "3.47.0",
+   "sdist": "google_cloud_bigquery-3.47.0.tar.gz",
+   "sha256": "bca7a5ff52326172dc8c292e4592a5b46b491b6872010d242d7663d8ea89b12f",
+   "py_files": 55,
+   "root": "/tmp/t_work/google-cloud-bigquery"
+  },
+  {
+   "rank": 146,
+   "download_rank": 202,
+   "project": "jeepney",
+   "version": "0.9.0",
+   "sdist": "jeepney-0.9.0.tar.gz",
+   "sha256": "cf0e9e845622b81e4a28df94c40345400256ec608d0e55bb8a3feaa9163f5732",
+   "py_files": 38,
+   "root": "/tmp/t_work/jeepney"
+  },
+  {
+   "rank": 147,
+   "download_rank": 204,
+   "project": "secretstorage",
+   "version": "3.5.0",
+   "sdist": "secretstorage-3.5.0.tar.gz",
+   "sha256": "f04b8e4689cbce351744d5537bf6b1329c6fc68f91fa666f60a380edddcd11be",
+   "py_files": 8,
+   "root": "/tmp/t_work/secretstorage"
+  },
+  {
+   "rank": 148,
+   "download_rank": 205,
+   "project": "toml",
+   "version": "0.10.2",
+   "sdist": "toml-0.10.2.tar.gz",
+   "sha256": "b3bda1d108d5dd99f4a20d24d9c348e91c4db7ab1b749200bded2f839ccbe68f",
+   "py_files": 6,
+   "root": "/tmp/t_work/toml"
+  },
+  {
+   "rank": 149,
+   "download_rank": 209,
+   "project": "google-resumable-media",
+   "version": "2.11.0",
+   "sdist": "google_resumable_media-2.11.0.tar.gz",
+   "sha256": "febd83686752799661b4de575f0b993c5c25c349a5362556fc4d7be164056a37",
+   "py_files": 18,
+   "root": "/tmp/t_work/google-resumable-media"
+  },
+  {
+   "rank": 150,
+   "download_rank": 210,
+   "project": "docutils",
+   "version": "0.23",
+   "sdist": "docutils-0.23.tar.gz",
+   "sha256": "746f5060322511280a1e50eb76846ed6bf2342984b2ac04dc42caa1a8d78799e",
+   "py_files": 146,
+   "root": "/tmp/t_work/docutils"
+  },
+  {
+   "rank": 151,
+   "download_rank": 212,
+   "project": "google-genai",
+   "version": "2.34.0",
+   "sdist": "google_genai-2.34.0.tar.gz",
+   "sha256": "8e182cf3f73384167b96861cf0aef5102b5070f2db1ea11002879e913806ef37",
+   "py_files": 389,
+   "root": "/tmp/t_work/google-genai"
+  },
+  {
+   "rank": 152,
+   "download_rank": 213,
+   "project": "pytest-xdist",
+   "version": "3.8.0",
+   "sdist": "pytest_xdist-3.8.0.tar.gz",
+   "sha256": "7e578125ec9bc6050861aa93f2d59f1d8d085595d6551c2c90b6f4fad8d3a9f1",
+   "py_files": 20,
+   "root": "/tmp/t_work/pytest-xdist"
+  },
+  {
+   "rank": 153,
+   "download_rank": 214,
+   "project": "execnet",
+   "version": "2.1.2",
+   "sdist": "execnet-2.1.2.tar.gz",
+   "sha256": "63d83bfdd9a23e35b9c6a3261412324f964c2ec8dcd8d3c6916ee9373e0befcd",
+   "py_files": 30,
+   "root": "/tmp/t_work/execnet"
+  },
+  {
+   "rank": 154,
+   "download_rank": 215,
+   "project": "flask",
+   "version": "3.1.3",
+   "sdist": "flask-3.1.3.tar.gz",
+   "sha256": "0ef0e52b8a9cd932855379197dd8f94047b359ca0a78695144304cb45f87c9eb",
+   "py_files": 35,
+   "root": "/tmp/t_work/flask"
+  },
+  {
+   "rank": 155,
+   "download_rank": 216,
+   "project": "prometheus-client",
+   "version": "0.26.0",
+   "sdist": "prometheus_client-0.26.0.tar.gz",
+   "sha256": "04a91bcf94e2cf74a44a1a874d651a2e853ed354b6e822f3b7487751465d5c2b",
+   "py_files": 30,
+   "root": "/tmp/t_work/prometheus-client"
+  },
+  {
+   "rank": 156,
+   "download_rank": 217,
+   "project": "asn1crypto",
+   "version": "1.5.1",
+   "sdist": "asn1crypto-1.5.1.tar.gz",
+   "sha256": "13ae38502be632115abf8a24cbe5f4da52e3b5231990aff31123c805306ccb9c",
+   "py_files": 24,
+   "root": "/tmp/t_work/asn1crypto"
+  },
+  {
+   "rank": 157,
+   "download_rank": 218,
+   "project": "backoff",
+   "version": "2.2.1",
+   "sdist": "backoff-2.2.1.tar.gz",
+   "sha256": "03f829f5bb1923180821643f8753b0502c3b682293992485b0eef2807afa5cba",
+   "py_files": 10,
+   "root": "/tmp/t_work/backoff"
+  },
+  {
+   "rank": 158,
+   "download_rank": 220,
+   "project": "docker",
+   "version": "7.2.0",
+   "sdist": "docker-7.2.0.tar.gz",
+   "sha256": "cebb93773d334f778e023a7ee352a8d6e13ab1bd3b863a4d4a59dec897df43ac",
+   "py_files": 67,
+   "root": "/tmp/t_work/docker"
+  },
+  {
+   "rank": 159,
+   "download_rank": 221,
+   "project": "psycopg",
+   "version": "3.3.6",
+   "sdist": "psycopg-3.3.6.tar.gz",
+   "sha256": "c081f2250df751a943036e42db6df4571c66cd0aabe8291a7a506512b12007d2",
+   "py_files": 83,
+   "root": "/tmp/t_work/psycopg"
+  },
+  {
+   "rank": 160,
+   "download_rank": 222,
+   "project": "deprecated",
+   "version": "3.0.1",
+   "sdist": "deprecated-3.0.1.tar.gz",
+   "sha256": "2f5a9fecc9961e26462846cf1e57f73a612b1d0b79c27dceeed8de647beadcee",
+   "py_files": 27,
+   "root": "/tmp/t_work/deprecated"
+  },
+  {
+   "rank": 161,
+   "download_rank": 223,
+   "project": "sympy",
+   "version": "1.14.0",
+   "sdist": "sympy-1.14.0.tar.gz",
+   "sha256": "d3d3fe8df1e5a0b42f0e7bdf50541697dbe7d23746e894990c030e2b05e72517",
+   "py_files": 857,
+   "root": "/tmp/t_work/sympy"
+  },
+  {
+   "rank": 162,
+   "download_rank": 225,
+   "project": "uritemplate",
+   "version": "4.2.0",
+   "sdist": "uritemplate-4.2.0.tar.gz",
+   "sha256": "480c2ed180878955863323eea31b0ede668795de182617fef9c6ca09e6ec9d0e",
+   "py_files": 7,
+   "root": "/tmp/t_work/uritemplate"
+  },
+  {
+   "rank": 163,
+   "download_rank": 228,
+   "project": "sentry-sdk",
+   "version": "2.73.0",
+   "sdist": "sentry_sdk-2.73.0.tar.gz",
+   "sha256": "4a2ab97b16e4693c325ab361c7bbbb346dbc7d0bc0150922d795a25bac8d5280",
+   "py_files": 204,
+   "root": "/tmp/t_work/sentry-sdk"
+  },
+  {
+   "rank": 164,
+   "download_rank": 229,
+   "project": "ptyprocess",
+   "version": "0.7.0",
+   "sdist": "ptyprocess-0.7.0.tar.gz",
+   "sha256": "5c5d0a3b48ceee0b48485e0c26037c0acd7d29765ca3fbb5cb3831d347423220",
+   "py_files": 6,
+   "root": "/tmp/t_work/ptyprocess"
+  },
+  {
+   "rank": 165,
+   "download_rank": 230,
+   "project": "mpmath",
+   "version": "1.4.1",
+   "sdist": "mpmath-1.4.1.tar.gz",
+   "sha256": "efd6d1b75f09d69524a67609949812668b28e81ecbfe0ab449ced8c13e92642e",
+   "py_files": 111,
+   "root": "/tmp/t_work/mpmath"
+  },
+  {
+   "rank": 166,
+   "download_rank": 232,
+   "project": "google-api-python-client",
+   "version": "2.201.0",
+   "sdist": "google_api_python_client-2.201.0.tar.gz",
+   "sha256": "d5691982abd7287f53cb0b0e0c6a9984d4103cf864ea0a88cb6e4347bbaf70de",
+   "py_files": 18,
+   "root": "/tmp/t_work/google-api-python-client"
+  },
+  {
+   "rank": 167,
+   "download_rank": 233,
+   "project": "pypdf",
+   "version": "6.21.4",
+   "sdist": "pypdf-6.21.4.tar.gz",
+   "sha256": "c8817e3f888d47a087872ded69812c1ef30cacb871d6e053e0c00bbaf0bc2163",
+   "py_files": 60,
+   "root": "/tmp/t_work/pypdf"
+  },
+  {
+   "rank": 168,
+   "download_rank": 234,
+   "project": "pexpect",
+   "version": "4.9.0",
+   "sdist": "pexpect-4.9.0.tar.gz",
+   "sha256": "ee7d41123f3c9911050ea2c2dac107568dc43b2d3b0c7557a33212c398ead30f",
+   "py_files": 35,
+   "root": "/tmp/t_work/pexpect"
+  },
+  {
+   "rank": 169,
+   "download_rank": 237,
+   "project": "pytest-json-ctrf",
+   "version": "0.6.1",
+   "sdist": "pytest_json_ctrf-0.6.1.tar.gz",
+   "sha256": "c968bbee43ea7f885434ec105aa9ecad3d0576f70fbf15c329ed8362ae114eb8",
+   "py_files": 6,
+   "root": "/tmp/t_work/pytest-json-ctrf"
+  },
+  {
+   "rank": 170,
+   "download_rank": 238,
+   "project": "asgiref",
+   "version": "3.13.0",
+   "sdist": "asgiref-3.13.0.tar.gz",
+   "sha256": "034cc8cbf72d00553b4be256703ac545120b4e50af13b49dec99da899aeeecb4",
+   "py_files": 11,
+   "root": "/tmp/t_work/asgiref"
+  },
+  {
+   "rank": 171,
+   "download_rank": 241,
+   "project": "aiofiles",
+   "version": "25.1.0",
+   "sdist": "aiofiles-25.1.0.tar.gz",
+   "sha256": "a8d728f0a29de45dc521f18f07297428d56992a742f0cd2701ba86e44d23d5b2",
+   "py_files": 10,
+   "root": "/tmp/t_work/aiofiles"
+  },
+  {
+   "rank": 172,
+   "download_rank": 243,
+   "project": "traitlets",
+   "version": "5.16.1",
+   "sdist": "traitlets-5.16.1.tar.gz",
+   "sha256": "ed900c2b631aa3a112811139fa97b8d2c3bad5e989656bba4b7e52c7852c18c1",
+   "py_files": 35,
+   "root": "/tmp/t_work/traitlets"
+  },
+  {
+   "rank": 173,
+   "download_rank": 244,
+   "project": "httplib2",
+   "version": "0.32.1",
+   "sdist": "httplib2-0.32.1.tar.gz",
+   "sha256": "37900eb8a74576bd99fc39ae1dc8409f95f965d45b56cbcb2194bb55f58a90e1",
+   "py_files": 8,
+   "root": "/tmp/t_work/httplib2"
+  },
+  {
+   "rank": 174,
+   "download_rank": 245,
+   "project": "azure-identity",
+   "version": "1.27.0",
+   "sdist": "azure_identity-1.27.0.tar.gz",
+   "sha256": "6a4c50e25e8e9a47b324a95ad024897e56cb3c6241e0094e93b126a2bf71edc5",
+   "py_files": 96,
+   "root": "/tmp/t_work/azure-identity"
+  },
+  {
+   "rank": 175,
+   "download_rank": 246,
+   "project": "webencodings",
+   "version": "0.6.1",
+   "sdist": "webencodings-0.6.1.tar.gz",
+   "sha256": "565f9ad031c702dae404e27a099e3e09186a3ab1b9520f06d215502b651fd910",
+   "py_files": 5,
+   "root": "/tmp/t_work/webencodings"
+  },
+  {
+   "rank": 176,
+   "download_rank": 247,
+   "project": "narwhals",
+   "version": "2.28.0",
+   "sdist": "narwhals-2.28.0.tar.gz",
+   "sha256": "2d9860c80d6610820826e94c6e42ce4b1d92d89cdd479586e652a8d211dab345",
+   "py_files": 158,
+   "root": "/tmp/t_work/narwhals"
+  },
+  {
+   "rank": 177,
+   "download_rank": 248,
+   "project": "black",
+   "version": "26.10.1",
+   "sdist": "black-26.10.1.tar.gz",
+   "sha256": "5f9f83beae62437e060dafd53d7f1fc327e3d3494f74d72ee5c2b73eb90fc4e7",
+   "py_files": 51,
+   "root": "/tmp/t_work/black"
+  },
+  {
+   "rank": 178,
+   "download_rank": 249,
+   "project": "google-auth-oauthlib",
+   "version": "1.5.0",
+   "sdist": "google_auth_oauthlib-1.5.0.tar.gz",
+   "sha256": "b351107c7dd9017f426cbb0272ea1bc04f469020fd18f4443c7d40362e0b1510",
+   "py_files": 7,
+   "root": "/tmp/t_work/google-auth-oauthlib"
+  },
+  {
+   "rank": 179,
+   "download_rank": 251,
+   "project": "msal-extensions",
+   "version": "1.3.1",
+   "sdist": "msal_extensions-1.3.1.tar.gz",
+   "sha256": "c5b0fd10f65ef62b5f1d62f4251d51cbcaf003fcedae8c91b040a488614be1a4",
+   "py_files": 9,
+   "root": "/tmp/t_work/msal-extensions"
+  },
+  {
+   "rank": 180,
+   "download_rank": 252,
+   "project": "sqlparse",
+   "version": "0.6.0",
+   "sdist": "sqlparse-0.6.0.tar.gz",
+   "sha256": "113c35c75365ab9cc9c7231d68c6428fb11c085fc8e9eb1ad659b7ddbf6cd2b9",
+   "py_files": 29,
+   "root": "/tmp/t_work/sqlparse"
+  },
+  {
+   "rank": 181,
+   "download_rank": 253,
+   "project": "authlib",
+   "version": "1.9.1",
+   "sdist": "authlib-1.9.1.tar.gz",
+   "sha256": "5c7d9848f47cac340f060f76ae0bc09b59f5c8e89cc1bb032d4370a0c55b5974",
+   "py_files": 216,
+   "root": "/tmp/t_work/authlib"
+  },
+  {
+   "rank": 182,
+   "download_rank": 254,
+   "project": "fastjsonschema",
+   "version": "2.22.2",
+   "sdist": "fastjsonschema-2.22.2.tar.gz",
+   "sha256": "72064e12356a7d6ef02165be2946b9abadbdf238536e07eb587e3dbaa33099cf",
+   "py_files": 12,
+   "root": "/tmp/t_work/fastjsonschema"
+  },
+  {
+   "rank": 183,
+   "download_rank": 255,
+   "project": "opentelemetry-exporter-otlp-proto-grpc",
+   "version": "1.45.2",
+   "sdist": "opentelemetry_exporter_otlp_proto_grpc-1.45.2.tar.gz",
+   "sha256": "9e4a6490ca7711479fec7c519425bc09808abbc9a2a1775528edecf200d19a5a",
+   "py_files": 6,
+   "root": "/tmp/t_work/opentelemetry-exporter-otlp-proto-grpc"
+  },
+  {
+   "rank": 184,
+   "download_rank": 256,
+   "project": "jsonpatch",
+   "version": "1.38",
+   "sdist": "jsonpatch-1.38.tar.gz",
+   "sha256": "debc3e7bdc3d446468d64987f51a0e7a9deea42987ff90a6d1005a489b471c19",
+   "py_files": 6,
+   "root": "/tmp/t_work/jsonpatch"
+  },
+  {
+   "rank": 185,
+   "download_rank": 258,
+   "project": "paramiko",
+   "version": "5.1.0",
+   "sdist": "paramiko-5.1.0.tar.gz",
+   "sha256": "239b5f9b2a53006cd54f83cf8495ee742083708ead947882c8dd2786de79f39b",
+   "py_files": 42,
+   "root": "/tmp/t_work/paramiko"
+  },
+  {
+   "rank": 186,
+   "download_rank": 259,
+   "project": "executing",
+   "version": "2.3.0",
+   "sdist": "executing-2.3.0.tar.gz",
+   "sha256": "15919cb5d667e5cb4e099511971d00d659573fff2dd5c4e6cd8b71636c7858d2",
+   "py_files": 7,
+   "root": "/tmp/t_work/executing"
+  },
+  {
+   "rank": 187,
+   "download_rank": 260,
+   "project": "babel",
+   "version": "2.18.0",
+   "sdist": "babel-2.18.0.tar.gz",
+   "sha256": "b80b99a14bd085fcacfa15c9165f651fbb3406e66cc603abf11c5750937c992d",
+   "py_files": 35,
+   "root": "/tmp/t_work/babel"
+  },
+  {
+   "rank": 188,
+   "download_rank": 263,
+   "project": "ipython",
+   "version": "9.18.0",
+   "sdist": "ipython-9.18.0.tar.gz",
+   "sha256": "93ec98e27d5ce494c962758111c7dff1ef45f9efdd55604ae70a7d4cabb3e1ea",
+   "py_files": 177,
+   "root": "/tmp/t_work/ipython"
+  },
+  {
+   "rank": 189,
+   "download_rank": 264,
+   "project": "grpc-google-iam-v1",
+   "version": "0.14.6",
+   "sdist": "grpc_google_iam_v1-0.14.6.tar.gz",
+   "sha256": "fc0a683ace0a149184fcd08d667dd64d51ae65e5698e86f7136aa6002a8b5373",
+   "py_files": 11,
+   "root": "/tmp/t_work/grpc-google-iam-v1"
+  },
+  {
+   "rank": 190,
+   "download_rank": 265,
+   "project": "gunicorn",
+   "version": "26.2.0",
+   "sdist": "gunicorn-26.2.0.tar.gz",
+   "sha256": "62b864895d9ebff0b2f9867ba04fe811c93121596540830c9c916d0769668447",
+   "py_files": 119,
+   "root": "/tmp/t_work/gunicorn"
+  },
+  {
+   "rank": 191,
+   "download_rank": 266,
+   "project": "joserfc",
+   "version": "1.7.7",
+   "sdist": "joserfc-1.7.7.tar.gz",
+   "sha256": "471d0fd12a5a0d1c0942de280f39efe6f597878315033270b504d4d006d25510",
+   "py_files": 56,
+   "root": "/tmp/t_work/joserfc"
+  },
+  {
+   "rank": 192,
+   "download_rank": 267,
+   "project": "parso",
+   "version": "0.8.7",
+   "sdist": "parso-0.8.7.tar.gz",
+   "sha256": "eaaac4c9fdd5e9e8852dc778d2d7405897ec510f2a298071453e5e3a07914bb1",
+   "py_files": 25,
+   "root": "/tmp/t_work/parso"
+  },
+  {
+   "rank": 193,
+   "download_rank": 268,
+   "project": "jedi",
+   "version": "0.20.1",
+   "sdist": "jedi-0.20.1.tar.gz",
+   "sha256": "2f71208c3f9c1bca057c0e90d3f272aba44ace88fc4067d7587e9e069331b7e5",
+   "py_files": 88,
+   "root": "/tmp/t_work/jedi"
+  },
+  {
+   "rank": 194,
+   "download_rank": 269,
+   "project": "structlog",
+   "version": "26.1.0",
+   "sdist": "structlog-26.1.0.tar.gz",
+   "sha256": "f63a716cbd1b1291cf7661de7794b455acfa4c43c5bcf1630e6ad5ddc1adb3b7",
+   "py_files": 23,
+   "root": "/tmp/t_work/structlog"
+  },
+  {
+   "rank": 195,
+   "download_rank": 270,
+   "project": "azure-storage-blob",
+   "version": "12.31.1",
+   "sdist": "azure_storage_blob-12.31.1.tar.gz",
+   "sha256": "0d6e5b860a1357efc602db04cfa7c9950ac86126edcf7db89320cde281555fe5",
+   "py_files": 109,
+   "root": "/tmp/t_work/azure-storage-blob"
+  },
+  {
+   "rank": 196,
+   "download_rank": 271,
+   "project": "typedload",
+   "version": "2.41",
+   "sdist": "typedload-2.41.tar.gz",
+   "sha256": "85ed3911b465781acc4ea2d124e2fc0a99148566a2db5d6e906b210b69782267",
+   "py_files": 10,
+   "root": "/tmp/t_work/typedload"
+  },
+  {
+   "rank": 197,
+   "download_rank": 272,
+   "project": "asttokens",
+   "version": "3.0.2",
+   "sdist": "asttokens-3.0.2.tar.gz",
+   "sha256": "3ecdbd8f2cc195f53ccada3a613538bb5f9ef6f6869129f13e03c30a677b8fe2",
+   "py_files": 8,
+   "root": "/tmp/t_work/asttokens"
+  },
+  {
+   "rank": 198,
+   "download_rank": 273,
+   "project": "pyproject-hooks",
+   "version": "1.3.3",
+   "sdist": "pyproject_hooks-1.3.3.tar.gz",
+   "sha256": "defda19b854fa0d3bd4f76ea4ddcba8abd7dcfcdd585a6690ade050744fc5f43",
+   "py_files": 6,
+   "root": "/tmp/t_work/pyproject-hooks"
+  },
+  {
+   "rank": 199,
+   "download_rank": 274,
+   "project": "transformers",
+   "version": "5.22.1",
+   "sdist": "transformers-5.22.1.tar.gz",
+   "sha256": "bed9fd76d6f43b4a1a9fc5d0c565ace7c77edbd029784f8cbcdf772cb5e924d8",
+   "py_files": 2810,
+   "root": "/tmp/t_work/transformers"
+  },
+  {
+   "rank": 200,
+   "download_rank": 277,
+   "project": "python-docx",
+   "version": "1.2.0",
+   "sdist": "python_docx-1.2.0.tar.gz",
+   "sha256": "7bc9d7b7d8a69c9c02ca09216118c86552704edc23bac179283f2e38f86220ce",
+   "py_files": 119,
+   "root": "/tmp/t_work/python-docx"
+  }
+ ],
+ "skipped": [
+  {
+   "project": "typing-extensions",
+   "reason": "fewer than 5 non-test .py files (2)"
+  },
+  {
+   "project": "certifi",
+   "reason": "fewer than 5 non-test .py files (4)"
+  },
+  {
+   "project": "cryptography",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "cffi",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "pyyaml",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "six",
+   "reason": "fewer than 5 non-test .py files (3)"
+  },
+  {
+   "project": "pydantic-core",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "numpy",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "iniconfig",
+   "reason": "fewer than 5 non-test .py files (4)"
+  },
+  {
+   "project": "annotated-types",
+   "reason": "fewer than 5 non-test .py files (1)"
+  },
+  {
+   "project": "typing-inspection",
+   "reason": "fewer than 5 non-test .py files (4)"
+  },
+  {
+   "project": "markupsafe",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "pandas",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "rpds-py",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "jsonschema-specifications",
+   "reason": "fewer than 5 non-test .py files (4)"
+  },
+  {
+   "project": "pillow",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "aiosignal",
+   "reason": "fewer than 5 non-test .py files (3)"
+  },
+  {
+   "project": "annotated-doc",
+   "reason": "fewer than 5 non-test .py files (4)"
+  },
+  {
+   "project": "greenlet",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "trove-classifiers",
+   "reason": "fewer than 5 non-test .py files (4)"
+  },
+  {
+   "project": "pyarrow",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "grpcio",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "lxml",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "jiter",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "regex",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "watchfiles",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "ruff",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "scipy",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "psutil",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "et-xmlfile",
+   "reason": "fewer than 5 non-test .py files (4)"
+  },
+  {
+   "project": "tomli",
+   "reason": "fewer than 5 non-test .py files (4)"
+  },
+  {
+   "project": "mypy-extensions",
+   "reason": "fewer than 5 non-test .py files (1)"
+  },
+  {
+   "project": "sse-starlette",
+   "reason": "fewer than 5 non-test .py files (4)"
+  },
+  {
+   "project": "more-itertools",
+   "reason": "fewer than 5 non-test .py files (4)"
+  },
+  {
+   "project": "editables",
+   "reason": "fewer than 5 non-test .py files (3)"
+  },
+  {
+   "project": "httptools",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "uvloop",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "psycopg2-binary",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "msgpack",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "hf-xet",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "scikit-learn",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "orjson",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "tiktoken",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "nodeenv",
+   "reason": "fewer than 5 non-test .py files (2)"
+  },
+  {
+   "project": "threadpoolctl",
+   "reason": "fewer than 5 non-test .py files (1)"
+  },
+  {
+   "project": "cloudpickle",
+   "reason": "fewer than 5 non-test .py files (3)"
+  },
+  {
+   "project": "tokenizers",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "pynacl",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "matplotlib",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "zstandard",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "kiwisolver",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "bcrypt",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "tabulate",
+   "reason": "fewer than 5 non-test .py files (2)"
+  },
+  {
+   "project": "cfgv",
+   "reason": "fewer than 5 non-test .py files (2)"
+  },
+  {
+   "project": "decorator",
+   "reason": "fewer than 5 non-test .py files (2)"
+  },
+  {
+   "project": "jaraco-functools",
+   "reason": "fewer than 5 non-test .py files (3)"
+  },
+  {
+   "project": "cycler",
+   "reason": "fewer than 5 non-test .py files (1)"
+  },
+  {
+   "project": "jaraco-context",
+   "reason": "fewer than 5 non-test .py files (3)"
+  },
+  {
+   "project": "google-crc32c",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "contourpy",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "grpcio-tools",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "xxhash",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "jsonpointer",
+   "reason": "fewer than 5 non-test .py files (3)"
+  },
+  {
+   "project": "uv",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "blinker",
+   "reason": "fewer than 5 non-test .py files (4)"
+  },
+  {
+   "project": "psycopg-binary",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "librt",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "google-auth-httplib2",
+   "reason": "fewer than 5 non-test .py files (2)"
+  },
+  {
+   "project": "async-timeout",
+   "reason": "fewer than 5 non-test .py files (2)"
+  },
+  {
+   "project": "multiprocess",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "rapidfuzz",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "opentelemetry-util-http",
+   "reason": "fewer than 5 non-test .py files (4)"
+  },
+  {
+   "project": "asyncpg",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "snowflake-connector-python",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "tornado",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "playwright",
+   "reason": "no py3-none-any wheel"
+  },
+  {
+   "project": "xmltodict",
+   "reason": "fewer than 5 non-test .py files (1)"
+  }
+ ],
+ "top_last_update": "2026-10-01 12:40:51"
+}
