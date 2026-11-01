@@ -1,7 +1,13 @@
 # Study T-A7: B9 with the medium (flash, high reasoning) and strong (argon) models on the same 150 cells as T-A6.
 # Paid, capped (medium 4 USD, strong 10 USD).  Commits research_closure/results/study_t/B9_{medium,strong}_*.json and B9_RESULT_*.json.
 name: Gatekeeper Study T B9 tiers
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      jobs:
+        description: "JSON list of {shard, tag, model, effort, cap}; default all eight"
+        default: >-
+          [{"shard":0,"tag":"medium","model":"vertex-gemini-flash","effort":"high","cap":"1.0"},{"shard":1,"tag":"medium","model":"vertex-gemini-flash","effort":"high","cap":"1.0"},{"shard":2,"tag":"medium","model":"vertex-gemini-flash","effort":"high","cap":"1.0"},{"shard":3,"tag":"medium","model":"vertex-gemini-flash","effort":"high","cap":"1.0"},{"shard":0,"tag":"strong","model":"vertex-gemini-argon","effort":"low","cap":"2.5"},{"shard":1,"tag":"strong","model":"vertex-gemini-argon","effort":"low","cap":"2.5"},{"shard":2,"tag":"strong","model":"vertex-gemini-argon","effort":"low","cap":"2.5"},{"shard":3,"tag":"strong","model":"vertex-gemini-argon","effort":"low","cap":"2.5"}]
 permissions:
   contents: write
 jobs:
@@ -9,10 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        shard: [0, 1, 2, 3]
-        tier:
-          - {tag: medium, model: vertex-gemini-flash, effort: high, cap: "1.0"}
-          - {tag: strong, model: vertex-gemini-argon, effort: low, cap: "2.5"}
+        include: ${{ fromJSON(inputs.jobs) }}
     runs-on: ubuntu-24.04
     timeout-minutes: 330
     steps:
@@ -35,11 +38,11 @@ jobs:
           GK_MEMCAP_GB: "2"
         run: >-
           python -W ignore tools/market_b9.py /tmp/b9_work out_b9 research_closure/pilot/models.json --shard ${{ matrix.shard }} --shards 4
-          --cap ${{ matrix.tier.cap }} --model ${{ matrix.tier.model }} --effort ${{ matrix.tier.effort }} --tag ${{ matrix.tier.tag }}
+          --cap ${{ matrix.cap }} --model ${{ matrix.model }} --effort ${{ matrix.effort }} --tag ${{ matrix.tag }}
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         if: always()
         with:
-          name: T_B9_${{ matrix.tier.tag }}_${{ matrix.shard }}
+          name: T_B9_${{ matrix.tag }}_${{ matrix.shard }}
           path: out_b9
   analyse:
     needs: b9

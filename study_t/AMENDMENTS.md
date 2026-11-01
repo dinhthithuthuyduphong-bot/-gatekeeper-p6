@@ -121,3 +121,10 @@ could shrink.
 
 **Reported per configuration:** cells whose output changed behaviour on ≥ 5% of reference inputs (and those where Ruff's own fix is
 harmless), unparsable replies, USD and seconds per cell, against Gatekeeper on the same cells. B9-W is evaluated per configuration.
+
+### T-A7 incident (run 41264163363)
+A variable in `tools/market_b9.py` overwrote the tier tag, so the shard files were named by a hash; the medium and strong tiers
+processed the same cells, produced identical names, and half of the files overwrote the other half when artifacts were merged. The
+analysis then wrote empty results without failing. **Kept:** medium shards 0 and 2, strong shards 1 and 3 (each file records its
+model and effort), renamed to their tier. **Fixed:** the variable; the analysis now refuses an empty or mixed-model tier.
+**Re-run:** medium shards 1 and 3, strong shards 0 and 2, same code path and prompt. No outcome was used to change anything.

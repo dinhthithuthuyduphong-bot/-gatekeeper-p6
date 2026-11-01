@@ -171,14 +171,14 @@ def run(argv):
             for fr in rec["functions"]:
                 f, q = fr["file"], fr["qualname"]
                 pp = [MT.import_root(root, f)] if MT.import_root(root, f) else []
-                tag = hashlib.sha1((rec["cell"] + q).encode()).hexdigest()[:10]
+                ftag = hashlib.sha1((rec["cell"] + q).encode()).hexdigest()[:10]   # not `tag`: that is the tier (T-A7 bug)
                 t0 = time.time()
-                gflags = flags(py, root, gsnap, pp, f, q, MT.SEEDS["gate"], n, w, tag + "g")
+                gflags = flags(py, root, gsnap, pp, f, q, MT.SEEDS["gate"], n, w, ftag + "g")
                 rec["g_seconds"] += time.time() - t0
                 fr["gatekeeper_gate_flags_ok"] = gflags is not None
                 fr["b9_ref_flags"] = None
                 if fr.get("b9_changed_source"):
-                    bf = flags(py, root, bsnap, pp, f, q, MT.SEEDS["ref"], n, w, tag + "b")
+                    bf = flags(py, root, bsnap, pp, f, q, MT.SEEDS["ref"], n, w, ftag + "b")
                     fr["b9_ref_flags"] = "".join(map(str, bf)) if bf is not None else None
                 elif fr.get("b9", "").startswith("applied"):
                     fr["b9_ref_flags"] = ""          # unchanged source: no behaviour change

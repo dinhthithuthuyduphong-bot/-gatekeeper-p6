@@ -24,11 +24,16 @@ def analyse(d, tag=""):
     t = {r["cell"]: r for r in json.loads((d / "STUDY_T_RESULT.json").read_text())["rows"]}
     recs, spent = {}, 0.0
     files = sorted(d.glob("B9_%s_??.json" % tag)) if tag else sorted(p for p in d.glob("B9_??.json"))
+    if not files:
+        raise SystemExit("no B9 files for tier %r: refusing to write an empty result" % (tag or "cheap"))
     model = None
     for p in files:
         j = json.loads(p.read_text())
         spent += j["spent_usd"]
-        model = "%s (%s)" % (j["model"], j.get("effort") or "low")
+        m = "%s (%s)" % (j["model"], j.get("effort") or "low")
+        if model and m != model:
+            raise SystemExit("B9 files of tier %r mix models: %s and %s" % (tag, model, m))
+        model = m
         recs.update(j["cells"])
     rows = []
     for cell, rec in recs.items():
