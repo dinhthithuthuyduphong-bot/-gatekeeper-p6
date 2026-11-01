@@ -259,7 +259,11 @@ Study T cells (all $11$ harmful ones and $139$ drawn at random) a model (gemini-
 itself, and its output was tried with the same harness and reference inputs.  It changed behaviour on at least $5\%$ of inputs in
 $10$ of $148$ evaluable cells, $2$ of them cells where Ruff's own fix is harmless, and $6$ of its replies did not parse; Gatekeeper
 admitted no harmful cell.  The model cost $0.0080$ USD and $16.9$ seconds per cell, Gatekeeper's trials $2.3$ seconds of a hosted
-runner ($0.0003$ USD).
+runner ($0.0003$ USD).  Stronger models did not help (amendment T-A7, same cells): with high reasoning effort the same model changed
+behaviour in $9$ of $123$ evaluable cells ($52$ replies did not parse, most likely because reasoning used up the output budget) at
+$0.0246$ USD per cell, and the strongest model available to us (gemini-4-argon) in $11$ of $148$, $2$ of them harmless under Ruff's
+fix, at $0.0147$ USD per cell.  A model that applies a change faithfully has no evidence about the target, which is what admission
+supplies.
 
 \emph{Reading.} On these targets harm was frequent and deterministic, so a simple gate with target evidence suffices; the
 certificate's distinctive behaviour is refusing changes that are not beneficial, not catching rare harm.

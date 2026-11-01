@@ -47,6 +47,9 @@ S5 = "research_closure/results/study_s/COMPOSITION_STUDY_SA5.json"
 TC = "research_closure/results/study_t/MARKET_CENSUS.json"
 TR = "research_closure/results/study_t/STUDY_T_RESULT.json"
 B9 = lambda: J("research_closure/results/study_t/B9_RESULT.json")  # noqa: E731
+B9M = lambda: J("research_closure/results/study_t/B9_RESULT_medium.json")  # noqa: E731
+B9S = lambda: J("research_closure/results/study_t/B9_RESULT_strong.json")  # noqa: E731
+B9T = lambda: [B9(), B9M(), B9S()]  # noqa: E731
 UU = lambda: J("research_closure/results/study_u/STUDY_U_RESULT.json")["contract"]  # noqa: E731
 
 
@@ -250,9 +253,18 @@ CLAIMS = [
     ("B9 cost", "$0.0080$ USD and $16.9$ seconds per cell, Gatekeeper's trials $2.3$ seconds of a hosted\nrunner ($0.0003$ USD)",
      lambda: "$%.4f$ USD and $%.1f$ seconds per cell, Gatekeeper's trials $%.1f$ seconds of a hosted\nrunner ($%.4f$ USD)" % (
          B9()["cost_per_cell"]["b9_usd"], B9()["cost_per_cell"]["b9_seconds"], B9()["cost_per_cell"]["g_seconds"], B9()["cost_per_cell"]["g_usd_runner"])),
-    ("abstract: B9", "was $26$ times as expensive and changed\nbehaviour in $10$ of $148$ cells",
-     lambda: "was $%d$ times as expensive and changed\nbehaviour in $%d$ of $%d$ cells" % (
-         round(B9()["cost_per_cell"]["b9_usd"] / B9()["cost_per_cell"]["g_usd_runner"]), B9()["b9_harmful_applied"], B9()["evaluable_b9"])),
+    ("abstract: B9 tiers", "was $26$ to $88$ times as expensive and changed\nbehaviour in $9$ to $11$ cells",
+     lambda: "was $%d$ to $%d$ times as expensive and changed\nbehaviour in $%d$ to $%d$ cells" % (
+         min(round(t["cost_per_cell"]["b9_usd"] / t["cost_per_cell"]["g_usd_runner"]) for t in B9T()),
+         max(round(t["cost_per_cell"]["b9_usd"] / t["cost_per_cell"]["g_usd_runner"]) for t in B9T()),
+         min(t["b9_harmful_applied"] for t in B9T()), max(t["b9_harmful_applied"] for t in B9T()))),
+    ("B9 medium", "changed\nbehaviour in $9$ of $123$ evaluable cells ($52$ replies did not parse",
+     lambda: "changed\nbehaviour in $%d$ of $%d$ evaluable cells ($%d$ replies did not parse" % (
+         B9M()["b9_harmful_applied"], B9M()["evaluable_b9"], B9M()["b9_unparsable_functions"])),
+    ("B9 medium cost", "$0.0246$ USD per cell, and the strongest", lambda: "$%.4f$ USD per cell, and the strongest" % B9M()["cost_per_cell"]["b9_usd"]),
+    ("B9 strong", "(gemini-4-argon) in $11$ of $148$, $2$ of them harmless under Ruff's\nfix, at $0.0147$ USD per cell",
+     lambda: "(gemini-4-argon) in $%d$ of $%d$, $%d$ of them harmless under Ruff's\nfix, at $%.4f$ USD per cell" % (
+         B9S()["b9_harmful_applied"], B9S()["evaluable_b9"], B9S()["b9_harmful_among_truth_safe"], B9S()["cost_per_cell"]["b9_usd"])),
     # abstract (main.tex)
     ("abstract: plausible patches", "in $205$ plausible LLM patches", lambda: "in $%d$ plausible LLM patches" % PA()["PRIMARY"]["plausible"]),
     ("abstract: census admits", "the test census admitted all $16$ with partial\nbehavioural differences",
