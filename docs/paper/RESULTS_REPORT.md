@@ -45,3 +45,15 @@ Dải tác hại 5–20%: 33 patch; admit: U 33, S20 10, FS 0, B8 0, G 0, G_FDR 
 
 Dải tác hại 5–20%: 104 patch; admit: U 104, S20 21, FS 0, B8 0, G 0, G_FDR 0. Tiêu chí: U1 THẮNG, U2 THUA, U3 THẮNG.
 
+### Study T-A6: B9 (model tự áp dụng thay đổi) so với Gatekeeper, 150 ô lấy mẫu
+
+| Đại lượng | B9 (gemini-flash) | Gatekeeper | **Đánh giá** |
+|---|---|---|---|
+| Ô có hại được áp dụng / admit | 10 / 148 ô đánh giá được | 0 | G **thắng** |
+| …trong đó trên ô vốn an toàn (B9 tự gây hại) | 2 | — | |
+| Hàm model trả lời không parse được | 6 | 0 | |
+| Chi phí mỗi ô (USD) | 0.00801 | 0.00031 (runner) | G rẻ hơn |
+| Thời gian mỗi ô (giây) | 16.9 | 2.3 | |
+
+Tiêu chí B9-W: **THẮNG**. Tổng chi phí model: 1.201 USD.
+

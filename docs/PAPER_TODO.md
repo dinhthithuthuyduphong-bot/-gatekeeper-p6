@@ -23,7 +23,7 @@ Cập nhật sau **mỗi** lần chạy. **THẮNG** = đạt, có bằng chứn
 | S9 | Tái lập, artifact ẩn danh | **THẮNG** (chờ upload) | submission check |
 | S10 | Venue, định dạng | **THẮNG** (sát giới hạn) | ISSTA 2027, 11/1/2027; nội dung 16 trang / giới hạn 18 |
 | S11 | Chứng minh được kiểm độc lập | **THẮNG** | 5 vòng; vòng cuối chỉ còn ký hiệu |
-| S12 | Câu hỏi B9 của bài gốc: so với để LLM sửa trực tiếp | **THUA** (chưa làm) | → **D4** |
+| S12 | Câu hỏi B9 của bài gốc: so với để LLM sửa trực tiếp | **THẮNG** | T-A6: B9 gây hại 10/148 ô, đắt gấp 26 lần; G 0 hại |
 | S13 | Retirement trên thay đổi môi trường thật | **THUA** (chỉ có demo) | → **D5** |
 | S14 | Tổ hợp thật gây hại "nảy sinh" (minh hoạ Định lý 2) | **THUA** (chưa thấy) | → **D6** |
 | S15 | Chi phí và điểm hoà vốn (RQ4 của bài gốc) | **THUA** (chưa đo) | → **D2** |
@@ -37,9 +37,9 @@ Cập nhật sau **mỗi** lần chạy. **THẮNG** = đạt, có bằng chứn
 
 | # | Điểm yếu | Mức | Loại | Đang làm / hướng sửa |
 |---|---|---|---|---|
-| Y1 | B9 (để model tự sửa) chưa có số, trong khi đây là câu hỏi đồng-chính của bài gốc | Cao | Thiếu thực nghiệm | **T-A6 đang chạy:** 150 ô, gemini-flash, so tác hại và USD/giây |
+| Y1 | ~~B9 chưa có số~~ | — | Đã đóng | **T-A6:** G 0 hại, B9 10/148, rẻ hơn 26 lần |
 | Y2 | Ít ô có hại: Study T có 11 ô, nên "0/11 admit" chỉ cho cận trên khoảng 26% (Wilson); Study U có 44 ô, cận khoảng 8% | Cao | Thống kê | Báo CI trong bài; thêm nguồn có nhiều ô có hại hơn (Study U mở rộng: nhiều input/patch hơn, thêm benchmark) |
-| Y3 | Giữ lợi ích kém B8 khi kiểm soát FWER trên nhiều ô (U2: 303 so với 621) | Trung bình | Thua thật | U-A1 (e-BH, post hoc): 626, ngang B8 mà có bảo đảm FDR. Cần một study xác nhận viết trước |
+| Y3 | Giữ lợi ích kém B8 khi kiểm soát FWER trên nhiều ô (U2: 303 so với 621) | Trung bình | Thua thật, đã có lời giải post hoc | U-A1: e-BH giữ 626 (B8 621), 0 hại. Còn cần một study xác nhận viết trước |
 | Y4 | Tác hại rõ thì smoke 20 draw ngang G và rẻ hơn 10 lần (Study T) | Trung bình | Thua thật | Bài đã nói rõ; Study U cho thấy G hơn khi tác hại hiếm |
 | Y5 | Ground truth là "đổi hành vi trên input sinh ra", không phải test suite hay chuyên gia | Trung bình | Độ tin cậy oracle | T-A4: chạy test suite của gói làm oracle độc lập |
 | Y6 | 40% ô Study T không thử được (hàm không gọi được, input không ổn định) | Trung bình | Môi trường | Báo cáo; harness gọi method tốt hơn |
@@ -187,6 +187,8 @@ Mỗi dòng gồm:
 | R40 | 1/11 | Paper build (ce3f5ab) | PDF có Study T | — | — | **THẮNG**: 18 trang tổng; nội dung tới trang 16 (Conclusion), trang 17 là Data Availability (không tính trang), sau đó là tham khảo. Giới hạn ISSTA: 18 trang nội dung, nên **chỉ còn khoảng 1–2 trang**; thêm nội dung mới phải rút gọn chỗ khác | — |
 | R41 | 1/11 | T-A5 B6-strong (1c79be0) | B6 trung thành với bài gốc: replay trên mọi gói nguồn khác | `market_analyze.b6_strong` (post hoc, viết trước khi tính) | B6-R cũ yếu hơn B6 thật: replay fixture hoặc ví dụ tài liệu, thay vì repo nguồn | **THẮNG**: B6-strong 2 hại / 1.256 giữ, mạnh hơn B6-R (9 / 996); G 0 / 1.512 vẫn hơn ở cả hai chiều. B6-majority 10 / 1.503 | — |
 | R42 | 1/11 | Study U (1c79be0) | Tác hại hiếm trên kỹ năng thị trường: 693 patch agent đã resolved trên SWE-bench | `rare_harm_study.py`, chia input gate/tham chiếu theo seed | Đóng điểm yếu "smoke ngang G" | **U1 THẮNG** (G 0, smoke 10, test pass 44 patch có hại). **U3 THẮNG** (dải 5–20%: smoke 10/33, G 0). **U2 THUA**: G giữ 303/649, FS 299, B8 621 | Vòng C: thua thật, không phải môi trường. Bảo đảm FWER trên 693 ô cần khoảng 190 draw sạch, trong khi trung bình chỉ có khoảng 149 input. Hướng: nhiều input hơn mỗi patch, hoặc e-BH (FDR) cho mục đích sàng lọc (amendment trước) |
+| R43 | 1/11 | Báo cáo kết quả tự sinh (bcf2635) | Số liệu thống kê trước, đánh giá sau | `results_report.py`: số đếm, tỉ lệ, Wilson 95%, draw/ô, rồi cột đánh giá | — | **THẮNG** | Lộ ra Y2: 0/11 chỉ cho cận trên khoảng 26% |
+| R44 | 1/11 | Study T-A6 B9 + U-A1 (8048fb7) | Câu hỏi đồng-chính của bài gốc: để model tự sửa | gemini-flash tự áp rule lên 150 ô; e-BH cho Study U | — | **B9-W THẮNG:** B9 gây hại ở 10/148 ô (2 ô vốn an toàn, nghĩa là model tự gây hại), 6 trả lời không parse được; G 0. Chi phí 0,0080 so với 0,0003 USD/ô (×26), 16,9 so với 2,3 giây. **U-A1 (post hoc):** e-BH giữ 626/649 (B8 621), 0 hại | — |
 
 ## C. Vòng debug khi THUA (làm theo thứ tự)
 

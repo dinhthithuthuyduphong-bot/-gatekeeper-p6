@@ -46,6 +46,7 @@ S5 = "research_closure/results/study_s/COMPOSITION_STUDY_SA5.json"
 
 TC = "research_closure/results/study_t/MARKET_CENSUS.json"
 TR = "research_closure/results/study_t/STUDY_T_RESULT.json"
+B9 = lambda: J("research_closure/results/study_t/B9_RESULT.json")  # noqa: E731
 UU = lambda: J("research_closure/results/study_u/STUDY_U_RESULT.json")["contract"]  # noqa: E731
 
 
@@ -236,6 +237,22 @@ CLAIMS = [
          UU()["scores"]["U"]["harmful_admitted"], UU()["scores"]["S20"]["harmful_admitted"], "none" if UU()["scores"]["G"]["harmful_admitted"] == 0 else "some")),
     ("abstract: B6-strong", "(a strong B6) still admitted $2$", lambda: "(a strong B6) still admitted $%d$" % J(TR)["ruff_cells"]["B6S"]["harmful_admitted"]),
     ("abstract: U patches", "not on $693$ resolved SWE-bench agent patches", lambda: "not on $%d$ resolved SWE-bench agent patches" % UU()["patches"]),
+    ("U-A1 e-BH", "kept $626$ harmless patches and still admitted no harmful one",
+     lambda: "kept $%d$ harmless patches and still admitted %s harmful one" % (UU()["scores"]["G_FDR"]["safe_admitted"],
+                                                                             "no" if UU()["scores"]["G_FDR"]["harmful_admitted"] == 0 else "a")),
+    ("B9 harm", "in\n$10$ of $148$ evaluable cells, $2$ of them cells where Ruff's own fix is harmless, and $6$ of its replies did not parse",
+     lambda: "in\n$%d$ of $%d$ evaluable cells, $%d$ of them cells where Ruff's own fix is harmless, and $%d$ of its replies did not parse" % (
+         B9()["b9_harmful_applied"], B9()["evaluable_b9"], B9()["b9_harmful_among_truth_safe"], B9()["b9_unparsable_functions"])),
+    ("B9 sample", "On $150$\nStudy T cells (all $11$ harmful ones and $139$ drawn at random)",
+     lambda: "On $%d$\nStudy T cells (all $%d$ harmful ones and $%d$ drawn at random)" % (
+         B9()["cells"], J(TR)["ruff_cells"]["G"]["harmful_total"], B9()["cells"] - J(TR)["ruff_cells"]["G"]["harmful_total"])),
+    ("B9 G", "admitted no harmful cell.  The model cost", lambda: "admitted %s harmful cell.  The model cost" % ("no" if B9()["g_harmful_admitted"] == 0 else "a")),
+    ("B9 cost", "$0.0080$ USD and $16.9$ seconds per cell, Gatekeeper's trials $2.3$ seconds of a hosted\nrunner ($0.0003$ USD)",
+     lambda: "$%.4f$ USD and $%.1f$ seconds per cell, Gatekeeper's trials $%.1f$ seconds of a hosted\nrunner ($%.4f$ USD)" % (
+         B9()["cost_per_cell"]["b9_usd"], B9()["cost_per_cell"]["b9_seconds"], B9()["cost_per_cell"]["g_seconds"], B9()["cost_per_cell"]["g_usd_runner"])),
+    ("abstract: B9", "was $26$ times as expensive and changed\nbehaviour in $10$ of $148$ cells",
+     lambda: "was $%d$ times as expensive and changed\nbehaviour in $%d$ of $%d$ cells" % (
+         round(B9()["cost_per_cell"]["b9_usd"] / B9()["cost_per_cell"]["g_usd_runner"]), B9()["b9_harmful_applied"], B9()["evaluable_b9"])),
     # abstract (main.tex)
     ("abstract: plausible patches", "in $205$ plausible LLM patches", lambda: "in $%d$ plausible LLM patches" % PA()["PRIMARY"]["plausible"]),
     ("abstract: census admits", "the test census admitted all $16$ with partial\nbehavioural differences",

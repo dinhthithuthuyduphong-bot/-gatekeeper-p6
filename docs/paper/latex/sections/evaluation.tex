@@ -249,7 +249,17 @@ in the $5$--$20\%$ band; Gatekeeper, the fixed-sample test and always-retest adm
 cells is retention: Gatekeeper kept $303$ of $649$ harmless patches, the fixed-sample test $299$, and always-retest, which has no error
 guarantee, $621$; many patches had too few stable inputs (about $149$ on average) to reach the certification threshold.  Two of the
 three pre-registered criteria held (fewer harmful admissions than smoke and than the tests, also in the rare band) and the third,
-retention at least that of always-retest, did not.
+retention at least that of always-retest, did not.  For screening, where a false-discovery guarantee is the usual target, the same
+e-values with e-BH at $q=0.1$ (post hoc) kept $626$ harmless patches and still admitted no harmful one.
+
+\paragraph{Letting the model apply the change (B9).}
+% source: research_closure/results/study_t/B9_RESULT.json; study_t/AMENDMENTS.md T-A6
+The original proposal's co-primary question is whether admission beats spending the budget on direct repair by a model.  On $150$
+Study T cells (all $11$ harmful ones and $139$ drawn at random) a model (gemini-3.8-flash) applied each rule to the touched functions
+itself, and its output was tried with the same harness and reference inputs.  It changed behaviour on at least $5\%$ of inputs in
+$10$ of $148$ evaluable cells, $2$ of them cells where Ruff's own fix is harmless, and $6$ of its replies did not parse; Gatekeeper
+admitted no harmful cell.  The model cost $0.0080$ USD and $16.9$ seconds per cell, Gatekeeper's trials $2.3$ seconds of a hosted
+runner ($0.0003$ USD).
 
 \emph{Reading.} On these targets harm was frequent and deterministic, so a simple gate with target evidence suffices; the
 certificate's distinctive behaviour is refusing changes that are not beneficial, not catching rare harm.
