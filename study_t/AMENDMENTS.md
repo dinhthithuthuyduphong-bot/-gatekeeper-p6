@@ -128,3 +128,32 @@ processed the same cells, produced identical names, and half of the files overwr
 analysis then wrote empty results without failing. **Kept:** medium shards 0 and 2, strong shards 1 and 3 (each file records its
 model and effort), renamed to their tier. **Fixed:** the variable; the analysis now refuses an empty or mixed-model tier.
 **Re-run:** medium shards 1 and 3, strong shards 0 and 2, same code path and prompt. No outcome was used to change anything.
+
+## T-A4 (written before it runs; no test-suite outcome has been seen): the package's own test suite, as a baseline and as an independent oracle
+**Why.** Weakness Y5: our ground truth is "behaviour changed on generated inputs". A reviewer will ask (i) whether the project's own
+tests, the check every CI already runs, would have been enough (a baseline: *admit the change if CI stays green*), and (ii)
+whether an independent oracle agrees with Gatekeeper's admissions.
+
+**Procedure, per package of Study T (and later T2) with at least one usable cell.**
+1. Environment: the trial environment (the release from PyPI, then uninstalled so the extracted sdist is imported), plus `pytest`,
+   `pytest-timeout`, and the first of the extras `test`, `tests`, `testing`, `dev` that installs. The import root is `src/` if it
+   exists, else the sdist root.
+2. The sdist's tests are run twice on the original code: `pytest -q -p no:cacheprovider -o addopts= --timeout 60` with a JUnit
+   report, at most 900 s per run. **Stable passes** P = tests that pass in both runs. If P is empty (no tests shipped, collection
+   fails, or a run exceeds 900 s), TS is *not applicable* to the package; this is reported, and TS is scored only on the cells where it
+   applies (as LJ in T-A2).
+3. For every usable cell, the skill is applied to the cell's files exactly as in the trials, and the tests are run once.
+   **TS admits** the cell iff every test of P passes (a run that exceeds 900 s is a rejection, as in CI).
+4. When TS rejects a cell that Gatekeeper admits, the patched run is repeated; the rejection is **confirmed** if a test of P fails
+   again.
+5. Packages are sharded over 20 runners with a 320-minute budget per runner; cells not reached are reported as *not run*.
+
+**Reported (statistics first).** On the cells where TS applies: harmful admitted and safe kept for TS, U, RS, B6-strong, S20, B8
+and G; seconds per cell of TS and of G; among G-admitted cells, the number with a confirmed TS rejection (Wilson 95%); among harmful
+cells (our oracle), the number TS rejects (the sensitivity of the shipped tests to the changes our oracle finds).
+
+**Win criteria (fixed here).**
+- **TS-W1:** G admits fewer harmful cells than TS on the cells where both apply, or both admit none and G keeps at least as many
+  safe cells.
+- **TS-W2 (independent oracle):** the Wilson 95% upper bound of the confirmed-TS-rejection rate among G-admitted cells is at most
+  η = 5%.

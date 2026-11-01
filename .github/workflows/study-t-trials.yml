@@ -7,6 +7,8 @@ on:
       shards: {description: "JSON list of shards (numbers) or single packages (names, T2-A2) to run (default all 20 shards)", default: "[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]"}
       memcap_gb: {description: "address-space cap per inner process in GB (T-A3); empty = none", default: ""}
       results: {description: "results directory (study_t, or study_t2)", default: "study_t"}
+      nproc: {description: "RLIMIT_NPROC per inner process (T2-A3); empty = none", default: ""}
+      skip_cells: {description: "comma-separated project/rule cells recorded as unusable (T2-A3: shut the runner down twice)", default: ""}
       n: {description: "inputs per stream and function (T: 200; T2: 240, amendment T2-A1)", default: "200"}
 permissions:
   contents: write
@@ -26,6 +28,8 @@ jobs:
       - run: pip install -q "ruff==0.17.3" && ruff --version
       - env:
           GK_MEMCAP_GB: ${{ inputs.memcap_gb }}
+          GK_NPROC: ${{ inputs.nproc }}
+          GK_SKIP_CELLS: ${{ inputs.skip_cells }}
           GK_T_RES: research_closure/results/${{ inputs.results }}
         run: |
           s="${{ matrix.shard }}"
@@ -42,6 +46,8 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ github.ref_name }}   # latest commit, not the run's start commit (T2 LJ incident)
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: "3.12"

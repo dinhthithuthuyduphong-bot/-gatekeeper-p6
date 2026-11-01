@@ -34,6 +34,8 @@ def configure_harness():
     CS.S_A3_FIXED_HASH = True
     if os.environ.get("GK_MEMCAP_GB"):          # T-A3
         CS.MEMCAP_BYTES = int(float(os.environ["GK_MEMCAP_GB"]) * 1024 ** 3)
+    if os.environ.get("GK_NPROC"):              # T2-A3
+        CS.NPROC_CAP = int(os.environ["GK_NPROC"])
 
 
 def extract_all(blob, filename, dest):
@@ -112,9 +114,15 @@ def run_package(pkg, census_pkg, work, n, k, skills):
     root = extract_all(data, sd["filename"], work / "src")
     py, log = env_for(work, root, pkg["project"], pkg["version"])
     orig_cache, cells = {}, {}
+    skip = set(filter(None, os.environ.get("GK_SKIP_CELLS", "").split(",")))   # T2-A3: cells that shut the runner down twice
     for rule, cell in sorted(census_pkg["cells"].items()):
         fs = funcs_of(cell, k)
         rec = {"applicability": cell["applicability"], "functions": []}
+        print("  cell", rule, "functions", len(fs), flush=True)
+        if "%s/%s" % (pkg["project"], rule) in skip:
+            rec["usable"], rec["why"] = False, "trial shut the runner down twice (T2-A3)"
+            cells[rule] = rec
+            continue
         if not fs:
             rec["usable"], rec["why"] = False, "no callable function among the sites"
             cells[rule] = rec

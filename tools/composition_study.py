@@ -37,6 +37,7 @@ S_A3 = False         # --s-a3: S-A2 plus every variant run twice; only inputs st
 S_A3_FIXED_HASH = "--fixed-hash" in sys.argv or "--s-a4" in sys.argv or "--s-a5" in sys.argv   # after S-A3; the reported S-A3 run did not fix it
 S_A5 = False         # --s-a5: S-A4 with the setuptools-scm pretend version restricted to the target package
 S_A4 = False         # --s-a4: S-A3 + fixed hash seed + missing HERA dependencies installed from GitHub source
+NPROC_CAP = 0        # Study T2-A3: RLIMIT_NPROC of inner processes (0 = none)
 MEMCAP_BYTES = 0     # Study T-A3: address-space cap per inner process (0 = none, as in Study S)
 INSTALL_LOG = {}
 
@@ -46,6 +47,8 @@ def _memcap():
     instead of exhausting the runner (Study T shard 7 was shut down twice)."""
     import resource
     resource.setrlimit(resource.RLIMIT_AS, (MEMCAP_BYTES, MEMCAP_BYTES))
+    if NPROC_CAP:            # T2-A3: a cap on processes, so target code cannot start pools that together exhaust the runner
+        resource.setrlimit(resource.RLIMIT_NPROC, (NPROC_CAP, NPROC_CAP))
 
 
 def _run_group(cmd, timeout, env):
@@ -55,7 +58,7 @@ def _run_group(cmd, timeout, env):
     timeout (as subprocess.run did); that behaviour, and so every outcome, is kept: only the clean-up is new."""
     import signal
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, env=env, start_new_session=True,
-                         preexec_fn=_memcap if MEMCAP_BYTES else None)
+                         preexec_fn=_memcap if (MEMCAP_BYTES or NPROC_CAP) else None)
     try:
         out, err = p.communicate(timeout=timeout)
     finally:

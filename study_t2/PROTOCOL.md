@@ -49,3 +49,15 @@ they were never killed, so they accumulated over hundreds of calls until the run
 (`composition_study._run_group`). The timeout behaviour, and therefore every outcome, is exactly that of `subprocess.run`: a call
 whose leftover processes hold the pipes still ends as PROCESS_TIMEOUT. Only the clean-up is new. Shard 19 is re-run with one
 package per runner (`--only`), so a runner failure can lose at most one package, and each package's free disk and memory are logged.
+
+## T2-A3 (after the T2-A2 re-run, before any further trial of joblib; no outcome of joblib has been seen)
+
+**Incident.** With T2-A2, seven of the nine re-run packages finished (paramiko and azure-storage-blob were still running when this
+was written); joblib shut the runner down again after 70 minutes. Free memory at its start was 15.2 GB and free disk 91.6 GB, so
+the cause is inside single calls: most likely target code that starts many worker processes at once, each under the 2 GB cap.
+
+**Change.** (1) The inner process gets `RLIMIT_NPROC` (workflow input `nproc`, used: 512) in addition to the memory cap, so such
+pools fail inside the call (an outcome, as MemoryError under T-A3) instead of killing the runner. (2) The trial log prints each
+cell before it runs, so a runner shutdown points at the cell. (3) **Rule, fixed here:** a cell whose trial shuts the runner down
+twice is recorded as unusable with the reason "trial shut the runner down twice (T2-A3)" (workflow input `skip_cells`), like the
+other unusable cells; it is listed in the paper. No cell is skipped on any other ground.

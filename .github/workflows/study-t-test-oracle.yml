@@ -1,0 +1,66 @@
+# Study T-A4 (study_t/AMENDMENTS.md): each package's own test suite as a baseline (TS) and as an independent oracle for
+# Gatekeeper's admissions.  20 shards of packages, then the analysis.  No model calls.  Commits research_closure/results/<results>/TS_*.json.
+name: Gatekeeper Study T test-suite oracle
+on:
+  workflow_dispatch:
+    inputs:
+      results: {description: "results directory (study_t, or study_t2)", default: "study_t"}
+      shards: {description: "JSON list of shards to run (default all 20)", default: "[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]"}
+      memcap_gb: {description: "address-space cap per test run in GB; empty = none", default: "4"}
+      nproc: {description: "RLIMIT_NPROC per test run; empty = none", default: "512"}
+permissions:
+  contents: write
+jobs:
+  suites:
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ${{ fromJSON(inputs.shards) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 345
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.12"
+      - run: pip install -q "ruff==0.17.3" && ruff --version
+      - env:
+          GK_MEMCAP_GB: ${{ inputs.memcap_gb }}
+          GK_NPROC: ${{ inputs.nproc }}
+          GK_T_RES: research_closure/results/${{ inputs.results }}
+        run: python -W ignore tools/test_oracle.py /tmp/ts_work out_ts --shard ${{ matrix.shard }} --shards 20 --budget-min 320
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        if: always()
+        with:
+          name: TS_${{ matrix.shard }}
+          path: out_ts
+  analyse:
+    needs: suites
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ github.ref_name }}   # latest commit, not the run's start commit (T2 LJ incident)
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.12"
+      - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        with:
+          pattern: TS_*
+          path: research_closure/results/${{ inputs.results }}
+          merge-multiple: true
+      - run: python -m unittest tests.test_test_oracle -v
+      - run: python tools/test_oracle_analyze.py research_closure/results/${{ inputs.results }} | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "gatekeeper-freeze-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add "research_closure/results/${{ inputs.results }}"
+          git diff --cached --quiet && { echo "no change"; exit 0; }
+          git commit -m "Study T test-suite oracle (${{ inputs.results }})"
+          git fetch origin "${GITHUB_REF_NAME}"
+          git rebase origin/"${GITHUB_REF_NAME}"
+          git push origin HEAD:"${GITHUB_REF_NAME}"

@@ -41,10 +41,11 @@ Cập nhật sau **mỗi** lần chạy. **THẮNG** = đạt, có bằng chứn
 | Y2 | Ít ô có hại: Study T có 11 ô, nên "0/11 admit" chỉ cho cận trên khoảng 26% (Wilson); Study U có 44 ô, cận khoảng 8% | Cao | Thống kê | **Study T2 đang chạy** (140 gói mới, dự kiến khoảng 3 lần số ô); gộp T + T2 |
 | Y3 | Giữ lợi ích kém B8 khi kiểm soát FWER trên nhiều ô (U2: 303 so với 621) | Trung bình | Thua thật, đã có lời giải post hoc | U-A1: e-BH giữ 626 (B8 621), 0 hại. Còn cần một study xác nhận viết trước |
 | Y4 | Tác hại rõ thì smoke 20 draw ngang G và rẻ hơn 10 lần (Study T) | Trung bình | Thua thật | Bài đã nói rõ; Study U cho thấy G hơn khi tác hại hiếm |
-| Y5 | Ground truth là "đổi hành vi trên input sinh ra", không phải test suite hay chuyên gia | Trung bình | Độ tin cậy oracle | T-A4: chạy test suite của gói làm oracle độc lập |
+| Y5 | Ground truth là "đổi hành vi trên input sinh ra", không phải test suite hay chuyên gia | Trung bình | Độ tin cậy oracle | **T-A4 đã viết trước khi chạy** (`study_t/AMENDMENTS.md`): test suite của gói vừa là baseline TS ("CI xanh thì nhận") vừa là oracle độc lập; tiêu chí TS-W1, TS-W2. Workflow `study-t-test-oracle.yml` |
 | Y6 | 40% ô Study T không thử được (hàm không gọi được, input không ổn định) | Trung bình | Môi trường | Báo cáo; harness gọi method tốt hơn |
 | Y7 | Kỹ năng là luật viết sẵn, chưa có kỹ năng do agent tự học | Trung bình | Phạm vi | Threats; study riêng nếu còn thời gian |
 | Y8 | Một môi trường duy nhất, nên retirement và fingerprint chưa có thay đổi môi trường thật | Thấp | Phạm vi | D5 |
+| Y10 | Hạ tầng: job phân tích lấy commit lúc bắt đầu chạy, nên T2 bỏ sót file judge (LJ 0 ô); tiến trình con của mã đích làm chết runner (T2 shard 19, joblib) | Trung bình | Môi trường | **Đã sửa:** checkout commit mới nhất; T2-A2 (kill process group), T2-A3 (RLIMIT_NPROC, log từng ô, quy tắc ô làm chết runner 2 lần) |
 | Y9 | Model chấm, judge và generator đều họ Gemini | Thấp | Độ độc lập | Đã hiệu chuẩn (20/20); thêm họ model khác nếu có quyền truy cập |
 
 ## D. Lộ trình research (đọc kỹ nếu chưa có kinh nghiệm)
@@ -199,6 +200,8 @@ Mỗi dòng gồm:
 | R48 | 1/11 | B9 tiers chạy lại (41268301738, b0d813c) | B9 với model vừa và mạnh | — | Model mạnh hơn không thay được bằng chứng trên đích | **THẮNG ở cả 3 mức:** hại 10/148 (rẻ), 9/123 (vừa), 11/148 (mạnh: argon), G 0. Chi phí ×26, ×87, ×49 so với G | Mức vừa có 52 trả lời không parse được (nhiều khả năng token suy luận ăn hết giới hạn đầu ra 4.000): vấn đề cấu hình, ghi trong bài |
 | R49 | 1/11 | Quy trình | Mọi tính toán trên Actions; branch trước, `main` sau | `Gatekeeper analyses`, CI chặn sửa tệp kết quả ngoài bot, workflow bằng chứng | — | **THẮNG**: bằng chứng 5/5 PASS (41271189650); CI xanh; `bb65d89` vào `main` | — |
 | R50 | 1/11 | T2 trials (41265721814) | Shard 19 chết khi chạy joblib dù có giới hạn 2 GB | Tiến trình con của mã đích sống sót, giữ pipe nên mỗi lệnh gọi chờ hết timeout, rồi tích tụ: **lỗi môi trường** (test `test_run_group` tái hiện) | T2-A2: kill cả process group, ngữ nghĩa timeout giữ nguyên; chạy lại shard 19 mỗi gói một runner | Đang chạy lại | Không phải thua thật: chưa thấy kết quả nào của shard 19 |
+| R51 | 1/11 | T2 chạy lại 9 gói (41288092994) | Mỗi gói một runner | 6/9 xong; joblib làm chết runner lần 2 (RAM trống 15,2 GB lúc bắt đầu) | T2-A3: RLIMIT_NPROC 512, log từng ô; job phân tích lấy commit mới nhất (vì LJ 0 ô) | Chưa đủ 140 gói, chưa đánh giá | Lỗi môi trường |
+| R52 | 1/11 | Chuẩn bị T-A4 | Baseline test suite (TS) + oracle độc lập | Viết giao thức trước khi chạy; tool `test_oracle.py`, phân tích, 3 test | — | Chờ chạy trên Actions | — |
 
 ## C. Vòng debug khi THUA (làm theo thứ tự)
 
