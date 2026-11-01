@@ -85,3 +85,28 @@ packages are labelled by run in the results.
 
 **Reported:** harmful and safe admissions of B6-strong and B6-majority next to Table `tab:market`; W1, W2 and W4 recomputed with
 B6-strong replacing B6-R. A loss is reported as such.
+
+## T-A6 (written before it runs): B9, the model applies the change itself
+**Why.** The original paper's co-primary question: is admission worth more than spending the budget on direct repair by a model
+(B9)? In Study T the natural B9 is: instead of certifying Ruff's deterministic fix, ask a model to apply the rule to each touched
+function directly, and use its output without trials.
+
+**Sample (fixed by seed, before any call).** All 11 harmful Ruff cells plus 139 other usable Ruff cells drawn uniformly
+(seed `sha256("study-t-b9")`); up to 5 functions per cell, as in the trials.
+
+**B9 call.** gemini-3.8-flash, temperature 0, one call per function. The model sees the rule code, the rule's name and the first
+800 characters of Ruff's explanation, and the function's source. Prompt fixed here: *"Apply the lint rule below to this Python
+function. Keep its behaviour identical for every caller. Return only the complete rewritten function (no decorators, no
+explanation) in one ```python block; if the rule does not apply, return the function unchanged."* The returned function replaces
+the original (same indentation); a reply that does not parse leaves the function unchanged and is counted as a failed attempt.
+Hard cap 3 USD.
+
+**Measures.**
+- B9 output harm: the same harness, reference stream, and η = 5% as the ground truth of the trials.
+- Cost:
+  - B9: USD, tokens and wall seconds of the calls.
+  - Gatekeeper: wall seconds of the gate-stream trials of the same cells (re-timed in the same job), converted to USD at the
+    GitHub-hosted Linux runner price (0.008 USD per minute).
+
+**Win criterion B9-W:** among the sampled cells, Gatekeeper admits fewer harmful changes than B9 applies, at lower or equal cost per
+cell.

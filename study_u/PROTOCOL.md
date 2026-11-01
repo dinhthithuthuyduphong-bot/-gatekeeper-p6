@@ -30,3 +30,9 @@ regression* (Study Q's definitions). No new runs.
 - **U3 (rare-harm regime):** among patches with reference harm rate in [5%, 20%), G admits fewer than S20.
 
 **Seeds:** `sha256("study-u:" + patch sha)`. Script `tools/rare_harm_study.py`; workflow `Gatekeeper Study U rare harm`.
+
+## U-A1 (post hoc, written before it is computed): false-discovery control for screening
+Retention criterion U2 was lost (Gatekeeper 303 vs always-retest 621 harmless patches kept), because family-wise control over 693
+patches needs about 190 clean draws per patch. For screening, false discovery rate is the usual target. U-A1 adds **G-FDR**: the
+same e-values, admitted by e-BH at q = 0.1 (Wang & Ramdas 2022) instead of e-Holm. Reported next to G, labelled post hoc; it does not
+replace the pre-registered result.
