@@ -110,6 +110,11 @@ def analyse(res_dir):
     census = json.loads((res_dir / "MARKET_CENSUS.json").read_text())
     k = census["total"]["cells"]
     replay = json.loads((res_dir / "REPLAY.json").read_text()) if (res_dir / "REPLAY.json").exists() else {}
+    judge = {}                                   # T-A2: {project: {rule: verdict}}, judged cells only
+    for jp in sorted(res_dir.glob("JUDGE_*.json")):
+        for proj, cells in json.loads(jp.read_text())["packages"].items():
+            if "error" not in cells:
+                judge[proj] = {r: c["verdict"] for r, c in cells.items() if c.get("judged")}
     rows, errors, unusable = [], [], {}
     targets = json.loads((res_dir / "TARGETS.json").read_text())["selected"] if (res_dir / "TARGETS.json").exists() else []
     seen = {json.loads(p.read_text()).get("project") for p in res_dir.glob("TRIALS_*.json")}
@@ -134,7 +139,8 @@ def analyse(res_dir):
                          "n_gate": len(seq), "S20": not any(seq[:20]),
                          "FS": len(seq) >= fs_n(k) and not any(seq[:fs_n(k)]), "B8": not any(seq),
                          "RS": cell["applicability"] == "safe",
-                         "B6R": bool(replay.get(rule, {}).get("replay")) if not rule.startswith("R2:") else None})
+                         "B6R": bool(replay.get(rule, {}).get("replay")) if not rule.startswith("R2:") else None,
+                         "LJ": (judge[t["project"]][rule] == "safe") if rule in judge.get(t["project"], {}) else None})
     evals = {r["cell"]: r["e"] for r in rows}
     adm = set(e_holm(evals, ALPHA)) if evals else set()
     for r in rows:
@@ -151,19 +157,20 @@ def score(rows, rule):
 
 
 def summarise(rows, errors, unusable, k):
-    rules = ["U", "RS", "B6R", "S20", "FS", "B8", "G"]
+    rules = ["U", "RS", "B6R", "LJ", "S20", "FS", "B8", "G"]
     ruff_rows = [r for r in rows if not r["r2"]]
     res = {"K": k, "usable_cells": len(rows), "harmful_cells": sum(r["harmful"] for r in rows), "package_errors": errors,
            "unusable_cells": unusable, "fs_draws": fs_n(k),
            "all_cells": {x: score(rows, x) for x in rules if x not in ("RS", "B6R")},
+           "lj_judged_cells": sum(1 for r in rows if r.get("LJ") is not None),
            "ruff_cells": {x: score(ruff_rows, x) for x in rules},
            "mean_draws": {"G": sum(r["g_draws"] for r in rows) / max(1, len(rows)), "S20": 20, "FS": fs_n(k),
                           "B8": sum(r["n_gate"] for r in rows) / max(1, len(rows))}}
     g, rc = res["ruff_cells"]["G"], res["ruff_cells"]
     h = res["harmful_cells"]
     res["W1"] = {"won": res["all_cells"]["G"]["harmful_admitted"] <= math.ceil(ALPHA * h)
-                 and all(g["harmful_admitted"] < rc[b]["harmful_admitted"] for b in ("U", "RS", "B6R")),
-                 "note": "LJ (T-A2) and T (T-A3) added when run"}
+                 and all(g["harmful_admitted"] < rc[b]["harmful_admitted"] for b in ("U", "RS", "B6R", "LJ")),
+                 "note": "T (T-A3) added when run; LJ scored on the cells it judged"}
     res["W2"] = {"won": g["safe_admitted"] >= rc["RS"]["safe_admitted"]}
     res["W3"] = {"won": res["mean_draws"]["G"] <= 0.7 * 200 and res["mean_draws"]["G"] <= fs_n(k)}
     res["W4"] = {"won": not any(rc[b]["safe_admitted"] > g["safe_admitted"] and rc[b]["harmful_admitted"] < g["harmful_admitted"]

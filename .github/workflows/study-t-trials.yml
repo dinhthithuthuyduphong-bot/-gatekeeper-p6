@@ -1,7 +1,11 @@
 # Study T phase 2 (study_t/AMENDMENTS.md T-A1): trials of every census cell, 20 shards of packages in parallel, then the B6R
 # replay, the analysis and the win criteria.  No model calls.  Commits research_closure/results/study_t/{TRIALS_*,REPLAY,STUDY_T_RESULT}.json.
 name: Gatekeeper Study T trials
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      shards: {description: "JSON list of shards to run (default all 20)", default: "[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]"}
+      memcap_gb: {description: "address-space cap per inner process in GB (T-A3); empty = none", default: ""}
 permissions:
   contents: write
 jobs:
@@ -9,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+        shard: ${{ fromJSON(inputs.shards) }}
     runs-on: ubuntu-24.04
     timeout-minutes: 340
     steps:
@@ -18,7 +22,9 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -q "ruff==0.17.3" && ruff --version
-      - run: python -W ignore tools/market_trials.py /tmp/t_work out_trials --shard ${{ matrix.shard }} --shards 20
+      - env:
+          GK_MEMCAP_GB: ${{ inputs.memcap_gb }}
+        run: python -W ignore tools/market_trials.py /tmp/t_work out_trials --shard ${{ matrix.shard }} --shards 20
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         if: always()
         with:

@@ -38,7 +38,7 @@ is conservative). Mean draws of G count every draw up to its stopping time.
 - FS: no change in the first 199.
 - B8: no change in all 200.
 
-LJ (model judge) and T (test suites) follow in amendments T-A2 and T-A3, written before they run.
+LJ (model judge) and T (test suites) follow in amendments T-A2 and T-A4, written before they run.
 
 **Win criteria W1–W4 unchanged.**
 
@@ -53,3 +53,15 @@ LJ (model judge) and T (test suites) follow in amendments T-A2 and T-A3, written
   {"verdict": "safe" | "unsafe", "reason": "<one sentence>"}."*
 - **Decision:** LJ admits iff the verdict is `safe`; an unparsable reply counts as `unsafe`.
 - Tool `tools/market_judge.py`; workflow `Gatekeeper Study T LLM judge`; output `JUDGE_*.json`, merged into the analysis.
+
+## T-A3 (written before the re-run of shard 7): memory cap for the inner process
+**What happened.** Shard 7 (pygments, jinja2, googleapis-common-protos) was shut down by the runner twice, both times about 9
+minutes in (runs 41237317062 attempts 1 and 2; exit 143), while the other 19 shards finished. Most likely a generated input made a
+function allocate gigabytes (for example a width or count of 2^31−1), which exhausts the runner's memory.
+
+**Change (shard 7 only).** Each inner process gets an address-space cap of 2 GB (`RLIMIT_AS`); a call that exceeds it raises
+`MemoryError`, which is recorded as an outcome like any other exception. Nothing else changes. The 57 packages already run are not
+re-run. A call that would allocate between 2 GB and the runner's memory was possible there and is not possible here, so the
+packages are labelled by run in the results.
+
+*(T-A3 was originally reserved for test suites; the test-suite baseline becomes T-A4.)*

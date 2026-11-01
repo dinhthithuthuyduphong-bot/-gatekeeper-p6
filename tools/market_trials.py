@@ -32,6 +32,8 @@ def configure_harness():
     """The S-A5 configuration of Study S, used unchanged (T-A1)."""
     CS.S_A1 = CS.S_A2 = CS.S_A3 = CS.S_A4 = CS.S_A5 = True
     CS.S_A3_FIXED_HASH = True
+    if os.environ.get("GK_MEMCAP_GB"):          # T-A3
+        CS.MEMCAP_BYTES = int(float(os.environ["GK_MEMCAP_GB"]) * 1024 ** 3)
 
 
 def extract_all(blob, filename, dest):

@@ -37,7 +37,15 @@ S_A3 = False         # --s-a3: S-A2 plus every variant run twice; only inputs st
 S_A3_FIXED_HASH = "--fixed-hash" in sys.argv or "--s-a4" in sys.argv or "--s-a5" in sys.argv   # after S-A3; the reported S-A3 run did not fix it
 S_A5 = False         # --s-a5: S-A4 with the setuptools-scm pretend version restricted to the target package
 S_A4 = False         # --s-a4: S-A3 + fixed hash seed + missing HERA dependencies installed from GitHub source
+MEMCAP_BYTES = 0     # Study T-A3: address-space cap per inner process (0 = none, as in Study S)
 INSTALL_LOG = {}
+
+
+def _memcap():
+    """Child-side: cap the address space, so a generated input that allocates gigabytes raises MemoryError (an outcome)
+    instead of exhausting the runner (Study T shard 7 was shut down twice)."""
+    import resource
+    resource.setrlimit(resource.RLIMIT_AS, (MEMCAP_BYTES, MEMCAP_BYTES))
 
 
 def inner(py, root, pp, rel, qualname, mode, calls, out, n, seed=0):
@@ -53,7 +61,8 @@ def inner(py, root, pp, rel, qualname, mode, calls, out, n, seed=0):
             ap.write_text(json.dumps(args))
             # fixed hash seed: S-A3 traced a non-replicated difference to per-process hash randomisation (study_s/AMENDMENTS.md)
             p = subprocess.run([str(py), str(ROOT / "tools" / "composition_inner.py"), str(ap)], capture_output=True, text=True,
-                               timeout=120 + n * 2, env=dict(os.environ, PYTHONHASHSEED="0") if S_A3_FIXED_HASH else None)
+                               timeout=120 + n * 2, env=dict(os.environ, PYTHONHASHSEED="0") if S_A3_FIXED_HASH else None,
+                               preexec_fn=_memcap if MEMCAP_BYTES else None)
     except subprocess.TimeoutExpired:
         return {"status": "PROCESS_TIMEOUT"}
     if not Path(out).exists():
