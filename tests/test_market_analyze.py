@@ -60,6 +60,17 @@ class MarketAnalyzeTest(unittest.TestCase):
             self.assertEqual(r["ruff_cells"]["U"]["harmful_admitted"], 1)
             self.assertEqual(r["ruff_cells"]["B6R"]["harmful_admitted"], 1)
             self.assertTrue(r["W2"]["won"])
+            self.assertIn("B6S", r["ruff_cells"])
+
+    def test_b6_strong_uses_other_packages_only(self):
+        rows = [{"cell": "p1/X", "rule": "X", "r2": False, "changed_any": True, "B6R": True},
+                {"cell": "p2/X", "rule": "X", "r2": False, "changed_any": False, "B6R": True},
+                {"cell": "p3/X", "rule": "X", "r2": False, "changed_any": False, "B6R": True},
+                {"cell": "p1/Y", "rule": "Y", "r2": False, "changed_any": True, "B6R": False}]
+        A.b6_strong(rows)
+        self.assertEqual([r["B6S"] for r in rows], [True, False, False, False])   # p1 sees clean sources; p2, p3 see p1's change
+        self.assertEqual([r["B6M"] for r in rows], [True, False, False, False])   # 1 of 2 changed is not fewer than half
+        self.assertEqual(rows[3]["b6_sources"], 0)
 
 
 if __name__ == "__main__":

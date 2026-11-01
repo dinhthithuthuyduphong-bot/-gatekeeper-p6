@@ -1,0 +1,28 @@
+# Study U (study_u/PROTOCOL.md) and Study T-A5 (B6-strong): analyses of recorded data, no new runs, no model calls.
+# Commits research_closure/results/study_u/STUDY_U_RESULT.json and research_closure/results/study_t/STUDY_T_RESULT.json.
+name: Gatekeeper Study U rare harm and B6-strong
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  analyse:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.12"
+      - run: python -m unittest tests.test_rare_harm_study tests.test_market_analyze -v
+      - run: python tools/rare_harm_study.py research_closure/results/study_u | tee -a "$GITHUB_STEP_SUMMARY"
+      - run: python tools/market_analyze.py research_closure/results/study_t | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "gatekeeper-freeze-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add research_closure/results/study_u research_closure/results/study_t
+          git diff --cached --quiet && { echo "no change"; exit 0; }
+          git commit -m "Study U and B6-strong"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin HEAD:"${GITHUB_REF_NAME}"

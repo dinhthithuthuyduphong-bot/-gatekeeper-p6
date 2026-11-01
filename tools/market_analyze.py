@@ -140,7 +140,10 @@ def analyse(res_dir):
                          "FS": len(seq) >= fs_n(k) and not any(seq[:fs_n(k)]), "B8": not any(seq),
                          "RS": cell["applicability"] == "safe",
                          "B6R": bool(replay.get(rule, {}).get("replay")) if not rule.startswith("R2:") else None,
-                         "LJ": (judge[t["project"]][rule] == "safe") if rule in judge.get(t["project"], {}) else None})
+                         "LJ": (judge[t["project"]][rule] == "safe") if rule in judge.get(t["project"], {}) else None,
+                         # source evidence for B6-strong (T-A5): did the rule change behaviour anywhere in this cell?
+                         "changed_any": any("1" in f[s_]["flags"] for f in funcs for s_ in ("gate", "ref"))})
+    b6_strong(rows)
     evals = {r["cell"]: r["e"] for r in rows}
     adm = set(e_holm(evals, ALPHA)) if evals else set()
     for r in rows:
@@ -156,12 +159,32 @@ def score(rows, rule):
             "harmful_total": sum(1 for r in sel if r["harmful"]), "safe_total": sum(1 for r in sel if not r["harmful"])}
 
 
+def b6_strong(rows):
+    """T-A5: replay on the rule's other packages (sources) + environment fingerprint (identical by construction).
+    B6S admits iff no source changed behaviour; no source -> fall back to B6R.  B6M admits iff fewer than half did."""
+    by_rule = {}
+    for r in rows:
+        by_rule.setdefault(r["rule"], []).append(r)
+    for r in rows:
+        if r["r2"]:
+            r["B6S"] = r["B6M"] = None
+            continue
+        src = [x for x in by_rule[r["rule"]] if x["cell"] != r["cell"]]
+        r["b6_sources"] = len(src)
+        if not src:
+            r["B6S"] = r["B6M"] = r["B6R"]
+            continue
+        bad = sum(1 for x in src if x["changed_any"])
+        r["B6S"] = bad == 0
+        r["B6M"] = bad < len(src) / 2
+
+
 def summarise(rows, errors, unusable, k):
-    rules = ["U", "RS", "B6R", "LJ", "S20", "FS", "B8", "G"]
+    rules = ["U", "RS", "B6R", "B6S", "B6M", "LJ", "S20", "FS", "B8", "G"]
     ruff_rows = [r for r in rows if not r["r2"]]
     res = {"K": k, "usable_cells": len(rows), "harmful_cells": sum(r["harmful"] for r in rows), "package_errors": errors,
            "unusable_cells": unusable, "fs_draws": fs_n(k),
-           "all_cells": {x: score(rows, x) for x in rules if x not in ("RS", "B6R")},
+           "all_cells": {x: score(rows, x) for x in rules if x not in ("RS", "B6R", "B6S", "B6M")},
            "lj_judged_cells": sum(1 for r in rows if r.get("LJ") is not None),
            "ruff_cells": {x: score(ruff_rows, x) for x in rules},
            "mean_draws": {"G": sum(r["g_draws"] for r in rows) / max(1, len(rows)), "S20": 20, "FS": fs_n(k),
@@ -170,6 +193,7 @@ def summarise(rows, errors, unusable, k):
     h = res["harmful_cells"]
     res["W1"] = {"won": res["all_cells"]["G"]["harmful_admitted"] <= math.ceil(ALPHA * h)
                  and all(g["harmful_admitted"] < rc[b]["harmful_admitted"] for b in ("U", "RS", "B6R", "LJ")),
+                 "with_B6S": all(g["harmful_admitted"] < rc[b]["harmful_admitted"] for b in ("U", "RS", "B6S", "LJ")),
                  "note": "T (T-A3) added when run; LJ scored on the cells it judged"}
     res["W2"] = {"won": g["safe_admitted"] >= rc["RS"]["safe_admitted"]}
     res["W3"] = {"won": res["mean_draws"]["G"] <= 0.7 * 200 and res["mean_draws"]["G"] <= fs_n(k)}
