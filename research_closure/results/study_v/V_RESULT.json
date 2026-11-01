@@ -5,7 +5,6 @@
  "packages_with_fingerprint": 60,
  "packages_fingerprint_changed": 60,
  "python_v": [
-  "3.13.16",
   "3.13.17"
  ],
  "flips_safe_to_harmful": [],
@@ -18,13 +17,13 @@
  "f1_epoch1": {
   "harmful_admitted": 0,
   "harmful_total": 12,
-  "safe_admitted": 1533,
+  "safe_admitted": 1527,
   "safe_total": 1547,
   "mean_draws": 198.5
  },
  "b8_v": {
   "harmful_admitted": 0,
-  "safe_admitted": 1533,
+  "safe_admitted": 1534,
   "mean_draws": 199.5
  },
  "package_errors_v": [],
