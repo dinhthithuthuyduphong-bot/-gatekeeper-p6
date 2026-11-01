@@ -110,3 +110,14 @@ Hard cap 3 USD.
 
 **Win criterion B9-W:** among the sampled cells, Gatekeeper admits fewer harmful changes than B9 applies, at lower or equal cost per
 cell.
+
+## T-A7 (written before it runs): B9 with medium and strong models
+**Why.** T-A6 used the cheapest configuration. A stronger model might apply the rules more faithfully, so Gatekeeper's advantage
+could shrink.
+
+**Configurations, on the same 150 cells, prompt and harness as T-A6:**
+- *medium:* gemini-3.8-flash with `reasoning_effort: high`, cap 4 USD;
+- *strong:* gemini-4-argon with `reasoning_effort: low`, cap 10 USD (the model the repository already uses as its strong model).
+
+**Reported per configuration:** cells whose output changed behaviour on ≥ 5% of reference inputs (and those where Ruff's own fix is
+harmless), unparsable replies, USD and seconds per cell, against Gatekeeper on the same cells. B9-W is evaluated per configuration.
