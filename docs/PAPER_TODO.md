@@ -52,7 +52,8 @@ Cập nhật sau **mỗi** lần chạy. **THẮNG** = đạt, có bằng chứn
 ### D0. Nguyên tắc (không được vi phạm)
 1. **Viết tiêu chí thắng trước khi chạy.** Mỗi study có `PROTOCOL.md` commit trước; ghi rõ "thắng" là gì và "thua" là gì.
 2. **Thua thì báo thua.** Không đổi tiêu chí sau khi thấy dữ liệu. Phân tích làm sau khi thấy dữ liệu phải gắn nhãn *post hoc*.
-3a. **Mọi lần chạy local đều qua `tools/local_run.py TÊN -- lệnh`.** Công cụ ghi lệnh, commit, tệp đang sửa dở, thời gian, mã thoát và toàn bộ output vào `logs/local_runs/`, rồi push lên branch và `main`. Chỉ mục ở `logs/local_runs/INDEX.md`; các lần chạy trước khi có công cụ được liệt kê ở `HISTORY_BEFORE_LOGGING.md`.
+3b. **Đánh giá chỉ dựa trên log của GitHub Actions** (quy tắc từ 1/11). Mỗi thay đổi: commit, push lên branch, chờ workflow (CI chạy tự động khi push lên `claude/**` và `main`; các study chạy bằng dispatch) **xong**, rồi đọc log và job summary của run đó để chấm thắng hay thua. Kết quả chạy local không được dùng để đánh giá.
+3a. **Mọi lần chạy local đều qua `tools/local_run.py TÊN -- lệnh`.** (Chỉ dùng khi phát triển, không dùng để đánh giá.) Công cụ ghi lệnh, commit, tệp đang sửa dở, thời gian, mã thoát và toàn bộ output vào `logs/local_runs/`, rồi push lên branch và `main`. Chỉ mục ở `logs/local_runs/INDEX.md`; các lần chạy trước khi có công cụ được liệt kê ở `HISTORY_BEFORE_LOGGING.md`.
 3. **Mọi kết quả lên `main`.** Workflow chạy trên `main`; tệp kết quả nằm ở `research_closure/results/<study>/`; thêm một dòng vào bảng B.
 4. **Đa dạng và minh bạch:** nhiều repo, nhiều loại thay đổi, dữ liệu công khai, ghi rõ license và cách chọn mẫu (không chọn tay).
 5. **Hữu ích:** công bố bộ dữ liệu, công cụ và quy trình để người khác chạy lại.
