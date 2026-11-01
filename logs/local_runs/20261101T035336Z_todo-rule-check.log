@@ -1,0 +1,14 @@
+command: python3 -c print(open('docs/PAPER_TODO.md').read().count('local_run.py'))
+cwd: /home/user/-gatekeeper-p6
+head: 148fd2e
+uncommitted at start:
+M docs/PAPER_TODO.md
+start: 2026-11-01T03:53:36.111219+00:00
+seconds: 0.0
+exit: 0
+
+===== stdout =====
+1
+
+===== stderr =====
+
