@@ -1,4 +1,6 @@
 {
+ "tag": "cheap",
+ "model": "google/gemini-3.8-flash (low)",
  "cells": 150,
  "evaluable_b9": 148,
  "spent_usd": 1.2010387500000002,
