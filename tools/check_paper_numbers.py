@@ -253,7 +253,7 @@ CLAIMS = [
     ("B9 cost", "$0.0080$ USD and $16.9$ seconds per cell, Gatekeeper's trials $2.3$ seconds of a hosted\nrunner ($0.0003$ USD)",
      lambda: "$%.4f$ USD and $%.1f$ seconds per cell, Gatekeeper's trials $%.1f$ seconds of a hosted\nrunner ($%.4f$ USD)" % (
          B9()["cost_per_cell"]["b9_usd"], B9()["cost_per_cell"]["b9_seconds"], B9()["cost_per_cell"]["g_seconds"], B9()["cost_per_cell"]["g_usd_runner"])),
-    ("abstract: B9 tiers", "was $26$ to $88$ times as expensive and changed\nbehaviour in $9$ to $11$ cells",
+    ("abstract: B9 tiers", "was $26$ to $87$ times as expensive and changed\nbehaviour in $9$ to $11$ cells",
      lambda: "was $%d$ to $%d$ times as expensive and changed\nbehaviour in $%d$ to $%d$ cells" % (
          min(round(t["cost_per_cell"]["b9_usd"] / t["cost_per_cell"]["g_usd_runner"]) for t in B9T()),
          max(round(t["cost_per_cell"]["b9_usd"] / t["cost_per_cell"]["g_usd_runner"]) for t in B9T()),
