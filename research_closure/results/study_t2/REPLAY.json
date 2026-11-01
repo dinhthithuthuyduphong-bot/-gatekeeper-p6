@@ -1,0 +1,1070 @@
+{
+ "ANN201": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "ANN202": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "ANN204": {
+  "replay": true,
+  "why": ""
+ },
+ "ANN205": {
+  "replay": true,
+  "why": ""
+ },
+ "ANN206": {
+  "replay": true,
+  "why": ""
+ },
+ "ASYNC115": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "B004": {
+  "replay": true,
+  "why": ""
+ },
+ "B006": {
+  "replay": true,
+  "why": ""
+ },
+ "B007": {
+  "replay": true,
+  "why": ""
+ },
+ "B009": {
+  "replay": true,
+  "why": ""
+ },
+ "B010": {
+  "replay": true,
+  "why": ""
+ },
+ "B011": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "B028": {
+  "replay": true,
+  "why": ""
+ },
+ "B905": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "C400": {
+  "replay": true,
+  "why": ""
+ },
+ "C401": {
+  "replay": true,
+  "why": ""
+ },
+ "C402": {
+  "replay": true,
+  "why": ""
+ },
+ "C403": {
+  "replay": true,
+  "why": ""
+ },
+ "C404": {
+  "replay": true,
+  "why": ""
+ },
+ "C405": {
+  "replay": true,
+  "why": ""
+ },
+ "C406": {
+  "replay": true,
+  "why": ""
+ },
+ "C408": {
+  "replay": true,
+  "why": ""
+ },
+ "C409": {
+  "replay": true,
+  "why": ""
+ },
+ "C413": {
+  "replay": true,
+  "why": ""
+ },
+ "C414": {
+  "replay": true,
+  "why": ""
+ },
+ "C416": {
+  "replay": true,
+  "why": ""
+ },
+ "C417": {
+  "replay": true,
+  "why": ""
+ },
+ "C419": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "C420": {
+  "replay": true,
+  "why": ""
+ },
+ "COM812": {
+  "replay": true,
+  "why": ""
+ },
+ "COM819": {
+  "replay": true,
+  "why": ""
+ },
+ "D200": {
+  "replay": true,
+  "why": ""
+ },
+ "D201": {
+  "replay": true,
+  "why": ""
+ },
+ "D202": {
+  "replay": true,
+  "why": ""
+ },
+ "D204": {
+  "replay": true,
+  "why": ""
+ },
+ "D205": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "D207": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "D208": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "D209": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "D210": {
+  "replay": true,
+  "why": ""
+ },
+ "D211": {
+  "replay": true,
+  "why": ""
+ },
+ "D212": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "D214": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "D300": {
+  "replay": true,
+  "why": ""
+ },
+ "D301": {
+  "replay": true,
+  "why": ""
+ },
+ "D400": {
+  "replay": true,
+  "why": ""
+ },
+ "D403": {
+  "replay": true,
+  "why": ""
+ },
+ "D405": {
+  "replay": true,
+  "why": ""
+ },
+ "D406": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "D407": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "D409": {
+  "replay": true,
+  "why": ""
+ },
+ "D410": {
+  "replay": true,
+  "why": ""
+ },
+ "D411": {
+  "replay": true,
+  "why": ""
+ },
+ "D412": {
+  "replay": true,
+  "why": ""
+ },
+ "D413": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "D415": {
+  "replay": true,
+  "why": ""
+ },
+ "D416": {
+  "replay": true,
+  "why": ""
+ },
+ "E401": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "E703": {
+  "replay": true,
+  "why": ""
+ },
+ "E711": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "E712": {
+  "replay": true,
+  "why": ""
+ },
+ "E713": {
+  "replay": true,
+  "why": ""
+ },
+ "E714": {
+  "replay": true,
+  "why": ""
+ },
+ "E731": {
+  "replay": true,
+  "why": ""
+ },
+ "EM101": {
+  "replay": false,
+  "why": "no example"
+ },
+ "EM102": {
+  "replay": false,
+  "why": "no example"
+ },
+ "EM103": {
+  "replay": false,
+  "why": "no example"
+ },
+ "ERA001": {
+  "replay": false,
+  "why": "no example"
+ },
+ "F401": {
+  "replay": true,
+  "why": ""
+ },
+ "F523": {
+  "replay": true,
+  "why": ""
+ },
+ "F541": {
+  "replay": true,
+  "why": ""
+ },
+ "F601": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "F811": {
+  "replay": true,
+  "why": ""
+ },
+ "F841": {
+  "replay": true,
+  "why": ""
+ },
+ "F901": {
+  "replay": true,
+  "why": ""
+ },
+ "FLY002": {
+  "replay": true,
+  "why": ""
+ },
+ "FURB105": {
+  "replay": true,
+  "why": ""
+ },
+ "FURB110": {
+  "replay": true,
+  "why": ""
+ },
+ "FURB116": {
+  "replay": true,
+  "why": ""
+ },
+ "FURB122": {
+  "replay": true,
+  "why": ""
+ },
+ "FURB129": {
+  "replay": true,
+  "why": ""
+ },
+ "FURB132": {
+  "replay": true,
+  "why": ""
+ },
+ "FURB136": {
+  "replay": true,
+  "why": ""
+ },
+ "FURB157": {
+  "replay": true,
+  "why": ""
+ },
+ "FURB161": {
+  "replay": true,
+  "why": ""
+ },
+ "FURB162": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "FURB163": {
+  "replay": true,
+  "why": ""
+ },
+ "FURB164": {
+  "replay": true,
+  "why": ""
+ },
+ "FURB166": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "FURB167": {
+  "replay": true,
+  "why": ""
+ },
+ "FURB168": {
+  "replay": true,
+  "why": ""
+ },
+ "FURB169": {
+  "replay": true,
+  "why": ""
+ },
+ "FURB171": {
+  "replay": true,
+  "why": ""
+ },
+ "FURB187": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "FURB188": {
+  "replay": true,
+  "why": ""
+ },
+ "FURB192": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "G010": {
+  "replay": true,
+  "why": ""
+ },
+ "I001": {
+  "replay": true,
+  "why": ""
+ },
+ "ICN001": {
+  "replay": true,
+  "why": ""
+ },
+ "ISC001": {
+  "replay": true,
+  "why": ""
+ },
+ "ISC003": {
+  "replay": true,
+  "why": ""
+ },
+ "ISC004": {
+  "replay": false,
+  "why": "no example"
+ },
+ "LOG004": {
+  "replay": true,
+  "why": ""
+ },
+ "LOG009": {
+  "replay": true,
+  "why": ""
+ },
+ "LOG014": {
+  "replay": true,
+  "why": ""
+ },
+ "N804": {
+  "replay": true,
+  "why": ""
+ },
+ "N805": {
+  "replay": true,
+  "why": ""
+ },
+ "PERF102": {
+  "replay": true,
+  "why": ""
+ },
+ "PGH004": {
+  "replay": true,
+  "why": ""
+ },
+ "PIE790": {
+  "replay": true,
+  "why": ""
+ },
+ "PIE794": {
+  "replay": true,
+  "why": ""
+ },
+ "PIE800": {
+  "replay": true,
+  "why": ""
+ },
+ "PIE804": {
+  "replay": true,
+  "why": ""
+ },
+ "PIE807": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "PIE808": {
+  "replay": true,
+  "why": ""
+ },
+ "PIE810": {
+  "replay": true,
+  "why": ""
+ },
+ "PLC0207": {
+  "replay": true,
+  "why": ""
+ },
+ "PLC0208": {
+  "replay": true,
+  "why": ""
+ },
+ "PLC0414": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "PLC1802": {
+  "replay": true,
+  "why": ""
+ },
+ "PLE2513": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "PLR0402": {
+  "replay": true,
+  "why": ""
+ },
+ "PLR1711": {
+  "replay": true,
+  "why": ""
+ },
+ "PLR1714": {
+  "replay": true,
+  "why": ""
+ },
+ "PLR1716": {
+  "replay": true,
+  "why": ""
+ },
+ "PLR1722": {
+  "replay": true,
+  "why": ""
+ },
+ "PLR1730": {
+  "replay": true,
+  "why": ""
+ },
+ "PLR1733": {
+  "replay": true,
+  "why": ""
+ },
+ "PLR1736": {
+  "replay": true,
+  "why": ""
+ },
+ "PLR2044": {
+  "replay": true,
+  "why": ""
+ },
+ "PLR5501": {
+  "replay": true,
+  "why": ""
+ },
+ "PLW0108": {
+  "replay": true,
+  "why": ""
+ },
+ "PLW0120": {
+  "replay": true,
+  "why": ""
+ },
+ "PLW0133": {
+  "replay": true,
+  "why": ""
+ },
+ "PLW1510": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "PLW3301": {
+  "replay": true,
+  "why": ""
+ },
+ "PT001": {
+  "replay": true,
+  "why": ""
+ },
+ "PT003": {
+  "replay": true,
+  "why": ""
+ },
+ "PT009": {
+  "replay": true,
+  "why": ""
+ },
+ "PT018": {
+  "replay": true,
+  "why": ""
+ },
+ "PT027": {
+  "replay": true,
+  "why": ""
+ },
+ "PT028": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "PTH201": {
+  "replay": true,
+  "why": ""
+ },
+ "PTH208": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "PYI016": {
+  "replay": true,
+  "why": ""
+ },
+ "PYI018": {
+  "replay": false,
+  "why": "no example"
+ },
+ "PYI019": {
+  "replay": false,
+  "why": "no example"
+ },
+ "PYI025": {
+  "replay": false,
+  "why": "no example"
+ },
+ "PYI030": {
+  "replay": false,
+  "why": "no example"
+ },
+ "PYI032": {
+  "replay": false,
+  "why": "no example"
+ },
+ "PYI034": {
+  "replay": false,
+  "why": "no example"
+ },
+ "PYI036": {
+  "replay": false,
+  "why": "no example"
+ },
+ "PYI041": {
+  "replay": false,
+  "why": "no example"
+ },
+ "PYI055": {
+  "replay": false,
+  "why": "no example"
+ },
+ "PYI058": {
+  "replay": false,
+  "why": "no example"
+ },
+ "PYI059": {
+  "replay": false,
+  "why": "no example"
+ },
+ "PYI061": {
+  "replay": true,
+  "why": ""
+ },
+ "PYI064": {
+  "replay": false,
+  "why": "no example"
+ },
+ "Q000": {
+  "replay": false,
+  "why": "no example"
+ },
+ "Q001": {
+  "replay": false,
+  "why": "no example"
+ },
+ "Q002": {
+  "replay": false,
+  "why": "no example"
+ },
+ "Q003": {
+  "replay": true,
+  "why": ""
+ },
+ "Q004": {
+  "replay": true,
+  "why": ""
+ },
+ "RET501": {
+  "replay": true,
+  "why": ""
+ },
+ "RET502": {
+  "replay": true,
+  "why": ""
+ },
+ "RET503": {
+  "replay": true,
+  "why": ""
+ },
+ "RET504": {
+  "replay": true,
+  "why": ""
+ },
+ "RET505": {
+  "replay": true,
+  "why": ""
+ },
+ "RET506": {
+  "replay": true,
+  "why": ""
+ },
+ "RET507": {
+  "replay": true,
+  "why": ""
+ },
+ "RET508": {
+  "replay": true,
+  "why": ""
+ },
+ "RSE102": {
+  "replay": true,
+  "why": ""
+ },
+ "RUF005": {
+  "replay": true,
+  "why": ""
+ },
+ "RUF007": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "RUF010": {
+  "replay": true,
+  "why": ""
+ },
+ "RUF013": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "RUF015": {
+  "replay": true,
+  "why": ""
+ },
+ "RUF017": {
+  "replay": false,
+  "why": "no example"
+ },
+ "RUF019": {
+  "replay": true,
+  "why": ""
+ },
+ "RUF020": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "RUF021": {
+  "replay": false,
+  "why": "no example"
+ },
+ "RUF022": {
+  "replay": true,
+  "why": ""
+ },
+ "RUF023": {
+  "replay": true,
+  "why": ""
+ },
+ "RUF024": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "RUF028": {
+  "replay": false,
+  "why": "no example"
+ },
+ "RUF036": {
+  "replay": true,
+  "why": ""
+ },
+ "RUF037": {
+  "replay": true,
+  "why": ""
+ },
+ "RUF046": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "RUF051": {
+  "replay": true,
+  "why": ""
+ },
+ "RUF059": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "RUF064": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "RUF068": {
+  "replay": true,
+  "why": ""
+ },
+ "RUF071": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "RUF100": {
+  "replay": true,
+  "why": ""
+ },
+ "RUF102": {
+  "replay": true,
+  "why": ""
+ },
+ "SIM101": {
+  "replay": true,
+  "why": ""
+ },
+ "SIM102": {
+  "replay": true,
+  "why": ""
+ },
+ "SIM103": {
+  "replay": false,
+  "why": "no example"
+ },
+ "SIM105": {
+  "replay": true,
+  "why": ""
+ },
+ "SIM108": {
+  "replay": true,
+  "why": ""
+ },
+ "SIM109": {
+  "replay": true,
+  "why": ""
+ },
+ "SIM110": {
+  "replay": true,
+  "why": ""
+ },
+ "SIM112": {
+  "replay": true,
+  "why": ""
+ },
+ "SIM114": {
+  "replay": true,
+  "why": ""
+ },
+ "SIM117": {
+  "replay": true,
+  "why": ""
+ },
+ "SIM118": {
+  "replay": true,
+  "why": ""
+ },
+ "SIM201": {
+  "replay": true,
+  "why": ""
+ },
+ "SIM208": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "SIM210": {
+  "replay": true,
+  "why": ""
+ },
+ "SIM211": {
+  "replay": true,
+  "why": ""
+ },
+ "SIM212": {
+  "replay": true,
+  "why": ""
+ },
+ "SIM223": {
+  "replay": true,
+  "why": ""
+ },
+ "SIM300": {
+  "replay": true,
+  "why": ""
+ },
+ "SIM401": {
+  "replay": true,
+  "why": ""
+ },
+ "SIM905": {
+  "replay": true,
+  "why": ""
+ },
+ "SIM910": {
+  "replay": true,
+  "why": ""
+ },
+ "T201": {
+  "replay": false,
+  "why": "no example"
+ },
+ "T203": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "TC001": {
+  "replay": true,
+  "why": ""
+ },
+ "TC002": {
+  "replay": true,
+  "why": ""
+ },
+ "TC003": {
+  "replay": true,
+  "why": ""
+ },
+ "TC004": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "TC005": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "TC006": {
+  "replay": true,
+  "why": ""
+ },
+ "TD006": {
+  "replay": true,
+  "why": ""
+ },
+ "TID252": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "TRY201": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "TRY400": {
+  "replay": true,
+  "why": ""
+ },
+ "UP003": {
+  "replay": true,
+  "why": ""
+ },
+ "UP004": {
+  "replay": true,
+  "why": ""
+ },
+ "UP006": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "UP007": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "UP008": {
+  "replay": true,
+  "why": ""
+ },
+ "UP009": {
+  "replay": true,
+  "why": ""
+ },
+ "UP010": {
+  "replay": true,
+  "why": ""
+ },
+ "UP011": {
+  "replay": true,
+  "why": ""
+ },
+ "UP012": {
+  "replay": true,
+  "why": ""
+ },
+ "UP013": {
+  "replay": true,
+  "why": ""
+ },
+ "UP014": {
+  "replay": true,
+  "why": ""
+ },
+ "UP015": {
+  "replay": true,
+  "why": ""
+ },
+ "UP017": {
+  "replay": true,
+  "why": ""
+ },
+ "UP018": {
+  "replay": true,
+  "why": ""
+ },
+ "UP019": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "UP020": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "UP022": {
+  "replay": true,
+  "why": ""
+ },
+ "UP023": {
+  "replay": true,
+  "why": ""
+ },
+ "UP024": {
+  "replay": true,
+  "why": ""
+ },
+ "UP025": {
+  "replay": true,
+  "why": ""
+ },
+ "UP028": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "UP029": {
+  "replay": true,
+  "why": ""
+ },
+ "UP030": {
+  "replay": true,
+  "why": ""
+ },
+ "UP031": {
+  "replay": true,
+  "why": ""
+ },
+ "UP032": {
+  "replay": true,
+  "why": ""
+ },
+ "UP033": {
+  "replay": true,
+  "why": ""
+ },
+ "UP034": {
+  "replay": true,
+  "why": ""
+ },
+ "UP035": {
+  "replay": true,
+  "why": ""
+ },
+ "UP036": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "UP037": {
+  "replay": false,
+  "why": "no example"
+ },
+ "UP039": {
+  "replay": true,
+  "why": ""
+ },
+ "UP041": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "UP042": {
+  "replay": true,
+  "why": ""
+ },
+ "UP044": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "UP045": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "W291": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "W292": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "W293": {
+  "replay": false,
+  "why": "fixed example differs from 'Use instead'"
+ },
+ "W605": {
+  "replay": true,
+  "why": ""
+ }
+}
