@@ -190,6 +190,8 @@ Mỗi dòng gồm:
 | R43 | 1/11 | Báo cáo kết quả tự sinh (bcf2635) | Số liệu thống kê trước, đánh giá sau | `results_report.py`: số đếm, tỉ lệ, Wilson 95%, draw/ô, rồi cột đánh giá | — | **THẮNG** | Lộ ra Y2: 0/11 chỉ cho cận trên khoảng 26% |
 | R44 | 1/11 | Study T-A6 B9 + U-A1 (8048fb7) | Câu hỏi đồng-chính của bài gốc: để model tự sửa | gemini-flash tự áp rule lên 150 ô; e-BH cho Study U | — | **B9-W THẮNG:** B9 gây hại ở 10/148 ô (2 ô vốn an toàn, nghĩa là model tự gây hại), 6 trả lời không parse được; G 0. Chi phí 0,0080 so với 0,0003 USD/ô (×26), 16,9 so với 2,3 giây. **U-A1 (post hoc):** e-BH giữ 626/649 (B8 621), 0 hại | — |
 | R45 | 1/11 | T-A7 B9 mức vừa/mạnh + Study T2 (đang chạy) | B9 với model mạnh; lặp lại xác nhận trên 140 gói mới (hạng 61–200), B6-strong và e-BH đăng ký trước | `market_b9 --model/--effort`; census `--skip`; thư mục `study_t2` | Đóng Y2 (ít ô có hại) và nhãn post hoc của B6-strong, e-BH | *chờ* | — |
+| R46 | 1/11 | T-A7 B9 tiers (41264163363) | B9 mức vừa/mạnh | — | — | **THUA do lỗi của mình (mã):** biến `tag` bị ghi đè nên tên tệp trùng nhau; một nửa số tệp bị ghi đè khi gộp artifact; phân tích ghi kết quả rỗng mà không báo lỗi | Vòng C bước 1: sửa biến; giữ 4 tệp đúng (mỗi tệp ghi rõ model), đổi tên; phân tích nay từ chối kết quả rỗng hoặc lẫn model; chạy lại đúng 4 shard thiếu |
+| R47 | 1/11 | T2 census (ee0d57d) + T2-A1 | 140 gói mới, 6.839 ô | Ngân sách 240 draw mỗi luồng (FS cần 218 với K = 6.839) | — | **THẮNG** (công bằng trước trial); trial và judge đang chạy | — |
 
 ## C. Vòng debug khi THUA (làm theo thứ tự)
 
