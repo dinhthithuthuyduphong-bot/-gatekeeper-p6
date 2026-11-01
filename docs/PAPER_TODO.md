@@ -24,7 +24,7 @@ Cập nhật sau **mỗi** lần chạy. **THẮNG** = đạt, có bằng chứn
 | S10 | Venue, định dạng | **THẮNG** (sát giới hạn) | ISSTA 2027, 11/1/2027; nội dung 16 trang / giới hạn 18 |
 | S11 | Chứng minh được kiểm độc lập | **THẮNG** | 5 vòng; vòng cuối chỉ còn ký hiệu |
 | S12 | Câu hỏi B9 của bài gốc: so với để LLM sửa trực tiếp | **THẮNG** | T-A6: B9 gây hại 10/148 ô, đắt gấp 26 lần; G 0 hại |
-| S13 | Retirement trên thay đổi môi trường thật | **THUA** (chỉ có demo) | → **D5** |
+| S13 | Retirement trên thay đổi môi trường thật | **THUA** (chỉ có demo) | → **D5: Study V** (`study_v/PROTOCOL.md`, viết trước khi chạy): chạy lại ô của T trên Python 3.13; F0 vs F1; tiêu chí V-W1, V-W2 |
 | S14 | Tổ hợp thật gây hại "nảy sinh" (minh hoạ Định lý 2) | **THUA** (chưa thấy) | → **D6** |
 | S15 | Chi phí và điểm hoà vốn (RQ4 của bài gốc) | **THUA** (chưa đo) | → **D2** |
 
@@ -202,6 +202,7 @@ Mỗi dòng gồm:
 | R50 | 1/11 | T2 trials (41265721814) | Shard 19 chết khi chạy joblib dù có giới hạn 2 GB | Tiến trình con của mã đích sống sót, giữ pipe nên mỗi lệnh gọi chờ hết timeout, rồi tích tụ: **lỗi môi trường** (test `test_run_group` tái hiện) | T2-A2: kill cả process group, ngữ nghĩa timeout giữ nguyên; chạy lại shard 19 mỗi gói một runner | Đang chạy lại | Không phải thua thật: chưa thấy kết quả nào của shard 19 |
 | R51 | 1/11 | T2 chạy lại 9 gói (41288092994) | Mỗi gói một runner | 6/9 xong; joblib làm chết runner lần 2 (RAM trống 15,2 GB lúc bắt đầu) | T2-A3: RLIMIT_NPROC 512, log từng ô; job phân tích lấy commit mới nhất (vì LJ 0 ô) | Chưa đủ 140 gói, chưa đánh giá | Lỗi môi trường |
 | R52 | 1/11 | Chuẩn bị T-A4 | Baseline test suite (TS) + oracle độc lập | Viết giao thức trước khi chạy; tool `test_oracle.py`, phân tích, 3 test | — | Chờ chạy trên Actions | — |
+| R53 | 1/11 | Chuẩn bị Study V (D5) | Retirement khi đổi Python 3.12 → 3.13 | Giao thức viết trước; ghi fingerprint (`pip freeze`); α theo epoch (T tính lại ở phần epoch 0 = 6/π²·α, V ở epoch 1 = 6/(4π²)·α); `v_analyze.py` + 2 test; workflow `study-v-retirement.yml` | Lỗi nhỏ tìm ra: T dùng cả α cho một epoch; khi thêm epoch 1 phải tính lại T ở phần epoch 0 (đã ghi vào giao thức) | Chờ chạy | — |
 
 ## C. Vòng debug khi THUA (làm theo thứ tự)
 

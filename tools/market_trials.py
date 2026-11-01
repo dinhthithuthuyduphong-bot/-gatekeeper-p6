@@ -74,7 +74,10 @@ def env_for(work, root, project, version):
     r = subprocess.run([str(py), "-m", "pip", "install", "-q", "%s==%s" % (project, version)], capture_output=True, text=True,
                        timeout=1800)
     u = subprocess.run([str(py), "-m", "pip", "uninstall", "-y", "-q", project], capture_output=True, text=True, timeout=600)
-    return py, {"install_rc": r.returncode, "install_tail": (r.stderr or r.stdout)[-400:], "uninstall_rc": u.returncode}
+    fz = subprocess.run([str(py), "-m", "pip", "freeze"], capture_output=True, text=True, timeout=600)
+    ver = subprocess.run([str(py), "-c", "import sys; print(sys.version.split()[0])"], capture_output=True, text=True, timeout=60)
+    return py, {"install_rc": r.returncode, "install_tail": (r.stderr or r.stdout)[-400:], "uninstall_rc": u.returncode,
+                "fingerprint": {"python": ver.stdout.strip(), "freeze": sorted(fz.stdout.split())}}   # Study V
 
 
 def strip_top(rel):

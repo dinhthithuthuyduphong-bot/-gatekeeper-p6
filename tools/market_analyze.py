@@ -20,6 +20,8 @@ sys.path.insert(0, str(ROOT))
 from gatekeeper_lite.eprocess import e_bh, e_holm  # noqa: E402
 
 ETA, ALPHA, C_STAKE, ALARM = 0.05, 0.1, 0.9, 20.0
+ALPHA *= float(os.environ.get("GK_ALPHA_FACTOR", "1"))   # Study V: epoch share of the ledger (6/pi^2 for epoch 0, 6/(4 pi^2) for epoch 1)
+OUT_NAME = os.environ.get("GK_OUT", "STUDY_T_RESULT.json")
 N_MAX = int(os.environ.get("GK_N_MAX", "200"))   # T2: 240 (amendment T2-A1)
 
 
@@ -223,7 +225,7 @@ def main(argv):
         return 0
     d = Path(argv[0])
     res = analyse(d)
-    (d / "STUDY_T_RESULT.json").write_text(json.dumps(res, indent=1))
+    (d / OUT_NAME).write_text(json.dumps(res, indent=1))
     print(json.dumps({k: v for k, v in res.items() if k != "rows"}, indent=1))
     return 0
 

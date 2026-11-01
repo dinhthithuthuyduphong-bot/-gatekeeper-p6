@@ -136,6 +136,28 @@ def b9_tiers():
     return out + [""]
 
 
+def retirement():
+    p = R / "study_v/V_RESULT.json"
+    if not p.exists():
+        return []
+    v = json.loads(p.read_text())
+    f1, b8 = v["f1_epoch1"], v["b8_v"]
+    return ["### Study V: retirement khi môi trường thật đổi (Python %s → %s)" % ("3.12", ", ".join(v["python_v"])), "",
+            "| Đại lượng | Giá trị |", "|---|---|",
+            "| Ô dùng được ở cả hai môi trường | %d (T %d, V %d) |" % (v["usable_both"], v["usable_t"], v["usable_v"]),
+            "| Gói có fingerprint đổi | %d/%d |" % (v["packages_fingerprint_changed"], v["packages_with_fingerprint"]),
+            "| Ô đổi từ an toàn sang có hại | %d |" % len(v["flips_safe_to_harmful"]),
+            "| Ô đổi từ có hại sang an toàn | %d |" % len(v["flips_harmful_to_safe"]),
+            "| Ô G admit ở T (phần epoch 0) | %d (cả α: %d) |" % (v["t_admitted_epoch0"], v["t_admitted_full_alpha"]),
+            "| F0 (không retire): ô có hại ở 3.13 vẫn giữ | %d |" % v["f0_harmful_kept"],
+            "| F1 (retire theo fingerprint): ô bị retire | %d |" % v["f1_retired"],
+            "| F1 epoch 1: có hại admit | %d/%d (%s) |" % (f1["harmful_admitted"], f1["harmful_total"], ci(f1["harmful_admitted"], f1["harmful_total"])),
+            "| F1 epoch 1: an toàn giữ | %d/%d (%s) |" % (f1["safe_admitted"], f1["safe_total"], ci(f1["safe_admitted"], f1["safe_total"])),
+            "| Draw/ô chứng nhận lại: G / B8 | %s / %s |" % (f1["mean_draws"], b8["mean_draws"]),
+            "| B8 ở 3.13: có hại admit / an toàn giữ | %d / %d |" % (b8["harmful_admitted"], b8["safe_admitted"]),
+            "", "Tiêu chí: V-W1 **%s**, V-W2 **%s**." % ("THẮNG" if v["V_W1"] else "THUA", "THẮNG" if v["V_W2"] else "THUA"), ""]
+
+
 def main(argv):
     out_p = Path(argv[0]) if argv else ROOT / "docs/paper/RESULTS_REPORT.md"
     L = ["# Báo cáo kết quả: số liệu thống kê trước, đánh giá sau", "",
@@ -146,6 +168,7 @@ def main(argv):
     for d, label in ((R / "study_t", "Study T"), (R / "study_t2", "Study T2")):
         L += test_suite(d, label)
     L += b9_tiers()
+    L += retirement()
     up = R / "study_u/STUDY_U_RESULT.json"
     if up.exists():
         u = json.loads(up.read_text())

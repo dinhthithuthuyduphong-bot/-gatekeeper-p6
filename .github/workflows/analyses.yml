@@ -1,5 +1,5 @@
 # Every analysis recomputed from committed raw data, in Actions (rule 3d of docs/PAPER_TODO.md): Study T and T2 decisions
-# (incl. B6-strong, LLM judge, e-BH), B9 tiers, Study U, and the results report.  No model calls, 0 USD.  The bot commits the outputs.
+# (incl. B6-strong, LLM judge, e-BH), test-suite oracle, Study V retirement, B9 tiers, Study U, and the results report.  No model calls, 0 USD.  The bot commits the outputs.
 name: Gatekeeper analyses
 on: workflow_dispatch
 permissions:
@@ -28,6 +28,13 @@ jobs:
           for tier in "" medium strong; do
             if [ -z "$tier" ] || ls $R/study_t/B9_${tier}_??.json >/dev/null 2>&1; then python tools/b9_analyze.py $R/study_t $tier > /dev/null; fi
           done
+          if ls $R/study_v/TRIALS_*.json >/dev/null 2>&1; then
+            E0=$(python -c "import math; print(6/math.pi**2)"); E1=$(python -c "import math; print(6/(4*math.pi**2))")
+            GK_ALPHA_FACTOR=$E0 GK_OUT=STUDY_T_EPOCH0.json python tools/market_analyze.py $R/study_t > /dev/null
+            GK_ALPHA_FACTOR=$E1 GK_OUT=STUDY_V_RESULT.json python tools/market_analyze.py $R/study_v > /dev/null
+            python tools/v_analyze.py $R/study_t $R/study_v > /dev/null
+          fi
+          for d in study_t study_t2; do if ls $R/$d/TS_*.json >/dev/null 2>&1; then python tools/test_oracle_analyze.py $R/$d > /dev/null; fi; done
           python tools/rare_harm_study.py $R/study_u > /dev/null
           python tools/results_report.py
           python tools/check_paper_numbers.py | tail -1 | tee -a "$GITHUB_STEP_SUMMARY"

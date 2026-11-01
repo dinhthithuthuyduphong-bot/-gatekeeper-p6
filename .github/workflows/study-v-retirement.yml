@@ -1,0 +1,79 @@
+# Study V (study_v/PROTOCOL.md): Study T's cells re-tried on CPython 3.13 (Study T: 3.12), then retirement analysis.
+# 20 shards of packages, same harness, seeds and draws.  No model calls.  Commits research_closure/results/study_v/.
+name: Gatekeeper Study V retirement
+on:
+  workflow_dispatch:
+    inputs:
+      shards: {description: "JSON list of shards (numbers) or single packages (names)", default: "[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]"}
+      python: {description: "Python of the new environment", default: "3.13"}
+      skip_cells: {description: "project/rule cells recorded as unusable (T2-A3 rule)", default: ""}
+permissions:
+  contents: write
+jobs:
+  trials:
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ${{ fromJSON(inputs.shards) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: ${{ inputs.python }}
+      - run: pip install -q "ruff==0.17.3" && ruff --version && python --version
+      - env:
+          GK_MEMCAP_GB: "2"
+          GK_NPROC: "512"
+          GK_SKIP_CELLS: ${{ inputs.skip_cells }}
+          GK_T_RES: research_closure/results/study_t
+        run: |
+          s="${{ matrix.shard }}"
+          if [[ "$s" =~ ^[0-9]+$ ]]; then sel=(--shard "$s" --shards 20); else sel=(--only "$s"); fi
+          python -W ignore tools/market_trials.py /tmp/v_work out_trials "${sel[@]}" --n 200
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        if: always()
+        with:
+          name: V_TRIALS_${{ matrix.shard }}
+          path: out_trials
+  analyse:
+    needs: trials
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.12"
+      - run: pip install -q "ruff==0.17.3"
+      - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        with:
+          pattern: V_TRIALS_*
+          path: research_closure/results/study_v
+          merge-multiple: true
+      - name: Analyse
+        shell: bash
+        run: |
+          set -euo pipefail
+          R=research_closure/results
+          cp $R/study_t/TARGETS.json $R/study_t/MARKET_CENSUS.json $R/study_t/REPLAY.json $R/study_v/
+          python -m unittest tests.test_v_analyze -v
+          E0=$(python -c "import math; print(6/math.pi**2)"); E1=$(python -c "import math; print(6/(4*math.pi**2))")
+          GK_ALPHA_FACTOR=$E0 GK_OUT=STUDY_T_EPOCH0.json python tools/market_analyze.py $R/study_t > /dev/null
+          GK_ALPHA_FACTOR=$E1 GK_OUT=STUDY_V_RESULT.json python tools/market_analyze.py $R/study_v > /dev/null
+          python tools/v_analyze.py $R/study_t $R/study_v | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "gatekeeper-freeze-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add research_closure/results/study_v research_closure/results/study_t/STUDY_T_EPOCH0.json
+          git diff --cached --quiet && { echo "no change"; exit 0; }
+          git commit -m "Study V retirement trials and analysis"
+          git fetch origin "${GITHUB_REF_NAME}"
+          git rebase origin/"${GITHUB_REF_NAME}" || { git rebase --abort; echo "::error::rebase conflict"; exit 1; }
+          git push origin HEAD:"${GITHUB_REF_NAME}"
