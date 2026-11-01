@@ -683,7 +683,7 @@ jobs:
           docker ps -aq --filter label=gk-phase=p65 | xargs -r docker rm -f
       - name: Preserve contract receipts and failure logs
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: P6_5_${{ matrix.profile }}_REMOTE_OUTPUT
           path: P6_5_REMOTE_OUTPUT/
