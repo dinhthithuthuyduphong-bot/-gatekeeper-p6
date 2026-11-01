@@ -19,13 +19,16 @@ def cell_harm(rec):
     return sum(rates) / len(rates) if rates else None
 
 
-def analyse(d):
+def analyse(d, tag=""):
     d = Path(d)
     t = {r["cell"]: r for r in json.loads((d / "STUDY_T_RESULT.json").read_text())["rows"]}
     recs, spent = {}, 0.0
-    for p in sorted(d.glob("B9_*.json")):
+    files = sorted(d.glob("B9_%s_??.json" % tag)) if tag else sorted(p for p in d.glob("B9_??.json"))
+    model = None
+    for p in files:
         j = json.loads(p.read_text())
         spent += j["spent_usd"]
+        model = "%s (%s)" % (j["model"], j.get("effort") or "low")
         recs.update(j["cells"])
     rows = []
     for cell, rec in recs.items():
@@ -37,7 +40,7 @@ def analyse(d):
                      "usd": rec["usd"], "llm_s": rec["llm_seconds"], "g_s": rec["g_seconds"]})
     ev = [r for r in rows if r["b9_harmful"] is not None]
     n = len(rows)
-    res = {"cells": n, "evaluable_b9": len(ev), "spent_usd": spent,
+    res = {"tag": tag or "cheap", "model": model, "cells": n, "evaluable_b9": len(ev), "spent_usd": spent,
            "b9_harmful_applied": sum(1 for r in ev if r["b9_harmful"]),
            "b9_harmful_among_truth_harmful": sum(1 for r in ev if r["b9_harmful"] and r["truth_harmful"]),
            "b9_harmful_among_truth_safe": sum(1 for r in ev if r["b9_harmful"] and not r["truth_harmful"]),
@@ -50,10 +53,10 @@ def analyse(d):
            "rows": rows}
     res["B9_W"] = (res["g_harmful_admitted"] < res["b9_harmful_applied"]
                    and res["cost_per_cell"]["g_usd_runner"] <= res["cost_per_cell"]["b9_usd"])
-    (d / "B9_RESULT.json").write_text(json.dumps(res, indent=1))
+    (d / ("B9_RESULT_%s.json" % tag if tag else "B9_RESULT.json")).write_text(json.dumps(res, indent=1))
     return res
 
 
 if __name__ == "__main__":
-    r = analyse(sys.argv[1])
+    r = analyse(sys.argv[1], sys.argv[2] if len(sys.argv) > 2 else "")
     print(json.dumps({k: v for k, v in r.items() if k != "rows"}, indent=1))

@@ -74,8 +74,9 @@ def source_files(root):
     return [p for p in sorted(root.rglob("*.py")) if not is_test(p.relative_to(root).as_posix())]
 
 
-def select_targets(top, work, k):
-    chosen, skipped = [], []
+def select_targets(top, work, k, skip=0):
+    """The first k qualifying projects after the first `skip` qualifying ones (Study T2 continues Study T's list)."""
+    chosen, skipped, passed = [], [], 0
     for row in top["rows"]:
         if len(chosen) >= k:
             break
@@ -95,7 +96,10 @@ def select_targets(top, work, k):
         if n < MIN_PY_FILES:
             skipped.append({"project": name, "reason": "fewer than %d non-test .py files (%d)" % (MIN_PY_FILES, n)})
             continue
-        chosen.append({"rank": len(chosen) + 1, "download_rank": top["rows"].index(row) + 1, "project": name,
+        if passed < skip:
+            passed += 1
+            continue
+        chosen.append({"rank": skip + len(chosen) + 1, "download_rank": top["rows"].index(row) + 1, "project": name,
                        "version": meta["info"]["version"], "sdist": sd["filename"], "sha256": hashlib.sha256(blob).hexdigest(),
                        "py_files": n, "root": str(root)})
     return chosen, skipped
@@ -202,10 +206,10 @@ def cells_of(sites):
     return cells
 
 
-def census(work, out, k, top_path=None):
+def census(work, out, k, top_path=None, skip=0):
     top = json.loads(Path(top_path).read_text()) if top_path else json.loads(fetch(TOP_URL))
     (out / "TOP_PYPI_SNAPSHOT.json").write_text(json.dumps(top))
-    targets, skipped = select_targets(top, work, k)
+    targets, skipped = select_targets(top, work, k, skip)
     (out / "TARGETS.json").write_text(json.dumps({"selected": targets, "skipped": skipped,
                                                    "top_last_update": top.get("last_update")}, indent=1))
     rules = ruff_rules()
@@ -234,9 +238,10 @@ def main(argv):
     work, out = Path(argv[0]), Path(argv[1])
     k = int(argv[argv.index("--targets") + 1]) if "--targets" in argv else 60
     top = argv[argv.index("--top") + 1] if "--top" in argv else None
+    skip = int(argv[argv.index("--skip") + 1]) if "--skip" in argv else 0
     work.mkdir(parents=True, exist_ok=True)
     out.mkdir(parents=True, exist_ok=True)
-    res = census(work, out, k, top)
+    res = census(work, out, k, top, skip)
     print(json.dumps(res["total"], indent=1))
     return 0
 

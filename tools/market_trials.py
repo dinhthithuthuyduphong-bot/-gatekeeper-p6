@@ -23,7 +23,7 @@ import composition_study as CS  # noqa: E402  (S-A5 harness: inner(), fixed hash
 import market_census as MC  # noqa: E402
 from library_census import load_skills, apply_all  # noqa: E402
 
-RES = ROOT / "research_closure/results/study_t"
+RES = ROOT / os.environ.get("GK_T_RES", "research_closure/results/study_t")   # T2: research_closure/results/study_t2
 SEEDS = {"gate": 1, "ref": 2}
 MIN_STABLE = 50
 

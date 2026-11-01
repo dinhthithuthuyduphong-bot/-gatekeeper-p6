@@ -8,6 +8,7 @@ python tools/market_analyze.py --replay RESULTS_DIR   (B6R: each Ruff rule's doc
 import ast
 import json
 import math
+import os
 import re
 import subprocess
 import sys
@@ -16,7 +17,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
-from gatekeeper_lite.eprocess import e_holm  # noqa: E402
+from gatekeeper_lite.eprocess import e_bh, e_holm  # noqa: E402
 
 ETA, ALPHA, C_STAKE, ALARM, N_MAX = 0.05, 0.1, 0.9, 20.0, 200
 
@@ -143,11 +144,19 @@ def analyse(res_dir):
                          "LJ": (judge[t["project"]][rule] == "safe") if rule in judge.get(t["project"], {}) else None,
                          # source evidence for B6-strong (T-A5): did the rule change behaviour anywhere in this cell?
                          "changed_any": any("1" in f[s_]["flags"] for f in funcs for s_ in ("gate", "ref"))})
-    b6_strong(rows)
+    extra = []
+    if os.environ.get("GK_EXTRA_SOURCES"):      # T2: Study T's cells are sources, never scored here
+        extra = [{"cell": "T:" + x["cell"], "rule": x["rule"], "changed_any": x["changed_any"]}
+                 for x in json.loads(Path(os.environ["GK_EXTRA_SOURCES"]).read_text())["rows"] if "changed_any" in x]
+    b6_strong(rows, extra)
+    for r in rows:
+        r["G_FDR"] = None
     evals = {r["cell"]: r["e"] for r in rows}
     adm = set(e_holm(evals, ALPHA)) if evals else set()
+    adm_fdr = set(e_bh(evals, ALPHA)) if evals else set()
     for r in rows:
         r["G"] = r["cell"] in adm
+        r["G_FDR"] = r["cell"] in adm_fdr
         r["U"] = True
     return summarise(rows, errors, unusable, k)
 
@@ -159,11 +168,11 @@ def score(rows, rule):
             "harmful_total": sum(1 for r in sel if r["harmful"]), "safe_total": sum(1 for r in sel if not r["harmful"])}
 
 
-def b6_strong(rows):
+def b6_strong(rows, extra_sources=()):
     """T-A5: replay on the rule's other packages (sources) + environment fingerprint (identical by construction).
     B6S admits iff no source changed behaviour; no source -> fall back to B6R.  B6M admits iff fewer than half did."""
     by_rule = {}
-    for r in rows:
+    for r in list(rows) + list(extra_sources):
         by_rule.setdefault(r["rule"], []).append(r)
     for r in rows:
         if r["r2"]:
@@ -180,7 +189,7 @@ def b6_strong(rows):
 
 
 def summarise(rows, errors, unusable, k):
-    rules = ["U", "RS", "B6R", "B6S", "B6M", "LJ", "S20", "FS", "B8", "G"]
+    rules = ["U", "RS", "B6R", "B6S", "B6M", "LJ", "S20", "FS", "B8", "G", "G_FDR"]
     ruff_rows = [r for r in rows if not r["r2"]]
     res = {"K": k, "usable_cells": len(rows), "harmful_cells": sum(r["harmful"] for r in rows), "package_errors": errors,
            "unusable_cells": unusable, "fs_draws": fs_n(k),

@@ -104,6 +104,7 @@ def run(argv):
     work, out, models = Path(argv[0]), Path(argv[1]), argv[2]
     opt = lambda key, d: type(d)(argv[argv.index(key) + 1]) if key in argv else d   # noqa: E731
     shard, shards, cap, n = opt("--shard", 0), opt("--shards", 1), opt("--cap", 0.75), 200
+    model, effort, tag = opt("--model", "vertex-gemini-flash"), opt("--effort", ""), opt("--tag", "")   # T-A7
     MT.configure_harness()
     res_t = json.loads((MT.RES / "STUDY_T_RESULT.json").read_text())
     cells = sample(res_t)
@@ -111,8 +112,9 @@ def run(argv):
     targets = {t["project"]: t for t in json.loads((MT.RES / "TARGETS.json").read_text())["selected"]}
     rules = rule_docs()
     from cohort_inner import RefreshingClient
-    cfg = next(m for m in json.loads(Path(models).read_text())["models"] if m["name"] == "vertex-gemini-flash")
-    client = RefreshingClient(cfg["base_url"].replace("{GCP_PROJECT}", os.environ.get("GCP_PROJECT", "")), cfg["key_env"], cfg.get("extra", {}))
+    cfg = next(m for m in json.loads(Path(models).read_text())["models"] if m["name"] == model)
+    extra = dict(cfg.get("extra", {}), **({"reasoning_effort": effort} if effort else {}))
+    client = RefreshingClient(cfg["base_url"].replace("{GCP_PROJECT}", os.environ.get("GCP_PROJECT", "")), cfg["key_env"], extra)
     guard = B.SpendGuard(cap)
     by_pkg = {}
     for c in cells:
@@ -185,7 +187,9 @@ def run(argv):
             results[rec["cell"]] = rec
         shutil.rmtree(w, ignore_errors=True)
     out.mkdir(parents=True, exist_ok=True)
-    (out / ("B9_%02d.json" % shard)).write_text(json.dumps({"model": cfg["model_id"], "spent_usd": guard.spent_usd, "cells": results}))
+    name = ("B9_%s_%02d.json" % (tag, shard)) if tag else ("B9_%02d.json" % shard)
+    (out / name).write_text(json.dumps({"model": cfg["model_id"], "effort": extra.get("reasoning_effort"), "spent_usd": guard.spent_usd,
+                                        "cells": results}))
     print(json.dumps({"shard": shard, "cells": len(results), "usd": round(guard.spent_usd, 4)}))
     return 0
 
