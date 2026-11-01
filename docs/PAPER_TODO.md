@@ -33,6 +33,20 @@ Cập nhật sau **mỗi** lần chạy. **THẮNG** = đạt, có bằng chứn
 - **Phần "thắng baseline" chưa đạt**, vì tiêu chí chính của bài gốc (S5) đang thua.
 - Bài **chưa** đủ mạnh cho A*. Lộ trình D bên dưới nhắm đúng vào các ô thua.
 
+## A2. Điểm yếu chính hiện tại (rà ngày 1/11, sắp theo mức độ)
+
+| # | Điểm yếu | Mức | Loại | Đang làm / hướng sửa |
+|---|---|---|---|---|
+| Y1 | B9 (để model tự sửa) chưa có số, trong khi đây là câu hỏi đồng-chính của bài gốc | Cao | Thiếu thực nghiệm | **T-A6 đang chạy:** 150 ô, gemini-flash, so tác hại và USD/giây |
+| Y2 | Ít ô có hại: Study T có 11 ô, nên "0/11 admit" chỉ cho cận trên khoảng 26% (Wilson); Study U có 44 ô, cận khoảng 8% | Cao | Thống kê | Báo CI trong bài; thêm nguồn có nhiều ô có hại hơn (Study U mở rộng: nhiều input/patch hơn, thêm benchmark) |
+| Y3 | Giữ lợi ích kém B8 khi kiểm soát FWER trên nhiều ô (U2: 303 so với 621) | Trung bình | Thua thật | U-A1 (e-BH, post hoc): 626, ngang B8 mà có bảo đảm FDR. Cần một study xác nhận viết trước |
+| Y4 | Tác hại rõ thì smoke 20 draw ngang G và rẻ hơn 10 lần (Study T) | Trung bình | Thua thật | Bài đã nói rõ; Study U cho thấy G hơn khi tác hại hiếm |
+| Y5 | Ground truth là "đổi hành vi trên input sinh ra", không phải test suite hay chuyên gia | Trung bình | Độ tin cậy oracle | T-A4: chạy test suite của gói làm oracle độc lập |
+| Y6 | 40% ô Study T không thử được (hàm không gọi được, input không ổn định) | Trung bình | Môi trường | Báo cáo; harness gọi method tốt hơn |
+| Y7 | Kỹ năng là luật viết sẵn, chưa có kỹ năng do agent tự học | Trung bình | Phạm vi | Threats; study riêng nếu còn thời gian |
+| Y8 | Một môi trường duy nhất, nên retirement và fingerprint chưa có thay đổi môi trường thật | Thấp | Phạm vi | D5 |
+| Y9 | Model chấm, judge và generator đều họ Gemini | Thấp | Độ độc lập | Đã hiệu chuẩn (20/20); thêm họ model khác nếu có quyền truy cập |
+
 ## D. Lộ trình research (đọc kỹ nếu chưa có kinh nghiệm)
 
 ### D0. Nguyên tắc (không được vi phạm)
