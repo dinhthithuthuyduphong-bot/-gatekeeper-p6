@@ -1,0 +1,44 @@
+# Evidence for checks that used to run only locally (logs/local_runs/HISTORY_BEFORE_LOGGING.md): each is re-run here with a
+# pass/fail condition.  Runs on every push to the working branches and main, and on demand.  No model calls, 0 USD.
+name: Gatekeeper evidence of local tasks
+on:
+  push:
+    branches: [main, "claude/**"]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: evidence-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  evidence:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.12"
+      - name: Re-run the local tasks
+        shell: bash
+        run: |
+          set -o pipefail
+          python -W ignore tools/evidence_local_tasks.py 2>&1 | tee evidence.txt
+      - name: Evidence summary
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo "## Evidence of local tasks (commit ${GITHUB_SHA::7}, ref ${GITHUB_REF_NAME})"
+            echo
+            echo '```'
+            grep -E '^(PASS|FAIL)' evidence.txt || echo "no result"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        if: always()
+        with:
+          name: EVIDENCE_LOCAL_TASKS
+          path: |
+            evidence.txt
+            evidence_out

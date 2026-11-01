@@ -16,3 +16,5 @@ GitHub Actions workflow and is recomputed by `tools/check_paper_numbers.py`. Run
 | 1/11 | `tools/market_analyze.py` on Study T results with the LLM-judge files | merge test; its output was committed once (690ad38 area) and later replaced by the workflow analysis | No (workflow re-ran the analysis) |
 | 1/11 | `tools/rare_harm_study.py` into `/tmp/u_check` | preview of U-A1 (e-BH) before the workflow | No (workflow run, commit 8048fb7) |
 | 1/11 | `tools/results_report.py` | generates `docs/paper/RESULTS_REPORT.md` from committed result files | Report only, regenerated from committed files |
+
+**Re-run as Actions evidence (1/11):** workflow `Gatekeeper evidence of local tasks` (`tools/evidence_local_tasks.py`) re-runs, with a pass/fail condition, the R2 pre-flight (requests v2.32.3, flask 3.0.3, standard library), the Study S smoke test, `library_census --dynamic` (must equal the committed analysis), the Study U recomputation (must equal the committed result) and the results report (must equal the committed report). Unit tests and the paper's numbers are re-run by `Gatekeeper CI`. Theory checks have their own workflow.
