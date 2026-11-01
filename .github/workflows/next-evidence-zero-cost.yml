@@ -26,7 +26,7 @@ jobs:
         run: |
           mkdir -p "$RUNNER_TEMP/next-audit"
           printf 'commit=%s\nrun_id=%s\nattempt=%s\nB9=HOLD\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" > "$RUNNER_TEMP/next-audit/context.txt"
-      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: "3.12.14"
@@ -65,7 +65,7 @@ jobs:
         run: |
           mkdir -p "$RUNNER_TEMP/next-scan"
           printf 'commit=%s\nrun_id=%s\nattempt=%s\ntarget=%s\ntests=NOT_RUN\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" '${{ matrix.target }}' > "$RUNNER_TEMP/next-scan/context.txt"
-      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: "3.12.14"
@@ -96,7 +96,7 @@ jobs:
           mkdir -p "$RUNNER_TEMP/next-pydantic"
           printf 'commit=%s\nrun_id=%s\nattempt=%s\ntreatment=DISABLED\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" > "$RUNNER_TEMP/next-pydantic/context.txt"
           uname -a > "$RUNNER_TEMP/next-pydantic/runner.txt"
-      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: "3.12.14"
@@ -154,7 +154,7 @@ jobs:
           mkdir -p "$RUNNER_TEMP/next-cost"
           printf 'commit=%s\nrun_id=%s\nattempt=%s\ntarget=%s\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" '${{ matrix.target }}' > "$RUNNER_TEMP/next-cost/context.txt"
           uname -a > "$RUNNER_TEMP/next-cost/runner.txt"
-      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         if: matrix.target == 'sqlalchemy'
         with:
@@ -220,7 +220,7 @@ jobs:
           printf '%s\n' "$JOB_RESULTS" > "$RUNNER_TEMP/next-return/JOB_STATUS.json"
           printf 'commit=%s\nrun_id=%s\nattempt=%s\ncost_requested=%s\nscout_requested=%s\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" '${{ inputs.run_cost }}' '${{ inputs.run_scout }}' > "$RUNNER_TEMP/next-return/RUN_CONTEXT.txt"
           printf 'Send this compact review artifact and the run URL. Coverage databases remain in the individual next-raw-* artifacts; REVIEW_SCOPE.json lists hashes and omissions. A successful collect job does not mean the experiments passed; inspect JOB_STATUS.json. B9 remains HOLD.\n' > "$RUNNER_TEMP/next-return/README.txt"
-      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
         with:
           pattern: next-raw-*
