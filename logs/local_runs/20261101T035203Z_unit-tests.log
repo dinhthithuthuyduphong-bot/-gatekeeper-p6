@@ -1,0 +1,345 @@
+command: python3 -W ignore -m unittest discover -s tests -q
+cwd: /home/user/-gatekeeper-p6
+head: 61c4143
+uncommitted at start:
+(none)
+start: 2026-11-01T03:52:03.485223+00:00
+seconds: 73.0
+exit: 0
+
+===== stdout =====
+payload 0: zip, 1 file(s) -> /tmp/tmpr5cg5_g2/out
+A/bool ADMIT ADMIT ADMIT ADMIT 110
+B/bool ADMIT ADMIT CENSUS_INVALID CENSUS_INVALID 110
+C/bool ADMIT REJECT ADMIT ADMIT 110
+written /tmp/tmpeb4j02_2/R.md
+| Biến thể | A/bool | B/bool | C/bool |
+|---|---|---|---|
+| full | ADMIT@74 | CENSUS_INVALID | ADMIT@74 |
+| no_harm_cert | ADMIT@12 | CENSUS_INVALID | ADMIT@12 |
+| no_census | ADMIT@74 | CENSUS_INVALID | ADMIT@74 |
+| bonferroni | ADMIT@74 | CENSUS_INVALID | ADMIT@74 |
+| sign_test | ADMIT@74 | CENSUS_INVALID | ADMIT@74 |
+| eta_0.10 | ADMIT@36 | CENSUS_INVALID | ADMIT@36 |
+
+{"search_hits": 60, "unique_prs": 60, "after_cheap_filters": 60, "examined": 7, "kept": 2, "stopped_because": "max_examined reached"} errors: 0
+{"search_hits": 60, "unique_prs": 60, "after_cheap_filters": 60, "examined": 60, "kept": 20, "stopped_because": "list exhausted"} errors: 0
+{"search_hits": 60, "unique_prs": 60, "after_cheap_filters": 60, "examined": 14, "kept": 6, "stopped_because": "target reached"} errors: 0
+{"search_hits": 60, "unique_prs": 60, "after_cheap_filters": 60, "examined": 9, "kept": 4, "stopped_because": "target reached"} errors: 0
+{"search_hits": 60, "unique_prs": 60, "after_cheap_filters": 60, "examined": 9, "kept": 4, "stopped_because": "target reached"} errors: 0
+{"search_hits": 60, "unique_prs": 60, "after_cheap_filters": 60, "examined": 15, "kept": 4, "stopped_because": "target reached"} errors: 0
+{"search_hits": 60, "unique_prs": 60, "after_cheap_filters": 60, "examined": 11, "kept": 5, "stopped_because": "target reached"} errors: 0
+{"search_hits": 30, "unique_prs": 30, "after_cheap_filters": 30, "examined": 8, "kept": 3, "stopped_because": "target reached"} errors: 0
+{"search_hits": 60, "unique_prs": 60, "after_cheap_filters": 60, "examined": 60, "kept": 20, "stopped_because": "list exhausted"} errors: 0
+{"search_hits": 60, "after_cheap_filters": 60, "after_the_first_500": 46, "examined": 18, "kept": 5, "stopped_because": "target reached"}
+{"search_hits": 60, "unique_prs": 60, "after_cheap_filters": 60, "examined": 60, "kept": 20, "stopped_because": "list exhausted"} errors: 0
+{"search_hits": 70, "after_cheap_filters": 70, "after_the_first_500": 53, "examined": 53, "kept": 17, "stopped_because": "list exhausted"}
+# Study F — kết quả theo model (e-Holm trên K = 4 patch, α = 0.1; chấm trên seed held-out)
+
+| Model | Điều kiện | SUCCESS | HARMFUL | NO_EFFECT | NO_PATCH | BUDGET_CAP | CENSUS_INVALID |
+|---|---|---|---|---|---|---|---|
+| m1 | B9 thô | 0 | 1 | 1 | 0 | 0 | 0 |
+| m1 | B9 + Gatekeeper | 0 | 0 | 0 | 2 | 0 | 0 |
+| m2 | B9 thô | 1 | 0 | 0 | 1 | 0 | 0 |
+| m2 | B9 + Gatekeeper | 1 | 0 | 0 | 1 | 0 | 0 |
+
+| Model | Δ SUCCESS (GK − thô) | Δ HARMFUL (GK − thô) | n |
+|---|---|---|---|
+| m1 | +0 | -1 | 2 |
+| m2 | +0 | +0 | 2 |
+
+| Model | SUCCESS được giữ / SUCCESS thô | HARMFUL bị chặn / HARMFUL thô | Δ SUCCESS (điểm %) | Δ HARMFUL (điểm %) |
+|---|---|---|---|---|
+| m1 | 0/0 (không xác định tỷ lệ) | 1/1 | +0.00 | -50.00 |
+| m2 | 1/1 | 0/0 (không có harm để đánh giá) | +0.00 | +0.00 |
+
+## Theo target (đơn vị cụm)
+
+| Model | Target | n | SUCCESS thô → GK | HARMFUL thô → GK |
+|---|---|---|---|---|
+| m1 | T1 | 1 | 0 → 0 | 1 → 0 |
+| m1 | T2 | 1 | 0 → 0 | 0 → 0 |
+| m2 | T1 | 1 | 1 → 1 | 0 → 0 |
+| m2 | T2 | 1 | 0 → 0 | 0 → 0 |
+
+Đơn vị cụm là target; các lần lặp trong một target không phải target độc lập.
+Gatekeeper ở đây là bộ lọc trên cùng patch: không thể tăng số SUCCESS thô; phải báo cáo cả harm bị chặn và SUCCESS bị loại.
+Không có HARMFUL thô không chứng minh khả năng chặn hại. Không suy ra model independence từ kết quả không khác biệt.
+Chi phí sinh patch dùng chung giữa hai điều kiện; phải cộng riêng chi phí admission để so hiệu quả kinh tế.
+{
+ "instances": 41,
+ "pass": 40,
+ "gate_N2": "PASS",
+ "threshold": 40,
+ "reasons": {
+  "pass": 40,
+  "not deterministic": 1
+ },
+ "passing_repositories": 1
+}
+shard 0 : 2 instances
+{
+ "plausible": 21,
+ "in_band": 21,
+ "share": 1.0,
+ "wilson95": [
+  0.8453561767357979,
+  0.9999999999999999
+ ],
+ "repo_cluster_boot95": [
+  1.0,
+  1.0
+ ],
+ "half_width": 0.077321911632101,
+ "P3_precision_met": false,
+ "H1_p_value": 1.0000000000000012e-21,
+ "H1_reject_at_0.05": true,
+ "H1_critical_count": 6
+}
+{
+ "plausible": 250,
+ "in_band": 30,
+ "share": 0.12,
+ "wilson95": [
+  0.08536266215857913,
+  0.16613906175113463
+ ],
+ "repo_cluster_boot95": [
+  0.1171875,
+  0.12244897959183673
+ ],
+ "half_width": 0.04038819979627775,
+ "P3_precision_met": true,
+ "H1_p_value": 0.1704442980193474,
+ "H1_reject_at_0.05": false,
+ "H1_critical_count": 34
+}
+{"search_hits": 5, "after_cheap_filters": 5, "examined": 4, "kept": 4, "stopped_because": "target reached"}
+{"search_hits": 5, "after_cheap_filters": 5, "examined": 1, "kept": 1, "stopped_because": "list exhausted"}
+{"search_hits": 5, "after_cheap_filters": 5, "examined": 5, "kept": 5, "stopped_because": "list exhausted"}
+{"search_hits": 5, "after_cheap_filters": 5, "examined": 5, "kept": 2, "stopped_because": "list exhausted"}
+{"search_hits": 800, "after_cheap_filters": 800, "examined": 3, "kept": 3, "stopped_because": "target reached"}
+{"name": "c0", "stage_reached": "P-S2", "vet_verdict": "NOT_ELIGIBLE", "fn_verdict": null, "gen_status": null}
+{"name": "c2", "stage_reached": "STAGE_ERROR", "vet_verdict": null, "fn_verdict": null, "gen_status": null}
+{"name": "c4", "stage_reached": "P-S2", "vet_verdict": "NOT_ELIGIBLE", "fn_verdict": null, "gen_status": null}
+{"name": "c6", "stage_reached": "P-S2", "vet_verdict": "NOT_ELIGIBLE", "fn_verdict": null, "gen_status": null}
+{"name": "c8", "stage_reached": "P-S2", "vet_verdict": "NOT_ELIGIBLE", "fn_verdict": null, "gen_status": null}
+# Pilot P0: summary
+
+**PASS**: criterion (a) full chain on at least 1 instances: True (1 of 1); criterion (b) at least one plausible patch: True. Spent 0.0100 USD.
+
+| Model | Attempts | Submitted | Plausible | First call passes visible | Stopped by the spend guard | Truncated calls | Median output tokens per call | Mean calls | Cost USD |
+|---|---|---|---|---|---|---|---|---|---|
+| m | 1 | 1 | 1 | 1 | 0 | 0.0 | 300.0 | 1 | 0.01 |
+
+Instances by status: {'FINISHED': 1}.
+Plausible patches in the harm band: 0; with gates that disagree: 0.
+
+Development instances (exposed). Not evidence for any gate of Study N.
+
+{
+ "Q1_funnel": {
+  "frame": 469,
+  "records": 124,
+  "FINISHED": 124
+ },
+ "patches_scored": 124,
+ "HQ1": {
+  "units": 24,
+  "without_contract_regression": 20,
+  "share": 0.8333333333333334,
+  "wilson95": [
+   0.6414652961213058,
+   0.9332143199927109
+  ],
+  "gate_Q_G1_met": true,
+  "p_value_one_sided_vs_0.5": 0.000771939754486084,
+  "HQ1_supported_at_0.05": true
+ }
+}
+{"hq1_units": 1, "captured": 1, "reproduced": 0, "items": 0, "units_with_items": 0}
+{"hq1_units": 1, "captured": 1, "reproduced": 1, "items": 1, "units_with_items": 1}
+{
+ "targets": 3,
+ "measured": 3,
+ "G0": {
+  "targets": 3,
+  "agree": 2,
+  "agreement": 0.667,
+  "agreement_cp95": [
+   0.094,
+   0.992
+  ],
+  "kappa": 0.39999999999999986,
+  "hand_detects_auto_misses": 1,
+  "auto_detects_hand_misses": 0
+ },
+ "G2": {
+  "targets": 0,
+  "agree": 0,
+  "agreement": null,
+  "agreement_cp95": null,
+  "kappa": null,
+  "hand_detects_auto_misses": 0,
+  "auto_detects_hand_misses": 0
+ },
+ "G0_or_G2": {
+  "targets": 3,
+  "agree": 2,
+  "agreement": 0.667,
+  "agreement_cp95": [
+   0.094,
+   0.992
+  ],
+  "kappa": 0.39999999999999986,
+  "hand_detects_auto_misses": 1,
+  "auto_detects_hand_misses": 0
+ }
+}
+{
+ "targets": 3,
+ "rescored": 2,
+ "reproduced": 2,
+ "not_reproduced_or_missing": [
+  "c"
+ ],
+ "category_totals": {
+  "C1a": 0,
+  "C1b": 10,
+  "C2a": 0,
+  "C2b": 18,
+  "C2c": 0,
+  "C3": 0
+ },
+ "revised_primary": {
+  "lower": {
+   "in_band": 1,
+   "share": 0.004878048780487805,
+   "wilson95": [
+    0.0008615928370303422,
+    0.02710984580354701
+   ]
+  },
+  "upper": {
+   "in_band": 2,
+   "share": 0.00975609756097561,
+   "wilson95": [
+    0.002679507763058954,
+    0.03486856695002503
+   ]
+  },
+  "registered": {
+   "in_band": 16,
+   "share": 0.07804878048780488
+  }
+ }
+}
+{
+ "candidates_considered": 100,
+ "vetting_results": 100,
+ "categories": {
+  "eligible (fail-before, pass-after test)": 39,
+  "tests not runnable: missing python module": 61
+ },
+ "eligible": 39,
+ "runnable": 39,
+ "eligible_share_of_runnable": 1.0,
+ "gate": "FAIL",
+ "gate_M1": "FAIL",
+ "threshold": ">= 40 eligible among the first 100 (at least 80 candidates)",
+ "eligible_repositories": 39,
+ "most_missing_modules": [
+  [
+   "x",
+   61
+  ]
+ ]
+}
+{
+ "candidates_considered": 100,
+ "vetting_results": 100,
+ "categories": {
+  "eligible (fail-before, pass-after test)": 40,
+  "tests not runnable: missing python module": 60
+ },
+ "eligible": 40,
+ "runnable": 40,
+ "eligible_share_of_runnable": 1.0,
+ "gate": "PASS",
+ "gate_M1": "PASS",
+ "threshold": ">= 40 eligible among the first 100 (at least 80 candidates)",
+ "eligible_repositories": 40,
+ "most_missing_modules": [
+  [
+   "x",
+   60
+  ]
+ ]
+}
+{
+ "candidates_considered": 100,
+ "vetting_results": 100,
+ "categories": {
+  "eligible (fail-before, pass-after test)": 40,
+  "tests not runnable: missing python module": 60
+ },
+ "eligible": 40,
+ "runnable": 40,
+ "eligible_share_of_runnable": 1.0,
+ "gate": "FAIL",
+ "gate_M1": "FAIL",
+ "threshold": ">= 60 eligible among the first 100 (at least 200 candidates)",
+ "eligible_repositories": 40,
+ "most_missing_modules": [
+  [
+   "x",
+   60
+  ]
+ ]
+}
+{
+ "venue": "FSE2027",
+ "paper_id": "123",
+ "date": "2027-01-01",
+ "commit": "abc",
+ "paper_pdf": "paper.pdf",
+ "paper_pdf_sha256": "97aed54f9da17fa7561f05a336ca6c802a4520306ea46fb35e21053f5dd592c3",
+ "artifact_url": null,
+ "artifact_manifest_sha256": "0e09eeab5bdeab40e2af08a4432d53de29fc2ba94dfa38fae0871d749681cf68",
+ "artifact_files": 2
+}
+{"seed": "x", "candidates": 120, "pull_requests": {"RR": 48, "ASTAR": 72}, "repositories": {"RR": 16, "ASTAR": 24}, "shared_repositories": 0, "input_sha256": "d1bacc955050a74a5f3b6c7f6b72be1c63c0e4c58b1e5a87ce1a70ad49e0c363"}
+{"seed": "x", "candidates": 120, "pull_requests": {"RR": 48, "ASTAR": 72}, "repositories": {"RR": 16, "ASTAR": 24}, "shared_repositories": 0, "input_sha256": "d1bacc955050a74a5f3b6c7f6b72be1c63c0e4c58b1e5a87ce1a70ad49e0c363"}
+shard 0 of 1 : 6 candidates; 4 not finished
+# Smoke test of the paid-model endpoints (not study data)
+
+| Model | OK | HTTP 429 | Served model | Implied cost (USD) | First error |
+|---|---|---|---|---|---|
+| vertex-x | 0/3 | 5 |  | 0.000000 | {"error":"quota"} |
+| other | skipped | | | | environment variable NOT_SET is not set |
+
+## Task probe (a small repair, max_tokens 1000): how much of the output budget thinking uses
+
+| Model | Finished with `stop` | Median output tokens (visible + thinking) | Median thinking tokens | Reply contains a diff |
+|---|---|---|---|---|
+| vertex-x | 0/3 | 0 | 0 | 0/3 |
+# Smoke test of the paid-model endpoints (not study data)
+
+| Model | OK | HTTP 429 | Served model | Implied cost (USD) | First error |
+|---|---|---|---|---|---|
+| vertex-x | 3/3 | 0 | served | 0.000984 |  |
+| other | skipped | | | | environment variable NOT_SET is not set |
+
+## Task probe (a small repair, max_tokens 1000): how much of the output budget thinking uses
+
+| Model | Finished with `stop` | Median output tokens (visible + thinking) | Median thinking tokens | Reply contains a diff |
+|---|---|---|---|---|
+| vertex-x | 3/3 | 12 | 12 | 0/3 |
+shard 0 of 1 : 6 candidates; 4 not finished
+
+===== stderr =====
+----------------------------------------------------------------------
+Ran 417 tests in 72.760s
+
+OK
+
