@@ -19,7 +19,8 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 from gatekeeper_lite.eprocess import e_bh, e_holm  # noqa: E402
 
-ETA, ALPHA, C_STAKE, ALARM, N_MAX = 0.05, 0.1, 0.9, 20.0, 200
+ETA, ALPHA, C_STAKE, ALARM = 0.05, 0.1, 0.9, 20.0
+N_MAX = int(os.environ.get("GK_N_MAX", "200"))   # T2: 240 (amendment T2-A1)
 
 
 # ------------------------------------------------------------------ B6R replay

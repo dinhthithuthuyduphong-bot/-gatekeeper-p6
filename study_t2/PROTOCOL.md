@@ -27,3 +27,11 @@ looked at, with those analyses **pre-registered**.
   - **T2-3:** pooled over T and T2, the Wilson upper bound of G's harmful-admission rate is below the lower bound of B6-strong's.
 
 **Results** in `research_closure/results/study_t2/`; Study T's files are not touched.
+
+## T2-A1 (after the census, before any trial; the census has no outcome)
+**What the census showed (sizes only).** 140 targets, 6,839 cells (6,459 Ruff, 380 R2), 277 skills.
+
+**Fairness correction.** With K = 6,839 the fixed-sample test needs n_FS = ⌈log(α/K)/log(1−η)⌉ = 218 draws to certify zero harm,
+more than the 200 draws per stream of Study T, so FS could never admit. Both streams therefore get **240** inputs per function
+(gate and reference). B8 = no change in all gate draws (up to 240). Gatekeeper's budget is 240 draws. Everything else is as in the
+protocol.
