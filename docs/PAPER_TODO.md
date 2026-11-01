@@ -21,7 +21,7 @@ Cập nhật sau **mỗi** lần chạy. **THẮNG** = đạt, có bằng chứn
 | S7 | Nguồn đa dạng, đủ lớn | **THẮNG** | Study T: 60 gói phổ biến nhất PyPI, 235 kỹ năng có trên thị trường (Ruff), 1.465 ô có quyết định thật |
 | S8 | Người chấm độc lập (model đã hiệu chuẩn) | **THẮNG** | 20/20 mỗi model; Q-A1 5/36 – 8/36 |
 | S9 | Tái lập, artifact ẩn danh | **THẮNG** (chờ upload) | submission check |
-| S10 | Venue, định dạng | **THẮNG** | ISSTA 2027, 11/1/2027, 16/18 trang |
+| S10 | Venue, định dạng | **THẮNG** (sát giới hạn) | ISSTA 2027, 11/1/2027; nội dung 16 trang / giới hạn 18 |
 | S11 | Chứng minh được kiểm độc lập | **THẮNG** | 5 vòng; vòng cuối chỉ còn ký hiệu |
 | S12 | Câu hỏi B9 của bài gốc: so với để LLM sửa trực tiếp | **THUA** (chưa làm) | → **D4** |
 | S13 | Retirement trên thay đổi môi trường thật | **THUA** (chỉ có demo) | → **D5** |
@@ -170,6 +170,7 @@ Mỗi dòng gồm:
 | R37 | 1/11 | Study T LLM judge (df0564b) | Baseline hiện đại: model đọc diff | gemini-flash chấm 2.578/2.578 ô, 2,20 USD | — | **THẮNG** cho G: LJ admit **6/11** ô có hại và giữ 1.064 ô an toàn; G 0/11 và 1.420. G hơn LJ ở cả hai chiều | — |
 | R38 | 1/11 | Shard 7 chạy lại lần 1 (41237317062, attempt 2) | Thiếu 3 gói | — | — | **THUA do môi trường**, lặp lại: runner bị tắt sau khoảng 9 phút, cả hai lần | Vòng C bước 1: lỗi tất định, nhiều khả năng một input sinh ra cấp phát vài GB làm runner hết bộ nhớ. Sửa: T-A3, giới hạn 2 GB cho mỗi tiến trình con (`RLIMIT_AS`), chỉ áp cho shard 7; đang chạy lại |
 | R39 | 1/11 | Shard 7 với T-A3 (00ffb43) + đưa Study T vào bài | Đủ 60/60 gói | Mục 7.4 mới, Bảng `tab:market`, Abstract, Intro, Threats; 4 phản biện giả định mới (A12, A22–A24) | Tiêu chí chính của bài gốc: thắng B6-R cả hai chiều | **THẮNG**: 1.559 ô dùng được (1.531 Ruff), 12 ô có hại. G 0 hại / 1.512 giữ; nhãn Ruff 0 / 677; B6-R 9 / 996; LJ 6 / 1.128; FS 0 / 1.492; B8 0 / 1.506; **smoke 0 / 1.518 (thua)**. 60/60 con số khớp | Còn THUA: W1 (hoà nhãn Ruff), W3 (chi phí), smoke test. Hướng: T-A4 test suite (oracle độc lập); nhóm kỹ năng có tác hại hiếm, nơi G có lợi thế |
+| R40 | 1/11 | Paper build (ce3f5ab) | PDF có Study T | — | — | **THẮNG**: 18 trang tổng; nội dung tới trang 16 (Conclusion), trang 17 là Data Availability (không tính trang), sau đó là tham khảo. Giới hạn ISSTA: 18 trang nội dung, nên **chỉ còn khoảng 1–2 trang**; thêm nội dung mới phải rút gọn chỗ khác | — |
 
 ## C. Vòng debug khi THUA (làm theo thứ tự)
 
