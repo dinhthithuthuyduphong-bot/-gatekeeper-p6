@@ -1,0 +1,44 @@
+# Every analysis recomputed from committed raw data, in Actions (rule 3d of docs/PAPER_TODO.md): Study T and T2 decisions
+# (incl. B6-strong, LLM judge, e-BH), B9 tiers, Study U, and the results report.  No model calls, 0 USD.  The bot commits the outputs.
+name: Gatekeeper analyses
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  analyse:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.12"
+      - run: pip install -q "ruff==0.17.3"
+      - name: Analyses
+        shell: bash
+        run: |
+          set -euo pipefail
+          R=research_closure/results
+          python tools/market_analyze.py --replay $R/study_t
+          python tools/market_analyze.py $R/study_t > /dev/null
+          if ls $R/study_t2/TRIALS_*.json >/dev/null 2>&1; then
+            python tools/market_analyze.py --replay $R/study_t2
+            GK_N_MAX=240 GK_EXTRA_SOURCES=$R/study_t/STUDY_T_RESULT.json python tools/market_analyze.py $R/study_t2 > /dev/null
+          fi
+          for tier in "" medium strong; do
+            if [ -z "$tier" ] || ls $R/study_t/B9_${tier}_??.json >/dev/null 2>&1; then python tools/b9_analyze.py $R/study_t $tier > /dev/null; fi
+          done
+          python tools/rare_harm_study.py $R/study_u > /dev/null
+          python tools/results_report.py
+          python tools/check_paper_numbers.py | tail -1 | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "gatekeeper-freeze-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add research_closure/results docs/paper/RESULTS_REPORT.md
+          git diff --cached --quiet && { echo "no change"; exit 0; }
+          git commit -m "Analyses recomputed in Actions"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin HEAD:"${GITHUB_REF_NAME}"

@@ -44,6 +44,25 @@ jobs:
           for s in study_d study_e study_g study_h study_q; do python tools/freeze_study.py verify $s | tee -a ci_log/freeze.txt; done
           git worktree add -q /tmp/p_freeze 6437ecf
           (cd /tmp/p_freeze && python tools/freeze_study.py verify study_p) | tee -a ci_log/freeze.txt
+      - name: Result files come from Actions (rule 3d)
+        if: github.event_name == 'push' && github.event.before != '0000000000000000000000000000000000000000'
+        shell: bash
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          set -euo pipefail
+          bad=0
+          for c in $(git rev-list "$BEFORE..$GITHUB_SHA" -- research_closure/results 2>/dev/null || true); do
+            author=$(git log -1 --format=%an "$c")
+            [ "$author" = "gatekeeper-freeze-bot" ] && continue
+            # content changes only: additions, modifications, deletions, renames with edits (pure renames R100 are allowed)
+            changed=$(git show --format= --name-status -M100% "$c" -- research_closure/results | grep -Ev '^R100' || true)
+            if [ -n "$changed" ]; then
+              echo "::error::commit ${c::7} by $author changes result files outside a workflow:"; echo "$changed"; bad=1
+            fi
+          done
+          echo "| Result files from Actions only | $([ $bad = 0 ] && echo OK || echo VIOLATION) |" >> ci_log/provenance.txt
+          exit $bad
       - name: Evaluation summary
         if: always()
         shell: bash
@@ -55,6 +74,7 @@ jobs:
             echo "|---|---|"
             echo "| Unit tests | $(grep -E '^(Ran|OK|FAILED)' ci_log/unit_tests.txt 2>/dev/null | tr '\n' ' ') |"
             echo "| Paper numbers | $(tail -1 ci_log/paper_numbers.txt 2>/dev/null) |"
+            cat ci_log/provenance.txt 2>/dev/null || true
             echo "| Freeze verifications | $(grep -ci 'ok\|verified' ci_log/freeze.txt 2>/dev/null) lines OK, $(grep -ci 'fail\|mismatch' ci_log/freeze.txt 2>/dev/null) failing |"
           } | tee -a "$GITHUB_STEP_SUMMARY" ci_log/SUMMARY.md
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
