@@ -16,8 +16,8 @@ Cập nhật sau **mỗi** lần chạy. **THẮNG** = đạt, có bằng chứn
 | S2 | Mã làm đúng lý thuyết đã chứng minh | **THẮNG** | THEORY_CODE_AUDIT TC1–TC24 |
 | S3 | Đóng góp mới, nói rõ cái gì không mới | **THẮNG** | Mục 5, Intro |
 | S4 | Thực nghiệm thật, đăng ký trước, có kết quả âm | **THẮNG** | D, E, G, H, P, Q, R2, S |
-| S5 | **Tiêu chí chính của bài FSE gốc:** thắng B6-R ở cùng mức giữ lợi ích | **THẮNG (Study T)** | Trên 1.439 ô Ruff: B6-R admit 9/11 ô có hại và giữ 928 ô an toàn; G admit 0/11 và giữ 1.420. Thắng cả hai chiều |
-| S6 | Thắng baseline thống kê và B8 | **THUA một phần** | Study T: G giữ nhiều hơn FS (1.400) và B8 (1.414) ở cùng 0 tác hại (thắng); **smoke 20 ngang G và rẻ hơn 10 lần** (thua); chi phí G bằng B8 (thua W3) |
+| S5 | **Tiêu chí chính của bài FSE gốc:** thắng B6 ở cùng mức giữ lợi ích | **THẮNG** | Study T với B6-strong (replay trên mọi gói nguồn): B6 2 hại / 1.256 giữ; G 0 / 1.512 |
+| S6 | Thắng baseline thống kê, smoke và B8 | **THẮNG một phần** | Tác hại rõ (Study T): smoke ngang G, rẻ hơn 10 lần. **Tác hại hiếm (Study U): G 0 hại, smoke 10, test pass 44** (thắng). Giữ lợi ích: G ≥ FS nhưng < B8 không bảo đảm (thua) |
 | S7 | Nguồn đa dạng, đủ lớn | **THẮNG** | Study T: 60 gói phổ biến nhất PyPI, 235 kỹ năng có trên thị trường (Ruff), 1.465 ô có quyết định thật |
 | S8 | Người chấm độc lập (model đã hiệu chuẩn) | **THẮNG** | 20/20 mỗi model; Q-A1 5/36 – 8/36 |
 | S9 | Tái lập, artifact ẩn danh | **THẮNG** (chờ upload) | submission check |
@@ -171,6 +171,8 @@ Mỗi dòng gồm:
 | R38 | 1/11 | Shard 7 chạy lại lần 1 (41237317062, attempt 2) | Thiếu 3 gói | — | — | **THUA do môi trường**, lặp lại: runner bị tắt sau khoảng 9 phút, cả hai lần | Vòng C bước 1: lỗi tất định, nhiều khả năng một input sinh ra cấp phát vài GB làm runner hết bộ nhớ. Sửa: T-A3, giới hạn 2 GB cho mỗi tiến trình con (`RLIMIT_AS`), chỉ áp cho shard 7; đang chạy lại |
 | R39 | 1/11 | Shard 7 với T-A3 (00ffb43) + đưa Study T vào bài | Đủ 60/60 gói | Mục 7.4 mới, Bảng `tab:market`, Abstract, Intro, Threats; 4 phản biện giả định mới (A12, A22–A24) | Tiêu chí chính của bài gốc: thắng B6-R cả hai chiều | **THẮNG**: 1.559 ô dùng được (1.531 Ruff), 12 ô có hại. G 0 hại / 1.512 giữ; nhãn Ruff 0 / 677; B6-R 9 / 996; LJ 6 / 1.128; FS 0 / 1.492; B8 0 / 1.506; **smoke 0 / 1.518 (thua)**. 60/60 con số khớp | Còn THUA: W1 (hoà nhãn Ruff), W3 (chi phí), smoke test. Hướng: T-A4 test suite (oracle độc lập); nhóm kỹ năng có tác hại hiếm, nơi G có lợi thế |
 | R40 | 1/11 | Paper build (ce3f5ab) | PDF có Study T | — | — | **THẮNG**: 18 trang tổng; nội dung tới trang 16 (Conclusion), trang 17 là Data Availability (không tính trang), sau đó là tham khảo. Giới hạn ISSTA: 18 trang nội dung, nên **chỉ còn khoảng 1–2 trang**; thêm nội dung mới phải rút gọn chỗ khác | — |
+| R41 | 1/11 | T-A5 B6-strong (1c79be0) | B6 trung thành với bài gốc: replay trên mọi gói nguồn khác | `market_analyze.b6_strong` (post hoc, viết trước khi tính) | B6-R cũ yếu hơn B6 thật: replay fixture hoặc ví dụ tài liệu, thay vì repo nguồn | **THẮNG**: B6-strong 2 hại / 1.256 giữ, mạnh hơn B6-R (9 / 996); G 0 / 1.512 vẫn hơn ở cả hai chiều. B6-majority 10 / 1.503 | — |
+| R42 | 1/11 | Study U (1c79be0) | Tác hại hiếm trên kỹ năng thị trường: 693 patch agent đã resolved trên SWE-bench | `rare_harm_study.py`, chia input gate/tham chiếu theo seed | Đóng điểm yếu "smoke ngang G" | **U1 THẮNG** (G 0, smoke 10, test pass 44 patch có hại). **U3 THẮNG** (dải 5–20%: smoke 10/33, G 0). **U2 THUA**: G giữ 303/649, FS 299, B8 621 | Vòng C: thua thật, không phải môi trường. Bảo đảm FWER trên 693 ô cần khoảng 190 draw sạch, trong khi trung bình chỉ có khoảng 149 input. Hướng: nhiều input hơn mỗi patch, hoặc e-BH (FDR) cho mục đích sàng lọc (amendment trước) |
 
 ## C. Vòng debug khi THUA (làm theo thứ tự)
 

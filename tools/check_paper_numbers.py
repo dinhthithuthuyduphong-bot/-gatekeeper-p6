@@ -46,6 +46,7 @@ S5 = "research_closure/results/study_s/COMPOSITION_STUDY_SA5.json"
 
 TC = "research_closure/results/study_t/MARKET_CENSUS.json"
 TR = "research_closure/results/study_t/STUDY_T_RESULT.json"
+UU = lambda: J("research_closure/results/study_u/STUDY_U_RESULT.json")["contract"]  # noqa: E731
 
 
 def K(n):
@@ -58,12 +59,14 @@ def t_g_draws():
 
 
 MARKET_ROWS = [("U", "Apply every fix (\\texttt{--unsafe-fixes})", "0"), ("RS", "Ruff's \\emph{safe} label (\\texttt{ruff --fix})", "0"),
-               ("B6R", "Replay of the rule's documented example (B6-R)", "0"), ("LJ", "LLM judge reading the diff", "0"),
+               ("B6R", "Replay of the rule's documented example (B6-R)", "0"),
+               ("B6S", "Replay on all other packages (B6-strong, post hoc)", "0"), ("LJ", "LLM judge reading the diff", "0"),
                ("S20", "Smoke test, $20$ draws", "20"), ("FS", "Fixed-sample test, $199$ draws", "199"),
                ("B8", "Always-retest (B8), $200$ draws", "200"), ("G", "Gatekeeper", None)]
 MARKET_TABLE = """Apply every fix (\\texttt{--unsafe-fixes}) & 11 & 1{,}520 & 0 \\\\
 Ruff's \\emph{safe} label (\\texttt{ruff --fix}) & 0 & 677 & 0 \\\\
 Replay of the rule's documented example (B6-R) & 9 & 996 & 0 \\\\
+Replay on all other packages (B6-strong, post hoc) & 2 & 1{,}256 & 0 \\\\
 LLM judge reading the diff & 6 & 1{,}128 & 0 \\\\
 Smoke test, $20$ draws & 0 & 1{,}518 & 20 \\\\
 Fixed-sample test, $199$ draws & 0 & 1{,}492 & 199 \\\\
@@ -213,6 +216,26 @@ CLAIMS = [
          J(TR)["ruff_cells"]["G"]["safe_admitted"] / J(TR)["ruff_cells"]["RS"]["safe_admitted"])),
     ("T untestable share", "and $40\\%$ of the cells could not be\ntested",
      lambda: "and $%d\\%%$ of the cells could not be\ntested" % round(100 * (J(TR)["K"] - J(TR)["usable_cells"]) / J(TR)["K"])),
+    ("T B6-strong", "It admitted $2$ harmful cells and kept $1{,}256$ safe ones",
+     lambda: "It admitted $%d$ harmful cells and kept $%s$ safe ones" % (J(TR)["ruff_cells"]["B6S"]["harmful_admitted"], K(J(TR)["ruff_cells"]["B6S"]["safe_admitted"]))),
+    ("U setup", "($44$ patches, $33$ of them between $5\\%$ and $20\\%$)",
+     lambda: "($%d$ patches, $%d$ of them between $5\\%%$ and $20\\%%$)" % (UU()["harmful"], UU()["band_5_20"]["patches"])),
+    ("U patches", "records of the $693$ resolved SWE-bench Verified", lambda: "records of the $%d$ resolved SWE-bench Verified" % UU()["patches"]),
+    ("U smoke", "Passing the tests admitted all $44$, and the $20$-draw smoke test admitted $10$, all\nin the $5$--$20\\%$ band",
+     lambda: "Passing the tests admitted all $%d$, and the $20$-draw smoke test admitted $%d$, %s\nin the $5$--$20\\%%$ band" % (
+         UU()["scores"]["U"]["harmful_admitted"], UU()["scores"]["S20"]["harmful_admitted"],
+         "all" if UU()["band_5_20"]["admitted"]["S20"] == UU()["scores"]["S20"]["harmful_admitted"] else "not all")),
+    ("U retention", "Gatekeeper kept $303$ of $649$ harmless patches, the fixed-sample test $299$, and always-retest, which has no error\nguarantee, $621$",
+     lambda: "Gatekeeper kept $%d$ of $%d$ harmless patches, the fixed-sample test $%d$, and always-retest, which has no error\nguarantee, $%d$" % (
+         UU()["scores"]["G"]["safe_admitted"], UU()["safe"], UU()["scores"]["FS"]["safe_admitted"], UU()["scores"]["B8"]["safe_admitted"])),
+    ("U zero", "Gatekeeper, the fixed-sample test and always-retest admitted none",
+     lambda: "Gatekeeper, the fixed-sample test and always-retest admitted none" if all(UU()["scores"][x]["harmful_admitted"] == 0 for x in ("G", "FS", "B8")) else "X"),
+    ("U draws", "(about $149$ on average)", lambda: "(about $%d$ on average)" % round(UU()["mean_draws"]["B8"])),
+    ("abstract: U", "passing the tests admitted all $44$ harmful patches, the smoke test $10$, Gatekeeper none",
+     lambda: "passing the tests admitted all $%d$ harmful patches, the smoke test $%d$, Gatekeeper %s" % (
+         UU()["scores"]["U"]["harmful_admitted"], UU()["scores"]["S20"]["harmful_admitted"], "none" if UU()["scores"]["G"]["harmful_admitted"] == 0 else "some")),
+    ("abstract: B6-strong", "(a strong B6) still admitted $2$", lambda: "(a strong B6) still admitted $%d$" % J(TR)["ruff_cells"]["B6S"]["harmful_admitted"]),
+    ("abstract: U patches", "not on $693$ resolved SWE-bench agent patches", lambda: "not on $%d$ resolved SWE-bench agent patches" % UU()["patches"]),
     # abstract (main.tex)
     ("abstract: plausible patches", "in $205$ plausible LLM patches", lambda: "in $%d$ plausible LLM patches" % PA()["PRIMARY"]["plausible"]),
     ("abstract: census admits", "the test census admitted all $16$ with partial\nbehavioural differences",

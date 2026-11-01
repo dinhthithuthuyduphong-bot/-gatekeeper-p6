@@ -212,6 +212,7 @@ Decision rule & harmful admitted & safe admitted & draws per cell \\
 Apply every fix (\texttt{--unsafe-fixes}) & 11 & 1{,}520 & 0 \\
 Ruff's \emph{safe} label (\texttt{ruff --fix}) & 0 & 677 & 0 \\
 Replay of the rule's documented example (B6-R) & 9 & 996 & 0 \\
+Replay on all other packages (B6-strong, post hoc) & 2 & 1{,}256 & 0 \\
 LLM judge reading the diff & 6 & 1{,}128 & 0 \\
 Smoke test, $20$ draws & 0 & 1{,}518 & 20 \\
 Fixed-sample test, $199$ draws & 0 & 1{,}492 & 199 \\
@@ -222,7 +223,11 @@ Gatekeeper & 0 & 1{,}512 & 198.5 \\
 \end{table}
 
 Gatekeeper admitted no harmful cell; unrestricted reuse admitted all $11$, replay of the documented example $9$ and the LLM judge
-$6$, so Gatekeeper beat both on both columns, which is the criterion of the original proposal (B6-R at equal retention).  Ruff's own
+$6$, so Gatekeeper beat both on both columns, which is the criterion of the original proposal (B6 at equal retention).  Because
+replay on a documented example is weaker than the original B6, which replays a skill on the repositories it was used on, we added
+(post hoc, written before it was computed) B6-strong: a rule is admitted on a package only if it changed no behaviour on any other
+package of the study.  It admitted $2$ harmful cells and kept $1{,}256$ safe ones: evidence from dozens of real source repositories
+still let target-specific harm through while rejecting safe reuse, which is the selective-transfer argument of this paper.  Ruff's own
 label also admitted no harmful cell, so W1 is \emph{lost} as stated, but the label is conservative: Gatekeeper kept $1{,}512$ safe fixes
 against $677$, and admitted $771$ of the $788$ cells Ruff labels unsafe, at zero harm (W2 won).  Among the rules that run
 trials, Gatekeeper kept more safe fixes than the fixed-sample test and always-retest at the same zero harm.  Two criteria are
@@ -233,6 +238,18 @@ inputs, and above $30\%$ in $8$ of the $11$ cells), the situation in which Secti
 gate suffices; the certificate pays off for rare partial harm (Study H), not here.  $1{,}019$ cells were unusable (no callable
 function, or too few stable inputs), and one shard of three projects needed a memory cap after the runner was shut down twice
 (amendment T-A3).
+
+\paragraph{Rare partial harm in agent patches (Study U).}
+% source: research_closure/results/study_u/STUDY_U_RESULT.json; study_u/PROTOCOL.md
+Where harm is rare the picture changes.  Study U reuses the function-level records of the $693$ resolved SWE-bench Verified
+patches of Study Q (written by LLM coding agents; every one passes the benchmark's tests), splitting each patch's inputs at random
+into gate and reference halves; a patch is harmful if it has a contract regression on at least $5\%$ of its reference inputs
+($44$ patches, $33$ of them between $5\%$ and $20\%$).  Passing the tests admitted all $44$, and the $20$-draw smoke test admitted $10$, all
+in the $5$--$20\%$ band; Gatekeeper, the fixed-sample test and always-retest admitted none.  The price of the guarantee over $693$
+cells is retention: Gatekeeper kept $303$ of $649$ harmless patches, the fixed-sample test $299$, and always-retest, which has no error
+guarantee, $621$; many patches had too few stable inputs (about $149$ on average) to reach the certification threshold.  Two of the
+three pre-registered criteria held (fewer harmful admissions than smoke and than the tests, also in the rare band) and the third,
+retention at least that of always-retest, did not.
 
 \emph{Reading.} On these targets harm was frequent and deterministic, so a simple gate with target evidence suffices; the
 certificate's distinctive behaviour is refusing changes that are not beneficial, not catching rare harm.
