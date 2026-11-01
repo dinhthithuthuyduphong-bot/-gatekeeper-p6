@@ -1,0 +1,65 @@
+# Study T-A6 (B9: the model applies each sampled cell's rule directly; cost vs Gatekeeper) and Study U-A1 (e-BH screening variant).
+# Paid, capped at 3 USD.  Commits research_closure/results/study_t/{B9_*,B9_RESULT}.json and research_closure/results/study_u/.
+name: Gatekeeper Study T B9 and Study U-A1
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  b9:
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.12"
+      - run: pip install -q "ruff==0.17.3" google-auth requests
+      - run: python -m unittest tests.test_market_b9 -v
+      - name: Google Cloud auth
+        uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+      - name: Vertex access token
+        run: |
+          t="$(gcloud auth print-access-token)"; echo "::add-mask::$t"; echo "GOOGLE_OAUTH_TOKEN=$t" >> "$GITHUB_ENV"
+          echo "GCP_PROJECT=${{ secrets.GCP_PROJECT }}" >> "$GITHUB_ENV"
+          echo "GK_TOKEN_CMD=python $GITHUB_WORKSPACE/tools/fresh_gcp_token.py" >> "$GITHUB_ENV"
+      - env:
+          GK_MEMCAP_GB: "2"
+        run: python -W ignore tools/market_b9.py /tmp/b9_work out_b9 research_closure/pilot/models.json --shard ${{ matrix.shard }} --shards 4 --cap 0.75
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        if: always()
+        with:
+          name: T_B9_${{ matrix.shard }}
+          path: out_b9
+  analyse:
+    needs: b9
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.12"
+      - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        with:
+          pattern: T_B9_*
+          path: research_closure/results/study_t
+          merge-multiple: true
+      - run: python tools/b9_analyze.py research_closure/results/study_t | tee -a "$GITHUB_STEP_SUMMARY"
+      - run: python tools/rare_harm_study.py research_closure/results/study_u | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "gatekeeper-freeze-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add research_closure/results/study_t research_closure/results/study_u
+          git diff --cached --quiet && { echo "no change"; exit 0; }
+          git commit -m "Study T B9 and Study U-A1"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin HEAD:"${GITHUB_REF_NAME}"

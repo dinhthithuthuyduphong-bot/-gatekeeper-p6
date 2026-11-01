@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "tools"))
 import market_analyze as MA  # noqa: E402  (same harm certificate, e-Holm and thresholds as Study T)
-from gatekeeper_lite.eprocess import e_holm  # noqa: E402
+from gatekeeper_lite.eprocess import e_bh, e_holm  # noqa: E402
 
 Q = ROOT / "research_closure/results/study_q/Q_RECORDS.jsonl.gz"
 ETA, ALPHA = MA.ETA, MA.ALPHA
@@ -58,9 +58,11 @@ def study(harm_key):
                      "harmful": rate >= ETA, "e": e, "g_draws": used, "U": True, "S20": not any(gate[:20]),
                      "FS": len(gate) >= n_fs and not any(gate[:n_fs]), "B8": not any(gate)})
     adm = set(e_holm({r["patch"] + r["instance"]: r["e"] for r in rows}, ALPHA))
+    adm_fdr = set(e_bh({r["patch"] + r["instance"]: r["e"] for r in rows}, ALPHA))      # U-A1, post hoc
     for r in rows:
         r["G"] = (r["patch"] + r["instance"]) in adm
-    rules = ["U", "S20", "FS", "B8", "G"]
+        r["G_FDR"] = (r["patch"] + r["instance"]) in adm_fdr
+    rules = ["U", "S20", "FS", "B8", "G", "G_FDR"]
     sc = {x: {"harmful_admitted": sum(1 for r in rows if r[x] and r["harmful"]),
               "safe_admitted": sum(1 for r in rows if r[x] and not r["harmful"])} for x in rules}
     band = [r for r in rows if r["harmful"] and r["ref_rate"] < 0.20]
