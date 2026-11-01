@@ -1,0 +1,91 @@
+command: python3 tools/check_paper_numbers.py
+cwd: /home/user/-gatekeeper-p6
+head: bd63a42
+uncommitted at start:
+(none)
+start: 2026-11-01T03:53:19.952862+00:00
+seconds: 0.3
+exit: 0
+
+===== stdout =====
+OK     Q usable instances     quoted='$245$ instances usable' recomputed='$245$ instances usable' in_latex=True
+OK     Q scored patches       quoted='$694$ patches' recomputed='$694$ patches' in_latex=True
+OK     Q2 share               quoted='$43.1\\%$' recomputed='$43.1\\%$' in_latex=True
+OK     Q4 share and Wilson    quoted='$11.1\\%$ (Wilson $9.0$--$13.6\\%$)' recomputed='$11.1\\%$ (Wilson $9.0$--$13.6\\%$)' in_latex=True
+OK     HQ1                    quoted='$6/55$ ($10.9\\%$, Wilson $5.1$--$21.8\\%$' recomputed='$6/55$ ($10.9\\%$, Wilson $5.1$--$21.8\\%$' in_latex=True
+OK     Q-A1 reproduced        quoted='$36$ reproduced exactly' recomputed='$36$ reproduced exactly' in_latex=True
+OK     Q-A1 agreement         quoted='$87.7\\%$ of $154$ items' recomputed='$87.7\\%$ of $154$ items' in_latex=True
+OK     Q-A1 main              quoted='$8/36$ ($22.2\\%$, Wilson $11.7$--$38.1\\%$)' recomputed='$8/36$ ($22.2\\%$, Wilson $11.7$--$38.1\\%$)' in_latex=True
+OK     Q-A1 sensitivity       quoted='$11/36$ ($18.0$--$46.9\\%$)' recomputed='$11/36$ ($18.0$--$46.9\\%$)' in_latex=True
+OK     P primary              quoted='$16/205=7.8\\%$ (Wilson $4.9$--$12.3\\%$)' recomputed='$16/205=7.8\\%$ (Wilson $4.9$--$12.3\\%$)' in_latex=True
+OK     P census admits        quoted='admitted all $16$ patches' recomputed='admitted all $16$ patches' in_latex=True
+OK     P smoke admits         quoted='smoke test admitted $2$' recomputed='smoke test admitted $2$' in_latex=True
+OK     RQ3 G2                 quoted="$11/14$ detection decisions (Cohen's $\\kappa=0.57$)" recomputed="$11/14$ detection decisions (Cohen's $\\kappa=0.57$)" in_latex=True
+OK     RQ3 G0                 quoted='$8/14$ ($\\kappa=0.19$)' recomputed='$8/14$ ($\\kappa=0.19$)' in_latex=True
+OK     theory C2              quoted='family-wise false admission rate of our e-process is $0.45$, against $0.05$' recomputed='family-wise false admission rate of our e-process is $0.45$, against $0.05$' in_latex=True
+OK     theory C10 decision rule quoted='family-wise false admission rate was $2.4\\%$ and $7.3\\%$' recomputed='family-wise false admission rate was $2.4\\%$ and $7.3\\%$' in_latex=True
+OK     theory C9 draws        quoted='needs $110$ clean draws' recomputed='needs $110$ clean draws' in_latex=True
+OK     loss-weight sensitivity draws quoted='Recomputing all $7{,}200$ recorded draws' recomputed='Recomputing all $7{,}200$ recorded draws' in_latex=True
+OK     library sim P1 q=0.3   quoted='in $27.9\\%$ of the libraries at $q=0.3$' recomputed='in $27.9\\%$ of the libraries at $q=0.3$' in_latex=True
+OK     library sim sweep      quoted='($9.9\\%$ at $q=0.1$, $42.4\\%$ at $q=0.5$)' recomputed='($9.9\\%$ at $q=0.1$, $42.4\\%$ at $q=0.5$)' in_latex=True
+OK     library sim P2 zero    quoted='($0/1{,}000$ at every $q$' recomputed='($0/1{,}000$ at every $q$' in_latex=True
+OK     library sim reuse      quoted='$3.59$ instead of $4.48$' recomputed='$3.59$ instead of $4.48$' in_latex=True
+OK     library sim masked     quoted='harmful in only $5.4\\%$ of libraries' recomputed='harmful in only $5.4\\%$ of libraries' in_latex=True
+OK     abstract: library sim  quoted='ran a harmful composition in $28\\%$ of libraries' recomputed='ran a harmful composition in $28\\%$ of libraries' in_latex=True
+OK     Q robustness HQ1 range quoted='between $8.2\\%$ and $16.7\\%$ (largest Wilson upper bound $31.9\\%$' recomputed='between $8.2\\%$ and $16.7\\%$ (largest Wilson upper bound $31.9\\%$' in_latex=True
+OK     Q robustness Q4 range  quoted='between $8.2\\%$ and $14.0\\%$' recomputed='between $8.2\\%$ and $14.0\\%$' in_latex=True
+OK     R2 census              quoted='($655$ non-test files) found $59$ single-skill cells, $3.7$ per repository, touching $467$ functions, of which $21$ are touched by two or more families' recomputed='($655$ non-test files) found $59$ single-skill cells, $3.7$ per repository, touching $467$ functions, of which $21$ are touched by two or more families' in_latex=True
+OK     R2 targets/families    quoted='over all $16$ target repositories at their pinned revisions' recomputed='over all $16$ target repositories at their pinned revisions' in_latex=True
+OK     R2 pairs               quoted='Of the $136$ family pairs that meet in some repository, $18$ overlap, and the execution rule requires $6$ composite cells' recomputed='Of the $136$ family pairs that meet in some repository, $18$ overlap, and the execution rule requires $6$ composite cells' in_latex=True
+OK     R2 shared commute      quoted='all $21$ such pairs that share a function commute' recomputed='all $21$ such pairs that share a function commute' in_latex=True
+OK     R2 disjoint non-commuting quoted='Two pairs with \\emph{disjoint} footprints do not' recomputed='Two pairs with \\emph{disjoint} footprints do not' in_latex=True
+OK     R2 missed by static    quoted='In \\texttt{pydal} the original-code footprints' recomputed='In \\texttt{pydal} the original-code footprints' in_latex=True
+OK     R2 commuting disjoint  quoted='among the $80$ such file pairs of Study R2 none' recomputed='among the $80$ such file pairs of Study R2 none' in_latex=True
+OK     R2 graph sim           quoted='Re-running the simulation on the $13$ measured libraries' recomputed='Re-running the simulation on the $13$ measured libraries' in_latex=True
+OK     R2 graph sim P1        quoted='executed a harmful component in $7.1\\%$ of libraries at $q=0.3$ ($14.5\\%$ when every overlapping pair is harmful), ours in $0/1{,}000$' recomputed='executed a harmful component in $7.1\\%$ of libraries at $q=0.3$ ($14.5\\%$ when every overlapping pair is harmful), ours in $0/1{,}000$' in_latex=True
+OK     R2 graph sim reuse     quoted='$1.64$ instead of $1.96$ beneficial skills executed' recomputed='$1.64$ instead of $1.96$ beneficial skills executed' in_latex=True
+OK     S registered usable    quoted='As registered only $2$ of $23$ could be called' recomputed='As registered only $2$ of $23$ could be called' in_latex=True
+OK     S-A1 usable            quoted='($12$ usable, S-A1)' recomputed='($12$ usable, S-A1)' in_latex=True
+OK     S-A5 usable            quoted='In the final run $16$ functions were usable and $7$ could not be called' recomputed='In the final run $16$ functions were usable and $7$ could not be called' in_latex=True
+OK     S-A5 final             quoted='No composition changed behaviour where both of its parts kept it, none masked a change of a part, and none depended on the order' recomputed='No composition changed behaviour where both of its parts kept it, none masked a change of a part, and none depended on the order' in_latex=True
+OK     S-A2 noise unit        quoted='an apparent order dependence on one input of' recomputed='an apparent order dependence on one input of' in_latex=True
+OK     S-A3 IS_STRONG         quoted='on $29$ of $200$ inputs' recomputed='on $29$ of $200$ inputs' in_latex=True
+OK     S-A5 gate              quoted='over all $64$ cells, the gate rejected exactly the $3$ cells' recomputed='over all $64$ cells, the gate rejected exactly the $3$ cells' in_latex=True
+OK     S-A5 admitted          quoted='admitted the other $61$' recomputed='admitted the other $61$' in_latex=True
+OK     S-A5 limited           quoted='the evidence is limited to $16$ functions' recomputed='the evidence is limited to $16$ functions' in_latex=True
+OK     Q-A1 generator changed quoted='re-generating it gave a different program for $17$ of the other $19$ units' recomputed='re-generating it gave a different program for $17$ of the other $19$ units' in_latex=True
+OK     Q-A1 three raters      quoted='$5/36$ ($13.9\\%$, Wilson $6.1$--$28.7\\%$) units have no confirmed regression' recomputed='$5/36$ ($13.9\\%$, Wilson $6.1$--$28.7\\%$) units have no confirmed regression' in_latex=True
+OK     rater calibration      quoted='both model raters coded all $20$ items of a calibration set with known codes correctly' recomputed='both model raters coded all $20$ items of a calibration set with known codes correctly' in_latex=True
+OK     T census               quoted='The census found $2{,}578$ cells ($235$ skills)' recomputed='The census found $2{,}578$ cells ($235$ skills)' in_latex=True
+OK     T usable               quoted='$1{,}559$ cells were usable ($1{,}531$ Ruff cells) and $12$ were harmful' recomputed='$1{,}559$ cells were usable ($1{,}531$ Ruff cells) and $12$ were harmful' in_latex=True
+OK     T table body           quoted="Apply every fix (\\texttt{--unsafe-fixes}) & 11 & 1{,}520 & 0 \\\\ Ruff's \\emph{safe} label (\\texttt{ruff --fix}) & 0 & 677 & 0 \\\\ Replay of the rule's documented example (B6-R) & 9 & 996 & 0 \\\\ Replay on all other packages (B6-strong, post hoc) & 2 & 1{,}256 & 0 \\\\ LLM judge reading the diff & 6 & 1{,}128 & 0 \\\\ Smoke test, $20$ draws & 0 & 1{,}518 & 20 \\\\ Fixed-sample test, $199$ draws & 0 & 1{,}492 & 199 \\\\ Always-retest (B8), $200$ draws & 0 & 1{,}506 & 200 \\\\ Gatekeeper & 0 & 1{,}512 & 198.5 \\\\" recomputed="Apply every fix (\\texttt{--unsafe-fixes}) & 11 & 1{,}520 & 0 \\\\ Ruff's \\emph{safe} label (\\texttt{ruff --fix}) & 0 & 677 & 0 \\\\ Replay of the rule's documented example (B6-R) & 9 & 996 & 0 \\\\ Replay on all other packages (B6-strong, post hoc) & 2 & 1{,}256 & 0 \\\\ LLM judge reading the diff & 6 & 1{,}128 & 0 \\\\ Smoke test, $20$ draws & 0 & 1{,}518 & 20 \\\\ Fixed-sample test, $199$ draws & 0 & 1{,}492 & 199 \\\\ Always-retest (B8), $200$ draws & 0 & 1{,}506 & 200 \\\\ Gatekeeper & 0 & 1{,}512 & 198.5 \\\\" in_latex=True
+OK     T G vs RS              quoted='Gatekeeper kept $1{,}512$ safe fixes against $677$, and admitted $771$ of the $788$ cells Ruff labels unsafe' recomputed='Gatekeeper kept $1{,}512$ safe fixes against $677$, and admitted $771$ of the $788$ cells Ruff labels unsafe' in_latex=True
+OK     T draws                quoted='($198.5$ draws per cell against $200$)' recomputed='($198.5$ draws per cell against $200$)' in_latex=True
+OK     T smoke                quoted='kept $1{,}518$ safe fixes and cost a tenth' recomputed='kept $1{,}518$ safe fixes and cost a tenth' in_latex=True
+OK     T unusable             quoted='$1{,}019$ cells were unusable' recomputed='$1{,}019$ cells were unusable' in_latex=True
+OK     T blatant              quoted='above $30\\%$ in $8$ of the $11$ cells' recomputed='above $30\\%$ in $8$ of the $11$ cells' in_latex=True
+OK     abstract: market       quoted='admitted $9$ and $6$ of $11$, and it kept $2.2$ times as many safe fixes' recomputed='admitted $9$ and $6$ of $11$, and it kept $2.2$ times as many safe fixes' in_latex=True
+OK     T untestable share     quoted='and $40\\%$ of the cells could not be tested' recomputed='and $40\\%$ of the cells could not be tested' in_latex=True
+OK     T B6-strong            quoted='It admitted $2$ harmful cells and kept $1{,}256$ safe ones' recomputed='It admitted $2$ harmful cells and kept $1{,}256$ safe ones' in_latex=True
+OK     U setup                quoted='($44$ patches, $33$ of them between $5\\%$ and $20\\%$)' recomputed='($44$ patches, $33$ of them between $5\\%$ and $20\\%$)' in_latex=True
+OK     U patches              quoted='records of the $693$ resolved SWE-bench Verified' recomputed='records of the $693$ resolved SWE-bench Verified' in_latex=True
+OK     U smoke                quoted='Passing the tests admitted all $44$, and the $20$-draw smoke test admitted $10$, all in the $5$--$20\\%$ band' recomputed='Passing the tests admitted all $44$, and the $20$-draw smoke test admitted $10$, all in the $5$--$20\\%$ band' in_latex=True
+OK     U retention            quoted='Gatekeeper kept $303$ of $649$ harmless patches, the fixed-sample test $299$, and always-retest, which has no error guarantee, $621$' recomputed='Gatekeeper kept $303$ of $649$ harmless patches, the fixed-sample test $299$, and always-retest, which has no error guarantee, $621$' in_latex=True
+OK     U zero                 quoted='Gatekeeper, the fixed-sample test and always-retest admitted none' recomputed='Gatekeeper, the fixed-sample test and always-retest admitted none' in_latex=True
+OK     U draws                quoted='(about $149$ on average)' recomputed='(about $149$ on average)' in_latex=True
+OK     abstract: U            quoted='passing the tests admitted all $44$ harmful patches, the smoke test $10$, Gatekeeper none' recomputed='passing the tests admitted all $44$ harmful patches, the smoke test $10$, Gatekeeper none' in_latex=True
+OK     abstract: B6-strong    quoted='(a strong B6) still admitted $2$' recomputed='(a strong B6) still admitted $2$' in_latex=True
+OK     abstract: U patches    quoted='not on $693$ resolved SWE-bench agent patches' recomputed='not on $693$ resolved SWE-bench agent patches' in_latex=True
+OK     U-A1 e-BH              quoted='kept $626$ harmless patches and still admitted no harmful one' recomputed='kept $626$ harmless patches and still admitted no harmful one' in_latex=True
+OK     B9 harm                quoted="in $10$ of $148$ evaluable cells, $2$ of them cells where Ruff's own fix is harmless, and $6$ of its replies did not parse" recomputed="in $10$ of $148$ evaluable cells, $2$ of them cells where Ruff's own fix is harmless, and $6$ of its replies did not parse" in_latex=True
+OK     B9 sample              quoted='On $150$ Study T cells (all $11$ harmful ones and $139$ drawn at random)' recomputed='On $150$ Study T cells (all $11$ harmful ones and $139$ drawn at random)' in_latex=True
+OK     B9 G                   quoted='admitted no harmful cell. The model cost' recomputed='admitted no harmful cell. The model cost' in_latex=True
+OK     B9 cost                quoted="$0.0080$ USD and $16.9$ seconds per cell, Gatekeeper's trials $2.3$ seconds of a hosted runner ($0.0003$ USD)" recomputed="$0.0080$ USD and $16.9$ seconds per cell, Gatekeeper's trials $2.3$ seconds of a hosted runner ($0.0003$ USD)" in_latex=True
+OK     abstract: B9           quoted='was $26$ times as expensive and changed behaviour in $10$ of $148$ cells' recomputed='was $26$ times as expensive and changed behaviour in $10$ of $148$ cells' in_latex=True
+OK     abstract: plausible patches quoted='in $205$ plausible LLM patches' recomputed='in $205$ plausible LLM patches' in_latex=True
+OK     abstract: census admits quoted='the test census admitted all $16$ with partial behavioural differences' recomputed='the test census admitted all $16$ with partial behavioural differences' in_latex=True
+OK     abstract: factor ~4 (Q2/Q4) quoted='changes by a factor of about four with its definition' recomputed='changes by a factor of about four with its definition' in_latex=True
+77/77 claims verified
+
+===== stderr =====
+
