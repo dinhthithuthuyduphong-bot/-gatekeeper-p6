@@ -1,0 +1,153 @@
+{
+ "packages": {
+  "packages": 57,
+  "applicable": 17,
+  "errors": [],
+  "not_applicable": [
+   "aiobotocore",
+   "aiohttp",
+   "anyio",
+   "attrs",
+   "boto3",
+   "botocore",
+   "click",
+   "fastapi",
+   "filelock",
+   "fsspec",
+   "google-auth",
+   "httpcore",
+   "httpx",
+   "idna",
+   "jinja2",
+   "jmespath",
+   "jsonschema",
+   "markdown-it-py",
+   "mdurl",
+   "multidict",
+   "opentelemetry-api",
+   "packaging",
+   "pip",
+   "platformdirs",
+   "propcache",
+   "protobuf",
+   "pydantic-settings",
+   "pydantic",
+   "pygments",
+   "pytest",
+   "python-dateutil",
+   "python-dotenv",
+   "referencing",
+   "rich",
+   "setuptools",
+   "starlette",
+   "urllib3",
+   "uvicorn",
+   "websockets",
+   "yarl"
+  ]
+ },
+ "cells_run": 339,
+ "harmful": 3,
+ "safe": 336,
+ "scores": {
+  "U": {
+   "harmful_admitted": 3,
+   "harmful_total": 3,
+   "safe_admitted": 336,
+   "safe_total": 336
+  },
+  "RS": {
+   "harmful_admitted": 0,
+   "harmful_total": 3,
+   "safe_admitted": 153,
+   "safe_total": 335
+  },
+  "B6S": {
+   "harmful_admitted": 0,
+   "harmful_total": 3,
+   "safe_admitted": 274,
+   "safe_total": 335
+  },
+  "LJ": {
+   "harmful_admitted": 2,
+   "harmful_total": 3,
+   "safe_admitted": 256,
+   "safe_total": 336
+  },
+  "S20": {
+   "harmful_admitted": 0,
+   "harmful_total": 3,
+   "safe_admitted": 336,
+   "safe_total": 336
+  },
+  "B8": {
+   "harmful_admitted": 0,
+   "harmful_total": 3,
+   "safe_admitted": 336,
+   "safe_total": 336
+  },
+  "G": {
+   "harmful_admitted": 0,
+   "harmful_total": 3,
+   "safe_admitted": 336,
+   "safe_total": 336
+  },
+  "G_FDR": {
+   "harmful_admitted": 0,
+   "harmful_total": 3,
+   "safe_admitted": 336,
+   "safe_total": 336
+  },
+  "TS": {
+   "harmful_admitted": 3,
+   "harmful_total": 3,
+   "safe_admitted": 300,
+   "safe_total": 336
+  }
+ },
+ "not_run_budget": 0,
+ "ts_seconds_per_cell": 11.3,
+ "harmful_rejected_by_ts": 0,
+ "g_admitted": 336,
+ "g_admitted_ts_confirmed_reject": 34,
+ "g_admitted_ts_unconfirmed_reject": 2,
+ "confirmed_cells": [
+  "requests/ANN201",
+  "requests/ANN202",
+  "requests/B010",
+  "requests/B028",
+  "requests/C416",
+  "requests/COM812",
+  "requests/D200",
+  "requests/D202",
+  "requests/D209",
+  "requests/D212",
+  "requests/D400",
+  "requests/D403",
+  "requests/D415",
+  "requests/EM101",
+  "requests/EM102",
+  "requests/FLY002",
+  "requests/FURB167",
+  "requests/PIE790",
+  "requests/PLR1714",
+  "requests/PLR5501",
+  "requests/PYI032",
+  "requests/PYI036",
+  "requests/RET502",
+  "requests/RET503",
+  "requests/RET504",
+  "requests/RET505",
+  "requests/RET506",
+  "requests/RSE102",
+  "requests/SIM101",
+  "requests/SIM105",
+  "requests/SIM108",
+  "requests/SIM114",
+  "requests/T201",
+  "requests/TC006"
+ ],
+ "confirmed_rate_wilson_hi": 0.1381,
+ "TS_W1": true,
+ "TS_W2": false
+}
