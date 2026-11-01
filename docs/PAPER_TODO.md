@@ -38,7 +38,7 @@ Cập nhật sau **mỗi** lần chạy. **THẮNG** = đạt, có bằng chứn
 | # | Điểm yếu | Mức | Loại | Đang làm / hướng sửa |
 |---|---|---|---|---|
 | Y1 | ~~B9 chưa có số~~ | — | Đã đóng | **T-A6:** G 0 hại, B9 10/148, rẻ hơn 26 lần |
-| Y2 | Ít ô có hại: Study T có 11 ô, nên "0/11 admit" chỉ cho cận trên khoảng 26% (Wilson); Study U có 44 ô, cận khoảng 8% | Cao | Thống kê | Báo CI trong bài; thêm nguồn có nhiều ô có hại hơn (Study U mở rộng: nhiều input/patch hơn, thêm benchmark) |
+| Y2 | Ít ô có hại: Study T có 11 ô, nên "0/11 admit" chỉ cho cận trên khoảng 26% (Wilson); Study U có 44 ô, cận khoảng 8% | Cao | Thống kê | **Study T2 đang chạy** (140 gói mới, dự kiến khoảng 3 lần số ô); gộp T + T2 |
 | Y3 | Giữ lợi ích kém B8 khi kiểm soát FWER trên nhiều ô (U2: 303 so với 621) | Trung bình | Thua thật, đã có lời giải post hoc | U-A1: e-BH giữ 626 (B8 621), 0 hại. Còn cần một study xác nhận viết trước |
 | Y4 | Tác hại rõ thì smoke 20 draw ngang G và rẻ hơn 10 lần (Study T) | Trung bình | Thua thật | Bài đã nói rõ; Study U cho thấy G hơn khi tác hại hiếm |
 | Y5 | Ground truth là "đổi hành vi trên input sinh ra", không phải test suite hay chuyên gia | Trung bình | Độ tin cậy oracle | T-A4: chạy test suite của gói làm oracle độc lập |
@@ -189,6 +189,7 @@ Mỗi dòng gồm:
 | R42 | 1/11 | Study U (1c79be0) | Tác hại hiếm trên kỹ năng thị trường: 693 patch agent đã resolved trên SWE-bench | `rare_harm_study.py`, chia input gate/tham chiếu theo seed | Đóng điểm yếu "smoke ngang G" | **U1 THẮNG** (G 0, smoke 10, test pass 44 patch có hại). **U3 THẮNG** (dải 5–20%: smoke 10/33, G 0). **U2 THUA**: G giữ 303/649, FS 299, B8 621 | Vòng C: thua thật, không phải môi trường. Bảo đảm FWER trên 693 ô cần khoảng 190 draw sạch, trong khi trung bình chỉ có khoảng 149 input. Hướng: nhiều input hơn mỗi patch, hoặc e-BH (FDR) cho mục đích sàng lọc (amendment trước) |
 | R43 | 1/11 | Báo cáo kết quả tự sinh (bcf2635) | Số liệu thống kê trước, đánh giá sau | `results_report.py`: số đếm, tỉ lệ, Wilson 95%, draw/ô, rồi cột đánh giá | — | **THẮNG** | Lộ ra Y2: 0/11 chỉ cho cận trên khoảng 26% |
 | R44 | 1/11 | Study T-A6 B9 + U-A1 (8048fb7) | Câu hỏi đồng-chính của bài gốc: để model tự sửa | gemini-flash tự áp rule lên 150 ô; e-BH cho Study U | — | **B9-W THẮNG:** B9 gây hại ở 10/148 ô (2 ô vốn an toàn, nghĩa là model tự gây hại), 6 trả lời không parse được; G 0. Chi phí 0,0080 so với 0,0003 USD/ô (×26), 16,9 so với 2,3 giây. **U-A1 (post hoc):** e-BH giữ 626/649 (B8 621), 0 hại | — |
+| R45 | 1/11 | T-A7 B9 mức vừa/mạnh + Study T2 (đang chạy) | B9 với model mạnh; lặp lại xác nhận trên 140 gói mới (hạng 61–200), B6-strong và e-BH đăng ký trước | `market_b9 --model/--effort`; census `--skip`; thư mục `study_t2` | Đóng Y2 (ít ô có hại) và nhãn post hoc của B6-strong, e-BH | *chờ* | — |
 
 ## C. Vòng debug khi THUA (làm theo thứ tự)
 
