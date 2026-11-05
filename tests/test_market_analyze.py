@@ -62,6 +62,26 @@ class MarketAnalyzeTest(unittest.TestCase):
             self.assertTrue(r["W2"]["won"])
             self.assertIn("B6S", r["ruff_cells"])
 
+    def test_cell_shards_of_one_package_merge(self):
+        """T2-A4: a package's cells split over two records give the same rows as one record."""
+        cells = {"UP008": {"applicability": "safe", "functions": [fn("0" * 200, "0" * 200)]},
+                 "SIM108": {"applicability": "unsafe", "functions": [fn("10000" * 40, "1" * 40 + "0" * 160)]}}
+        out = []
+        for split in (False, True):
+            with tempfile.TemporaryDirectory() as d:
+                d = Path(d)
+                (d / "MARKET_CENSUS.json").write_text(json.dumps({"total": {"cells": 2}, "packages": []}))
+                (d / "TARGETS.json").write_text(json.dumps({"selected": [{"project": "p"}]}))
+                if split:
+                    for i, rule in enumerate(sorted(cells)):
+                        (d / ("TRIALS_p__%dof2.json" % i)).write_text(json.dumps({"project": "p", "cells": {rule: cells[rule]}}))
+                else:
+                    (d / "TRIALS_p.json").write_text(json.dumps({"project": "p", "cells": cells}))
+                r = A.analyse(d)
+                out.append((sorted(x["cell"] for x in r["rows"]), r["package_errors"], r["harmful_cells"]))
+        self.assertEqual(out[0], out[1])
+        self.assertEqual(out[0][1], [])
+
     def test_b6_strong_uses_other_packages_only(self):
         rows = [{"cell": "p1/X", "rule": "X", "r2": False, "changed_any": True, "B6R": True},
                 {"cell": "p2/X", "rule": "X", "r2": False, "changed_any": False, "B6R": True},

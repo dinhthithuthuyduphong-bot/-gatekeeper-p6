@@ -33,12 +33,14 @@ jobs:
           GK_T_RES: research_closure/results/${{ inputs.results }}
         run: |
           s="${{ matrix.shard }}"
-          if [[ "$s" =~ ^[0-9]+$ ]]; then sel=(--shard "$s" --shards 20); else sel=(--only "$s"); fi
+          if [[ "$s" =~ ^[0-9]+$ ]]; then sel=(--shard "$s" --shards 20)
+          elif [[ "$s" == *:* ]]; then sel=(--only "${s%%:*}" --cell-shard "${s##*:}")    # T2-A4: package:I/M
+          else sel=(--only "$s"); fi
           python -W ignore tools/market_trials.py /tmp/t_work out_trials "${sel[@]}" --n ${{ inputs.n }}
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         if: always()
         with:
-          name: T_TRIALS_${{ matrix.shard }}
+          name: T_TRIALS_${{ strategy.job-index }}_${{ inputs.results }}
           path: out_trials
   analyse:
     needs: trials

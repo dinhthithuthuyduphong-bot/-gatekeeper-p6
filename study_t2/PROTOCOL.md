@@ -61,3 +61,16 @@ pools fail inside the call (an outcome, as MemoryError under T-A3) instead of ki
 cell before it runs, so a runner shutdown points at the cell. (3) **Rule, fixed here:** a cell whose trial shuts the runner down
 twice is recorded as unusable with the reason "trial shut the runner down twice (T2-A3)" (workflow input `skip_cells`), like the
 other unusable cells; it is listed in the paper. No cell is skipped on any other ground.
+
+## T2-A4 (after paramiko and azure-storage-blob hit the 340-minute runner limit twice; no outcome of either has been seen)
+
+**Incident.** In the first T2 run and in the T2-A2 re-run, paramiko and azure-storage-blob were still in their trials when the
+runner's time limit ended the job; no record was written. Six other packages of the re-run finished; their records were recovered
+from the run's artifacts (workflow `study-t-collect.yml`, run 41288092994), after its commit step failed on a rebase conflict, so
+138 of the 140 projects have records.
+
+**Change.** A package's census cells, in sorted order, can be split over M runners (`--cell-shard I/M`: runner I takes cells I,
+I+M, ...). Each runner writes its own record (`TRIALS_<project>__<I>of<M>.json`); the analysis treats the records of one project
+together (unit test `test_cell_shards_of_one_package_merge`). Trials, seeds, draws and decisions are unchanged; only the work is
+spread. paramiko and azure-storage-blob are re-run with M = 8. If a cell still does not finish, the package is reported with the
+cells that did.

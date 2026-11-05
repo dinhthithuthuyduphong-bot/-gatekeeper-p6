@@ -280,11 +280,11 @@ CLAIMS = [
      lambda: "a pre-registered replication with $%d$ harmful cells, it again admitted %s, while every rule that runs no trials\nadmitted at least $%d$" % (
          T2()["harmful_cells"], "none" if T2()["all_cells"]["G"]["harmful_admitted"] == 0 else "some",
          min(T2()["ruff_cells"][b]["harmful_admitted"] for b in ("U", "RS", "B6R", "B6S", "B6M", "LJ")))),
-    ("T2 records", "Trial records exist for $131$ of the $140$ projects", lambda: t2_par()[0]),
-    ("T2 cells", "$3{,}426$ usable cells, $29$ were harmful ($20$ of them Ruff cells).  Gatekeeper admitted none, in both variants", lambda: t2_par()[1]),
+    ("T2 records", "Trial records exist for $138$ of the $140$ projects", lambda: t2_par()[0]),
+    ("T2 cells", "$3{,}626$ usable cells, $29$ were harmful ($20$ of them Ruff cells).  Gatekeeper admitted none, in both variants", lambda: t2_par()[1]),
     ("T2 baselines", "Ruff's \\emph{safe} label admitted $3$, B6-strong $4$, the LLM judge $10$, replay of the documented example $17$ and the smoke test\n$1$", lambda: t2_par()[2]),
-    ("T2 retention", "Gatekeeper kept $3{,}309$ safe Ruff cells, always-retest $3{,}312$;\nG-FDR kept $3{,}320$", lambda: t2_par()[3]),
-    ("T2 cost", "certification used almost the whole budget ($238.0$ of $240$ draws per cell), so W3 is lost again",
+    ("T2 retention", "Gatekeeper kept $3{,}505$ safe Ruff cells, always-retest $3{,}508$;\nG-FDR kept $3{,}517$", lambda: t2_par()[3]),
+    ("T2 cost", "certification used almost the whole budget ($238.1$ of $240$ draws per cell), so W3 is lost again",
      lambda: "certification used almost the whole budget ($%.1f$ of $240$ draws per cell), so W3 is %s again" % (
          T2()["mean_draws"]["G"], "lost" if not T2()["W3"]["won"] else "won")),
     ("T2 pooled", "Gatekeeper admitted none of $41$ harmful cells (Wilson 95\\% upper bound $8.6\\%$)", lambda: t2_par()[4]),

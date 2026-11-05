@@ -1,7 +1,7 @@
 """Study T phase 2 (study_t/AMENDMENTS.md, T-A1): trials of every census cell of one shard of packages.  Records raw per-input
 change flags of the gate and reference streams; decisions and ground truth are computed by tools/market_analyze.py.
 
-python tools/market_trials.py WORK_DIR OUT_DIR --shard I --shards K [--n 200] [--max-funcs 5] [--only PKG[,PKG]]
+python tools/market_trials.py WORK_DIR OUT_DIR --shard I --shards K [--n 200] [--max-funcs 5] [--only PKG[,PKG]] [--cell-shard I/M]
 """
 import hashlib
 import io
@@ -107,7 +107,7 @@ def funcs_of(cell, k):
     return out[:k]
 
 
-def run_package(pkg, census_pkg, work, n, k, skills):
+def run_package(pkg, census_pkg, work, n, k, skills, cell_shard=None):
     blob = MC.fetch("https://pypi.org/pypi/%s/%s/json" % (pkg["project"], pkg["version"]))
     meta = json.loads(blob)
     sd = next(f for f in meta["urls"] if f["filename"] == pkg["sdist"])
@@ -118,7 +118,11 @@ def run_package(pkg, census_pkg, work, n, k, skills):
     py, log = env_for(work, root, pkg["project"], pkg["version"])
     orig_cache, cells = {}, {}
     skip = set(filter(None, os.environ.get("GK_SKIP_CELLS", "").split(",")))   # T2-A3: cells that shut the runner down twice
-    for rule, cell in sorted(census_pkg["cells"].items()):
+    items = sorted(census_pkg["cells"].items())
+    if cell_shard:                               # T2-A4: one package's cells over several runners
+        i, m = cell_shard
+        items = items[i::m]
+    for rule, cell in items:
         fs = funcs_of(cell, k)
         rec = {"applicability": cell["applicability"], "functions": []}
         print("  cell", rule, "functions", len(fs), flush=True)
@@ -197,14 +201,18 @@ def main(argv):
     skills = load_skills()
     out.mkdir(parents=True, exist_ok=True)
     only = set(argv[argv.index("--only") + 1].split(",")) if "--only" in argv else None   # T2-A2: one package per runner
+    cs = tuple(map(int, argv[argv.index("--cell-shard") + 1].split("/"))) if "--cell-shard" in argv else None   # T2-A4
     for pkg in (targets[shard::shards] if only is None else [t for t in targets if t["project"] in only]):
         du = shutil.disk_usage("/tmp")
         print("package", pkg["project"], "free_disk_gb %.1f" % (du.free / 1e9), "free_mem_gb %s" % _free_mem_gb(), flush=True)
         try:
-            res = run_package(pkg, census[pkg["project"]], work / pkg["project"], n, k, skills)
+            res = run_package(pkg, census[pkg["project"]], work / pkg["project"], n, k, skills, cs)
+            if cs:
+                res["cell_shard"] = "%d/%d" % cs
         except Exception as exc:  # noqa: BLE001 - recorded, never silently dropped
             res = {"project": pkg["project"], "error": "%s: %s" % (type(exc).__name__, str(exc)[:300])}
-        (out / ("TRIALS_%s.json" % re.sub(r"[^A-Za-z0-9_.-]", "_", pkg["project"]))).write_text(json.dumps(res))
+        suffix = ("__%dof%d" % cs) if cs else ""
+        (out / ("TRIALS_%s%s.json" % (re.sub(r"[^A-Za-z0-9_.-]", "_", pkg["project"]), suffix))).write_text(json.dumps(res))
     return 0
 
 
