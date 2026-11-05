@@ -1,0 +1,1 @@
+{"project": "tzdata", "version": "2026.6", "env": {"install_rc": 0, "install_tail": "", "uninstall_rc": 0, "fingerprint": {"python": "3.13.17", "freeze": []}}, "cells": {}}
