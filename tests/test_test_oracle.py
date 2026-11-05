@@ -19,6 +19,13 @@ class Junit(unittest.TestCase):
         self.assertEqual(TO.junit_outcomes(p), {"t::a": "pass", "t::b": "fail", "t::c": "skip", "t::d": "fail"})
         self.assertEqual(TO.junit_outcomes(p.parent / "missing.xml"), {})
 
+    def test_root_path_normalised(self):
+        """T-A4a: a test parametrised by its own path keeps its id between the original and the patched copy."""
+        d = Path(tempfile.mkdtemp())
+        for root in ("/w/src/pkg-1", "/w/snap"):
+            (d / "r.xml").write_text('<testsuite><testcase classname="tests.t" name="test_p[%s/tests/t.py]"/></testsuite>' % root)
+            self.assertEqual(TO.junit_outcomes(d / "r.xml", root), {"tests.t::test_p[<ROOT>/tests/t.py]": "pass"})
+
 
 class RealRun(unittest.TestCase):
     def test_pytest_detects_change(self):
@@ -37,6 +44,18 @@ class RealRun(unittest.TestCase):
         (root / "pkg/__init__.py").write_text("def f(x):\n    return x + 2\n")
         r = TO.pytest_run(Path(sys.executable), root, "", work, "c")
         self.assertEqual(list(r["outcomes"].values()), ["fail"])
+
+    def test_collection_error_does_not_stop_the_run(self):
+        try:
+            import pytest_timeout  # noqa: F401
+        except ImportError:
+            self.skipTest("pytest-timeout not installed")
+        root = Path(tempfile.mkdtemp())
+        (root / "tests").mkdir()
+        (root / "tests/test_ok.py").write_text("def test_ok():\n    assert True\n")
+        (root / "tests/test_broken.py").write_text("import module_that_does_not_exist\n")
+        r = TO.pytest_run(Path(sys.executable), root, "", Path(tempfile.mkdtemp()), "o")
+        self.assertIn("pass", r["outcomes"].values())
 
 
 class Analysis(unittest.TestCase):

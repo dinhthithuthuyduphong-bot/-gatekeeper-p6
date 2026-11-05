@@ -48,8 +48,9 @@ def run_group(cmd, timeout, env, cwd):
     return rc, (out or "")[-600:]
 
 
-def junit_outcomes(path):
-    """{test id: 'pass' | 'fail' | 'skip'} from a JUnit XML report; {} if missing or unreadable."""
+def junit_outcomes(path, root=None):
+    """{test id: 'pass' | 'fail' | 'skip'} from a JUnit XML report; {} if missing or unreadable.  T-A4a: the run's root path is
+    replaced by <ROOT> in test ids, so a test parametrised by its own file path keeps its id in the patched copy."""
     try:
         tree = ET.parse(path)
     except (ET.ParseError, OSError):
@@ -57,6 +58,8 @@ def junit_outcomes(path):
     out = {}
     for tc in tree.iter("testcase"):
         tid = "%s::%s" % (tc.get("classname", ""), tc.get("name", ""))
+        if root is not None:
+            tid = tid.replace(str(root), "<ROOT>")
         tags = {ch.tag for ch in tc}
         out[tid] = "fail" if tags & {"failure", "error"} else "skip" if "skipped" in tags else "pass"
     return out
@@ -69,9 +72,36 @@ def pytest_run(py, root, ir, work, tag):
     env = dict(os.environ, PYTHONPATH=str(root / ir) if ir else str(root), PYTHONHASHSEED="0", PYTHONDONTWRITEBYTECODE="1")
     t0 = time.time()
     rc, tail = run_group([str(py), "-m", "pytest", "-q", "-p", "no:cacheprovider", "-o", "addopts=", "--timeout", "60",
-                          "--junitxml", str(xml)], RUN_CAP_S, env, str(root))
-    return {"rc": rc, "seconds": round(time.time() - t0, 1), "outcomes": junit_outcomes(xml) if rc is not None else {},
-            "timeout": rc is None, "tail": tail if rc not in (0, 1) else ""}
+                          "--continue-on-collection-errors", "--junitxml", str(xml)], RUN_CAP_S, env, str(root))
+    return {"rc": rc, "seconds": round(time.time() - t0, 1), "outcomes": junit_outcomes(xml, root) if rc is not None else {},
+            "timeout": rc is None, "tail": tail[-300:]}
+
+
+COMMON_TEST_TOOLS = ("pytest-asyncio", "pytest-mock", "hypothesis", "trustme")    # T-A4a, fixed before the re-run
+REQ_GLOBS = ("requirements*test*.txt", "test*requirements*.txt", "requirements-dev*.txt", "requirements/test*.txt",
+             "tests/requirements*.txt", "test/requirements*.txt")
+
+
+def test_deps(py, root, pip):
+    """T-A4a: test dependencies the project declares (PEP 735 groups test/tests/testing/dev, requirement files), then a fixed
+    set of common test tools.  Each install is tried on its own; failures are recorded, never fatal."""
+    log = {"groups": [], "files": [], "common_rc": None}
+    try:
+        import tomllib
+        groups = tomllib.loads((root / "pyproject.toml").read_text()).get("dependency-groups", {})
+    except (OSError, ValueError, ImportError):
+        groups = {}
+    for g in ("test", "tests", "testing", "dev"):
+        reqs = [r for r in groups.get(g, []) if isinstance(r, str)]
+        if reqs:
+            log["groups"].append({"group": g, "rc": pip(*reqs).returncode})
+    for pat in REQ_GLOBS:
+        for f in sorted(root.glob(pat)):
+            r = subprocess.run([str(py), "-m", "pip", "install", "-q", "-r", str(f)], capture_output=True, text=True, timeout=1800,
+                               cwd=str(root))
+            log["files"].append({"file": f.relative_to(root).as_posix(), "rc": r.returncode})
+    log["common_rc"] = pip(*COMMON_TEST_TOOLS).returncode
+    return log
 
 
 def setup_env(work, root, proj, version):
@@ -83,6 +113,7 @@ def setup_env(work, root, proj, version):
         if pip("%s[%s]==%s" % (proj, ex, version)).returncode == 0:
             log["extra"] = ex
             break
+    log["test_deps"] = test_deps(py, root, pip)       # T-A4a
     subprocess.run([str(py), "-m", "pip", "uninstall", "-y", "-q", proj], capture_output=True, timeout=600)
     return py, log
 

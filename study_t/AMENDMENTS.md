@@ -157,3 +157,23 @@ cells (our oracle), the number TS rejects (the sensitivity of the shipped tests 
   safe cells.
 - **TS-W2 (independent oracle):** the Wilson 95% upper bound of the confirmed-TS-rejection rate among G-admitted cells is at most
   η = 5%.
+
+## T-A4a (after the first T-A4 run, commit 1090ff1, before its re-run): environment of the test-suite baseline
+**What the first run showed (reported as such).** TS applied to 17 of 57 packages (339 cells, 3 harmful). TS admitted all 3
+harmful cells (TS-W1 won). Among the 336 cells Gatekeeper admitted, 34 had a confirmed TS rejection (Wilson upper bound 13.8%,
+TS-W2 lost). **Debugging:** all 34 are cells of `requests`, and all fail the same test,
+`test_unzipped_paths_unchanged[<absolute path of tests/test_utils.py>]`: its id contains the path of the copy it runs in, so in
+the patched copy the stable-passing test of the original "disappears" and was counted as a failure. This is a defect of our
+harness, not a behaviour change. Of the 40 packages where TS did not apply, about 22 stopped at a collection error in one test
+file (pytest interrupts the whole session), about 7 lacked test-only dependencies (trustme, hypothesis, click, anyio, httpx2), 7
+ship no tests in their sdist, and 4 ended with no report and no log (the harness dropped the log of exit code 1).
+
+**Changes, fixed before the re-run.**
+1. Test ids: the run's root path is replaced by `<ROOT>`, so a test keeps its id between the original and the patched copy.
+2. `--continue-on-collection-errors`: a broken test file no longer removes the package's other tests.
+3. Test dependencies the project declares are installed: PEP 735 groups `test`, `tests`, `testing`, `dev`, and requirement files
+   matching `requirements*test*.txt`, `test*requirements*.txt`, `requirements-dev*.txt`, `requirements/test*.txt`,
+   `tests/requirements*.txt`, `test/requirements*.txt`; then the fixed set `pytest-asyncio`, `pytest-mock`, `hypothesis`, `trustme`.
+   Each install is tried on its own and recorded.
+4. The tail of every run's output is kept.
+The procedure, the cells and the criteria TS-W1 and TS-W2 are unchanged; both runs are reported.
